@@ -1,0 +1,106 @@
+//
+//  tabBarViewController.swift
+//  SleepCare
+//
+//  Created by haijie on 15/12/15.
+//  Copyright © 2015年 juxi. All rights reserved.
+//
+
+import UIKit
+// MARK: Tab 分组
+private enum QNTabBarItem: Int {
+    case MedicaData = 0
+    case Task = 1
+    case Services = 2
+    case UserCenter = 3
+    
+    // 对应的图片名
+    var imageName: String {
+        switch self {
+        case .MedicaData: return "Home"
+        case .Task: return "Category"
+        case .Services: return "School"
+        case .UserCenter: return "Mine"
+        }
+    }
+}
+
+/// MARK: - 底部工具控制器
+class tabBarViewController: UITabBarController {
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // 修改底部工具条的字体和颜色
+        let titleSelectedColor = UIColor(red: 237/255, green: 191/255, blue: 28/255, alpha: 1.0)
+        
+        self.tabBar.translucent = false
+        self.tabBar.barTintColor = UIColor(red: 42/255, green: 42/255, blue: 42/255, alpha: 1.0)
+        self.tabBar.tintColor = UINavigationBar.appearance().tintColor
+        UITabBarItem.appearance().setTitleTextAttributes(NSDictionary(dictionary: [NSForegroundColorAttributeName: UIColor.whiteColor(),NSFontAttributeName:UIFont.systemFontOfSize(12)]) as? [String : AnyObject], forState: .Normal)
+        UITabBarItem.appearance().setTitleTextAttributes(NSDictionary(dictionary: [NSForegroundColorAttributeName: titleSelectedColor,NSFontAttributeName:UIFont.systemFontOfSize(12)]) as? [String : AnyObject], forState: .Selected)
+        // 图标配置
+        if let _ = self.tabBar.items {
+            self.itemConfig(QNTabBarItem.MedicaData)
+            self.itemConfig(QNTabBarItem.Task)
+            self.itemConfig(QNTabBarItem.Services)
+            self.itemConfig(QNTabBarItem.UserCenter)
+        }
+    }
+    //MARK:-Private Method
+    /**
+     配置Item
+     
+     :param: index     配置项
+     :param: haveDot   是否需要小红点
+     
+     :returns: 被配置的Item
+     */
+    private func itemConfig(qnItem: QNTabBarItem, haveDot: Bool = false) -> UITabBarItem? {
+        if let item = self.tabBar.items?[qnItem.rawValue]{
+            let imageName = qnItem.imageName
+            if let image = UIImage(named: "TabBar_" + imageName + "_Normal"),
+                let selectedImage = UIImage(named: "TabBar_" + imageName + "_Selected") {
+                    if !haveDot {
+                        item.image = image.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal) //不使用Tint Color
+                        item.selectedImage = selectedImage.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
+                    }
+                    else {
+                        item.image = self.imageAddDotView(image).imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
+                        item.selectedImage = self.imageAddDotView(selectedImage).imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
+                    }
+            }
+            return item
+        }
+        return nil
+    }
+    private func imageAddDotView(image: UIImage) -> UIImage {
+        let imageView = UIImageView(image: image)
+        
+        let dotView = UIView(frame: CGRect(x: imageView.bounds.width - 8, y: imageView.bounds.height - 8, width: 8, height: 8))
+        dotView.layer.masksToBounds = true
+        dotView.layer.cornerRadius = dotView.bounds.width/2.0
+        dotView.backgroundColor = UIColor(red: 251/255.0, green: 55/255.0, blue: 55/255.0, alpha: 1.0)
+        imageView.addSubview(dotView)
+        
+        UIGraphicsBeginImageContextWithOptions(imageView.frame.size, false, 0)
+        let context = UIGraphicsGetCurrentContext()
+        imageView.layer.renderInContext(context!)
+        let imageResult = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return imageResult
+    }
+    //可以隐藏首页
+    func hideTabBar() {
+        for v in self.view.subviews {
+            if v is UITabBar {
+                v.hidden = true
+                break
+            }
+        }
+    }
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+}

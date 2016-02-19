@@ -1,0 +1,64 @@
+/**********************************************
+// ******* 重要说明 ******* //
+
+
+
+// ******* 本文件对该项目做一个简单的说明 ******* //
+ 
+- 开发注意：
+ ·· 本项目主要使用Swift语言进行开发；
+ ·· AppID 和 SKU 已经有定义好的常量，不允许直接使用 "...", 有用到的地方，必须用 APP_ID APP_SKU；（其他常量请查看 Constents 和 QNSharedDatas 文件）
+ ·· 有需要用到App前缀的地方 请使用 ZMD**** ；
+ ·· 数据模型使用统一的前缀 ZMD_**** ；
+ ·· 图片资源统一用Images.xcassets进行管理，公有图片放在根目录下，某个页面的图片放在指定的文件夹下，某个页面的图片请使用该页面统一的前缀；
+ ·· 图片命名规范："模块名_首字母大写驼峰式图片名_使用场景"
+ ·· 其他资源放在 Resources 文件夹下，要分类别存储（字体，CSS，JS）；
+ ·· 新建 Scene（在 Storyboard 中）时，StoryboardID 必须与 类名想同，可使用 类名.CreateFromMainStoryboard() 方法创建，如果不是在 Main.storyboard 中的Scene，需调用 类名.CreateFromStoryboard(name: NSString) 方法创建；
+ ·· 新建的 Xib 文件名必须与 类名想同，可使用 类名.CreateFromXib() 方法创建；
+ ·· 统一的提示框：
+ ·· 全局数据用 "g_" 做前缀声明， 如：g_currentUserInfo
+func QNTool.showPromptView(message: String) // n秒后会自动消失的提示
+func QNTool.showActivityView(message: String) // 锁屏提示框，必须调用 QNTool.hiddenActivityView() 方法将其隐藏
+func QNTool.hiddenActivityView() 
+
+- 文件夹目录简单说明：
+ ·· ProductName-Bridging-Header.h: Swift 使用 Object-C 文件
+ ·· Constents: 通用的常量数据好方法，（开发必看），开发时候要避免重复定义
+ ·· QNSharedDatas: App中共享的数据都在文件中，（开发必看），开发时候要避免重复定义
+ ·· QNStyleAttribute: App中风格都在此文件设定中，包括默认背景色，导航栏颜色。。，（开发必看），开发时候要避免重复定义
+ ·· Base/: 基类，一些通用的类的基类定义，如新建的 ViewController 应该继承 UIViewController；
+ ·· Tools/: 工具类
+ ·· DataModule/: 数据模型
+ ·· Extension/: 对现有的系统API进行扩展
+ ·· StartPages/: 起始过渡页
+ ·· Login/: 登陆模块
+ ·· UserCenter/: 用户中心模块
+ ·· Librarys/
+    ./Alamofire 网络通信（类似OC的AFNetworking, 本项目使用Swfit开发）
+    ./Qoocc/    
+        ./NSData+AES256 NSData的AES256加密解密方法
+        ./PromptView 提示框
+ ·· Resources/
+    ./Fonts/: 项目中引入的字体文件（如果没有此文件夹则去创建）
+    ./Sounds/: 项目中的声音资源（如果没有此文件夹则去创建）
+    ./CSS/: 项目中的CSS文件（如果没有此文件夹则去创建）
+    ./Images.scassets 该项目用到的图片资源
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ **********************************************/
+
+
+
+
+
+
+
+
+
+

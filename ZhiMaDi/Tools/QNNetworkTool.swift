@@ -27,6 +27,8 @@ private extension QNNetworkTool {
     private class func productRequest(url: NSURL!, method: NSString!) -> NSMutableURLRequest {
         let request = NSMutableURLRequest(URL: url)
         request.HTTPMethod = method as String
+//        request.addValue(g_currentGroup?.auth ?? "", forHTTPHeaderField: "AUTH") // 用户身份串,在调用/api/login 成功后会返回这个串;未登录时为空
+ 
         return request
     }
     /**
@@ -90,21 +92,7 @@ private extension QNNetworkTool {
                 if dictionary == nil {  // Json解析结果出错
                     completionHandler(request: $0!, response: $1, data: $2, dictionary: nil, error: NSError(domain: "JSON解析错误", code: 10086, userInfo: nil)); return
                 }
-                // 这里有可能对数据进行了jsonData的包装，有可能没有进行jsonData的包装
-                let errorCode = (dictionary!["errorCode"]! as AnyObject).integerValue
-                
-                if errorCode == -996 {
-                    completionHandler(request: $0!, response: $1, data: $2, dictionary: dictionary, error: nil)
-                } else if errorCode == -999 {
-                    completionHandler(request: $0!, response: $1, data: $2, dictionary: nil, error: NSError(domain: "服务器内部错误", code:errorCode ?? 10088, userInfo: nil))
-                } else if errorCode == -997 {
-                    completionHandler(request: $0!, response: $1, data: $2, dictionary: nil, error: NSError(domain: "非法访问", code:errorCode ?? 10088, userInfo: nil))
-                } else if errorCode == -998 {
-                    completionHandler(request: $0!, response: $1, data: $2, dictionary: nil, error: NSError(domain: "服务器session超时", code:errorCode ?? 10088, userInfo: nil))
-                }
-                else {
-                    completionHandler(request: $0!, response: $1, data: $2, dictionary: nil, error: NSError(domain: "服务器返回错误", code:errorCode ?? 10088, userInfo: nil))
-                }
+                completionHandler(request: $0!, response: $1, data: $2, dictionary: dictionary, error: nil)
             }
             catch {
                 println("Json解析过程出错")
@@ -265,7 +253,7 @@ extension QNNetworkTool {
      :param: corpId       厂商的id（咨询博创海云获取）
      */
     class func getSleepLevel(userId: String,date: String,corpId: String,completion: (NSDictionary?, NSError?, String?) -> Void) {
-        requestGET(kServerAddress + "/SleepCareIIServer/getSleepLevel.action", parameters: paramsToJsonDataParams(["userId" : userId,"date" : date,"corpId" : corpId])) { (_, _, _, dictionary, error) -> Void in
+        requestGET(kServerAddress + "/SleepCareIIServer/getSleepLevel.action", parameters: paramsToJsonDataParams(["userId" : userId,"date" : date,"corpId" : corpId])) { (_, response, _, dictionary, error) -> Void in
             if dictionary != nil{
                 completion(dictionary, nil, nil)
             }else {
@@ -289,4 +277,22 @@ extension QNNetworkTool {
             }
         }
     }
+    // MARK:test
+    class func login(){
+        requestPOST("http://api.ccw.cn/api/auth/login", parameters: paramsToJsonDataParams(["mobile" : "13713368658","password" : "123456"])) { (_,response, _, dictionary, error) -> Void in
+            
+            let head = response?.allHeaderFields
+            let cookieTmp = head!["Set-Cookie"]
+            // set cookie
+            let properties = [NSHTTPCookieOriginURL: "http://api.ccw.cn",
+                NSHTTPCookieName: "cookie_name",
+                NSHTTPCookieValue: cookieTmp as! String,
+                NSHTTPCookiePath : "/"]
+            let cookie : NSHTTPCookie = NSHTTPCookie(properties: properties )!
+            NSHTTPCookieStorage.sharedHTTPCookieStorage().setCookie(cookie)
+            // get cookie
+//            let cookies = NSHTTPCookieStorage.sharedHTTPCookieStorage().cookies
+        }
+    }
+    
 }

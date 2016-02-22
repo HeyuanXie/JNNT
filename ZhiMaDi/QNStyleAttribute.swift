@@ -48,7 +48,7 @@ let tableViewCellDefaultTextColor = UIColor(white: 63/255.0, alpha: 1.0)
 let tableViewCellDefaultDetailTextFont = UIFont.systemFontOfSize(14)
 /// 默认详情颜色
 let tableViewCellDefaultDetailTextColor = UIColor(white: 136/255.0, alpha: 1)
-extension QNTool {
+extension ZMDTool {
     /// 对UITableViewCell对象进行默认配置
     class func configTableViewCellDefault(cell: UITableViewCell) {
         cell.textLabel?.font = tableViewCellDefaultTextFont

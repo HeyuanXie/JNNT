@@ -7,7 +7,8 @@
 //
 
 import UIKit
-
+/// 第一次启动判断的Key
+let kKeyIsFirstStartApp = ("IsFirstStartApp" as NSString).encrypt(g_SecretKey)
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -15,7 +16,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        print("\n<\(APP_NAME)> 开始运行\nversion: \(APP_VERSION)(\(APP_VERSION_BUILD))\nApple ID: \(APP_ID)\nBundle ID: \(APP_BUNDLE_ID)\n")
+        // 修改统一的字体
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSFontAttributeName : navigationTextFont], forState: .Normal)
+        
+        // 启动过渡页
+//        let allowShowStartPages = !NSUserDefaults.standardUserDefaults().boolForKey(kKeyIsFirstStartApp)
+//        if allowShowStartPages {
+//            UIApplication.sharedApplication().statusBarHidden = true
+//            let startPagesWindow = StartPagesWindow()
+//            startPagesWindow.finished = { () -> Void in
+//                NSUserDefaults.standardUserDefaults().setBool(true, forKey: kKeyIsFirstStartApp)
+//            }
+//        }
+        // 开启拦截器
+        QNInterceptor.start()
         return true
     }
 

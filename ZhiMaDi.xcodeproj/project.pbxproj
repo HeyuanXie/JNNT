@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B68C44F1C7A9C3000B401A9 /* MineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B68C44E1C7A9C3000B401A9 /* MineViewController.swift */; };
 		2B959E9C1C76C492002EA40D /* TabBar_Category_Normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B959E941C76C492002EA40D /* TabBar_Category_Normal@2x.png */; };
 		2B959E9D1C76C492002EA40D /* TabBar_Category_Selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B959E951C76C492002EA40D /* TabBar_Category_Selected@2x.png */; };
 		2B959E9E1C76C492002EA40D /* TabBar_Home_Normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B959E961C76C492002EA40D /* TabBar_Home_Normal@2x.png */; };
@@ -17,6 +18,16 @@
 		2B959EA31C76C492002EA40D /* TabBar_School_Selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B959E9B1C76C492002EA40D /* TabBar_School_Selected@2x.png */; };
 		2B959EA61C76C65E002EA40D /* TabBar_MedicaData_Normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B959EA41C76C65E002EA40D /* TabBar_MedicaData_Normal@2x.png */; };
 		2B959EA71C76C65E002EA40D /* TabBar_MedicaData_Selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B959EA51C76C65E002EA40D /* TabBar_MedicaData_Selected@2x.png */; };
+		2B959EAD1C76E4CA002EA40D /* Home_bottom_Advertisement@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2B959EAA1C76E4CA002EA40D /* Home_bottom_Advertisement@3x.jpg */; };
+		2B959EAE1C76E4CA002EA40D /* Home_Top1_Advertisement@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2B959EAB1C76E4CA002EA40D /* Home_Top1_Advertisement@3x.jpg */; };
+		2B959EAF1C76E4CA002EA40D /* Home_Top2_Advertisement@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2B959EAC1C76E4CA002EA40D /* Home_Top2_Advertisement@3x.jpg */; };
+		2B959EB41C76ED04002EA40D /* BlinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B959EB11C76ED04002EA40D /* BlinkView.swift */; };
+		2B959EB51C76ED04002EA40D /* StartImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B959EB21C76ED04002EA40D /* StartImageView.swift */; };
+		2B959EB61C76ED04002EA40D /* StartPagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B959EB31C76ED04002EA40D /* StartPagesViewController.swift */; };
+		2B959EBB1C76ED42002EA40D /* Start_index1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2B959EB81C76ED42002EA40D /* Start_index1.jpg */; };
+		2B959EBC1C76ED42002EA40D /* Start_index2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2B959EB91C76ED42002EA40D /* Start_index2.jpg */; };
+		2B959EBD1C76ED42002EA40D /* Start_index3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2B959EBA1C76ED42002EA40D /* Start_index3.jpg */; };
+		2B959EC01C76F5D0002EA40D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B959EBF1C76F5D0002EA40D /* HomeViewController.swift */; };
 		3C9098581C76A482006B7D2C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9098571C76A482006B7D2C /* AppDelegate.swift */; };
 		3C90985A1C76A482006B7D2C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9098591C76A482006B7D2C /* ViewController.swift */; };
 		3C90985D1C76A482006B7D2C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C90985B1C76A482006B7D2C /* Main.storyboard */; };
@@ -132,12 +143,13 @@
 		3C9099601C76A6E9006B7D2C /* QNFormatTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9098F31C76A6E9006B7D2C /* QNFormatTool.swift */; };
 		3C9099611C76A6E9006B7D2C /* QNInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9098F41C76A6E9006B7D2C /* QNInterceptor.swift */; };
 		3C9099621C76A6E9006B7D2C /* QNNetworkTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9098F51C76A6E9006B7D2C /* QNNetworkTool.swift */; };
-		3C9099631C76A6E9006B7D2C /* QNTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9098F61C76A6E9006B7D2C /* QNTool.swift */; };
+		3C9099631C76A6E9006B7D2C /* ZMDTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9098F61C76A6E9006B7D2C /* ZMDTool.swift */; };
 		3C9099641C76A6E9006B7D2C /* UserCenterHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9098F81C76A6E9006B7D2C /* UserCenterHomeViewController.swift */; };
 		CCC2E90F973B87889ED9CCB6 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31D2DB4A35812B2A2B5A22B4 /* Pods.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2B68C44E1C7A9C3000B401A9 /* MineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineViewController.swift; sourceTree = "<group>"; };
 		2B959E941C76C492002EA40D /* TabBar_Category_Normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabBar_Category_Normal@2x.png"; sourceTree = "<group>"; };
 		2B959E951C76C492002EA40D /* TabBar_Category_Selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabBar_Category_Selected@2x.png"; sourceTree = "<group>"; };
 		2B959E961C76C492002EA40D /* TabBar_Home_Normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabBar_Home_Normal@2x.png"; sourceTree = "<group>"; };
@@ -148,6 +160,16 @@
 		2B959E9B1C76C492002EA40D /* TabBar_School_Selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabBar_School_Selected@2x.png"; sourceTree = "<group>"; };
 		2B959EA41C76C65E002EA40D /* TabBar_MedicaData_Normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabBar_MedicaData_Normal@2x.png"; sourceTree = "<group>"; };
 		2B959EA51C76C65E002EA40D /* TabBar_MedicaData_Selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabBar_MedicaData_Selected@2x.png"; sourceTree = "<group>"; };
+		2B959EAA1C76E4CA002EA40D /* Home_bottom_Advertisement@3x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Home_bottom_Advertisement@3x.jpg"; sourceTree = "<group>"; };
+		2B959EAB1C76E4CA002EA40D /* Home_Top1_Advertisement@3x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Home_Top1_Advertisement@3x.jpg"; sourceTree = "<group>"; };
+		2B959EAC1C76E4CA002EA40D /* Home_Top2_Advertisement@3x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Home_Top2_Advertisement@3x.jpg"; sourceTree = "<group>"; };
+		2B959EB11C76ED04002EA40D /* BlinkView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlinkView.swift; sourceTree = "<group>"; };
+		2B959EB21C76ED04002EA40D /* StartImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartImageView.swift; sourceTree = "<group>"; };
+		2B959EB31C76ED04002EA40D /* StartPagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartPagesViewController.swift; sourceTree = "<group>"; };
+		2B959EB81C76ED42002EA40D /* Start_index1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Start_index1.jpg; sourceTree = "<group>"; };
+		2B959EB91C76ED42002EA40D /* Start_index2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Start_index2.jpg; sourceTree = "<group>"; };
+		2B959EBA1C76ED42002EA40D /* Start_index3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Start_index3.jpg; sourceTree = "<group>"; };
+		2B959EBF1C76F5D0002EA40D /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		31D2DB4A35812B2A2B5A22B4 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C9098541C76A482006B7D2C /* ZhiMaDi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZhiMaDi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C9098571C76A482006B7D2C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -271,7 +293,7 @@
 		3C9098F31C76A6E9006B7D2C /* QNFormatTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QNFormatTool.swift; sourceTree = "<group>"; };
 		3C9098F41C76A6E9006B7D2C /* QNInterceptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QNInterceptor.swift; sourceTree = "<group>"; };
 		3C9098F51C76A6E9006B7D2C /* QNNetworkTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QNNetworkTool.swift; sourceTree = "<group>"; };
-		3C9098F61C76A6E9006B7D2C /* QNTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QNTool.swift; sourceTree = "<group>"; };
+		3C9098F61C76A6E9006B7D2C /* ZMDTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZMDTool.swift; sourceTree = "<group>"; };
 		3C9098F81C76A6E9006B7D2C /* UserCenterHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCenterHomeViewController.swift; sourceTree = "<group>"; };
 		B87B3CB9214E0C97B64D9460 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		EAA66A338C1BF41B2A7175DB /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -300,6 +322,9 @@
 		2B959E921C76C33B002EA40D /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				2B959EB71C76ED42002EA40D /* StartPages */,
+				2B959EA81C76E3B0002EA40D /* Advertisement */,
+				2B959EA91C76E3B0002EA40D /* Home */,
 				2B959E931C76C492002EA40D /* Tabbar */,
 			);
 			path = Images;
@@ -320,6 +345,51 @@
 				2B959E9B1C76C492002EA40D /* TabBar_School_Selected@2x.png */,
 			);
 			path = Tabbar;
+			sourceTree = "<group>";
+		};
+		2B959EA81C76E3B0002EA40D /* Advertisement */ = {
+			isa = PBXGroup;
+			children = (
+				2B959EAA1C76E4CA002EA40D /* Home_bottom_Advertisement@3x.jpg */,
+				2B959EAB1C76E4CA002EA40D /* Home_Top1_Advertisement@3x.jpg */,
+				2B959EAC1C76E4CA002EA40D /* Home_Top2_Advertisement@3x.jpg */,
+			);
+			path = Advertisement;
+			sourceTree = "<group>";
+		};
+		2B959EA91C76E3B0002EA40D /* Home */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		2B959EB01C76ED04002EA40D /* StartPages */ = {
+			isa = PBXGroup;
+			children = (
+				2B959EB11C76ED04002EA40D /* BlinkView.swift */,
+				2B959EB21C76ED04002EA40D /* StartImageView.swift */,
+				2B959EB31C76ED04002EA40D /* StartPagesViewController.swift */,
+			);
+			path = StartPages;
+			sourceTree = "<group>";
+		};
+		2B959EB71C76ED42002EA40D /* StartPages */ = {
+			isa = PBXGroup;
+			children = (
+				2B959EB81C76ED42002EA40D /* Start_index1.jpg */,
+				2B959EB91C76ED42002EA40D /* Start_index2.jpg */,
+				2B959EBA1C76ED42002EA40D /* Start_index3.jpg */,
+			);
+			path = StartPages;
+			sourceTree = "<group>";
+		};
+		2B959EBE1C76F5A9002EA40D /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				2B959EBF1C76F5D0002EA40D /* HomeViewController.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 		2C475CDFCB51F0D44C1096F4 /* Pods */ = {
@@ -361,9 +431,11 @@
 				3C9098741C76A6E9006B7D2C /* DataModule */,
 				3C9098761C76A6E9006B7D2C /* Extension */,
 				3C90987A1C76A6E9006B7D2C /* Librarys */,
+				2B959EB01C76ED04002EA40D /* StartPages */,
 				3C9098F01C76A6E9006B7D2C /* Login */,
 				3C9098F11C76A6E9006B7D2C /* Tools */,
 				3C9098F71C76A6E9006B7D2C /* UserCenter */,
+				2B959EBE1C76F5A9002EA40D /* Home */,
 				3C9099651C76A6FD006B7D2C /* Resources */,
 				3C9098571C76A482006B7D2C /* AppDelegate.swift */,
 				3C9098591C76A482006B7D2C /* ViewController.swift */,
@@ -650,7 +722,7 @@
 				3C9098F31C76A6E9006B7D2C /* QNFormatTool.swift */,
 				3C9098F41C76A6E9006B7D2C /* QNInterceptor.swift */,
 				3C9098F51C76A6E9006B7D2C /* QNNetworkTool.swift */,
-				3C9098F61C76A6E9006B7D2C /* QNTool.swift */,
+				3C9098F61C76A6E9006B7D2C /* ZMDTool.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -659,6 +731,7 @@
 			isa = PBXGroup;
 			children = (
 				3C9098F81C76A6E9006B7D2C /* UserCenterHomeViewController.swift */,
+				2B68C44E1C7A9C3000B401A9 /* MineViewController.swift */,
 			);
 			path = UserCenter;
 			sourceTree = "<group>";
@@ -741,11 +814,17 @@
 				2B959EA01C76C492002EA40D /* TabBar_Mine_Normal@2x.png in Resources */,
 				2B959E9E1C76C492002EA40D /* TabBar_Home_Normal@2x.png in Resources */,
 				3C90985F1C76A482006B7D2C /* Assets.xcassets in Resources */,
+				2B959EAD1C76E4CA002EA40D /* Home_bottom_Advertisement@3x.jpg in Resources */,
 				2B959EA31C76C492002EA40D /* TabBar_School_Selected@2x.png in Resources */,
+				2B959EBC1C76ED42002EA40D /* Start_index2.jpg in Resources */,
 				2B959EA11C76C492002EA40D /* TabBar_Mine_Selected@2x.png in Resources */,
 				2B959EA61C76C65E002EA40D /* TabBar_MedicaData_Normal@2x.png in Resources */,
 				3C90985D1C76A482006B7D2C /* Main.storyboard in Resources */,
+				2B959EBB1C76ED42002EA40D /* Start_index1.jpg in Resources */,
+				2B959EBD1C76ED42002EA40D /* Start_index3.jpg in Resources */,
 				2B959EA21C76C492002EA40D /* TabBar_School_Normal@2x.png in Resources */,
+				2B959EAF1C76E4CA002EA40D /* Home_Top2_Advertisement@3x.jpg in Resources */,
+				2B959EAE1C76E4CA002EA40D /* Home_Top1_Advertisement@3x.jpg in Resources */,
 				2B959E9F1C76C492002EA40D /* TabBar_Home_Selected@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -834,10 +913,12 @@
 				3C9099531C76A6E9006B7D2C /* ScatterChartRenderer.swift in Sources */,
 				3C90986F1C76A6AA006B7D2C /* Constents.swift in Sources */,
 				3C9099131C76A6E9006B7D2C /* ChartYAxis.swift in Sources */,
+				2B68C44F1C7A9C3000B401A9 /* MineViewController.swift in Sources */,
 				3C9098FB1C76A6E9006B7D2C /* StringExtension.swift in Sources */,
 				3C90993E1C76A6E9006B7D2C /* ScatterChartDataProvider.swift in Sources */,
 				3C9099351C76A6E9006B7D2C /* ChartRange.swift in Sources */,
 				3C9099141C76A6E9006B7D2C /* BarChartData.swift in Sources */,
+				2B959EB41C76ED04002EA40D /* BlinkView.swift in Sources */,
 				3C9099601C76A6E9006B7D2C /* QNFormatTool.swift in Sources */,
 				3C9099491C76A6E9006B7D2C /* ChartXAxisRendererRadarChart.swift in Sources */,
 				3C9099451C76A6E9006B7D2C /* ChartRendererBase.swift in Sources */,
@@ -854,6 +935,7 @@
 				3C9099461C76A6E9006B7D2C /* ChartXAxisRenderer.swift in Sources */,
 				3C9099151C76A6E9006B7D2C /* BarChartDataEntry.swift in Sources */,
 				3C9099241C76A6E9006B7D2C /* LineChartDataSet.swift in Sources */,
+				2B959EC01C76F5D0002EA40D /* HomeViewController.swift in Sources */,
 				3C90990A1C76A6E9006B7D2C /* PieRadarChartViewBase.swift in Sources */,
 				3C9099251C76A6E9006B7D2C /* LineRadarChartDataSet.swift in Sources */,
 				3C9099411C76A6E9006B7D2C /* CandleStickChartRenderer.swift in Sources */,
@@ -862,6 +944,7 @@
 				3C90993C1C76A6E9006B7D2C /* ChartDataProvider.swift in Sources */,
 				3C9099191C76A6E9006B7D2C /* BubbleChartData.swift in Sources */,
 				3C9099111C76A6E9006B7D2C /* ChartMarker.swift in Sources */,
+				2B959EB61C76ED04002EA40D /* StartPagesViewController.swift in Sources */,
 				3C90994C1C76A6E9006B7D2C /* ChartYAxisRendererRadarChart.swift in Sources */,
 				3C90995D1C76A6E9006B7D2C /* NSString+AES.m in Sources */,
 				3C9098711C76A6AA006B7D2C /* QNStyleAttribute.swift in Sources */,
@@ -873,7 +956,7 @@
 				3C90990E1C76A6E9006B7D2C /* ChartComponentBase.swift in Sources */,
 				3C9098FA1C76A6E9006B7D2C /* QN_BaseDataModel.swift in Sources */,
 				3C90990C1C76A6E9006B7D2C /* ScatterChartView.swift in Sources */,
-				3C9099631C76A6E9006B7D2C /* QNTool.swift in Sources */,
+				3C9099631C76A6E9006B7D2C /* ZMDTool.swift in Sources */,
 				3C9099181C76A6E9006B7D2C /* BarLineScatterCandleBubbleChartDataSet.swift in Sources */,
 				3C90995F1C76A6E9006B7D2C /* QNChartsTool.swift in Sources */,
 				3C9099381C76A6E9006B7D2C /* BarChartDataProvider.swift in Sources */,
@@ -883,6 +966,7 @@
 				3C90994E1C76A6E9006B7D2C /* HorizontalBarChartRenderer.swift in Sources */,
 				3C9099421C76A6E9006B7D2C /* ChartAxisRendererBase.swift in Sources */,
 				3C9099011C76A6E9006B7D2C /* BarChartView.swift in Sources */,
+				2B959EB51C76ED04002EA40D /* StartImageView.swift in Sources */,
 				3C90992D1C76A6E9006B7D2C /* ChartDataApproximatorFilter.swift in Sources */,
 				3C9099541C76A6E9006B7D2C /* ChartColorTemplates.swift in Sources */,
 				3C9099231C76A6E9006B7D2C /* LineChartData.swift in Sources */,
@@ -1029,6 +1113,7 @@
 			baseConfigurationReference = EAA66A338C1BF41B2A7175DB /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = ZhiMaDi/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1043,6 +1128,7 @@
 			baseConfigurationReference = B87B3CB9214E0C97B64D9460 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = ZhiMaDi/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

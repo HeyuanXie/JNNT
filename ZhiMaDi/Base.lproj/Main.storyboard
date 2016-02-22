@@ -43,10 +43,10 @@
             </objects>
             <point key="canvasLocation" x="857" y="-541"/>
         </scene>
-        <!--View Controller-->
+        <!--首页-->
         <scene sceneID="OBx-Tn-1rl">
             <objects>
-                <viewController id="CtY-Ud-GBP" sceneMemberID="viewController">
+                <viewController id="CtY-Ud-GBP" userLabel="首页" customClass="HomeViewController" customModule="ZhiMaDi" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="LAo-Sq-gdf"/>
                         <viewControllerLayoutGuide type="bottom" id="VtB-Nv-4mc"/>
@@ -54,6 +54,12 @@
                     <view key="view" contentMode="scaleToFill" id="HvP-0X-O1k">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="FYt-SU-ruP">
+                                <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="cD9-IZ-2Bq"/>
@@ -93,9 +99,16 @@
                     <view key="view" contentMode="scaleToFill" id="xYN-CR-ZhT">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WhO-CD-G51">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="145"/>
+                                <color key="backgroundColor" red="1" green="0.87194127170021563" blue="0.24225304689190719" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="hKp-TU-cE2"/>
+                    <nil key="simulatedTopBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hs6-Ml-cVt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

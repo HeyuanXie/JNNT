@@ -105,7 +105,7 @@ class UserCenterHomeViewController: UIViewController, QNInterceptorProtocol, UIT
         self.dataInit()
         self.subViewInit()
         // 让导航栏支持右滑返回功能
-        QNTool.addInteractive(self.navigationController)
+        ZMDTool.addInteractive(self.navigationController)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -133,7 +133,7 @@ class UserCenterHomeViewController: UIViewController, QNInterceptorProtocol, UIT
                 cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: cellIdentifier)
                 cell?.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
                 cell?.selectionStyle = UITableViewCellSelectionStyle.Default
-                QNTool.configTableViewCellDefault(cell!)
+                ZMDTool.configTableViewCellDefault(cell!)
             }
             self.configHeadView(cell!)
             return cell!
@@ -145,7 +145,7 @@ class UserCenterHomeViewController: UIViewController, QNInterceptorProtocol, UIT
             cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: cellIdentifier)
             cell?.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
             cell?.selectionStyle = UITableViewCellSelectionStyle.Default
-            QNTool.configTableViewCellDefault(cell!)
+            ZMDTool.configTableViewCellDefault(cell!)
             
             let balanceLabel = UILabel(frame: CGRectMake(cell!.contentView.bounds.size.width-100, 0, 100, cell!.contentView.bounds.size.height))
             balanceLabel.autoresizingMask = [UIViewAutoresizing.FlexibleLeftMargin , UIViewAutoresizing.FlexibleWidth , UIViewAutoresizing.FlexibleHeight]

@@ -1,5 +1,5 @@
 //
-//  QNTool.swift
+//  ZMDTool.swift
 //  QooccHealth
 //
 //  Created by LiuYu on 15/5/28.
@@ -9,14 +9,21 @@
 import Foundation
 import UIKit
 // 私有的实例，用户处理一些回调
-private let qnToolInstance = QNTool()
+private let zmdToolInstance = ZMDTool()
 
 /** 通用工具类 */
-class QNTool: NSObject {
+class ZMDTool: NSObject {
+}
+// MARK: - 更新时做 数据迁移
+private let kKeyVersionOnLastOpen = ("VersionOnLastOpen" as NSString).encrypt(g_SecretKey)
+extension ZMDTool {
+    /// 更新时做 数据迁移
+    class func update() {
+        }
 }
 
 // MARK: - 提示框相关
-extension QNTool {
+extension ZMDTool {
     
     /**
     弹出会自动消失的提示框
@@ -57,18 +64,18 @@ extension QNTool {
     */
     class func showErrorPromptView(dictionary: NSDictionary?, error: NSError?, errorMsg: String? = nil) {
         if errorMsg != nil {
-            QNTool.showPromptView(errorMsg!); return
+            ZMDTool.showPromptView(errorMsg!); return
         }
         
         if let errorMsg = dictionary?["errorMsg"] as? String {
-            QNTool.showPromptView(errorMsg); return
+            ZMDTool.showPromptView(errorMsg); return
         }
         
         if error != nil && error!.domain.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) > 0 {
-            QNTool.showPromptView("网络异常，请稍后重试！"); return
+            ZMDTool.showPromptView("网络异常，请稍后重试！"); return
         }
         
-        QNTool.showPromptView()
+        ZMDTool.showPromptView()
     }
     
     
@@ -77,7 +84,7 @@ extension QNTool {
 // MARK: - 增加空提示的View
 private let kTagEmptyView = 96211
 private let kTagMessageLabel = 96212
-extension QNTool {
+extension ZMDTool {
     
     /**
     为inView增加空提示
@@ -134,7 +141,7 @@ extension QNTool {
 }
 
 // MARK: - 页面切换相关
-extension QNTool {
+extension ZMDTool {
 
     /**
     转场动画过渡
@@ -177,14 +184,14 @@ extension QNTool {
     */
     class func enterLoginViewController() {
         let vc = UIStoryboard(name: "Login", bundle: nil).instantiateInitialViewController()!
-        QNTool.enterRootViewController(vc)
+        ZMDTool.enterRootViewController(vc)
     }
     
     
 }
 
 // MARK: - 获得某个范围内的屏幕图像
-extension QNTool {
+extension ZMDTool {
     /// 获得 view 某个范围内的屏幕图像
     class func imageFromView(view: UIView, frame: CGRect) -> UIImageView {
         UIGraphicsBeginImageContext(view.frame.size)
@@ -202,7 +209,7 @@ extension QNTool {
 
 
 // MARK: - 判断当前网络状况
-extension QNTool {
+extension ZMDTool {
     /// 网络连接状态
     class func netWorkStatus() -> NetworkStatus {
         let netWorkStatic = Reachability.reachabilityForInternetConnection()
@@ -212,7 +219,7 @@ extension QNTool {
 }
 
 // MARK: - 让 Navigation 支持右滑返回
-extension QNTool: UIGestureRecognizerDelegate {
+extension ZMDTool: UIGestureRecognizerDelegate {
     
     /**
     让 Navigation 支持右滑返回
@@ -221,7 +228,7 @@ extension QNTool: UIGestureRecognizerDelegate {
     */
     class func addInteractive(navigationController: UINavigationController?) {
         navigationController?.interactivePopGestureRecognizer!.enabled = true
-        navigationController?.interactivePopGestureRecognizer!.delegate = qnToolInstance
+        navigationController?.interactivePopGestureRecognizer!.delegate = zmdToolInstance
     }
     
     /**

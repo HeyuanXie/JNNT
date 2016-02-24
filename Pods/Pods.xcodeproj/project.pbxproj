@@ -2188,6 +2188,14 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0700;
+				TargetAttributes = {
+					2F9912775473A057A1BEE942E87BEDCB = {
+						DevelopmentTeam = LC97QVP7Z7;
+					};
+					94624EC6C9739263AA965CFE2D8933F5 = {
+						DevelopmentTeam = LC97QVP7Z7;
+					};
+				};
 			};
 			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -2936,6 +2944,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 384AF13CDB8BF12A1A8783299F3C2D6F /* Box.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -2951,6 +2960,7 @@
 				MODULEMAP_FILE = "Target Support Files/Box/Box.modulemap";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = Box;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -3019,6 +3029,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 14A0699FA9BA153A52AE5C12FA48F2E8 /* DACircularProgress.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -3034,6 +3045,7 @@
 				MODULEMAP_FILE = "Target Support Files/DACircularProgress/DACircularProgress.modulemap";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = DACircularProgress;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -3046,6 +3058,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 384AF13CDB8BF12A1A8783299F3C2D6F /* Box.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -3061,6 +3074,7 @@
 				MODULEMAP_FILE = "Target Support Files/Box/Box.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = Box;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -3246,6 +3260,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 14A0699FA9BA153A52AE5C12FA48F2E8 /* DACircularProgress.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -3261,6 +3276,7 @@
 				MODULEMAP_FILE = "Target Support Files/DACircularProgress/DACircularProgress.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = DACircularProgress;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";

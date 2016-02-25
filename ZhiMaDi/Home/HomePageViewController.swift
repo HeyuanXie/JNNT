@@ -102,14 +102,13 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
     let kTagAdPageControl = 12200
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
-        UIApplication.sharedApplication().statusBarHidden = false //info.plist  View controller-based status bar appearance = no
-
         self.dataInit()
        
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+        UIApplication.sharedApplication().statusBarHidden = false //info.plist  View controller-based status bar appearance = no
         self.setupNewNavigation()
     }
     override func viewWillDisappear(animated: Bool) {

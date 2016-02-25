@@ -53,7 +53,7 @@ class QNInterceptor : NSObject {
                     viewController.edgesForExtendedLayout = UIRectEdge.None
                     // 全部设置成返回按钮，在有导航栏，并且不是导航栏的rootViewController
                     if let rootViewController = viewController.navigationController?.viewControllers.first where rootViewController != viewController {
-//                        viewController.configBackButton()
+                        viewController.configBackButton()
                     }
                 }
             }

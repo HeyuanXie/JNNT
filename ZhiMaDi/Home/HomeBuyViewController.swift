@@ -1,3 +1,4 @@
+
 //
 //  HomeBuyViewController.swift
 //  ZhiMaDi
@@ -16,11 +17,11 @@ class HomeBuyViewController: UIViewController, QNInterceptorProtocol, UITableVie
         self.tableView = UITableView(frame: self.view.bounds, style: UITableViewStyle.Plain)
         self.tableView.backgroundColor = defaultBackgroundGrayColor
         self.tableView.separatorStyle = .SingleLine
-        self.tableView.scrollEnabled = false
         self.tableView.dataSource = self
         self.tableView.delegate = self
         self.view.addSubview(self.tableView)
-        self.navigationController?.navigationBarHidden = false
+        self.navigationController?.navigationBarHidden = false 
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -38,19 +39,19 @@ class HomeBuyViewController: UIViewController, QNInterceptorProtocol, UITableVie
         return 0
     }
     func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 0
+        return 1
     }
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
        return 84
     }
-    
+  
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cellId = "cell"
         var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
         if cell == nil {
             cell = UITableViewCell(style: .Subtitle, reuseIdentifier: cellId)
             cell?.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
-            cell!.selectionStyle = .Default
+            cell!.selectionStyle = .None
             
             ZMDTool.configTableViewCellDefault(cell!)
             cell!.contentView.backgroundColor = UIColor.whiteColor()
@@ -74,7 +75,8 @@ class HomeBuyViewController: UIViewController, QNInterceptorProtocol, UITableVie
         return cell!
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
+        let homeBuyListViewController = HomeBuyListViewController.CreateFromMainStoryboard() as! HomeBuyListViewController
+        self.navigationController?.pushViewController(homeBuyListViewController, animated: true)
     }
 
 

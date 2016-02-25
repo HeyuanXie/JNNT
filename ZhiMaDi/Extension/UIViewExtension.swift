@@ -72,6 +72,36 @@ extension UIView {
 }
 //方便自定义窗口弹出
 extension UIView {
+    //点击阴影移除窗口
+    func showAsPopAndhideWhenClickGray() {
+        let frontToBackWindows = UIApplication.sharedApplication().windows.reverse()
+        for window in frontToBackWindows {
+            let windowOnMainScreen = window.screen == UIScreen.mainScreen()
+            let windowIsVisible = !window.hidden && window.alpha > 0
+            let windowLevelNormal = window.windowLevel == UIWindowLevelNormal
+            if (windowOnMainScreen && windowIsVisible && windowLevelNormal) {
+                window.addSubview(self)
+                
+                let btn = UIButton(frame: CGRectMake(0 , 0, kScreenWidth,  kScreenHeight))
+                btn.backgroundColor = UIColor.clearColor()
+                btn.rac_signalForControlEvents(.TouchUpInside).subscribeNext({ (sender) -> Void in
+                    self.hidePop()
+                    sender.removeFromSuperview()
+                })
+                window.addSubview(btn)
+                break
+            }
+        }
+        self.layer.opacity = 0.5;
+        self.layer.transform = CATransform3DMakeScale(1.1, 1.1, 1.0);
+        UIView.animateWithDuration(0.2, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
+            self.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.4) //半透明色值
+            self.layer.opacity = 1.0
+            self.layer.transform = CATransform3DMakeScale(1, 1, 1);
+            }) { (finished) -> Void in
+        }
+    }
+ 
     func showAsPop() {
         let frontToBackWindows = UIApplication.sharedApplication().windows.reverse()
         for window in frontToBackWindows {
@@ -92,7 +122,7 @@ extension UIView {
             }) { (finished) -> Void in
         }
     }
-    func hideAsPop() {
+    func hidePop() {
         UIView.animateWithDuration(0.15, delay: 0.0, options: [UIViewAnimationOptions.CurveEaseIn , UIViewAnimationOptions.AllowUserInteraction], animations: { () -> Void in
             self.alpha = 0
             self.transform = CGAffineTransformScale(self.transform, 0.8,0.8);

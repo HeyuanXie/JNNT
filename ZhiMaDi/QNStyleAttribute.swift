@@ -17,11 +17,11 @@ let appThemeColor = UIColor(red: 0/255.0, green: 153/255.0, blue: 255/255.0, alp
 /// 默认背景色
 let defaultBackgroundColor = UIColor(white: 1.0, alpha: 1.0)
 /// 默认灰色背景
-let defaultBackgroundGrayColor = UIColor(white: 249/255.0, alpha: 1.0)
+let defaultBackgroundGrayColor = UIColor(red: 238/255, green: 238/255, blue: 238/255, alpha: 1.0)//UIColor(white: 249/255.0, alpha: 1.0)
 /// 默认灰色
 let defaultGrayColor = UIColor(white: 81/255.0, alpha: 1.0)
 /// 默认的分割线颜色
-let defaultLineColor = UIColor(white: 224/255.0, alpha: 1.0)
+let defaultLineColor = UIColor(red: 197/255, green: 197/255, blue: 197/255, alpha: 1.0)//UIColor(white: 224/255.0, alpha: 1.0)
 
 // MARK: 导航栏
 /// 导航栏文本颜色

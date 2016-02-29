@@ -85,7 +85,7 @@ extension UIView {
                 let btn = UIButton(frame: CGRectMake(0 , 0, kScreenWidth,  kScreenHeight))
                 btn.backgroundColor = UIColor.clearColor()
                 btn.rac_signalForControlEvents(.TouchUpInside).subscribeNext({ (sender) -> Void in
-                    self.hidePop()
+                    self.removePop()
                     sender.removeFromSuperview()
                 })
                 window.addSubview(btn)
@@ -102,7 +102,7 @@ extension UIView {
         }
     }
  
-    func showAsPop() {
+    func showAsPop(setBgColor isSetBgColor : Bool  = true) {
         let frontToBackWindows = UIApplication.sharedApplication().windows.reverse()
         for window in frontToBackWindows {
             let windowOnMainScreen = window.screen == UIScreen.mainScreen()
@@ -116,13 +116,15 @@ extension UIView {
         self.layer.opacity = 0.5;
         self.layer.transform = CATransform3DMakeScale(1.1, 1.1, 1.0);
         UIView.animateWithDuration(0.2, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
-            self.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.4) //半透明色值
+            if isSetBgColor {
+                self.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.4) //半透明色值
+            }
             self.layer.opacity = 1.0
             self.layer.transform = CATransform3DMakeScale(1, 1, 1);
             }) { (finished) -> Void in
         }
     }
-    func hidePop() {
+    func removePop() {
         UIView.animateWithDuration(0.15, delay: 0.0, options: [UIViewAnimationOptions.CurveEaseIn , UIViewAnimationOptions.AllowUserInteraction], animations: { () -> Void in
             self.alpha = 0
             self.transform = CGAffineTransformScale(self.transform, 0.8,0.8);
@@ -141,4 +143,5 @@ extension UIView {
         label.textAlignment = .Center
         return label
     }
+
 }

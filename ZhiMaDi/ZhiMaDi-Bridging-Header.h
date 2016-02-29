@@ -24,4 +24,5 @@
 #import "Reachability.h"
 
 //简单轮翻图
+#import "CycleScrollView.h"
 #endif /* SleepCare_Bridging_Header_h */

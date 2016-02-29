@@ -40,6 +40,16 @@ extension UIViewController {
             self.dismissViewControllerAnimated(true, completion: { () -> Void in })
         }
     }
+    @IBAction func gotoMsg() {
+        if let navigationController = self.navigationController where (navigationController.viewControllers.first
+            
+            ) != self {
+                navigationController.popViewControllerAnimated(true)
+        }
+        else {
+            self.dismissViewControllerAnimated(true, completion: { () -> Void in })
+        }
+    }
 }
 
 //MARK:- 为 UIViewController ... 提供一个标准的导航栏返回按钮配置
@@ -49,5 +59,11 @@ extension UIViewController {
         item.customView?.tintColor = appThemeColor
         
         self.navigationItem.leftBarButtonItem = item
+    }
+    public func configMsgButton() {
+        let item = UIBarButtonItem(image: UIImage(named: "Navi_Msg")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate), style: UIBarButtonItemStyle.Bordered, target: self, action: Selector("back"))
+        item.customView?.tintColor = appThemeColor
+        
+        self.navigationItem.rightBarButtonItem = item
     }
 }

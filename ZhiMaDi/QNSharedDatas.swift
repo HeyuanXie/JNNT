@@ -14,6 +14,11 @@ import UIKit
 /// 加密解密密钥
 let g_SecretKey = "qoocc"
 
+/// 是否登录
+var g_isLogin: Bool! { return g_currentGroup != nil }
+/// 当前账号
+var g_currentGroup : String?
+
 // MARK: - 账号 & 账号管理
 private let kKeyAccount = ("Account" as NSString).encrypt(g_SecretKey)
 /// 账号（登录成功的）
@@ -44,5 +49,14 @@ func cleanPassword() {
 func cleanAccount(){
     removeObjectAtUserDefaults(kKeyAccount)
 }
-/// 是否登录
-var g_isLogin: Bool!
+
+
+// MARK: -搜索记录
+let KeyHistory = ("History" as NSString).encrypt(g_SecretKey)
+//保存搜索记录
+func saveSearchHistory (goodes: NSArray) {
+    saveObjectToUserDefaults(KeyHistory, value: goodes)
+}
+var g_SearchHistory : AnyObject? {
+    return getObjectFromUserDefaults(KeyHistory) 
+}

@@ -11,12 +11,17 @@ import UIKit
 class HomeBuyListViewController: UIViewController ,QNInterceptorProtocol, UITableViewDataSource, UITableViewDelegate{
 
     @IBOutlet weak var currentTableView: UITableView!
+    var isBought = false
     var popView : UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.currentTableView.tableHeaderView = self.createHeadAd()
     }
     
-
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -35,13 +40,13 @@ class HomeBuyListViewController: UIViewController ,QNInterceptorProtocol, UITabl
         return 0
     }
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 208
+        return !self.isBought ?  208 : 170
     }
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return self.createFilterMenu()
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cellId = "goodsCell"
+        let cellId = !self.isBought ? "goodsCell" : "goodsBoughtCell"
         var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
         if cell == nil {
             cell = UITableViewCell(style: .Subtitle, reuseIdentifier: cellId)
@@ -50,20 +55,31 @@ class HomeBuyListViewController: UIViewController ,QNInterceptorProtocol, UITabl
             
             ZMDTool.configTableViewCellDefault(cell!)
         }
+        
+        
         return cell!
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
     }
     //MARK: -  PrivateMethod
     //headView
+    func createHeadAd() -> UIView{
+        let cycleScroll = CycleScrollView(frame: CGRectMake(0, 0, kScreenWidth, kScreenWidth * 7/15))
+        let image = ["Home_Top1_Advertisement","Home_Top2_Advertisement"]
+        cycleScroll.imgArray = image
+        //            cycleScroll.delegate = self
+        cycleScroll.autoScroll = true
+        cycleScroll.autoTime = 2.5
+        return cycleScroll
+    }
     func createFilterMenu() -> UIView{
-        let prices = ["价格","分类","品种","区域"]
+        let prices = !self.isBought ? ["价格","分类","品种","区域"] : ["全部","价格","成交量","筛选"]
         let (imageNormal,imageSelected) = ("Home_Buy_Filter1","Home_Buy_Filter2")
         let view = UIView(frame: CGRectMake(0 , 0, kScreenWidth, 52))
         for var i=0;i<4;i++ {
             let index = i%4
             let btn = UIButton(frame:  CGRectMake(CGFloat(index) * kScreenWidth/4 , 0, kScreenWidth/4, 52))
-            btn.backgroundColor = UIColor.clearColor()
+            btn.backgroundColor = UIColor.whiteColor()
             btn.setImage(UIImage(named: imageNormal), forState: .Normal)
             btn.setImage(UIImage(named: imageSelected), forState: .Selected)
             btn.setTitle(prices[i], forState: .Normal)
@@ -76,6 +92,10 @@ class HomeBuyListViewController: UIViewController ,QNInterceptorProtocol, UITabl
             btn.rac_signalForControlEvents(.TouchUpInside).subscribeNext({ (sender) -> Void in
                 self.popWindow()
             })
+            if i < 3 {
+                let line = ZMDTool.getLine(CGRectMake(kScreenWidth/4 - 1, 20, 1, 13))
+                btn.addSubview(line)
+            }
         }
         return view
     }

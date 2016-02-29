@@ -9,24 +9,24 @@
 import UIKit
 // MARK: Tab 分组
 private enum QNTabBarItem: Int {
-    case MedicaData = 0
-    case Task = 1
-    case Services = 2
-    case UserCenter = 3
+    case Home = 0
+    case Category = 1
+    case School = 2
+    case Mine = 3
     
     // 对应的图片名
     var imageName: String {
         switch self {
-        case .MedicaData: return "Home"
-        case .Task: return "Category"
-        case .Services: return "School"
-        case .UserCenter: return "Mine"
+        case .Home: return "Home"
+        case .Category: return "Category"
+        case .School: return "School"
+        case .Mine: return "Mine"
         }
     }
 }
 
 /// MARK: - 底部工具控制器
-class tabBarViewController: UITabBarController {
+class tabBarViewController: UITabBarController,UITabBarControllerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,11 +40,21 @@ class tabBarViewController: UITabBarController {
         UITabBarItem.appearance().setTitleTextAttributes(NSDictionary(dictionary: [NSForegroundColorAttributeName: titleSelectedColor,NSFontAttributeName:UIFont.systemFontOfSize(12)]) as? [String : AnyObject], forState: .Selected)
         // 图标配置
         if let _ = self.tabBar.items {
-            self.itemConfig(QNTabBarItem.MedicaData)
-            self.itemConfig(QNTabBarItem.Task)
-            self.itemConfig(QNTabBarItem.Services)
-            self.itemConfig(QNTabBarItem.UserCenter)
+            self.itemConfig(QNTabBarItem.Home)
+            self.itemConfig(QNTabBarItem.Category)
+            self.itemConfig(QNTabBarItem.School)
+            self.itemConfig(QNTabBarItem.Mine)
         }
+        self.delegate = self
+    }
+    
+    // UITabBarControllerDelegate
+    func tabBarController(tabBarController: UITabBarController, shouldSelectViewController viewController: UIViewController) -> Bool {
+        if viewController == (self.viewControllers?.last)! as UIViewController {
+            ZMDTool.enterLoginViewController()
+            return g_isLogin
+        }
+        return true
     }
     //MARK:-Private Method
     /**
@@ -69,6 +79,7 @@ class tabBarViewController: UITabBarController {
                         item.selectedImage = self.imageAddDotView(selectedImage).imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
                     }
             }
+            
             return item
         }
         return nil

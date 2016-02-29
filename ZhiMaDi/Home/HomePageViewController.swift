@@ -8,7 +8,7 @@
 
 import UIKit
 //首页
-class HomePageViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
+class HomePageViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate,QNInterceptorNavigationBarHiddenProtocol {
     enum UserCenterCellType{
         case HomeContentTypeAd                      /* 广告显示页 */
         case HomeContentTypeMenu                    /* 菜单选择栏目 */
@@ -69,7 +69,9 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
             let viewController: UIViewController
             switch self{
             case Offer:
-                viewController = UIViewController()
+                let homeBuyListViewController = HomeBuyListViewController.CreateFromMainStoryboard() as! HomeBuyListViewController
+                homeBuyListViewController.isBought = true
+                viewController = homeBuyListViewController
             case Market:
                 viewController = UIViewController()
             case News:
@@ -90,16 +92,13 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
         }
     }
     @IBOutlet weak var currentTableView: UITableView!
-    var adScrollView : UIScrollView!
-    var adPageControl : UIPageControl!
+
     var window : UIWindow!
     var userCenterData: [UserCenterCellType]!
     var menuType: [MenuType]!
     let menuBtnTag = 10000
     let menuLblTag = 11000
     let menuImgTag = 11100
-    let kTagAdScrollView = 12000
-    let kTagAdPageControl = 12200
     override func viewDidLoad() {
         super.viewDidLoad()
         self.dataInit()
@@ -107,8 +106,7 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
-        UIApplication.sharedApplication().statusBarHidden = false //info.plist  View controller-based status bar appearance = no
+//        UIApplication.sharedApplication().statusBarHidden = false //info.plist  View controller-based status bar appearance = no
         self.setupNewNavigation()
     }
     override func viewWillDisappear(animated: Bool) {
@@ -160,12 +158,11 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 
     }
-    //MARK: -UIScrollViewDelegate
-    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
-        let index = scrollView.contentOffset.x/scrollView.bounds.size.width
-        self.adPageControl.currentPage = Int(index)
+    //MARK: - UISearchBarDelegate
+    func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
+        self.navigationController?.pushViewController(HomeBuyGoodsSearchViewController(), animated: true)
+        return true
     }
-  
     //MARK: private method
     //MARK: 广告 cell
     func cellForHomeAd(tableView: UITableView,indexPath: NSIndexPath)-> UITableViewCell {
@@ -176,25 +173,15 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
             cell!.selectionStyle = .None
             cell!.contentView.backgroundColor = UIColor.whiteColor()
             
-            let scrollView = UIScrollView(frame: cell!.contentView.bounds)
-            scrollView.backgroundColor = UIColor.clearColor()
-            scrollView.autoresizingMask = [.FlexibleWidth,.FlexibleHeight]
-            scrollView.tag = kTagAdScrollView
-            scrollView.scrollsToTop = false;
-            scrollView.pagingEnabled = true;
-            scrollView.showsVerticalScrollIndicator = false;
-            scrollView.showsHorizontalScrollIndicator = false;
-            scrollView.delegate = self;
-            cell!.contentView.addSubview(scrollView)
-            
-            let pageControl = UIPageControl(frame: CGRectMake(0, scrollView.bounds.height - 20, kScreenWidth, 20))
-            pageControl.tag = kTagAdPageControl
-            pageControl.backgroundColor = UIColor.clearColor()
-            pageControl.currentPageIndicatorTintColor = UIColor.blueColor()
-            pageControl.autoresizingMask = [.FlexibleWidth,.FlexibleTopMargin]
-            cell?.contentView.addSubview(pageControl)
+            let cycleScroll = CycleScrollView(frame: CGRectMake(0, 0, kScreenWidth, kScreenWidth * 7/15))
+            let image = ["Home_Top1_Advertisement","Home_Top2_Advertisement"]
+            cycleScroll.imgArray = image
+//            cycleScroll.delegate = self
+            cycleScroll.autoScroll = true
+            cycleScroll.autoTime = 2.5
+            cell?.addSubview(cycleScroll)
+
         }
-        self.reloadAdWithCell(cell!)
         return cell!
     }
     // 菜单
@@ -203,7 +190,7 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
         var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
         if cell == nil {
             cell = UITableViewCell(style: .Default, reuseIdentifier: cellId)
-            cell?.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+            cell?.accessoryType = UITableViewCellAccessoryType.None
             cell!.selectionStyle = .None
             ZMDTool.configTableViewCellDefault(cell!)
             cell!.contentView.backgroundColor = UIColor.whiteColor()
@@ -265,6 +252,9 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
             cell!.contentView.addSubview(imgVLeft)
             cell!.contentView.addSubview(imgVRightTop)
             cell!.contentView.addSubview(imgVRightBot)
+ 
+            cell?.contentView.addSubview(ZMDTool.getLine(CGRectMake( kScreenWidth/2,0,1,kScreenWidth*31/68)))
+            cell?.contentView.addSubview(ZMDTool.getLine(CGRectMake( kScreenWidth/2,kScreenWidth*31/68/2,kScreenWidth/2,1)))
         }
         return cell!
     }
@@ -285,28 +275,7 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
         }
         return cell!
     }
-    // 重新加载广告模块的内容
-    func reloadAdWithCell(cell:UITableViewCell ) {
-        let adScrollView = cell.contentView.viewWithTag(kTagAdScrollView) as? UIScrollView
-        let pageControl = cell.contentView.viewWithTag(kTagAdPageControl) as? UIPageControl
 
-        if adScrollView == nil {
-            return
-        }
-        for view in (adScrollView?.subviews)! {
-            view.removeFromSuperview()
-        }
-        for var i = 0 ; i < 2 ; i++ {
-            let imgV = UIImageView(frame: CGRectMake(i==0 ? 0:kScreenWidth, 0, kScreenWidth, kScreenWidth * 350/720))
-            let image = i == 0 ? UIImage(named: "Home_Top1_Advertisement") : UIImage(named: "Home_Top2_Advertisement")
-            imgV.image=image
-            adScrollView?.addSubview(imgV)
-        }
-        adScrollView?.contentSize = CGSizeMake(kScreenWidth*2, kScreenWidth * 7/15)
-        pageControl!.numberOfPages = 2
-        self.adScrollView = adScrollView
-        self.adPageControl = pageControl
-    }
     func setupNewNavigation() {
         if self.window == nil {
             window  = UIWindow(frame: CGRectMake(0, 30, kScreenWidth, 38))
@@ -320,6 +289,12 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
             searchBar.backgroundImage = UIImage.imageWithColor(UIColor.clearColor(), size: searchBar.bounds.size)
             searchBar.placeholder = "商品查找"
             window.addSubview(searchBar)
+            let searchBtn = UIButton(frame: searchBar.bounds)
+            searchBar.addSubview(searchBtn)
+            searchBtn.rac_signalForControlEvents(.TouchUpInside).subscribeNext({ (sender) -> Void in
+                self.tabBarController?.hidesBottomBarWhenPushed = true
+                self.navigationController?.pushViewController(HomeBuyGoodsSearchViewController(), animated: true)
+            })
             
             let imgV = UIImageView(frame: CGRectMake(kScreenWidth-40, 0, 28, 28))
             imgV.image = UIImage(named: "Home_Msg")
@@ -333,7 +308,7 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
             window.addSubview(label)
         }
         self.window.makeKeyAndVisible()
-}
+    }
 
     func updateData (){
         

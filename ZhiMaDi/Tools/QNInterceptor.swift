@@ -23,6 +23,9 @@ protocol QNInterceptorNavigationBarHiddenProtocol: QNInterceptorProtocol {}
 /// 遵循此协议的 ViewController 会支持 IQKeyboardManager 键盘遮挡解决方案
 protocol QNInterceptorKeyboardProtocol: QNInterceptorProtocol {}
 
+/// 遵循此协议的 ViewController 会提供消息按扭
+protocol QNInterceptorMsnProtocol: QNInterceptorProtocol {}
+
 
 /** 拦截器，拦截遵循了QNInterceptorProtocol 协议的类的实例 */
 class QNInterceptor : NSObject {
@@ -54,6 +57,16 @@ class QNInterceptor : NSObject {
                     // 全部设置成返回按钮，在有导航栏，并且不是导航栏的rootViewController
                     if let rootViewController = viewController.navigationController?.viewControllers.first where rootViewController != viewController {
                         viewController.configBackButton()
+                    }
+                }
+                if let _ = self, let viewController = aspectInfo.instance() as? UIViewController where viewController is QNInterceptorMsnProtocol {
+                    // 设置统一的背景色
+                    viewController.view.backgroundColor = defaultBackgroundColor
+                    // 修改基础配置
+                    viewController.edgesForExtendedLayout = UIRectEdge.None
+                    // 全部设置成返回按钮，在有导航栏，并且不是导航栏的rootViewController
+                    if let rootViewController = viewController.navigationController?.viewControllers.first where rootViewController != viewController {
+                        viewController.configMsgButton()
                     }
                 }
             }
@@ -94,7 +107,7 @@ class QNInterceptor : NSObject {
                         
                         // 修改导航栏&状态栏的样式
                         viewController.navigationController?.navigationBar.translucent = false // 关闭透明度效果
-                        UIApplication.sharedApplication().statusBarHidden = false
+//                        UIApplication.sharedApplication().statusBarHidden = false
                         if viewController.navigationController!.viewControllers.count == 1{
 //                            if viewController is BindingFamilyViewController || viewController is ForgetPasswordViewController{
 //                                UIApplication.sharedApplication().statusBarStyle = .Default
@@ -109,7 +122,7 @@ class QNInterceptor : NSObject {
                             viewController.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: navigationTextColor, NSFontAttributeName: UIFont.systemFontOfSize(18)]
                         }
                         else {
-                            UIApplication.sharedApplication().statusBarStyle = .Default
+//                            UIApplication.sharedApplication().statusBarStyle = .Default
                             viewController.navigationController?.navigationBar.barTintColor = navigationTextColor
                             viewController.navigationController?.navigationBar.tintColor = appThemeColor
                             viewController.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: appThemeColor, NSFontAttributeName: UIFont.systemFontOfSize(18)]

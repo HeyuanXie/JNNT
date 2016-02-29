@@ -67,6 +67,11 @@ extension ZMDTool {
         view.layer.borderWidth = 0.5
         view.layer.borderColor = defaultLineColor.CGColor
     }
+    /// 对UIView对象进行配置(cornerRadius)
+    class func configViewLayerRound(view: UIView) {
+        view.layer.cornerRadius = view.bounds.size.width/2
+        view.layer.masksToBounds = true
+    }
 }
 
 

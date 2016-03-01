@@ -8,7 +8,7 @@
 
 import UIKit
 //商品列表
-class HomeBuyListViewController: UIViewController ,QNInterceptorProtocol, UITableViewDataSource, UITableViewDelegate{
+class HomeBuyListViewController: UIViewController ,ZMDInterceptorProtocol, UITableViewDataSource, UITableViewDelegate{
 
     @IBOutlet weak var currentTableView: UITableView!
     var isBought = false

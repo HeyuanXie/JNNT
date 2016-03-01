@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginViewController: UIViewController , QNInterceptorNavigationBarHiddenProtocol, UITextFieldDelegate{
+class LoginViewController: UIViewController , ZMDInterceptorNavigationBarHiddenProtocol, UITextFieldDelegate{
 
     @IBOutlet weak var accountTextField: UITextField!
     @IBOutlet weak var verificationTextField: UITextField!
@@ -150,10 +150,10 @@ extension LoginViewController {
             if isRegister {
 //                QNNetworkTool.registeredSmscode(phoneNum, completion: { [weak viewController](succeed, error, errorMsg) -> Void in
 //                    if let _ = viewController {
-//                        QNTool.hiddenActivityView()
+                        ZMDTool.hiddenActivityView()
 //                        if succeed {
-//                            QNTool.showPromptView( "验证码已发送到你手机", nil)
-//                            self.waitingAuthCode(authCodeButton, start: true)
+                            ZMDTool.showPromptView( "验证码已发送到你手机", nil)
+                            self.waitingAuthCode(authCodeButton, start: true)
 //                        }
 //                        else {
 //                            QNTool.showErrorPromptView(nil, error: error, errorMsg: errorMsg)
@@ -166,7 +166,7 @@ extension LoginViewController {
 //                        QNTool.hiddenActivityView()
 //                        if succeed {
 //                            QNTool.showPromptView( "验证码已发送到你手机", nil)
-//                            self.waitingAuthCode(authCodeButton, start: true)
+                            self.waitingAuthCode(authCodeButton, start: true)
 //                        }
 //                        else {
 //                            QNTool.showErrorPromptView(nil, error: error, errorMsg: errorMsg)
@@ -191,8 +191,8 @@ extension LoginViewController {
         
         if button.tag == 0 {
             button.setTitle("获取验证码", forState: .Normal)
-            button.backgroundColor = appThemeColor
-            button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+            button.backgroundColor = UIColor.clearColor()
+            button.setTitleColor(UIColor.grayColor(), forState: .Normal)
             button.setTitleColor(UIColor.grayColor(), forState: .Highlighted)
             button.enabled = true
         }

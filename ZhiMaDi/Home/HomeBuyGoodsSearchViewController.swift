@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HomeBuyGoodsSearchViewController: UIViewController, QNInterceptorProtocol, UITableViewDataSource, UITableViewDelegate {
+class HomeBuyGoodsSearchViewController: UIViewController, ZMDInterceptorProtocol, UITableViewDataSource, UITableViewDelegate {
     var tableView : UITableView!
     
     let goodses  = ["冰糖心苹果","西西","苹果","冰糖心苹果","西西","糖心苹果","糖心苹果"]
@@ -157,7 +157,7 @@ class HomeBuyGoodsSearchViewController: UIViewController, QNInterceptorProtocol,
                 })
                 
                 let label = UILabel(frame: CGRectMake(14, 18,100, 15))
-                label.text = self.histories[indexPath.row] as! String
+                label.text = self.histories[indexPath.row] as? String
                 label.textColor = UIColor.blackColor()
                 label.font = UIFont.systemFontOfSize(15)
                 

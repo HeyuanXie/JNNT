@@ -256,23 +256,25 @@ extension ZMDTool {
         line.backgroundColor = defaultBackgroundGrayColor
         return line
     }
-    class func getBtn () -> newBtn {
-        return newBtn()
+    class func getBtn (frame:CGRect) -> CustomBtn {
+        return CustomBtn(frame: frame)
     }
 }
-class newBtn : UIButton {
+//自定义UIButton 用于图跟文字垂直
+class CustomBtn : UIButton {
     override func layoutSubviews() {
+        let edgeTop = (self.frame.height - (self.imageView?.frame.size.height)! - 24)/2
         super.layoutSubviews()
         // Center image
         var center = self.imageView?.center
         center?.x = self.frame.size.width/2
-        center?.y = self.imageView!.frame.size.height/2
+        center?.y = self.imageView!.frame.size.height/2 + edgeTop
         self.imageView!.center = center!
         
         //Center text
         var newFrame = self.titleLabel!.frame;
         newFrame.origin.x = 0;
-        newFrame.origin.y = self.imageView!.frame.size.height + 5;
+        newFrame.origin.y = self.imageView!.frame.size.height + edgeTop + 10;
         newFrame.size.width = self.frame.size.width;
         
         self.titleLabel!.frame = newFrame;

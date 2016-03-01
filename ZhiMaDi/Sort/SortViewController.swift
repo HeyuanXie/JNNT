@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SortViewController: UIViewController,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UICollectionViewDelegate,QNInterceptorProtocol,QNInterceptorNavigationBarShowProtocol,QNInterceptorMsnProtocol{
+class SortViewController: UIViewController,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UICollectionViewDelegate,ZMDInterceptorProtocol,ZMDInterceptorNavigationBarShowProtocol,ZMDInterceptorMsnProtocol{
     
     var collectView : UICollectionView!
     override func viewDidLoad() {
@@ -36,10 +36,9 @@ class SortViewController: UIViewController,UICollectionViewDataSource,UICollecti
         cell.backgroundColor = UIColor.clearColor()
 
         let img = UIImage(named: "apple")
-        let btn = ZMDTool.getBtn()
+        let btn = ZMDTool.getBtn(cell.bounds)
     
         btn.backgroundColor = UIColor.clearColor()
-        btn.frame = cell.bounds
         //UIButton(frame: cell.bounds)
         btn.setTitle("苹果", forState: .Normal)
         btn.setTitleColor(UIColor.blackColor(), forState: .Normal)

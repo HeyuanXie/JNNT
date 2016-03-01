@@ -31,9 +31,7 @@ extension UIViewController {
 //MARK:- 为 UIViewController ... 扩展一个 返回功能
 extension UIViewController {
     @IBAction func back() {
-        if let navigationController = self.navigationController where (navigationController.viewControllers.first
-            
-            ) != self {
+        if let navigationController = self.navigationController where (navigationController.viewControllers.first) != self {
             navigationController.popViewControllerAnimated(true)
         }
         else {
@@ -41,9 +39,7 @@ extension UIViewController {
         }
     }
     @IBAction func gotoMsg() {
-        if let navigationController = self.navigationController where (navigationController.viewControllers.first
-            
-            ) != self {
+        if let navigationController = self.navigationController where (navigationController.viewControllers.first) != self {
                 navigationController.popViewControllerAnimated(true)
         }
         else {
@@ -62,6 +58,12 @@ extension UIViewController {
     }
     public func configMsgButton() {
         let item = UIBarButtonItem(image: UIImage(named: "Navi_Msg")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate), style: UIBarButtonItemStyle.Bordered, target: self, action: Selector("back"))
+        item.customView?.tintColor = appThemeColor
+        
+        self.navigationItem.rightBarButtonItem = item
+    }
+    public func configMoreButton() {
+        let item = UIBarButtonItem(image: UIImage(named: "Msn_More")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate), style: UIBarButtonItemStyle.Bordered, target: self, action: Selector("back"))
         item.customView?.tintColor = appThemeColor
         
         self.navigationItem.rightBarButtonItem = item

@@ -7,8 +7,8 @@
 //
 
 import UIKit
-
-class MineHomeViewController: UIViewController,QNInterceptorProtocol,UICollectionViewDelegate,UICollectionViewDataSource{
+//我的  首页
+class MineHomeViewController: UIViewController,  UITableViewDataSource, UITableViewDelegate,ZMDInterceptorNavigationBarHiddenProtocol {
     enum UserCenterCellType{
         case NewProduct
         case Exchange
@@ -28,19 +28,19 @@ class MineHomeViewController: UIViewController,QNInterceptorProtocol,UICollectio
             case NewProduct:
                 return "新品发布"
             case Exchange:
-                return "我要换手"
+                return "我要转卖"
             case Goods:
-                return "商品管理"
-            case OfferCenter:
-                return "报价中心"
+                return "采购管理"
+            case Order:
+                return "销售管理"
             case Financia:
-                return "财务管理"
-            case Customer:
-                return "客户管理"
+                return "财富中心"
             case Data:
                 return "数据中心"
-            case Order:
-                return "订单管理"
+            case OfferCenter:
+                return "报价中心"
+            case Customer:
+                return "客户管理"
             }
         }
         
@@ -70,8 +70,6 @@ class MineHomeViewController: UIViewController,QNInterceptorProtocol,UICollectio
             switch self{
             case NewProduct:
                 viewController = UIViewController()
-            case NewProduct:
-                viewController = UIViewController()
             case Exchange:
                 viewController = UIViewController()
             case Goods:
@@ -96,82 +94,147 @@ class MineHomeViewController: UIViewController,QNInterceptorProtocol,UICollectio
         }
     }
 
-    var currentCollectionV : UICollectionView!
+    @IBOutlet weak var currentTableView: UITableView!
+    var navView : UIView!
+    var headerV : UIView!
+    
     var cellWidth : CGFloat!
     var userCenterData: [UserCenterCellType]!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.currentCollectionV?.backgroundColor = UIColor.whiteColor()
-        self.navigationController?.navigationBar.backgroundColor = UIColor.clearColor()
-        self.configureUI()
         self.dataInit()
+        self.updateUI()
     }
-    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        self.setupNewNavigation()
+    }
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(true)
+        self.navView.removePop()
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    //MARK:UICollectionViewDataSource
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 8
-    }
-    
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int{
+    //MARK:- UITableViewDataSource,UITableViewDelegate
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell{
-        
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! MineCollectionViewCell
-        cell.layer.borderWidth = 0.3;
-        cell.layer.borderColor = UIColor.lightGrayColor().CGColor
-        
-        let userCellType = self.userCenterData[indexPath.row]
-        cell.button.setImage(userCellType.image, forState: .Normal)
-        return cell
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 3
     }
-    //返回HeadView的宽高
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize{
-        return CGSize(width: kScreenWidth/3, height: kScreenWidth/3)
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return section == 0 ? 200 : 0
     }
-    //返回自定义HeadView或者FootView，我这里以headview为例
-    func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView{
-        var v = MineHomeHeadView()
-        if kind == UICollectionElementKindSectionHeader{
-            v = currentCollectionV!.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "headView", forIndexPath: indexPath) as! MineHomeHeadView
+    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return section > 0 ? 1 : 0
+    }
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        self.configHead()
+        return self.headerV
+    }
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return indexPath.section == 0 ? kScreenWidth/3 * 2 : 44
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        if indexPath.section == 0 {
+            let cellId = "topCell"
+            var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
+            if cell == nil {
+                cell = UITableViewCell(style: .Subtitle, reuseIdentifier: cellId)
+                cell?.accessoryType = UITableViewCellAccessoryType.None
+                cell!.selectionStyle = .None
+                ZMDTool.configTableViewCellDefault(cell!)
+                
+                for var i = 0 ; i < self.userCenterData.count ; i++ {
+                    let userCenterCellType = self.userCenterData[i]
+                    let x = kScreenWidth/3 * CGFloat(i % 3)
+                    let y = CGFloat(i / 3) * kScreenWidth/3
+                    let btn = ZMDTool.getBtn(CGRectMake(x, y, kScreenWidth/3, kScreenWidth/3))
+                    btn.backgroundColor = UIColor.clearColor()
+                    btn.setTitle(userCenterCellType.title, forState: .Normal)
+                    btn.setTitleColor(UIColor.blackColor(), forState: .Normal)
+                    btn.setImage(userCenterCellType.image, forState:.Normal)
+                    cell!.addSubview(btn)
+                    ZMDTool.configViewLayerFrame(btn)
+                }
+            }
+            return cell!
+        } else {
+            let cellId = "bottomCell"
+            var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
+            if cell == nil {
+                cell = UITableViewCell(style: .Subtitle, reuseIdentifier: cellId)
+                cell?.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+                cell!.selectionStyle = .None
+                
+                ZMDTool.configTableViewCellDefault(cell!)
+            }
+            cell?.textLabel?.text = indexPath.section == 1 ? "我的关注" : "商品评价"
+            return cell!
         }
-        return v
     }
-    //返回cell 上下左右的间距
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets{
-        return UIEdgeInsetsMake(0, 0,0,0)
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let homeBuyListViewController = HomeBuyListViewController.CreateFromMainStoryboard() as! HomeBuyListViewController
+        self.navigationController?.pushViewController(homeBuyListViewController, animated: true)
     }
-    //MARK:
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath){
-        let userCellType = self.userCenterData[indexPath.row]
-        userCellType.didSelect(self.navigationController!)
+    //MARK: UIScrollViewDelegate
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        //uitableview处理section的headView不悬浮
+        let sectionHeaderHeight : CGFloat = 200
+        if scrollView.contentOffset.y <= sectionHeaderHeight && scrollView.contentOffset.y >= 0{
+            scrollView.contentInset = UIEdgeInsetsMake(-scrollView.contentOffset.y, 0, 0, 0)
+        }else if scrollView.contentOffset.y >= sectionHeaderHeight{
+            scrollView.contentInset = UIEdgeInsetsMake(-sectionHeaderHeight, 0, 0, 0)
+        }
     }
+
     //MARK:Private Method
-    func configureUI() {
-        let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSizeMake(kScreenWidth/3, kScreenWidth/3)
-        layout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
-        layout.minimumLineSpacing       = 0.0;
-        layout.minimumInteritemSpacing  = 0.0;
-        currentCollectionV = UICollectionView(frame: CGRectMake(0, 0, kScreenWidth, self.view.bounds.height - 44), collectionViewLayout: layout)
-        //注册一个cell
-        currentCollectionV! .registerClass(MineCollectionViewCell.self, forCellWithReuseIdentifier:"cell")
-        //注册一个headView
-        currentCollectionV! .registerClass(MineHomeHeadView.self, forSupplementaryViewOfKind:UICollectionElementKindSectionHeader, withReuseIdentifier: "headView")
-        currentCollectionV?.delegate = self;
-        currentCollectionV?.dataSource = self;
+    func setupNewNavigation() {
+        let getBtn = { (frame:CGRect) -> UIButton in
+            let btn = UIButton(frame: frame)
+            btn.backgroundColor = UIColor.clearColor()
+            btn.layer.opacity = 0.5
+            ZMDTool.configViewLayerRound(btn)
+            return btn
+        }
+        let navView = UIView(frame: CGRectMake(0 , 20, kScreenWidth, 44))
+        navView.backgroundColor = UIColor.clearColor()
+        let setBtn = getBtn(CGRectMake(12 , 8, 28, 28))
+        let msnBtn = getBtn(CGRectMake(kScreenWidth - 40 , 8, 28, 28))
         
-        currentCollectionV?.backgroundColor = UIColor.whiteColor()
-        //设置每一个cell的宽高
-        self.view .addSubview(currentCollectionV!)
-//        self .getData()
+        setBtn.setImage(UIImage(named: "Mine_Set"), forState:.Normal)
+        msnBtn.setImage(UIImage(named: "Navi_Msg"), forState:.Normal)
+
+        navView.addSubview(setBtn)
+        navView.addSubview(msnBtn)
+        navView.showAsPop(setBgColor: false)
+        self.navView = navView
+        
+        setBtn.rac_signalForControlEvents(.TouchUpInside).subscribeNext { (sender) -> Void in
+            self.navigationController?.pushViewController(MineHomeSetViewController(), animated: true)
+        }
+        msnBtn.rac_signalForControlEvents(.TouchUpInside).subscribeNext { (sender) -> Void in
+            self.navigationController?.popToRootViewControllerAnimated(true)
+        }
+    }
+    func configHead() {
+        let nibView = NSBundle.mainBundle().loadNibNamed("MineHomeHeadView", owner: nil, options: nil) as NSArray
+        self.headerV = nibView.objectAtIndex(0) as? UIView
+        self.headerV.frame.size = CGSizeMake(kScreenWidth, 200)
+        
+        if let personImgV = self.headerV.viewWithTag(10001) {
+            personImgV.layer.cornerRadius = 43
+            personImgV.layer.masksToBounds = true
+        }
+    }
+    func updateUI() {
+       
     }
     private func dataInit(){
-        self.userCenterData = [UserCenterCellType.NewProduct,UserCenterCellType.Exchange,UserCenterCellType.Goods, UserCenterCellType.OfferCenter, UserCenterCellType.Financia, UserCenterCellType.Customer,UserCenterCellType.Data,UserCenterCellType.Order]
+        self.userCenterData = [UserCenterCellType.NewProduct,UserCenterCellType.Exchange,UserCenterCellType.Goods, UserCenterCellType.Order, UserCenterCellType.Financia, UserCenterCellType.Data]
     }
 }

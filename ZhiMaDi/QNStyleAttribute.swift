@@ -12,10 +12,10 @@ import UIKit.UIColor
 
 // MARK: - 颜色
 /// App主色    
-let appThemeColor = UIColor(red: 0/255.0, green: 153/255.0, blue: 255/255.0, alpha: 1.0)
+let appThemeColor = UIColor(red: 246/255.0, green: 246/255.0, blue: 246/255.0, alpha: 1.0)
 
 /// 默认背景色
-let defaultBackgroundColor = UIColor(white: 1.0, alpha: 1.0)
+let defaultBackgroundColor = UIColor(red: 238/255, green: 238/255, blue: 238/255, alpha: 1.0)
 /// 默认灰色背景
 let defaultBackgroundGrayColor = UIColor(red: 238/255, green: 238/255, blue: 238/255, alpha: 1.0)//UIColor(white: 249/255.0, alpha: 1.0)
 /// 默认灰色
@@ -25,12 +25,14 @@ let defaultLineColor = UIColor(red: 197/255, green: 197/255, blue: 197/255, alph
 
 // MARK: 导航栏
 /// 导航栏文本颜色
-let navigationTextColor = UIColor(white: 1.0, alpha: 1.0)
+let navigationTextColor = UIColor.blackColor()
 /// 导航栏背景颜色
-let navigationBackgroundColor = UIColor(red: 255/255.0, green: 136/255.0, blue: 0/255.0, alpha: 1.0)
+let navigationBackgroundColor = UIColor(red: 246/255.0, green: 246/255.0, blue: 246/255.0, alpha: 1.0)
 /// 导航栏字体（titleView不允许被修改）
 let navigationTextFont = UIFont.systemFontOfSize(16)
 
+// 边距
+let marginLeft = 12
 
 // MARK: - 统一的列表样式
 //MARK:- 高度 & 宽度 缩放系数

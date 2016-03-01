@@ -9,7 +9,7 @@
 
 import UIKit
 //我要买
-class HomeBuyViewController: UIViewController, QNInterceptorProtocol, UITableViewDataSource, UITableViewDelegate {
+class HomeBuyViewController: UIViewController, ZMDInterceptorProtocol, UITableViewDataSource, UITableViewDelegate {
     var tableView : UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +21,6 @@ class HomeBuyViewController: UIViewController, QNInterceptorProtocol, UITableVie
         self.tableView.delegate = self
         self.view.addSubview(self.tableView)
         self.navigationController?.navigationBarHidden = false 
-        
     }
 
     override func didReceiveMemoryWarning() {

@@ -8,7 +8,7 @@
 
 import UIKit
 //首页
-class HomePageViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate,QNInterceptorNavigationBarHiddenProtocol {
+class HomePageViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate,ZMDInterceptorNavigationBarHiddenProtocol {
     enum UserCenterCellType{
         case HomeContentTypeAd                      /* 广告显示页 */
         case HomeContentTypeMenu                    /* 菜单选择栏目 */

@@ -35,6 +35,7 @@
 		2B06631E1C7DA9E900EA822F /* prune@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B06630B1C7DA9E900EA822F /* prune@2x.png */; };
 		2B06631F1C7DA9E900EA822F /* strawberry@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B06630C1C7DA9E900EA822F /* strawberry@2x.png */; };
 		2B0663201C7DA9E900EA822F /* watermelon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B06630D1C7DA9E900EA822F /* watermelon@2x.png */; };
+		2B0ACCB31C858E31000EC299 /* PersonInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0ACCB21C858E31000EC299 /* PersonInfoViewController.swift */; };
 		2B197DA41C83DB8B006494CF /* SortViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B197DA31C83DB8B006494CF /* SortViewController.swift */; };
 		2B197DA61C83EAD3006494CF /* Navi_Msg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B197DA51C83EAD3006494CF /* Navi_Msg@2x.png */; };
 		2B197DA81C8424F2006494CF /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B197DA71C8424F2006494CF /* Login.storyboard */; };
@@ -44,13 +45,21 @@
 		2B197DB51C842A03006494CF /* Login_NoSelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B197DB31C842A03006494CF /* Login_NoSelected@2x.png */; };
 		2B197DB61C842A03006494CF /* Login_Selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B197DB41C842A03006494CF /* Login_Selected@2x.png */; };
 		2B197DB81C843515006494CF /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B197DB71C843515006494CF /* LoginViewController.swift */; };
+		2B197DBA1C854524006494CF /* MineHomeHeadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B197DB91C854524006494CF /* MineHomeHeadView.xib */; };
+		2B197DBC1C8570D2006494CF /* MineHome_Edit@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B197DBB1C8570D2006494CF /* MineHome_Edit@2x.png */; };
+		2B197DBE1C857236006494CF /* MineHome_Headbg@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2B197DBD1C857236006494CF /* MineHome_Headbg@2x.jpg */; };
+		2B197DC31C857FA4006494CF /* MineHomeSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B197DC21C857FA4006494CF /* MineHomeSetViewController.swift */; };
+		2B197DCA1C857FFE006494CF /* Set_Lock.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B197DC51C857FFE006494CF /* Set_Lock.png */; };
+		2B197DCB1C857FFE006494CF /* Set_Phone.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B197DC61C857FFE006494CF /* Set_Phone.png */; };
+		2B197DCC1C857FFE006494CF /* Set_Question.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B197DC71C857FFE006494CF /* Set_Question.png */; };
+		2B197DCD1C857FFE006494CF /* Set_Shape.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B197DC81C857FFE006494CF /* Set_Shape.png */; };
+		2B197DCE1C857FFE006494CF /* Set_User.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B197DC91C857FFE006494CF /* Set_User.png */; };
+		2B197DD11C858261006494CF /* Msn_More.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B197DD01C858261006494CF /* Msn_More.png */; };
 		2B68C44F1C7A9C3000B401A9 /* MineHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B68C44E1C7A9C3000B401A9 /* MineHomeViewController.swift */; };
-		2B68C4541C7AA76500B401A9 /* MineHomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B68C4531C7AA76500B401A9 /* MineHomeCollectionViewCell.swift */; };
-		2B68C4561C7AAC1700B401A9 /* MineHomeHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B68C4551C7AAC1700B401A9 /* MineHomeHeadView.swift */; };
 		2B68C4681C7AB14300B401A9 /* Mine_Set@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B68C4671C7AB14300B401A9 /* Mine_Set@2x.png */; };
 		2B68C4711C7AB22B00B401A9 /* MineHome_CustomerManagement@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B68C4691C7AB22B00B401A9 /* MineHome_CustomerManagement@2x.png */; };
 		2B68C4721C7AB22B00B401A9 /* MineHome_DataCenter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B68C46A1C7AB22B00B401A9 /* MineHome_DataCenter@2x.png */; };
-		2B68C4731C7AB22B00B401A9 /* MineHome_Exchange@2.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B68C46B1C7AB22B00B401A9 /* MineHome_Exchange@2.png */; };
+		2B68C4731C7AB22B00B401A9 /* MineHome_Exchange@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B68C46B1C7AB22B00B401A9 /* MineHome_Exchange@2x.png */; };
 		2B68C4741C7AB22B00B401A9 /* MineHome_FinancialManagement@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B68C46C1C7AB22B00B401A9 /* MineHome_FinancialManagement@2x.png */; };
 		2B68C4751C7AB22B00B401A9 /* MineHome_GoodsManagement@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B68C46D1C7AB22B00B401A9 /* MineHome_GoodsManagement@2x.png */; };
 		2B68C4761C7AB22B00B401A9 /* MineHome_NewProduct@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B68C46E1C7AB22B00B401A9 /* MineHome_NewProduct@2x.png */; };
@@ -248,6 +257,7 @@
 		2B06630B1C7DA9E900EA822F /* prune@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "prune@2x.png"; sourceTree = "<group>"; };
 		2B06630C1C7DA9E900EA822F /* strawberry@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "strawberry@2x.png"; sourceTree = "<group>"; };
 		2B06630D1C7DA9E900EA822F /* watermelon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "watermelon@2x.png"; sourceTree = "<group>"; };
+		2B0ACCB21C858E31000EC299 /* PersonInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonInfoViewController.swift; sourceTree = "<group>"; };
 		2B197DA31C83DB8B006494CF /* SortViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SortViewController.swift; sourceTree = "<group>"; };
 		2B197DA51C83EAD3006494CF /* Navi_Msg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Navi_Msg@2x.png"; sourceTree = "<group>"; };
 		2B197DA71C8424F2006494CF /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
@@ -257,13 +267,21 @@
 		2B197DB31C842A03006494CF /* Login_NoSelected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Login_NoSelected@2x.png"; sourceTree = "<group>"; };
 		2B197DB41C842A03006494CF /* Login_Selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Login_Selected@2x.png"; sourceTree = "<group>"; };
 		2B197DB71C843515006494CF /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		2B197DB91C854524006494CF /* MineHomeHeadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MineHomeHeadView.xib; sourceTree = "<group>"; };
+		2B197DBB1C8570D2006494CF /* MineHome_Edit@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MineHome_Edit@2x.png"; sourceTree = "<group>"; };
+		2B197DBD1C857236006494CF /* MineHome_Headbg@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "MineHome_Headbg@2x.jpg"; sourceTree = "<group>"; };
+		2B197DC21C857FA4006494CF /* MineHomeSetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineHomeSetViewController.swift; sourceTree = "<group>"; };
+		2B197DC51C857FFE006494CF /* Set_Lock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Set_Lock.png; sourceTree = "<group>"; };
+		2B197DC61C857FFE006494CF /* Set_Phone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Set_Phone.png; sourceTree = "<group>"; };
+		2B197DC71C857FFE006494CF /* Set_Question.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Set_Question.png; sourceTree = "<group>"; };
+		2B197DC81C857FFE006494CF /* Set_Shape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Set_Shape.png; sourceTree = "<group>"; };
+		2B197DC91C857FFE006494CF /* Set_User.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Set_User.png; sourceTree = "<group>"; };
+		2B197DD01C858261006494CF /* Msn_More.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Msn_More.png; sourceTree = "<group>"; };
 		2B68C44E1C7A9C3000B401A9 /* MineHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineHomeViewController.swift; sourceTree = "<group>"; };
-		2B68C4531C7AA76500B401A9 /* MineHomeCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineHomeCollectionViewCell.swift; sourceTree = "<group>"; };
-		2B68C4551C7AAC1700B401A9 /* MineHomeHeadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineHomeHeadView.swift; sourceTree = "<group>"; };
 		2B68C4671C7AB14300B401A9 /* Mine_Set@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Mine_Set@2x.png"; sourceTree = "<group>"; };
 		2B68C4691C7AB22B00B401A9 /* MineHome_CustomerManagement@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MineHome_CustomerManagement@2x.png"; sourceTree = "<group>"; };
 		2B68C46A1C7AB22B00B401A9 /* MineHome_DataCenter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MineHome_DataCenter@2x.png"; sourceTree = "<group>"; };
-		2B68C46B1C7AB22B00B401A9 /* MineHome_Exchange@2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MineHome_Exchange@2.png"; sourceTree = "<group>"; };
+		2B68C46B1C7AB22B00B401A9 /* MineHome_Exchange@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MineHome_Exchange@2x.png"; sourceTree = "<group>"; };
 		2B68C46C1C7AB22B00B401A9 /* MineHome_FinancialManagement@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MineHome_FinancialManagement@2x.png"; sourceTree = "<group>"; };
 		2B68C46D1C7AB22B00B401A9 /* MineHome_GoodsManagement@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MineHome_GoodsManagement@2x.png"; sourceTree = "<group>"; };
 		2B68C46E1C7AB22B00B401A9 /* MineHome_NewProduct@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MineHome_NewProduct@2x.png"; sourceTree = "<group>"; };
@@ -488,6 +506,14 @@
 			path = Home_Buy;
 			sourceTree = "<group>";
 		};
+		2B0ACCB11C858E11000EC299 /* MineSet */ = {
+			isa = PBXGroup;
+			children = (
+				2B0ACCB21C858E31000EC299 /* PersonInfoViewController.swift */,
+			);
+			path = MineSet;
+			sourceTree = "<group>";
+		};
 		2B197DA21C83DB7E006494CF /* Sort */ = {
 			isa = PBXGroup;
 			children = (
@@ -508,13 +534,36 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
+		2B197DC41C857FFE006494CF /* MineHome_Set */ = {
+			isa = PBXGroup;
+			children = (
+				2B197DC51C857FFE006494CF /* Set_Lock.png */,
+				2B197DC61C857FFE006494CF /* Set_Phone.png */,
+				2B197DC71C857FFE006494CF /* Set_Question.png */,
+				2B197DC81C857FFE006494CF /* Set_Shape.png */,
+				2B197DC91C857FFE006494CF /* Set_User.png */,
+			);
+			path = MineHome_Set;
+			sourceTree = "<group>";
+		};
+		2B197DCF1C858261006494CF /* Msn */ = {
+			isa = PBXGroup;
+			children = (
+				2B197DD01C858261006494CF /* Msn_More.png */,
+			);
+			path = Msn;
+			sourceTree = "<group>";
+		};
 		2B68C4501C7A9F7700B401A9 /* Mine */ = {
 			isa = PBXGroup;
 			children = (
+				2B197DC41C857FFE006494CF /* MineHome_Set */,
+				2B197DBD1C857236006494CF /* MineHome_Headbg@2x.jpg */,
+				2B197DBB1C8570D2006494CF /* MineHome_Edit@2x.png */,
 				2B68C4671C7AB14300B401A9 /* Mine_Set@2x.png */,
 				2B68C4691C7AB22B00B401A9 /* MineHome_CustomerManagement@2x.png */,
 				2B68C46A1C7AB22B00B401A9 /* MineHome_DataCenter@2x.png */,
-				2B68C46B1C7AB22B00B401A9 /* MineHome_Exchange@2.png */,
+				2B68C46B1C7AB22B00B401A9 /* MineHome_Exchange@2x.png */,
 				2B68C46C1C7AB22B00B401A9 /* MineHome_FinancialManagement@2x.png */,
 				2B68C46D1C7AB22B00B401A9 /* MineHome_GoodsManagement@2x.png */,
 				2B68C46E1C7AB22B00B401A9 /* MineHome_NewProduct@2x.png */,
@@ -532,6 +581,7 @@
 				2BDEF3921C7E9D5700927F64 /* Navigation_Back02@2x.png */,
 				2BDEF3AA1C7EA84600927F64 /* btn_Arrow_TurnRight1@2x.png */,
 				2B197DA51C83EAD3006494CF /* Navi_Msg@2x.png */,
+				2B197DCF1C858261006494CF /* Msn */,
 				2B197DA91C84261E006494CF /* Login */,
 				2B68C4501C7A9F7700B401A9 /* Mine */,
 				2B959EB71C76ED42002EA40D /* StartPages */,
@@ -993,8 +1043,9 @@
 			children = (
 				3C9098F81C76A6E9006B7D2C /* UserCenterHomeViewController.swift */,
 				2B68C44E1C7A9C3000B401A9 /* MineHomeViewController.swift */,
-				2B68C4531C7AA76500B401A9 /* MineHomeCollectionViewCell.swift */,
-				2B68C4551C7AAC1700B401A9 /* MineHomeHeadView.swift */,
+				2B197DB91C854524006494CF /* MineHomeHeadView.xib */,
+				2B197DC21C857FA4006494CF /* MineHomeSetViewController.swift */,
+				2B0ACCB11C858E11000EC299 /* MineSet */,
 			);
 			path = UserCenter;
 			sourceTree = "<group>";
@@ -1077,6 +1128,8 @@
 				2B959E9D1C76C492002EA40D /* TabBar_Category_Selected@2x.png in Resources */,
 				3C90986A1C76A687006B7D2C /* readme in Resources */,
 				2B0662EF1C7C2B5800EA822F /* Home_Middle03_Advertisement.png in Resources */,
+				2B197DCB1C857FFE006494CF /* Set_Phone.png in Resources */,
+				2B197DBE1C857236006494CF /* MineHome_Headbg@2x.jpg in Resources */,
 				2B0663171C7DA9E900EA822F /* melon@2x.png in Resources */,
 				2B68C4771C7AB22B00B401A9 /* MineHome_OfferCenter@2x.png in Resources */,
 				2B68C4821C7AFAA500B401A9 /* Home_News@2x.png in Resources */,
@@ -1087,21 +1140,26 @@
 				2B0663101C7DA9E900EA822F /* banana@2x.png in Resources */,
 				2B0662E81C7C07CF00EA822F /* Home_Top1_Advertisement@2x.png in Resources */,
 				2B959E9C1C76C492002EA40D /* TabBar_Category_Normal@2x.png in Resources */,
+				2B197DCE1C857FFE006494CF /* Set_User.png in Resources */,
 				3C9098621C76A482006B7D2C /* LaunchScreen.storyboard in Resources */,
 				2BDEF3A21C7E9DA800927F64 /* Home_Buy_Filter2@2x.png in Resources */,
 				2B959EA01C76C492002EA40D /* TabBar_Mine_Normal@2x.png in Resources */,
 				2B06630F1C7DA9E900EA822F /* apple@2x.png in Resources */,
 				2B197DA81C8424F2006494CF /* Login.storyboard in Resources */,
-				2B68C4731C7AB22B00B401A9 /* MineHome_Exchange@2.png in Resources */,
+				2B68C4731C7AB22B00B401A9 /* MineHome_Exchange@2x.png in Resources */,
 				2B06631B1C7DA9E900EA822F /* pear@2x.png in Resources */,
+				2B197DD11C858261006494CF /* Msn_More.png in Resources */,
 				2BDEF3AB1C7EA84600927F64 /* btn_Arrow_TurnRight1@2x.png in Resources */,
 				2B197DAF1C84261E006494CF /* Login_Account.png in Resources */,
 				2B06631A1C7DA9E900EA822F /* peach@2x.png in Resources */,
 				2B68C47F1C7AFAA500B401A9 /* Home_Buy@2x.png in Resources */,
+				2B197DCC1C857FFE006494CF /* Set_Question.png in Resources */,
 				2BDEF3941C7E9D5700927F64 /* Navigation_Back02@2x.png in Resources */,
 				2B959E9E1C76C492002EA40D /* TabBar_Home_Normal@2x.png in Resources */,
+				2B197DBC1C8570D2006494CF /* MineHome_Edit@2x.png in Resources */,
 				2BDEF3A51C7E9DA800927F64 /* Home_Buy_Share@2x.png in Resources */,
 				2B0662E91C7C07CF00EA822F /* Home_Top2_Advertisement@2x.png in Resources */,
+				2B197DCA1C857FFE006494CF /* Set_Lock.png in Resources */,
 				3C90985F1C76A482006B7D2C /* Assets.xcassets in Resources */,
 				2BDEF3A81C7E9DA800927F64 /* Home_BuyAddFav@2x.png in Resources */,
 				2B0663141C7DA9E900EA822F /* kiwi@2x.png in Resources */,
@@ -1113,6 +1171,7 @@
 				2B68C4841C7AFAA500B401A9 /* Home_Sale@2x.png in Resources */,
 				2B68C4761C7AB22B00B401A9 /* MineHome_NewProduct@2x.png in Resources */,
 				2B0662EE1C7C2B5800EA822F /* Home_Middle02_Advertisement.png in Resources */,
+				2B197DBA1C854524006494CF /* MineHomeHeadView.xib in Resources */,
 				2B0662F11C7C2DB300EA822F /* Home_bottom_Advertisement@2x.png in Resources */,
 				2B68C4781C7AB22B00B401A9 /* MineHome_OrderManagement@2x.png in Resources */,
 				2B959EBC1C76ED42002EA40D /* Start_index2.jpg in Resources */,
@@ -1140,6 +1199,7 @@
 				2B197DB51C842A03006494CF /* Login_NoSelected@2x.png in Resources */,
 				2B959EA61C76C65E002EA40D /* TabBar_MedicaData_Normal@2x.png in Resources */,
 				2BDEF3A71C7E9DA800927F64 /* Home_Buy_Xie@2x.png in Resources */,
+				2B197DCD1C857FFE006494CF /* Set_Shape.png in Resources */,
 				2B06631D1C7DA9E900EA822F /* pomegranate@2x.png in Resources */,
 				2B68C4681C7AB14300B401A9 /* Mine_Set@2x.png in Resources */,
 				2B0662F31C7C407500EA822F /* Home_Msg@2x.png in Resources */,
@@ -1268,6 +1328,7 @@
 				2BDEF38F1C7DB73500927F64 /* HomeBuyListViewController.swift in Sources */,
 				3C9099241C76A6E9006B7D2C /* LineChartDataSet.swift in Sources */,
 				2B959EC01C76F5D0002EA40D /* HomePageViewController.swift in Sources */,
+				2B0ACCB31C858E31000EC299 /* PersonInfoViewController.swift in Sources */,
 				3C90990A1C76A6E9006B7D2C /* PieRadarChartViewBase.swift in Sources */,
 				3C9099251C76A6E9006B7D2C /* LineRadarChartDataSet.swift in Sources */,
 				3C9099411C76A6E9006B7D2C /* CandleStickChartRenderer.swift in Sources */,
@@ -1284,6 +1345,7 @@
 				3C90995B1C76A6E9006B7D2C /* LyPrompt.swift in Sources */,
 				3C90993B1C76A6E9006B7D2C /* CandleChartDataProvider.swift in Sources */,
 				3C9099521C76A6E9006B7D2C /* RadarChartRenderer.swift in Sources */,
+				2B197DC31C857FA4006494CF /* MineHomeSetViewController.swift in Sources */,
 				3C90992E1C76A6E9006B7D2C /* ChartDataBaseFilter.swift in Sources */,
 				3C90990E1C76A6E9006B7D2C /* ChartComponentBase.swift in Sources */,
 				3C9098FA1C76A6E9006B7D2C /* QN_BaseDataModel.swift in Sources */,
@@ -1299,7 +1361,6 @@
 				3C9099421C76A6E9006B7D2C /* ChartAxisRendererBase.swift in Sources */,
 				3C9099011C76A6E9006B7D2C /* BarChartView.swift in Sources */,
 				2B959EB51C76ED04002EA40D /* StartImageView.swift in Sources */,
-				2B68C4541C7AA76500B401A9 /* MineHomeCollectionViewCell.swift in Sources */,
 				3C90992D1C76A6E9006B7D2C /* ChartDataApproximatorFilter.swift in Sources */,
 				3C9099541C76A6E9006B7D2C /* ChartColorTemplates.swift in Sources */,
 				3C9099231C76A6E9006B7D2C /* LineChartData.swift in Sources */,
@@ -1332,7 +1393,6 @@
 				3C90993A1C76A6E9006B7D2C /* BubbleChartDataProvider.swift in Sources */,
 				3C9099501C76A6E9006B7D2C /* LineScatterCandleRadarChartRenderer.swift in Sources */,
 				3C9099361C76A6E9006B7D2C /* CombinedHighlighter.swift in Sources */,
-				2B68C4561C7AAC1700B401A9 /* MineHomeHeadView.swift in Sources */,
 				3C9099551C76A6E9006B7D2C /* ChartSelectionDetail.swift in Sources */,
 				3C90991D1C76A6E9006B7D2C /* CandleChartDataEntry.swift in Sources */,
 				3C90991F1C76A6E9006B7D2C /* ChartData.swift in Sources */,

@@ -30,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            }
 //        }
         // 开启拦截器
-        QNInterceptor.start()
+        ZMDInterceptor.start()
         return true
     }
 

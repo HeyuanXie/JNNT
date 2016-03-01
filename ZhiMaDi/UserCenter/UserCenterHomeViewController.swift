@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UserCenterHomeViewController: UIViewController, QNInterceptorProtocol, UITableViewDataSource, UITableViewDelegate  {
+class UserCenterHomeViewController: UIViewController, ZMDInterceptorProtocol, UITableViewDataSource, UITableViewDelegate  {
     enum UserCenterCellType{
         case headView
         case ReserveBalance
@@ -101,7 +101,7 @@ class UserCenterHomeViewController: UIViewController, QNInterceptorProtocol, UIT
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.leftBarButtonItem = nil
-        
+
         self.dataInit()
         self.subViewInit()
         // 让导航栏支持右滑返回功能

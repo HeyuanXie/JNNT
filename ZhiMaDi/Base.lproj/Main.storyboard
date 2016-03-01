@@ -115,10 +115,29 @@
                     <view key="view" contentMode="scaleToFill" id="xYN-CR-ZhT">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ODE-xB-Uck">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="3Ek-kO-ux5" id="syM-ce-RHR"/>
+                                    <outlet property="delegate" destination="3Ek-kO-ux5" id="lQH-DD-2rx"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ODE-xB-Uck" firstAttribute="leading" secondItem="xYN-CR-ZhT" secondAttribute="leading" id="Kdy-2r-UKE"/>
+                            <constraint firstAttribute="trailing" secondItem="ODE-xB-Uck" secondAttribute="trailing" id="Ni8-6D-0dA"/>
+                            <constraint firstItem="aip-aL-h26" firstAttribute="top" secondItem="ODE-xB-Uck" secondAttribute="bottom" id="V7o-Bs-r3U"/>
+                            <constraint firstItem="ODE-xB-Uck" firstAttribute="top" secondItem="xYN-CR-ZhT" secondAttribute="top" id="rQc-sP-k49"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="hKp-TU-cE2"/>
                     <nil key="simulatedTopBarMetrics"/>
+                    <connections>
+                        <outlet property="currentTableView" destination="ODE-xB-Uck" id="1Wa-sl-t4R"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hs6-Ml-cVt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

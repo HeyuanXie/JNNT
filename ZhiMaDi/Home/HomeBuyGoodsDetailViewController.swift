@@ -8,7 +8,7 @@
 
 import UIKit
 //商品详请
-class HomeBuyGoodsDetailViewController: UIViewController,QNInterceptorProtocol,QNInterceptorNavigationBarShowProtocol,QNInterceptorMsnProtocol {
+class HomeBuyGoodsDetailViewController: UIViewController,ZMDInterceptorProtocol,ZMDInterceptorNavigationBarShowProtocol,ZMDInterceptorMsnProtocol {
 
     @IBOutlet weak var currentTableView: UITableView!
     var navView : UIView!

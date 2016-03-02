@@ -51,9 +51,9 @@ class PersonInfoViewController:UIViewController,UITableViewDataSource, UITableVi
             case Sex:
                 viewController = UIViewController()
             case Address:
-                viewController = UIViewController()
+                viewController = AddressViewController.CreateFromMainStoryboard() as! AddressViewController
             case Resume:
-                viewController = UIViewController()
+                viewController = PersonIntroductionViewController()
             }
             viewController.hidesBottomBarWhenPushed = true
             return viewController
@@ -194,6 +194,8 @@ class PersonInfoViewController:UIViewController,UITableViewDataSource, UITableVi
                 actionSheet.showInView(self.view)
             default: return
             }
+        } else {
+            type.didSelect(self.navigationController!)
         }
     }
     //MARK: UIImagePickerControllerDelegate

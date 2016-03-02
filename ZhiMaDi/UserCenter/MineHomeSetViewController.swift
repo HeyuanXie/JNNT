@@ -61,7 +61,7 @@ class MineHomeSetViewController: UIViewController,UITableViewDataSource, UITable
             case User:
                 viewController = PersonInfoViewController()
             case Lock:
-                viewController = UIViewController()
+                viewController = AccoutSafeViewController()
             case Password:
                 viewController = UIViewController()
             case Shape:

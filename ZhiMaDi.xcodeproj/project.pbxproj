@@ -71,6 +71,19 @@
 		2B68C4821C7AFAA500B401A9 /* Home_News@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B68C47C1C7AFAA500B401A9 /* Home_News@2x.png */; };
 		2B68C4831C7AFAA500B401A9 /* Home_Offer@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B68C47D1C7AFAA500B401A9 /* Home_Offer@2x.png */; };
 		2B68C4841C7AFAA500B401A9 /* Home_Sale@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B68C47E1C7AFAA500B401A9 /* Home_Sale@2x.png */; };
+		2B73D84D1C8678C40016FEB2 /* AddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B73D84C1C8678C40016FEB2 /* AddressViewController.swift */; };
+		2B73D84F1C867C280016FEB2 /* AdressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B73D84E1C867C280016FEB2 /* AdressTableViewCell.swift */; };
+		2B73D8511C8682050016FEB2 /* AddressEditOrAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B73D8501C8682050016FEB2 /* AddressEditOrAddViewController.swift */; };
+		2B73D8531C868FC50016FEB2 /* CustomPickView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B73D8521C868FC50016FEB2 /* CustomPickView.swift */; };
+		2B73D8551C86B6D00016FEB2 /* PersonIntroductionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B73D8541C86B6D00016FEB2 /* PersonIntroductionViewController.swift */; };
+		2B73D8571C86B8510016FEB2 /* AccoutSafeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B73D8561C86B8510016FEB2 /* AccoutSafeViewController.swift */; };
+		2B73D8591C86C3C50016FEB2 /* SignPassWordSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B73D8581C86C3C50016FEB2 /* SignPassWordSetViewController.swift */; };
+		2B73D85B1C86CBBD0016FEB2 /* PhoneSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B73D85A1C86CBBD0016FEB2 /* PhoneSetViewController.swift */; };
+		2B73D85D1C86D1530016FEB2 /* PhoneSetPsVerifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B73D85C1C86D1530016FEB2 /* PhoneSetPsVerifyViewController.swift */; };
+		2B73D85F1C86D36E0016FEB2 /* PhoneSeteMsgVerifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B73D85E1C86D36E0016FEB2 /* PhoneSeteMsgVerifyViewController.swift */; };
+		2B73D8611C86E0650016FEB2 /* RealAuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B73D8601C86E0650016FEB2 /* RealAuthenticationViewController.swift */; };
+		2B73D8631C86E5E50016FEB2 /* PictureAdd.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B73D8621C86E5E50016FEB2 /* PictureAdd.png */; };
+		2B73D8651C86EB8A0016FEB2 /* PersonAuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B73D8641C86EB8A0016FEB2 /* PersonAuthenticationViewController.swift */; };
 		2B959E9C1C76C492002EA40D /* TabBar_Category_Normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B959E941C76C492002EA40D /* TabBar_Category_Normal@2x.png */; };
 		2B959E9D1C76C492002EA40D /* TabBar_Category_Selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B959E951C76C492002EA40D /* TabBar_Category_Selected@2x.png */; };
 		2B959E9E1C76C492002EA40D /* TabBar_Home_Normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B959E961C76C492002EA40D /* TabBar_Home_Normal@2x.png */; };
@@ -293,6 +306,19 @@
 		2B68C47C1C7AFAA500B401A9 /* Home_News@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Home_News@2x.png"; sourceTree = "<group>"; };
 		2B68C47D1C7AFAA500B401A9 /* Home_Offer@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Home_Offer@2x.png"; sourceTree = "<group>"; };
 		2B68C47E1C7AFAA500B401A9 /* Home_Sale@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Home_Sale@2x.png"; sourceTree = "<group>"; };
+		2B73D84C1C8678C40016FEB2 /* AddressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressViewController.swift; sourceTree = "<group>"; };
+		2B73D84E1C867C280016FEB2 /* AdressTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdressTableViewCell.swift; sourceTree = "<group>"; };
+		2B73D8501C8682050016FEB2 /* AddressEditOrAddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressEditOrAddViewController.swift; sourceTree = "<group>"; };
+		2B73D8521C868FC50016FEB2 /* CustomPickView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPickView.swift; sourceTree = "<group>"; };
+		2B73D8541C86B6D00016FEB2 /* PersonIntroductionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonIntroductionViewController.swift; sourceTree = "<group>"; };
+		2B73D8561C86B8510016FEB2 /* AccoutSafeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccoutSafeViewController.swift; sourceTree = "<group>"; };
+		2B73D8581C86C3C50016FEB2 /* SignPassWordSetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignPassWordSetViewController.swift; sourceTree = "<group>"; };
+		2B73D85A1C86CBBD0016FEB2 /* PhoneSetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneSetViewController.swift; sourceTree = "<group>"; };
+		2B73D85C1C86D1530016FEB2 /* PhoneSetPsVerifyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneSetPsVerifyViewController.swift; sourceTree = "<group>"; };
+		2B73D85E1C86D36E0016FEB2 /* PhoneSeteMsgVerifyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneSeteMsgVerifyViewController.swift; sourceTree = "<group>"; };
+		2B73D8601C86E0650016FEB2 /* RealAuthenticationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealAuthenticationViewController.swift; sourceTree = "<group>"; };
+		2B73D8621C86E5E50016FEB2 /* PictureAdd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PictureAdd.png; sourceTree = "<group>"; };
+		2B73D8641C86EB8A0016FEB2 /* PersonAuthenticationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonAuthenticationViewController.swift; sourceTree = "<group>"; };
 		2B959E941C76C492002EA40D /* TabBar_Category_Normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabBar_Category_Normal@2x.png"; sourceTree = "<group>"; };
 		2B959E951C76C492002EA40D /* TabBar_Category_Selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabBar_Category_Selected@2x.png"; sourceTree = "<group>"; };
 		2B959E961C76C492002EA40D /* TabBar_Home_Normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabBar_Home_Normal@2x.png"; sourceTree = "<group>"; };
@@ -510,6 +536,18 @@
 			isa = PBXGroup;
 			children = (
 				2B0ACCB21C858E31000EC299 /* PersonInfoViewController.swift */,
+				2B73D84C1C8678C40016FEB2 /* AddressViewController.swift */,
+				2B73D84E1C867C280016FEB2 /* AdressTableViewCell.swift */,
+				2B73D8501C8682050016FEB2 /* AddressEditOrAddViewController.swift */,
+				2B73D8521C868FC50016FEB2 /* CustomPickView.swift */,
+				2B73D8541C86B6D00016FEB2 /* PersonIntroductionViewController.swift */,
+				2B73D8561C86B8510016FEB2 /* AccoutSafeViewController.swift */,
+				2B73D8581C86C3C50016FEB2 /* SignPassWordSetViewController.swift */,
+				2B73D85A1C86CBBD0016FEB2 /* PhoneSetViewController.swift */,
+				2B73D85C1C86D1530016FEB2 /* PhoneSetPsVerifyViewController.swift */,
+				2B73D85E1C86D36E0016FEB2 /* PhoneSeteMsgVerifyViewController.swift */,
+				2B73D8601C86E0650016FEB2 /* RealAuthenticationViewController.swift */,
+				2B73D8641C86EB8A0016FEB2 /* PersonAuthenticationViewController.swift */,
 			);
 			path = MineSet;
 			sourceTree = "<group>";
@@ -576,6 +614,7 @@
 		2B959E921C76C33B002EA40D /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				2B73D8621C86E5E50016FEB2 /* PictureAdd.png */,
 				2BDEF38C1C7DB5FB00927F64 /* Navigation_Back@2x.png */,
 				2BDEF3911C7E9D5700927F64 /* Home_Buy_Back03@2x.png */,
 				2BDEF3921C7E9D5700927F64 /* Navigation_Back02@2x.png */,
@@ -1171,6 +1210,7 @@
 				2B68C4841C7AFAA500B401A9 /* Home_Sale@2x.png in Resources */,
 				2B68C4761C7AB22B00B401A9 /* MineHome_NewProduct@2x.png in Resources */,
 				2B0662EE1C7C2B5800EA822F /* Home_Middle02_Advertisement.png in Resources */,
+				2B73D8631C86E5E50016FEB2 /* PictureAdd.png in Resources */,
 				2B197DBA1C854524006494CF /* MineHomeHeadView.xib in Resources */,
 				2B0662F11C7C2DB300EA822F /* Home_bottom_Advertisement@2x.png in Resources */,
 				2B68C4781C7AB22B00B401A9 /* MineHome_OrderManagement@2x.png in Resources */,
@@ -1285,8 +1325,11 @@
 				3C9099001C76A6E9006B7D2C /* ChartAnimator.swift in Sources */,
 				3C9099171C76A6E9006B7D2C /* BarLineScatterCandleBubbleChartData.swift in Sources */,
 				2B197DA41C83DB8B006494CF /* SortViewController.swift in Sources */,
+				2B73D8511C8682050016FEB2 /* AddressEditOrAddViewController.swift in Sources */,
 				3C9099091C76A6E9006B7D2C /* PieChartView.swift in Sources */,
 				3C90995E1C76A6E9006B7D2C /* Reachability.m in Sources */,
+				2B73D84D1C8678C40016FEB2 /* AddressViewController.swift in Sources */,
+				2B73D8531C868FC50016FEB2 /* CustomPickView.swift in Sources */,
 				3C9099201C76A6E9006B7D2C /* ChartDataEntry.swift in Sources */,
 				3C90993F1C76A6E9006B7D2C /* BarChartRenderer.swift in Sources */,
 				3C9099471C76A6E9006B7D2C /* ChartXAxisRendererBarChart.swift in Sources */,
@@ -1310,6 +1353,7 @@
 				2B959EB41C76ED04002EA40D /* BlinkView.swift in Sources */,
 				3C9099601C76A6E9006B7D2C /* QNFormatTool.swift in Sources */,
 				3C9099491C76A6E9006B7D2C /* ChartXAxisRendererRadarChart.swift in Sources */,
+				2B73D8571C86B8510016FEB2 /* AccoutSafeViewController.swift in Sources */,
 				3C9099451C76A6E9006B7D2C /* ChartRendererBase.swift in Sources */,
 				3C9099211C76A6E9006B7D2C /* ChartDataSet.swift in Sources */,
 				3C9099581C76A6E9006B7D2C /* ChartUtils.swift in Sources */,
@@ -1322,9 +1366,11 @@
 				2B0662F91C7DA4A800EA822F /* HomeBuyViewController.swift in Sources */,
 				3C9099041C76A6E9006B7D2C /* CandleStickChartView.swift in Sources */,
 				3C9099511C76A6E9006B7D2C /* PieChartRenderer.swift in Sources */,
+				2B73D85D1C86D1530016FEB2 /* PhoneSetPsVerifyViewController.swift in Sources */,
 				3C9099261C76A6E9006B7D2C /* LineScatterCandleChartDataSet.swift in Sources */,
 				3C9099461C76A6E9006B7D2C /* ChartXAxisRenderer.swift in Sources */,
 				3C9099151C76A6E9006B7D2C /* BarChartDataEntry.swift in Sources */,
+				2B73D8651C86EB8A0016FEB2 /* PersonAuthenticationViewController.swift in Sources */,
 				2BDEF38F1C7DB73500927F64 /* HomeBuyListViewController.swift in Sources */,
 				3C9099241C76A6E9006B7D2C /* LineChartDataSet.swift in Sources */,
 				2B959EC01C76F5D0002EA40D /* HomePageViewController.swift in Sources */,
@@ -1334,17 +1380,21 @@
 				3C9099411C76A6E9006B7D2C /* CandleStickChartRenderer.swift in Sources */,
 				3C9099441C76A6E9006B7D2C /* ChartLegendRenderer.swift in Sources */,
 				3C9099101C76A6E9006B7D2C /* ChartLimitLine.swift in Sources */,
+				2B73D8591C86C3C50016FEB2 /* SignPassWordSetViewController.swift in Sources */,
 				3C90993C1C76A6E9006B7D2C /* ChartDataProvider.swift in Sources */,
 				3C9099191C76A6E9006B7D2C /* BubbleChartData.swift in Sources */,
+				2B73D8611C86E0650016FEB2 /* RealAuthenticationViewController.swift in Sources */,
 				3C9099111C76A6E9006B7D2C /* ChartMarker.swift in Sources */,
 				2B959EB61C76ED04002EA40D /* StartPagesViewController.swift in Sources */,
 				3C90994C1C76A6E9006B7D2C /* ChartYAxisRendererRadarChart.swift in Sources */,
 				3C90995D1C76A6E9006B7D2C /* NSString+AES.m in Sources */,
+				2B73D8551C86B6D00016FEB2 /* PersonIntroductionViewController.swift in Sources */,
 				3C9098711C76A6AA006B7D2C /* QNStyleAttribute.swift in Sources */,
 				3C90991A1C76A6E9006B7D2C /* BubbleChartDataEntry.swift in Sources */,
 				3C90995B1C76A6E9006B7D2C /* LyPrompt.swift in Sources */,
 				3C90993B1C76A6E9006B7D2C /* CandleChartDataProvider.swift in Sources */,
 				3C9099521C76A6E9006B7D2C /* RadarChartRenderer.swift in Sources */,
+				2B73D84F1C867C280016FEB2 /* AdressTableViewCell.swift in Sources */,
 				2B197DC31C857FA4006494CF /* MineHomeSetViewController.swift in Sources */,
 				3C90992E1C76A6E9006B7D2C /* ChartDataBaseFilter.swift in Sources */,
 				3C90990E1C76A6E9006B7D2C /* ChartComponentBase.swift in Sources */,
@@ -1367,6 +1417,7 @@
 				3C9099401C76A6E9006B7D2C /* BubbleChartRenderer.swift in Sources */,
 				3C9099301C76A6E9006B7D2C /* ChartFillFormatter.swift in Sources */,
 				3C9099621C76A6E9006B7D2C /* QNNetworkTool.swift in Sources */,
+				2B73D85F1C86D36E0016FEB2 /* PhoneSeteMsgVerifyViewController.swift in Sources */,
 				3C9099071C76A6E9006B7D2C /* HorizontalBarChartView.swift in Sources */,
 				3C90990F1C76A6E9006B7D2C /* ChartLegend.swift in Sources */,
 				3C9099021C76A6E9006B7D2C /* BarLineChartViewBase.swift in Sources */,
@@ -1386,6 +1437,7 @@
 				3C9099221C76A6E9006B7D2C /* CombinedChartData.swift in Sources */,
 				3C9099271C76A6E9006B7D2C /* PieChartData.swift in Sources */,
 				3C90994F1C76A6E9006B7D2C /* LineChartRenderer.swift in Sources */,
+				2B73D85B1C86CBBD0016FEB2 /* PhoneSetViewController.swift in Sources */,
 				3C9098581C76A482006B7D2C /* AppDelegate.swift in Sources */,
 				3C9099341C76A6E9006B7D2C /* ChartHighlighter.swift in Sources */,
 				3C9099481C76A6E9006B7D2C /* ChartXAxisRendererHorizontalBarChart.swift in Sources */,

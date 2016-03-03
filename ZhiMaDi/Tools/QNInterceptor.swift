@@ -59,15 +59,14 @@ class ZMDInterceptor : NSObject {
                     viewController.edgesForExtendedLayout = UIRectEdge.None
                     
                     if let rootViewController = viewController.navigationController?.viewControllers.first where rootViewController != viewController {
-                        switch viewController {
-                        case is ZMDInterceptorProtocol :
+                        if viewController is ZMDInterceptorProtocol {
                             viewController.configBackButton()
-                        case is ZMDInterceptorMsnProtocol :
-                            // 全部设置成消息按钮，在有导航栏，并且不是导航栏的rootViewController
+                        }
+                        if viewController is ZMDInterceptorMsnProtocol {
                             viewController.configMsgButton()
-                        case is ZMDInterceptorMoreProtocol :
+                        }
+                        if viewController is ZMDInterceptorMoreProtocol {
                             viewController.configMoreButton()
-                        default :break
                         }
                     }
                 }

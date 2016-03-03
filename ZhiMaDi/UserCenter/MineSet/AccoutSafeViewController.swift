@@ -7,7 +7,7 @@
 //
 
 import UIKit
-//帐户与安全
+//帐户安全
 class AccoutSafeViewController: UIViewController ,UITableViewDataSource, UITableViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,ZMDInterceptorProtocol,ZMDInterceptorNavigationBarShowProtocol,ZMDInterceptorMoreProtocol {
     enum UserCenterCellType{
         case Account
@@ -45,7 +45,7 @@ class AccoutSafeViewController: UIViewController ,UITableViewDataSource, UITable
             case Account:
                 viewController = UIViewController()
             case SignPS:
-                viewController =  UIViewController()//SignPassWordSetViewController.CreateFromMainStoryboard() as! SignPassWordSetViewController
+                viewController = SignPSSetViewController.CreateFromMainStoryboard() as! SignPSSetViewController
             case Phone :
                 viewController = PhoneSetViewController.CreateFromMainStoryboard() as! PhoneSetViewController
             case PayPs:
@@ -157,7 +157,7 @@ class AccoutSafeViewController: UIViewController ,UITableViewDataSource, UITable
     
     //MARK:- Private Method
     private func subViewInit(){
-        self.title = "个人资料"
+        self.title = "帐户安全"
         self.tableView = UITableView(frame: self.view.bounds, style: UITableViewStyle.Plain)
         self.tableView.backgroundColor = defaultBackgroundGrayColor
         self.tableView.separatorStyle = .None

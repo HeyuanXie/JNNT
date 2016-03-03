@@ -1,14 +1,14 @@
 //
-//  SignPassWordSetViewController.swift
+//  SignPSSetViewController.swift
 //  ZhiMaDi
 //
-//  Created by haijie on 16/3/2.
+//  Created by haijie on 16/3/3.
 //  Copyright © 2016年 ZhiMaDi. All rights reserved.
 //
 
 import UIKit
-//设置登录密码
-class SignPassWordSetViewController: UIViewController {
+
+class SignPSSetViewController: UIViewController {
 
     @IBOutlet weak var psTextF: UITextField!
     @IBOutlet weak var psAgainTextF: UITextField!
@@ -16,17 +16,16 @@ class SignPassWordSetViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.updateUI()
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    @IBAction func confirmBtnClick(sender: UIButton) {
-        
+    
+    @IBAction func confirmBtnCli(sender: UIButton) {
     }
-    //MARK: -  PrivateMethod
+
     func updateUI() {
         ZMDTool.configViewLayer(self.confirmBtn)
         let view = UIView(frame: CGRectMake(0, 0, 12, 20))
@@ -35,4 +34,5 @@ class SignPassWordSetViewController: UIViewController {
         self.psAgainTextF.leftView = view
         self.psAgainTextF.leftViewMode =  UITextFieldViewMode.Always
     }
+
 }

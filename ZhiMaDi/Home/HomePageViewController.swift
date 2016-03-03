@@ -77,11 +77,11 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
             case News:
                 viewController = UIViewController()
             case Sale:
-                viewController = UIViewController()
+                viewController = HomeSellViewController.CreateFromMainStoryboard() as! HomeSellViewController
             case Buy:
                 viewController = HomeBuyViewController()
             case Loan:
-                viewController = UIViewController()
+                viewController = HomeLoanViewController()
             }
             viewController.hidesBottomBarWhenPushed = true
             return viewController

@@ -50,7 +50,7 @@ class RealAuthenticationViewController: UIViewController,UITableViewDataSource, 
             ZMDTool.configTableViewCellDefault(cell!)
         }
         if let lbl = cell?.viewWithTag(10001) as? UILabel {
-            lbl.text = indexPath.row == 0  ? "个人认证" : "企业认证"
+            lbl.text = indexPath.section == 0  ? "个人认证" : "企业认证"
         }
         return cell!
     }

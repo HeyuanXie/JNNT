@@ -69,7 +69,7 @@ class MineHomeViewController: UIViewController,  UITableViewDataSource, UITableV
             let viewController: UIViewController
             switch self{
             case NewProduct:
-                viewController = UIViewController()
+                viewController = NewProductReleaseViewController.CreateFromMainStoryboard() as! NewProductReleaseViewController
             case Exchange:
                 viewController = UIViewController()
             case Goods:
@@ -123,24 +123,39 @@ class MineHomeViewController: UIViewController,  UITableViewDataSource, UITableV
         return 1
     }
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 3
+        return 4
     }
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return section == 0 ? 200 : 0
+        return  0
     }
     func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return section > 0 ? 1 : 0
     }
-    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        self.configHead()
-        return self.headerV
-    }
+
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return indexPath.section == 0 ? kScreenWidth/3 * 2 : 44
+        if indexPath.section == 0 {
+            return 200
+        }
+        return indexPath.section == 1 ? kScreenWidth/3 * 2 : 44
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
+            let cellId = "headCell"
+            var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
+            if cell == nil {
+                cell = UITableViewCell(style: .Subtitle, reuseIdentifier: cellId)
+                cell?.accessoryType = UITableViewCellAccessoryType.None
+                cell!.selectionStyle = .None
+                ZMDTool.configTableViewCellDefault(cell!)
+            }
+            if let personImgV = cell!.viewWithTag(10001) {
+                personImgV.layer.cornerRadius = 43
+                personImgV.layer.masksToBounds = true
+            }
+            return cell!
+        }
+        if indexPath.section == 1 {
             let cellId = "topCell"
             var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
             if cell == nil {
@@ -160,6 +175,9 @@ class MineHomeViewController: UIViewController,  UITableViewDataSource, UITableV
                     btn.setImage(userCenterCellType.image, forState:.Normal)
                     cell!.addSubview(btn)
                     ZMDTool.configViewLayerFrame(btn)
+                    btn.rac_signalForControlEvents(.TouchUpInside).subscribeNext({ (sender) -> Void in
+                        userCenterCellType.didSelect(self.navigationController!)
+                    })
                 }
             }
             return cell!
@@ -181,17 +199,6 @@ class MineHomeViewController: UIViewController,  UITableViewDataSource, UITableV
         let homeBuyListViewController = HomeBuyListViewController.CreateFromMainStoryboard() as! HomeBuyListViewController
         self.navigationController?.pushViewController(homeBuyListViewController, animated: true)
     }
-    //MARK: UIScrollViewDelegate
-    func scrollViewDidScroll(scrollView: UIScrollView) {
-        //uitableview处理section的headView不悬浮
-        let sectionHeaderHeight : CGFloat = 200
-        if scrollView.contentOffset.y <= sectionHeaderHeight && scrollView.contentOffset.y >= 0{
-            scrollView.contentInset = UIEdgeInsetsMake(-scrollView.contentOffset.y, 0, 0, 0)
-        }else if scrollView.contentOffset.y >= sectionHeaderHeight{
-            scrollView.contentInset = UIEdgeInsetsMake(-sectionHeaderHeight, 0, 0, 0)
-        }
-    }
-
     //MARK:Private Method
     func setupNewNavigation() {
         let getBtn = { (frame:CGRect) -> UIButton in
@@ -222,14 +229,7 @@ class MineHomeViewController: UIViewController,  UITableViewDataSource, UITableV
         }
     }
     func configHead() {
-        let nibView = NSBundle.mainBundle().loadNibNamed("MineHomeHeadView", owner: nil, options: nil) as NSArray
-        self.headerV = nibView.objectAtIndex(0) as? UIView
-        self.headerV.frame.size = CGSizeMake(kScreenWidth, 200)
-        
-        if let personImgV = self.headerV.viewWithTag(10001) {
-            personImgV.layer.cornerRadius = 43
-            personImgV.layer.masksToBounds = true
-        }
+
     }
     func updateUI() {
        

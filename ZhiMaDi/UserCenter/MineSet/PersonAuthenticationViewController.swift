@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+//个人认证
 class PersonAuthenticationViewController: UIViewController ,UITableViewDataSource, UITableViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,ZMDInterceptorProtocol,ZMDInterceptorNavigationBarShowProtocol,ZMDInterceptorMoreProtocol{
    
     var leftPhotoBtn : UIButton!

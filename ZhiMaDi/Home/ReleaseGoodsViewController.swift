@@ -8,13 +8,13 @@
 
 import UIKit
 
-class ReleaseGoodsViewController: UIViewController {
+class ReleaseGoodsViewController: UIViewController,UITableViewDataSource, UITableViewDelegate,ZMDInterceptorProtocol,ZMDInterceptorNavigationBarShowProtocol,ZMDInterceptorMoreProtocol {
     
     @IBOutlet weak var currentTableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        let label = UILabel(frame: CGRectMake(12, 0, kScreenWidth - 24, 50))
-        label.text = "特别说明：系统会根据转卖货品的总额，按20%的比例计 算出需交付保证金的费用。"
+        let label = UILabel(frame: CGRectMake(12, 0, kScreenWidth - 30, 50))
+        label.text = "特别说明：系统会根据转卖货品的总额，按20%的比例计算出需交付保证金的费用。"
         label.font = tableViewCellDefaultDetailTextFont
         label.backgroundColor = UIColor.clearColor()
         label.numberOfLines = 0
@@ -42,7 +42,6 @@ class ReleaseGoodsViewController: UIViewController {
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 50
     }
-    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cellId = "topCell"
@@ -75,8 +74,11 @@ class ReleaseGoodsViewController: UIViewController {
         }
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-     
+        
     }
-    
-
+    //MARK: - Action
+    @IBAction func nextBtnCli(sender: UIButton) {
+        let vc = ReleaseGoodsConfirmViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
 }

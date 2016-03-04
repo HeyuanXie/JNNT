@@ -10,6 +10,10 @@ import Foundation
 
 extension String{
 
+    func sizeWithAttributeString(attributedString: NSAttributedString, maxWidth: CGFloat) -> CGSize{
+        let rect = attributedString.boundingRectWithSize(CGSizeMake(maxWidth, CGFloat.max), options: NSStringDrawingOptions.UsesLineFragmentOrigin, context: nil)
+        return rect.size
+    }
     func sizeWithFont(font: UIFont, maxWidth: CGFloat) -> CGSize {
         let attributedString = NSAttributedString(string: self, attributes: [NSFontAttributeName : font])
         let rect = attributedString.boundingRectWithSize(CGSizeMake(maxWidth, CGFloat.max), options: NSStringDrawingOptions.UsesLineFragmentOrigin, context: nil)

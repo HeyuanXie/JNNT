@@ -14,7 +14,7 @@ class MineHomeViewController: UIViewController,  UITableViewDataSource, UITableV
         case Exchange
         case Goods
         case OfferCenter
-        case Financia
+        case Fortune
         case Customer
         case Data
         case Order
@@ -33,7 +33,7 @@ class MineHomeViewController: UIViewController,  UITableViewDataSource, UITableV
                 return "采购管理"
             case Order:
                 return "销售管理"
-            case Financia:
+            case Fortune:
                 return "财富中心"
             case Data:
                 return "数据中心"
@@ -54,7 +54,7 @@ class MineHomeViewController: UIViewController,  UITableViewDataSource, UITableV
                 return UIImage(named: "MineHome_GoodsManagement")
             case OfferCenter:
                 return UIImage(named: "MineHome_OfferCenter")
-            case Financia:
+            case Fortune:
                 return UIImage(named: "MineHome_FinancialManagement")
             case Customer:
                 return UIImage(named: "MineHome_CustomerManagement")
@@ -76,7 +76,7 @@ class MineHomeViewController: UIViewController,  UITableViewDataSource, UITableV
                 viewController = UIViewController()
             case OfferCenter:
                 viewController = UIViewController()
-            case Financia:
+            case Fortune:
                 viewController = UIViewController()
             case Customer:
                 viewController = UIViewController()
@@ -235,6 +235,6 @@ class MineHomeViewController: UIViewController,  UITableViewDataSource, UITableV
        
     }
     private func dataInit(){
-        self.userCenterData = [UserCenterCellType.NewProduct,UserCenterCellType.Exchange,UserCenterCellType.Goods, UserCenterCellType.Order, UserCenterCellType.Financia, UserCenterCellType.Data]
+        self.userCenterData = [UserCenterCellType.NewProduct,UserCenterCellType.Exchange,UserCenterCellType.Goods, UserCenterCellType.Order, UserCenterCellType.Fortune, UserCenterCellType.Data]
     }
 }

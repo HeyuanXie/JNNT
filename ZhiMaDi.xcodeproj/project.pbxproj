@@ -136,6 +136,11 @@
 		2BE373041C897F96004A1DDF /* ProductSpecsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE373031C897F96004A1DDF /* ProductSpecsViewController.swift */; };
 		2BE373071C89836A004A1DDF /* btn_Arrow_TurnDown1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BE373051C89836A004A1DDF /* btn_Arrow_TurnDown1@2x.png */; };
 		2BE373081C89836A004A1DDF /* btn_Arrow_TurnUp1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BE373061C89836A004A1DDF /* btn_Arrow_TurnUp1@2x.png */; };
+		2BF7EF1A1C8D3370001C4595 /* MineBankCardHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF7EF191C8D3370001C4595 /* MineBankCardHomeViewController.swift */; };
+		2BF7EF1C1C8D4D29001C4595 /* BankCardDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF7EF1B1C8D4D29001C4595 /* BankCardDetailViewController.swift */; };
+		2BF7EF1E1C8D61F7001C4595 /* AddBankCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF7EF1D1C8D61F7001C4595 /* AddBankCardViewController.swift */; };
+		2BF7EF201C8D662C001C4595 /* VerifyBankCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF7EF1F1C8D662C001C4595 /* VerifyBankCardViewController.swift */; };
+		2BF7EF221C8D703F001C4595 /* FortuneCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF7EF211C8D703F001C4595 /* FortuneCenterViewController.swift */; };
 		3C9098581C76A482006B7D2C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9098571C76A482006B7D2C /* AppDelegate.swift */; };
 		3C90985A1C76A482006B7D2C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9098591C76A482006B7D2C /* ViewController.swift */; };
 		3C90985D1C76A482006B7D2C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C90985B1C76A482006B7D2C /* Main.storyboard */; };
@@ -252,7 +257,6 @@
 		3C9099611C76A6E9006B7D2C /* QNInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9098F41C76A6E9006B7D2C /* QNInterceptor.swift */; };
 		3C9099621C76A6E9006B7D2C /* QNNetworkTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9098F51C76A6E9006B7D2C /* QNNetworkTool.swift */; };
 		3C9099631C76A6E9006B7D2C /* ZMDTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9098F61C76A6E9006B7D2C /* ZMDTool.swift */; };
-		3C9099641C76A6E9006B7D2C /* UserCenterHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9098F81C76A6E9006B7D2C /* UserCenterHomeViewController.swift */; };
 		CCC2E90F973B87889ED9CCB6 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31D2DB4A35812B2A2B5A22B4 /* Pods.framework */; };
 /* End PBXBuildFile section */
 
@@ -387,6 +391,11 @@
 		2BE373031C897F96004A1DDF /* ProductSpecsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductSpecsViewController.swift; sourceTree = "<group>"; };
 		2BE373051C89836A004A1DDF /* btn_Arrow_TurnDown1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_Arrow_TurnDown1@2x.png"; sourceTree = "<group>"; };
 		2BE373061C89836A004A1DDF /* btn_Arrow_TurnUp1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_Arrow_TurnUp1@2x.png"; sourceTree = "<group>"; };
+		2BF7EF191C8D3370001C4595 /* MineBankCardHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineBankCardHomeViewController.swift; sourceTree = "<group>"; };
+		2BF7EF1B1C8D4D29001C4595 /* BankCardDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankCardDetailViewController.swift; sourceTree = "<group>"; };
+		2BF7EF1D1C8D61F7001C4595 /* AddBankCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBankCardViewController.swift; sourceTree = "<group>"; };
+		2BF7EF1F1C8D662C001C4595 /* VerifyBankCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerifyBankCardViewController.swift; sourceTree = "<group>"; };
+		2BF7EF211C8D703F001C4595 /* FortuneCenterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FortuneCenterViewController.swift; sourceTree = "<group>"; };
 		31D2DB4A35812B2A2B5A22B4 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C9098541C76A482006B7D2C /* ZhiMaDi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZhiMaDi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C9098571C76A482006B7D2C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -511,7 +520,6 @@
 		3C9098F41C76A6E9006B7D2C /* QNInterceptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QNInterceptor.swift; sourceTree = "<group>"; };
 		3C9098F51C76A6E9006B7D2C /* QNNetworkTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QNNetworkTool.swift; sourceTree = "<group>"; };
 		3C9098F61C76A6E9006B7D2C /* ZMDTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZMDTool.swift; sourceTree = "<group>"; };
-		3C9098F81C76A6E9006B7D2C /* UserCenterHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCenterHomeViewController.swift; sourceTree = "<group>"; };
 		B87B3CB9214E0C97B64D9460 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		EAA66A338C1BF41B2A7175DB /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -565,6 +573,7 @@
 		2B0ACCB11C858E11000EC299 /* MineSet */ = {
 			isa = PBXGroup;
 			children = (
+				2BF7EF181C8D3353001C4595 /* BankCard */,
 				2B0ACCB21C858E31000EC299 /* PersonInfoViewController.swift */,
 				2B73D84C1C8678C40016FEB2 /* AddressViewController.swift */,
 				2B73D84E1C867C280016FEB2 /* AdressTableViewCell.swift */,
@@ -794,6 +803,17 @@
 				2BDEF3CB1C7F028F00927F64 /* CycleScrollView.m */,
 			);
 			path = CycleScrollView;
+			sourceTree = "<group>";
+		};
+		2BF7EF181C8D3353001C4595 /* BankCard */ = {
+			isa = PBXGroup;
+			children = (
+				2BF7EF191C8D3370001C4595 /* MineBankCardHomeViewController.swift */,
+				2BF7EF1B1C8D4D29001C4595 /* BankCardDetailViewController.swift */,
+				2BF7EF1D1C8D61F7001C4595 /* AddBankCardViewController.swift */,
+				2BF7EF1F1C8D662C001C4595 /* VerifyBankCardViewController.swift */,
+			);
+			path = BankCard;
 			sourceTree = "<group>";
 		};
 		2C475CDFCB51F0D44C1096F4 /* Pods */ = {
@@ -1139,12 +1159,12 @@
 		3C9098F71C76A6E9006B7D2C /* UserCenter */ = {
 			isa = PBXGroup;
 			children = (
-				3C9098F81C76A6E9006B7D2C /* UserCenterHomeViewController.swift */,
 				2B68C44E1C7A9C3000B401A9 /* MineHomeViewController.swift */,
 				2B197DB91C854524006494CF /* MineHomeHeadView.xib */,
 				2B197DC21C857FA4006494CF /* MineHomeSetViewController.swift */,
 				2BE373011C8974DC004A1DDF /* NewProductReleaseViewController.swift */,
 				2BE373031C897F96004A1DDF /* ProductSpecsViewController.swift */,
+				2BF7EF211C8D703F001C4595 /* FortuneCenterViewController.swift */,
 				2B0ACCB11C858E11000EC299 /* MineSet */,
 			);
 			path = UserCenter;
@@ -1392,6 +1412,7 @@
 				3C9098F91C76A6E9006B7D2C /* tabBarViewController.swift in Sources */,
 				3C90985A1C76A482006B7D2C /* ViewController.swift in Sources */,
 				2BDEF3AF1C7EE0CA00927F64 /* HomeBuyGoodsDetailViewController.swift in Sources */,
+				2BF7EF1A1C8D3370001C4595 /* MineBankCardHomeViewController.swift in Sources */,
 				2BE372D61C883AEC004A1DDF /* ReleaseGoodsViewController.swift in Sources */,
 				3C9099001C76A6E9006B7D2C /* ChartAnimator.swift in Sources */,
 				3C9099171C76A6E9006B7D2C /* BarLineScatterCandleBubbleChartData.swift in Sources */,
@@ -1409,6 +1430,7 @@
 				3C9099611C76A6E9006B7D2C /* QNInterceptor.swift in Sources */,
 				3C9099161C76A6E9006B7D2C /* BarChartDataSet.swift in Sources */,
 				3C9098FC1C76A6E9006B7D2C /* UIViewControllerExtension.swift in Sources */,
+				2BF7EF1E1C8D61F7001C4595 /* AddBankCardViewController.swift in Sources */,
 				3C9098701C76A6AA006B7D2C /* QNSharedDatas.swift in Sources */,
 				3C9099311C76A6E9006B7D2C /* ChartXAxisValueFormatter.swift in Sources */,
 				3C9099051C76A6E9006B7D2C /* ChartViewBase.swift in Sources */,
@@ -1435,6 +1457,7 @@
 				3C9099031C76A6E9006B7D2C /* BubbleChartView.swift in Sources */,
 				3C90992A1C76A6E9006B7D2C /* RadarChartDataSet.swift in Sources */,
 				3C9099291C76A6E9006B7D2C /* RadarChartData.swift in Sources */,
+				2BF7EF221C8D703F001C4595 /* FortuneCenterViewController.swift in Sources */,
 				2B0662F91C7DA4A800EA822F /* HomeBuyViewController.swift in Sources */,
 				3C9099041C76A6E9006B7D2C /* CandleStickChartView.swift in Sources */,
 				3C9099511C76A6E9006B7D2C /* PieChartRenderer.swift in Sources */,
@@ -1459,6 +1482,7 @@
 				2BE372D91C891D7E004A1DDF /* ReleaseGoodsConfirmViewController.swift in Sources */,
 				3C9099111C76A6E9006B7D2C /* ChartMarker.swift in Sources */,
 				2B959EB61C76ED04002EA40D /* StartPagesViewController.swift in Sources */,
+				2BF7EF201C8D662C001C4595 /* VerifyBankCardViewController.swift in Sources */,
 				3C90994C1C76A6E9006B7D2C /* ChartYAxisRendererRadarChart.swift in Sources */,
 				3C90995D1C76A6E9006B7D2C /* NSString+AES.m in Sources */,
 				2B73D8551C86B6D00016FEB2 /* PersonIntroductionViewController.swift in Sources */,
@@ -1476,6 +1500,7 @@
 				3C9099631C76A6E9006B7D2C /* ZMDTool.swift in Sources */,
 				2BE373001C895F28004A1DDF /* BusinessAuthenticationViewController.swift in Sources */,
 				3C9099181C76A6E9006B7D2C /* BarLineScatterCandleBubbleChartDataSet.swift in Sources */,
+				2BF7EF1C1C8D4D29001C4595 /* BankCardDetailViewController.swift in Sources */,
 				3C90995F1C76A6E9006B7D2C /* QNChartsTool.swift in Sources */,
 				3C9099381C76A6E9006B7D2C /* BarChartDataProvider.swift in Sources */,
 				3C90992F1C76A6E9006B7D2C /* ChartDefaultXAxisValueFormatter.swift in Sources */,
@@ -1517,7 +1542,6 @@
 				3C9098581C76A482006B7D2C /* AppDelegate.swift in Sources */,
 				3C9099341C76A6E9006B7D2C /* ChartHighlighter.swift in Sources */,
 				3C9099481C76A6E9006B7D2C /* ChartXAxisRendererHorizontalBarChart.swift in Sources */,
-				3C9099641C76A6E9006B7D2C /* UserCenterHomeViewController.swift in Sources */,
 				3C90993A1C76A6E9006B7D2C /* BubbleChartDataProvider.swift in Sources */,
 				3C9099501C76A6E9006B7D2C /* LineScatterCandleRadarChartRenderer.swift in Sources */,
 				3C9099361C76A6E9006B7D2C /* CombinedHighlighter.swift in Sources */,

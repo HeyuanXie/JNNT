@@ -38,9 +38,11 @@ let marginLeft = 12
 //MARK:- 高度 & 宽度 缩放系数
 let COEFFICIENT_OF_HEIGHT_ZOOM = kScreenHeight/568.0
 let COEFFICIENT_OF_WIDTH_ZOOM = kScreenWidth/320.0
+/// 默认tableView背景色
+let tableViewdefaultBackgroundColor = UIColor(red: 238/255, green: 238/255, blue: 238/255, alpha: 1.0)
 /// 默认高度
 let tableViewCellDefaultHeight: CGFloat = 56.0
-/// 默认背景色
+/// 默认cell背景色
 let tableViewCellDefaultBackgroundColor = UIColor.whiteColor()
 /// 默认内容字体
 let tableViewCellDefaultTextFont = UIFont.systemFontOfSize(16)

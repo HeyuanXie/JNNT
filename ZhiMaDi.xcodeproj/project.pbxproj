@@ -141,6 +141,10 @@
 		2BF7EF1E1C8D61F7001C4595 /* AddBankCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF7EF1D1C8D61F7001C4595 /* AddBankCardViewController.swift */; };
 		2BF7EF201C8D662C001C4595 /* VerifyBankCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF7EF1F1C8D662C001C4595 /* VerifyBankCardViewController.swift */; };
 		2BF7EF221C8D703F001C4595 /* FortuneCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF7EF211C8D703F001C4595 /* FortuneCenterViewController.swift */; };
+		2BF7F06E1C8E6C1E001C4595 /* Navigation_Back_R.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BF7F06D1C8E6C1E001C4595 /* Navigation_Back_R.png */; };
+		2BF7F0701C8EA741001C4595 /* FortuneCenterCaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF7F06F1C8EA741001C4595 /* FortuneCenterCaseViewController.swift */; };
+		2BF7F0721C8EACD4001C4595 /* FortuneCenterRechargeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF7F0711C8EACD4001C4595 /* FortuneCenterRechargeViewController.swift */; };
+		2BF7F0741C8EB18B001C4595 /* FortuneCenterSelectPayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF7F0731C8EB18B001C4595 /* FortuneCenterSelectPayViewController.swift */; };
 		3C9098581C76A482006B7D2C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9098571C76A482006B7D2C /* AppDelegate.swift */; };
 		3C90985A1C76A482006B7D2C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9098591C76A482006B7D2C /* ViewController.swift */; };
 		3C90985D1C76A482006B7D2C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C90985B1C76A482006B7D2C /* Main.storyboard */; };
@@ -396,6 +400,10 @@
 		2BF7EF1D1C8D61F7001C4595 /* AddBankCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBankCardViewController.swift; sourceTree = "<group>"; };
 		2BF7EF1F1C8D662C001C4595 /* VerifyBankCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerifyBankCardViewController.swift; sourceTree = "<group>"; };
 		2BF7EF211C8D703F001C4595 /* FortuneCenterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FortuneCenterViewController.swift; sourceTree = "<group>"; };
+		2BF7F06D1C8E6C1E001C4595 /* Navigation_Back_R.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Navigation_Back_R.png; sourceTree = "<group>"; };
+		2BF7F06F1C8EA741001C4595 /* FortuneCenterCaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FortuneCenterCaseViewController.swift; sourceTree = "<group>"; };
+		2BF7F0711C8EACD4001C4595 /* FortuneCenterRechargeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FortuneCenterRechargeViewController.swift; sourceTree = "<group>"; };
+		2BF7F0731C8EB18B001C4595 /* FortuneCenterSelectPayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FortuneCenterSelectPayViewController.swift; sourceTree = "<group>"; };
 		31D2DB4A35812B2A2B5A22B4 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C9098541C76A482006B7D2C /* ZhiMaDi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZhiMaDi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C9098571C76A482006B7D2C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -662,6 +670,7 @@
 		2B959E921C76C33B002EA40D /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				2BF7F06D1C8E6C1E001C4595 /* Navigation_Back_R.png */,
 				2BE373051C89836A004A1DDF /* btn_Arrow_TurnDown1@2x.png */,
 				2BE373061C89836A004A1DDF /* btn_Arrow_TurnUp1@2x.png */,
 				2B73D8621C86E5E50016FEB2 /* PictureAdd.png */,
@@ -1165,6 +1174,9 @@
 				2BE373011C8974DC004A1DDF /* NewProductReleaseViewController.swift */,
 				2BE373031C897F96004A1DDF /* ProductSpecsViewController.swift */,
 				2BF7EF211C8D703F001C4595 /* FortuneCenterViewController.swift */,
+				2BF7F06F1C8EA741001C4595 /* FortuneCenterCaseViewController.swift */,
+				2BF7F0711C8EACD4001C4595 /* FortuneCenterRechargeViewController.swift */,
+				2BF7F0731C8EB18B001C4595 /* FortuneCenterSelectPayViewController.swift */,
 				2B0ACCB11C858E11000EC299 /* MineSet */,
 			);
 			path = UserCenter;
@@ -1338,6 +1350,7 @@
 				2B68C4811C7AFAA500B401A9 /* Home_Market@2x.png in Resources */,
 				2B959EA21C76C492002EA40D /* TabBar_School_Normal@2x.png in Resources */,
 				2BDEF3B11C7EE9BE00927F64 /* Home_Buy_PeopleTest.png in Resources */,
+				2BF7F06E1C8E6C1E001C4595 /* Navigation_Back_R.png in Resources */,
 				2B959E9F1C76C492002EA40D /* TabBar_Home_Selected@2x.png in Resources */,
 				2B197DA61C83EAD3006494CF /* Navi_Msg@2x.png in Resources */,
 			);
@@ -1413,6 +1426,7 @@
 				3C90985A1C76A482006B7D2C /* ViewController.swift in Sources */,
 				2BDEF3AF1C7EE0CA00927F64 /* HomeBuyGoodsDetailViewController.swift in Sources */,
 				2BF7EF1A1C8D3370001C4595 /* MineBankCardHomeViewController.swift in Sources */,
+				2BF7F0701C8EA741001C4595 /* FortuneCenterCaseViewController.swift in Sources */,
 				2BE372D61C883AEC004A1DDF /* ReleaseGoodsViewController.swift in Sources */,
 				3C9099001C76A6E9006B7D2C /* ChartAnimator.swift in Sources */,
 				3C9099171C76A6E9006B7D2C /* BarLineScatterCandleBubbleChartData.swift in Sources */,
@@ -1455,6 +1469,7 @@
 				3C90995C1C76A6E9006B7D2C /* NSData+AES.m in Sources */,
 				3C9098FE1C76A6E9006B7D2C /* Aspects.m in Sources */,
 				3C9099031C76A6E9006B7D2C /* BubbleChartView.swift in Sources */,
+				2BF7F0741C8EB18B001C4595 /* FortuneCenterSelectPayViewController.swift in Sources */,
 				3C90992A1C76A6E9006B7D2C /* RadarChartDataSet.swift in Sources */,
 				3C9099291C76A6E9006B7D2C /* RadarChartData.swift in Sources */,
 				2BF7EF221C8D703F001C4595 /* FortuneCenterViewController.swift in Sources */,
@@ -1538,6 +1553,7 @@
 				3C9099221C76A6E9006B7D2C /* CombinedChartData.swift in Sources */,
 				3C9099271C76A6E9006B7D2C /* PieChartData.swift in Sources */,
 				3C90994F1C76A6E9006B7D2C /* LineChartRenderer.swift in Sources */,
+				2BF7F0721C8EACD4001C4595 /* FortuneCenterRechargeViewController.swift in Sources */,
 				2B73D85B1C86CBBD0016FEB2 /* PhoneSetViewController.swift in Sources */,
 				3C9098581C76A482006B7D2C /* AppDelegate.swift in Sources */,
 				3C9099341C76A6E9006B7D2C /* ChartHighlighter.swift in Sources */,

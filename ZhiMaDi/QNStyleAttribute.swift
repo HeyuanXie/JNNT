@@ -30,7 +30,9 @@ let navigationTextColor = UIColor.blackColor()
 let navigationBackgroundColor = UIColor(red: 246/255.0, green: 246/255.0, blue: 246/255.0, alpha: 1.0)
 /// 导航栏字体（titleView不允许被修改）
 let navigationTextFont = UIFont.systemFontOfSize(16)
-
+let defaultFontWithSize = { (size : CGFloat) -> UIFont in
+    UIFont.systemFontOfSize(16)
+}
 // 边距
 let marginLeft = 12
 
@@ -42,6 +44,8 @@ let COEFFICIENT_OF_WIDTH_ZOOM = kScreenWidth/320.0
 let tableViewdefaultBackgroundColor = UIColor(red: 238/255, green: 238/255, blue: 238/255, alpha: 1.0)
 /// 默认高度
 let tableViewCellDefaultHeight: CGFloat = 56.0
+/// 默念head高度
+let tableViewCellHeadDefaultHeight: CGFloat = 10.0
 /// 默认cell背景色
 let tableViewCellDefaultBackgroundColor = UIColor.whiteColor()
 /// 默认内容字体
@@ -52,6 +56,7 @@ let tableViewCellDefaultTextColor = UIColor(white: 63/255.0, alpha: 1.0)
 let tableViewCellDefaultDetailTextFont = UIFont.systemFontOfSize(14)
 /// 默认详情颜色
 let tableViewCellDefaultDetailTextColor = UIColor(white: 136/255.0, alpha: 1)
+
 extension ZMDTool {
     /// 对UITableViewCell对象进行默认配置
     class func configTableViewCellDefault(cell: UITableViewCell) {

@@ -77,7 +77,7 @@ class MineHomeViewController: UIViewController,  UITableViewDataSource, UITableV
             case OfferCenter:
                 viewController = UIViewController()
             case Fortune:
-                viewController = UIViewController()
+                viewController = FortuneCenterViewController.CreateFromMainStoryboard() as! FortuneCenterViewController
             case Customer:
                 viewController = UIViewController()
             case Data:

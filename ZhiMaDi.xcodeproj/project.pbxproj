@@ -102,6 +102,10 @@
 		2B959EBC1C76ED42002EA40D /* Start_index2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2B959EB91C76ED42002EA40D /* Start_index2.jpg */; };
 		2B959EBD1C76ED42002EA40D /* Start_index3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2B959EBA1C76ED42002EA40D /* Start_index3.jpg */; };
 		2B959EC01C76F5D0002EA40D /* HomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B959EBF1C76F5D0002EA40D /* HomePageViewController.swift */; };
+		2B9D9F901C8FC3D800141D31 /* PayPassWordSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9D9F8F1C8FC3D800141D31 /* PayPassWordSetViewController.swift */; };
+		2B9D9F921C8FCC0400141D31 /* CustomPassWordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9D9F911C8FCC0400141D31 /* CustomPassWordView.swift */; };
+		2B9D9F961C9004CC00141D31 /* password_in@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B9D9F941C9004CC00141D31 /* password_in@2x.png */; };
+		2B9D9F971C9004CC00141D31 /* yuan@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B9D9F951C9004CC00141D31 /* yuan@2x.png */; };
 		2B9DB8A61C801BF500259910 /* HomeBuyGoodsSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9DB8A51C801BF500259910 /* HomeBuyGoodsSearchViewController.swift */; };
 		2BB6A8D01C87DF12008209E8 /* SignPSSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6A8CF1C87DF12008209E8 /* SignPSSetViewController.swift */; };
 		2BB6A8D41C87E413008209E8 /* Home_Loan_Tmp.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BB6A8D31C87E413008209E8 /* Home_Loan_Tmp.png */; };
@@ -360,6 +364,10 @@
 		2B959EB91C76ED42002EA40D /* Start_index2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Start_index2.jpg; sourceTree = "<group>"; };
 		2B959EBA1C76ED42002EA40D /* Start_index3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Start_index3.jpg; sourceTree = "<group>"; };
 		2B959EBF1C76F5D0002EA40D /* HomePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageViewController.swift; sourceTree = "<group>"; };
+		2B9D9F8F1C8FC3D800141D31 /* PayPassWordSetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PayPassWordSetViewController.swift; sourceTree = "<group>"; };
+		2B9D9F911C8FCC0400141D31 /* CustomPassWordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPassWordView.swift; sourceTree = "<group>"; };
+		2B9D9F941C9004CC00141D31 /* password_in@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "password_in@2x.png"; sourceTree = "<group>"; };
+		2B9D9F951C9004CC00141D31 /* yuan@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yuan@2x.png"; sourceTree = "<group>"; };
 		2B9DB8A51C801BF500259910 /* HomeBuyGoodsSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeBuyGoodsSearchViewController.swift; sourceTree = "<group>"; };
 		2BB6A8CF1C87DF12008209E8 /* SignPSSetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignPSSetViewController.swift; sourceTree = "<group>"; };
 		2BB6A8D31C87E413008209E8 /* Home_Loan_Tmp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Home_Loan_Tmp.png; sourceTree = "<group>"; };
@@ -596,6 +604,8 @@
 				2B73D8601C86E0650016FEB2 /* RealAuthenticationViewController.swift */,
 				2B73D8641C86EB8A0016FEB2 /* PersonAuthenticationViewController.swift */,
 				2BE372FF1C895F28004A1DDF /* BusinessAuthenticationViewController.swift */,
+				2B9D9F8F1C8FC3D800141D31 /* PayPassWordSetViewController.swift */,
+				2B9D9F911C8FCC0400141D31 /* CustomPassWordView.swift */,
 			);
 			path = MineSet;
 			sourceTree = "<group>";
@@ -682,6 +692,7 @@
 				2B197DB31C842A03006494CF /* Login_NoSelected@2x.png */,
 				2B197DB41C842A03006494CF /* Login_Selected@2x.png */,
 				2B68C47D1C7AFAA500B401A9 /* Home_Offer@2x.png */,
+				2B9D9F931C9004CC00141D31 /* tmp */,
 				2B197DCF1C858261006494CF /* Msn */,
 				2B197DA91C84261E006494CF /* Login */,
 				2B68C4501C7A9F7700B401A9 /* Mine */,
@@ -774,6 +785,15 @@
 				2BE372D81C891D7E004A1DDF /* ReleaseGoodsConfirmViewController.swift */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		2B9D9F931C9004CC00141D31 /* tmp */ = {
+			isa = PBXGroup;
+			children = (
+				2B9D9F941C9004CC00141D31 /* password_in@2x.png */,
+				2B9D9F951C9004CC00141D31 /* yuan@2x.png */,
+			);
+			path = tmp;
 			sourceTree = "<group>";
 		};
 		2BB6A8D91C87EE7E008209E8 /* Home_Sell */ = {
@@ -1340,6 +1360,7 @@
 				2B197DB51C842A03006494CF /* Login_NoSelected@2x.png in Resources */,
 				2B959EA61C76C65E002EA40D /* TabBar_MedicaData_Normal@2x.png in Resources */,
 				2BDEF3A71C7E9DA800927F64 /* Home_Buy_Xie@2x.png in Resources */,
+				2B9D9F971C9004CC00141D31 /* yuan@2x.png in Resources */,
 				2B197DCD1C857FFE006494CF /* Set_Shape.png in Resources */,
 				2B06631D1C7DA9E900EA822F /* pomegranate@2x.png in Resources */,
 				2B68C4681C7AB14300B401A9 /* Mine_Set@2x.png in Resources */,
@@ -1350,6 +1371,7 @@
 				2B68C4811C7AFAA500B401A9 /* Home_Market@2x.png in Resources */,
 				2B959EA21C76C492002EA40D /* TabBar_School_Normal@2x.png in Resources */,
 				2BDEF3B11C7EE9BE00927F64 /* Home_Buy_PeopleTest.png in Resources */,
+				2B9D9F961C9004CC00141D31 /* password_in@2x.png in Resources */,
 				2BF7F06E1C8E6C1E001C4595 /* Navigation_Back_R.png in Resources */,
 				2B959E9F1C76C492002EA40D /* TabBar_Home_Selected@2x.png in Resources */,
 				2B197DA61C83EAD3006494CF /* Navi_Msg@2x.png in Resources */,
@@ -1435,6 +1457,7 @@
 				2B73D8511C8682050016FEB2 /* AddressEditOrAddViewController.swift in Sources */,
 				3C9099091C76A6E9006B7D2C /* PieChartView.swift in Sources */,
 				3C90995E1C76A6E9006B7D2C /* Reachability.m in Sources */,
+				2B9D9F921C8FCC0400141D31 /* CustomPassWordView.swift in Sources */,
 				2B73D84D1C8678C40016FEB2 /* AddressViewController.swift in Sources */,
 				2B73D8531C868FC50016FEB2 /* CustomPickView.swift in Sources */,
 				3C9099201C76A6E9006B7D2C /* ChartDataEntry.swift in Sources */,
@@ -1461,6 +1484,7 @@
 				2B959EB41C76ED04002EA40D /* BlinkView.swift in Sources */,
 				3C9099601C76A6E9006B7D2C /* QNFormatTool.swift in Sources */,
 				3C9099491C76A6E9006B7D2C /* ChartXAxisRendererRadarChart.swift in Sources */,
+				2B9D9F901C8FC3D800141D31 /* PayPassWordSetViewController.swift in Sources */,
 				2B73D8571C86B8510016FEB2 /* AccoutSafeViewController.swift in Sources */,
 				3C9099451C76A6E9006B7D2C /* ChartRendererBase.swift in Sources */,
 				3C9099211C76A6E9006B7D2C /* ChartDataSet.swift in Sources */,

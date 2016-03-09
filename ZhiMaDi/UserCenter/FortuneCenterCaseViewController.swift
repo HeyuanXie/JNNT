@@ -80,7 +80,8 @@ class FortuneCenterCaseViewController: UIViewController,UITableViewDataSource, U
         let label = UILabel(frame: CGRectMake(12, 14, kScreenWidth - 24,12))
         label.text = "可用金额 ： 35.00"
         label.textColor = UIColor.grayColor()
-        label.font = defaultFontWithSize(12)
+        label.font = defaultSysFontWithSize(12)
+        
         let btn = UIButton(frame: CGRectMake(12, 50, kScreenWidth-24, 46))
         btn.setTitle("申请提现", forState: .Normal)
         btn.setTitleColor(UIColor.whiteColor(), forState: .Normal)

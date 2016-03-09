@@ -49,7 +49,7 @@ class AccoutSafeViewController: UIViewController ,UITableViewDataSource, UITable
             case Phone :
                 viewController = PhoneSetViewController.CreateFromMainStoryboard() as! PhoneSetViewController
             case PayPs:
-                viewController = UIViewController()
+                viewController = PayPassWordSetViewController.CreateFromMainStoryboard() as! PayPassWordSetViewController
             case Card:
                 viewController = MineBankCardHomeViewController.CreateFromMainStoryboard() as! MineBankCardHomeViewController
             case Identification:

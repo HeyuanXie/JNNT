@@ -30,7 +30,7 @@ let navigationTextColor = UIColor.blackColor()
 let navigationBackgroundColor = UIColor(red: 246/255.0, green: 246/255.0, blue: 246/255.0, alpha: 1.0)
 /// 导航栏字体（titleView不允许被修改）
 let navigationTextFont = UIFont.systemFontOfSize(16)
-let defaultFontWithSize = { (size : CGFloat) -> UIFont in
+let defaultSysFontWithSize = { (size : CGFloat) -> UIFont in
     UIFont.systemFontOfSize(16)
 }
 // 边距

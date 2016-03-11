@@ -212,6 +212,10 @@ class NewProductReleaseViewController: UIViewController,UITableViewDataSource, U
             let vc = ProductSpecsViewController.CreateFromMainStoryboard() as! ProductSpecsViewController
             self.navigationController?.pushViewController(vc, animated: true)
         }
+        if type == .Name {
+            let vc = ProductCategoryViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
     //MARK: -  PrivateMethod
     private func dataInit(){

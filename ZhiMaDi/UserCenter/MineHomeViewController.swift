@@ -191,13 +191,16 @@ class MineHomeViewController: UIViewController,  UITableViewDataSource, UITableV
                 
                 ZMDTool.configTableViewCellDefault(cell!)
             }
-            cell?.textLabel?.text = indexPath.section == 1 ? "我的关注" : "商品评价"
+
+            cell?.textLabel?.text = indexPath.section == 2 ? "我的关注" : "商品评价"
             return cell!
         }
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let homeBuyListViewController = HomeBuyListViewController.CreateFromMainStoryboard() as! HomeBuyListViewController
-        self.navigationController?.pushViewController(homeBuyListViewController, animated: true)
+        if indexPath.section == 2 {
+            let vc = MyFollowViewController.CreateFromMainStoryboard() as! MyFollowViewController
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
     //MARK:Private Method
     func setupNewNavigation() {

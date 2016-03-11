@@ -55,7 +55,9 @@ class CustomPassWordView: UIView,UITextFieldDelegate {
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         var text = textField.text as! NSString
         text = text.stringByReplacingCharactersInRange(range, withString: string)
-        
+        if text.length > 6 {
+            return false
+        }
         for var i = 0 ;i < text.length;i++ {
             let circle = self.viewWithTag(1000 + i)
             circle?.hidden = false

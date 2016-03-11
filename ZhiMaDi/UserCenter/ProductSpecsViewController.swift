@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProductSpecsViewController: UIViewController ,  UITableViewDataSource, UITableViewDelegate,ZMDInterceptorNavigationBarHiddenProtocol{
+class ProductSpecsViewController: UIViewController ,  UITableViewDataSource, UITableViewDelegate,ZMDInterceptorProtocol,ZMDInterceptorMoreProtocol,ZMDInterceptorNavigationBarShowProtocol{
     
     let getLabel = { (y : CGFloat!) -> UILabel in
         let label = UILabel(frame: CGRectMake(12, y, 200, 52))
@@ -18,7 +18,6 @@ class ProductSpecsViewController: UIViewController ,  UITableViewDataSource, UIT
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
     
     override func didReceiveMemoryWarning() {

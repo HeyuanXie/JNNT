@@ -73,7 +73,7 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
                 homeBuyListViewController.isBought = true
                 viewController = homeBuyListViewController
             case Market:
-                viewController = UIViewController()
+                viewController = HomeMarketViewController.CreateFromMainStoryboard() as! HomeMarketViewController
             case News:
                 viewController = UIViewController()
             case Sale:
@@ -156,7 +156,7 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
         }
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-
+        
     }
     //MARK: - UISearchBarDelegate
     func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {

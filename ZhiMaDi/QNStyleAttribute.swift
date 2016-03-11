@@ -12,7 +12,7 @@ import UIKit.UIColor
 
 // MARK: - 颜色
 /// App主色    
-let appThemeColor = UIColor(red: 246/255.0, green: 246/255.0, blue: 246/255.0, alpha: 1.0)
+let appThemeColor = UIColor(red: 237/255.0, green: 191/255.0, blue: 28/255.0, alpha: 1.0)
 
 /// 默认背景色
 let defaultBackgroundColor = UIColor(red: 238/255, green: 238/255, blue: 238/255, alpha: 1.0)
@@ -34,12 +34,13 @@ let defaultSysFontWithSize = { (size : CGFloat) -> UIFont in
     UIFont.systemFontOfSize(16)
 }
 // 边距
-let marginLeft = 12
+let MarginLeft = 12
 
 // MARK: - 统一的列表样式
 //MARK:- 高度 & 宽度 缩放系数
-let COEFFICIENT_OF_HEIGHT_ZOOM = kScreenHeight/568.0
-let COEFFICIENT_OF_WIDTH_ZOOM = kScreenWidth/320.0
+let COEFFICIENT_OF_HEIGHT_ZOOM = kScreenHeight/667.0
+let COEFFICIENT_OF_WIDTH_ZOOM = kScreenWidth/375.0
+
 /// 默认tableView背景色
 let tableViewdefaultBackgroundColor = UIColor(red: 238/255, green: 238/255, blue: 238/255, alpha: 1.0)
 /// 默认高度
@@ -71,10 +72,14 @@ extension ZMDTool {
         view.layer.cornerRadius = 2
         view.layer.masksToBounds = true
     }
-    ///对UIView对象进行配置(borderWidth、borderColor)
+    ///对UIView对象进行配置(borderWidth) 默认颜色 defaultLineColor
     class func configViewLayerFrame(view: UIView) {
+        self.configViewLayerFrameWithColor(view, color: defaultLineColor)
+    }
+    ///对UIView对象进行配置(borderWidth、borderColor)
+    class func configViewLayerFrameWithColor(view: UIView,color: UIColor) {
         view.layer.borderWidth = 0.5
-        view.layer.borderColor = defaultLineColor.CGColor
+        view.layer.borderColor = color.CGColor
     }
     /// 对UIView对象进行配置(cornerRadius)
     class func configViewLayerRound(view: UIView) {

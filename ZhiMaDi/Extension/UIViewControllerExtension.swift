@@ -52,19 +52,19 @@ extension UIViewController {
 extension UIViewController {
     public func configBackButton() {
         let item = UIBarButtonItem(image: UIImage(named: "Navigation_Back")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate), style: UIBarButtonItemStyle.Bordered, target: self, action: Selector("back"))
-        item.customView?.tintColor = appThemeColor
+        item.customView?.tintColor = UIColor.blackColor()
         
         self.navigationItem.leftBarButtonItem = item
     }
     public func configMsgButton() {
         let item = UIBarButtonItem(image: UIImage(named: "Navi_Msg")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate), style: UIBarButtonItemStyle.Bordered, target: self, action: Selector("back"))
-        item.customView?.tintColor = appThemeColor
+        item.customView?.tintColor = UIColor.blackColor()
         
         self.navigationItem.rightBarButtonItem = item
     }
     public func configMoreButton() {
         let item = UIBarButtonItem(image: UIImage(named: "Msn_More")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate), style: UIBarButtonItemStyle.Bordered, target: self, action: Selector("back"))
-        item.customView?.tintColor = appThemeColor
+        item.customView?.tintColor = UIColor.blackColor()
         
         self.navigationItem.rightBarButtonItem = item
     }

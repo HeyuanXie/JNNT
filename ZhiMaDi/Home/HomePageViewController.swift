@@ -173,7 +173,7 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
             cell!.selectionStyle = .None
             cell!.contentView.backgroundColor = UIColor.whiteColor()
             
-            let cycleScroll = CycleScrollView(frame: CGRectMake(0, 0, kScreenWidth, kScreenWidth * 7/15))
+            let cycleScroll = CycleScrollView(frame: CGRectMake(0, 0, kScreenWidth, kScreenWidth * 7/15))   
             let image = ["Home_Top1_Advertisement","Home_Top2_Advertisement"]
             cycleScroll.imgArray = image
 //            cycleScroll.delegate = self

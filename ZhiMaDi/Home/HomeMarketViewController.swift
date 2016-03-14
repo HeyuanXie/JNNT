@@ -49,7 +49,7 @@ class HomeMarketViewController: UIViewController,UITableViewDataSource,UITableVi
         return 5
     }
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section == 2 {
+        if section == 2 || section == 4 {
             return 1
         }
         if section == 3 {
@@ -133,7 +133,7 @@ class HomeMarketViewController: UIViewController,UITableViewDataSource,UITableVi
         }
         return cell!
     }
-
+    
     func cellForHomeMenu(tableView: UITableView,indexPath: NSIndexPath)-> UITableViewCell {
         let cellId = "menuCell"
         var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
@@ -233,6 +233,10 @@ class HomeMarketViewController: UIViewController,UITableViewDataSource,UITableVi
                         imgV.image = UIImage(named: "btn_Arrow_TurnRight1")
                         btn.addSubview(imgV)
                         self.dropDownMenuView.addSubview(btn)
+                        btn.rac_signalForControlEvents(.TouchUpInside).subscribeNext({ (sender) -> Void in
+                            let vc = HomeMarketDetailViewController.CreateFromMainStoryboard() as! HomeMarketDetailViewController
+                            self.navigationController?.pushViewController(vc, animated: true)
+                        })
                     }
                     cell!.contentView.addSubview(self.dropDownMenuView)
                     //线
@@ -241,46 +245,46 @@ class HomeMarketViewController: UIViewController,UITableViewDataSource,UITableVi
                         self.lineDropDown.frame = CGRectMake(btn.frame.origin.x + 0.5, btn.frame.maxY - 1, width - 1, 2) //档住 选中btn 下标线
                         cell?.contentView.addSubview(self.lineDropDown)
                     }
-                   
+                    
                 }
             }
         }
         return cell!
     }
-// 更多 cell
-func cellForHomeMore(tableView: UITableView,indexPath: NSIndexPath)-> UITableViewCell {
-    let cellId = "moreCell"
-    var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
-    if cell == nil {
-        cell = UITableViewCell(style: .Default, reuseIdentifier: cellId)
-        cell!.selectionStyle = .None
-        cell!.contentView.backgroundColor = UIColor.whiteColor()
-        
-        let label = UILabel(frame: CGRectMake(0, 0, kScreenWidth,52))
-        label.text = "查看更多"
-        label.textAlignment = .Center
-        label.textColor = UIColor.blackColor()
-        label.font = defaultSysFontWithSize(14)
-        cell?.addSubview(label)
+    // 更多 cell
+    func cellForHomeMore(tableView: UITableView,indexPath: NSIndexPath)-> UITableViewCell {
+        let cellId = "moreCell"
+        var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
+        if cell == nil {
+            cell = UITableViewCell(style: .Default, reuseIdentifier: cellId)
+            cell!.selectionStyle = .None
+            cell!.contentView.backgroundColor = UIColor.whiteColor()
+            
+            let label = UILabel(frame: CGRectMake(0, 0, kScreenWidth,52))
+            label.text = "查看更多"
+            label.textAlignment = .Center
+            label.textColor = UIColor.blackColor()
+            label.font = defaultSysFontWithSize(14)
+            cell?.addSubview(label)
+        }
+        return cell!
     }
-    return cell!
-}
-//MARK: - 底部 cell
-func cellForHomeRecommendation(tableView: UITableView,indexPath: NSIndexPath)-> UITableViewCell {
-    let cellId = "recommendationCell"
-    var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
-    if cell == nil {
-        cell = UITableViewCell(style: .Default, reuseIdentifier: cellId)
-        cell!.selectionStyle = .None
-        cell!.contentView.backgroundColor = UIColor.whiteColor()
-    }
-    let imgVLeft = cell?.contentView.viewWithTag(10001) as! UIImageView
-    let imgVBot = cell?.contentView.viewWithTag(10002) as! UIImageView
-    let imgVRight = cell?.contentView.viewWithTag(10003) as! UIImageView
-    imgVLeft.image = UIImage(named: "HomeMarket_BottomLeft")
-    imgVBot.image = UIImage(named: "HomeMarket_BottomMiddle")
-    imgVRight.image = UIImage(named: "HomeMarket_BottomRight")
-    return cell!
+    //MARK: - 底部 cell
+    func cellForHomeRecommendation(tableView: UITableView,indexPath: NSIndexPath)-> UITableViewCell {
+        let cellId = "recommendationCell"
+        var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
+        if cell == nil {
+            cell = UITableViewCell(style: .Default, reuseIdentifier: cellId)
+            cell!.selectionStyle = .None
+            cell!.contentView.backgroundColor = UIColor.whiteColor()
+        }
+        let imgVLeft = cell?.contentView.viewWithTag(10001) as! UIImageView
+        let imgVBot = cell?.contentView.viewWithTag(10002) as! UIImageView
+        let imgVRight = cell?.contentView.viewWithTag(10003) as! UIImageView
+        imgVLeft.image = UIImage(named: "HomeMarket_BottomLeft")
+        imgVBot.image = UIImage(named: "HomeMarket_BottomMiddle")
+        imgVRight.image = UIImage(named: "HomeMarket_BottomRight")
+        return cell!
     }
     
     

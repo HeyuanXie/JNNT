@@ -147,6 +147,12 @@
 		2BE373041C897F96004A1DDF /* ProductSpecsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE373031C897F96004A1DDF /* ProductSpecsViewController.swift */; };
 		2BE373071C89836A004A1DDF /* btn_Arrow_TurnDown1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BE373051C89836A004A1DDF /* btn_Arrow_TurnDown1@2x.png */; };
 		2BE373081C89836A004A1DDF /* btn_Arrow_TurnUp1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BE373061C89836A004A1DDF /* btn_Arrow_TurnUp1@2x.png */; };
+		2BF2B0D01C9659B500B310D5 /* HomeMarketDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF2B0CF1C9659B500B310D5 /* HomeMarketDetailViewController.swift */; };
+		2BF2B0E21C96651100B310D5 /* Market01.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BF2B0DD1C96651100B310D5 /* Market01.png */; };
+		2BF2B0E31C96651100B310D5 /* Market02.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BF2B0DE1C96651100B310D5 /* Market02.png */; };
+		2BF2B0E41C96651100B310D5 /* Market03.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BF2B0DF1C96651100B310D5 /* Market03.png */; };
+		2BF2B0E51C96651100B310D5 /* Market04.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BF2B0E01C96651100B310D5 /* Market04.png */; };
+		2BF2B0E61C96651100B310D5 /* Market05.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BF2B0E11C96651100B310D5 /* Market05.png */; };
 		2BF7EF1A1C8D3370001C4595 /* MineBankCardHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF7EF191C8D3370001C4595 /* MineBankCardHomeViewController.swift */; };
 		2BF7EF1C1C8D4D29001C4595 /* BankCardDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF7EF1B1C8D4D29001C4595 /* BankCardDetailViewController.swift */; };
 		2BF7EF1E1C8D61F7001C4595 /* AddBankCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF7EF1D1C8D61F7001C4595 /* AddBankCardViewController.swift */; };
@@ -417,6 +423,12 @@
 		2BE373031C897F96004A1DDF /* ProductSpecsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductSpecsViewController.swift; sourceTree = "<group>"; };
 		2BE373051C89836A004A1DDF /* btn_Arrow_TurnDown1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_Arrow_TurnDown1@2x.png"; sourceTree = "<group>"; };
 		2BE373061C89836A004A1DDF /* btn_Arrow_TurnUp1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_Arrow_TurnUp1@2x.png"; sourceTree = "<group>"; };
+		2BF2B0CF1C9659B500B310D5 /* HomeMarketDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeMarketDetailViewController.swift; sourceTree = "<group>"; };
+		2BF2B0DD1C96651100B310D5 /* Market01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Market01.png; sourceTree = "<group>"; };
+		2BF2B0DE1C96651100B310D5 /* Market02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Market02.png; sourceTree = "<group>"; };
+		2BF2B0DF1C96651100B310D5 /* Market03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Market03.png; sourceTree = "<group>"; };
+		2BF2B0E01C96651100B310D5 /* Market04.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Market04.png; sourceTree = "<group>"; };
+		2BF2B0E11C96651100B310D5 /* Market05.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Market05.png; sourceTree = "<group>"; };
 		2BF7EF191C8D3370001C4595 /* MineBankCardHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineBankCardHomeViewController.swift; sourceTree = "<group>"; };
 		2BF7EF1B1C8D4D29001C4595 /* BankCardDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankCardDetailViewController.swift; sourceTree = "<group>"; };
 		2BF7EF1D1C8D61F7001C4595 /* AddBankCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBankCardViewController.swift; sourceTree = "<group>"; };
@@ -738,6 +750,7 @@
 		2B959EA81C76E3B0002EA40D /* Advertisement */ = {
 			isa = PBXGroup;
 			children = (
+				2BF2B0D21C96636E00B310D5 /* Market */,
 				2B0662E61C7C07CF00EA822F /* Home_Top1_Advertisement@2x.png */,
 				2B0662F01C7C2DB300EA822F /* Home_bottom_Advertisement@2x.png */,
 				2B0662E71C7C07CF00EA822F /* Home_Top2_Advertisement@2x.png */,
@@ -801,6 +814,7 @@
 				2BE372D51C883AEC004A1DDF /* ReleaseGoodsViewController.swift */,
 				2BE372D81C891D7E004A1DDF /* ReleaseGoodsConfirmViewController.swift */,
 				2B9D9F9E1C917B8F00141D31 /* HomeMarketViewController.swift */,
+				2BF2B0CF1C9659B500B310D5 /* HomeMarketDetailViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -850,6 +864,18 @@
 				2BDEF3CB1C7F028F00927F64 /* CycleScrollView.m */,
 			);
 			path = CycleScrollView;
+			sourceTree = "<group>";
+		};
+		2BF2B0D21C96636E00B310D5 /* Market */ = {
+			isa = PBXGroup;
+			children = (
+				2BF2B0DD1C96651100B310D5 /* Market01.png */,
+				2BF2B0DE1C96651100B310D5 /* Market02.png */,
+				2BF2B0DF1C96651100B310D5 /* Market03.png */,
+				2BF2B0E01C96651100B310D5 /* Market04.png */,
+				2BF2B0E11C96651100B310D5 /* Market05.png */,
+			);
+			path = Market;
 			sourceTree = "<group>";
 		};
 		2BF7EF181C8D3353001C4595 /* BankCard */ = {
@@ -1320,7 +1346,9 @@
 				3C9098621C76A482006B7D2C /* LaunchScreen.storyboard in Resources */,
 				2BB6A8DE1C880548008209E8 /* HomeSell_Deposit.png in Resources */,
 				2BDEF3A21C7E9DA800927F64 /* Home_Buy_Filter2@2x.png in Resources */,
+				2BF2B0E21C96651100B310D5 /* Market01.png in Resources */,
 				2B959EA01C76C492002EA40D /* TabBar_Mine_Normal@2x.png in Resources */,
+				2BF2B0E61C96651100B310D5 /* Market05.png in Resources */,
 				2B06630F1C7DA9E900EA822F /* apple@2x.png in Resources */,
 				2B197DA81C8424F2006494CF /* Login.storyboard in Resources */,
 				2B68C4731C7AB22B00B401A9 /* MineHome_Exchange@2x.png in Resources */,
@@ -1347,6 +1375,7 @@
 				2BB6A8DF1C880548008209E8 /* HomeSell_NotDeposit.png in Resources */,
 				2B197DB61C842A03006494CF /* Login_Selected@2x.png in Resources */,
 				2BDEF3A61C7E9DA800927F64 /* Home_Buy_Smile@2x.png in Resources */,
+				2BF2B0E41C96651100B310D5 /* Market03.png in Resources */,
 				2B0663111C7DA9E900EA822F /* cherry@2x.png in Resources */,
 				2B68C4841C7AFAA500B401A9 /* Home_Sale@2x.png in Resources */,
 				2B68C4761C7AB22B00B401A9 /* MineHome_NewProduct@2x.png in Resources */,
@@ -1361,6 +1390,7 @@
 				2B0663161C7DA9E900EA822F /* Mangosteen@2x.png in Resources */,
 				2B0662ED1C7C2B5800EA822F /* Home_Middle01_Advertisement.png in Resources */,
 				2B68C4741C7AB22B00B401A9 /* MineHome_FinancialManagement@2x.png in Resources */,
+				2BF2B0E51C96651100B310D5 /* Market04.png in Resources */,
 				2B0663131C7DA9E900EA822F /* grape@2x.png in Resources */,
 				2B68C4801C7AFAA500B401A9 /* Home_Loan@2x.png in Resources */,
 				2B197DAE1C84261E006494CF /* Login_Verification.png in Resources */,
@@ -1389,6 +1419,7 @@
 				2B68C4681C7AB14300B401A9 /* Mine_Set@2x.png in Resources */,
 				2B0662F31C7C407500EA822F /* Home_Msg@2x.png in Resources */,
 				3C90985D1C76A482006B7D2C /* Main.storyboard in Resources */,
+				2BF2B0E31C96651100B310D5 /* Market02.png in Resources */,
 				2B959EBB1C76ED42002EA40D /* Start_index1.jpg in Resources */,
 				2B959EBD1C76ED42002EA40D /* Start_index3.jpg in Resources */,
 				2B9D9FA61C92B3FC00141D31 /* HomeMarket_BottomRight.png in Resources */,
@@ -1561,6 +1592,7 @@
 				2B197DC31C857FA4006494CF /* MineHomeSetViewController.swift in Sources */,
 				3C90992E1C76A6E9006B7D2C /* ChartDataBaseFilter.swift in Sources */,
 				3C90990E1C76A6E9006B7D2C /* ChartComponentBase.swift in Sources */,
+				2BF2B0D01C9659B500B310D5 /* HomeMarketDetailViewController.swift in Sources */,
 				3C9098FA1C76A6E9006B7D2C /* QN_BaseDataModel.swift in Sources */,
 				3C90990C1C76A6E9006B7D2C /* ScatterChartView.swift in Sources */,
 				3C9099631C76A6E9006B7D2C /* ZMDTool.swift in Sources */,

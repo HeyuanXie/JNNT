@@ -7,18 +7,19 @@
 //
 
 import UIKit
-
+//行情趋势-单品详请
 class HomeMarketDetailViewController: UIViewController ,UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate,ZMDInterceptorProtocol{
 
+    @IBOutlet weak var currentTableView: UITableView!
     var dealData : NSArray!  //实时成交
     override func viewDidLoad() {
         super.viewDidLoad()
         dealData = ["","",""]
+        self.currentTableView.backgroundColor = tableViewdefaultBackgroundColor
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     //MARK:- UITableViewDataSource,UITableViewDelegate
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -47,6 +48,9 @@ class HomeMarketDetailViewController: UIViewController ,UITableViewDataSource,UI
             return 360
         }
         else if indexPath.section == 2 {
+            if indexPath.row == 0 {
+                return 45
+            }
             return 32
         }
         return 0
@@ -89,11 +93,11 @@ class HomeMarketDetailViewController: UIViewController ,UITableViewDataSource,UI
             return cell!
         case 2:
             if indexPath.row == 0 {
-                let cellId = "bottomCell"
+                let cellId = "bottomTitleCell"
                 var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
                 if cell == nil {
                     cell = UITableViewCell(style: .Subtitle, reuseIdentifier: cellId)
-                    cell?.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+                    cell?.accessoryType = UITableViewCellAccessoryType.None
                     cell!.selectionStyle = .None
                     
                     ZMDTool.configTableViewCellDefault(cell!)
@@ -117,9 +121,9 @@ class HomeMarketDetailViewController: UIViewController ,UITableViewDataSource,UI
                 ZMDTool.configTableViewCellDefault(cell!)
             }
             let sellerLbl = cell?.viewWithTag(10001) as! UILabel
-            let sizeLbl = cell?.viewWithTag(10001) as! UILabel
-            let priceLbl = cell?.viewWithTag(10001) as! UILabel
-            let currentLbl = cell?.viewWithTag(10001) as! UILabel
+            let sizeLbl = cell?.viewWithTag(10002) as! UILabel
+            let priceLbl = cell?.viewWithTag(10003) as! UILabel
+            let currentLbl = cell?.viewWithTag(10004) as! UILabel
             //标题栏
             if indexPath.row == 1 {
                 sellerLbl.backgroundColor = UIColor(red: 230/255, green: 230/255, blue: 230/255, alpha: 1.0)
@@ -149,7 +153,6 @@ class HomeMarketDetailViewController: UIViewController ,UITableViewDataSource,UI
         }
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let homeBuyListViewController = HomeBuyListViewController.CreateFromMainStoryboard() as! HomeBuyListViewController
-        self.navigationController?.pushViewController(homeBuyListViewController, animated: true)
+        
     }
 }

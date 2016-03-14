@@ -125,7 +125,7 @@ class ZMDInterceptor : NSObject {
                         else {
 //                            UIApplication.sharedApplication().statusBarStyle = .Default
 //                            viewController.navigationController?.navigationBar.barTintColor = navigationTextColor
-//                            viewController.navigationController?.navigationBar.tintColor = appThemeColor
+                            viewController.navigationController?.navigationBar.tintColor = UIColor.blackColor()
 //                            viewController.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: appThemeColor, NSFontAttributeName: UIFont.systemFontOfSize(18)]
                         }
                     }

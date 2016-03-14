@@ -201,6 +201,10 @@ class MineHomeViewController: UIViewController,  UITableViewDataSource, UITableV
             let vc = MyFollowViewController.CreateFromMainStoryboard() as! MyFollowViewController
             self.navigationController?.pushViewController(vc, animated: true)
         }
+        else if indexPath.section == 3 {
+            let vc = GoodsCommentViewController.CreateFromMainStoryboard() as! GoodsCommentViewController
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
     //MARK:Private Method
     func setupNewNavigation() {

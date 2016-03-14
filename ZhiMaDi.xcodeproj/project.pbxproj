@@ -147,6 +147,8 @@
 		2BE373041C897F96004A1DDF /* ProductSpecsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE373031C897F96004A1DDF /* ProductSpecsViewController.swift */; };
 		2BE373071C89836A004A1DDF /* btn_Arrow_TurnDown1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BE373051C89836A004A1DDF /* btn_Arrow_TurnDown1@2x.png */; };
 		2BE373081C89836A004A1DDF /* btn_Arrow_TurnUp1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BE373061C89836A004A1DDF /* btn_Arrow_TurnUp1@2x.png */; };
+		2BEBE77C1C9697940019E74F /* GoodsCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEBE77B1C9697940019E74F /* GoodsCommentViewController.swift */; };
+		2BEBE77E1C9699160019E74F /* GoodsCommentFullCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEBE77D1C9699160019E74F /* GoodsCommentFullCell.swift */; };
 		2BF2B0D01C9659B500B310D5 /* HomeMarketDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF2B0CF1C9659B500B310D5 /* HomeMarketDetailViewController.swift */; };
 		2BF2B0E21C96651100B310D5 /* Market01.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BF2B0DD1C96651100B310D5 /* Market01.png */; };
 		2BF2B0E31C96651100B310D5 /* Market02.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BF2B0DE1C96651100B310D5 /* Market02.png */; };
@@ -423,6 +425,8 @@
 		2BE373031C897F96004A1DDF /* ProductSpecsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductSpecsViewController.swift; sourceTree = "<group>"; };
 		2BE373051C89836A004A1DDF /* btn_Arrow_TurnDown1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_Arrow_TurnDown1@2x.png"; sourceTree = "<group>"; };
 		2BE373061C89836A004A1DDF /* btn_Arrow_TurnUp1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_Arrow_TurnUp1@2x.png"; sourceTree = "<group>"; };
+		2BEBE77B1C9697940019E74F /* GoodsCommentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoodsCommentViewController.swift; sourceTree = "<group>"; };
+		2BEBE77D1C9699160019E74F /* GoodsCommentFullCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoodsCommentFullCell.swift; sourceTree = "<group>"; };
 		2BF2B0CF1C9659B500B310D5 /* HomeMarketDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeMarketDetailViewController.swift; sourceTree = "<group>"; };
 		2BF2B0DD1C96651100B310D5 /* Market01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Market01.png; sourceTree = "<group>"; };
 		2BF2B0DE1C96651100B310D5 /* Market02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Market02.png; sourceTree = "<group>"; };
@@ -1244,6 +1248,8 @@
 				2BF7F0731C8EB18B001C4595 /* FortuneCenterSelectPayViewController.swift */,
 				2B9D9F9A1C91543D00141D31 /* MyFollowViewController.swift */,
 				2B9D9F9C1C9164F000141D31 /* PersonDetailViewController.swift */,
+				2BEBE77B1C9697940019E74F /* GoodsCommentViewController.swift */,
+				2BEBE77D1C9699160019E74F /* GoodsCommentFullCell.swift */,
 				2B0ACCB11C858E11000EC299 /* MineSet */,
 			);
 			path = UserCenter;
@@ -1500,6 +1506,7 @@
 				3C90992C1C76A6E9006B7D2C /* ScatterChartDataSet.swift in Sources */,
 				3C90994A1C76A6E9006B7D2C /* ChartYAxisRenderer.swift in Sources */,
 				3C9098F91C76A6E9006B7D2C /* tabBarViewController.swift in Sources */,
+				2BEBE77E1C9699160019E74F /* GoodsCommentFullCell.swift in Sources */,
 				3C90985A1C76A482006B7D2C /* ViewController.swift in Sources */,
 				2BDEF3AF1C7EE0CA00927F64 /* HomeBuyGoodsDetailViewController.swift in Sources */,
 				2BF7EF1A1C8D3370001C4595 /* MineBankCardHomeViewController.swift in Sources */,
@@ -1544,6 +1551,7 @@
 				2B73D8571C86B8510016FEB2 /* AccoutSafeViewController.swift in Sources */,
 				3C9099451C76A6E9006B7D2C /* ChartRendererBase.swift in Sources */,
 				3C9099211C76A6E9006B7D2C /* ChartDataSet.swift in Sources */,
+				2BEBE77C1C9697940019E74F /* GoodsCommentViewController.swift in Sources */,
 				3C9099581C76A6E9006B7D2C /* ChartUtils.swift in Sources */,
 				2B197DB81C843515006494CF /* LoginViewController.swift in Sources */,
 				3C90995C1C76A6E9006B7D2C /* NSData+AES.m in Sources */,

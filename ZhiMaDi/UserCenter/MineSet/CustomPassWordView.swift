@@ -32,6 +32,7 @@ class CustomPassWordView: UIView,UITextFieldDelegate {
         textF = UITextField()
         textF.keyboardType = .NumberPad
         textF.textAlignment = .Center
+        textF.returnKeyType =  .Default
         textF.delegate = self
         self.addSubview(textF)
         

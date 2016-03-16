@@ -75,6 +75,7 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
             case Market:
                 viewController = HomeMarketViewController.CreateFromMainStoryboard() as! HomeMarketViewController
             case News:
+                
                 viewController = UIViewController()
             case Sale:
                 viewController = HomeSellViewController.CreateFromMainStoryboard() as! HomeSellViewController
@@ -223,7 +224,12 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
             let imgV = cell?.contentView.viewWithTag(menuImgTag + i) as! UIImageView
             
             btn.rac_signalForControlEvents(.TouchUpInside).subscribeNext { (sender) -> Void in
-                menuType.didSelect(self.navigationController!)
+                if menuType == .News {
+                   ZMDShareSDKTool.share()
+                }
+                else {
+                    menuType.didSelect(self.navigationController!)
+                }
             }
             label.text = menuType.title
             imgV.image = menuType.image

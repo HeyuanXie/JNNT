@@ -12,6 +12,8 @@ class AddressViewController: UIViewController,UITableViewDataSource, UITableView
 
     @IBOutlet weak var currentTableView: UITableView!
     @IBOutlet weak var AddAddressBtn: UIButton!
+    
+    var selectAddressFinished : ((address : String)->Void)?
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -50,6 +52,11 @@ class AddressViewController: UIViewController,UITableViewDataSource, UITableView
             
             ZMDTool.configTableViewCellDefault(cell!)
         }
+        let selectBtn = cell?.viewWithTag(10003) as! UIButton
+        selectBtn.rac_signalForControlEvents(.TouchUpInside).subscribeNext { (sender) -> Void in
+            self.selectAddressFinished!(address: "test")
+            self.navigationController?.popViewControllerAnimated(true)
+        }
         return cell!
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -60,14 +67,4 @@ class AddressViewController: UIViewController,UITableViewDataSource, UITableView
     func updateUI() {
         ZMDTool.configViewLayer(self.AddAddressBtn)
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

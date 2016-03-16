@@ -19,6 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("\n<\(APP_NAME)> 开始运行\nversion: \(APP_VERSION)(\(APP_VERSION_BUILD))\nApple ID: \(APP_ID)\nBundle ID: \(APP_BUNDLE_ID)\n")
         // 修改统一的字体
         UIBarButtonItem.appearance().setTitleTextAttributes([NSFontAttributeName : navigationTextFont], forState: .Normal)
+        //配置分享
+//        ZMDShareSDKTool.startShare()
         
         // 启动过渡页
 //        let allowShowStartPages = !NSUserDefaults.standardUserDefaults().boolForKey(kKeyIsFirstStartApp)

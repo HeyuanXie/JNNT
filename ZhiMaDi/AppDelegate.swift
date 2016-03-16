@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // 修改统一的字体
         UIBarButtonItem.appearance().setTitleTextAttributes([NSFontAttributeName : navigationTextFont], forState: .Normal)
         //配置分享
-//        ZMDShareSDKTool.startShare()
+        ZMDShareSDKTool.startShare()
         
         // 启动过渡页
 //        let allowShowStartPages = !NSUserDefaults.standardUserDefaults().boolForKey(kKeyIsFirstStartApp)

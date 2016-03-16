@@ -181,7 +181,6 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
             cycleScroll.autoScroll = true
             cycleScroll.autoTime = 2.5
             cell?.addSubview(cycleScroll)
-
         }
         return cell!
     }
@@ -225,7 +224,7 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
             
             btn.rac_signalForControlEvents(.TouchUpInside).subscribeNext { (sender) -> Void in
                 if menuType == .News {
-                   ZMDShareSDKTool.share()
+                   ZMDShareSDKTool.shareWithMenu(self.view)
                 }
                 else {
                     menuType.didSelect(self.navigationController!)

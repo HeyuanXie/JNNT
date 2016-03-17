@@ -97,6 +97,17 @@
 		2B539A9D1C992C6100FFE6CD /* MOBFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B539A901C992C6100FFE6CD /* MOBFoundation.framework */; };
 		2B539A9E1C992C6100FFE6CD /* ShareSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2B539A911C992C6100FFE6CD /* ShareSDK.bundle */; };
 		2B539A9F1C992C6100FFE6CD /* ShareSDKConnector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B539A921C992C6100FFE6CD /* ShareSDKConnector.framework */; };
+		2B539AB91C9950EC00FFE6CD /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B539AB81C9950EC00FFE6CD /* CFNetwork.framework */; };
+		2B539ABB1C9950F400FFE6CD /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B539ABA1C9950F400FFE6CD /* CoreFoundation.framework */; };
+		2B539ABD1C99511C00FFE6CD /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B539ABC1C99511C00FFE6CD /* CoreTelephony.framework */; };
+		2B539ABF1C99512C00FFE6CD /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B539ABE1C99512C00FFE6CD /* SystemConfiguration.framework */; };
+		2B539AC11C99513300FFE6CD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B539AC01C99513300FFE6CD /* CoreGraphics.framework */; };
+		2B539AC31C99513A00FFE6CD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B539AC21C99513A00FFE6CD /* Foundation.framework */; };
+		2B539AC51C99514200FFE6CD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B539AC41C99514200FFE6CD /* UIKit.framework */; };
+		2B539AC71C99518900FFE6CD /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B539AC61C99518900FFE6CD /* Security.framework */; };
+		2B539AC91C9954B700FFE6CD /* ZMDPushTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B539AC81C9954B700FFE6CD /* ZMDPushTool.swift */; };
+		2B539ACE1C9961F400FFE6CD /* libBPush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B539ACC1C9961F400FFE6CD /* libBPush.a */; };
+		2B539ACF1C9961F400FFE6CD /* test.caf in Resources */ = {isa = PBXBuildFile; fileRef = 2B539ACD1C9961F400FFE6CD /* test.caf */; };
 		2B68C44F1C7A9C3000B401A9 /* MineHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B68C44E1C7A9C3000B401A9 /* MineHomeViewController.swift */; };
 		2B68C4681C7AB14300B401A9 /* Mine_Set@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B68C4671C7AB14300B401A9 /* Mine_Set@2x.png */; };
 		2B68C4711C7AB22B00B401A9 /* MineHome_CustomerManagement@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B68C4691C7AB22B00B401A9 /* MineHome_CustomerManagement@2x.png */; };
@@ -430,6 +441,18 @@
 		2B539A901C992C6100FFE6CD /* MOBFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MOBFoundation.framework; sourceTree = "<group>"; };
 		2B539A911C992C6100FFE6CD /* ShareSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ShareSDK.bundle; sourceTree = "<group>"; };
 		2B539A921C992C6100FFE6CD /* ShareSDKConnector.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDKConnector.framework; sourceTree = "<group>"; };
+		2B539AB81C9950EC00FFE6CD /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		2B539ABA1C9950F400FFE6CD /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		2B539ABC1C99511C00FFE6CD /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		2B539ABE1C99512C00FFE6CD /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		2B539AC01C99513300FFE6CD /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		2B539AC21C99513A00FFE6CD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		2B539AC41C99514200FFE6CD /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		2B539AC61C99518900FFE6CD /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		2B539AC81C9954B700FFE6CD /* ZMDPushTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZMDPushTool.swift; sourceTree = "<group>"; };
+		2B539ACB1C9961F400FFE6CD /* BPush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPush.h; sourceTree = "<group>"; };
+		2B539ACC1C9961F400FFE6CD /* libBPush.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBPush.a; sourceTree = "<group>"; };
+		2B539ACD1C9961F400FFE6CD /* test.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = test.caf; sourceTree = "<group>"; };
 		2B68C44E1C7A9C3000B401A9 /* MineHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineHomeViewController.swift; sourceTree = "<group>"; };
 		2B68C4671C7AB14300B401A9 /* Mine_Set@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Mine_Set@2x.png"; sourceTree = "<group>"; };
 		2B68C4691C7AB22B00B401A9 /* MineHome_CustomerManagement@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MineHome_CustomerManagement@2x.png"; sourceTree = "<group>"; };
@@ -673,6 +696,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B539ABF1C99512C00FFE6CD /* SystemConfiguration.framework in Frameworks */,
+				2B3AC5DB1C96BF1E00CC8662 /* libz.tbd in Frameworks */,
+				2B539ABD1C99511C00FFE6CD /* CoreTelephony.framework in Frameworks */,
+				2B539AC71C99518900FFE6CD /* Security.framework in Frameworks */,
+				2B539AC51C99514200FFE6CD /* UIKit.framework in Frameworks */,
+				2B539AC31C99513A00FFE6CD /* Foundation.framework in Frameworks */,
+				2B539AC11C99513300FFE6CD /* CoreGraphics.framework in Frameworks */,
+				2B539ABB1C9950F400FFE6CD /* CoreFoundation.framework in Frameworks */,
+				2B539AB91C9950EC00FFE6CD /* CFNetwork.framework in Frameworks */,
 				2B3AC5E31C96BF6B00CC8662 /* ImageIO.framework in Frameworks */,
 				2B539A9B1C992C6100FFE6CD /* libWeChatSDK.a in Frameworks */,
 				2B539A961C992C6100FFE6CD /* ShareSDKUI.framework in Frameworks */,
@@ -687,7 +719,7 @@
 				2B539A931C992C6100FFE6CD /* ShareSDK.framework in Frameworks */,
 				2B539A941C992C6100FFE6CD /* ShareSDKExtension.framework in Frameworks */,
 				2B539A9D1C992C6100FFE6CD /* MOBFoundation.framework in Frameworks */,
-				2B3AC5DB1C96BF1E00CC8662 /* libz.tbd in Frameworks */,
+				2B539ACE1C9961F400FFE6CD /* libBPush.a in Frameworks */,
 				CCC2E90F973B87889ED9CCB6 /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -698,6 +730,14 @@
 		18E2BC74B095F0976F695BAA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2B539AC61C99518900FFE6CD /* Security.framework */,
+				2B539AC41C99514200FFE6CD /* UIKit.framework */,
+				2B539AC21C99513A00FFE6CD /* Foundation.framework */,
+				2B539AC01C99513300FFE6CD /* CoreGraphics.framework */,
+				2B539ABE1C99512C00FFE6CD /* SystemConfiguration.framework */,
+				2B539ABC1C99511C00FFE6CD /* CoreTelephony.framework */,
+				2B539ABA1C9950F400FFE6CD /* CoreFoundation.framework */,
+				2B539AB81C9950EC00FFE6CD /* CFNetwork.framework */,
 				2B3AC5E61C96BF7900CC8662 /* libsqlite3.tbd */,
 				2B3AC5E41C96BF7100CC8662 /* AdSupport.framework */,
 				2B3AC5E21C96BF6B00CC8662 /* ImageIO.framework */,
@@ -920,6 +960,16 @@
 				2B539A921C992C6100FFE6CD /* ShareSDKConnector.framework */,
 			);
 			path = Required;
+			sourceTree = "<group>";
+		};
+		2B539ACA1C9961F400FFE6CD /* LibBPush */ = {
+			isa = PBXGroup;
+			children = (
+				2B539ACB1C9961F400FFE6CD /* BPush.h */,
+				2B539ACC1C9961F400FFE6CD /* libBPush.a */,
+				2B539ACD1C9961F400FFE6CD /* test.caf */,
+			);
+			path = LibBPush;
 			sourceTree = "<group>";
 		};
 		2B68C4501C7A9F7700B401A9 /* Mine */ = {
@@ -1176,12 +1226,12 @@
 				3C90986D1C76A6AA006B7D2C /* QNStyleAttribute.swift */,
 				3C90986E1C76A6AA006B7D2C /* ZhiMaDi-Bridging-Header.h */,
 				3C9098721C76A6E9006B7D2C /* Base */,
+				3C9098F11C76A6E9006B7D2C /* Tools */,
 				3C9098741C76A6E9006B7D2C /* DataModule */,
 				3C9098761C76A6E9006B7D2C /* Extension */,
 				3C90987A1C76A6E9006B7D2C /* Librarys */,
 				2B959EB01C76ED04002EA40D /* StartPages */,
 				3C9098F01C76A6E9006B7D2C /* Login */,
-				3C9098F11C76A6E9006B7D2C /* Tools */,
 				3C9098F71C76A6E9006B7D2C /* UserCenter */,
 				2B959EBE1C76F5A9002EA40D /* Home */,
 				2B197DA21C83DB7E006494CF /* Sort */,
@@ -1226,6 +1276,7 @@
 		3C90987A1C76A6E9006B7D2C /* Librarys */ = {
 			isa = PBXGroup;
 			children = (
+				2B539ACA1C9961F400FFE6CD /* LibBPush */,
 				2B539A701C992C6100FFE6CD /* ShareSDK */,
 				2BDEF3C91C7F028F00927F64 /* CycleScrollView */,
 				3C90987B1C76A6E9006B7D2C /* Aspects */,
@@ -1474,6 +1525,7 @@
 		3C9098F11C76A6E9006B7D2C /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				2B539AC81C9954B700FFE6CD /* ZMDPushTool.swift */,
 				3C9098F21C76A6E9006B7D2C /* QNChartsTool.swift */,
 				3C9098F31C76A6E9006B7D2C /* QNFormatTool.swift */,
 				3C9098F41C76A6E9006B7D2C /* QNInterceptor.swift */,
@@ -1550,6 +1602,11 @@
 					3C9098531C76A482006B7D2C = {
 						CreatedOnToolsVersion = 7.2.1;
 						DevelopmentTeam = HN3F5Y5U68;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -1683,6 +1740,7 @@
 				2B06631F1C7DA9E900EA822F /* strawberry@2x.png in Resources */,
 				2BDEF3A31C7E9DA800927F64 /* Home_Buy_Home@2x.png in Resources */,
 				2B3AC60A1C96C05B00CC8662 /* Share_TXWeibo@3x.png in Resources */,
+				2B539ACF1C9961F400FFE6CD /* test.caf in Resources */,
 				2BDEF3A41C7E9DA800927F64 /* Home_Buy_Services@2x.png in Resources */,
 				2BDEF3A91C7E9DA800927F64 /* Home_BuyBao@2x.png in Resources */,
 				2B0663191C7DA9E900EA822F /* pawpaws@2x.png in Resources */,
@@ -1776,6 +1834,7 @@
 				2BE373021C8974DC004A1DDF /* NewProductReleaseViewController.swift in Sources */,
 				3C9099571C76A6E9006B7D2C /* ChartTransformerHorizontalBarChart.swift in Sources */,
 				3C90992C1C76A6E9006B7D2C /* ScatterChartDataSet.swift in Sources */,
+				2B539AC91C9954B700FFE6CD /* ZMDPushTool.swift in Sources */,
 				3C90994A1C76A6E9006B7D2C /* ChartYAxisRenderer.swift in Sources */,
 				3C9098F91C76A6E9006B7D2C /* tabBarViewController.swift in Sources */,
 				2BEBE77E1C9699160019E74F /* GoodsCommentFullCell.swift in Sources */,
@@ -2048,6 +2107,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/ZhiMaDi/Librarys/ShareSDK",
@@ -2074,6 +2134,8 @@
 					3/Support/PlatformSDK/SinaWeiboSDK,
 					"$(PROJECT_DIR)/ZhiMaDi/Librarys/ShareSDK",
 					3/Support/PlatformSDK/WeChatSDK,
+					"$(PROJECT_DIR)/ZhiMaDi/Librarys/JPush",
+					"$(PROJECT_DIR)/ZhiMaDi/Librarys/LibBPush",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -2112,6 +2174,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/ZhiMaDi/Librarys/ShareSDK",
@@ -2138,6 +2201,8 @@
 					3/Support/PlatformSDK/SinaWeiboSDK,
 					"$(PROJECT_DIR)/ZhiMaDi/Librarys/ShareSDK",
 					3/Support/PlatformSDK/WeChatSDK,
+					"$(PROJECT_DIR)/ZhiMaDi/Librarys/JPush",
+					"$(PROJECT_DIR)/ZhiMaDi/Librarys/LibBPush",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",

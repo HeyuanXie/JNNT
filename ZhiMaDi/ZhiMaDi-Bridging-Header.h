@@ -36,5 +36,6 @@
 #import "WXApi.h"
 //新浪微博SDK头文件
 #import "WeiboSDK.h"
-
+// 极光推送
+#import "BPush.h"
 #endif /* SleepCare_Bridging_Header_h */

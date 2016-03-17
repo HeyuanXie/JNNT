@@ -22,6 +22,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //配置分享
         ZMDShareSDKTool.startShare()
         
+        // 开启推送服务
+        ZMDPushTool.startPushTool(launchOptions)
+        ZMDPushTool.clear()
+
         // 启动过渡页
 //        let allowShowStartPages = !NSUserDefaults.standardUserDefaults().boolForKey(kKeyIsFirstStartApp)
 //        if allowShowStartPages {
@@ -35,12 +39,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ZMDInterceptor.start()
         return true
     }
-
     func applicationWillResignActive(application: UIApplication) {
-        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-        // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+        ZMDPushTool.clear()
     }
 
+   
     func applicationDidEnterBackground(application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
@@ -53,11 +56,41 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     }
-
+    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+        BPush.registerDeviceToken(deviceToken)
+        BPush.bindChannelWithCompleteHandler { (result, error) -> Void in
+            //回调中看获得channnelid appid userid
+        }
+    }
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
-
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+        BPush.handleNotification(userInfo)
+        if (application.applicationState == UIApplicationState.Active || application.applicationState == UIApplicationState.Background) {
+            ZMDTool.showPromptView("收到一条消息")
+        }
+        else//跳转到跳转页面。
+        {
+           
+        }
+    }
+    
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+        completionHandler(UIBackgroundFetchResult.NewData)
+        if (application.applicationState == UIApplicationState.Active || application.applicationState == UIApplicationState.Background) {
+            ZMDTool.showPromptView("收到一条消息")
+        }
+        else//跳转到跳转页面。
+        {
+            
+        }
+    }
+    func application(application: UIApplication, didRegisterUserNotificationSettings notificationSettings: UIUserNotificationSettings) {
+        application.registerForRemoteNotifications()
+    }
+    func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+        println("DeviceToken 获取失败，原因：\(error)")
+    }
 }
 

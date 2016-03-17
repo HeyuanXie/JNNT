@@ -15,6 +15,7 @@ class ZMDShareSDKTool: NSObject {
     }
     override init() {
         super.init()
+       
         ShareSDK.registerApp("c46314899f04",
             activePlatforms: [
                 SSDKPlatformType.TypeSinaWeibo.rawValue,

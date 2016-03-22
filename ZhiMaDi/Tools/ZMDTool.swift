@@ -139,7 +139,38 @@ extension ZMDTool {
     
     
 }
-
+// MARK: - 让 Navigation 支持右滑返回
+extension ZMDTool: UIGestureRecognizerDelegate {
+    
+    /**
+     让 Navigation 支持右滑返回
+     
+     :param: navigationController 需要支持的 UINavigationController 对象
+     */
+    class func addInteractive(navigationController: UINavigationController?) {
+        navigationController?.interactivePopGestureRecognizer!.enabled = true
+        navigationController?.interactivePopGestureRecognizer!.delegate = zmdToolInstance
+    }
+    
+    /**
+     移除 Navigation 右滑返回
+     
+     :param: navigationController 需要支持的 UINavigationController 对象
+     */
+    class func removeInteractive(navigationController: UINavigationController?) {
+        navigationController?.interactivePopGestureRecognizer!.enabled = false
+        navigationController?.interactivePopGestureRecognizer!.delegate = nil
+    }
+    
+    // MARK: UIGestureRecognizerDelegate
+    func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
+        _ = topViewController()
+        if let vc = topViewController() where gestureRecognizer == vc.navigationController?.interactivePopGestureRecognizer {
+            return (vc.navigationController!.viewControllers.count > 1)
+        }
+        return false // 其他情况，则不支持
+    }
+}
 // MARK: - 页面切换相关
 extension ZMDTool {
 
@@ -218,38 +249,6 @@ extension ZMDTool {
     }
 }
 
-// MARK: - 让 Navigation 支持右滑返回
-extension ZMDTool: UIGestureRecognizerDelegate {
-    
-    /**
-    让 Navigation 支持右滑返回
-    
-    :param: navigationController 需要支持的 UINavigationController 对象
-    */
-    class func addInteractive(navigationController: UINavigationController?) {
-        navigationController?.interactivePopGestureRecognizer!.enabled = true
-        navigationController?.interactivePopGestureRecognizer!.delegate = zmdToolInstance
-    }
-    
-    /**
-    移除 Navigation 右滑返回
-    
-    :param: navigationController 需要支持的 UINavigationController 对象
-    */
-    class func removeInteractive(navigationController: UINavigationController?) {
-        navigationController?.interactivePopGestureRecognizer!.enabled = false
-        navigationController?.interactivePopGestureRecognizer!.delegate = nil
-    }
-    
-    // MARK: UIGestureRecognizerDelegate
-    func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
-        if let vc = topViewController() where gestureRecognizer == vc.navigationController?.interactivePopGestureRecognizer {
-            return (vc.navigationController!.viewControllers.count > 1)
-        }
-        return false // 其他情况，则不支持
-    }
-    
-}
 extension ZMDTool {
     class func getLine(frame:CGRect) -> UIView {
         let line = UIView(frame: frame)

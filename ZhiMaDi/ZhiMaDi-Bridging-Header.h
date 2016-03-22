@@ -24,7 +24,8 @@
 #import "Reachability.h"
 //简单轮翻图
 #import "CycleScrollView.h"
-
+// 键盘遮挡解决方案
+#import <IQKeyboardManager/IQKeyboardManager.h>
 //友盟分享
 #import <ShareSDK/ShareSDK.h>
 #import <ShareSDKUI/ShareSDK+SSUI.h>

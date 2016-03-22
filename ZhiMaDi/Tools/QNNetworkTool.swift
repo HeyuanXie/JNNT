@@ -13,6 +13,11 @@ import Alamofire
 private let kServerAddress = { () -> String in
     "http://115.159.28.132:8080"
 }()
+// 芝麻地后台接口配置文件
+/*private*/let ZMDInterface = { () -> NSDictionary in
+    let plistPath = NSBundle.mainBundle().pathForResource("ZMDInterface", ofType: "plist")
+    return NSDictionary(contentsOfFile: plistPath!)!
+}()
 
 class QNNetworkTool: NSObject {
 }
@@ -28,7 +33,8 @@ private extension QNNetworkTool {
         let request = NSMutableURLRequest(URL: url)
         request.HTTPMethod = method as String
 //        request.addValue(g_currentGroup?.auth ?? "", forHTTPHeaderField: "AUTH") // 用户身份串,在调用/api/login 成功后会返回这个串;未登录时为空
- 
+        
+        
         return request
     }
     /**

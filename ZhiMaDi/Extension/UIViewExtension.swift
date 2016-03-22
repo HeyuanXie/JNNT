@@ -92,6 +92,7 @@ extension UIView {
                 break
             }
         }
+        //动画
         self.layer.opacity = 0.5;
         self.layer.transform = CATransform3DMakeScale(1.1, 1.1, 1.0);
         UIView.animateWithDuration(0.2, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in

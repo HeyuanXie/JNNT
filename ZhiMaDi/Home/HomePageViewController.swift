@@ -102,12 +102,13 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
     let menuImgTag = 11100
     override func viewDidLoad() {
         super.viewDidLoad()
+        // 让导航栏支持右滑返回功能
+        ZMDTool.addInteractive(self.navigationController)
         self.dataInit()
-       
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
-//        UIApplication.sharedApplication().statusBarHidden = false //info.plist  View controller-based status bar appearance = no
+        UIApplication.sharedApplication().statusBarHidden = false //info.plist  View controller-based status bar appearance = no
         self.setupNewNavigation()
     }
     override func viewWillDisappear(animated: Bool) {

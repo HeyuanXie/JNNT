@@ -9,11 +9,11 @@
 import UIKit
 /// 第一次启动判断的Key
 let kKeyIsFirstStartApp = ("IsFirstStartApp" as NSString).encrypt(g_SecretKey)
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         print("\n<\(APP_NAME)> 开始运行\nversion: \(APP_VERSION)(\(APP_VERSION_BUILD))\nApple ID: \(APP_ID)\nBundle ID: \(APP_BUNDLE_ID)\n")
@@ -24,17 +24,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // 开启推送服务
         ZMDPushTool.startPushTool(launchOptions)
+        
         ZMDPushTool.clear()
 
         // 启动过渡页
-//        let allowShowStartPages = !NSUserDefaults.standardUserDefaults().boolForKey(kKeyIsFirstStartApp)
-//        if allowShowStartPages {
-//            UIApplication.sharedApplication().statusBarHidden = true
-//            let startPagesWindow = StartPagesWindow()
-//            startPagesWindow.finished = { () -> Void in
-//                NSUserDefaults.standardUserDefaults().setBool(true, forKey: kKeyIsFirstStartApp)
-//            }
-//        }
+        let allowShowStartPages = !NSUserDefaults.standardUserDefaults().boolForKey(kKeyIsFirstStartApp)
+        if allowShowStartPages {
+            UIApplication.sharedApplication().statusBarHidden = true
+            let startPages = StartPagesWindow()
+            startPages.finished = { () -> Void in
+                NSUserDefaults.standardUserDefaults().setBool(true, forKey: kKeyIsFirstStartApp)
+                let vc = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()!
+                ZMDTool.enterRootViewController(vc)
+            }
+            window = UIWindow(frame: UIScreen.mainScreen().bounds)
+            window?.rootViewController = startPages
+            window?.makeKeyAndVisible()
+        }
+        
         // 开启拦截器
         ZMDInterceptor.start()
         return true

@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import IQKeyboardManager
 private var g_ZMDInterceptor: ZMDInterceptor? = nil
 
 // MARK: - 遵循此协议的将会拦截
@@ -103,7 +103,7 @@ class ZMDInterceptor : NSObject {
                         
                         // 键盘遮挡解决方案
                         if !(viewController is ZMDInterceptorKeyboardProtocol) {
-//                            IQKeyboardManager.sharedManager().disableInViewControllerClass(viewController.classForCoder)
+                            IQKeyboardManager.sharedManager().disabledInViewControllerClasses()
                         }
                         
                         // 修改导航栏&状态栏的样式

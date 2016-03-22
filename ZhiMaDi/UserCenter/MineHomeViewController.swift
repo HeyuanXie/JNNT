@@ -73,7 +73,7 @@ class MineHomeViewController: UIViewController,  UITableViewDataSource, UITableV
             case Exchange:
                 viewController = UIViewController()
             case Goods:
-                viewController = UIViewController()
+                viewController = GoodsPurchaseViewController.CreateFromMainStoryboard() as! GoodsPurchaseViewController
             case OfferCenter:
                 viewController = UIViewController()
             case Fortune:
@@ -81,7 +81,7 @@ class MineHomeViewController: UIViewController,  UITableViewDataSource, UITableV
             case Customer:
                 viewController = UIViewController()
             case Data:
-                viewController = UIViewController()
+                viewController = DataCenterViewController()
             case Order:
                 viewController = UIViewController()
             }

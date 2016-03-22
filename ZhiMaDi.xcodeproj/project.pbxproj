@@ -108,6 +108,15 @@
 		2B539AC91C9954B700FFE6CD /* ZMDPushTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B539AC81C9954B700FFE6CD /* ZMDPushTool.swift */; };
 		2B539ACE1C9961F400FFE6CD /* libBPush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B539ACC1C9961F400FFE6CD /* libBPush.a */; };
 		2B539ACF1C9961F400FFE6CD /* test.caf in Resources */ = {isa = PBXBuildFile; fileRef = 2B539ACD1C9961F400FFE6CD /* test.caf */; };
+		2B539BFE1C9AAAB000FFE6CD /* Start_index1.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B539BFB1C9AAAB000FFE6CD /* Start_index1.png */; };
+		2B539BFF1C9AAAB000FFE6CD /* Start_index2.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B539BFC1C9AAAB000FFE6CD /* Start_index2.png */; };
+		2B539C001C9AAAB000FFE6CD /* Start_index3.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B539BFD1C9AAAB000FFE6CD /* Start_index3.png */; };
+		2B539C041C9AACD000FFE6CD /* BlinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B539C011C9AACD000FFE6CD /* BlinkView.swift */; };
+		2B539C051C9AACD000FFE6CD /* StartImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B539C021C9AACD000FFE6CD /* StartImageView.swift */; };
+		2B539C061C9AACD000FFE6CD /* StartPagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B539C031C9AACD000FFE6CD /* StartPagesViewController.swift */; };
+		2B539C081C9B91EB00FFE6CD /* ZMDInterface.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2B539C071C9B91EB00FFE6CD /* ZMDInterface.plist */; };
+		2B539C0A1C9BA68900FFE6CD /* GoodsPurchaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B539C091C9BA68900FFE6CD /* GoodsPurchaseViewController.swift */; };
+		2B539C0C1C9BD49200FFE6CD /* DataCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B539C0B1C9BD49200FFE6CD /* DataCenterViewController.swift */; };
 		2B68C44F1C7A9C3000B401A9 /* MineHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B68C44E1C7A9C3000B401A9 /* MineHomeViewController.swift */; };
 		2B68C4681C7AB14300B401A9 /* Mine_Set@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B68C4671C7AB14300B401A9 /* Mine_Set@2x.png */; };
 		2B68C4711C7AB22B00B401A9 /* MineHome_CustomerManagement@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B68C4691C7AB22B00B401A9 /* MineHome_CustomerManagement@2x.png */; };
@@ -148,12 +157,6 @@
 		2B959EA31C76C492002EA40D /* TabBar_School_Selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B959E9B1C76C492002EA40D /* TabBar_School_Selected@2x.png */; };
 		2B959EA61C76C65E002EA40D /* TabBar_MedicaData_Normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B959EA41C76C65E002EA40D /* TabBar_MedicaData_Normal@2x.png */; };
 		2B959EA71C76C65E002EA40D /* TabBar_MedicaData_Selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B959EA51C76C65E002EA40D /* TabBar_MedicaData_Selected@2x.png */; };
-		2B959EB41C76ED04002EA40D /* BlinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B959EB11C76ED04002EA40D /* BlinkView.swift */; };
-		2B959EB51C76ED04002EA40D /* StartImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B959EB21C76ED04002EA40D /* StartImageView.swift */; };
-		2B959EB61C76ED04002EA40D /* StartPagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B959EB31C76ED04002EA40D /* StartPagesViewController.swift */; };
-		2B959EBB1C76ED42002EA40D /* Start_index1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2B959EB81C76ED42002EA40D /* Start_index1.jpg */; };
-		2B959EBC1C76ED42002EA40D /* Start_index2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2B959EB91C76ED42002EA40D /* Start_index2.jpg */; };
-		2B959EBD1C76ED42002EA40D /* Start_index3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2B959EBA1C76ED42002EA40D /* Start_index3.jpg */; };
 		2B959EC01C76F5D0002EA40D /* HomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B959EBF1C76F5D0002EA40D /* HomePageViewController.swift */; };
 		2B9D9F901C8FC3D800141D31 /* PayPassWordSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9D9F8F1C8FC3D800141D31 /* PayPassWordSetViewController.swift */; };
 		2B9D9F921C8FCC0400141D31 /* CustomPassWordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9D9F911C8FCC0400141D31 /* CustomPassWordView.swift */; };
@@ -167,6 +170,10 @@
 		2B9D9FA51C92B3FC00141D31 /* HomeMarket_BottomMiddle.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B9D9FA21C92B3FC00141D31 /* HomeMarket_BottomMiddle.png */; };
 		2B9D9FA61C92B3FC00141D31 /* HomeMarket_BottomRight.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B9D9FA31C92B3FC00141D31 /* HomeMarket_BottomRight.png */; };
 		2B9DB8A61C801BF500259910 /* HomeBuyGoodsSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9DB8A51C801BF500259910 /* HomeBuyGoodsSearchViewController.swift */; };
+		2BA3FDB31C9F83B900018F3C /* FindDoctorCityPopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA3FDB21C9F83B900018F3C /* FindDoctorCityPopView.swift */; };
+		2BA3FDB51C9F842800018F3C /* QN_Area.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA3FDB41C9F842800018F3C /* QN_Area.swift */; };
+		2BA3FDB81C9F850E00018F3C /* area.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2BA3FDB71C9F850E00018F3C /* area.txt */; };
+		2BA3FDBA1C9F8C0D00018F3C /* UIViewControllerExtensionForPop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA3FDB91C9F8C0D00018F3C /* UIViewControllerExtensionForPop.swift */; };
 		2BB6A8D01C87DF12008209E8 /* SignPSSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6A8CF1C87DF12008209E8 /* SignPSSetViewController.swift */; };
 		2BB6A8D41C87E413008209E8 /* Home_Loan_Tmp.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BB6A8D31C87E413008209E8 /* Home_Loan_Tmp.png */; };
 		2BB6A8D61C87E447008209E8 /* HomeLoanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6A8D51C87E447008209E8 /* HomeLoanViewController.swift */; };
@@ -453,6 +460,15 @@
 		2B539ACB1C9961F400FFE6CD /* BPush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPush.h; sourceTree = "<group>"; };
 		2B539ACC1C9961F400FFE6CD /* libBPush.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBPush.a; sourceTree = "<group>"; };
 		2B539ACD1C9961F400FFE6CD /* test.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = test.caf; sourceTree = "<group>"; };
+		2B539BFB1C9AAAB000FFE6CD /* Start_index1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Start_index1.png; sourceTree = "<group>"; };
+		2B539BFC1C9AAAB000FFE6CD /* Start_index2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Start_index2.png; sourceTree = "<group>"; };
+		2B539BFD1C9AAAB000FFE6CD /* Start_index3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Start_index3.png; sourceTree = "<group>"; };
+		2B539C011C9AACD000FFE6CD /* BlinkView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlinkView.swift; sourceTree = "<group>"; };
+		2B539C021C9AACD000FFE6CD /* StartImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartImageView.swift; sourceTree = "<group>"; };
+		2B539C031C9AACD000FFE6CD /* StartPagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartPagesViewController.swift; sourceTree = "<group>"; };
+		2B539C071C9B91EB00FFE6CD /* ZMDInterface.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ZMDInterface.plist; sourceTree = "<group>"; };
+		2B539C091C9BA68900FFE6CD /* GoodsPurchaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoodsPurchaseViewController.swift; sourceTree = "<group>"; };
+		2B539C0B1C9BD49200FFE6CD /* DataCenterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataCenterViewController.swift; sourceTree = "<group>"; };
 		2B68C44E1C7A9C3000B401A9 /* MineHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineHomeViewController.swift; sourceTree = "<group>"; };
 		2B68C4671C7AB14300B401A9 /* Mine_Set@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Mine_Set@2x.png"; sourceTree = "<group>"; };
 		2B68C4691C7AB22B00B401A9 /* MineHome_CustomerManagement@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MineHome_CustomerManagement@2x.png"; sourceTree = "<group>"; };
@@ -493,12 +509,6 @@
 		2B959E9B1C76C492002EA40D /* TabBar_School_Selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabBar_School_Selected@2x.png"; sourceTree = "<group>"; };
 		2B959EA41C76C65E002EA40D /* TabBar_MedicaData_Normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabBar_MedicaData_Normal@2x.png"; sourceTree = "<group>"; };
 		2B959EA51C76C65E002EA40D /* TabBar_MedicaData_Selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabBar_MedicaData_Selected@2x.png"; sourceTree = "<group>"; };
-		2B959EB11C76ED04002EA40D /* BlinkView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlinkView.swift; sourceTree = "<group>"; };
-		2B959EB21C76ED04002EA40D /* StartImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartImageView.swift; sourceTree = "<group>"; };
-		2B959EB31C76ED04002EA40D /* StartPagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartPagesViewController.swift; sourceTree = "<group>"; };
-		2B959EB81C76ED42002EA40D /* Start_index1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Start_index1.jpg; sourceTree = "<group>"; };
-		2B959EB91C76ED42002EA40D /* Start_index2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Start_index2.jpg; sourceTree = "<group>"; };
-		2B959EBA1C76ED42002EA40D /* Start_index3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Start_index3.jpg; sourceTree = "<group>"; };
 		2B959EBF1C76F5D0002EA40D /* HomePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageViewController.swift; sourceTree = "<group>"; };
 		2B9D9F8F1C8FC3D800141D31 /* PayPassWordSetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PayPassWordSetViewController.swift; sourceTree = "<group>"; };
 		2B9D9F911C8FCC0400141D31 /* CustomPassWordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPassWordView.swift; sourceTree = "<group>"; };
@@ -512,6 +522,10 @@
 		2B9D9FA21C92B3FC00141D31 /* HomeMarket_BottomMiddle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HomeMarket_BottomMiddle.png; sourceTree = "<group>"; };
 		2B9D9FA31C92B3FC00141D31 /* HomeMarket_BottomRight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HomeMarket_BottomRight.png; sourceTree = "<group>"; };
 		2B9DB8A51C801BF500259910 /* HomeBuyGoodsSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeBuyGoodsSearchViewController.swift; sourceTree = "<group>"; };
+		2BA3FDB21C9F83B900018F3C /* FindDoctorCityPopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindDoctorCityPopView.swift; sourceTree = "<group>"; };
+		2BA3FDB41C9F842800018F3C /* QN_Area.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QN_Area.swift; sourceTree = "<group>"; };
+		2BA3FDB71C9F850E00018F3C /* area.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = area.txt; sourceTree = "<group>"; };
+		2BA3FDB91C9F8C0D00018F3C /* UIViewControllerExtensionForPop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtensionForPop.swift; sourceTree = "<group>"; };
 		2BB6A8CF1C87DF12008209E8 /* SignPSSetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignPSSetViewController.swift; sourceTree = "<group>"; };
 		2BB6A8D31C87E413008209E8 /* Home_Loan_Tmp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Home_Loan_Tmp.png; sourceTree = "<group>"; };
 		2BB6A8D51C87E447008209E8 /* HomeLoanViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeLoanViewController.swift; sourceTree = "<group>"; };
@@ -1081,9 +1095,9 @@
 		2B959EB01C76ED04002EA40D /* StartPages */ = {
 			isa = PBXGroup;
 			children = (
-				2B959EB11C76ED04002EA40D /* BlinkView.swift */,
-				2B959EB21C76ED04002EA40D /* StartImageView.swift */,
-				2B959EB31C76ED04002EA40D /* StartPagesViewController.swift */,
+				2B539C011C9AACD000FFE6CD /* BlinkView.swift */,
+				2B539C021C9AACD000FFE6CD /* StartImageView.swift */,
+				2B539C031C9AACD000FFE6CD /* StartPagesViewController.swift */,
 			);
 			path = StartPages;
 			sourceTree = "<group>";
@@ -1091,9 +1105,9 @@
 		2B959EB71C76ED42002EA40D /* StartPages */ = {
 			isa = PBXGroup;
 			children = (
-				2B959EB81C76ED42002EA40D /* Start_index1.jpg */,
-				2B959EB91C76ED42002EA40D /* Start_index2.jpg */,
-				2B959EBA1C76ED42002EA40D /* Start_index3.jpg */,
+				2B539BFB1C9AAAB000FFE6CD /* Start_index1.png */,
+				2B539BFC1C9AAAB000FFE6CD /* Start_index2.png */,
+				2B539BFD1C9AAAB000FFE6CD /* Start_index3.png */,
 			);
 			path = StartPages;
 			sourceTree = "<group>";
@@ -1127,6 +1141,23 @@
 				2B9D9F951C9004CC00141D31 /* yuan@2x.png */,
 			);
 			path = tmp;
+			sourceTree = "<group>";
+		};
+		2BA3FDB11C9F83AD00018F3C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2BA3FDB21C9F83B900018F3C /* FindDoctorCityPopView.swift */,
+				2BA3FDB41C9F842800018F3C /* QN_Area.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2BA3FDB61C9F850E00018F3C /* Word */ = {
+			isa = PBXGroup;
+			children = (
+				2BA3FDB71C9F850E00018F3C /* area.txt */,
+			);
+			path = Word;
 			sourceTree = "<group>";
 		};
 		2BB6A8D91C87EE7E008209E8 /* Home_Sell */ = {
@@ -1234,6 +1265,7 @@
 				3C9098F01C76A6E9006B7D2C /* Login */,
 				3C9098F71C76A6E9006B7D2C /* UserCenter */,
 				2B959EBE1C76F5A9002EA40D /* Home */,
+				2BA3FDB11C9F83AD00018F3C /* View */,
 				2B197DA21C83DB7E006494CF /* Sort */,
 				3C9099651C76A6FD006B7D2C /* Resources */,
 				3C9098571C76A482006B7D2C /* AppDelegate.swift */,
@@ -1269,6 +1301,7 @@
 				3C9098771C76A6E9006B7D2C /* StringExtension.swift */,
 				3C9098781C76A6E9006B7D2C /* UIViewControllerExtension.swift */,
 				3C9098791C76A6E9006B7D2C /* UIViewExtension.swift */,
+				2BA3FDB91C9F8C0D00018F3C /* UIViewControllerExtensionForPop.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1552,6 +1585,8 @@
 				2B9D9F9C1C9164F000141D31 /* PersonDetailViewController.swift */,
 				2BEBE77B1C9697940019E74F /* GoodsCommentViewController.swift */,
 				2BEBE77D1C9699160019E74F /* GoodsCommentFullCell.swift */,
+				2B539C091C9BA68900FFE6CD /* GoodsPurchaseViewController.swift */,
+				2B539C0B1C9BD49200FFE6CD /* DataCenterViewController.swift */,
 				2B0ACCB11C858E11000EC299 /* MineSet */,
 			);
 			path = UserCenter;
@@ -1560,8 +1595,10 @@
 		3C9099651C76A6FD006B7D2C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				2BA3FDB61C9F850E00018F3C /* Word */,
 				2B959E921C76C33B002EA40D /* Images */,
 				3C90985E1C76A482006B7D2C /* Assets.xcassets */,
+				2B539C071C9B91EB00FFE6CD /* ZMDInterface.plist */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -1601,7 +1638,7 @@
 				TargetAttributes = {
 					3C9098531C76A482006B7D2C = {
 						CreatedOnToolsVersion = 7.2.1;
-						DevelopmentTeam = HN3F5Y5U68;
+						DevelopmentTeam = 4MU4T6A6ME;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -1641,11 +1678,13 @@
 				2B68C4721C7AB22B00B401A9 /* MineHome_DataCenter@2x.png in Resources */,
 				2B959E9D1C76C492002EA40D /* TabBar_Category_Selected@2x.png in Resources */,
 				3C90986A1C76A687006B7D2C /* readme in Resources */,
+				2B539C081C9B91EB00FFE6CD /* ZMDInterface.plist in Resources */,
 				2B3AC6081C96C05B00CC8662 /* Share_SMS@3x.png in Resources */,
 				2B0662EF1C7C2B5800EA822F /* Home_Middle03_Advertisement.png in Resources */,
 				2B3AC6061C96C05B00CC8662 /* Share_Sina@3x.png in Resources */,
 				2B539A9C1C992C6100FFE6CD /* read_me.txt in Resources */,
 				2B197DCB1C857FFE006494CF /* Set_Phone.png in Resources */,
+				2B539C001C9AAAB000FFE6CD /* Start_index3.png in Resources */,
 				2BB6A8DB1C87EE7E008209E8 /* HomeSell_Contract.png in Resources */,
 				2B197DBE1C857236006494CF /* MineHome_Headbg@2x.jpg in Resources */,
 				2B0663171C7DA9E900EA822F /* melon@2x.png in Resources */,
@@ -1710,13 +1749,14 @@
 				2B0662EE1C7C2B5800EA822F /* Home_Middle02_Advertisement.png in Resources */,
 				2B73D8631C86E5E50016FEB2 /* PictureAdd.png in Resources */,
 				2B3AC6091C96C05B00CC8662 /* Share_TXWeibo@2x.png in Resources */,
+				2BA3FDB81C9F850E00018F3C /* area.txt in Resources */,
 				2B197DBA1C854524006494CF /* MineHomeHeadView.xib in Resources */,
 				2B0662F11C7C2DB300EA822F /* Home_bottom_Advertisement@2x.png in Resources */,
 				2B68C4781C7AB22B00B401A9 /* MineHome_OrderManagement@2x.png in Resources */,
 				2B73D86F1C87D0BC0016FEB2 /* id-card-show01.png in Resources */,
-				2B959EBC1C76ED42002EA40D /* Start_index2.jpg in Resources */,
 				2B959EA11C76C492002EA40D /* TabBar_Mine_Selected@2x.png in Resources */,
 				2B0663161C7DA9E900EA822F /* Mangosteen@2x.png in Resources */,
+				2B539BFE1C9AAAB000FFE6CD /* Start_index1.png in Resources */,
 				2B0662ED1C7C2B5800EA822F /* Home_Middle01_Advertisement.png in Resources */,
 				2B3AC60D1C96C05B00CC8662 /* Share_WXFriends@2x.png in Resources */,
 				2B68C4741C7AB22B00B401A9 /* MineHome_FinancialManagement@2x.png in Resources */,
@@ -1755,9 +1795,8 @@
 				2B0662F31C7C407500EA822F /* Home_Msg@2x.png in Resources */,
 				3C90985D1C76A482006B7D2C /* Main.storyboard in Resources */,
 				2BF2B0E31C96651100B310D5 /* Market02.png in Resources */,
+				2B539BFF1C9AAAB000FFE6CD /* Start_index2.png in Resources */,
 				2B3AC5FE1C96C05B00CC8662 /* Share_Email@2x.png in Resources */,
-				2B959EBB1C76ED42002EA40D /* Start_index1.jpg in Resources */,
-				2B959EBD1C76ED42002EA40D /* Start_index3.jpg in Resources */,
 				2B9D9FA61C92B3FC00141D31 /* HomeMarket_BottomRight.png in Resources */,
 				2B68C4811C7AFAA500B401A9 /* Home_Market@2x.png in Resources */,
 				2B959EA21C76C492002EA40D /* TabBar_School_Normal@2x.png in Resources */,
@@ -1861,6 +1900,7 @@
 				3C9099611C76A6E9006B7D2C /* QNInterceptor.swift in Sources */,
 				3C9099161C76A6E9006B7D2C /* BarChartDataSet.swift in Sources */,
 				3C9098FC1C76A6E9006B7D2C /* UIViewControllerExtension.swift in Sources */,
+				2BA3FDB51C9F842800018F3C /* QN_Area.swift in Sources */,
 				2BF7EF1E1C8D61F7001C4595 /* AddBankCardViewController.swift in Sources */,
 				3C9098701C76A6AA006B7D2C /* QNSharedDatas.swift in Sources */,
 				3C9099311C76A6E9006B7D2C /* ChartXAxisValueFormatter.swift in Sources */,
@@ -1877,12 +1917,12 @@
 				3C9099351C76A6E9006B7D2C /* ChartRange.swift in Sources */,
 				3C9099141C76A6E9006B7D2C /* BarChartData.swift in Sources */,
 				2BDEF3CC1C7F028F00927F64 /* CycleScrollView.m in Sources */,
-				2B959EB41C76ED04002EA40D /* BlinkView.swift in Sources */,
 				3C9099601C76A6E9006B7D2C /* QNFormatTool.swift in Sources */,
 				3C9099491C76A6E9006B7D2C /* ChartXAxisRendererRadarChart.swift in Sources */,
 				2B9D9F901C8FC3D800141D31 /* PayPassWordSetViewController.swift in Sources */,
 				2B73D8571C86B8510016FEB2 /* AccoutSafeViewController.swift in Sources */,
 				3C9099451C76A6E9006B7D2C /* ChartRendererBase.swift in Sources */,
+				2B539C061C9AACD000FFE6CD /* StartPagesViewController.swift in Sources */,
 				3C9099211C76A6E9006B7D2C /* ChartDataSet.swift in Sources */,
 				2BEBE77C1C9697940019E74F /* GoodsCommentViewController.swift in Sources */,
 				3C9099581C76A6E9006B7D2C /* ChartUtils.swift in Sources */,
@@ -1904,6 +1944,8 @@
 				3C9099461C76A6E9006B7D2C /* ChartXAxisRenderer.swift in Sources */,
 				3C9099151C76A6E9006B7D2C /* BarChartDataEntry.swift in Sources */,
 				2B73D8651C86EB8A0016FEB2 /* PersonAuthenticationViewController.swift in Sources */,
+				2B539C0A1C9BA68900FFE6CD /* GoodsPurchaseViewController.swift in Sources */,
+				2BA3FDB31C9F83B900018F3C /* FindDoctorCityPopView.swift in Sources */,
 				2BDEF38F1C7DB73500927F64 /* HomeBuyListViewController.swift in Sources */,
 				2B3AC61A1C97E8BF00CC8662 /* OrderDetailViewController.swift in Sources */,
 				3C9099241C76A6E9006B7D2C /* LineChartDataSet.swift in Sources */,
@@ -1919,12 +1961,13 @@
 				3C9099191C76A6E9006B7D2C /* BubbleChartData.swift in Sources */,
 				2B73D8611C86E0650016FEB2 /* RealAuthenticationViewController.swift in Sources */,
 				2BE372D91C891D7E004A1DDF /* ReleaseGoodsConfirmViewController.swift in Sources */,
+				2BA3FDBA1C9F8C0D00018F3C /* UIViewControllerExtensionForPop.swift in Sources */,
 				3C9099111C76A6E9006B7D2C /* ChartMarker.swift in Sources */,
-				2B959EB61C76ED04002EA40D /* StartPagesViewController.swift in Sources */,
 				2BF7EF201C8D662C001C4595 /* VerifyBankCardViewController.swift in Sources */,
 				3C90994C1C76A6E9006B7D2C /* ChartYAxisRendererRadarChart.swift in Sources */,
 				3C90995D1C76A6E9006B7D2C /* NSString+AES.m in Sources */,
 				2B73D8551C86B6D00016FEB2 /* PersonIntroductionViewController.swift in Sources */,
+				2B539C051C9AACD000FFE6CD /* StartImageView.swift in Sources */,
 				3C9098711C76A6AA006B7D2C /* QNStyleAttribute.swift in Sources */,
 				3C90991A1C76A6E9006B7D2C /* BubbleChartDataEntry.swift in Sources */,
 				3C90995B1C76A6E9006B7D2C /* LyPrompt.swift in Sources */,
@@ -1936,6 +1979,7 @@
 				3C90990E1C76A6E9006B7D2C /* ChartComponentBase.swift in Sources */,
 				2BF2B0D01C9659B500B310D5 /* HomeMarketDetailViewController.swift in Sources */,
 				3C9098FA1C76A6E9006B7D2C /* QN_BaseDataModel.swift in Sources */,
+				2B539C0C1C9BD49200FFE6CD /* DataCenterViewController.swift in Sources */,
 				3C90990C1C76A6E9006B7D2C /* ScatterChartView.swift in Sources */,
 				3C9099631C76A6E9006B7D2C /* ZMDTool.swift in Sources */,
 				2BE373001C895F28004A1DDF /* BusinessAuthenticationViewController.swift in Sources */,
@@ -1950,7 +1994,6 @@
 				2B3AC6171C97DDC100CC8662 /* LogisticsViewController.swift in Sources */,
 				3C9099421C76A6E9006B7D2C /* ChartAxisRendererBase.swift in Sources */,
 				3C9099011C76A6E9006B7D2C /* BarChartView.swift in Sources */,
-				2B959EB51C76ED04002EA40D /* StartImageView.swift in Sources */,
 				3C90992D1C76A6E9006B7D2C /* ChartDataApproximatorFilter.swift in Sources */,
 				3C9099541C76A6E9006B7D2C /* ChartColorTemplates.swift in Sources */,
 				2B9D9F991C91148F00141D31 /* ProductCategoryViewController.swift in Sources */,
@@ -1958,6 +2001,7 @@
 				3C9099401C76A6E9006B7D2C /* BubbleChartRenderer.swift in Sources */,
 				3C9099301C76A6E9006B7D2C /* ChartFillFormatter.swift in Sources */,
 				3C9099621C76A6E9006B7D2C /* QNNetworkTool.swift in Sources */,
+				2B539C041C9AACD000FFE6CD /* BlinkView.swift in Sources */,
 				2BB6A8D61C87E447008209E8 /* HomeLoanViewController.swift in Sources */,
 				2B73D85F1C86D36E0016FEB2 /* PhoneSeteMsgVerifyViewController.swift in Sources */,
 				3C9099071C76A6E9006B7D2C /* HorizontalBarChartView.swift in Sources */,
@@ -2159,7 +2203,7 @@
 					"\"SDWebImage\"",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = zhimadi.cn.app;
+				PRODUCT_BUNDLE_IDENTIFIER = zhimadi.cn.app.test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "ZhiMaDi/ZhiMaDi-Bridging-Header.h";
@@ -2226,7 +2270,7 @@
 					"\"SDWebImage\"",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = zhimadi.cn.app;
+				PRODUCT_BUNDLE_IDENTIFIER = zhimadi.cn.app.test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "ZhiMaDi/ZhiMaDi-Bridging-Header.h";

@@ -7,28 +7,22 @@
 //
 
 import UIKit
-
+// 商品搜索
 class HomeBuyGoodsSearchViewController: UIViewController, ZMDInterceptorProtocol, UITableViewDataSource, UITableViewDelegate {
-    var tableView : UITableView!
     
-    let goodses  = ["冰糖心苹果","西西","苹果","冰糖心苹果","西西","糖心苹果","糖心苹果"]
+    @IBOutlet weak var currentTableView: UITableView!
+    let goodses  = ["睡袋","婴儿床","床垫","儿童椅","奶酪","七万"]
     var histories = g_SearchHistory == nil  ? [] : g_SearchHistory as!  NSArray
-    
+    let goodsData = ["",""]
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tableView = UITableView(frame: self.view.bounds, style: UITableViewStyle.Plain)
-        self.tableView.backgroundColor = defaultBackgroundGrayColor
-        self.tableView.separatorStyle = .None
-        self.tableView.dataSource = self
-        self.tableView.delegate = self
-        self.view.addSubview(self.tableView)
-        self.navigationController?.navigationBarHidden = false
+        self.currentTableView.backgroundColor = tableViewdefaultBackgroundColor
         self.setupNewNavigation()
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
         histories = g_SearchHistory == nil  ? [] : g_SearchHistory as!  NSArray
-        self.tableView.reloadData()
+        self.currentTableView.reloadData()
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -37,40 +31,69 @@ class HomeBuyGoodsSearchViewController: UIViewController, ZMDInterceptorProtocol
     
     //MARK:- UITableViewDataSource,UITableViewDelegate
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? 1 : self.histories.count
+        if section == 1 {
+            return self.histories.count + 1
+        } else if section == 3 {
+            return goodsData.count
+        }
+        return  1
     }
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 2
+        return 4
     }
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 10
+        switch section {
+        case 1 :
+            return 10
+        case 1 :
+            return 10
+        case 2 :
+            return 0
+        case 3 :
+            return 0
+        default :
+            return 0
+        }
     }
     func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0
     }
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headView = UIView(frame: CGRectMake(0, 0, kScreenWidth, 10))
+        headView.backgroundColor = UIColor.clearColor()
+        return headView
+    }
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        let size = "热搜 ：".sizeWithFont(UIFont.systemFontOfSize(15), maxWidth: 100)
-        let goodses  = ["冰糖心苹果","西西","苹果","冰糖心苹果","西西","糖心苹果","糖心苹果"]
-        var x = 14 + size.width
-        var y = 50
-        let space = CGFloat(12)
-        for goods in goodses {
-            let sizeTmp = goods.sizeWithFont(UIFont.systemFontOfSize(15), maxWidth: 100) //名宽度
-            let xTmp = x + space + sizeTmp.width + 20 + 12
-            if xTmp > kScreenWidth {
-                y += 38
-                x = 14 + sizeTmp.width + 20
-            } else {
-                x = x + space + sizeTmp.width + 20
+        if indexPath.section == 0 {
+            let size = "热搜 ：".sizeWithFont(UIFont.systemFontOfSize(15), maxWidth: 100)
+            var x = 14 + size.width
+            var y = 50
+            let space = CGFloat(12)
+            for goods in goodses {
+                let sizeTmp = goods.sizeWithFont(UIFont.systemFontOfSize(15), maxWidth: 100) //名宽度
+                let xTmp = x + space + sizeTmp.width + 20 + 12
+                if xTmp > kScreenWidth {
+                    y += 38
+                    x = 14 + sizeTmp.width + 20
+                } else {
+                    x = x + space + sizeTmp.width + 20
+                }
             }
+            return  CGFloat(y)
+        } else if indexPath.section == 1 {
+            return  55
+        } else if indexPath.section == 2 {
+            return  80
+        } else if indexPath.section == 3 {
+            return  581/750 * kScreenWidth + 10
         }
-        return indexPath.section == 0 ? CGFloat(y) : 50
+        return 0
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         switch indexPath.section {
         case 0 :
-            let cellId = "goodsCell"
+            let cellId = "goodsHotCell"
             var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
             if cell == nil {
                 cell = UITableViewCell(style: .Subtitle, reuseIdentifier: cellId)
@@ -89,8 +112,8 @@ class HomeBuyGoodsSearchViewController: UIViewController, ZMDInterceptorProtocol
             let getBtn = { (text : String,index : Int) -> UIButton in
                 let btn = UIButton(frame: CGRect.zero)
                 btn.setTitle(text, forState: .Normal)
-                btn.setTitleColor(UIColor.grayColor(), forState: .Normal)
-                btn.titleLabel?.font = UIFont.systemFontOfSize(14)
+                btn.setTitleColor(defaultTextColor, forState: .Normal)
+                btn.titleLabel?.font = UIFont.systemFontOfSize(17)
                 btn.layer.borderColor = UIColor.grayColor().CGColor;
                 btn.layer.borderWidth = 0.5
                 btn.layer.cornerRadius = 10
@@ -132,6 +155,33 @@ class HomeBuyGoodsSearchViewController: UIViewController, ZMDInterceptorProtocol
             }
             return cell!
         case 1 :
+            //记录
+            if indexPath.row == self.histories.count {
+                let cellId = "cleanCell"
+                var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
+                if cell == nil {
+                    cell = UITableViewCell(style: .Subtitle, reuseIdentifier: cellId)
+                    cell?.accessoryType = UITableViewCellAccessoryType.None
+                    cell!.selectionStyle = .None
+                    
+                    ZMDTool.configTableViewCellDefault(cell!)
+                }
+                let title = "清除搜索记录"
+                let size = title.sizeWithFont(UIFont.systemFontOfSize(14), maxWidth: kScreenWidth)
+                let label = UILabel(frame: CGRectMake(kScreenWidth/2-size.width/2,0,size.width, 55))
+                label.text = title
+                label.textAlignment = .Center
+                
+                label.textColor = defaultDetailTextColor
+                label.font = UIFont.systemFontOfSize(14)
+                cell?.contentView.addSubview(label)
+                
+                let imgV = UIImageView(frame: CGRect(x: label.frame.origin.x - 29, y: 18, width: 19, height: 19))
+                imgV.image = UIImage(named: "GoodsSearch_Trash")
+                cell?.contentView.addSubview(imgV)
+                
+                return cell!
+            }
             let cellId = "historyCell"
             var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
             if cell == nil {
@@ -141,9 +191,9 @@ class HomeBuyGoodsSearchViewController: UIViewController, ZMDInterceptorProtocol
                 
                 ZMDTool.configTableViewCellDefault(cell!)
                 
-                let btn = UIButton(frame: CGRectMake(kScreenWidth-26, 18, 14, 14))
-                btn.backgroundColor = UIColor.grayColor()
-                btn.setImage(UIImage(named: "Home_Msg"), forState: .Normal)
+                let btn = UIButton(frame: CGRectMake(kScreenWidth-26, 20, 14, 14))
+                btn.backgroundColor = UIColor.clearColor()
+                btn.setImage(UIImage(named: "GoodsSearch_close"), forState: .Normal)
                 btn.rac_signalForControlEvents(.TouchUpInside).subscribeNext({ (sender) -> Void in
                     let goods = self.goodses[indexPath.row]
                     let tmp = NSMutableArray()
@@ -153,18 +203,41 @@ class HomeBuyGoodsSearchViewController: UIViewController, ZMDInterceptorProtocol
                         }
                     }
                     saveSearchHistory(tmp)
-                    self.tableView.reloadData()
+                    self.currentTableView.reloadData()
                 })
                 
-                let label = UILabel(frame: CGRectMake(14, 18,100, 15))
+                let label = UILabel(frame: CGRectMake(14, 20,100, 16))
                 label.text = self.histories[indexPath.row] as? String
-                label.textColor = UIColor.blackColor()
-                label.font = UIFont.systemFontOfSize(15)
+                label.textColor = defaultDetailTextColor
+                label.font = UIFont.systemFontOfSize(16)
                 
                 cell?.contentView.addSubview(btn)
                 cell?.contentView.addSubview(label)
+                
+                let line = UIImageView(frame: CGRect(x: 0, y: 54, width: kScreenWidth, height: 0.5))
+                line.backgroundColor = defaultLineColor
+                cell?.contentView.addSubview(line)
             }
             return cell!
+        case 2 :
+            //
+            let cellId = "doubleHeadCell"
+            var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
+            if cell == nil {
+                cell = UITableViewCell(style: .Subtitle, reuseIdentifier: cellId)
+                cell?.accessoryType = UITableViewCellAccessoryType.None
+                cell!.selectionStyle = .None
+                
+                ZMDTool.configTableViewCellDefault(cell!)
+            }
+            return cell!
+        case 3 :
+            //
+            let cellId = "doubleGoodsCell"
+            var cell = tableView.dequeueReusableCellWithIdentifier(cellId) as! DoubleGoodsTableViewCell
+            cell.goodsImgVLeft.image = UIImage(named: "home_banner02")
+            return cell
+   
         default :
             return UITableViewCell()
         }
@@ -174,34 +247,22 @@ class HomeBuyGoodsSearchViewController: UIViewController, ZMDInterceptorProtocol
     }
     //MARK: -  PrivateMethod
     func setupNewNavigation() {
-        let searchView = UIView(frame: CGRectMake(0, 0, kScreenWidth - 74, 40))
-        let searchBar = UISearchBar(frame: CGRectMake(0, 2, kScreenWidth - 74, 36))
+        let searchView = UIView(frame: CGRectMake(0, 0, kScreenWidth - 120, 44))
+        let searchBar = UISearchBar(frame: CGRectMake(0, 4, kScreenWidth - 120, 36))
         searchBar.backgroundImage = UIImage.imageWithColor(UIColor.clearColor(), size: searchBar.bounds.size)
-        searchBar.placeholder = "商品查找"
+        searchBar.placeholder = "商品关键字"
         searchBar.layer.borderColor = UIColor.grayColor().CGColor;
         searchBar.layer.borderWidth = 0.5
         searchBar.layer.cornerRadius = 6
         searchBar.layer.masksToBounds = true
         searchView.addSubview(searchBar)
-        
-        let searchBtn = UIButton(frame:  CGRectMake(0, 0, 40, 15))
-        searchBtn.rac_signalForControlEvents(.TouchUpInside).subscribeNext({ (sender) -> Void in
-            self.navigationController?.popViewControllerAnimated(true)
-        })
-        searchBtn.setTitle("取消", forState:.Normal)
-        searchBtn.setTitleColor(UIColor.grayColor(), forState: .Normal)
-        
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: searchView)
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: searchBtn)
-    }
-    /*
-    // MARK: - Navigation
-    
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+        self.navigationItem.titleView = searchView
 
+        let rightItem = UIBarButtonItem(title: "取消", style: UIBarButtonItemStyle.Done, target: nil, action: nil)
+        rightItem.rac_command = RACCommand(signalBlock: { (input) -> RACSignal! in
+            self.navigationController?.popViewControllerAnimated(true)
+            return RACSignal.empty()
+        })
+        self.navigationItem.rightBarButtonItem = rightItem
+    }
 }

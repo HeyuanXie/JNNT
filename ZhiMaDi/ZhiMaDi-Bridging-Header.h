@@ -39,4 +39,6 @@
 #import "WeiboSDK.h"
 // 极光推送
 #import "BPush.h"
+//下拉刷新
+#import <MJRefresh/MJRefresh.h>
 #endif /* SleepCare_Bridging_Header_h */

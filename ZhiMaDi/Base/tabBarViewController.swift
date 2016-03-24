@@ -31,13 +31,13 @@ class tabBarViewController: UITabBarController,UITabBarControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // 修改底部工具条的字体和颜色
-        let titleSelectedColor = UIColor(red: 237/255, green: 191/255, blue: 28/255, alpha: 1.0)
+//        let titleSelectedColor = UIColor(red: 247/255, green: 247/255, blue: 247/255, alpha: 1.0)
         
         self.tabBar.translucent = false
-        self.tabBar.barTintColor = UIColor(red: 42/255, green: 42/255, blue: 42/255, alpha: 1.0)
-        self.tabBar.tintColor = UINavigationBar.appearance().tintColor
-        UITabBarItem.appearance().setTitleTextAttributes(NSDictionary(dictionary: [NSForegroundColorAttributeName: UIColor.whiteColor(),NSFontAttributeName:UIFont.systemFontOfSize(12)]) as? [String : AnyObject], forState: .Normal)
-        UITabBarItem.appearance().setTitleTextAttributes(NSDictionary(dictionary: [NSForegroundColorAttributeName: titleSelectedColor,NSFontAttributeName:UIFont.systemFontOfSize(12)]) as? [String : AnyObject], forState: .Selected)
+//        self.tabBar.barTintColor = UIColor(red: 133/255, green: 133/255, blue: 133/255, alpha: 1.0)
+//        self.tabBar.tintColor = UINavigationBar.appearance().tintColor
+        UITabBarItem.appearance().setTitleTextAttributes(NSDictionary(dictionary: [NSForegroundColorAttributeName: UIColor(red: 133/255, green: 133/255, blue: 133/255, alpha: 1.0),NSFontAttributeName:UIFont.systemFontOfSize(11)]) as? [String : AnyObject], forState: .Normal)
+        UITabBarItem.appearance().setTitleTextAttributes(NSDictionary(dictionary: [NSForegroundColorAttributeName: defaultSelectColor,NSFontAttributeName:UIFont.systemFontOfSize(11)]) as? [String : AnyObject], forState: .Selected)
         // 图标配置
         if let _ = self.tabBar.items {
             self.itemConfig(QNTabBarItem.Home)

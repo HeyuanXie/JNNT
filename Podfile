@@ -6,7 +6,7 @@ pod "ReactiveCocoa"
 pod "MWPhotoBrowser"
 pod "IQKeyboardManager"
 use_frameworks!
-pod 'Alamofire'
+pod 'Alamofire', '~> 3.2.0'
 pod 'Result'
 pod 'Box'
-
+pod 'MJRefresh'

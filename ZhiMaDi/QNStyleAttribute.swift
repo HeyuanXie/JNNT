@@ -13,23 +13,40 @@ import UIKit.UIColor
 // MARK: - 颜色
 /// App主色    
 let appThemeColor = UIColor(red: 237/255.0, green: 191/255.0, blue: 28/255.0, alpha: 1.0)
-
-/// 默认背景色
-let defaultBackgroundColor = UIColor(red: 238/255, green: 238/255, blue: 238/255, alpha: 1.0)
-/// 默认灰色背景
-let defaultBackgroundGrayColor = UIColor(red: 238/255, green: 238/255, blue: 238/255, alpha: 1.0)
-/// 默认灰色
-let defaultGrayColor = UIColor(white: 81/255.0, alpha: 1.0)
-/// 默认的分割线颜色
-let defaultLineColor = UIColor(red: 197/255, green: 197/255, blue: 197/255, alpha: 1.0)
-
+//从深到浅
 // MARK: 导航栏
 /// 导航栏文本颜色
-let navigationTextColor = UIColor.blackColor()
+let navigationTextColor = UIColor(red: 79/255.0, green: 79/255.0, blue: 79/255.0, alpha: 1.0)  //黑色
 /// 导航栏背景颜色
-let navigationBackgroundColor = UIColor(red: 246/255.0, green: 246/255.0, blue: 246/255.0, alpha: 1.0)
+let navigationBackgroundColor = UIColor.whiteColor()
 /// 导航栏字体（titleView不允许被修改）
-let navigationTextFont = UIFont.systemFontOfSize(16)
+let navigationTextFont = UIFont.systemFontOfSize(19)
+
+// 选中的文字 按扭 颜色
+let defaultSelectColor = UIColor(red: 235/255, green: 61/255, blue: 61/255, alpha: 1.0)  //红色
+
+// 常规文字 （标题 icon）
+let defaultTextColor = UIColor(red: 79/255, green: 79/255, blue: 79/255, alpha: 1.0) //黑色
+let defaultTextSize = defaultSysFontWithSize(17)
+// 辅助 次要 文字 icon
+let defaultDetailTextColor = UIColor(red: 174/255, green: 174/255, blue: 174/255, alpha: 1.0) // 浅灰
+// 小标题 描述  备注 评论 按扭  等
+let defaultDetailTextSize = defaultSysFontWithSize(15)
+/// 默认的分割线颜色
+let defaultLineColor = UIColor(red: 229/255, green: 229/255, blue: 229/255, alpha: 1.0)
+
+/// 默认灰色
+let defaultGrayColor = UIColor(red: 240/255, green: 240/255, blue: 240/255, alpha: 1.0)
+
+/// 默认背景色
+let defaultBackgroundColor = defaultGrayColor
+/// 默认灰色背景
+let defaultBackgroundGrayColor = defaultGrayColor
+
+//let defaultButtonTextColor = UIColor(red: 174/255, green: 174/255, blue: 174/255, alpha: 1.0)
+// 次要标题 分类  备注
+let defaultButtonTextSize = defaultSysFontWithSize(13)
+
 let defaultSysFontWithSize = { (size : CGFloat) -> UIFont in
     UIFont.systemFontOfSize(16)
 }
@@ -42,7 +59,7 @@ let COEFFICIENT_OF_HEIGHT_ZOOM = kScreenHeight/667.0
 let COEFFICIENT_OF_WIDTH_ZOOM = kScreenWidth/375.0
 
 /// 默认tableView背景色
-let tableViewdefaultBackgroundColor = UIColor(red: 238/255, green: 238/255, blue: 238/255, alpha: 1.0)
+let tableViewdefaultBackgroundColor = UIColor(red: 240/255, green: 240/255, blue: 240/255, alpha: 1.0)
 /// 默认高度
 let tableViewCellDefaultHeight: CGFloat = 56.0
 /// 默念head高度
@@ -69,7 +86,7 @@ extension ZMDTool {
     }
     /// 对UIView对象进行配置(cornerRadius)
     class func configViewLayer(view: UIView) {
-        view.layer.cornerRadius = 2
+        view.layer.cornerRadius = 5
         view.layer.masksToBounds = true
     }
     ///对UIView对象进行配置(borderWidth) 默认颜色 defaultLineColor

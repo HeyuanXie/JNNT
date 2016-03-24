@@ -29,7 +29,6 @@ protocol ZMDInterceptorMsnProtocol: ZMDInterceptorProtocol {}
 /// 遵循此协议的 ViewController 会提供更多按扭
 protocol ZMDInterceptorMoreProtocol: ZMDInterceptorProtocol {}
 
-
 /** 拦截器，拦截遵循了g_ZMDInterceptorProtocol 协议的类的实例 */
 class ZMDInterceptor : NSObject {
     
@@ -125,8 +124,18 @@ class ZMDInterceptor : NSObject {
                         else {
 //                            UIApplication.sharedApplication().statusBarStyle = .Default
 //                            viewController.navigationController?.navigationBar.barTintColor = navigationTextColor
-                            viewController.navigationController?.navigationBar.tintColor = UIColor.blackColor()
+//                            viewController.navigationController?.navigationBar.tintColor = UIColor.blackColor()
 //                            viewController.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: appThemeColor, NSFontAttributeName: UIFont.systemFontOfSize(18)]
+                        }
+                        if viewController is HomePageViewController {
+                            UIApplication.sharedApplication().statusBarStyle = .Default
+                            //填充色
+                            viewController.navigationController?.navigationBar.barTintColor = UIColor(red: 14/255, green: 48/255, blue: 141/255, alpha: 1.0)
+                        } else {
+                            UIApplication.sharedApplication().statusBarStyle = .Default
+                            viewController.navigationController?.navigationBar.barTintColor = navigationBackgroundColor
+                            viewController.navigationController?.navigationBar.tintColor = navigationTextColor
+                            viewController.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: navigationTextColor, NSFontAttributeName: navigationTextFont]
                         }
                     }
                 }

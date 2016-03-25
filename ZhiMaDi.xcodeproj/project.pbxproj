@@ -201,6 +201,7 @@
 		2B5FF41D1CA3F03C0067909D /* list_collect_normal@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B5FF3EA1CA3F03C0067909D /* list_collect_normal@3x.png */; };
 		2B5FF41E1CA3F03C0067909D /* list_collect_selected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B5FF3EB1CA3F03C0067909D /* list_collect_selected@3x.png */; };
 		2B5FF41F1CA3F03C0067909D /* shop_add_product@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B5FF3EC1CA3F03C0067909D /* shop_add_product@3x.png */; };
+		2B5FF4211CA4E11F0067909D /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B5FF4201CA4E11F0067909D /* CoreText.framework */; };
 		2B68C44F1C7A9C3000B401A9 /* MineHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B68C44E1C7A9C3000B401A9 /* MineHomeViewController.swift */; };
 		2B68C4681C7AB14300B401A9 /* Mine_Set@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B68C4671C7AB14300B401A9 /* Mine_Set@2x.png */; };
 		2B68C4711C7AB22B00B401A9 /* MineHome_CustomerManagement@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B68C4691C7AB22B00B401A9 /* MineHome_CustomerManagement@2x.png */; };
@@ -669,6 +670,7 @@
 		2B5FF3EA1CA3F03C0067909D /* list_collect_normal@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "list_collect_normal@3x.png"; sourceTree = "<group>"; };
 		2B5FF3EB1CA3F03C0067909D /* list_collect_selected@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "list_collect_selected@3x.png"; sourceTree = "<group>"; };
 		2B5FF3EC1CA3F03C0067909D /* shop_add_product@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shop_add_product@3x.png"; sourceTree = "<group>"; };
+		2B5FF4201CA4E11F0067909D /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		2B68C44E1C7A9C3000B401A9 /* MineHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineHomeViewController.swift; sourceTree = "<group>"; };
 		2B68C4671C7AB14300B401A9 /* Mine_Set@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Mine_Set@2x.png"; sourceTree = "<group>"; };
 		2B68C4691C7AB22B00B401A9 /* MineHome_CustomerManagement@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MineHome_CustomerManagement@2x.png"; sourceTree = "<group>"; };
@@ -942,6 +944,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B5FF4211CA4E11F0067909D /* CoreText.framework in Frameworks */,
 				2B539ABF1C99512C00FFE6CD /* SystemConfiguration.framework in Frameworks */,
 				2B3AC5DB1C96BF1E00CC8662 /* libz.tbd in Frameworks */,
 				2B539ABD1C99511C00FFE6CD /* CoreTelephony.framework in Frameworks */,
@@ -976,6 +979,7 @@
 		18E2BC74B095F0976F695BAA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2B5FF4201CA4E11F0067909D /* CoreText.framework */,
 				2B539AC61C99518900FFE6CD /* Security.framework */,
 				2B539AC41C99514200FFE6CD /* UIKit.framework */,
 				2B539AC21C99513A00FFE6CD /* Foundation.framework */,

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import TYAttributedLabel
 //商品详请
 class HomeBuyGoodsDetailViewController: UIViewController,ZMDInterceptorProtocol,ZMDInterceptorNavigationBarShowProtocol {
     enum GoodsCellType{
@@ -15,7 +16,7 @@ class HomeBuyGoodsDetailViewController: UIViewController,ZMDInterceptorProtocol,
         case HomeContentTypeMenu                    /* 菜单选择栏目 */
         case HomeContentTypeDistribution             /* 商品配送栏目 */
         case HomeContentTypeStore                   /* 店家  */
-        case HomeContentTypeRDaPeiGou               /* 推荐商品 */
+        case HomeContentTypeDaPeiGou               /* 搭配购商品 */
         case HomeContentTypeNextMenu                /* 下面展示菜单 */
         init(){
             self = HomeContentTypeAd
@@ -24,13 +25,16 @@ class HomeBuyGoodsDetailViewController: UIViewController,ZMDInterceptorProtocol,
     
     @IBOutlet weak var currentTableView: UITableView!
     var countForBounghtLbl : UIButton!               // 购买数量Lbl
-
+//    var consultBtn : UIButton!,shareBtn: UIButton!,boughtbtn: UIButton!  //底部按扭
+    @IBOutlet weak var bottomV: UIView!
+ 
     var countForBounght = 0                         // 购买数量
     var goodsCellTypes: [GoodsCellType]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-         self.dataInit()
+        self.dataInit()
+        self.updateUI()
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
@@ -51,6 +55,8 @@ class HomeBuyGoodsDetailViewController: UIViewController,ZMDInterceptorProtocol,
             return 1
         case .HomeContentTypeMenu :
             return 3
+        case .HomeContentTypeDaPeiGou :
+            return 1
         default :
             return 1
         }
@@ -84,6 +90,10 @@ class HomeBuyGoodsDetailViewController: UIViewController,ZMDInterceptorProtocol,
             return 106
         case .HomeContentTypeStore :
             return 120
+        case .HomeContentTypeDaPeiGou :
+            return 60 + 144 + 56
+        case .HomeContentTypeNextMenu :
+            return 60
         default :
             return 1
         }
@@ -102,6 +112,10 @@ class HomeBuyGoodsDetailViewController: UIViewController,ZMDInterceptorProtocol,
                 return cellForHomeDistribution(tableView, indexPath: indexPath)
         case .HomeContentTypeStore :
             return cellForHomeStore(tableView, indexPath: indexPath)
+        case .HomeContentTypeDaPeiGou :
+            return cellForHomeDapeigou(tableView, indexPath: indexPath)
+        case .HomeContentTypeNextMenu :
+            return cellForHomeNextMenu(tableView, indexPath: indexPath)
         default :
             return UITableViewCell()
         }
@@ -109,6 +123,7 @@ class HomeBuyGoodsDetailViewController: UIViewController,ZMDInterceptorProtocol,
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
        
     }
+    
     //MARK: -  PrivateMethod
     //MARK: 广告 cell
     func cellForHomeAd(tableView: UITableView,indexPath: NSIndexPath)-> UITableViewCell {
@@ -246,34 +261,156 @@ class HomeBuyGoodsDetailViewController: UIViewController,ZMDInterceptorProtocol,
         }
         return cell!
     }
+    //MARK: 搭配购 cell
+    func cellForHomeDapeigou(tableView: UITableView,indexPath: NSIndexPath)-> UITableViewCell {
+        let cellId = "dapeigouCell"
+        var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
+        if cell == nil {
+            cell = UITableViewCell(style: .Default, reuseIdentifier: cellId)
+            cell!.selectionStyle = .None
+            cell!.contentView.backgroundColor = UIColor.whiteColor()
+        }
+        let datas = ["","","","","",""]
+        if let scrollView = cell?.viewWithTag(10001) as? UIScrollView {
+            var i = 0
+            var scrollvWidth = CGFloat(0)
+            for data in datas {
+                var x = 0
+                if i == 0 {
+                    x = 12
+                } else {
+                    x = 12 + 80 + (36 + 80) * (i-1)
+                    let addLbl = UILabel(frame: CGRect(x: x, y: 46, width: 36, height: 15))
+                    addLbl.textColor = UIColor.blackColor()
+                    addLbl.text = "+"
+                    addLbl.textAlignment = .Center
+                    addLbl.font = defaultSysFontWithSize(15)
+                    scrollView.addSubview(addLbl)
+                }
+                //主
+                if i > 0 {
+                    x += 36
+                }
+                let view = UIView(frame: CGRect(x: x, y: 0, width: 80, height: 144))
+                let imgV = UIImageView(frame: CGRect(x: 0, y: 12, width: 80, height: 80))
+                imgV.image = UIImage(named: "product_pic")
+                view.addSubview(imgV)
+                
+                let priceLbl = UILabel(frame: CGRect(x: 0, y: 144 - 12 - 13, width: 80, height: 13))
+                priceLbl.text = "原价：218.0"
+                priceLbl.textColor = defaultTextColor
+                priceLbl.font = defaultSysFontWithSize(12)
+                view.addSubview(priceLbl)
+                
+                let titleLbl = UILabel(frame: CGRect(x: 0, y: 144 - 12 - 13 - 8 - 12, width: 80, height: 12))
+                titleLbl.text = "家纺被"
+                titleLbl.textAlignment = .Center
+                titleLbl.textColor = defaultDetailTextColor
+                titleLbl.font = defaultSysFontWithSize(12)
+                view.addSubview(titleLbl)
+                scrollView.addSubview(view)
+                i++
+                if i == datas.count-1 {
+                    scrollvWidth = CGRectGetMaxX(view.frame) + 80 + 12
+                }
+                scrollView.contentSize = CGSize(width: scrollvWidth, height: 0)
+            }
+            
+        }
+        let textArray = ["组合价：","613.00","（已为你节省：100)"]
+        let label = TYAttributedLabel(frame: CGRect(x: 12, y: 207 + 15, width: kScreenWidth - 24, height: 22))
+        label.textColor = defaultTextColor
+        label.backgroundColor = UIColor.clearColor()
+        label.font = defaultSysFontWithSize(15)
+        label.textAlignment = .Left
+        label.characterSpacing = 0
+        let colors = [defaultTextColor,UIColor.redColor(),defaultDetailTextColor]
+        var i = 0
+        for text in textArray {
+            let attributedStr = NSMutableAttributedString(string: text)
+            attributedStr.addAttributeTextColor(colors[i])
+            attributedStr.addAttributeFont(defaultSysFontWithSize(15))
+            label.appendTextAttributedString(attributedStr)
+            i++
+        }
+        cell?.contentView.addSubview(label)
+        return cell!
+    }
+    //MARK:  下一页菜单 cell
+    func cellForHomeNextMenu(tableView: UITableView,indexPath: NSIndexPath)-> UITableViewCell {
+        let cellId = "NextMenuCell"
+        var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
+        if cell == nil {
+            cell = UITableViewCell(style: .Default, reuseIdentifier: cellId)
+            cell!.selectionStyle = .None
+            cell!.contentView.backgroundColor = UIColor.whiteColor()
+        }
+        cell?.addSubview(self.createFilterMenu())
+        return cell!
+    }
     func createFilterMenu() -> UIView{
-        let titles = ["交付标准","农场情况","交易记录"]
-        let view = UIView(frame: CGRectMake(0 , 0, kScreenWidth, 52))
-        for var i=0;i<3;i++ {
-            let index = i%4
-            let btn = UIButton(frame:  CGRectMake(CGFloat(index) * kScreenWidth/3 , 0, kScreenWidth/3, 52))
+        let titles = ["图文详情","评分","相关推荐"]
+        let view = UIView(frame: CGRectMake(0 , 0, kScreenWidth, 60))
+        for var i=0;i<titles.count;i++ {
+            let btn = UIButton(frame:  CGRectMake(CGFloat(i) * kScreenWidth/3 , 0, kScreenWidth/3, 60))
             btn.backgroundColor = UIColor.clearColor()
             btn.setTitle(titles[i], forState: .Normal)
             btn.setTitle(titles[i], forState: .Normal)
             btn.setTitleColor(UIColor.blackColor(), forState: .Normal)
             btn.setTitleColor(UIColor.yellowColor(), forState: .Selected)
-            btn.titleLabel?.font = UIFont.systemFontOfSize(18)
+            btn.titleLabel?.font = UIFont.systemFontOfSize(17)
             view.addSubview(btn)
             
             btn.rac_signalForControlEvents(.TouchUpInside).subscribeNext({ (sender) -> Void in
             })
+            if i < 2{
+                let lineView = UIView(frame: CGRectMake(CGFloat(i + 1) * kScreenWidth/3, 18, 0.5, 21))
+                lineView.backgroundColor = defaultLineColor
+                view.addSubview(lineView)
+            }
         }
-        let lineView = UIView(frame: CGRectMake(0 , 50, kScreenWidth/3, 2))
-        view.addSubview(lineView)
         return view
     }
     func setupNewNavigation() {
     }
     
     private func dataInit(){
-        self.goodsCellTypes = [.HomeContentTypeAd,.HomeContentTypeDetail,.HomeContentTypeMenu,.HomeContentTypeDistribution,.HomeContentTypeStore,.HomeContentTypeRDaPeiGou, .HomeContentTypeNextMenu]
+        self.goodsCellTypes = [.HomeContentTypeAd,.HomeContentTypeDetail,.HomeContentTypeMenu,.HomeContentTypeDistribution,.HomeContentTypeStore,.HomeContentTypeDaPeiGou, .HomeContentTypeNextMenu]
     }
     func updateUI() {
+        self.currentTableView.backgroundColor  = tableViewdefaultBackgroundColor
+            self.bottomV.backgroundColor = RGB(247,247,247,1)
+        let titles = ["咨询","分享赚佣金","购买"]
+        var i = 0
+        let colorsBg = [UIColor.clearColor(),RGB(225,188,42,1),RGB(232,61,60,1)]
+        for title in titles {
+            let bottomBtn = UIButton(frame: CGRect(x: kScreenWidth/3 * CGFloat(i) + 18, y: 12, width: kScreenWidth/3 - 36, height: 34))
+            bottomBtn.backgroundColor = UIColor.clearColor()
+            bottomBtn.setTitle(title, forState: .Normal)
+            bottomBtn.titleLabel?.font = defaultSysFontWithSize(17)
+            bottomBtn.backgroundColor = colorsBg[i]
+            bottomBtn.tag = 1000 + i
+            if i == 0 {
+                bottomBtn.setTitleColor(defaultTextColor, forState: .Normal)
+                bottomBtn.setImage(UIImage(named: "product_chat"), forState: .Normal)
+            } else {
+                ZMDTool.configViewLayer(bottomBtn)
+                bottomBtn.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+            }
+            bottomBtn.rac_signalForControlEvents(.TouchUpInside).subscribeNext({ [weak self](sender) -> Void in
+                if (sender as! UIButton).titleLabel!.text == titles[0] {
+                    
+                } else if (sender as! UIButton).titleLabel?.text == titles[1] {
+                    if let strongSelf = self {
+                        
+                    }
+                } else if (sender as! UIButton).titleLabel?.text == titles[2] {
+                    
+                }
+            })
+            self.bottomV.addSubview(bottomBtn)
+            i++
+        }
     }
 
 }

@@ -280,6 +280,8 @@ class CustomBtn : UIButton {
         self.titleLabel!.textAlignment = .Center
     }
 }
+// 文字 字体
+
 
 
 

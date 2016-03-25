@@ -24,6 +24,7 @@ PODS:
   - SDWebImage (3.7.5):
     - SDWebImage/Core (= 3.7.5)
   - SDWebImage/Core (3.7.5)
+  - TYAttributedLabel (2.5.6)
 
 DEPENDENCIES:
   - Alamofire (~> 3.2.0)
@@ -34,6 +35,7 @@ DEPENDENCIES:
   - ReactiveCocoa
   - Result
   - SDWebImage
+  - TYAttributedLabel (~> 2.5.6)
 
 SPEC CHECKSUMS:
   Alamofire: f11d8624a05f5d39e0c99309b3e600a3ba64298a
@@ -46,5 +48,6 @@ SPEC CHECKSUMS:
   ReactiveCocoa: f7011630aee4deeb16352fcb1b50d6bde9db4f90
   Result: dd3dd71af3fa2e262f1a999e14fba2c25ec14f16
   SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
+  TYAttributedLabel: 251d4cb2bf35813815d0ad632b3e56ba626c6b01
 
 COCOAPODS: 0.39.0

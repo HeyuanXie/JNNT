@@ -30,6 +30,7 @@
 #import <ShareSDK/ShareSDK.h>
 #import <ShareSDKUI/ShareSDK+SSUI.h>
 #import <ShareSDKConnector/ShareSDKConnector.h>
+#import <TencentOpenAPI/WeiBoAPI.h>
 //腾讯SDK头文件
 #import <TencentOpenAPI/TencentOAuth.h>
 #import <TencentOpenAPI/QQApiInterface.h>
@@ -41,4 +42,7 @@
 #import "BPush.h"
 //下拉刷新
 #import <MJRefresh/MJRefresh.h>
+// 富文本控件
+#import <CoreText/CoreText.h>
+#import <TYAttributedLabel/TYAttributedLabel.h>
 #endif /* SleepCare_Bridging_Header_h */

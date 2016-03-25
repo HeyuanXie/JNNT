@@ -50,6 +50,9 @@ let defaultButtonTextSize = defaultSysFontWithSize(13)
 let defaultSysFontWithSize = { (size : CGFloat) -> UIFont in
     UIFont.systemFontOfSize(16)
 }
+let RGB = { (r : CGFloat,g: CGFloat,b: CGFloat,a: CGFloat) -> UIColor in
+    return UIColor(red: r/255, green: g/255, blue: b/255, alpha: a)
+}
 // 边距
 let MarginLeft = 12
 

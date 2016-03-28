@@ -1,20 +1,19 @@
 //
-//  HomeBuyListViewController.swift
+//  HomeLeaseViewController.swift
 //  ZhiMaDi
 //
-//  Created by haijie on 16/2/24.
+//  Created by haijie on 16/3/28.
 //  Copyright © 2016年 ZhiMaDi. All rights reserved.
 //
 
 import UIKit
-//商品列表
-class HomeBuyListViewController: UIViewController ,ZMDInterceptorProtocol, UITableViewDataSource, UITableViewDelegate{
-
+//租赁列表
+class HomeLeaseListViewController: UIViewController ,ZMDInterceptorProtocol, UITableViewDataSource, UITableViewDelegate{
+    
     @IBOutlet weak var currentTableView: UITableView!
     var popView : UIView!
     var cityPop : FindDoctorCityPopView!
     
-    var isLease = false             //租赁
     var isHorizontal = true      // 横屏
     var dataArray = ["","","",""]
     override func viewDidLoad() {
@@ -73,7 +72,7 @@ class HomeBuyListViewController: UIViewController ,ZMDInterceptorProtocol, UITab
     }
     //MARK: -  PrivateMethod
     func createFilterMenu() -> UIView{
-        let prices = self.isLease ? ["默认","人气","价格","筛选",""] : ["默认","销量","价格","最新",""]
+        let prices = ["默认","人气","价格","筛选",""]
         let countForBtn = CGFloat(prices.count)
         let view = UIView(frame: CGRectMake(0 , 0, kScreenWidth, 52 + 16))
         view.backgroundColor = UIColor.clearColor()
@@ -81,8 +80,8 @@ class HomeBuyListViewController: UIViewController ,ZMDInterceptorProtocol, UITab
             let index = i%prices.count
             let btn = UIButton(frame:  CGRectMake(CGFloat(index) * kScreenWidth/countForBtn , 0, kScreenWidth/countForBtn, 52))
             btn.backgroundColor = UIColor.whiteColor()
-//            btn.setImage(UIImage(named: imageNormal), forState: .Normal)
-//            btn.setImage(UIImage(named: imageSelected), forState: .Selected)
+            //            btn.setImage(UIImage(named: imageNormal), forState: .Normal)
+            //            btn.setImage(UIImage(named: imageSelected), forState: .Selected)
             btn.setTitle(prices[i], forState: .Normal)
             btn.setTitle(prices[i], forState: .Normal)
             btn.setTitleColor(UIColor.blackColor(), forState: .Normal)
@@ -100,9 +99,9 @@ class HomeBuyListViewController: UIViewController ,ZMDInterceptorProtocol, UITab
                 if self.cityPop == nil {
                     let height = kScreenHeight/3 * 2 - kScreenHeight/3 * 2 % 40
                     self.cityPop = FindDoctorCityPopView(frame: CGRectMake(0, CGRectGetMaxY(btn.frame), kScreenWidth,height))
-//                    if self.currentCity != nil {
-//                        cityPop.titleLbl.text = self.currentCity
-//                    }
+                    //                    if self.currentCity != nil {
+                    //                        cityPop.titleLbl.text = self.currentCity
+                    //                    }
                 }
                 let config = ZMDPopViewConfig()
                 config.showAnimation = .SlideInFromTop
@@ -125,7 +124,7 @@ class HomeBuyListViewController: UIViewController ,ZMDInterceptorProtocol, UITab
         rightItem.customView?.tintColor = UIColor.whiteColor()
         self.navigationItem.rightBarButtonItem = rightItem
     }
-
+    
     func popWindow () {
         self.popView = UIView(frame: CGRectMake(0 , 64+52, kScreenWidth,  self.view.bounds.height - 100))
         self.popView.backgroundColor = UIColor.blueColor()

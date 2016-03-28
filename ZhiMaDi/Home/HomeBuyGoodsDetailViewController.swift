@@ -8,8 +8,9 @@
 
 import UIKit
 import TYAttributedLabel
+import MJRefresh
 //商品详请
-class HomeBuyGoodsDetailViewController: UIViewController,ZMDInterceptorProtocol,ZMDInterceptorNavigationBarShowProtocol {
+class HomeBuyGoodsDetailViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,ZMDInterceptorProtocol,ZMDInterceptorNavigationBarShowProtocol,QNShareViewDelegate {
     enum GoodsCellType{
         case HomeContentTypeAd                      /* 广告显示页 */
         case HomeContentTypeDetail                   /* 菜单参数栏目 */
@@ -24,10 +25,10 @@ class HomeBuyGoodsDetailViewController: UIViewController,ZMDInterceptorProtocol,
     }
     
     @IBOutlet weak var currentTableView: UITableView!
+    var secondTableView: UITableView!
     var countForBounghtLbl : UIButton!               // 购买数量Lbl
-//    var consultBtn : UIButton!,shareBtn: UIButton!,boughtbtn: UIButton!  //底部按扭
     @IBOutlet weak var bottomV: UIView!
- 
+    
     var countForBounght = 0                         // 购买数量
     var goodsCellTypes: [GoodsCellType]!
     
@@ -49,6 +50,10 @@ class HomeBuyGoodsDetailViewController: UIViewController,ZMDInterceptorProtocol,
     }
     //MARK:- UITableViewDataSource,UITableViewDelegate
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if tableView == self.secondTableView {
+            return 1
+        }
+        
         let cellType = self.goodsCellTypes[section]
         switch cellType {
         case .HomeContentTypeAd :
@@ -62,9 +67,17 @@ class HomeBuyGoodsDetailViewController: UIViewController,ZMDInterceptorProtocol,
         }
     }
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        if tableView == self.secondTableView {
+            return 1
+        }
+
         return self.goodsCellTypes.count
     }
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if tableView == self.secondTableView {
+            return 10
+        }
+
         let cellType = self.goodsCellTypes[section]
         switch cellType {
         case .HomeContentTypeAd :
@@ -78,6 +91,10 @@ class HomeBuyGoodsDetailViewController: UIViewController,ZMDInterceptorProtocol,
         return  0
     }
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if tableView == self.secondTableView {
+            return 325
+        }
+
         let cellType = self.goodsCellTypes[indexPath.section]
         switch cellType {
         case .HomeContentTypeAd :
@@ -100,6 +117,10 @@ class HomeBuyGoodsDetailViewController: UIViewController,ZMDInterceptorProtocol,
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        if tableView == self.secondTableView {
+             return cellForSecond(tableView, indexPath: indexPath)
+        }
+
         let cellType = self.goodsCellTypes[indexPath.section]
         switch cellType {
         case .HomeContentTypeAd :
@@ -123,8 +144,28 @@ class HomeBuyGoodsDetailViewController: UIViewController,ZMDInterceptorProtocol,
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
        
     }
-    
+    //MARK: QNShareViewDelegate
+    func qnShareView(view: ShareView) -> (image: UIImage, url: String, title: String?, description: String)? {
+        return (UIImage(named: "Share_Icon")!, "http://www.baidu.com", self.title ?? "", "成为喜特用户，享有更多服务!")
+    }
     //MARK: -  PrivateMethod
+    //MARK: 广告 cell
+    func cellForSecond(tableView: UITableView,indexPath: NSIndexPath)-> UITableViewCell {
+        let cellId = "testCell"
+        var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
+        if cell == nil {
+            cell = UITableViewCell(style: .Default, reuseIdentifier: cellId)
+            cell!.selectionStyle = .None
+            cell!.contentView.backgroundColor = UIColor.whiteColor()
+            
+            let nibView = NSBundle.mainBundle().loadNibNamed("CommentView", owner: nil, options: nil) as NSArray
+            let remarkV = nibView.objectAtIndex(0) as? UIView
+            remarkV!.frame = CGRectMake(0,0, kScreenWidth, 325)
+            cell?.contentView.addSubview(remarkV!)
+        }
+        return cell!
+    }
+
     //MARK: 广告 cell
     func cellForHomeAd(tableView: UITableView,indexPath: NSIndexPath)-> UITableViewCell {
         let cellId = "productImgCell"
@@ -274,7 +315,7 @@ class HomeBuyGoodsDetailViewController: UIViewController,ZMDInterceptorProtocol,
         if let scrollView = cell?.viewWithTag(10001) as? UIScrollView {
             var i = 0
             var scrollvWidth = CGFloat(0)
-            for data in datas {
+            for _ in datas {
                 var x = 0
                 if i == 0 {
                     x = 12
@@ -377,9 +418,47 @@ class HomeBuyGoodsDetailViewController: UIViewController,ZMDInterceptorProtocol,
     private func dataInit(){
         self.goodsCellTypes = [.HomeContentTypeAd,.HomeContentTypeDetail,.HomeContentTypeMenu,.HomeContentTypeDistribution,.HomeContentTypeStore,.HomeContentTypeDaPeiGou, .HomeContentTypeNextMenu]
     }
+
+    func footerRefresh(){
+        UIView.animateWithDuration(0.38, animations: { () -> Void in
+            var frame = self.currentTableView.frame
+            self.secondTableView.frame = frame
+            frame.origin = CGPoint(x: 0, y: frame.origin.y - frame.size.height)
+            self.currentTableView.frame = frame
+            }, completion: { (bool) -> Void in
+            self.currentTableView.mj_footer.endRefreshing()
+        })
+    }
+    // 顶部刷新
+    func headerRefresh(){
+        UIView.animateWithDuration(0.38, animations: { () -> Void in
+            var frame = self.secondTableView.frame
+            self.currentTableView.frame = frame
+            frame.origin = CGPoint(x: 0, y: 64 + frame.size.height)
+            self.secondTableView.frame = frame
+            }, completion: { (bool) -> Void in
+            self.secondTableView.mj_header.endRefreshing()
+        })
+
+    }
     func updateUI() {
+        // 底部刷新
+        let footer = MJRefreshAutoNormalFooter()
+        // 顶部刷新
+        let header = MJRefreshNormalHeader()
+        footer.setRefreshingTarget(self, refreshingAction: Selector("footerRefresh"))
+        header.setRefreshingTarget(self, refreshingAction: Selector("headerRefresh"))
+        
         self.currentTableView.backgroundColor  = tableViewdefaultBackgroundColor
-            self.bottomV.backgroundColor = RGB(247,247,247,1)
+        self.currentTableView.mj_footer = footer
+       
+        self.bottomV.backgroundColor = RGB(247,247,247,1)
+        secondTableView = UITableView(frame: CGRect(x: 0, y: CGRectGetMaxY(self.currentTableView.frame), width: kScreenWidth, height: self.currentTableView.frame.size.height))
+        secondTableView.dataSource = self
+        secondTableView.delegate = self
+        self.view.addSubview(secondTableView)
+        self.secondTableView.mj_header = header
+        
         let titles = ["咨询","分享赚佣金","购买"]
         var i = 0
         let colorsBg = [UIColor.clearColor(),RGB(225,188,42,1),RGB(232,61,60,1)]
@@ -402,7 +481,9 @@ class HomeBuyGoodsDetailViewController: UIViewController,ZMDInterceptorProtocol,
                     
                 } else if (sender as! UIButton).titleLabel?.text == titles[1] {
                     if let strongSelf = self {
-                        
+                        let shareView = ShareView()
+                        shareView.delegate = strongSelf
+                        shareView.showShareView()
                     }
                 } else if (sender as! UIButton).titleLabel?.text == titles[2] {
                     
@@ -412,5 +493,4 @@ class HomeBuyGoodsDetailViewController: UIViewController,ZMDInterceptorProtocol,
             i++
         }
     }
-
 }

@@ -1,19 +1,19 @@
 //
-//  DoubleGoodsTableViewCell.swift
+//  DoubleGoodsLeaseTableViewCell.swift
 //  ZhiMaDi
 //
-//  Created by haijie on 16/3/23.
+//  Created by haijie on 16/3/28.
 //  Copyright © 2016年 ZhiMaDi. All rights reserved.
 //
 
 import UIKit
-// 商品双层形式cell
-class DoubleGoodsTableViewCell: UITableViewCell {
+// 商品双层形式 租赁 cell
+class DoubleGoodsLeaseTableViewCell: UITableViewCell {
 
     //left
     @IBOutlet weak var goodsImgVLeft: UIImageView!
     @IBOutlet weak var titleLblLeft: UILabel!
-    @IBOutlet weak var currentPriceLblLeft: UILabel!   // 当前价 
+    @IBOutlet weak var currentPriceLblLeft: UILabel!   // 当前价
     @IBOutlet weak var originalPriceLblLeft: UILabel!  // 原价
     @IBOutlet weak var countLblLeft: UILabel!
     @IBOutlet weak var isCollectionBtnLeft: UIButton!
@@ -28,11 +28,10 @@ class DoubleGoodsTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-
+    
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
-
 }

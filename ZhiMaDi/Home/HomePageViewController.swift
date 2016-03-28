@@ -66,7 +66,7 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
             let viewController: UIViewController
             switch self{
             case Offer:
-                let homeBuyListViewController = HomeBuyListViewController.CreateFromMainStoryboard() as! HomeBuyListViewController
+                let homeBuyListViewController = HomeLeaseListViewController.CreateFromMainStoryboard() as! HomeLeaseListViewController
                 viewController = homeBuyListViewController
             case Market:
                 viewController = HomeMarketViewController.CreateFromMainStoryboard() as! HomeMarketViewController
@@ -318,6 +318,8 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
             let imgV = cell?.contentView.viewWithTag(10020 + i) as! UIImageView
             
             btn.rac_signalForControlEvents(.TouchUpInside).subscribeNext { (sender) -> Void in
+                let btnType = self.menuType[sender.tag - 10000]
+                btnType.didSelect(self.navigationController!)
             }
             label.text = menuType.title
             imgV.image = menuType.image

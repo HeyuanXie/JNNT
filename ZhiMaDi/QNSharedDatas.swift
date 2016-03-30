@@ -10,7 +10,7 @@
 
 import UIKit
 
-//富文本   ￥
+//富文本   ￥ ×
 /// 加密解密密钥
 let g_SecretKey = "qoocc"
 

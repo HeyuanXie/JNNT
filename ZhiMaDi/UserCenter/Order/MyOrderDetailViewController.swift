@@ -1,15 +1,15 @@
 //
-//  MineViewController.swift
+//  OrderDetailViewController.swift
 //  ZhiMaDi
 //
-//  Created by haijie on 16/2/22.
+//  Created by haijie on 16/3/30.
 //  Copyright © 2016年 ZhiMaDi. All rights reserved.
 //
 
 import UIKit
-//我的  首页
-class MineHomeViewController: UIViewController,UITableViewDataSource, UITableViewDelegate {
-
+// 我的订单详请
+class MyOrderDetailViewController: UIViewController,UITableViewDataSource, UITableViewDelegate {
+    
     enum UserCenterCellType{
         case UserHead
         case UserMyOrder
@@ -124,7 +124,7 @@ class MineHomeViewController: UIViewController,UITableViewDataSource, UITableVie
             viewController.hidesBottomBarWhenPushed = true
             return viewController
         }
-
+        
         func didSelect(navViewController:UINavigationController){
             navViewController.pushViewController(pushViewController, animated: true)
         }

@@ -58,7 +58,7 @@ class HomeBuyListViewController: UIViewController ,ZMDInterceptorProtocol, UITab
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cellId = self.isHorizontal ? "doubleGoodsCell" : "goodsCell"
-        var cell = tableView.dequeueReusableCellWithIdentifier(cellId) as! DoubleGoodsTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellId) as! DoubleGoodsTableViewCell
         cell.goodsImgVLeft.image = UIImage(named: "home_banner02")
         if self.isHorizontal {
             
@@ -106,7 +106,7 @@ class HomeBuyListViewController: UIViewController ,ZMDInterceptorProtocol, UITab
                 }
                 let config = ZMDPopViewConfig()
                 config.showAnimation = .SlideInFromTop
-                btn.presentPopupView(self.cityPop,config: config)
+                self.presentPopupView(self.cityPop,config: config)
             })
             if i < 3 {
                 let line = ZMDTool.getLine(CGRectMake(kScreenWidth/4 - 1, 20, 1, 13))

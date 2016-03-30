@@ -72,18 +72,7 @@ private var configAssociationKey: UInt8 = 0
 /**
  *  UIViewController + STZPopupView
  */
-extension UIView {
-    
-    /// Popup conteiner view
-    private var containerView: UIView? {
-        //动态向类中添加 方法
-        get {
-            return objc_getAssociatedObject(self, &containerViewAssociationKey) as? UIView
-        }
-        set {
-            objc_setAssociatedObject(self, &containerViewAssociationKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-        }
-    }
+extension UIViewController {
     
     /// Popup view
     private var popupView: UIView? {
@@ -113,14 +102,14 @@ extension UIView {
     :param: popupView Popup view
     :param: config    Config (Option)
     */
-    public func presentPopupView(popupView: UIView,config: ZMDPopViewConfig = ZMDPopViewConfig()) {
-        self.addSubview(popupView)
+    public func presentPopupView(popupView: UIView,config: ZMDPopViewConfig!) {
+        self.view.addSubview(popupView)
         self.popupView = popupView
         self.config = config
         showAnimation()
     }
     private func showAnimation() {
-        if let config = config {
+        if let config = self.config {
             switch (config.showAnimation) {
             case .None:
                 completionShowAnimation(true)
@@ -135,7 +124,7 @@ extension UIView {
             case .SlideInFromRight:
                 slideInFromRight()
             case .Custom:
-                if let containerView = containerView, let popupView = popupView {
+                if let containerView = self.view, let popupView = popupView {
                     config.showCustomAnimation(containerView, popupView, { self.completionShowAnimation(true) })
                 }
             }
@@ -153,7 +142,8 @@ extension UIView {
     /**
     Dismiss popup
     */
-    public func dismissPopupView() {
+    public func dismissPopupView(popupView:UIView) {
+        self.popupView = popupView
         dismissAnimation()
     }
     
@@ -163,14 +153,11 @@ extension UIView {
         }
         
         // remove view
-        containerView?.removeFromSuperview()
-        containerView = nil
         config = nil
     }
     
     private func dismissAnimation() {
-        NSNotificationCenter.defaultCenter().postNotificationName("popDismiss", object: nil)
-        if let config = config {
+        if let config = self.config {
             switch (config.dismissAnimation) {
             case .None:
                 completionDismissAnimation(true)
@@ -185,7 +172,7 @@ extension UIView {
             case .SlideOutToRight:
                 slideOutToRight()
             case .Custom:
-                if let containerView = containerView, let popupView = popupView {
+                if let containerView = self.view, let popupView = popupView {
                     config.dismissCustomAnimation(containerView, popupView, { self.completionDismissAnimation(true) })
                 }
             }
@@ -195,7 +182,7 @@ extension UIView {
     // MARK: - Show Animation
     
     private func fadeIn() {
-        if let containerView = containerView {
+        if let containerView = self.view {
             containerView.alpha = 0
             UIView.animateWithDuration(0.2, animations: {
                 containerView.alpha = 1
@@ -217,20 +204,22 @@ extension UIView {
     }
     
     private func slideInFromBottom() {
-        if let containerView = containerView, let popupView = popupView {
+        if let containerView = self.view, let popupView = popupView {
             
             var frame = popupView.frame
             frame.origin.y = CGRectGetHeight(containerView.frame)
             popupView.frame = frame
             
-            UIView.animateWithDuration(0.3, animations: {
-                popupView.center = containerView.center
+            UIView.animateWithDuration(1.0, animations: {
+                var frame = popupView.frame
+                frame.origin.y = CGRectGetHeight(containerView.frame) -  CGRectGetHeight(frame)
+                popupView.frame = frame
                 }, completion: completionShowAnimation)
         }
     }
     
     private func slideInFromLeft() {
-        if let containerView = containerView, let popupView = popupView {
+        if let containerView = self.view, let popupView = popupView {
             
             var frame = popupView.frame
             frame.origin.x = -CGRectGetWidth(frame)
@@ -243,7 +232,7 @@ extension UIView {
     }
     
     private func slideInFromRight() {
-        if let containerView = containerView, let popupView = popupView {
+        if let containerView = self.view, let popupView = popupView {
             
             var frame = popupView.frame
             frame.origin.x = CGRectGetWidth(containerView.frame)
@@ -258,7 +247,7 @@ extension UIView {
     // MARK: - Dismiss Animation
     
     private func fadeOut() {
-        if let containerView = containerView {
+        if let containerView = self.view {
             UIView.animateWithDuration(0.2, animations: {
                 containerView.alpha = 0
                 }, completion: completionDismissAnimation)
@@ -266,7 +255,7 @@ extension UIView {
     }
     
     private func slideOutToTop() {
-        if let _ = containerView, let popupView = popupView {
+        if let _ = self.view, let popupView = popupView {
             UIView.animateWithDuration(0.3, animations: {
                 var frame = popupView.frame
                 frame.origin.y = -CGRectGetHeight(frame)
@@ -276,8 +265,8 @@ extension UIView {
     }
     
     private func slideOutToBottom() {
-        if let containerView = containerView, let popupView = popupView {
-            UIView.animateWithDuration(0.3, animations: {
+        if let containerView = self.view, let popupView = popupView {
+            UIView.animateWithDuration(0.8, animations: {
                 var frame = popupView.frame
                 frame.origin.y = CGRectGetHeight(containerView.frame)
                 popupView.frame = frame
@@ -286,7 +275,7 @@ extension UIView {
     }
     
     private func slideOutToLeft() {
-        if let _ = containerView, let popupView = popupView {
+        if let _ = self.view, let popupView = popupView {
             UIView.animateWithDuration(0.3, animations: {
                 var frame = popupView.frame
                 frame.origin.x = -CGRectGetWidth(frame)
@@ -296,7 +285,7 @@ extension UIView {
     }
     
     private func slideOutToRight() {
-        if let containerView = containerView, let popupView = popupView {
+        if let containerView = self.view, let popupView = popupView {
             UIView.animateWithDuration(0.3, animations: {
                 var frame = popupView.frame
                 frame.origin.x = CGRectGetWidth(containerView.frame)

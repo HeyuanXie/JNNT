@@ -134,15 +134,4 @@ extension UIView {
         }
     }
 }
-//各种基本设置
-extension UIView {
-    func getLabel() -> UILabel{
-        let label = UILabel(frame: CGRect.zero)
-        label.text = ""
-        label.textColor = UIColor.whiteColor()
-        label.font = UIFont.systemFontOfSize(10)
-        label.textAlignment = .Center
-        return label
-    }
-    
-}
+

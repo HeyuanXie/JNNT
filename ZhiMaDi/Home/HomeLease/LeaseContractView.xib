@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1713" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="333"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="租赁合同" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J9l-6M-csW" userLabel="Label  4f4f4f">
+                    <rect key="frame" x="100" y="20" width="120" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="Qrh-Q6-YAm"/>
+                        <constraint firstAttribute="width" constant="120" id="zTr-2W-3Rj"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                    <color key="textColor" red="0.30980392159999998" green="0.30980392159999998" blue="0.30980392159999998" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" tag="10002" contentMode="scaleToFill" text="合同" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ddm-O1-fSe">
+                    <rect key="frame" x="20" y="61" width="280" height="208"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textView>
+                <button opaque="NO" tag="10003" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8aP-Rd-ojl">
+                    <rect key="frame" x="0.0" y="289" width="320" height="44"/>
+                    <color key="backgroundColor" red="0.90980392160000001" green="0.23921568630000001" blue="0.23921568630000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="Bgo-Jh-d9Q"/>
+                    </constraints>
+                    <inset key="imageEdgeInsets" minX="-10" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    <state key="normal" title="同意葫芦堡用户租赁条款" image="common_01unselected.png">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="selected" title="同意葫芦堡用户租赁条款" image="common_02selected.png"/>
+                </button>
+                <button opaque="NO" tag="10001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2zJ-0S-NEA">
+                    <rect key="frame" x="276" y="4" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="1Ai-Zu-AEi"/>
+                        <constraint firstAttribute="width" constant="40" id="GzT-m2-GjC"/>
+                    </constraints>
+                    <state key="normal" image="common_delete_text.png"/>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="8aP-Rd-ojl" firstAttribute="top" secondItem="ddm-O1-fSe" secondAttribute="bottom" constant="20" id="2JK-6Z-F44"/>
+                <constraint firstAttribute="trailing" secondItem="2zJ-0S-NEA" secondAttribute="trailing" constant="4" id="2ps-ah-yhQ"/>
+                <constraint firstItem="ddm-O1-fSe" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="4oB-7A-WUx"/>
+                <constraint firstItem="2zJ-0S-NEA" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="4" id="CcQ-bD-Kio"/>
+                <constraint firstItem="8aP-Rd-ojl" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Rsl-HT-08o"/>
+                <constraint firstAttribute="bottom" secondItem="8aP-Rd-ojl" secondAttribute="bottom" id="Ww8-TP-9SB"/>
+                <constraint firstAttribute="trailing" secondItem="ddm-O1-fSe" secondAttribute="trailing" constant="20" id="YXT-gf-wvz"/>
+                <constraint firstItem="J9l-6M-csW" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="aea-hz-V7J"/>
+                <constraint firstItem="ddm-O1-fSe" firstAttribute="top" secondItem="J9l-6M-csW" secondAttribute="bottom" constant="20" id="eVI-8D-8Gn"/>
+                <constraint firstAttribute="trailing" secondItem="8aP-Rd-ojl" secondAttribute="trailing" id="nVd-gN-ZQu"/>
+                <constraint firstItem="J9l-6M-csW" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="ouP-n6-AHn"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="333" y="269.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="common_01unselected.png" width="20" height="20"/>
+        <image name="common_02selected.png" width="20" height="20"/>
+        <image name="common_delete_text.png" width="20" height="20"/>
+    </resources>
+</document>

@@ -250,9 +250,27 @@ extension ZMDTool {
 }
 
 extension ZMDTool {
-    class func getLine(frame:CGRect) -> UIView {
+    
+    class func getLabel(frame:CGRect,text:String,fontSize:CGFloat,textColor:UIColor = defaultTextColor) -> UILabel {
+        let label = UILabel(frame: frame)
+        label.backgroundColor = UIColor.clearColor()
+        label.text = text
+        label.font = defaultSysFontWithSize(fontSize)
+        label.textColor = textColor
+        return label
+    }
+    class func getButton (frame:CGRect,textForNormal:String,fontSize:CGFloat,textColorForNormal:UIColor = defaultTextColor,backgroundColor:UIColor,blockForCli : ((AnyObject!) -> Void)!) -> UIButton{
+        let btn = UIButton(frame: frame)
+        btn.backgroundColor = backgroundColor
+        btn.setTitle(textForNormal, forState: .Normal)
+        btn.setTitleColor(textColorForNormal, forState: .Normal)
+        btn.titleLabel!.font = defaultSysFontWithSize(fontSize)
+        btn.rac_signalForControlEvents(.TouchUpInside).subscribeNext(blockForCli)
+        return btn
+    }
+      class func getLine(frame:CGRect) -> UIView {
         let line = UIView(frame: frame)
-        line.backgroundColor = defaultBackgroundGrayColor
+        line.backgroundColor = defaultLineColor
         return line
     }
     class func getBtn (frame:CGRect) -> CustomBtn {

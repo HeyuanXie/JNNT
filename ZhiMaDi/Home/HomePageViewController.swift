@@ -291,7 +291,7 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
             cell!.contentView.backgroundColor = UIColor.whiteColor()
             
             for var i=0;i<5;i++ {
-                let btnY = 0
+                _ = 0
                 let btnHeight = kScreenWidth * 250 / 750
                 let width = kScreenWidth/5
                 let btn = UIButton(frame: CGRectMake(kScreenWidth/5*CGFloat(i), 0 ,width, btnHeight))

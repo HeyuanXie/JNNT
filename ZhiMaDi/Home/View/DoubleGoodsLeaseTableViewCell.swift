@@ -17,6 +17,7 @@ class DoubleGoodsLeaseTableViewCell: UITableViewCell {
     @IBOutlet weak var originalPriceLblLeft: UILabel!  // 原价
     @IBOutlet weak var countLblLeft: UILabel!
     @IBOutlet weak var isCollectionBtnLeft: UIButton!
+    @IBOutlet weak var currentPriceWidthLayout: NSLayoutConstraint!
     //right
     @IBOutlet weak var goodsImgVRight: UIImageView!
     @IBOutlet weak var titleLblRight: UILabel!
@@ -24,14 +25,12 @@ class DoubleGoodsLeaseTableViewCell: UITableViewCell {
     @IBOutlet weak var originalPriceLblRight: UILabel!
     @IBOutlet weak var countLblRight: UILabel!
     @IBOutlet weak var isCollectionRight: UIButton!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
     
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
-        // Configure the view for the selected state
     }
 }

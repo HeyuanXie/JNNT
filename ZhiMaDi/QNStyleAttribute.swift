@@ -23,7 +23,7 @@ let navigationBackgroundColor = UIColor.whiteColor()
 let navigationTextFont = UIFont.systemFontOfSize(19)
 
 // 选中的文字 按扭 颜色
-let defaultSelectColor = UIColor(red: 235/255, green: 61/255, blue: 61/255, alpha: 1.0)  //红色
+let defaultSelectColor = RGB(235,61,61,1.0)//UIColor(red: 235/255, green: 61/255, blue: 61/255, alpha: 1.0)  //红色
 
 // 常规文字 （标题 icon）
 let defaultTextColor = UIColor(red: 79/255, green: 79/255, blue: 79/255, alpha: 1.0) //黑色
@@ -89,7 +89,10 @@ extension ZMDTool {
     }
     /// 对UIView对象进行配置(cornerRadius)
     class func configViewLayer(view: UIView) {
-        view.layer.cornerRadius = 5
+        configViewLayerWithSize(view,size: 5)
+    }
+    class func configViewLayerWithSize(view: UIView,size:CGFloat) {
+        view.layer.cornerRadius = size
         view.layer.masksToBounds = true
     }
     ///对UIView对象进行配置(borderWidth) 默认颜色 defaultLineColor

@@ -26,8 +26,31 @@ extension String{
         size.height = min(simple.height * CGFloat(lines), size.height)
         return size
     }
-    
-    
+    //富文本  
+    /**
+    * attrStr   文本
+    * color     文本颜色
+    *
+    */
+    func AttributedText(attrStr:String,color:UIColor) -> NSAttributedString {
+        let attText = NSMutableAttributedString(string: self)
+        let rentPriceRange = (self as NSString).rangeOfString(attrStr, options: NSStringCompareOptions())
+        attText.setAttributes([NSForegroundColorAttributeName:defaultTextColor], range: NSMakeRange(0, rentPriceRange.location))
+        attText.setAttributes([NSForegroundColorAttributeName:RGB(235,61,61,1.0)], range: NSMakeRange(rentPriceRange.location, rentPriceRange.length))
+        attText.setAttributes([NSForegroundColorAttributeName:defaultTextColor], range: NSMakeRange(rentPriceRange.location + rentPriceRange.length, self.characters.count - (rentPriceRange.location + rentPriceRange.length)))
+        return attText
+    }
+
+    func AttributedMutableText(attrStrs:[String],colors:[UIColor]) -> NSAttributedString {
+        let attText = NSMutableAttributedString(string: self)
+        var i = 0
+        for attrStr in attrStrs {
+            let rentPriceRange = (self as NSString).rangeOfString(attrStr, options: NSStringCompareOptions())
+            attText.addAttribute(NSForegroundColorAttributeName, value: colors[i], range: NSMakeRange(rentPriceRange.location, rentPriceRange.length))
+            i++
+        }
+        return attText
+    }
     // MARK: 判断手机号码
     func checkStingIsPhone() -> Bool {
         // 手机号码

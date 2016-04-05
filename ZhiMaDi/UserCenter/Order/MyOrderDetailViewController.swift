@@ -8,126 +8,83 @@
 
 import UIKit
 // 我的订单详请
-class MyOrderDetailViewController: UIViewController,UITableViewDataSource, UITableViewDelegate {
+class MyOrderDetailViewController: UIViewController {
     
     enum UserCenterCellType{
-        case UserHead
-        case UserMyOrder
-        case UserMyOrderMenu
-        case UserWallet
-        case UserBankCard
-        case UserCardVolume
-        case UserMyCrowdFunding
+        case OrderNum
+        case LogisticsMsg
+        case AcceptMsg
         
-        case UserMyStore
-        case UserVipClub
-        case UserCommission
-        case UserInvitation
+        case Store
+        case Goods
+        case Service
         
-        case UserHelp
-        case UserMore
+        case Pay
+        case Mark
+        case Invoice
+        case Discount
+        case Jifeng
+        
+        case Total
         
         init(){
-            self = UserHead
+            self = OrderNum
         }
         
         var title : String{
             switch self{
-            case UserHead :
-                return ""
-            case UserMyOrder :
-                return ""
-            case UserMyOrderMenu :
-                return ""
-                
-            case UserWallet :
-                return "钱包"
-            case UserBankCard :
-                return "银行卡"
-            case UserCardVolume :
-                return "卡券"
-            case UserMyCrowdFunding :
-                return "我的众筹"
-                
-            case UserMyStore :
-                return "我的店铺"
-            case UserVipClub :
-                return "会员俱乐部"
-            case UserCommission :
-                return "赚佣金"
-            case UserInvitation :
-                return "邀请好友注册"
-                
-            case UserHelp :
-                return "帮助与反馈"
-            case UserMore :
-                return "浏览记录"
-            }
-        }
-        var image : UIImage?{
-            switch self{
-            case UserWallet :
-                return UIImage(named: "user_wallet")
-            case UserBankCard :
-                return UIImage(named: "user_bankcard")
-            case UserCardVolume :
-                return UIImage(named: "user_card")
-            case UserMyCrowdFunding :
-                return UIImage(named: "user_crowdfunding")
-                
-            case UserMyStore :
-                return UIImage(named: "user_myshop")
-            case UserVipClub :
-                return UIImage(named: "user_vipclub")
-            case UserCommission :
-                return UIImage(named: "user_earn")
-            case UserInvitation :
-                return UIImage(named: "user_share")
-                
-            case UserHelp :
-                return UIImage(named: "user_help")
+            case Pay :
+                return "支付方式:"
+            case Mark :
+                return "备注"
+            case Invoice :
+                return "发票:"
+            case Discount:
+                return "优惠:"
+            case Jifeng:
+                return "获得积分:"
             default :
-                return UIImage(named: "")
+                return ""
             }
         }
-        
-        var pushViewController :UIViewController{
-            let viewController: UIViewController
-            switch self{
-            case UserMyOrder:
-                viewController = MyOrderViewController.CreateFromMainStoryboard() as! MyOrderViewController
-            case UserMyOrderMenu:
-                viewController = UIViewController()
-            case UserWallet:
-                viewController = UIViewController()
-            case UserBankCard:
-                viewController = UIViewController()
-            case UserCardVolume:
-                viewController = UIViewController()
-            case UserMyCrowdFunding:
-                viewController = UIViewController()
-                
-            case UserMyStore:
-                viewController = UIViewController()
-            case UserVipClub:
-                viewController = UIViewController()
-            case UserCommission:
-                viewController = UIViewController()
-            case UserInvitation:
-                viewController = UIViewController()
-                
-            case UserHelp:
-                viewController = UIViewController()
-            default :
-                viewController = UIViewController()
-            }
-            viewController.hidesBottomBarWhenPushed = true
-            return viewController
-        }
-        
-        func didSelect(navViewController:UINavigationController){
-            navViewController.pushViewController(pushViewController, animated: true)
-        }
+//        
+//        var pushViewController :UIViewController{
+//            let viewController: UIViewController
+//            switch self{
+//            case UserMyOrder:
+//                viewController = MyOrderViewController.CreateFromMainStoryboard() as! MyOrderViewController
+//            case UserMyOrderMenu:
+//                viewController = UIViewController()
+//            case UserWallet:
+//                viewController = UIViewController()
+//            case UserBankCard:
+//                viewController = UIViewController()
+//            case UserCardVolume:
+//                viewController = UIViewController()
+//            case UserMyCrowdFunding:
+//                viewController = UIViewController()
+//                
+//            case UserMyStore:
+//                viewController = UIViewController()
+//            case UserVipClub:
+//                viewController = UIViewController()
+//            case UserCommission:
+//                viewController = UIViewController()
+//            case UserInvitation:
+//                viewController = UIViewController()
+//                
+//            case UserHelp:
+//                viewController = UIViewController()
+//            default :
+//                viewController = UIViewController()
+//            }
+//            viewController.hidesBottomBarWhenPushed = true
+//            return viewController
+//        }
+//        
+//        func didSelect(navViewController:UINavigationController){
+//            navViewController.pushViewController(pushViewController, animated: true)
+//        }
     }
     
     @IBOutlet weak var currentTableView: UITableView!
@@ -166,69 +123,152 @@ class MyOrderDetailViewController: UIViewController,UITableViewDataSource, UITab
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         let cellType = self.userCenterData[indexPath.section][indexPath.row]
         switch cellType {
-        case .UserHead:
-            return 190
+        case .OrderNum :
+            return 54
+        case .LogisticsMsg :
+            return 118
+        case .AcceptMsg :
+            return 100
+        case .Store:
+            return 48
+        case .Goods :
+            return 110
+        case .Service:
+            return 62
+        case .Total:
+            return 75
         default :
-            return 55
+            return 56
         }
-        if indexPath.section == 0 {
-            return 200
-        }
-        return indexPath.section == 1 ? kScreenWidth/3 * 2 : 44
     }
-    
+
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cellType = self.userCenterData[indexPath.section][indexPath.row]
         switch cellType {
-        case .UserHead:
-            let cellId = "HeadCell"
-            let cell = tableView.dequeueReusableCellWithIdentifier(cellId)
-            if let personImgV = cell!.viewWithTag(10001) {
-                ZMDTool.configViewLayerWithSize(personImgV, size: 42)
-            }
-            return cell!
-        case .UserMyOrder :
-            let cellId = "MyOrderCell"
-            let cell = tableView.dequeueReusableCellWithIdentifier(cellId)
-            return cell!
-        case .UserMyOrderMenu :
-            let cellId = "MyOrderMenuCell"
+        case .OrderNum:
+            let cellId = "OrderNumCell"
             var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
             if cell == nil {
                 cell = UITableViewCell(style: .Subtitle, reuseIdentifier: cellId)
                 cell?.accessoryType = UITableViewCellAccessoryType.None
                 cell!.selectionStyle = .None
                 ZMDTool.configTableViewCellDefault(cell!)
-                
-                let menuTitle = ["0\n待付款","0\n待发货","0\n待收货","0\n待评价","0\n退货/售后"]
-                var i = 0
-                for title  in menuTitle {
-                    let width = kScreenWidth/5,height = CGFloat(55)
-                    let x = CGFloat(i) * width
-                    i++
-                    let btn = ZMDTool.getButton(CGRect(x: x, y: 0, width: width, height: height), textForNormal: title, fontSize: 14, backgroundColor: UIColor.clearColor(), blockForCli: { (sender) -> Void in
-                        
-                    })
-                    btn.titleLabel?.numberOfLines = 2
-                    btn.titleLabel?.textAlignment = .Center
-                    cell?.contentView.addSubview(btn)
-                }
             }
+            let numLbl = ZMDTool.getLabel(CGRect(x: 12, y: 0, width: 300, height: 54), text: "订单编号 ： 1524235232342", fontSize: 17)
+            cell?.contentView.addSubview(numLbl)
+            let typeLbl = ZMDTool.getLabel(CGRect(x: kScreenWidth  - 92, y: 0, width: 80, height: 54), text: "等待收货", fontSize: 17,textColor: RGB(235,61,61,1.0))
+            cell?.contentView.addSubview(typeLbl)
+            let line = ZMDTool.getLine(CGRect(x: 0, y: 53.5, width: kScreenWidth, height: 0.5))
+            cell?.contentView.addSubview(line)
             return cell!
-        case .UserMore :
-            let cellId = "MoreCell"
+        case .LogisticsMsg :
+            let cellId = "LogisticsMsgCell"
+            var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
+            if cell == nil {
+                cell = UITableViewCell(style: .Subtitle, reuseIdentifier: cellId)
+                cell?.accessoryType = UITableViewCellAccessoryType.None
+                cell!.selectionStyle = .None
+                ZMDTool.configTableViewCellDefault(cell!)
+            }
+            let arrowImgV = UIImageView(frame: CGRect(x: kScreenWidth - 27, y: 20, width: 9, height: 15))
+            arrowImgV.image = UIImage(named: "common_forward")
+            let numLbl = ZMDTool.getLabel(CGRect(x: 12, y: 20, width: 300, height: 17), text: "查看物流", fontSize: 17)
+            cell?.contentView.addSubview(numLbl)
+            cell?.contentView.addSubview(arrowImgV)
+            let wuliuLbl = ZMDTool.getLabel(CGRect(x: 12, y: 20+17+8, width: kScreenWidth-24, height: 15), text: "物流顺丰", fontSize: 15,textColor:defaultDetailTextColor)
+            cell?.contentView.addSubview(wuliuLbl)
+            let orderLbl = ZMDTool.getLabel(CGRect(x: 12, y: 20+17+8+15+8, width: kScreenWidth-24, height: 15), text: "下单时间 : 2016-02-20 15:3:23", fontSize: 15,textColor:defaultDetailTextColor)
+            cell?.contentView.addSubview(orderLbl)
+            let fahuoLbl = ZMDTool.getLabel(CGRect(x: 12, y: 20+17+8+15+8 + 15 + 8, width: kScreenWidth-24, height: 15), text: "发货时间 : 2016-02-20 15:3:23", fontSize: 15,textColor:defaultDetailTextColor)
+            cell?.contentView.addSubview(fahuoLbl)
+            return cell!
+        case .AcceptMsg :
+            let cellId = "AcceptMsgCell"
+            var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
+            if cell == nil {
+                cell = UITableViewCell(style: .Subtitle, reuseIdentifier: cellId)
+                cell?.accessoryType = UITableViewCellAccessoryType.None
+                cell!.selectionStyle = .None
+                ZMDTool.configTableViewCellDefault(cell!)
+            }
+            let userLbl = ZMDTool.getLabel(CGRect(x: 12, y: 16, width: 300, height: 17), text: "收货人 ：葫芦一娃", fontSize: 17)
+            cell?.contentView.addSubview(userLbl)
+            let phoneLbl = ZMDTool.getLabel(CGRect(x: kScreenWidth - 12 - 120, y: 16, width: 300, height: 17), text: "13780338447", fontSize: 17)
+            cell?.contentView.addSubview(phoneLbl)
+            let addressStr = "收货地址:广东省东莞市松山湖高新技术产业园新新"
+            let addressSize = addressStr.sizeWithFont(defaultSysFontWithSize(17), maxWidth: kScreenWidth - 24)
+            let addressLbl = ZMDTool.getLabel(CGRect(x: 12, y: 16 + 17 + 15, width: kScreenWidth - 24, height: addressSize.height), text: addressStr, fontSize: 17)
+            addressLbl.numberOfLines = 2
+            cell?.contentView.addSubview(addressLbl)
+            return cell!
+        case .Store :
+            let cellId = "StoreCell"
+            let cell = tableView.dequeueReusableCellWithIdentifier(cellId)
+            let line = ZMDTool.getLine(CGRect(x: 0, y: 47.5, width: kScreenWidth, height: 0.5))
+            cell?.contentView.addSubview(line)
+            return cell!
+        case .Goods :
+            let cellId = "GoodsCell"
+            let cell = tableView.dequeueReusableCellWithIdentifier(cellId) as! OrderGoodsTableViewCell
+            return cell
+        case .AcceptMsg :
+            let cellId = "AcceptMsgCell"
+            var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
+            if cell == nil {
+                cell = UITableViewCell(style: .Subtitle, reuseIdentifier: cellId)
+                cell?.accessoryType = UITableViewCellAccessoryType.None
+                cell!.selectionStyle = .None
+                ZMDTool.configTableViewCellDefault(cell!)
+            }
+            let userLbl = ZMDTool.getLabel(CGRect(x: 12, y: 16, width: 300, height: 54), text: "收货人 ：葫芦一娃", fontSize: 17)
+            cell?.contentView.addSubview(userLbl)
+            let phoneLbl = ZMDTool.getLabel(CGRect(x: 12, y: 16, width: 300, height: 54), text: "13780338447", fontSize: 17)
+            cell?.contentView.addSubview(phoneLbl)
+            let addressLbl = ZMDTool.getLabel(CGRect(x: 12, y: 16 + 17 + 15, width: kScreenWidth - 24, height: 54), text: "收货地址:广东省东莞市松山湖高新技术产业园新新", fontSize: 17)
+            addressLbl.numberOfLines = 2
+            cell?.contentView.addSubview(addressLbl)
+            return cell!
+        case .Service :
+            let cellId = "ServiceCell"
             var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
             if cell == nil {
                 cell = UITableViewCell(style: .Subtitle, reuseIdentifier: cellId)
                 cell?.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
                 cell!.selectionStyle = .None
                 ZMDTool.configTableViewCellDefault(cell!)
-                
-                let label = ZMDTool.getLabel(CGRect(x: kScreenWidth - 34 - 100, y: 0, width: 100, height: 55), text: "更多", fontSize: 15,textColor:defaultDetailTextColor)
-                label.textAlignment = .Right
-                cell?.contentView.addSubview(label)
             }
-            cell!.textLabel?.text = cellType.title
+            let contactBtn = ZMDTool.getButton(CGRect(x: kScreenWidth/2-14-130 , y: 12, width: 130, height: 40), textForNormal: "联系商家", fontSize: 16, backgroundColor: UIColor.whiteColor(), blockForCli: { (sender) -> Void in
+                
+            })
+            ZMDTool.configViewLayerFrameWithColor(contactBtn, color: defaultTextColor)
+            ZMDTool.configViewLayer(contactBtn)
+            contactBtn.setImage(UIImage(named: "product_chat"), forState: .Normal)
+            cell?.contentView.addSubview(contactBtn)
+            let fefundBtn = ZMDTool.getButton(CGRect(x: kScreenWidth/2+14 , y: 12, width: 130, height: 40), textForNormal: "退款/售后", fontSize: 16, backgroundColor: UIColor.whiteColor(), blockForCli: { (sender) -> Void in
+                
+            })
+            ZMDTool.configViewLayerFrameWithColor(fefundBtn, color: defaultTextColor)
+            ZMDTool.configViewLayer(fefundBtn)
+            fefundBtn.setImage(UIImage(named: "pay_shouhou"), forState: .Normal)
+            cell?.contentView.addSubview(fefundBtn)
+            return cell!
+        case .Total :
+            let cellId = "TotalCell"
+            var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
+            if cell == nil {
+                cell = UITableViewCell(style: .Subtitle, reuseIdentifier: cellId)
+                cell?.accessoryType = UITableViewCellAccessoryType.None
+                cell!.selectionStyle = .None
+                ZMDTool.configTableViewCellDefault(cell!)
+            }
+            let leftLbl = ZMDTool.getLabel(CGRect(x: 12, y: 16, width: 100, height: 17), text: "共一件商品", fontSize: 17)
+            cell?.contentView.addSubview(leftLbl)
+            let payLbl = ZMDTool.getLabel(CGRect(x: kScreenWidth - 12 - 200, y: 20, width: 200, height: 17), text: "实付：525.0", fontSize: 17)
+            payLbl.textAlignment = .Right
+            cell?.contentView.addSubview(payLbl)
+            let monnyLbl = ZMDTool.getLabel(CGRect(x: 12, y: 20 + 17 + 10, width: kScreenWidth - 24, height: 15), text: "(含运费80.0)", fontSize: 15,textColor: defaultDetailTextColor)
+            monnyLbl.textAlignment = .Right
+            cell?.contentView.addSubview(monnyLbl)
             return cell!
         default :
             let cellId = "OtherCell"
@@ -239,10 +279,8 @@ class MyOrderDetailViewController: UIViewController,UITableViewDataSource, UITab
                 cell!.selectionStyle = .None
                 ZMDTool.configTableViewCellDefault(cell!)
                 
-                cell?.contentView.addSubview(ZMDTool.getLine(CGRect(x: 0, y: 54.5, width: kScreenWidth, height: 0.5)))
+                cell?.contentView.addSubview(ZMDTool.getLine(CGRect(x: 0, y: 55.5, width: kScreenWidth, height: 0.5)))
             }
-            
-            cell?.imageView?.image = cellType.image
             cell!.textLabel?.text = cellType.title
             return cell!
         }
@@ -250,20 +288,37 @@ class MyOrderDetailViewController: UIViewController,UITableViewDataSource, UITab
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cellType = self.userCenterData[indexPath.section][indexPath.row]
         switch cellType{
-        case .UserMyOrder:
-            cellType.didSelect(self.navigationController!)
+        case .LogisticsMsg:
+             let vc = OrderLogisticsMsgViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
         default:
             break
         }
     }
     //MARK:Private Method
-    func configHead() {
-        
-    }
+//    func configHead() {
+//        
+//    }
     func updateUI() {
         self.currentTableView.backgroundColor = tableViewdefaultBackgroundColor
+        
+        let view = UIView(frame: CGRect(x: 0, y: kScreenHeight - 64 - 58, width: kScreenWidth, height: 58))
+        view.backgroundColor = RGB(247,247,247,1.0)
+        let confirmBtn = ZMDTool.getButton(CGRect(x: kScreenWidth - 12 - 90, y: 12, width: 90, height: 34), textForNormal: "确认签收", fontSize: 15,textColorForNormal:RGB(235,61,61,1.0), backgroundColor: UIColor.whiteColor()) { (sender) -> Void in
+            
+        }
+        ZMDTool.configViewLayerFrameWithColor(confirmBtn, color: RGB(235,61,61,1.0))
+        ZMDTool.configViewLayer(confirmBtn)
+        view.addSubview(confirmBtn)
+        let checkBtn = ZMDTool.getButton(CGRect(x: kScreenWidth - 12 - 90 - 10 - 90, y: 12, width: 90, height: 34), textForNormal: "查看物流", fontSize: 15,backgroundColor: UIColor.whiteColor()) { (sender) -> Void in
+            
+        }
+        ZMDTool.configViewLayerFrameWithColor(checkBtn, color: defaultTextColor)
+        ZMDTool.configViewLayer(checkBtn)
+        view.addSubview(checkBtn)
+        self.view.addSubview(view)
     }
     private func dataInit(){
-        self.userCenterData = [[.UserHead,.UserMyOrder,.UserMyOrderMenu], [.UserWallet,.UserBankCard,.UserCardVolume,.UserMyCrowdFunding],[.UserWallet,.UserMyStore,.UserVipClub,.UserCommission,.UserInvitation],[.UserHelp],[.UserMore]]
+        self.userCenterData = [[.OrderNum,.LogisticsMsg,.AcceptMsg], [.Store,.Goods,.Service],[.Pay,.Mark,.Invoice,.Discount,.Jifeng],[.Total]]
     }
 }

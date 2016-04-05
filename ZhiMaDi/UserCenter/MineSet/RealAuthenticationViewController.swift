@@ -9,11 +9,10 @@
 import UIKit
 //实名认证
 class RealAuthenticationViewController: UIViewController,UITableViewDataSource, UITableViewDelegate,ZMDInterceptorProtocol,ZMDInterceptorNavigationBarShowProtocol,ZMDInterceptorMoreProtocol {
-
+    var currentTableView : UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        self.subViewInit()
     }
 
     override func didReceiveMemoryWarning() {
@@ -49,13 +48,21 @@ class RealAuthenticationViewController: UIViewController,UITableViewDataSource, 
             
             ZMDTool.configTableViewCellDefault(cell!)
         }
-        if let lbl = cell?.viewWithTag(10001) as? UILabel {
-            lbl.text = indexPath.section == 0  ? "个人认证" : "企业认证"
-        }
+        cell?.textLabel!.text = indexPath.section == 0  ? "银行卡认证" : "身份证认证"
         return cell!
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let vc = indexPath.section == 0 ? PersonAuthenticationViewController.CreateFromMainStoryboard() as! PersonAuthenticationViewController : BusinessAuthenticationViewController.CreateFromMainStoryboard() as! BusinessAuthenticationViewController
+        let vc = indexPath.section == 0 ? MineBankCardHomeViewController() : PersonAuthenticationViewController.CreateFromMainStoryboard() as! PersonAuthenticationViewController
         self.navigationController?.pushViewController(vc, animated: true)
     }
+    //MARK:- Private Method
+    private func subViewInit(){
+        self.currentTableView = UITableView(frame: self.view.bounds)
+        self.currentTableView.backgroundColor = tableViewdefaultBackgroundColor
+        self.currentTableView.separatorStyle = .None
+        self.currentTableView.dataSource = self
+        self.currentTableView.delegate = self
+        self.view.addSubview(self.currentTableView)
+    }
+
 }

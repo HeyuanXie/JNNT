@@ -15,7 +15,9 @@ extension UIViewController {
     public class func CreateFromMainStoryboard() ->  AnyObject! {
         return self.CreateFromStoryboard("Main")
     }
-    
+    public class func CreateFromLoginStoryboard() ->  AnyObject! {
+        return self.CreateFromStoryboard("Login")
+    }
     //MARK: 从 storyboardName.storyboard 初始化一个当前类
     // 从 storyboardName.storyboard 中创建一个使用了当前类作为 StoryboardID 的类
     public class func CreateFromStoryboard(name: String) -> AnyObject! {
@@ -46,6 +48,14 @@ extension UIViewController {
             self.dismissViewControllerAnimated(true, completion: { () -> Void in })
         }
     }
+    @IBAction func gotoMore() {
+        if let navigationController = self.navigationController where (navigationController.viewControllers.first) != self {
+            navigationController.popViewControllerAnimated(true)
+        }
+        else {
+            self.dismissViewControllerAnimated(true, completion: { () -> Void in })
+        }
+    }
 }
 
 //MARK:- 为 UIViewController ... 提供一个标准的导航栏返回按钮配置
@@ -63,7 +73,7 @@ extension UIViewController {
         self.navigationItem.rightBarButtonItem = item
     }
     public func configMoreButton() {
-        let item = UIBarButtonItem(image: UIImage(named: "Msn_More")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate), style: UIBarButtonItemStyle.Done, target: self, action: Selector("back"))
+        let item = UIBarButtonItem(image: UIImage(named: "common_more")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate), style: UIBarButtonItemStyle.Done, target: self, action: Selector("gotoMore"))
         item.customView?.tintColor = UIColor.blackColor()
         
         self.navigationItem.rightBarButtonItem = item

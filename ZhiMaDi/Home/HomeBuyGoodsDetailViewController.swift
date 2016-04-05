@@ -486,7 +486,8 @@ class HomeBuyGoodsDetailViewController: UIViewController,UITableViewDataSource,U
                         shareView.showShareView()
                     }
                 } else if (sender as! UIButton).titleLabel?.text == titles[2] {
-                    
+                    let vc = ConfirmOrderViewController.CreateFromMainStoryboard() as! ConfirmOrderViewController
+                    self?.navigationController?.pushViewController(vc, animated: true)
                 }
             })
             self.bottomV.addSubview(bottomBtn)

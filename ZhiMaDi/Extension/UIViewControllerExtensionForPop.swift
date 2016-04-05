@@ -83,7 +83,6 @@ extension UIViewController {
             objc_setAssociatedObject(self, &popupViewAssociationKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
-    
     /// Popup config
     private var config: ZMDPopViewConfig? {
         get {
@@ -182,7 +181,7 @@ extension UIViewController {
     // MARK: - Show Animation
     
     private func fadeIn() {
-        if let containerView = self.view {
+        if let containerView = self.popupView {
             containerView.alpha = 0
             UIView.animateWithDuration(0.2, animations: {
                 containerView.alpha = 1
@@ -247,10 +246,11 @@ extension UIViewController {
     // MARK: - Dismiss Animation
     
     private func fadeOut() {
-        if let containerView = self.view {
+        if let containerView = self.popupView {
             UIView.animateWithDuration(0.2, animations: {
                 containerView.alpha = 0
                 }, completion: completionDismissAnimation)
+            containerView.removeFromSuperview()
         }
     }
     

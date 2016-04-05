@@ -136,11 +136,17 @@ class MineHomeViewController: UIViewController,UITableViewDataSource, UITableVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if !g_isLogin {
+            ZMDTool.enterLoginViewController()
+        }
         self.dataInit()
         self.updateUI()
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
+//        if !g_isLogin {
+//            ZMDTool.enterLoginViewController()
+//        }
     }
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(true)
@@ -262,6 +268,13 @@ class MineHomeViewController: UIViewController,UITableViewDataSource, UITableVie
     }
     func updateUI() {
         self.currentTableView.backgroundColor = tableViewdefaultBackgroundColor
+        let rightItem = UIBarButtonItem(image: UIImage(named: "user_set"), style: .Done, target: nil, action: nil)
+        rightItem.rac_command = RACCommand(signalBlock: { (sender) -> RACSignal! in
+            let vc = PersonInfoViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+            return RACSignal.empty()
+        })
+        self.navigationItem.rightBarButtonItem = rightItem
     }
     private func dataInit(){
         self.userCenterData = [[.UserHead,.UserMyOrder,.UserMyOrderMenu], [.UserWallet,.UserBankCard,.UserCardVolume,.UserMyCrowdFunding],[.UserWallet,.UserMyStore,.UserVipClub,.UserCommission,.UserInvitation],[.UserHelp],[.UserMore]]

@@ -12,10 +12,10 @@ class PersonInfoViewController:UIViewController,UITableViewDataSource, UITableVi
     enum UserCenterCellType{
         case Head
         case NickN
-        case Name
-        case Sex
+        case RealName
+        case ChangePs
         case Address
-        case Resume
+        case Clean
         
         init(){
             self = Head
@@ -27,14 +27,15 @@ class PersonInfoViewController:UIViewController,UITableViewDataSource, UITableVi
                 return "头像"
             case NickN:
                 return "昵称"
-            case Name :
-                return "姓名"
-            case Sex:
-                return "性别"
+            case RealName :
+                return "实名认证"
+            case ChangePs:
+                return "修改登陆密码"
             case Address:
-                return "收货地址"
-            case Resume:
-                return "简介"
+                return "管理收货地址"
+                
+            case Clean:
+                return "清理缓存"
             }
         }
 
@@ -46,13 +47,13 @@ class PersonInfoViewController:UIViewController,UITableViewDataSource, UITableVi
                 viewController = UIViewController()
             case NickN:
                 viewController = UIViewController()
-            case Name :
-                viewController = UIViewController()
-            case Sex:
+            case RealName :
+                viewController = RealAuthenticationViewController()
+            case ChangePs:
                 viewController = UIViewController()
             case Address:
                 viewController = AddressViewController.CreateFromMainStoryboard() as! AddressViewController
-            case Resume:
+            case Clean:
                 viewController = PersonIntroductionViewController()
             }
             viewController.hidesBottomBarWhenPushed = true
@@ -68,9 +69,9 @@ class PersonInfoViewController:UIViewController,UITableViewDataSource, UITableVi
     var headerView: UIImageView!
     var nameLB: UILabel!
     var sexLB: UILabel!
-    var addressLB: UITextView!
+    var addressLB: UILabel!
     var descriptionLB: UILabel!
-    
+    var moreView :UIView!
     var picker: UIImagePickerController?
     
     var userCenterData: [UserCenterCellType]!
@@ -95,17 +96,17 @@ class PersonInfoViewController:UIViewController,UITableViewDataSource, UITableVi
         return self.userCenterData.count
     }
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return (section == self.userCenterData.count - 1) ? 10 : 1
+        return (section == self.userCenterData.count - 1) ? 16 : 1
     }
     func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0
     }
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return indexPath.section == 0 ? 80 : tableViewCellDefaultHeight
+        return indexPath.section == 0 ? 85 : tableViewCellDefaultHeight
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cellId = "cell"
+        let cellId = "cell\(indexPath.row)\(indexPath.section)"
         var cell = tableView.dequeueReusableCellWithIdentifier(cellId) as UITableViewCell!
         if cell == nil{
             cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: cellId)
@@ -120,7 +121,7 @@ class PersonInfoViewController:UIViewController,UITableViewDataSource, UITableVi
         case .Head:
             cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
             if self.headerView == nil {
-                self.headerView = UIImageView(frame: CGRectMake(cell.contentView.bounds.size.width - 70, 15, 50, 50))
+                self.headerView = UIImageView(frame: CGRectMake(kScreenWidth - 60 - 38 - 19 , 17, 60, 60))
                 self.headerView.autoresizingMask = UIViewAutoresizing.FlexibleLeftMargin
                 self.headerView.layer.masksToBounds = true
                 self.headerView.layer.cornerRadius = self.headerView.frame.width/2
@@ -128,39 +129,33 @@ class PersonInfoViewController:UIViewController,UITableViewDataSource, UITableVi
             }
             cell.contentView.addSubview(self.headerView)
         case .NickN:
-            self.nameLB = UILabel(frame: CGRectMake(0, 0, tableView.bounds.width - 120, tableViewCellDefaultHeight))
-            self.nameLB.font = UIFont.systemFontOfSize(16)
+            cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+            self.nameLB = UILabel(frame: CGRectMake(kScreenWidth - 100 - 38 , 0, 100, tableViewCellDefaultHeight))
+            self.nameLB.font = UIFont.systemFontOfSize(17)
             self.nameLB.text = "张三"
             self.nameLB.textAlignment = NSTextAlignment.Right
-            self.nameLB.textColor = UIColor(white: 66/255, alpha: 1)
-            cell.accessoryView = self.nameLB
-        case .Sex:
-            self.sexLB = UILabel(frame: CGRectMake(0, 0, tableView.bounds.width - 120, tableViewCellDefaultHeight))
-            self.sexLB.font = UIFont.systemFontOfSize(14)
+            self.nameLB.textColor = defaultDetailTextColor
+            cell.contentView.addSubview(self.nameLB)
+        case .RealName:
+            cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+            self.sexLB = UILabel(frame: CGRectMake(kScreenWidth - 100 - 38, 0,100, tableViewCellDefaultHeight))
+            self.sexLB.font = UIFont.systemFontOfSize(17)
             self.sexLB.textAlignment = NSTextAlignment.Right
-            
-            self.sexLB.text = "女"
-            self.sexLB.textColor = UIColor(white: 66/255, alpha: 1)
-            cell.accessoryView = self.sexLB
+            self.sexLB.text = "未认证"
+            self.sexLB.textColor = defaultDetailTextColor
+            cell.contentView.addSubview(self.sexLB)
         case .Address:
             cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
-            self.addressLB = UITextView(frame: CGRectMake(0, 0, tableView.bounds.width - 120, size.height + 16))
-            self.addressLB.font = UIFont.systemFontOfSize(16)
+            self.addressLB = UILabel(frame: CGRectMake(kScreenWidth - 100 - 38,0,100,tableViewCellDefaultHeight))
+            self.addressLB.font = UIFont.systemFontOfSize(17)
             self.addressLB.text = "松山湖"
             self.addressLB.textAlignment = NSTextAlignment.Right
-            self.addressLB.textColor = UIColor(white: 66/255, alpha: 1)
-            self.addressLB.editable = false
-            cell.accessoryView = self.addressLB
-        case .Resume:
+            self.addressLB.textColor = defaultDetailTextColor
+            cell.contentView.addSubview(self.addressLB)
+        case .ChangePs:
             cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
-            self.descriptionLB = UILabel(frame: CGRectMake(70, 20, kScreenWidth - 120, 16))
-            self.descriptionLB.font = UIFont.systemFontOfSize(16)
-            self.descriptionLB.text = "技术男"
-            self.descriptionLB.textAlignment = NSTextAlignment.Right
-            self.descriptionLB.textColor = UIColor(white: 66/255, alpha: 1)
-            cell.contentView.addSubview(self.descriptionLB)
-        default :
-            break
+        case .Clean:
+            cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
         }
         
         ZMDTool.configTableViewCellDefault(cell)
@@ -198,6 +193,7 @@ class PersonInfoViewController:UIViewController,UITableViewDataSource, UITableVi
             type.didSelect(self.navigationController!)
         }
     }
+
     //MARK: UIImagePickerControllerDelegate
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
         // 存储图片
@@ -266,7 +262,7 @@ class PersonInfoViewController:UIViewController,UITableViewDataSource, UITableVi
 
     //MARK:- Private Method
     private func subViewInit(){
-        self.title = "个人资料"
+        self.title = "个人设置"
         self.tableView = UITableView(frame: self.view.bounds, style: UITableViewStyle.Plain)
         self.tableView.backgroundColor = defaultBackgroundGrayColor
         self.tableView.separatorStyle = .None
@@ -275,6 +271,46 @@ class PersonInfoViewController:UIViewController,UITableViewDataSource, UITableVi
         self.view.addSubview(self.tableView)
     }
     private func dataInit(){
-        self.userCenterData = [UserCenterCellType.Head,UserCenterCellType.NickN,UserCenterCellType.Name, UserCenterCellType.Sex, UserCenterCellType.Address, UserCenterCellType.Resume]
+        self.userCenterData = [UserCenterCellType.Head,UserCenterCellType.NickN,UserCenterCellType.RealName, UserCenterCellType.Address, UserCenterCellType.ChangePs, UserCenterCellType.Clean]
+    }
+    func moreViewUpdate() {
+        if self.moreView == nil {
+            let titles = ["消息":UIImage(named: "common_more_message"),"首页":UIImage(named: "common_more_home")]
+            let view = UIView(frame: CGRect(x:kScreenWidth-150-12, y: 0, width: 150, height: 48*CGFloat(titles.count)))
+            self.moreView = view
+            var i = 0
+            for title in titles {
+                let btn = UIButton(frame: CGRect(x: 0, y: 48*i, width: 150, height: 48))
+                btn.backgroundColor = UIColor(white: 0, alpha: 0.5)
+                btn.tag = i
+                btn.rac_signalForControlEvents(.TouchUpInside).subscribeNext({ (sender) -> Void in
+                    self.navigationController?.popToRootViewControllerAnimated(true)
+                    self.tabBarController?.selectedIndex = 0
+                })
+                let imgV = UIImageView(frame: CGRect(x: 10, y: 14, width: 20, height: 20))
+                imgV.image = title.1
+                btn.addSubview(imgV)
+                let label = UILabel(frame: CGRect(x: 40, y: 0, width: 110, height: 48))
+                label.text = title.0
+                label.textColor = UIColor.whiteColor()
+                btn.addSubview(label)
+                view.addSubview(btn)
+                i++
+            }
+            let line = UIView(frame: CGRect(x:0, y: 48, width: 150, height: 1))
+            line.backgroundColor = UIColor.whiteColor()
+            self.moreView.addSubview(line)
+        }
+    }
+    //重写
+    override func gotoMore() {
+        let containView = UIButton(frame: self.view.bounds)
+        containView.rac_signalForControlEvents(.TouchUpInside).subscribeNext { (sender) -> Void in
+            self.dismissPopupView(self.moreView)
+            containView.removeFromSuperview()
+        }
+        self.view.addSubview(containView)
+        self.moreViewUpdate()
+        self.presentPopupView(self.moreView, config: ZMDPopViewConfig())
     }
 }

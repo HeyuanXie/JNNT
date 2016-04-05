@@ -9,12 +9,14 @@
 import UIKit
 //编辑或增加收货地址
 class AddressEditOrAddViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,ZMDInterceptorProtocol,ZMDInterceptorNavigationBarShowProtocol,ZMDInterceptorMoreProtocol {
-    @IBOutlet weak var currentTableView: UITableView!
+    var currentTableView: UITableView!
+    var usrNameTextFidld : UITextField!,phoneTextFidld : UITextField!,areaTextFidld : UITextField!,codeTextFidld : UITextField!,addressTextFidld : UITextField!
+    
     var isAdd : Bool = true
-    var address : String! = "芝麻地"
+    let titles = ["收件人 : ","手机号码 : ","所在地区 : ","邮政编码 : ","街道地址 : ","设为默认地址 : "]
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.subViewInit()
     }
 
@@ -25,13 +27,13 @@ class AddressEditOrAddViewController: UIViewController,UITableViewDataSource,UIT
     
     //MARK:- UITableViewDataSource,UITableViewDelegate
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? 4 : 1
+        return 1
     }
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 2
+        return titles.count
     }
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 10
+        return 1
     }
     func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0
@@ -41,9 +43,9 @@ class AddressEditOrAddViewController: UIViewController,UITableViewDataSource,UIT
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if indexPath.section == 0 {
-            let titles = ["收货人","手机号码","所在地区","详细地址"]
-            let cellId = "cell"
+        switch indexPath.section {
+        case 0 :
+            let cellId = "cell\(indexPath.section)"
             var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
             if cell == nil {
                 cell = UITableViewCell(style: .Subtitle, reuseIdentifier: cellId)
@@ -52,57 +54,128 @@ class AddressEditOrAddViewController: UIViewController,UITableViewDataSource,UIT
                 
                 ZMDTool.configTableViewCellDefault(cell!)
             }
-            
-            if let lbl = cell?.viewWithTag(10001) as? UILabel {
-                lbl.text = titles[indexPath.row]
-            }
-            if let textV = cell?.viewWithTag(10002) as? UITextView {
-                textV.text = address
-                textV.editable = indexPath.row == 2 ? false : true
-            }
-            if indexPath.row == 2 {
-                cell?.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+            cell?.textLabel?.text = self.titles[indexPath.section]
+            let size = self.titles[indexPath.section].sizeWithFont(defaultSysFontWithSize(17), maxWidth: 320)
+            if self.usrNameTextFidld == nil {
+                self.usrNameTextFidld = UITextField(frame: CGRect(x: 20 + size.width, y: 0, width: kScreenWidth - 20 - size.width - 12, height: 56))
+                self.usrNameTextFidld.font = defaultSysFontWithSize(17)
+                cell?.contentView.addSubview(self.usrNameTextFidld)
             }
             return cell!
-        } else {
-            let cellId = "SeclectedCell"
+        case 1 :
+            let cellId = "cell\(indexPath.section)"
             var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
             if cell == nil {
                 cell = UITableViewCell(style: .Subtitle, reuseIdentifier: cellId)
-                cell?.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+                cell?.accessoryType = UITableViewCellAccessoryType.None
                 cell!.selectionStyle = .None
                 
                 ZMDTool.configTableViewCellDefault(cell!)
             }
-            if let btn = cell?.viewWithTag(10003) as? UIButton {
-                btn.rac_signalForControlEvents(.TouchDragInside).subscribeNext({ (sender) -> Void in
-                    
-                })
+            cell?.textLabel?.text = self.titles[indexPath.section]
+            let size = self.titles[indexPath.section].sizeWithFont(defaultSysFontWithSize(17), maxWidth: 320)
+            if self.phoneTextFidld == nil {
+                self.phoneTextFidld = UITextField(frame: CGRect(x: 20 + size.width, y: 0, width: kScreenWidth - 20 - size.width - 12, height: 56))
+                self.usrNameTextFidld.font = defaultSysFontWithSize(17)
+                cell?.contentView.addSubview(self.phoneTextFidld)
             }
             return cell!
+        case 2 :
+            let cellId = "cell\(indexPath.section)"
+            var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
+            if cell == nil {
+                cell = UITableViewCell(style: .Subtitle, reuseIdentifier: cellId)
+                cell?.accessoryType = UITableViewCellAccessoryType.None
+                cell!.selectionStyle = .None
+                
+                ZMDTool.configTableViewCellDefault(cell!)
+            }
+            cell?.textLabel?.text = self.titles[indexPath.section]
+            let size = self.titles[indexPath.section].sizeWithFont(defaultSysFontWithSize(17), maxWidth: 320)
+            if self.areaTextFidld == nil {
+                self.areaTextFidld = UITextField(frame: CGRect(x: 20 + size.width, y: 0, width: kScreenWidth - 20 - size.width - 12, height: 56))
+                self.areaTextFidld.font = defaultSysFontWithSize(17)
+                cell?.contentView.addSubview(self.areaTextFidld)
+            }
+            return cell!
+        case 3 :
+            let cellId = "cell\(indexPath.section)"
+            var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
+            if cell == nil {
+                cell = UITableViewCell(style: .Subtitle, reuseIdentifier: cellId)
+                cell?.accessoryType = UITableViewCellAccessoryType.None
+                cell!.selectionStyle = .None
+                
+                ZMDTool.configTableViewCellDefault(cell!)
+            }
+            cell?.textLabel?.text = self.titles[indexPath.section]
+            let size = self.titles[indexPath.section].sizeWithFont(defaultSysFontWithSize(17), maxWidth: 320)
+            if self.codeTextFidld == nil {
+                self.codeTextFidld = UITextField(frame: CGRect(x: 20 + size.width, y: 0, width: kScreenWidth - 20 - size.width - 12, height: 56))
+                self.codeTextFidld.font = defaultSysFontWithSize(17)
+                cell?.contentView.addSubview(self.codeTextFidld)
+            }
+            return cell!
+        case 4 :
+            let cellId = "cell\(indexPath.section)"
+            var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
+            if cell == nil {
+                cell = UITableViewCell(style: .Subtitle, reuseIdentifier: cellId)
+                cell?.accessoryType = UITableViewCellAccessoryType.None
+                cell!.selectionStyle = .None
+                
+                ZMDTool.configTableViewCellDefault(cell!)
+            }
+            cell?.textLabel?.text = self.titles[indexPath.section]
+            let size = self.titles[indexPath.section].sizeWithFont(defaultSysFontWithSize(17), maxWidth: 320)
+            if self.addressTextFidld == nil {
+                self.addressTextFidld = UITextField(frame: CGRect(x: 20 + size.width, y: 0, width: kScreenWidth - 20 - size.width - 12, height: 56))
+                self.addressTextFidld.font = defaultSysFontWithSize(17)
+                cell?.contentView.addSubview(self.addressTextFidld)
+            }
+            return cell!
+        case 5 :
+            let cellId = "cell\(indexPath.section)"
+            var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
+            if cell == nil {
+                cell = UITableViewCell(style: .Subtitle, reuseIdentifier: cellId)
+                cell?.accessoryType = UITableViewCellAccessoryType.None
+                cell!.selectionStyle = .None
+                
+                ZMDTool.configTableViewCellDefault(cell!)
+            }
+            cell?.textLabel?.text = self.titles[indexPath.section]
+            let swithBtn = UISwitch(frame: CGRect(x: kScreenWidth - 12 - 56, y: 14, width: 56, height: 28))
+            cell?.contentView.addSubview(swithBtn)
+            return cell!
+        default :
+            return UITableViewCell()
         }
-        
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if indexPath.section == 0 && indexPath.row == 2 {
-            let dataArray = ["芝","麻","2人","3人","4人","5人","6人","7人","8人"]
-            let data = ["0","1","2","3","4","5","6","7","8"]
-            let pickView = CustomPickView(frame: CGRectMake(0, 0, kScreenWidth, kScreenHeight))
-            pickView.dataArray = NSMutableArray(array: dataArray)
-            pickView.showAsPop()
-            pickView.finished = { (index) -> Void in
-                self.address = dataArray[index]
-                self.currentTableView.reloadData()
-            }
-        }
+        
     }
     //MARK:- Private Method
     private func subViewInit(){
         if self.isAdd {
             self.title = "编辑收货地址"
         }
+        self.currentTableView = UITableView(frame: self.view.bounds)
+        self.currentTableView.backgroundColor = tableViewdefaultBackgroundColor
+        self.currentTableView.separatorStyle = .None
+        self.currentTableView.dataSource = self
+        self.currentTableView.delegate = self
+        self.view.addSubview(self.currentTableView)
+        
+        let fotView = UIView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: 100))
+        fotView.backgroundColor = UIColor.clearColor()
+        let saveBtn = ZMDTool.getButton(CGRect(x: 12, y: 45, width: kScreenWidth - 24, height: 50), textForNormal: "保存", fontSize: 20, textColorForNormal: UIColor.whiteColor(), backgroundColor: RGB(235,61,61,1.0)) { (sender) -> Void in
+            
+        }
+        ZMDTool.configViewLayerWithSize(saveBtn, size: 25)
+        fotView.addSubview(saveBtn)
+        self.currentTableView.tableFooterView = fotView
     }
     private func dataInit(){
-      
     }
 }

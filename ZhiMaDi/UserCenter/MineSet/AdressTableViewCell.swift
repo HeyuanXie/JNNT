@@ -7,12 +7,14 @@
 //
 
 import UIKit
-
+// 管理收货地址 -> cell
 class AdressTableViewCell: UITableViewCell {
 
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var address: UILabel!
     @IBOutlet weak var selectedBtn: UIButton!
+    @IBOutlet weak var editBtn: UIButton!
+    @IBOutlet weak var editBtnWidthConstraint: NSLayoutConstraint!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

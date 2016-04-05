@@ -69,6 +69,7 @@ class HomeBuyListViewController: UIViewController ,ZMDInterceptorProtocol, UITab
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let vc = HomeBuyGoodsDetailViewController.CreateFromMainStoryboard() as! HomeBuyGoodsDetailViewController
+        vc.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(vc, animated: true)
     }
     //MARK: -  PrivateMethod

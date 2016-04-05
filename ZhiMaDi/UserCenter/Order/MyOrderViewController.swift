@@ -84,20 +84,24 @@ class MyOrderViewController: UIViewController,UITableViewDataSource,UITableViewD
                 let line = ZMDTool.getLine(CGRect(x: 0, y: 55.5, width: kScreenWidth, height: 0.5))
                 cell?.contentView.addSubview(line)
             }
-            let titles = ["到期归还","到期续组","评价","订单详情"]
+            let titles = ["到期归还","到期续租","评价","订单详情"]
             var i = 0,minX = CGFloat(0)
             for title in titles {
                 let size = title.sizeWithFont(UIFont.systemFontOfSize(14), maxWidth: 100)
                 let width = size.width + 32 ,height = CGFloat(35)
                 let x = kScreenWidth - 12 - width - minX,y = CGFloat(12)
+                minX = kScreenWidth - x
                 let btn = ZMDTool.getMutilButton(CGRect(x: x, y: y, width: width, height: height), textForNormal: title, fontSize: 14, backgroundColor: UIColor.whiteColor(), blockForCli: { (sender) -> Void in
-                    
+                    if titles[sender.tag-1000] == "订单详情" {
+                        let vc = MyOrderDetailViewController.CreateFromMainStoryboard() as! MyOrderDetailViewController
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    }
                 })
+                btn.tag = 1000+i
+                i++
                 ZMDTool.configViewLayerFrame(btn)
                 ZMDTool.configViewLayer(btn)
                 cell?.contentView.addSubview(btn)
-                minX = CGRectGetMinX(btn.frame)
-                i++
             }
             return cell!
 

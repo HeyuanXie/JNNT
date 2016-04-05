@@ -7,13 +7,16 @@
 //
 
 import UIKit
-//收货地址
+//管理收货地址
 class AddressViewController: UIViewController,UITableViewDataSource, UITableViewDelegate,ZMDInterceptorProtocol,ZMDInterceptorNavigationBarShowProtocol,ZMDInterceptorMoreProtocol {
 
     @IBOutlet weak var currentTableView: UITableView!
     @IBOutlet weak var AddAddressBtn: UIButton!
+    var rightItem : UIBarButtonItem!
     
     var selectAddressFinished : ((address : String)->Void)?
+    var indexDefault = 0
+    var isEdit = false
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -33,7 +36,7 @@ class AddressViewController: UIViewController,UITableViewDataSource, UITableView
         return 4
     }
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 10
+        return 16
     }
     func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0
@@ -41,30 +44,64 @@ class AddressViewController: UIViewController,UITableViewDataSource, UITableView
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 106
     }
-    
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headView = UIView(frame: CGRectMake(0, 0, kScreenWidth, 16))
+        headView.backgroundColor = UIColor.clearColor()
+        return headView
+    }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cellId = "cell"
-        var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
-        if cell == nil {
-            cell = UITableViewCell(style: .Subtitle, reuseIdentifier: cellId)
-            cell?.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
-            cell!.selectionStyle = .None
-            
-            ZMDTool.configTableViewCellDefault(cell!)
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellId) as! AdressTableViewCell
+        if !self.isEdit {
+            UIView.animateWithDuration(0.2, animations: { () -> Void in
+                cell.editBtnWidthConstraint.constant = 0
+                cell.selectedBtn.setImage(UIImage(named: "common_01unselected"), forState: .Normal)
+                cell.selectedBtn.setImage(UIImage(named: "common_02selected"), forState: .Selected)
+                cell.layoutIfNeeded()
+            })
+            if self.indexDefault == indexPath.section {
+                cell.selectedBtn.selected = true
+            }
+            cell.selectedBtn.rac_signalForControlEvents(.TouchUpInside).subscribeNext { (sender) -> Void in
+            }
+        } else {
+            UIView.animateWithDuration(0.2, animations: { () -> Void in
+                cell.editBtnWidthConstraint.constant = 60
+                cell.selectedBtn.setImage(UIImage(named: "btn_delete"), forState: .Normal)
+                cell.selectedBtn.setImage(UIImage(named: "btn_delete"), forState: .Selected)
+                cell.layoutIfNeeded()
+            })
+            cell.editBtn.rac_signalForControlEvents(.TouchUpInside).subscribeNext({ (sender) -> Void in
+            })
+            //delete
+            cell.selectedBtn.rac_signalForControlEvents(.TouchUpInside).subscribeNext { (sender) -> Void in
+
+            }
         }
-        let selectBtn = cell?.viewWithTag(10003) as! UIButton
-        selectBtn.rac_signalForControlEvents(.TouchUpInside).subscribeNext { (sender) -> Void in
-            self.selectAddressFinished!(address: "test")
-            self.navigationController?.popViewControllerAnimated(true)
-        }
-        return cell!
+        return cell
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let vc = AddressEditOrAddViewController.CreateFromMainStoryboard() as! AddressEditOrAddViewController
-        vc.isAdd = false
+    }
+    //MARK: -  Action
+    @IBAction func addAddressBtnCli(sender: UIButton) {
+        let vc = AddressEditOrAddViewController()
         self.navigationController?.pushViewController(vc, animated: true)
     }
+    //MARK: -  PrivateMethod
     func updateUI() {
-        ZMDTool.configViewLayer(self.AddAddressBtn)
+        if self.rightItem == nil {
+            self.rightItem = UIBarButtonItem(title:"编辑", style: UIBarButtonItemStyle.Done, target: nil, action: nil)
+            rightItem.customView?.tintColor = defaultDetailTextColor
+            rightItem.rac_command = RACCommand(signalBlock: { [weak self](sender) -> RACSignal! in
+                if let StrongSelf = self {
+                    StrongSelf.isEdit = !StrongSelf.isEdit
+                    StrongSelf.currentTableView.reloadData()
+                    StrongSelf.rightItem.title = StrongSelf.isEdit ? "取消" : "编辑"
+                }
+                return RACSignal.empty()
+            })
+            self.navigationItem.rightBarButtonItem = rightItem
+        }
+        self.currentTableView.backgroundColor = tableViewdefaultBackgroundColor
     }
 }

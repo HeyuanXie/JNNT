@@ -52,7 +52,7 @@ class RealAuthenticationViewController: UIViewController,UITableViewDataSource, 
         return cell!
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let vc = indexPath.section == 0 ? MineBankCardHomeViewController() : PersonAuthenticationViewController.CreateFromMainStoryboard() as! PersonAuthenticationViewController
+        let vc = indexPath.section == 0 ? MineBankCardHomeViewController() : PersonAuthenticationViewController()
         self.navigationController?.pushViewController(vc, animated: true)
     }
     //MARK:- Private Method

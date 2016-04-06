@@ -7,20 +7,19 @@
 //
 
 import UIKit
-//个人认证
+//身份证认证
 class PersonAuthenticationViewController: UIViewController ,UITableViewDataSource, UITableViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,ZMDInterceptorProtocol,ZMDInterceptorNavigationBarShowProtocol,ZMDInterceptorMoreProtocol{
-   
+    var currentTableView: UITableView!
+    var nameTextField : UITextField!
+    var cardNumTextField : UITextField!
     var leftPhotoBtn : UIButton!
-    var midPhotoBtn : UIButton!
     var rightPhotoBtn : UIButton!
     
     var picker : UIImagePickerController?
-    
     var photoSelectbtn : UIButton?
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        self.subViewInit()
     }
 
     override func didReceiveMemoryWarning() {
@@ -32,126 +31,47 @@ class PersonAuthenticationViewController: UIViewController ,UITableViewDataSourc
         return 1
     }
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 4
+        return 2
     }
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 10
+        return section == 0 ? 16 : 1
     }
     func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0
     }
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        switch indexPath.section {
-        case 0:
-            return 120
-        case 1:
-            return 180
-        case 2:
-            return 620
-        case 3:
-            return 200
-        default :
-            return 0
-        }
+        return 60
     }
-    
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headView = UIView(frame: CGRectMake(0, 0, kScreenWidth, 10))
+        headView.backgroundColor = UIColor.clearColor()
+        return headView
+    }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        switch indexPath.section {
-        case 0 :
-            let cellId = "topCell"
-            var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
-            if cell == nil {
-                cell = UITableViewCell(style: .Subtitle, reuseIdentifier: cellId)
-                cell?.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
-                cell!.selectionStyle = .None
-                
-                ZMDTool.configTableViewCellDefault(cell!)
-            }
-            return cell!
-        case 1 :
-            let cellId = "cardCell"
-            var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
-            if cell == nil {
-                cell = UITableViewCell(style: .Subtitle, reuseIdentifier: cellId)
-                cell?.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
-                cell!.selectionStyle = .None
-                
-                ZMDTool.configTableViewCellDefault(cell!)
-            }
-            let leftPhotoBtn = cell?.viewWithTag(10001) as! UIButton
-            let midPhotoBtn = cell?.viewWithTag(10002) as! UIButton
-            let rightPhotoBtn = cell?.viewWithTag(10003) as! UIButton
-            self.leftPhotoBtn = leftPhotoBtn
-            self.midPhotoBtn = midPhotoBtn
-            self.rightPhotoBtn = rightPhotoBtn
-            let actionSheet = UIActionSheet(title: nil, delegate: nil, cancelButtonTitle: "取消", destructiveButtonTitle: nil)
-            actionSheet.addButtonWithTitle("从手机相册选择")
-            actionSheet.addButtonWithTitle("拍照")
-            actionSheet.rac_buttonClickedSignal().subscribeNext({ (index) -> Void in
-                if let indexInt = index as? Int {
-                    switch indexInt {
-                    case 1, 2:
-                        if self.picker == nil {
-                            self.picker = UIImagePickerController()
-                            self.picker!.delegate = self
-                        }
-                        
-                        self.picker!.sourceType = (indexInt == 1) ? .SavedPhotosAlbum : .Camera
-                        self.picker!.allowsEditing = true
-                        self.presentViewController(self.picker!, animated: true, completion: nil)
-                    default: break
-                    }
-                }
-            })
-            self.leftPhotoBtn.rac_signalForControlEvents(.TouchUpInside).subscribeNext({ (sender) -> Void in
-                self.photoSelectbtn = leftPhotoBtn
-                actionSheet.showInView(self.view)
-            })
-            self.midPhotoBtn.rac_signalForControlEvents(.TouchUpInside).subscribeNext({ (sender) -> Void in
-                self.photoSelectbtn = midPhotoBtn
-                actionSheet.showInView(self.view)
-            })
-            self.rightPhotoBtn.rac_signalForControlEvents(.TouchUpInside).subscribeNext({ (sender) -> Void in
-                self.photoSelectbtn = rightPhotoBtn
-                actionSheet.showInView(self.view)
-            })
-
-            return cell!
-        case 2 :
-            let instructions = "1、照片内容真实有效,清晰,不得做任何修改\n2、支持jpg、jpeg、bmp、gif格式照片,大小不超过2M\n3、合照需按照图例方式双手持身份证, 手指不可遮挡身份证信息\n4、照片需免冠,未化妆,五官清晰可见"
-            let sizeInstructions = instructions.sizeWithFont(UIFont.systemFontOfSize(14), maxWidth: kScreenWidth - 24)
-            let cellId = "InstructionCell"
-            var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
-            if cell == nil {
-                cell = UITableViewCell(style: .Subtitle, reuseIdentifier: cellId)
-                cell?.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
-                cell!.selectionStyle = .None
-                
-                ZMDTool.configTableViewCellDefault(cell!)
-            }
-            let instructionLbl = cell?.viewWithTag(10001) as! UILabel
-            instructionLbl.text = instructions
-            return cell!
-        case 3 :
-            let instructions = "1、照片内容真实有效,清晰,不得做任何修改\n2、支持jpg、jpeg、bmp、gif格式照片,大小不超过2M\n3、合照需按照图例方式双手持身份证, 手指不可遮挡身份证信息\n4、照片需免冠,未化妆,五官清晰可见"
-            let sizeInstructions = instructions.sizeWithFont(UIFont.systemFontOfSize(14), maxWidth: kScreenWidth - 24)
-            let cellId = "ConfirmCell"
-            var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
-            if cell == nil {
-                cell = UITableViewCell(style: .Subtitle, reuseIdentifier: cellId)
-                cell?.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
-                cell!.selectionStyle = .None
-                
-                ZMDTool.configTableViewCellDefault(cell!)
-            }
+        let cellId = "Cell\(indexPath.section)"
+        var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
+        if cell == nil {
+            cell = UITableViewCell(style: .Subtitle, reuseIdentifier: cellId)
+            cell?.accessoryType = UITableViewCellAccessoryType.None
+            cell!.selectionStyle = .None
             
-            return cell!
-        default :
-            return UITableViewCell()
+            ZMDTool.configTableViewCellDefault(cell!)
         }
+        cell?.textLabel!.text = indexPath.section == 0 ? "姓名" : "身份证"
+        let tmp = UITextField(frame: CGRect(x: 88, y: 0, width: kScreenWidth - 88 - 12, height: 60))
+        tmp.textColor = defaultTextColor
+        tmp.font = defaultSysFontWithSize(17)
+        tmp.placeholder = indexPath.section == 0 ? "持卡人姓名" : "本人身份证号"
+        cell?.contentView.addSubview(tmp)
+        if indexPath.section == 0 {
+            self.nameTextField = tmp
+        } else {
+            self.cardNumTextField = tmp
+        }
+        return cell!
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-      
+        
     }
     //MARK: UIImagePickerControllerDelegate
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
@@ -218,5 +138,67 @@ class PersonAuthenticationViewController: UIViewController ,UITableViewDataSourc
         //                QNTool.showErrorPromptView(dictionary, error: error, errorMsg: nil)
         //            }
         //        }
+    }
+    //MARK:- Private Method
+    private func subViewInit(){
+            self.title = "身份证认证"
+        self.currentTableView = UITableView(frame: self.view.bounds)
+        self.currentTableView.backgroundColor = tableViewdefaultBackgroundColor
+        self.currentTableView.separatorStyle = .None
+        self.currentTableView.dataSource = self
+        self.currentTableView.delegate = self
+        self.view.addSubview(self.currentTableView)
+        
+        let actionSheet = UIActionSheet(title: nil, delegate: nil, cancelButtonTitle: "取消", destructiveButtonTitle: nil)
+        actionSheet.addButtonWithTitle("从手机相册选择")
+        actionSheet.addButtonWithTitle("拍照")
+        actionSheet.rac_buttonClickedSignal().subscribeNext({ (index) -> Void in
+            if let indexInt = index as? Int {
+                switch indexInt {
+                case 1, 2:
+                    if self.picker == nil {
+                        self.picker = UIImagePickerController()
+                        self.picker!.delegate = self
+                    }
+                    
+                    self.picker!.sourceType = (indexInt == 1) ? .SavedPhotosAlbum : .Camera
+                    self.picker!.allowsEditing = true
+                    self.presentViewController(self.picker!, animated: true, completion: nil)
+                default: break
+                }
+            }
+        })
+        let fotView = UIView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: 240))
+        fotView.backgroundColor = UIColor.clearColor()
+        let leftBtn = ZMDTool.getButton(CGRect(x: kScreenWidth/2 - 32 - 75, y: 25, width: 75, height: 75), textForNormal: "", fontSize: 0, backgroundColor: UIColor.clearColor()) { (sender) -> Void in
+            self.photoSelectbtn = sender as? UIButton
+            actionSheet.showInView(self.view)
+        }
+        leftBtn.setImage(UIImage(named: "common_add_pho"), forState: .Normal)
+        self.leftPhotoBtn = leftBtn
+        fotView.addSubview(self.leftPhotoBtn)
+        
+        let leftLbl = ZMDTool.getLabel(CGRect(x: kScreenWidth/2 - 32 - 75 - 15, y: 25 + 75 + 8, width: 75 + 30, height: 15), text: "身份证正面照", fontSize: 15, textColor: defaultDetailTextColor)
+        leftLbl.textAlignment = .Center
+        fotView.addSubview(leftLbl)
+        let rightBtn = ZMDTool.getButton(CGRect(x: kScreenWidth/2 + 32, y: 25, width: 75, height: 75), textForNormal: "", fontSize: 0, backgroundColor: UIColor.clearColor()) { (sender) -> Void in
+            self.photoSelectbtn = sender as? UIButton
+            actionSheet.showInView(self.view)
+        }
+        rightBtn.setImage(UIImage(named: "common_add_pho"), forState: .Normal)
+        self.rightPhotoBtn = rightBtn
+        fotView.addSubview(self.rightPhotoBtn)
+        let rightLbl = ZMDTool.getLabel(CGRect(x: kScreenWidth/2 + 32 - 15, y: 25 + 75 + 8, width: 75+30, height: 15), text: "身份证背面照", fontSize: 15, textColor: defaultDetailTextColor)
+        rightLbl.textAlignment = .Center
+        fotView.addSubview(rightLbl)
+        
+        let saveBtn = ZMDTool.getButton(CGRect(x: 12, y : 25+75+8+15+48, width: kScreenWidth - 24, height: 50), textForNormal: "下一步", fontSize: 20, textColorForNormal: UIColor.whiteColor(), backgroundColor: RGB(235,61,61,1.0)) { (sender) -> Void in
+            
+        }
+        ZMDTool.configViewLayerWithSize(saveBtn, size: 25)
+        fotView.addSubview(saveBtn)
+        self.currentTableView.tableFooterView = fotView
+    }
+    private func dataInit(){
     }
 }

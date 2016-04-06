@@ -401,7 +401,7 @@
         <!--找回登录密码-->
         <scene sceneID="m3v-zH-b2Q">
             <objects>
-                <viewController id="0TY-40-Hgb" customClass="PsWordFindViewController" customModule="ZhiMaDi" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PsWordFindViewController" id="0TY-40-Hgb" customClass="PsWordFindViewController" customModule="ZhiMaDi" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="vee-h9-VsL"/>
                         <viewControllerLayoutGuide type="bottom" id="Jy4-d6-2qX"/>

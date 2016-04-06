@@ -183,7 +183,7 @@ extension UIViewController {
     private func fadeIn() {
         if let containerView = self.popupView {
             containerView.alpha = 0
-            UIView.animateWithDuration(0.2, animations: {
+            UIView.animateWithDuration(0.1, animations: {
                 containerView.alpha = 1
                 }, completion: completionShowAnimation)
         }
@@ -209,7 +209,7 @@ extension UIViewController {
             frame.origin.y = CGRectGetHeight(containerView.frame)
             popupView.frame = frame
             
-            UIView.animateWithDuration(1.0, animations: {
+            UIView.animateWithDuration(0.38, animations: {
                 var frame = popupView.frame
                 frame.origin.y = CGRectGetHeight(containerView.frame) -  CGRectGetHeight(frame)
                 popupView.frame = frame
@@ -266,7 +266,7 @@ extension UIViewController {
     
     private func slideOutToBottom() {
         if let containerView = self.view, let popupView = popupView {
-            UIView.animateWithDuration(0.8, animations: {
+            UIView.animateWithDuration(0.38, animations: {
                 var frame = popupView.frame
                 frame.origin.y = CGRectGetHeight(containerView.frame)
                 popupView.frame = frame

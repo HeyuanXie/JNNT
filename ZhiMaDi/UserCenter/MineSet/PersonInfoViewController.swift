@@ -46,15 +46,15 @@ class PersonInfoViewController:UIViewController,UITableViewDataSource, UITableVi
             case Head:
                 viewController = UIViewController()
             case NickN:
-                viewController = UIViewController()
+                viewController = PersonIntroductionViewController()
             case RealName :
                 viewController = RealAuthenticationViewController()
             case ChangePs:
-                viewController = UIViewController()
+                viewController = PsWordFindViewController.CreateFromLoginStoryboard() as! PsWordFindViewController
             case Address:
                 viewController = AddressViewController.CreateFromMainStoryboard() as! AddressViewController
             case Clean:
-                viewController = PersonIntroductionViewController()
+                viewController = UIViewController()
             }
             viewController.hidesBottomBarWhenPushed = true
             return viewController

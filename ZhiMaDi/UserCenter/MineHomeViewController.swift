@@ -99,7 +99,7 @@ class MineHomeViewController: UIViewController,UITableViewDataSource, UITableVie
             case UserMyOrderMenu:
                 viewController = UIViewController()
             case UserWallet:
-                viewController = UIViewController()
+                viewController = WalletHomeViewController.CreateFromMainStoryboard() as! WalletHomeViewController
             case UserBankCard:
                 viewController = UIViewController()
             case UserCardVolume:
@@ -259,7 +259,7 @@ class MineHomeViewController: UIViewController,UITableViewDataSource, UITableVie
         case .UserMyOrder:
             cellType.didSelect(self.navigationController!)
         default:
-            break
+            cellType.didSelect(self.navigationController!)
         }
     }
     //MARK:Private Method

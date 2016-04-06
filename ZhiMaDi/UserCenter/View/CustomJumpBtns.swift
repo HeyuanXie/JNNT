@@ -24,18 +24,20 @@ class CustomJumpBtns: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     func updateUI(menuTitle:[String]) {
-        let line = ZMDTool.getLine(CGRect(x: 0, y: CGRectGetHeight(self.frame) - 3.5, width: kScreenWidth/CGFloat(menuTitle.count), height: 3.5))
-        line.backgroundColor = RGB(235,61,61,1.0)
-        self.addSubview(line)
+        let redLine = ZMDTool.getLine(CGRect(x: 0, y: CGRectGetHeight(self.frame) - 2, width: kScreenWidth/CGFloat(menuTitle.count), height: 2))
+        redLine.backgroundColor = RGB(235,61,61,1.0)
+        self.addSubview(redLine)
         var i = 0
-        let width = kScreenWidth/5,height = CGRectGetHeight(self.frame) - 3.5
+        let width = kScreenWidth/CGFloat(menuTitle.count),height = CGRectGetHeight(self.frame) - 3.5
         let SetSelectBtn = { (btn : UIButton) in
             self.selectBtn = btn
             self.selectBtn.selected = true
             UIView.animateWithDuration(0.2, animations: { () -> Void in
-                line.frame = CGRect(x: CGRectGetMinX(self.selectBtn.frame), y: CGRectGetHeight(self.frame) - 3.5, width: width, height: 3.5)
+                redLine.frame = CGRect(x: CGRectGetMinX(self.selectBtn.frame), y: CGRectGetHeight(self.frame) - 3.5, width: width, height: 3.5)
             })
-//            self.finished(index: btn.tag - 1000)
+            if self.finished != nil {
+                self.finished(index: btn.tag - 1000)
+            }
         }
         for title  in menuTitle {
             let x = CGFloat(i) * width
@@ -54,5 +56,17 @@ class CustomJumpBtns: UIView {
             }
             i++
         }
+    }
+    // 分割线
+    func addSeparatedLine() {
+        let width = kScreenWidth/CGFloat(menuTitle.count)
+         var i = 0
+        for _ in menuTitle {
+            let line = ZMDTool.getLine(CGRect(x: width*CGFloat(i), y:(self.frame.height-25)/2, width:0.5, height:25))
+            line.backgroundColor = defaultLineColor
+            self.addSubview(line)
+            i++
+        }
+       
     }
 }

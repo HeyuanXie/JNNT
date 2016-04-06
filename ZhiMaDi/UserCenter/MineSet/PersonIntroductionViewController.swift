@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+//个人简介
 class PersonIntroductionViewController: UIViewController ,UITextViewDelegate {
     
     private var inputTextView: UITextView!

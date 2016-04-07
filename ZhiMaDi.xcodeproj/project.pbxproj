@@ -365,6 +365,7 @@
 		2BB6A8DB1C87EE7E008209E8 /* HomeSell_Contract.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BB6A8DA1C87EE7E008209E8 /* HomeSell_Contract.png */; };
 		2BB6A8DE1C880548008209E8 /* HomeSell_Deposit.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BB6A8DC1C880548008209E8 /* HomeSell_Deposit.png */; };
 		2BB6A8DF1C880548008209E8 /* HomeSell_NotDeposit.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BB6A8DD1C880548008209E8 /* HomeSell_NotDeposit.png */; };
+		2BC05C601CB603E700D3B1AE /* BankCardHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC05C5F1CB603E700D3B1AE /* BankCardHomeViewController.swift */; };
 		2BDEF38D1C7DB5FB00927F64 /* Navigation_Back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BDEF38C1C7DB5FB00927F64 /* Navigation_Back@2x.png */; };
 		2BDEF38F1C7DB73500927F64 /* HomeBuyListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BDEF38E1C7DB73500927F64 /* HomeBuyListViewController.swift */; };
 		2BDEF3931C7E9D5700927F64 /* Home_Buy_Back03@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BDEF3911C7E9D5700927F64 /* Home_Buy_Back03@2x.png */; };
@@ -491,7 +492,7 @@
 		2BF52F9E1CB3BA2D0099F296 /* bank_zg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BF52F901CB3BA2D0099F296 /* bank_zg@3x.png */; };
 		2BF52F9F1CB3BA2D0099F296 /* bank_zs@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BF52F911CB3BA2D0099F296 /* bank_zs@2x.png */; };
 		2BF52FA01CB3BA2D0099F296 /* bank_zs@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BF52F921CB3BA2D0099F296 /* bank_zs@3x.png */; };
-		2BF7EF1A1C8D3370001C4595 /* MineBankCardHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF7EF191C8D3370001C4595 /* MineBankCardHomeViewController.swift */; };
+		2BF7EF1A1C8D3370001C4595 /* BankCardAuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF7EF191C8D3370001C4595 /* BankCardAuthenticationViewController.swift */; };
 		2BF7EF1C1C8D4D29001C4595 /* BankCardDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF7EF1B1C8D4D29001C4595 /* BankCardDetailViewController.swift */; };
 		2BF7EF1E1C8D61F7001C4595 /* AddBankCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF7EF1D1C8D61F7001C4595 /* AddBankCardViewController.swift */; };
 		2BF7EF201C8D662C001C4595 /* VerifyBankCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF7EF1F1C8D662C001C4595 /* VerifyBankCardViewController.swift */; };
@@ -995,6 +996,7 @@
 		2BB6A8DA1C87EE7E008209E8 /* HomeSell_Contract.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HomeSell_Contract.png; sourceTree = "<group>"; };
 		2BB6A8DC1C880548008209E8 /* HomeSell_Deposit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HomeSell_Deposit.png; sourceTree = "<group>"; };
 		2BB6A8DD1C880548008209E8 /* HomeSell_NotDeposit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HomeSell_NotDeposit.png; sourceTree = "<group>"; };
+		2BC05C5F1CB603E700D3B1AE /* BankCardHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankCardHomeViewController.swift; sourceTree = "<group>"; };
 		2BDEF38C1C7DB5FB00927F64 /* Navigation_Back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Navigation_Back@2x.png"; sourceTree = "<group>"; };
 		2BDEF38E1C7DB73500927F64 /* HomeBuyListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeBuyListViewController.swift; sourceTree = "<group>"; };
 		2BDEF3911C7E9D5700927F64 /* Home_Buy_Back03@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Home_Buy_Back03@2x.png"; sourceTree = "<group>"; };
@@ -1122,7 +1124,7 @@
 		2BF52F901CB3BA2D0099F296 /* bank_zg@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bank_zg@3x.png"; sourceTree = "<group>"; };
 		2BF52F911CB3BA2D0099F296 /* bank_zs@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bank_zs@2x.png"; sourceTree = "<group>"; };
 		2BF52F921CB3BA2D0099F296 /* bank_zs@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bank_zs@3x.png"; sourceTree = "<group>"; };
-		2BF7EF191C8D3370001C4595 /* MineBankCardHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineBankCardHomeViewController.swift; sourceTree = "<group>"; };
+		2BF7EF191C8D3370001C4595 /* BankCardAuthenticationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankCardAuthenticationViewController.swift; sourceTree = "<group>"; };
 		2BF7EF1B1C8D4D29001C4595 /* BankCardDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankCardDetailViewController.swift; sourceTree = "<group>"; };
 		2BF7EF1D1C8D61F7001C4595 /* AddBankCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBankCardViewController.swift; sourceTree = "<group>"; };
 		2BF7EF1F1C8D662C001C4595 /* VerifyBankCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerifyBankCardViewController.swift; sourceTree = "<group>"; };
@@ -2188,7 +2190,8 @@
 		2BF7EF181C8D3353001C4595 /* BankCard */ = {
 			isa = PBXGroup;
 			children = (
-				2BF7EF191C8D3370001C4595 /* MineBankCardHomeViewController.swift */,
+				2BF7EF191C8D3370001C4595 /* BankCardAuthenticationViewController.swift */,
+				2BC05C5F1CB603E700D3B1AE /* BankCardHomeViewController.swift */,
 				2BF7EF1B1C8D4D29001C4595 /* BankCardDetailViewController.swift */,
 				2BF7EF1D1C8D61F7001C4595 /* AddBankCardViewController.swift */,
 				2BF7EF1F1C8D662C001C4595 /* VerifyBankCardViewController.swift */,
@@ -3117,7 +3120,7 @@
 				2B3AC6151C97B49100CC8662 /* BuyConfirmOrderViewController.swift in Sources */,
 				3C90985A1C76A482006B7D2C /* ViewController.swift in Sources */,
 				2BDEF3AF1C7EE0CA00927F64 /* HomeBuyGoodsDetailViewController.swift in Sources */,
-				2BF7EF1A1C8D3370001C4595 /* MineBankCardHomeViewController.swift in Sources */,
+				2BF7EF1A1C8D3370001C4595 /* BankCardAuthenticationViewController.swift in Sources */,
 				2BF7F0701C8EA741001C4595 /* WalletCaseViewController.swift in Sources */,
 				2BE372D61C883AEC004A1DDF /* ReleaseGoodsViewController.swift in Sources */,
 				3C9099001C76A6E9006B7D2C /* ChartAnimator.swift in Sources */,
@@ -3221,6 +3224,7 @@
 				2B539C051C9AACD000FFE6CD /* StartImageView.swift in Sources */,
 				3C9098711C76A6AA006B7D2C /* QNStyleAttribute.swift in Sources */,
 				3C90991A1C76A6E9006B7D2C /* BubbleChartDataEntry.swift in Sources */,
+				2BC05C601CB603E700D3B1AE /* BankCardHomeViewController.swift in Sources */,
 				2B989C0A1CB4FB73008C6D23 /* WalletMyBillsViewController.swift in Sources */,
 				3C90995B1C76A6E9006B7D2C /* LyPrompt.swift in Sources */,
 				3C90993B1C76A6E9006B7D2C /* CandleChartDataProvider.swift in Sources */,

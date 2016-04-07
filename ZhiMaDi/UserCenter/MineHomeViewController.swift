@@ -101,7 +101,7 @@ class MineHomeViewController: UIViewController,UITableViewDataSource, UITableVie
             case UserWallet:
                 viewController = WalletHomeViewController.CreateFromMainStoryboard() as! WalletHomeViewController
             case UserBankCard:
-                viewController = UIViewController()
+                viewController = BankCardHomeViewController()
             case UserCardVolume:
                 viewController = UIViewController()
             case UserMyCrowdFunding:
@@ -277,6 +277,6 @@ class MineHomeViewController: UIViewController,UITableViewDataSource, UITableVie
         self.navigationItem.rightBarButtonItem = rightItem
     }
     private func dataInit(){
-        self.userCenterData = [[.UserHead,.UserMyOrder,.UserMyOrderMenu], [.UserWallet,.UserBankCard,.UserCardVolume,.UserMyCrowdFunding],[.UserWallet,.UserMyStore,.UserVipClub,.UserCommission,.UserInvitation],[.UserHelp],[.UserMore]]
+        self.userCenterData = [[.UserHead,.UserMyOrder,.UserMyOrderMenu], [.UserWallet,.UserBankCard,.UserCardVolume,.UserMyCrowdFunding],[.UserMyStore,.UserVipClub,.UserCommission,.UserInvitation],[.UserHelp],[.UserMore]]
     }
 }

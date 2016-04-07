@@ -8,7 +8,7 @@
 
 import UIKit
 //银行卡认证
-class MineBankCardHomeViewController: UIViewController,UITableViewDataSource, UITableViewDelegate,ZMDInterceptorProtocol,ZMDInterceptorMoreProtocol {
+class BankCardAuthenticationViewController: UIViewController,UITableViewDataSource, UITableViewDelegate,ZMDInterceptorProtocol,ZMDInterceptorMoreProtocol {
     var currentTableView: UITableView!
 
     var dataArray : NSArray!

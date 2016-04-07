@@ -251,6 +251,13 @@ extension ZMDTool {
 
 extension ZMDTool {
     
+    class func getTextField(frame:CGRect,placeholder:String,fontSize:CGFloat,textColor:UIColor = defaultTextColor) -> UITextField {
+        let textField = UITextField(frame: frame)
+        textField.textColor = defaultTextColor
+        textField.font = defaultSysFontWithSize(fontSize)
+        textField.placeholder = placeholder
+        return textField
+    }
     class func getLabel(frame:CGRect,text:String,fontSize:CGFloat,textColor:UIColor = defaultTextColor) -> UILabel {
         let label = UILabel(frame: frame)
         label.backgroundColor = UIColor.clearColor()

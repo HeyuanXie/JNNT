@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2B02B4AA1CAA4EA50064B47C /* UILabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B02B4A91CAA4EA50064B47C /* UILabelExtension.swift */; };
 		2B02B4B11CAA62FA0064B47C /* HomeLeaseDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B02B4AC1CAA62FA0064B47C /* HomeLeaseDetailViewController.swift */; };
 		2B02B4B21CAA62FA0064B47C /* HomeLeaseListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B02B4AD1CAA62FA0064B47C /* HomeLeaseListViewController.swift */; };
 		2B02B4B31CAA62FA0064B47C /* LeaseContractView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B02B4AE1CAA62FA0064B47C /* LeaseContractView.xib */; };
@@ -312,6 +311,10 @@
 		2B68C4821C7AFAA500B401A9 /* Home_News@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B68C47C1C7AFAA500B401A9 /* Home_News@2x.png */; };
 		2B68C4831C7AFAA500B401A9 /* Home_Offer@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B68C47D1C7AFAA500B401A9 /* Home_Offer@2x.png */; };
 		2B68C4841C7AFAA500B401A9 /* Home_Sale@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B68C47E1C7AFAA500B401A9 /* Home_Sale@2x.png */; };
+		2B6F90701CB6372900BD7A5D /* UITableViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6F906F1CB6372900BD7A5D /* UITableViewExtension.swift */; };
+		2B6F90721CB64B7400BD7A5D /* BankCardUnbindViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6F90711CB64B7400BD7A5D /* BankCardUnbindViewController.swift */; };
+		2B6F90741CB6508300BD7A5D /* BankCardVerifyPhoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6F90731CB6508300BD7A5D /* BankCardVerifyPhoneViewController.swift */; };
+		2B6F90961CB6599500BD7A5D /* BankCardSetPsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6F90951CB6599500BD7A5D /* BankCardSetPsViewController.swift */; };
 		2B73D84D1C8678C40016FEB2 /* AddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B73D84C1C8678C40016FEB2 /* AddressViewController.swift */; };
 		2B73D84F1C867C280016FEB2 /* AdressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B73D84E1C867C280016FEB2 /* AdressTableViewCell.swift */; };
 		2B73D8511C8682050016FEB2 /* AddressEditOrAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B73D8501C8682050016FEB2 /* AddressEditOrAddViewController.swift */; };
@@ -365,7 +368,13 @@
 		2BB6A8DB1C87EE7E008209E8 /* HomeSell_Contract.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BB6A8DA1C87EE7E008209E8 /* HomeSell_Contract.png */; };
 		2BB6A8DE1C880548008209E8 /* HomeSell_Deposit.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BB6A8DC1C880548008209E8 /* HomeSell_Deposit.png */; };
 		2BB6A8DF1C880548008209E8 /* HomeSell_NotDeposit.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BB6A8DD1C880548008209E8 /* HomeSell_NotDeposit.png */; };
-		2BC05C601CB603E700D3B1AE /* BankCardHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC05C5F1CB603E700D3B1AE /* BankCardHomeViewController.swift */; };
+		2BC05C671CB630C300D3B1AE /* AddBankCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC05C621CB630C300D3B1AE /* AddBankCardViewController.swift */; };
+		2BC05C681CB630C300D3B1AE /* BankCardAuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC05C631CB630C300D3B1AE /* BankCardAuthenticationViewController.swift */; };
+		2BC05C691CB630C300D3B1AE /* BankCardDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC05C641CB630C300D3B1AE /* BankCardDetailViewController.swift */; };
+		2BC05C6A1CB630C300D3B1AE /* BankCardHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC05C651CB630C300D3B1AE /* BankCardHomeViewController.swift */; };
+		2BC05C6F1CB630F700D3B1AE /* WalletCaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC05C6C1CB630F700D3B1AE /* WalletCaseViewController.swift */; };
+		2BC05C701CB630F700D3B1AE /* WalletHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC05C6D1CB630F700D3B1AE /* WalletHomeViewController.swift */; };
+		2BC05C711CB630F700D3B1AE /* WalletRechargeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC05C6E1CB630F700D3B1AE /* WalletRechargeViewController.swift */; };
 		2BDEF38D1C7DB5FB00927F64 /* Navigation_Back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BDEF38C1C7DB5FB00927F64 /* Navigation_Back@2x.png */; };
 		2BDEF38F1C7DB73500927F64 /* HomeBuyListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BDEF38E1C7DB73500927F64 /* HomeBuyListViewController.swift */; };
 		2BDEF3931C7E9D5700927F64 /* Home_Buy_Back03@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BDEF3911C7E9D5700927F64 /* Home_Buy_Back03@2x.png */; };
@@ -492,14 +501,7 @@
 		2BF52F9E1CB3BA2D0099F296 /* bank_zg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BF52F901CB3BA2D0099F296 /* bank_zg@3x.png */; };
 		2BF52F9F1CB3BA2D0099F296 /* bank_zs@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BF52F911CB3BA2D0099F296 /* bank_zs@2x.png */; };
 		2BF52FA01CB3BA2D0099F296 /* bank_zs@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BF52F921CB3BA2D0099F296 /* bank_zs@3x.png */; };
-		2BF7EF1A1C8D3370001C4595 /* BankCardAuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF7EF191C8D3370001C4595 /* BankCardAuthenticationViewController.swift */; };
-		2BF7EF1C1C8D4D29001C4595 /* BankCardDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF7EF1B1C8D4D29001C4595 /* BankCardDetailViewController.swift */; };
-		2BF7EF1E1C8D61F7001C4595 /* AddBankCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF7EF1D1C8D61F7001C4595 /* AddBankCardViewController.swift */; };
-		2BF7EF201C8D662C001C4595 /* VerifyBankCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF7EF1F1C8D662C001C4595 /* VerifyBankCardViewController.swift */; };
-		2BF7EF221C8D703F001C4595 /* WalletHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF7EF211C8D703F001C4595 /* WalletHomeViewController.swift */; };
 		2BF7F06E1C8E6C1E001C4595 /* Navigation_Back_R.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BF7F06D1C8E6C1E001C4595 /* Navigation_Back_R.png */; };
-		2BF7F0701C8EA741001C4595 /* WalletCaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF7F06F1C8EA741001C4595 /* WalletCaseViewController.swift */; };
-		2BF7F0721C8EACD4001C4595 /* WalletRechargeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF7F0711C8EACD4001C4595 /* WalletRechargeViewController.swift */; };
 		2BF7F0741C8EB18B001C4595 /* FortuneCenterSelectPayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF7F0731C8EB18B001C4595 /* FortuneCenterSelectPayViewController.swift */; };
 		2BF8D8BF1CAE67D7006E0C4D /* PsWordFindViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF8D8BE1CAE67D7006E0C4D /* PsWordFindViewController.swift */; };
 		2BF8D8C11CAE6CFB006E0C4D /* ResisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF8D8C01CAE6CFB006E0C4D /* ResisterViewController.swift */; };
@@ -623,7 +625,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2B02B4A91CAA4EA50064B47C /* UILabelExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILabelExtension.swift; sourceTree = "<group>"; };
 		2B02B4AC1CAA62FA0064B47C /* HomeLeaseDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeLeaseDetailViewController.swift; sourceTree = "<group>"; };
 		2B02B4AD1CAA62FA0064B47C /* HomeLeaseListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeLeaseListViewController.swift; sourceTree = "<group>"; };
 		2B02B4AE1CAA62FA0064B47C /* LeaseContractView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LeaseContractView.xib; sourceTree = "<group>"; };
@@ -943,6 +944,10 @@
 		2B68C47C1C7AFAA500B401A9 /* Home_News@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Home_News@2x.png"; sourceTree = "<group>"; };
 		2B68C47D1C7AFAA500B401A9 /* Home_Offer@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Home_Offer@2x.png"; path = "Home/Home_Offer@2x.png"; sourceTree = "<group>"; };
 		2B68C47E1C7AFAA500B401A9 /* Home_Sale@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Home_Sale@2x.png"; sourceTree = "<group>"; };
+		2B6F906F1CB6372900BD7A5D /* UITableViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableViewExtension.swift; sourceTree = "<group>"; };
+		2B6F90711CB64B7400BD7A5D /* BankCardUnbindViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankCardUnbindViewController.swift; sourceTree = "<group>"; };
+		2B6F90731CB6508300BD7A5D /* BankCardVerifyPhoneViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankCardVerifyPhoneViewController.swift; sourceTree = "<group>"; };
+		2B6F90951CB6599500BD7A5D /* BankCardSetPsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankCardSetPsViewController.swift; sourceTree = "<group>"; };
 		2B73D84C1C8678C40016FEB2 /* AddressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressViewController.swift; sourceTree = "<group>"; };
 		2B73D84E1C867C280016FEB2 /* AdressTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdressTableViewCell.swift; sourceTree = "<group>"; };
 		2B73D8501C8682050016FEB2 /* AddressEditOrAddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressEditOrAddViewController.swift; sourceTree = "<group>"; };
@@ -996,7 +1001,13 @@
 		2BB6A8DA1C87EE7E008209E8 /* HomeSell_Contract.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HomeSell_Contract.png; sourceTree = "<group>"; };
 		2BB6A8DC1C880548008209E8 /* HomeSell_Deposit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HomeSell_Deposit.png; sourceTree = "<group>"; };
 		2BB6A8DD1C880548008209E8 /* HomeSell_NotDeposit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HomeSell_NotDeposit.png; sourceTree = "<group>"; };
-		2BC05C5F1CB603E700D3B1AE /* BankCardHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankCardHomeViewController.swift; sourceTree = "<group>"; };
+		2BC05C621CB630C300D3B1AE /* AddBankCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBankCardViewController.swift; sourceTree = "<group>"; };
+		2BC05C631CB630C300D3B1AE /* BankCardAuthenticationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankCardAuthenticationViewController.swift; sourceTree = "<group>"; };
+		2BC05C641CB630C300D3B1AE /* BankCardDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankCardDetailViewController.swift; sourceTree = "<group>"; };
+		2BC05C651CB630C300D3B1AE /* BankCardHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankCardHomeViewController.swift; sourceTree = "<group>"; };
+		2BC05C6C1CB630F700D3B1AE /* WalletCaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletCaseViewController.swift; sourceTree = "<group>"; };
+		2BC05C6D1CB630F700D3B1AE /* WalletHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletHomeViewController.swift; sourceTree = "<group>"; };
+		2BC05C6E1CB630F700D3B1AE /* WalletRechargeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletRechargeViewController.swift; sourceTree = "<group>"; };
 		2BDEF38C1C7DB5FB00927F64 /* Navigation_Back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Navigation_Back@2x.png"; sourceTree = "<group>"; };
 		2BDEF38E1C7DB73500927F64 /* HomeBuyListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeBuyListViewController.swift; sourceTree = "<group>"; };
 		2BDEF3911C7E9D5700927F64 /* Home_Buy_Back03@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Home_Buy_Back03@2x.png"; sourceTree = "<group>"; };
@@ -1124,14 +1135,7 @@
 		2BF52F901CB3BA2D0099F296 /* bank_zg@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bank_zg@3x.png"; sourceTree = "<group>"; };
 		2BF52F911CB3BA2D0099F296 /* bank_zs@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bank_zs@2x.png"; sourceTree = "<group>"; };
 		2BF52F921CB3BA2D0099F296 /* bank_zs@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bank_zs@3x.png"; sourceTree = "<group>"; };
-		2BF7EF191C8D3370001C4595 /* BankCardAuthenticationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankCardAuthenticationViewController.swift; sourceTree = "<group>"; };
-		2BF7EF1B1C8D4D29001C4595 /* BankCardDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankCardDetailViewController.swift; sourceTree = "<group>"; };
-		2BF7EF1D1C8D61F7001C4595 /* AddBankCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBankCardViewController.swift; sourceTree = "<group>"; };
-		2BF7EF1F1C8D662C001C4595 /* VerifyBankCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerifyBankCardViewController.swift; sourceTree = "<group>"; };
-		2BF7EF211C8D703F001C4595 /* WalletHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WalletHomeViewController.swift; path = ../WalletHomeViewController.swift; sourceTree = "<group>"; };
 		2BF7F06D1C8E6C1E001C4595 /* Navigation_Back_R.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Navigation_Back_R.png; sourceTree = "<group>"; };
-		2BF7F06F1C8EA741001C4595 /* WalletCaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WalletCaseViewController.swift; path = ../WalletCaseViewController.swift; sourceTree = "<group>"; };
-		2BF7F0711C8EACD4001C4595 /* WalletRechargeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WalletRechargeViewController.swift; path = ../WalletRechargeViewController.swift; sourceTree = "<group>"; };
 		2BF7F0731C8EB18B001C4595 /* FortuneCenterSelectPayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FortuneCenterSelectPayViewController.swift; path = ../FortuneCenterSelectPayViewController.swift; sourceTree = "<group>"; };
 		2BF8D8BE1CAE67D7006E0C4D /* PsWordFindViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PsWordFindViewController.swift; sourceTree = "<group>"; };
 		2BF8D8C01CAE6CFB006E0C4D /* ResisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResisterViewController.swift; sourceTree = "<group>"; };
@@ -1495,7 +1499,6 @@
 		2B0ACCB11C858E11000EC299 /* MineSet */ = {
 			isa = PBXGroup;
 			children = (
-				2BF7EF181C8D3353001C4595 /* BankCard */,
 				2B0ACCB21C858E31000EC299 /* PersonInfoViewController.swift */,
 				2B73D84C1C8678C40016FEB2 /* AddressViewController.swift */,
 				2B73D84E1C867C280016FEB2 /* AdressTableViewCell.swift */,
@@ -1925,9 +1928,9 @@
 		2B989C051CB4D96E008C6D23 /* Wallet */ = {
 			isa = PBXGroup;
 			children = (
-				2BF7EF211C8D703F001C4595 /* WalletHomeViewController.swift */,
-				2BF7F06F1C8EA741001C4595 /* WalletCaseViewController.swift */,
-				2BF7F0711C8EACD4001C4595 /* WalletRechargeViewController.swift */,
+				2BC05C6C1CB630F700D3B1AE /* WalletCaseViewController.swift */,
+				2BC05C6D1CB630F700D3B1AE /* WalletHomeViewController.swift */,
+				2BC05C6E1CB630F700D3B1AE /* WalletRechargeViewController.swift */,
 				2B989C091CB4FB73008C6D23 /* WalletMyBillsViewController.swift */,
 				2B989C131CB50AF2008C6D23 /* WalletInComeViewController.swift */,
 				2BF7F0731C8EB18B001C4595 /* FortuneCenterSelectPayViewController.swift */,
@@ -1978,6 +1981,20 @@
 				2BB6A8DD1C880548008209E8 /* HomeSell_NotDeposit.png */,
 			);
 			path = Home_Sell;
+			sourceTree = "<group>";
+		};
+		2BC05C611CB630C300D3B1AE /* BankCard */ = {
+			isa = PBXGroup;
+			children = (
+				2BC05C651CB630C300D3B1AE /* BankCardHomeViewController.swift */,
+				2BC05C641CB630C300D3B1AE /* BankCardDetailViewController.swift */,
+				2B6F90711CB64B7400BD7A5D /* BankCardUnbindViewController.swift */,
+				2B6F90731CB6508300BD7A5D /* BankCardVerifyPhoneViewController.swift */,
+				2BC05C621CB630C300D3B1AE /* AddBankCardViewController.swift */,
+				2B6F90951CB6599500BD7A5D /* BankCardSetPsViewController.swift */,
+				2BC05C631CB630C300D3B1AE /* BankCardAuthenticationViewController.swift */,
+			);
+			path = BankCard;
 			sourceTree = "<group>";
 		};
 		2BDEF3951C7E9DA800927F64 /* Home_Buy_Goods */ = {
@@ -2187,18 +2204,6 @@
 			path = Bank;
 			sourceTree = "<group>";
 		};
-		2BF7EF181C8D3353001C4595 /* BankCard */ = {
-			isa = PBXGroup;
-			children = (
-				2BF7EF191C8D3370001C4595 /* BankCardAuthenticationViewController.swift */,
-				2BC05C5F1CB603E700D3B1AE /* BankCardHomeViewController.swift */,
-				2BF7EF1B1C8D4D29001C4595 /* BankCardDetailViewController.swift */,
-				2BF7EF1D1C8D61F7001C4595 /* AddBankCardViewController.swift */,
-				2BF7EF1F1C8D662C001C4595 /* VerifyBankCardViewController.swift */,
-			);
-			path = BankCard;
-			sourceTree = "<group>";
-		};
 		2C475CDFCB51F0D44C1096F4 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -2282,7 +2287,7 @@
 				3C9098781C76A6E9006B7D2C /* UIViewControllerExtension.swift */,
 				3C9098791C76A6E9006B7D2C /* UIViewExtension.swift */,
 				2BA3FDB91C9F8C0D00018F3C /* UIViewControllerExtensionForPop.swift */,
-				2B02B4A91CAA4EA50064B47C /* UILabelExtension.swift */,
+				2B6F906F1CB6372900BD7A5D /* UITableViewExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -2554,6 +2559,7 @@
 		3C9098F71C76A6E9006B7D2C /* UserCenter */ = {
 			isa = PBXGroup;
 			children = (
+				2BC05C611CB630C300D3B1AE /* BankCard */,
 				2B989C051CB4D96E008C6D23 /* Wallet */,
 				2B0ACCB11C858E11000EC299 /* MineSet */,
 				2B02B5141CABBEF40064B47C /* View */,
@@ -3120,8 +3126,6 @@
 				2B3AC6151C97B49100CC8662 /* BuyConfirmOrderViewController.swift in Sources */,
 				3C90985A1C76A482006B7D2C /* ViewController.swift in Sources */,
 				2BDEF3AF1C7EE0CA00927F64 /* HomeBuyGoodsDetailViewController.swift in Sources */,
-				2BF7EF1A1C8D3370001C4595 /* BankCardAuthenticationViewController.swift in Sources */,
-				2BF7F0701C8EA741001C4595 /* WalletCaseViewController.swift in Sources */,
 				2BE372D61C883AEC004A1DDF /* ReleaseGoodsViewController.swift in Sources */,
 				3C9099001C76A6E9006B7D2C /* ChartAnimator.swift in Sources */,
 				3C9099171C76A6E9006B7D2C /* BarLineScatterCandleBubbleChartData.swift in Sources */,
@@ -3139,16 +3143,19 @@
 				2B73D8531C868FC50016FEB2 /* CustomPickView.swift in Sources */,
 				3C9099201C76A6E9006B7D2C /* ChartDataEntry.swift in Sources */,
 				3C90993F1C76A6E9006B7D2C /* BarChartRenderer.swift in Sources */,
+				2B6F90961CB6599500BD7A5D /* BankCardSetPsViewController.swift in Sources */,
 				3C9099471C76A6E9006B7D2C /* ChartXAxisRendererBarChart.swift in Sources */,
 				3C9099281C76A6E9006B7D2C /* PieChartDataSet.swift in Sources */,
 				3C9099611C76A6E9006B7D2C /* QNInterceptor.swift in Sources */,
 				3C9099161C76A6E9006B7D2C /* BarChartDataSet.swift in Sources */,
+				2B6F90721CB64B7400BD7A5D /* BankCardUnbindViewController.swift in Sources */,
 				3C9098FC1C76A6E9006B7D2C /* UIViewControllerExtension.swift in Sources */,
 				2BA3FDB51C9F842800018F3C /* QN_Area.swift in Sources */,
-				2BF7EF1E1C8D61F7001C4595 /* AddBankCardViewController.swift in Sources */,
 				3C9098701C76A6AA006B7D2C /* QNSharedDatas.swift in Sources */,
+				2BC05C691CB630C300D3B1AE /* BankCardDetailViewController.swift in Sources */,
 				3C9099311C76A6E9006B7D2C /* ChartXAxisValueFormatter.swift in Sources */,
 				3C9099051C76A6E9006B7D2C /* ChartViewBase.swift in Sources */,
+				2BC05C671CB630C300D3B1AE /* AddBankCardViewController.swift in Sources */,
 				2B0662F71C7DA27E00EA822F /* UIImageExtension.swift in Sources */,
 				3C9099531C76A6E9006B7D2C /* ScatterChartRenderer.swift in Sources */,
 				2BF8D8C11CAE6CFB006E0C4D /* ResisterViewController.swift in Sources */,
@@ -3159,11 +3166,13 @@
 				3C9099131C76A6E9006B7D2C /* ChartYAxis.swift in Sources */,
 				2B68C44F1C7A9C3000B401A9 /* MineHomeViewController.swift in Sources */,
 				3C9098FB1C76A6E9006B7D2C /* StringExtension.swift in Sources */,
+				2BC05C6A1CB630C300D3B1AE /* BankCardHomeViewController.swift in Sources */,
 				3C90993E1C76A6E9006B7D2C /* ScatterChartDataProvider.swift in Sources */,
 				3C9099351C76A6E9006B7D2C /* ChartRange.swift in Sources */,
 				2B02B5161CABBF0C0064B47C /* CustomJumpBtns.swift in Sources */,
 				3C9099141C76A6E9006B7D2C /* BarChartData.swift in Sources */,
 				2BDEF3CC1C7F028F00927F64 /* CycleScrollView.m in Sources */,
+				2BC05C681CB630C300D3B1AE /* BankCardAuthenticationViewController.swift in Sources */,
 				3C9099601C76A6E9006B7D2C /* QNFormatTool.swift in Sources */,
 				3C9099491C76A6E9006B7D2C /* ChartXAxisRendererRadarChart.swift in Sources */,
 				2B9D9F901C8FC3D800141D31 /* PayPassWordSetViewController.swift in Sources */,
@@ -3182,7 +3191,6 @@
 				2B9D9F9D1C9164F000141D31 /* PersonDetailViewController.swift in Sources */,
 				3C90992A1C76A6E9006B7D2C /* RadarChartDataSet.swift in Sources */,
 				3C9099291C76A6E9006B7D2C /* RadarChartData.swift in Sources */,
-				2BF7EF221C8D703F001C4595 /* WalletHomeViewController.swift in Sources */,
 				2B0662F91C7DA4A800EA822F /* HomeBuyViewController.swift in Sources */,
 				3C9099041C76A6E9006B7D2C /* CandleStickChartView.swift in Sources */,
 				3C9099511C76A6E9006B7D2C /* PieChartRenderer.swift in Sources */,
@@ -3208,8 +3216,8 @@
 				3C9099411C76A6E9006B7D2C /* CandleStickChartRenderer.swift in Sources */,
 				3C9099441C76A6E9006B7D2C /* ChartLegendRenderer.swift in Sources */,
 				2B02B4C21CAA81140064B47C /* OrderGoodsTableViewCell.swift in Sources */,
-				2B02B4AA1CAA4EA50064B47C /* UILabelExtension.swift in Sources */,
 				2B989C141CB50AF2008C6D23 /* WalletInComeViewController.swift in Sources */,
+				2BC05C711CB630F700D3B1AE /* WalletRechargeViewController.swift in Sources */,
 				3C9099101C76A6E9006B7D2C /* ChartLimitLine.swift in Sources */,
 				3C90993C1C76A6E9006B7D2C /* ChartDataProvider.swift in Sources */,
 				3C9099191C76A6E9006B7D2C /* BubbleChartData.swift in Sources */,
@@ -3217,14 +3225,13 @@
 				2BE372D91C891D7E004A1DDF /* ReleaseGoodsConfirmViewController.swift in Sources */,
 				2BA3FDBA1C9F8C0D00018F3C /* UIViewControllerExtensionForPop.swift in Sources */,
 				3C9099111C76A6E9006B7D2C /* ChartMarker.swift in Sources */,
-				2BF7EF201C8D662C001C4595 /* VerifyBankCardViewController.swift in Sources */,
 				3C90994C1C76A6E9006B7D2C /* ChartYAxisRendererRadarChart.swift in Sources */,
 				3C90995D1C76A6E9006B7D2C /* NSString+AES.m in Sources */,
 				2B73D8551C86B6D00016FEB2 /* PersonIntroductionViewController.swift in Sources */,
 				2B539C051C9AACD000FFE6CD /* StartImageView.swift in Sources */,
 				3C9098711C76A6AA006B7D2C /* QNStyleAttribute.swift in Sources */,
+				2B6F90701CB6372900BD7A5D /* UITableViewExtension.swift in Sources */,
 				3C90991A1C76A6E9006B7D2C /* BubbleChartDataEntry.swift in Sources */,
-				2BC05C601CB603E700D3B1AE /* BankCardHomeViewController.swift in Sources */,
 				2B989C0A1CB4FB73008C6D23 /* WalletMyBillsViewController.swift in Sources */,
 				3C90995B1C76A6E9006B7D2C /* LyPrompt.swift in Sources */,
 				3C90993B1C76A6E9006B7D2C /* CandleChartDataProvider.swift in Sources */,
@@ -3241,7 +3248,6 @@
 				3C9099631C76A6E9006B7D2C /* ZMDTool.swift in Sources */,
 				2BE373001C895F28004A1DDF /* BusinessAuthenticationViewController.swift in Sources */,
 				3C9099181C76A6E9006B7D2C /* BarLineScatterCandleBubbleChartDataSet.swift in Sources */,
-				2BF7EF1C1C8D4D29001C4595 /* BankCardDetailViewController.swift in Sources */,
 				3C90995F1C76A6E9006B7D2C /* QNChartsTool.swift in Sources */,
 				2BF8D8BF1CAE67D7006E0C4D /* PsWordFindViewController.swift in Sources */,
 				3C9099381C76A6E9006B7D2C /* BarChartDataProvider.swift in Sources */,
@@ -3259,6 +3265,7 @@
 				2B9D9F991C91148F00141D31 /* ProductCategoryViewController.swift in Sources */,
 				3C9099231C76A6E9006B7D2C /* LineChartData.swift in Sources */,
 				3C9099401C76A6E9006B7D2C /* BubbleChartRenderer.swift in Sources */,
+				2B6F90741CB6508300BD7A5D /* BankCardVerifyPhoneViewController.swift in Sources */,
 				3C9099301C76A6E9006B7D2C /* ChartFillFormatter.swift in Sources */,
 				3C9099621C76A6E9006B7D2C /* QNNetworkTool.swift in Sources */,
 				2B539C041C9AACD000FFE6CD /* BlinkView.swift in Sources */,
@@ -3285,7 +3292,7 @@
 				3C9099221C76A6E9006B7D2C /* CombinedChartData.swift in Sources */,
 				3C9099271C76A6E9006B7D2C /* PieChartData.swift in Sources */,
 				3C90994F1C76A6E9006B7D2C /* LineChartRenderer.swift in Sources */,
-				2BF7F0721C8EACD4001C4595 /* WalletRechargeViewController.swift in Sources */,
+				2BC05C701CB630F700D3B1AE /* WalletHomeViewController.swift in Sources */,
 				2B5FF44C1CA523C70067909D /* ZMDShareSDKTool.swift in Sources */,
 				2B73D85B1C86CBBD0016FEB2 /* PhoneSetViewController.swift in Sources */,
 				3C9098581C76A482006B7D2C /* AppDelegate.swift in Sources */,
@@ -3297,6 +3304,7 @@
 				3C9099551C76A6E9006B7D2C /* ChartSelectionDetail.swift in Sources */,
 				3C90991D1C76A6E9006B7D2C /* CandleChartDataEntry.swift in Sources */,
 				3C90991F1C76A6E9006B7D2C /* ChartData.swift in Sources */,
+				2BC05C6F1CB630F700D3B1AE /* WalletCaseViewController.swift in Sources */,
 				3C90991B1C76A6E9006B7D2C /* BubbleChartDataSet.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

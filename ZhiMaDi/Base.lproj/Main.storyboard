@@ -1483,7 +1483,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="usrName" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uib-rb-3BI">
                                                     <rect key="frame" x="28" y="107" width="265" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wgj-P8-KNN">
@@ -2732,7 +2732,7 @@
                                 </constraints>
                                 <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <state key="normal" title="添加收货地址" image="shop_add_product.png">
-                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="addAddressBtnCli:" destination="QYT-5z-sma" eventType="touchUpInside" id="Kvs-oh-07Y"/>
@@ -2877,117 +2877,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5ts-Ip-ezs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="455.5" y="4848.5"/>
-        </scene>
-        <!--银行卡详请-->
-        <scene sceneID="k1e-F2-Lgb">
-            <objects>
-                <viewController storyboardIdentifier="BankCardDetailViewController" id="o8y-kd-zRI" customClass="BankCardDetailViewController" customModule="ZhiMaDi" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="EQN-OU-eBN"/>
-                        <viewControllerLayoutGuide type="bottom" id="KAi-hM-6iN"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="v60-Sw-48w">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="090-SW-JNp">
-                                <rect key="frame" x="0.0" y="64" width="320" height="603"/>
-                                <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="cardCell" rowHeight="70" id="hfx-uL-a74">
-                                        <rect key="frame" x="0.0" y="28" width="320" height="70"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hfx-uL-a74" id="RPp-La-HsZ">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="69"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Home_Buy.png" translatesAutoresizingMaskIntoConstraints="NO" id="fVG-63-Noz">
-                                                    <rect key="frame" x="18" y="16" width="38" height="38"/>
-                                                </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="储蓄卡" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Bi-So-aRu">
-                                                    <rect key="frame" x="74" y="41" width="260" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="中国工商银行" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EVU-Ln-M8Q">
-                                                    <rect key="frame" x="74" y="8" width="246" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="payCell" rowHeight="50" id="ENr-ai-6RV">
-                                        <rect key="frame" x="0.0" y="98" width="320" height="50"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ENr-ai-6RV" id="pMw-CY-XJT">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="单笔支付限额" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8gc-Lv-ceu">
-                                                    <rect key="frame" x="19" y="17" width="174" height="16"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="10000" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sex-rD-C6C">
-                                                    <rect key="frame" x="247" y="17" width="120" height="16"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="relieveCell" rowHeight="56" id="Dzw-Rf-c7f">
-                                        <rect key="frame" x="0.0" y="148" width="320" height="56"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Dzw-Rf-c7f" id="F7a-U3-8B9">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="55"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DlX-VH-3L3">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
-                                                    <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BC1-hm-u5q">
-                                                            <rect key="frame" x="20" y="10" width="335" height="46"/>
-                                                            <color key="backgroundColor" red="0.92941176469999998" green="0.74901960779999999" blue="0.10980392160000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                            <state key="normal" title="验证">
-                                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                            </state>
-                                                        </button>
-                                                    </subviews>
-                                                    <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
-                                                </view>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
-                                <connections>
-                                    <outlet property="dataSource" destination="o8y-kd-zRI" id="XM5-AS-fkT"/>
-                                    <outlet property="delegate" destination="o8y-kd-zRI" id="DvM-sD-eGe"/>
-                                </connections>
-                            </tableView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="090-SW-JNp" firstAttribute="top" secondItem="EQN-OU-eBN" secondAttribute="bottom" id="8Ph-hZ-b3f"/>
-                            <constraint firstItem="090-SW-JNp" firstAttribute="leading" secondItem="v60-Sw-48w" secondAttribute="leading" id="CwG-qB-3pB"/>
-                            <constraint firstItem="KAi-hM-6iN" firstAttribute="top" secondItem="090-SW-JNp" secondAttribute="bottom" id="DpZ-Zx-NsJ"/>
-                            <constraint firstAttribute="trailing" secondItem="090-SW-JNp" secondAttribute="trailing" id="o2Q-dM-AdQ"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="银行卡详请" id="9X8-Ca-gxi"/>
-                    <connections>
-                        <outlet property="currentTableView" destination="090-SW-JNp" id="Kpu-IQ-ftp"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="YSP-Iu-cbc" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="921.5" y="5591.5"/>
         </scene>
         <!--我的关注-->
         <scene sceneID="GOb-w7-S5T">
@@ -3430,8 +3319,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8sE-Rd-5wZ">
-                                <rect key="frame" x="0.0" y="64" width="320" height="603"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8sE-Rd-5wZ">
+                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="50" id="7NJ-Bh-1AB">
@@ -3477,7 +3366,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gwr-k3-2O3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="455.5" y="6368.5"/>
+            <point key="canvasLocation" x="455" y="6368"/>
         </scene>
         <!--采购管理-->
         <scene sceneID="o9Y-Ly-cki">
@@ -5629,7 +5518,6 @@
         <image name="HomeSell_Contract.png" width="35" height="41"/>
         <image name="HomeSell_Deposit.png" width="22" height="21"/>
         <image name="HomeSell_NotDeposit.png" width="22" height="22"/>
-        <image name="Home_Buy.png" width="60" height="60"/>
         <image name="Home_Buy_AppleGoods.png" width="176" height="175"/>
         <image name="Home_Buy_PeopleTest.png" width="128" height="128"/>
         <image name="Home_Buy_Smile.png" width="20" height="20"/>

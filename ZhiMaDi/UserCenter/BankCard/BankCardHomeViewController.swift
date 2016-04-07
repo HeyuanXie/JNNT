@@ -14,7 +14,7 @@ class BankCardHomeViewController: UIViewController,UITableViewDataSource, UITabl
     var dataArray : NSArray!
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.dataArray = []//["企业","",""]
+        self.dataArray = ["企业","",""]
         self.subViewInit()
     }
     
@@ -109,6 +109,8 @@ class BankCardHomeViewController: UIViewController,UITableViewDataSource, UITabl
         return cell!
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let vc = BankCardDetailViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     //MARK:- Private Method
     private func subViewInit(){
@@ -123,7 +125,8 @@ class BankCardHomeViewController: UIViewController,UITableViewDataSource, UITabl
         let footV = UIView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: 100))
         footV.backgroundColor = UIColor.clearColor()
         let addBtn = ZMDTool.getButton(CGRect(x: 12, y: 35, width: kScreenWidth - 24, height: 50), textForNormal: "+ 添加银行卡", fontSize: 16,textColorForNormal:defaultDetailTextColor, backgroundColor: UIColor.clearColor()) { (sender) -> Void in
-            
+            let vc = AddBankCardViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
         }
         addBtn.setImage(UIImage(named: ""), forState: .Normal)
         ZMDTool.configViewLayerWithSize(addBtn, size: 25)

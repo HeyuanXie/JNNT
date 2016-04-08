@@ -309,11 +309,17 @@ class CustomBtn : UIButton {
         //Center text
         var newFrame = self.titleLabel!.frame;
         newFrame.origin.x = 0;
-        newFrame.origin.y = self.imageView!.frame.size.height + edgeTop + 10;
+        newFrame.origin.y = self.imageView!.frame.size.height + edgeTop + 8 // 8 为 title img 间距
         newFrame.size.width = self.frame.size.width;
         
         self.titleLabel!.frame = newFrame;
         self.titleLabel!.textAlignment = .Center
+    }
+}
+// 图跟文字垂直
+class CustomVerticalBtn : UIButton {
+    override func layoutSubviews() {
+        
     }
 }
 // 文字 字体

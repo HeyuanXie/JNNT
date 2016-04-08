@@ -128,6 +128,10 @@
 		2B06631E1C7DA9E900EA822F /* prune@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B06630B1C7DA9E900EA822F /* prune@2x.png */; };
 		2B06631F1C7DA9E900EA822F /* strawberry@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B06630C1C7DA9E900EA822F /* strawberry@2x.png */; };
 		2B0663201C7DA9E900EA822F /* watermelon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B06630D1C7DA9E900EA822F /* watermelon@2x.png */; };
+		2B07BA291CB78E7C0012929B /* MineFollowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B07BA281CB78E7C0012929B /* MineFollowViewController.swift */; };
+		2B07BA2B1CB799490012929B /* MineCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B07BA2A1CB799490012929B /* MineCollectionViewController.swift */; };
+		2B07BA2D1CB7A1540012929B /* ZMDMultiselectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B07BA2C1CB7A1540012929B /* ZMDMultiselectView.swift */; };
+		2B07BA301CB7AFAC0012929B /* CardVolumeHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B07BA2F1CB7AFAC0012929B /* CardVolumeHomeViewController.swift */; };
 		2B0ACCB31C858E31000EC299 /* PersonInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0ACCB21C858E31000EC299 /* PersonInfoViewController.swift */; };
 		2B197DA41C83DB8B006494CF /* SortViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B197DA31C83DB8B006494CF /* SortViewController.swift */; };
 		2B197DA61C83EAD3006494CF /* Navi_Msg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B197DA51C83EAD3006494CF /* Navi_Msg@2x.png */; };
@@ -361,6 +365,8 @@
 		2BA3FDE61CA0E43A00018F3C /* TabBar_Mine_Selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BA3FDDE1CA0E43A00018F3C /* TabBar_Mine_Selected@2x.png */; };
 		2BA3FDE71CA0E43A00018F3C /* TabBar_School_Normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BA3FDDF1CA0E43A00018F3C /* TabBar_School_Normal@2x.png */; };
 		2BA3FDE81CA0E43A00018F3C /* TabBar_School_Selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BA3FDE01CA0E43A00018F3C /* TabBar_School_Selected@2x.png */; };
+		2BB0EEFE1CB743C1000A186D /* AfterSalesHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB0EEFD1CB743C1000A186D /* AfterSalesHomeViewController.swift */; };
+		2BB0EF001CB74A64000A186D /* AfterSalesReturnViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB0EEFF1CB74A64000A186D /* AfterSalesReturnViewController.swift */; };
 		2BB6A8D01C87DF12008209E8 /* SignPSSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6A8CF1C87DF12008209E8 /* SignPSSetViewController.swift */; };
 		2BB6A8D41C87E413008209E8 /* Home_Loan_Tmp.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BB6A8D31C87E413008209E8 /* Home_Loan_Tmp.png */; };
 		2BB6A8D61C87E447008209E8 /* HomeLoanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6A8D51C87E447008209E8 /* HomeLoanViewController.swift */; };
@@ -746,6 +752,10 @@
 		2B06630B1C7DA9E900EA822F /* prune@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "prune@2x.png"; sourceTree = "<group>"; };
 		2B06630C1C7DA9E900EA822F /* strawberry@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "strawberry@2x.png"; sourceTree = "<group>"; };
 		2B06630D1C7DA9E900EA822F /* watermelon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "watermelon@2x.png"; sourceTree = "<group>"; };
+		2B07BA281CB78E7C0012929B /* MineFollowViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineFollowViewController.swift; sourceTree = "<group>"; };
+		2B07BA2A1CB799490012929B /* MineCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineCollectionViewController.swift; sourceTree = "<group>"; };
+		2B07BA2C1CB7A1540012929B /* ZMDMultiselectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZMDMultiselectView.swift; sourceTree = "<group>"; };
+		2B07BA2F1CB7AFAC0012929B /* CardVolumeHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardVolumeHomeViewController.swift; sourceTree = "<group>"; };
 		2B0ACCB21C858E31000EC299 /* PersonInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonInfoViewController.swift; sourceTree = "<group>"; };
 		2B197DA31C83DB8B006494CF /* SortViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SortViewController.swift; sourceTree = "<group>"; };
 		2B197DA51C83EAD3006494CF /* Navi_Msg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Navi_Msg@2x.png"; sourceTree = "<group>"; };
@@ -994,6 +1004,8 @@
 		2BA3FDDE1CA0E43A00018F3C /* TabBar_Mine_Selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabBar_Mine_Selected@2x.png"; sourceTree = "<group>"; };
 		2BA3FDDF1CA0E43A00018F3C /* TabBar_School_Normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabBar_School_Normal@2x.png"; sourceTree = "<group>"; };
 		2BA3FDE01CA0E43A00018F3C /* TabBar_School_Selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabBar_School_Selected@2x.png"; sourceTree = "<group>"; };
+		2BB0EEFD1CB743C1000A186D /* AfterSalesHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AfterSalesHomeViewController.swift; sourceTree = "<group>"; };
+		2BB0EEFF1CB74A64000A186D /* AfterSalesReturnViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AfterSalesReturnViewController.swift; sourceTree = "<group>"; };
 		2BB6A8CF1C87DF12008209E8 /* SignPSSetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignPSSetViewController.swift; sourceTree = "<group>"; };
 		2BB6A8D31C87E413008209E8 /* Home_Loan_Tmp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Home_Loan_Tmp.png; sourceTree = "<group>"; };
 		2BB6A8D51C87E447008209E8 /* HomeLoanViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeLoanViewController.swift; sourceTree = "<group>"; };
@@ -1496,6 +1508,14 @@
 			path = Home_Buy;
 			sourceTree = "<group>";
 		};
+		2B07BA2E1CB7AF990012929B /* CardVolume */ = {
+			isa = PBXGroup;
+			children = (
+				2B07BA2F1CB7AFAC0012929B /* CardVolumeHomeViewController.swift */,
+			);
+			path = CardVolume;
+			sourceTree = "<group>";
+		};
 		2B0ACCB11C858E11000EC299 /* MineSet */ = {
 			isa = PBXGroup;
 			children = (
@@ -1961,6 +1981,7 @@
 			children = (
 				2BA3FDB21C9F83B900018F3C /* FindDoctorCityPopView.swift */,
 				2BA3FDB41C9F842800018F3C /* QN_Area.swift */,
+				2B07BA2C1CB7A1540012929B /* ZMDMultiselectView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1971,6 +1992,15 @@
 				2BA3FDB71C9F850E00018F3C /* area.txt */,
 			);
 			path = Word;
+			sourceTree = "<group>";
+		};
+		2BB0EEFC1CB743B5000A186D /* AfterSales */ = {
+			isa = PBXGroup;
+			children = (
+				2BB0EEFD1CB743C1000A186D /* AfterSalesHomeViewController.swift */,
+				2BB0EEFF1CB74A64000A186D /* AfterSalesReturnViewController.swift */,
+			);
+			path = AfterSales;
 			sourceTree = "<group>";
 		};
 		2BB6A8D91C87EE7E008209E8 /* Home_Sell */ = {
@@ -2559,12 +2589,16 @@
 		3C9098F71C76A6E9006B7D2C /* UserCenter */ = {
 			isa = PBXGroup;
 			children = (
+				2B07BA2E1CB7AF990012929B /* CardVolume */,
+				2BB0EEFC1CB743B5000A186D /* AfterSales */,
 				2BC05C611CB630C300D3B1AE /* BankCard */,
 				2B989C051CB4D96E008C6D23 /* Wallet */,
 				2B0ACCB11C858E11000EC299 /* MineSet */,
 				2B02B5141CABBEF40064B47C /* View */,
 				2B02B5111CABB7510064B47C /* Order */,
 				2B68C44E1C7A9C3000B401A9 /* MineHomeViewController.swift */,
+				2B07BA281CB78E7C0012929B /* MineFollowViewController.swift */,
+				2B07BA2A1CB799490012929B /* MineCollectionViewController.swift */,
 				2B197DC21C857FA4006494CF /* MineHomeSetViewController.swift */,
 				2BE373011C8974DC004A1DDF /* NewProductReleaseViewController.swift */,
 				2BE373031C897F96004A1DDF /* ProductSpecsViewController.swift */,
@@ -3146,12 +3180,14 @@
 				2B6F90961CB6599500BD7A5D /* BankCardSetPsViewController.swift in Sources */,
 				3C9099471C76A6E9006B7D2C /* ChartXAxisRendererBarChart.swift in Sources */,
 				3C9099281C76A6E9006B7D2C /* PieChartDataSet.swift in Sources */,
+				2B07BA291CB78E7C0012929B /* MineFollowViewController.swift in Sources */,
 				3C9099611C76A6E9006B7D2C /* QNInterceptor.swift in Sources */,
 				3C9099161C76A6E9006B7D2C /* BarChartDataSet.swift in Sources */,
 				2B6F90721CB64B7400BD7A5D /* BankCardUnbindViewController.swift in Sources */,
 				3C9098FC1C76A6E9006B7D2C /* UIViewControllerExtension.swift in Sources */,
 				2BA3FDB51C9F842800018F3C /* QN_Area.swift in Sources */,
 				3C9098701C76A6AA006B7D2C /* QNSharedDatas.swift in Sources */,
+				2B07BA301CB7AFAC0012929B /* CardVolumeHomeViewController.swift in Sources */,
 				2BC05C691CB630C300D3B1AE /* BankCardDetailViewController.swift in Sources */,
 				3C9099311C76A6E9006B7D2C /* ChartXAxisValueFormatter.swift in Sources */,
 				3C9099051C76A6E9006B7D2C /* ChartViewBase.swift in Sources */,
@@ -3162,8 +3198,10 @@
 				2B02B5531CAE18230064B47C /* OrderLogisticsMsgViewController.swift in Sources */,
 				3C90986F1C76A6AA006B7D2C /* Constents.swift in Sources */,
 				2B3AC61C1C97FAE000CC8662 /* VerificationPSViewController.swift in Sources */,
+				2B07BA2D1CB7A1540012929B /* ZMDMultiselectView.swift in Sources */,
 				2B9D9F9B1C91543D00141D31 /* MyFollowViewController.swift in Sources */,
 				3C9099131C76A6E9006B7D2C /* ChartYAxis.swift in Sources */,
+				2B07BA2B1CB799490012929B /* MineCollectionViewController.swift in Sources */,
 				2B68C44F1C7A9C3000B401A9 /* MineHomeViewController.swift in Sources */,
 				3C9098FB1C76A6E9006B7D2C /* StringExtension.swift in Sources */,
 				2BC05C6A1CB630C300D3B1AE /* BankCardHomeViewController.swift in Sources */,
@@ -3183,6 +3221,7 @@
 				2BEBE77C1C9697940019E74F /* GoodsCommentViewController.swift in Sources */,
 				3C9099581C76A6E9006B7D2C /* ChartUtils.swift in Sources */,
 				2B197DB81C843515006494CF /* LoginViewController.swift in Sources */,
+				2BB0EF001CB74A64000A186D /* AfterSalesReturnViewController.swift in Sources */,
 				2B989C081CB4E968008C6D23 /* ShoppingCartViewController.swift in Sources */,
 				3C90995C1C76A6E9006B7D2C /* NSData+AES.m in Sources */,
 				3C9098FE1C76A6E9006B7D2C /* Aspects.m in Sources */,
@@ -3206,6 +3245,7 @@
 				2BDEF38F1C7DB73500927F64 /* HomeBuyListViewController.swift in Sources */,
 				2B3AC61A1C97E8BF00CC8662 /* OrderDetailViewController.swift in Sources */,
 				3C9099241C76A6E9006B7D2C /* LineChartDataSet.swift in Sources */,
+				2BB0EEFE1CB743C1000A186D /* AfterSalesHomeViewController.swift in Sources */,
 				2B959EC01C76F5D0002EA40D /* HomePageViewController.swift in Sources */,
 				2B02B4B21CAA62FA0064B47C /* HomeLeaseListViewController.swift in Sources */,
 				2B02B5131CABB7510064B47C /* MyOrderViewController.swift in Sources */,

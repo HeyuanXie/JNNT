@@ -1,27 +1,26 @@
 //
-//  WalletMyBillsViewController.swift
+//  CardVolumeHomeViewController.swift
 //  ZhiMaDi
 //
-//  Created by haijie on 16/4/6.
+//  Created by haijie on 16/4/8.
 //  Copyright © 2016年 ZhiMaDi. All rights reserved.
 //
 
 import UIKit
-// 我的帐单
-class WalletMyBillsViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,ZMDInterceptorProtocol,ZMDInterceptorMoreProtocol {
-    enum BillsType {
-        case All
-        case Income
-        case Spending
+// 卡券
+class CardVolumeHomeViewController: UIViewController,UITableViewDataSource, UITableViewDelegate,ZMDInterceptorProtocol,ZMDInterceptorMoreProtocol {
+    enum CardType {
+        case Consumer
+        case Member
         init() {
-            self = All
+            self = Consumer
         }
     }
     var currentTableView: UITableView!
     
     var dataArray : NSArray!
-    let billsTypeAll = [BillsType.All,BillsType.Income,BillsType.Spending]
-    var billsType = BillsType()
+    let cardTypeAll = [CardType.Consumer,.Member]
+    var cardType = CardType()
     override func viewDidLoad() {
         super.viewDidLoad()
         self.dataArray = ["",""]
@@ -37,29 +36,21 @@ class WalletMyBillsViewController: UIViewController,UITableViewDataSource,UITabl
         return 1
     }
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        switch self.billsType {
-        case .All :
+        switch self.cardType {
+        case .Consumer :
             return self.dataArray.count
-        case .Income :
-            return 1
-        case .Spending :
+        case .Member :
             return 1
         }
     }
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if self.billsType == .Income {
-            return 0
-        }
-        return section == 0 ? 16 : 0.5
+        return 16
     }
     func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0
     }
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if self.billsType == .Income {
-            return self.view.bounds.size.height - 55
-        }
-        return 60
+        return 87
     }
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headView = UIView(frame: CGRectMake(0, 0, kScreenWidth, 16))
@@ -67,8 +58,8 @@ class WalletMyBillsViewController: UIViewController,UITableViewDataSource,UITabl
         return headView
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        switch self.billsType {
-        case .All :
+        switch self.cardType {
+        case .Consumer :
             let cellId = "Cell"
             var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
             if cell == nil {
@@ -89,7 +80,7 @@ class WalletMyBillsViewController: UIViewController,UITableViewDataSource,UITabl
             }
             
             return cell!
-        case .Income:
+        case .Member:
             let cellId = "NOCell"
             var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
             if cell == nil {
@@ -104,27 +95,6 @@ class WalletMyBillsViewController: UIViewController,UITableViewDataSource,UITabl
                 let dolbl = ZMDTool.getLabel(CGRect(x: 12, y: (self.view.bounds.size.height - 55)/2 + 27, width: kScreenWidth - 24, height: 16), text: "你还没有相关记录", fontSize: 16)
                 dolbl.textAlignment = .Center
                 cell?.contentView.addSubview(dolbl)
-            }
-            
-            return cell!
-        case .Spending:
-            let cellId = "Cell"
-            var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
-            if cell == nil {
-                cell = UITableViewCell(style: .Subtitle, reuseIdentifier: cellId)
-                cell?.accessoryType = UITableViewCellAccessoryType.None
-                cell!.selectionStyle = .None
-                
-                ZMDTool.configTableViewCellDefault(cell!)
-                
-                let dolbl = ZMDTool.getLabel(CGRect(x: 12, y: 12, width: 100, height: 16), text: "提现", fontSize: 16)
-                cell?.contentView.addSubview(dolbl)
-                let moneylbl = ZMDTool.getLabel(CGRect(x: kScreenWidth -  12 - 100, y: 12, width: 100, height: 16), text: "-10.00元", fontSize: 16)
-                cell?.contentView.addSubview(moneylbl)
-                let timelbl = ZMDTool.getLabel(CGRect(x: 12, y: 12 + 16 + 10, width: 100, height: 16), text: "2016-02-26", fontSize: 16,textColor:defaultDetailTextColor)
-                cell?.contentView.addSubview(timelbl)
-                let balanceLbl = ZMDTool.getLabel(CGRect(x: kScreenWidth -  12 - 100, y: 12 + 16 + 10, width: 100, height: 16), text: "余额：00元", fontSize: 16,textColor:defaultDetailTextColor)
-                cell?.contentView.addSubview(balanceLbl)
             }
             
             return cell!
@@ -143,11 +113,11 @@ class WalletMyBillsViewController: UIViewController,UITableViewDataSource,UITabl
         customJumpBtns.addSeparatedLine()
         self.view.addSubview(customJumpBtns)
         customJumpBtns.finished = { (index) ->Void in
-            self.billsType = self.billsTypeAll[index]
+            self.cardType = self.cardTypeAll[index]
             self.currentTableView.reloadData()
         }
         
-        self.currentTableView = UITableView(frame: CGRect(x: 0, y: 55, width: kScreenWidth, height: self.view.bounds.size.height - 55 - 58))
+        self.currentTableView = UITableView(frame: CGRect(x: 0, y: 55, width: kScreenWidth, height: self.view.bounds.size.height - 55-58))
         self.currentTableView.backgroundColor = tableViewdefaultBackgroundColor
         self.currentTableView.separatorStyle = .None
         self.currentTableView.dataSource = self
@@ -155,10 +125,10 @@ class WalletMyBillsViewController: UIViewController,UITableViewDataSource,UITabl
         self.view.addSubview(self.currentTableView)
         
         self.view.addSubview(ZMDTool.getLine(CGRect(x: 0, y: self.view.bounds.height - 58-0.5, width: kScreenWidth, height: 0.5)))
-        let submitBtn = ZMDTool.getButton(CGRect(x: 0, y: self.view.bounds.height - 58, width: kScreenWidth, height: 58), textForNormal: "提交申请", fontSize: 17, backgroundColor:RGB(247,247,247,1)) { (sender) -> Void in
+        let submitBtn = ZMDTool.getButton(CGRect(x: 0, y: self.view.bounds.height - 58, width: kScreenWidth, height: 58), textForNormal: "批量管理", fontSize: 17, backgroundColor:RGB(247,247,247,1)) { (sender) -> Void in
             
         }
         self.view.addSubview(submitBtn)
+        
     }
-    
 }

@@ -162,7 +162,6 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
             return 206
         }
     }
-    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         switch  self.userCenterData[indexPath.section] {
         case .HomeContentTypeHead :

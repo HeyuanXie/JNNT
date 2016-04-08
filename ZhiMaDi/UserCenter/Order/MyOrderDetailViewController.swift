@@ -245,7 +245,8 @@ class MyOrderDetailViewController: UIViewController {
             contactBtn.setImage(UIImage(named: "product_chat"), forState: .Normal)
             cell?.contentView.addSubview(contactBtn)
             let fefundBtn = ZMDTool.getButton(CGRect(x: kScreenWidth/2+14 , y: 12, width: 130, height: 40), textForNormal: "退款/售后", fontSize: 16, backgroundColor: UIColor.whiteColor(), blockForCli: { (sender) -> Void in
-                
+                let vc = AfterSalesHomeViewController()
+                self.navigationController?.pushViewController(vc, animated: true)
             })
             ZMDTool.configViewLayerFrameWithColor(fefundBtn, color: defaultTextColor)
             ZMDTool.configViewLayer(fefundBtn)

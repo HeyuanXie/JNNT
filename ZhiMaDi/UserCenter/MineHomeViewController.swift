@@ -139,6 +139,8 @@ class MineHomeViewController: UIViewController,UITableViewDataSource, UITableVie
         if !g_isLogin {
             ZMDTool.enterLoginViewController()
         }
+        // 让导航栏支持右滑返回功能
+        ZMDTool.addInteractive(self.navigationController)
         self.dataInit()
         self.updateUI()
     }
@@ -192,6 +194,16 @@ class MineHomeViewController: UIViewController,UITableViewDataSource, UITableVie
             if let personImgV = cell!.viewWithTag(10001) {
                 ZMDTool.configViewLayerWithSize(personImgV, size: 42)
             }
+            let followBtn = cell?.viewWithTag(10003) as! UIButton
+            followBtn.rac_signalForControlEvents(.TouchUpInside).subscribeNext({ (sender) -> Void in
+                let vc = MineFollowViewController()
+                self.navigationController?.pushViewController(vc, animated: true)
+            })
+            let collectionBtn = cell?.viewWithTag(10004) as! UIButton
+            collectionBtn.rac_signalForControlEvents(.TouchUpInside).subscribeNext({ (sender) -> Void in
+                let vc = MineCollectionViewController()
+                self.navigationController?.pushViewController(vc, animated: true)
+            })
             return cell!
         case .UserMyOrder :
             let cellId = "MyOrderCell"

@@ -53,7 +53,7 @@ class ZMDInterceptor : NSObject {
             let block : @convention(block) (aspectInfo: AspectInfo) -> Void = { [weak self](aspectInfo: AspectInfo) -> Void in
                 if let _ = self, let viewController = aspectInfo.instance() as? UIViewController {
                     // 设置统一的背景色
-                    viewController.view.backgroundColor = defaultBackgroundColor
+                    viewController.view.backgroundColor = UIColor.whiteColor()
                     // 修改基础配置
                     viewController.edgesForExtendedLayout = UIRectEdge.None
                     
@@ -108,25 +108,7 @@ class ZMDInterceptor : NSObject {
                         // 修改导航栏&状态栏的样式
                         viewController.navigationController?.navigationBar.translucent = false // 关闭透明度效果
 //                        UIApplication.sharedApplication().statusBarHidden = false
-                        if viewController.navigationController!.viewControllers.count == 1{
-//                            if viewController is BindingFamilyViewController || viewController is ForgetPasswordViewController{
-//                                UIApplication.sharedApplication().statusBarStyle = .Default
-//                                viewController.navigationController?.navigationBar.barTintColor = navigationTextColor
-//                                viewController.navigationController?.navigationBar.tintColor = appThemeColor
-//                                viewController.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.blackColor(), NSFontAttributeName: UIFont.systemFontOfSize(18)]
-//                                return
-//                            }
-//                            UIApplication.sharedApplication().statusBarStyle = .LightContent
-//                            viewController.navigationController?.navigationBar.barTintColor = appThemeColor
-//                            viewController.navigationController?.navigationBar.tintColor = navigationTextColor
-//                            viewController.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: navigationTextColor, NSFontAttributeName: UIFont.systemFontOfSize(18)]
-                        }
-                        else {
-//                            UIApplication.sharedApplication().statusBarStyle = .Default
-//                            viewController.navigationController?.navigationBar.barTintColor = navigationTextColor
-//                            viewController.navigationController?.navigationBar.tintColor = UIColor.blackColor()
-//                            viewController.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: appThemeColor, NSFontAttributeName: UIFont.systemFontOfSize(18)]
-                        }
+                       
                         if viewController is HomePageViewController {
                             UIApplication.sharedApplication().statusBarStyle = .Default
                             //填充色
@@ -136,6 +118,12 @@ class ZMDInterceptor : NSObject {
                             viewController.navigationController?.navigationBar.barTintColor = navigationBackgroundColor
                             viewController.navigationController?.navigationBar.tintColor = navigationTextColor
                             viewController.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: navigationTextColor, NSFontAttributeName: navigationTextFont]
+                        }
+                        if viewController is CrowdfundingHomeViewController {
+                            viewController.navigationController?.navigationBar.barTintColor = RGB(66,221,211,1)
+                            viewController.view.backgroundColor = RGB(66,221,211,1)
+                            viewController.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+                            viewController.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: navigationTextFont]
                         }
                     }
                 }

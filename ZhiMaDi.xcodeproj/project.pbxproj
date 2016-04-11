@@ -333,6 +333,7 @@
 		2B73D8651C86EB8A0016FEB2 /* PersonAuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B73D8641C86EB8A0016FEB2 /* PersonAuthenticationViewController.swift */; };
 		2B73D86E1C87D0BC0016FEB2 /* id-card-show00.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B73D86C1C87D0BC0016FEB2 /* id-card-show00.png */; };
 		2B73D86F1C87D0BC0016FEB2 /* id-card-show01.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B73D86D1C87D0BC0016FEB2 /* id-card-show01.png */; };
+		2B8CB2701CBB51DB00DA55F6 /* CardVolumeConsumerDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8CB26F1CBB51DB00DA55F6 /* CardVolumeConsumerDetailViewController.swift */; };
 		2B959EC01C76F5D0002EA40D /* HomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B959EBF1C76F5D0002EA40D /* HomePageViewController.swift */; };
 		2B989C081CB4E968008C6D23 /* ShoppingCartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B989C071CB4E968008C6D23 /* ShoppingCartViewController.swift */; };
 		2B989C0A1CB4FB73008C6D23 /* WalletMyBillsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B989C091CB4FB73008C6D23 /* WalletMyBillsViewController.swift */; };
@@ -409,6 +410,8 @@
 		2BE373081C89836A004A1DDF /* btn_Arrow_TurnUp1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BE373061C89836A004A1DDF /* btn_Arrow_TurnUp1@2x.png */; };
 		2BEBE77C1C9697940019E74F /* GoodsCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEBE77B1C9697940019E74F /* GoodsCommentViewController.swift */; };
 		2BEBE77E1C9699160019E74F /* GoodsCommentFullCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEBE77D1C9699160019E74F /* GoodsCommentFullCell.swift */; };
+		2BEBF5F01CBB843C00830585 /* CardVolumeMemberDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEBF5EF1CBB843C00830585 /* CardVolumeMemberDetailViewController.swift */; };
+		2BEBF5F31CBB8B7300830585 /* CrowdfundingHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEBF5F21CBB8B7300830585 /* CrowdfundingHomeViewController.swift */; };
 		2BF2B0D01C9659B500B310D5 /* HomeMarketDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF2B0CF1C9659B500B310D5 /* HomeMarketDetailViewController.swift */; };
 		2BF2B0E21C96651100B310D5 /* Market01.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BF2B0DD1C96651100B310D5 /* Market01.png */; };
 		2BF2B0E31C96651100B310D5 /* Market02.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BF2B0DE1C96651100B310D5 /* Market02.png */; };
@@ -972,6 +975,7 @@
 		2B73D8641C86EB8A0016FEB2 /* PersonAuthenticationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonAuthenticationViewController.swift; sourceTree = "<group>"; };
 		2B73D86C1C87D0BC0016FEB2 /* id-card-show00.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "id-card-show00.png"; sourceTree = "<group>"; };
 		2B73D86D1C87D0BC0016FEB2 /* id-card-show01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "id-card-show01.png"; sourceTree = "<group>"; };
+		2B8CB26F1CBB51DB00DA55F6 /* CardVolumeConsumerDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardVolumeConsumerDetailViewController.swift; sourceTree = "<group>"; };
 		2B959EBF1C76F5D0002EA40D /* HomePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageViewController.swift; sourceTree = "<group>"; };
 		2B989C071CB4E968008C6D23 /* ShoppingCartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoppingCartViewController.swift; sourceTree = "<group>"; };
 		2B989C091CB4FB73008C6D23 /* WalletMyBillsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletMyBillsViewController.swift; sourceTree = "<group>"; };
@@ -1049,6 +1053,8 @@
 		2BE373061C89836A004A1DDF /* btn_Arrow_TurnUp1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_Arrow_TurnUp1@2x.png"; sourceTree = "<group>"; };
 		2BEBE77B1C9697940019E74F /* GoodsCommentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoodsCommentViewController.swift; sourceTree = "<group>"; };
 		2BEBE77D1C9699160019E74F /* GoodsCommentFullCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoodsCommentFullCell.swift; sourceTree = "<group>"; };
+		2BEBF5EF1CBB843C00830585 /* CardVolumeMemberDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardVolumeMemberDetailViewController.swift; sourceTree = "<group>"; };
+		2BEBF5F21CBB8B7300830585 /* CrowdfundingHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrowdfundingHomeViewController.swift; sourceTree = "<group>"; };
 		2BF2B0CF1C9659B500B310D5 /* HomeMarketDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeMarketDetailViewController.swift; sourceTree = "<group>"; };
 		2BF2B0DD1C96651100B310D5 /* Market01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Market01.png; sourceTree = "<group>"; };
 		2BF2B0DE1C96651100B310D5 /* Market02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Market02.png; sourceTree = "<group>"; };
@@ -1512,6 +1518,8 @@
 			isa = PBXGroup;
 			children = (
 				2B07BA2F1CB7AFAC0012929B /* CardVolumeHomeViewController.swift */,
+				2B8CB26F1CBB51DB00DA55F6 /* CardVolumeConsumerDetailViewController.swift */,
+				2BEBF5EF1CBB843C00830585 /* CardVolumeMemberDetailViewController.swift */,
 			);
 			path = CardVolume;
 			sourceTree = "<group>";
@@ -1926,6 +1934,7 @@
 			children = (
 				2B02B4AB1CAA62FA0064B47C /* HomeLease */,
 				2B02B4B81CAA77AE0064B47C /* View */,
+				2BEBF5F11CBB8B2800830585 /* NewsCrowdfunding */,
 				2B959EBF1C76F5D0002EA40D /* HomePageViewController.swift */,
 				2B9DB8A51C801BF500259910 /* HomeBuyGoodsSearchViewController.swift */,
 				2BDEF38E1C7DB73500927F64 /* HomeBuyListViewController.swift */,
@@ -2053,6 +2062,15 @@
 				2BDEF3CB1C7F028F00927F64 /* CycleScrollView.m */,
 			);
 			path = CycleScrollView;
+			sourceTree = "<group>";
+		};
+		2BEBF5F11CBB8B2800830585 /* NewsCrowdfunding */ = {
+			isa = PBXGroup;
+			children = (
+				2BEBF5F21CBB8B7300830585 /* CrowdfundingHomeViewController.swift */,
+			);
+			name = NewsCrowdfunding;
+			path = News;
 			sourceTree = "<group>";
 		};
 		2BF2B0D21C96636E00B310D5 /* Market */ = {
@@ -3154,6 +3172,7 @@
 				3C9099571C76A6E9006B7D2C /* ChartTransformerHorizontalBarChart.swift in Sources */,
 				3C90992C1C76A6E9006B7D2C /* ScatterChartDataSet.swift in Sources */,
 				2B539AC91C9954B700FFE6CD /* ZMDPushTool.swift in Sources */,
+				2B8CB2701CBB51DB00DA55F6 /* CardVolumeConsumerDetailViewController.swift in Sources */,
 				3C90994A1C76A6E9006B7D2C /* ChartYAxisRenderer.swift in Sources */,
 				3C9098F91C76A6E9006B7D2C /* tabBarViewController.swift in Sources */,
 				2BEBE77E1C9699160019E74F /* GoodsCommentFullCell.swift in Sources */,
@@ -3195,6 +3214,7 @@
 				2B0662F71C7DA27E00EA822F /* UIImageExtension.swift in Sources */,
 				3C9099531C76A6E9006B7D2C /* ScatterChartRenderer.swift in Sources */,
 				2BF8D8C11CAE6CFB006E0C4D /* ResisterViewController.swift in Sources */,
+				2BEBF5F01CBB843C00830585 /* CardVolumeMemberDetailViewController.swift in Sources */,
 				2B02B5531CAE18230064B47C /* OrderLogisticsMsgViewController.swift in Sources */,
 				3C90986F1C76A6AA006B7D2C /* Constents.swift in Sources */,
 				2B3AC61C1C97FAE000CC8662 /* VerificationPSViewController.swift in Sources */,
@@ -3316,6 +3336,7 @@
 				3C9099021C76A6E9006B7D2C /* BarLineChartViewBase.swift in Sources */,
 				2BB6A8D81C87E8F2008209E8 /* HomeSellViewController.swift in Sources */,
 				3C90993D1C76A6E9006B7D2C /* LineChartDataProvider.swift in Sources */,
+				2BEBF5F31CBB8B7300830585 /* CrowdfundingHomeViewController.swift in Sources */,
 				3C9099391C76A6E9006B7D2C /* BarLineScatterCandleBubbleChartDataProvider.swift in Sources */,
 				3C9099081C76A6E9006B7D2C /* LineChartView.swift in Sources */,
 				3C90994B1C76A6E9006B7D2C /* ChartYAxisRendererHorizontalBarChart.swift in Sources */,

@@ -37,7 +37,7 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
             case Offer:
                 return "我的租贷"
             case Market:
-                return "新品租贷"
+                return "新品众筹"
             case News:
                 return "卡券"
             case Sale:
@@ -69,10 +69,9 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
                 let homeBuyListViewController = HomeLeaseListViewController.CreateFromMainStoryboard() as! HomeLeaseListViewController
                 viewController = homeBuyListViewController
             case Market:
-                viewController = HomeMarketViewController.CreateFromMainStoryboard() as! HomeMarketViewController
+                viewController = CrowdfundingHomeViewController()
             case News:
-                
-                viewController = UIViewController()
+                viewController = HomeMarketViewController.CreateFromMainStoryboard() as! HomeMarketViewController
             case Sale:
                 viewController = HomeSellViewController.CreateFromMainStoryboard() as! HomeSellViewController
             case Buy:

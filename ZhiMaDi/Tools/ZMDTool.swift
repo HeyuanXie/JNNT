@@ -258,12 +258,13 @@ extension ZMDTool {
         textField.placeholder = placeholder
         return textField
     }
-    class func getLabel(frame:CGRect,text:String,fontSize:CGFloat,textColor:UIColor = defaultTextColor) -> UILabel {
+    class func getLabel(frame:CGRect,text:String,fontSize:CGFloat,textColor:UIColor = defaultTextColor,textAlignment : NSTextAlignment = .Left) -> UILabel {
         let label = UILabel(frame: frame)
         label.backgroundColor = UIColor.clearColor()
         label.text = text
         label.font = defaultSysFontWithSize(fontSize)
         label.textColor = textColor
+        label.textAlignment = textAlignment
         return label
     }
     class func getButton (frame:CGRect,textForNormal:String,fontSize:CGFloat,textColorForNormal:UIColor = defaultTextColor,backgroundColor:UIColor,blockForCli : ((AnyObject!) -> Void)!) -> UIButton{
@@ -286,7 +287,7 @@ extension ZMDTool {
         btn.rac_signalForControlEvents(.TouchUpInside).subscribeNext(blockForCli)
         return btn
     }
-    class func getLine(frame:CGRect) -> UIView {
+    class func getLine(frame:CGRect,backgroundColor : UIColor = defaultLineColor) -> UIView {
         let line = UIView(frame: frame)
         line.backgroundColor = defaultLineColor
         return line

@@ -136,8 +136,8 @@ class WalletMyBillsViewController: UIViewController,UITableViewDataSource,UITabl
     }
     //MARK: -  PrivateMethod
     func updateUI() {
-        self.title = "卡券"
-        let menuTitle = ["消费券","会员卡"]
+        self.title = "我的帐单"
+        let menuTitle = ["全部","收入","支出"]
         let customJumpBtns = CustomJumpBtns(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: 55),menuTitle: menuTitle)
         customJumpBtns.backgroundColor = UIColor.whiteColor()
         customJumpBtns.addSeparatedLine()
@@ -147,18 +147,11 @@ class WalletMyBillsViewController: UIViewController,UITableViewDataSource,UITabl
             self.currentTableView.reloadData()
         }
         
-        self.currentTableView = UITableView(frame: CGRect(x: 0, y: 55, width: kScreenWidth, height: self.view.bounds.size.height - 55 - 58))
+        self.currentTableView = UITableView(frame: CGRect(x: 0, y: 55, width: kScreenWidth, height: self.view.bounds.size.height - 55))
         self.currentTableView.backgroundColor = tableViewdefaultBackgroundColor
         self.currentTableView.separatorStyle = .None
         self.currentTableView.dataSource = self
         self.currentTableView.delegate = self
         self.view.addSubview(self.currentTableView)
-        
-        self.view.addSubview(ZMDTool.getLine(CGRect(x: 0, y: self.view.bounds.height - 58-0.5, width: kScreenWidth, height: 0.5)))
-        let submitBtn = ZMDTool.getButton(CGRect(x: 0, y: self.view.bounds.height - 58, width: kScreenWidth, height: 58), textForNormal: "提交申请", fontSize: 17, backgroundColor:RGB(247,247,247,1)) { (sender) -> Void in
-            
-        }
-        self.view.addSubview(submitBtn)
     }
-    
 }

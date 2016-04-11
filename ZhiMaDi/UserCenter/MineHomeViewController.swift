@@ -103,7 +103,7 @@ class MineHomeViewController: UIViewController,UITableViewDataSource, UITableVie
             case UserBankCard:
                 viewController = BankCardHomeViewController()
             case UserCardVolume:
-                viewController = UIViewController()
+                viewController = CardVolumeHomeViewController()
             case UserMyCrowdFunding:
                 viewController = UIViewController()
                 

@@ -8,7 +8,7 @@
 
 import UIKit
 // 我的订单详请
-class MyOrderDetailViewController: UIViewController {
+class MyOrderDetailViewController: UIViewController,ZMDInterceptorProtocol {
     
     enum UserCenterCellType{
         case OrderNum

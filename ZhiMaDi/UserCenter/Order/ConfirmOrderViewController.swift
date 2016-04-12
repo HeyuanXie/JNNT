@@ -155,9 +155,7 @@ class ConfirmOrderViewController: UIViewController,UITableViewDataSource,UITable
                 cell!.selectionStyle = .None
                 ZMDTool.configTableViewCellDefault(cell!)
             }
-            let imgV = UIImageView(frame: CGRect(x: 12, y: 0, width: 16, height: 55))
-            imgV.image = UIImage(named: "pay_select_adress")
-            cell?.contentView.addSubview(imgV)
+            cell?.imageView?.image = UIImage(named: "pay_select_adress")
             let numLbl = ZMDTool.getLabel(CGRect(x: 44, y: 0, width: 300, height: 55), text: "选择收获地址", fontSize: 17)
             cell?.contentView.addSubview(numLbl)
             return cell!

@@ -111,8 +111,6 @@ class HomeBuyGoodsDetailViewController: UIViewController,UITableViewDataSource,U
             return 60 + 144 + 56
         case .HomeContentTypeNextMenu :
             return 60
-        default :
-            return 1
         }
     }
     
@@ -137,8 +135,6 @@ class HomeBuyGoodsDetailViewController: UIViewController,UITableViewDataSource,U
             return cellForHomeDapeigou(tableView, indexPath: indexPath)
         case .HomeContentTypeNextMenu :
             return cellForHomeNextMenu(tableView, indexPath: indexPath)
-        default :
-            return UITableViewCell()
         }
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

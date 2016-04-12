@@ -61,6 +61,23 @@ extension String{
         }
         return attText
     }
+    func AttributeText(attrStrs:[String],colors:[UIColor],textSizes : [CGFloat]) -> NSAttributedString {
+        let attText = NSMutableAttributedString(string: self)
+        var i = 0
+        for attrStr in attrStrs {
+            let rentPriceRange = (self as NSString).rangeOfString(attrStr, options: NSStringCompareOptions())
+            attText.addAttribute(NSForegroundColorAttributeName, value: colors[i], range: NSMakeRange(rentPriceRange.location, rentPriceRange.length))
+            attText.addAttribute(NSFontAttributeName, value: defaultSysFontWithSize(textSizes[i]), range: NSMakeRange(rentPriceRange.location, rentPriceRange.length))
+            i++
+        }
+        return attText
+    }
+    func AttributedStringWithImage(image:UIImage,size:CGSize) -> NSAttributedString{
+        let attch = NSTextAttachment()
+        attch.image = image
+        attch.bounds = CGRect(origin: CGPoint.zero, size: size)
+        return NSAttributedString(attachment: attch)
+    }
     // MARK: 判断手机号码
     func checkStingIsPhone() -> Bool {
         // 手机号码

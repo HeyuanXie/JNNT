@@ -354,6 +354,8 @@
 		2B9D9FA51C92B3FC00141D31 /* HomeMarket_BottomMiddle.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B9D9FA21C92B3FC00141D31 /* HomeMarket_BottomMiddle.png */; };
 		2B9D9FA61C92B3FC00141D31 /* HomeMarket_BottomRight.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B9D9FA31C92B3FC00141D31 /* HomeMarket_BottomRight.png */; };
 		2B9DB8A61C801BF500259910 /* HomeBuyGoodsSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9DB8A51C801BF500259910 /* HomeBuyGoodsSearchViewController.swift */; };
+		2B9E44A61CBCA41D00B645ED /* CrowdfundDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9E44A51CBCA41D00B645ED /* CrowdfundDetailViewController.swift */; };
+		2B9E44A81CBCD67100B645ED /* CrowdfundReturnViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9E44A71CBCD67100B645ED /* CrowdfundReturnViewController.swift */; };
 		2BA3FDB31C9F83B900018F3C /* FindDoctorCityPopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA3FDB21C9F83B900018F3C /* FindDoctorCityPopView.swift */; };
 		2BA3FDB51C9F842800018F3C /* QN_Area.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA3FDB41C9F842800018F3C /* QN_Area.swift */; };
 		2BA3FDB81C9F850E00018F3C /* area.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2BA3FDB71C9F850E00018F3C /* area.txt */; };
@@ -996,6 +998,8 @@
 		2B9D9FA21C92B3FC00141D31 /* HomeMarket_BottomMiddle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HomeMarket_BottomMiddle.png; sourceTree = "<group>"; };
 		2B9D9FA31C92B3FC00141D31 /* HomeMarket_BottomRight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HomeMarket_BottomRight.png; sourceTree = "<group>"; };
 		2B9DB8A51C801BF500259910 /* HomeBuyGoodsSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeBuyGoodsSearchViewController.swift; sourceTree = "<group>"; };
+		2B9E44A51CBCA41D00B645ED /* CrowdfundDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrowdfundDetailViewController.swift; sourceTree = "<group>"; };
+		2B9E44A71CBCD67100B645ED /* CrowdfundReturnViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrowdfundReturnViewController.swift; sourceTree = "<group>"; };
 		2BA3FDB21C9F83B900018F3C /* FindDoctorCityPopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindDoctorCityPopView.swift; sourceTree = "<group>"; };
 		2BA3FDB41C9F842800018F3C /* QN_Area.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QN_Area.swift; sourceTree = "<group>"; };
 		2BA3FDB71C9F850E00018F3C /* area.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = area.txt; sourceTree = "<group>"; };
@@ -2068,6 +2072,8 @@
 			isa = PBXGroup;
 			children = (
 				2BEBF5F21CBB8B7300830585 /* CrowdfundingHomeViewController.swift */,
+				2B9E44A51CBCA41D00B645ED /* CrowdfundDetailViewController.swift */,
+				2B9E44A71CBCD67100B645ED /* CrowdfundReturnViewController.swift */,
 			);
 			name = NewsCrowdfunding;
 			path = News;
@@ -3198,6 +3204,7 @@
 				3C90993F1C76A6E9006B7D2C /* BarChartRenderer.swift in Sources */,
 				2B6F90961CB6599500BD7A5D /* BankCardSetPsViewController.swift in Sources */,
 				3C9099471C76A6E9006B7D2C /* ChartXAxisRendererBarChart.swift in Sources */,
+				2B9E44A61CBCA41D00B645ED /* CrowdfundDetailViewController.swift in Sources */,
 				3C9099281C76A6E9006B7D2C /* PieChartDataSet.swift in Sources */,
 				2B07BA291CB78E7C0012929B /* MineFollowViewController.swift in Sources */,
 				3C9099611C76A6E9006B7D2C /* QNInterceptor.swift in Sources */,
@@ -3291,6 +3298,7 @@
 				2B539C051C9AACD000FFE6CD /* StartImageView.swift in Sources */,
 				3C9098711C76A6AA006B7D2C /* QNStyleAttribute.swift in Sources */,
 				2B6F90701CB6372900BD7A5D /* UITableViewExtension.swift in Sources */,
+				2B9E44A81CBCD67100B645ED /* CrowdfundReturnViewController.swift in Sources */,
 				3C90991A1C76A6E9006B7D2C /* BubbleChartDataEntry.swift in Sources */,
 				2B989C0A1CB4FB73008C6D23 /* WalletMyBillsViewController.swift in Sources */,
 				3C90995B1C76A6E9006B7D2C /* LyPrompt.swift in Sources */,

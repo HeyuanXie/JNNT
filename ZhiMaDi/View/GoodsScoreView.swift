@@ -9,12 +9,17 @@
 import UIKit
 // 星星评价控件
 class GoodsScoreView: UIView{
-    var touchTag = -1  
+    var touchTag = -1
+    var finished : ((str:String) ->Void)!
     override init(frame:CGRect){
         super.init(frame: frame)
         self.updateUI()
     }
-
+    init(frame: CGRect,finished:((str:String) ->Void)) {
+        super.init(frame: frame)
+        self.finished = finished
+        self.updateUI()
+    }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -33,6 +38,7 @@ class GoodsScoreView: UIView{
             btn.rac_signalForControlEvents(.TouchUpInside).subscribeNext({ (sender) -> Void in
                 self.touchTag = sender.tag
                 self.updateStarBtn()
+                self.finished(str: sender.tag > 1002 ? "满意" : "一般")
             })
         }
     }

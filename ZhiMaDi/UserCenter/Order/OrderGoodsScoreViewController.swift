@@ -16,7 +16,8 @@ class OrderGoodsScoreViewController: UIViewController,UITextFieldDelegate,UIActi
     let picker: UIImagePickerController = UIImagePickerController()
     var photoView: UIView!
     var tmp : UIButton!
-
+    var goodsScoreRigthLbl : UILabel!
+    var logisticsScoreRigthLbl : UILabel!
     var photos : NSMutableArray = NSMutableArray()
 
     override func viewDidLoad() {
@@ -73,15 +74,24 @@ class OrderGoodsScoreViewController: UIViewController,UITextFieldDelegate,UIActi
         photoView.backgroundColor = UIColor.clearColor()
         headViewBg.addSubview(photoView)
         self.configurePhotoBtn()
-        let goodsScoreTitleLbl = ZMDTool.getLabel(CGRect(x: 12, y: CGRectGetMaxY(headViewBg.frame)+26, width: 96, height: 17), text: "商品质量", fontSize: 17)
+        let goodsScoreTitleLbl = ZMDTool.getLabel(CGRect(x: 12, y: CGRectGetMaxY(headViewBg.frame)+27, width: 96, height: 17), text: "商品质量", fontSize: 17)
         self.view.addSubview(goodsScoreTitleLbl)
-        let goodsScoreView = GoodsScoreView(frame: CGRect(x: 108, y: CGRectGetMaxY(headViewBg.frame)+26, width: 32*5, height: 26))
+        let goodsScoreView = GoodsScoreView(frame: CGRect(x: 108, y: CGRectGetMaxY(headViewBg.frame)+22, width: 32*5, height: 26)){(str) ->Void in
+            self.goodsScoreRigthLbl.text = str as String
+        }
         self.view.addSubview(goodsScoreView)
+        self.goodsScoreRigthLbl = ZMDTool.getLabel(CGRect(x: kScreenWidth - 12 - 96, y: CGRectGetMaxY(headViewBg.frame)+27, width: 96, height: 17), text: "满意", fontSize: 17,textColor: defaultDetailTextColor,textAlignment: .Right)
+        self.view.addSubview(goodsScoreRigthLbl)
+        
         // 物流评分
-        let logisticsitleLbl = ZMDTool.getLabel(CGRect(x: 12, y: CGRectGetMaxY(goodsScoreTitleLbl.frame)+30, width: 96, height: 17), text: "物流服务", fontSize: 17)
+        let logisticsitleLbl = ZMDTool.getLabel(CGRect(x: 12, y: CGRectGetMaxY(goodsScoreTitleLbl.frame)+32, width: 96, height: 17), text: "物流服务", fontSize: 17)
         self.view.addSubview(logisticsitleLbl)
-        let logisticsScoreView = GoodsScoreView(frame: CGRect(x: 108, y: CGRectGetMaxY(goodsScoreTitleLbl.frame)+30, width: 32*5, height: 26))
+        let logisticsScoreView = GoodsScoreView(frame: CGRect(x: 108, y: CGRectGetMaxY(goodsScoreTitleLbl.frame)+22, width: 32*5, height: 26)){(str) ->Void in
+            self.logisticsScoreRigthLbl.text = str as String
+        }
         self.view.addSubview(logisticsScoreView)
+        self.logisticsScoreRigthLbl = ZMDTool.getLabel(CGRect(x: kScreenWidth - 12 - 96, y: CGRectGetMaxY(goodsScoreTitleLbl.frame)+32, width: 96, height: 17), text: "满意", fontSize: 17,textColor: defaultDetailTextColor,textAlignment: .Right)
+        self.view.addSubview(logisticsScoreRigthLbl)
     }
     func configurePhotoBtn(){
         if self.pickBtn == nil {

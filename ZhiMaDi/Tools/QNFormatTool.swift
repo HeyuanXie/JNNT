@@ -16,7 +16,8 @@ class QNFormatTool: NSObject {
 private let defaultDateInputFormat = "yyyy-MM-dd HH:mm:ss"
 /// 默认的输出日期格式
 private let defaultDateOutputFormat = "MM-dd HH:mm"
-
+/// 输出日期格式
+private let defaultDateOutputFormat02 = "MM-dd HH:mm"
 // MARK: - 时间格式化相关
 extension QNFormatTool {
     
@@ -47,7 +48,19 @@ extension QNFormatTool {
         dateFormat.dateFormat = format
         return dateFormat.stringFromDate(date)
     }
-    
+    /**
+     将时间转换成时间字符串
+     
+     :param: date   时间对象
+     :param: format 转换出来的时间字符串格式
+     
+     :returns: 时间字符串
+     */
+    class func dateString02(date: NSDate, format: String = defaultDateOutputFormat02) -> String {
+        let dateFormat = NSDateFormatter()
+        dateFormat.dateFormat = format
+        return dateFormat.stringFromDate(date)
+    }
     /**
     将时间字符串按一定的格式转换
     

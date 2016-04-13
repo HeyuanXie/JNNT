@@ -1434,6 +1434,34 @@
             </objects>
             <point key="canvasLocation" x="1738.5" y="768.5"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="QaF-Hj-SS4">
+            <objects>
+                <viewController id="AsH-C7-NDE" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="xh6-O5-AEx"/>
+                        <viewControllerLayoutGuide type="bottom" id="7tH-Ld-uzX"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="0e5-r5-vOT">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" text="i没有啊" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6QC-yl-Zki">
+                                <rect key="frame" x="0.0" y="46" width="320" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="WUE-2G-iMN"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KbU-Cr-b0E" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2201" y="725"/>
+        </scene>
         <!--Tab Bar View Controller-->
         <scene sceneID="37V-C0-tc6">
             <objects>

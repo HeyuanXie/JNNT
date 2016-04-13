@@ -45,13 +45,63 @@ class CrowdfundDetailViewController: UIViewController,UITableViewDataSource,UITa
             self = ImageTextExplain
         }
     }
+    enum ProjectExplainCellType {
+        case ContentTypeNextMenu                /* 下面展示菜单 */
+        
+        case ProjectSchedule
+        case TargetMoney
+        case StartTime
+        case EndTime
+        case ExpectTime
+        
+        case Explain
+        init(){
+            self = ProjectSchedule
+        }
+        var title : String {
+            switch self{
+            case ContentTypeNextMenu:
+                return ""
+                
+            case ProjectSchedule:
+                return "项目进度"
+            case TargetMoney:
+                return "目标金额"
+            case StartTime:
+                return "众筹发起时间"
+            case EndTime:
+                return "众筹截止时间"
+            case ExpectTime:
+                return "预计回报发放时间 ：项目筹款成功后的30天内"
+                
+            case Explain:
+                return "风险说明"
+            }
+        }
+        var height : CGFloat {
+            switch self {
+            case ContentTypeNextMenu:
+                return 60
+            case .ProjectSchedule :
+                return 144
+            case .Explain :
+                return 88
+            default :
+                return 56
+            }
+        }
+        var projectCellType :[[ProjectExplainCellType]] {
+            return [[.ContentTypeNextMenu],[.ProjectSchedule,.TargetMoney,.StartTime,.EndTime,.ExpectTime],[.Explain]]
+        }
+    }
     var currentTableView: UITableView!
     var secondTableView: UITableView!
     var bottomV: UIView!
     
     var cellTypes: [CrowdfundCellType]!
-    var secondTableViewCellType = SecondTableViewCellType()
+    var secondTableViewCellType = SecondTableViewCellType.Supporter
     var supportersData : NSArray!
+    var projectExplainCellType : [[ProjectExplainCellType]]!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.dataInit()
@@ -74,6 +124,8 @@ class CrowdfundDetailViewController: UIViewController,UITableViewDataSource,UITa
             switch self.secondTableViewCellType {
             case .Supporter :
                 return self.supportersData[section].count
+            case .ProjectExplain:
+                return self.projectExplainCellType[section].count
             default :
                 return 0
             }
@@ -91,6 +143,8 @@ class CrowdfundDetailViewController: UIViewController,UITableViewDataSource,UITa
             switch self.secondTableViewCellType {
             case .Supporter :
                 return self.supportersData.count
+            case .ProjectExplain:
+                return self.projectExplainCellType.count
             default :
                 return 0
             }
@@ -102,11 +156,12 @@ class CrowdfundDetailViewController: UIViewController,UITableViewDataSource,UITa
             switch self.secondTableViewCellType {
             case .Supporter :
                 return section == 1 ? 16 : 0.5
+            case .ProjectExplain:
+                return section == 0 ? 0 : 16
             default :
                 return 0
             }
         }
-        
         let cellType = self.cellTypes[section]
         switch cellType {
         case .ContentTypeNextMenu :
@@ -123,6 +178,9 @@ class CrowdfundDetailViewController: UIViewController,UITableViewDataSource,UITa
             switch self.secondTableViewCellType {
             case .Supporter :
                 return indexPath.section == 0 ? 60 : 65
+            case .ProjectExplain :
+                let projectCellType = self.projectExplainCellType[indexPath.section][indexPath.row]
+                return projectCellType.height
             default :
                 return 0
             }
@@ -131,7 +189,12 @@ class CrowdfundDetailViewController: UIViewController,UITableViewDataSource,UITa
         let type = self.cellTypes[indexPath.section]
         return type.height
     }
-    
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headView = UIView(frame: CGRectMake(0, 0, kScreenWidth, 10))
+        headView.backgroundColor = UIColor.clearColor()
+        return headView
+    }
+
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if tableView == self.secondTableView {
             switch self.secondTableViewCellType {
@@ -139,10 +202,22 @@ class CrowdfundDetailViewController: UIViewController,UITableViewDataSource,UITa
                 if indexPath.section == 0 {
                     return cellForHomeNextMenu(tableView, indexPath: indexPath)
                 } else {
-                    
+                    return cellSupportForSecond(tableView, indexPath: indexPath)
+                }
+            case .ProjectExplain :
+                let projectCellType = self.projectExplainCellType[indexPath.section][indexPath.row]
+                switch projectCellType {
+                case .ContentTypeNextMenu :
+                    return cellForHomeNextMenu(tableView, indexPath: indexPath)
+                case .ProjectSchedule :
+                    return cellProjectScheduleForSecond(tableView, indexPath: indexPath)
+                case .Explain :
+                    return cellProjectExplainForSecond(tableView, indexPath: indexPath)
+                default :
+                    return cellProjectOtherForSecond(tableView, indexPath: indexPath)
                 }
             default :
-                return cellForSecond(tableView, indexPath: indexPath)
+                return cellSupportForSecond(tableView, indexPath: indexPath)
             }
         }
         let cellType = self.cellTypes[indexPath.section]
@@ -178,14 +253,103 @@ class CrowdfundDetailViewController: UIViewController,UITableViewDataSource,UITa
     //MARK: -  PrivateMethod
     //MARK: -  SecondTableView      cell
     func cellSupportForSecond(tableView: UITableView,indexPath: NSIndexPath)-> UITableViewCell {
-        let cellId = "testCell"
+        let cellId = "SupportCell"
         var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
         if cell == nil {
             cell = UITableViewCell(style: .Default, reuseIdentifier: cellId)
             cell!.selectionStyle = .None
             cell!.contentView.backgroundColor = UIColor.whiteColor()
+            let leftLbl = ZMDTool.getLabel(CGRect(x: kScreenWidth-12-200, y: 0, width: 200, height: 65), text: "", fontSize: 13,textColor: defaultDetailTextColor,textAlignment: .Right)
+            leftLbl.numberOfLines = 2
+            leftLbl.tag = 10001
+            cell?.contentView.addSubview(leftLbl)
         }
-//        cell?.contentView
+        let image = UIImage(named: "home_banner02")
+        cell?.imageView?.image = image!.imageWithImageSimple(CGSize(width: 40, height: 40))
+        ZMDTool.configViewLayerWithSize((cell?.imageView)!, size: 20)
+        cell?.textLabel?.textColor = defaultDetailTextColor
+        cell?.textLabel!.text = "开档"
+        let leftLbl = cell?.contentView.viewWithTag(10001) as! UILabel
+        leftLbl.text = "1.0\n\(QNFormatTool.dateString02(NSDate()))"
+        return cell!
+    }
+    //MARK: - 工程进度
+    func cellProjectScheduleForSecond(tableView: UITableView,indexPath: NSIndexPath)-> UITableViewCell {
+        let cellId = "ScheduleCell"
+        var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
+        if cell == nil {
+            cell = UITableViewCell(style: .Default, reuseIdentifier: cellId)
+            cell!.selectionStyle = .None
+            ZMDTool.configTableViewCellDefault(cell!)
+            var i = 10000
+            let titleLbl = ZMDTool.getLabel(CGRect(x: 12, y: 20, width: kScreenWidth/2, height: 17), text: "", fontSize: 17)
+            titleLbl.tag = i++
+            cell?.contentView.addSubview(titleLbl)
+            let hasMoneylbl = ZMDTool.getLabel(CGRect(x: 12, y: CGRectGetMaxY(titleLbl.frame)+27, width: kScreenWidth/2, height: 15), text: "", fontSize: 15,textColor: defaultDetailTextColor)
+            hasMoneylbl.tag = i++
+            cell?.contentView.addSubview(hasMoneylbl)
+            let reachLbl = ZMDTool.getLabel(CGRect(x: 12, y: CGRectGetMaxY(hasMoneylbl.frame)+12, width: kScreenWidth/2, height: 15), text: "", fontSize: 15,textColor: defaultDetailTextColor)
+            reachLbl.tag = i++
+            cell?.contentView.addSubview(reachLbl)
+            cell?.contentView.addSubview(ZMDTool.getLine(CGRect(x: 0, y: 143.5, width: kScreenWidth, height: 0.5)))
+            
+            let view = CircleScaleCustomView(frame: CGRect(x: kScreenWidth - 36 - 100, y: 25, width: 100, height: 100),percentage: 0.9)
+            view.clipsToBounds = true
+            view.backgroundColor = UIColor.clearColor()
+            cell?.contentView.addSubview(view)
+        }
+        let type = self.projectExplainCellType[indexPath.section][indexPath.row]
+        var i = 10000
+        let titleLbl = cell?.contentView.viewWithTag(i++) as! UILabel
+        let hasMoneylbl = cell?.contentView.viewWithTag(i++) as! UILabel
+        let reachLbl = cell?.contentView.viewWithTag(i++) as! UILabel
+        titleLbl.text = type.title
+        hasMoneylbl.text = "已筹金额 ：1295343.0"
+        reachLbl.text = "达成率 ：50%"
+        
+        return cell!
+    }
+    func cellProjectOtherForSecond(tableView: UITableView,indexPath: NSIndexPath)-> UITableViewCell {
+        let cellId = "ScheduleCell"
+        var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
+        if cell == nil {
+            cell = UITableViewCell(style: .Default, reuseIdentifier: cellId)
+            cell!.selectionStyle = .None
+            ZMDTool.configTableViewCellDefault(cell!)
+            cell?.contentView.addSubview(ZMDTool.getLine(CGRect(x: 0, y: 55.5, width: kScreenWidth, height: 0.5)))
+        }
+        let type = self.projectExplainCellType[indexPath.section][indexPath.row]
+        var title = ""
+        switch type {
+        case .TargetMoney :
+            title = "\(type.title)250000.0"
+            break
+        case .StartTime :
+            title = "\(type.title)2016-1-32"
+            break
+        case .EndTime :
+            title = "\(type.title)2016-1-32"
+            break
+        case .ExpectTime :
+            title = "\(type.title)"
+            break
+        default :
+            break
+        }
+        cell?.textLabel?.text = title
+        return cell!
+    }
+    func cellProjectExplainForSecond(tableView: UITableView,indexPath: NSIndexPath)-> UITableViewCell {
+        let cellId = "ExplainCell"
+        var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
+        if cell == nil {
+            cell = UITableViewCell(style: .Subtitle, reuseIdentifier: cellId)
+            cell!.selectionStyle = .None
+            ZMDTool.configTableViewCellDefault(cell!)
+        }
+        let type = self.projectExplainCellType[indexPath.section][indexPath.row]
+        cell?.textLabel?.text = type.title
+        cell?.detailTextLabel?.text = "内容"
         return cell!
     }
     func cellForSecond(tableView: UITableView,indexPath: NSIndexPath)-> UITableViewCell {
@@ -203,7 +367,7 @@ class CrowdfundDetailViewController: UIViewController,UITableViewDataSource,UITa
         }
         return cell!
     }
-    
+    //MARK: - First TableView
     //MARK: 广告 cell
     func cellForHomeAd(tableView: UITableView,indexPath: NSIndexPath)-> UITableViewCell {
         let cellId = "ProductImgCell"
@@ -293,8 +457,8 @@ class CrowdfundDetailViewController: UIViewController,UITableViewDataSource,UITa
             cell = UITableViewCell(style: .Default, reuseIdentifier: cellId)
             cell!.selectionStyle = .None
             cell!.contentView.backgroundColor = UIColor.whiteColor()
+            cell?.addSubview(self.createFilterMenu())
         }
-        cell?.addSubview(self.createFilterMenu())
         return cell!
     }
     func createFilterMenu() -> UIView{
@@ -308,9 +472,13 @@ class CrowdfundDetailViewController: UIViewController,UITableViewDataSource,UITa
             btn.setTitleColor(UIColor.blackColor(), forState: .Normal)
             btn.setTitleColor(UIColor.yellowColor(), forState: .Selected)
             btn.titleLabel?.font = UIFont.systemFontOfSize(17)
+            btn.tag = 1000 + i
             view.addSubview(btn)
             
             btn.rac_signalForControlEvents(.TouchUpInside).subscribeNext({ (sender) -> Void in
+                let index = sender.tag - 1000
+                self.secondTableViewCellType = [SecondTableViewCellType.ImageTextExplain,.Supporter,.ProjectExplain][index]
+                self.secondTableView.reloadData()
             })
             if i < 2{
                 let lineView = UIView(frame: CGRectMake(CGFloat(i + 1) * kScreenWidth/3, 18, 0.5, 21))
@@ -322,12 +490,11 @@ class CrowdfundDetailViewController: UIViewController,UITableViewDataSource,UITa
     }
     func setupNewNavigation() {
     }
-    
     private func dataInit(){
         self.supportersData = [[""],[""],[""],[""]]
-        self.cellTypes = [.ContentTypeAd,.ContentTypeDetail,.ontentTypeStore,.ContentTypeLottery,.ContentTypeReturn, .ContentTypeNextMenu]
+        self.projectExplainCellType = ProjectExplainCellType().projectCellType
+        self.cellTypes = [.ContentTypeAd,.ContentTypeDetail,.ontentTypeStore,.ContentTypeLottery,.ContentTypeReturn]
     }
-    
     func footerRefresh(){
         UIView.animateWithDuration(0.38, animations: { () -> Void in
             var frame = self.currentTableView.frame
@@ -348,7 +515,6 @@ class CrowdfundDetailViewController: UIViewController,UITableViewDataSource,UITa
             }, completion: { (bool) -> Void in
                 self.secondTableView.mj_header.endRefreshing()
         })
-        
     }
     func updateUI() {
         self.title = "众筹详情"
@@ -376,10 +542,6 @@ class CrowdfundDetailViewController: UIViewController,UITableViewDataSource,UITa
         self.currentTableView.dataSource = self
         self.currentTableView.delegate = self
         self.view.addSubview(self.currentTableView)
-        self.configSecondTableView()
-        self.configeBottomView()
-    }
-    func configSecondTableView() {
         // 底部刷新
         let footer = MJRefreshAutoNormalFooter()
         let tmp_ = NSMutableAttributedString()
@@ -387,16 +549,19 @@ class CrowdfundDetailViewController: UIViewController,UITableViewDataSource,UITa
         tmp_.appendAttributedString("".AttributedStringWithImage(UIImage(named: "product_down")!,size: CGSize(width: 20, height: 20)))
         footer.setTitle("继续往下拖动，查看详情", forState: .Idle)
         footer.stateLabel?.attributedText = tmp_
+        footer.setRefreshingTarget(self, refreshingAction: Selector("footerRefresh"))
+        self.currentTableView.mj_footer = footer
+        self.configSecondTableView()
+        self.configeBottomView()
+    }
+    func configSecondTableView() {
         // 顶部刷新
         let header = MJRefreshNormalHeader()
-        footer.setRefreshingTarget(self, refreshingAction: Selector("footerRefresh"))
         header.setRefreshingTarget(self, refreshingAction: Selector("headerRefresh"))
-        
-        self.currentTableView.mj_footer = footer
-        
         secondTableView = UITableView(frame: CGRect(x: 0, y: CGRectGetMaxY(self.currentTableView.frame), width: kScreenWidth, height: self.currentTableView.frame.size.height))
         secondTableView.dataSource = self
         secondTableView.delegate = self
+        secondTableView.separatorStyle = .None
         self.view.addSubview(secondTableView)
         self.secondTableView.mj_header = header
     }

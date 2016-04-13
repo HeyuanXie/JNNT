@@ -39,5 +39,12 @@ extension UIImage {
         UIGraphicsEndImageContext()
         return image!
     }
-    
+    // 压缩图片
+    func imageWithImageSimple(scaledSize: CGSize) -> UIImage {
+        UIGraphicsBeginImageContext(scaledSize)
+        self.drawInRect(CGRectMake(0,0,scaledSize.width,scaledSize.height))
+        let  newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage;
+    }
 }

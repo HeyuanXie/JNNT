@@ -105,7 +105,7 @@ class MineHomeViewController: UIViewController,UITableViewDataSource, UITableVie
             case UserCardVolume:
                 viewController = CardVolumeHomeViewController()
             case UserMyCrowdFunding:
-                viewController = UIViewController()
+                viewController = MyCrowdfundHomeViewController()
                 
             case UserMyStore:
                 viewController = UIViewController()

@@ -188,6 +188,7 @@ class CrowdfundReturnViewController: UIViewController,UITableViewDataSource,UITa
     //
     //    }
     func updateUI() {
+        self.title = "众筹"
         var frame = self.view.bounds
         frame.size.height = frame.size.height - 56 - 64
         self.currentTableView = UITableView(frame: frame)

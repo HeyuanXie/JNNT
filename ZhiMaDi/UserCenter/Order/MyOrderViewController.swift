@@ -95,6 +95,9 @@ class MyOrderViewController: UIViewController,UITableViewDataSource,UITableViewD
                     if titles[sender.tag-1000] == "订单详情" {
                         let vc = MyOrderDetailViewController.CreateFromMainStoryboard() as! MyOrderDetailViewController
                         self.navigationController?.pushViewController(vc, animated: true)
+                    }else if titles[sender.tag-1000] == "评价" {
+                        let vc = OrderGoodsScoreViewController()
+                        self.navigationController?.pushViewController(vc, animated: true)
                     }
                 })
                 btn.tag = 1000+i

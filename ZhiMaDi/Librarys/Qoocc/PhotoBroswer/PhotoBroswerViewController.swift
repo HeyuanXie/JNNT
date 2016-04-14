@@ -72,9 +72,9 @@ class PhotoBroswerViewController: MWPhotoBrowser{
             });
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: button)
         self.navigationItem.rightBarButtonItem?.customView?.hidden = isDelete
-        self.navigationController?.navigationBar.barTintColor = appThemeColor
+        self.navigationController?.navigationBar.barTintColor = navigationBackgroundColor
         self.navigationController?.navigationBar.tintColor = navigationTextColor
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: navigationTextColor, NSFontAttributeName: UIFont.systemFontOfSize(18)]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: navigationTextColor, NSFontAttributeName: navigationTextFont]
         self.configBroswer()
     }
     

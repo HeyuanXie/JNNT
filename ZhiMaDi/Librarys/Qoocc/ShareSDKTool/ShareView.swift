@@ -81,7 +81,7 @@ class ShareView: UIView ,UICollectionViewDelegate, UICollectionViewDataSource{
         shareAdd("腾讯微博", "Share_TXWeibo", 2)
         shareAdd("邮件", "Share_Email", 18)
         shareAdd("短信", "Share_SMS", 19)
-        
+        shareAdd("复制链接","common_share_link",1000)
         //如果在iphone6以上一行最多5个
         if (self.frame.size.width > 320 && self.titileArray.count <= 5) || (self.frame.size.width <= 320 && self.titileArray.count <= 4){
             // 一行
@@ -209,8 +209,10 @@ class ShareView: UIView ,UICollectionViewDelegate, UICollectionViewDataSource{
             let url = data.url
             let title = data.title!
             let description = data.description
-            
-            if url != "" {
+            if self.shareTypeArray.count == index+1 {
+//                let tmp = UIPasteboard()
+//                tmp.string = url
+            } else if url != "" {
                 let shareType = self.shareTypeArray[index]
                 self.disMissShareView()
 //                if (shareType == 1/*ShareTypeSinaWeibo*/) && QNShareSDKTools.hasAuthorizedWithType(ShareTypeSinaWeibo) { // 新浪微博需要UI提示

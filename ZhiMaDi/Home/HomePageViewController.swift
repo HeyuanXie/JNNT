@@ -71,11 +71,11 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
             case Market:
                 viewController = CrowdfundingHomeViewController()
             case News:
-                viewController = HomeMarketViewController.CreateFromMainStoryboard() as! HomeMarketViewController
+                viewController = CardVolumeHomeViewController()
             case Sale:
-                viewController = HomeSellViewController.CreateFromMainStoryboard() as! HomeSellViewController
+                viewController = UIViewController()
             case Buy:
-                viewController = HomeBuyViewController()
+                viewController = UIViewController()
             }
             viewController.hidesBottomBarWhenPushed = true
             return viewController
@@ -200,6 +200,9 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
             scrollView.contentSize = CGSize(width: width * menuTitles.count, height: height)
             cell?.contentView.addSubview(scrollView)
             var i = 0
+            for index in [1,2,3,4] {
+                
+            }
             for title in menuTitles {
                 let x = i * width,y = 0
                 let frame = CGRect(x: x, y: y, width: width, height: height)
@@ -317,6 +320,9 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
             
             btn.rac_signalForControlEvents(.TouchUpInside).subscribeNext { (sender) -> Void in
                 let btnType = self.menuType[sender.tag - 10000]
+                if btnType == MenuType.Sale {
+                    self.tabBarController?.selectedIndex = 1
+                }
                 btnType.didSelect(self.navigationController!)
             }
             label.text = menuType.title

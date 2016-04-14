@@ -333,6 +333,10 @@
 		2B73D8651C86EB8A0016FEB2 /* PersonAuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B73D8641C86EB8A0016FEB2 /* PersonAuthenticationViewController.swift */; };
 		2B73D86E1C87D0BC0016FEB2 /* id-card-show00.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B73D86C1C87D0BC0016FEB2 /* id-card-show00.png */; };
 		2B73D86F1C87D0BC0016FEB2 /* id-card-show01.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B73D86D1C87D0BC0016FEB2 /* id-card-show01.png */; };
+		2B8739C61CBF3BAD007FE81A /* MineBroweRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8739C51CBF3BAD007FE81A /* MineBroweRecordViewController.swift */; };
+		2B8739C81CBF45D0007FE81A /* MineHomeHelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8739C71CBF45D0007FE81A /* MineHomeHelpViewController.swift */; };
+		2B8739CB1CBF6342007FE81A /* InvitationShareHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8739CA1CBF6342007FE81A /* InvitationShareHomeViewController.swift */; };
+		2B8739CD1CBF7AA3007FE81A /* InvitatinCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8739CC1CBF7AA3007FE81A /* InvitatinCodeViewController.swift */; };
 		2B8BB2B41CBDF41000CD2AD5 /* CircleScaleCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8BB2B31CBDF41000CD2AD5 /* CircleScaleCustomView.swift */; };
 		2B8BB2B71CBE2D4E00CD2AD5 /* MyCrowdfundHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8BB2B61CBE2D4E00CD2AD5 /* MyCrowdfundHomeViewController.swift */; };
 		2B8BB2B91CBE30F600CD2AD5 /* OrderGoodsScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8BB2B81CBE30F600CD2AD5 /* OrderGoodsScoreViewController.swift */; };
@@ -982,6 +986,10 @@
 		2B73D8641C86EB8A0016FEB2 /* PersonAuthenticationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonAuthenticationViewController.swift; sourceTree = "<group>"; };
 		2B73D86C1C87D0BC0016FEB2 /* id-card-show00.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "id-card-show00.png"; sourceTree = "<group>"; };
 		2B73D86D1C87D0BC0016FEB2 /* id-card-show01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "id-card-show01.png"; sourceTree = "<group>"; };
+		2B8739C51CBF3BAD007FE81A /* MineBroweRecordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineBroweRecordViewController.swift; sourceTree = "<group>"; };
+		2B8739C71CBF45D0007FE81A /* MineHomeHelpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineHomeHelpViewController.swift; sourceTree = "<group>"; };
+		2B8739CA1CBF6342007FE81A /* InvitationShareHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvitationShareHomeViewController.swift; sourceTree = "<group>"; };
+		2B8739CC1CBF7AA3007FE81A /* InvitatinCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvitatinCodeViewController.swift; sourceTree = "<group>"; };
 		2B8BB2B31CBDF41000CD2AD5 /* CircleScaleCustomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleScaleCustomView.swift; sourceTree = "<group>"; };
 		2B8BB2B61CBE2D4E00CD2AD5 /* MyCrowdfundHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCrowdfundHomeViewController.swift; sourceTree = "<group>"; };
 		2B8BB2B81CBE30F600CD2AD5 /* OrderGoodsScoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderGoodsScoreViewController.swift; sourceTree = "<group>"; };
@@ -1848,6 +1856,15 @@
 			path = PersonAuthentication;
 			sourceTree = "<group>";
 		};
+		2B8739C91CBF6322007FE81A /* Invitation */ = {
+			isa = PBXGroup;
+			children = (
+				2B8739CA1CBF6342007FE81A /* InvitationShareHomeViewController.swift */,
+				2B8739CC1CBF7AA3007FE81A /* InvitatinCodeViewController.swift */,
+			);
+			path = Invitation;
+			sourceTree = "<group>";
+		};
 		2B8BB2B51CBE2D3A00CD2AD5 /* MyCrowdfund */ = {
 			isa = PBXGroup;
 			children = (
@@ -2643,6 +2660,7 @@
 		3C9098F71C76A6E9006B7D2C /* UserCenter */ = {
 			isa = PBXGroup;
 			children = (
+				2B8739C91CBF6322007FE81A /* Invitation */,
 				2B8BB2B51CBE2D3A00CD2AD5 /* MyCrowdfund */,
 				2B07BA2E1CB7AF990012929B /* CardVolume */,
 				2BB0EEFC1CB743B5000A186D /* AfterSales */,
@@ -2655,6 +2673,8 @@
 				2B07BA281CB78E7C0012929B /* MineFollowViewController.swift */,
 				2B07BA2A1CB799490012929B /* MineCollectionViewController.swift */,
 				2B197DC21C857FA4006494CF /* MineHomeSetViewController.swift */,
+				2B8739C51CBF3BAD007FE81A /* MineBroweRecordViewController.swift */,
+				2B8739C71CBF45D0007FE81A /* MineHomeHelpViewController.swift */,
 				2BE373011C8974DC004A1DDF /* NewProductReleaseViewController.swift */,
 				2BE373031C897F96004A1DDF /* ProductSpecsViewController.swift */,
 				2B9D9F981C91148F00141D31 /* ProductCategoryViewController.swift */,
@@ -3220,6 +3240,7 @@
 				3C9099001C76A6E9006B7D2C /* ChartAnimator.swift in Sources */,
 				3C9099171C76A6E9006B7D2C /* BarLineScatterCandleBubbleChartData.swift in Sources */,
 				2B197DA41C83DB8B006494CF /* SortViewController.swift in Sources */,
+				2B8739CB1CBF6342007FE81A /* InvitationShareHomeViewController.swift in Sources */,
 				2BB6A8D01C87DF12008209E8 /* SignPSSetViewController.swift in Sources */,
 				2B02B5181CABD6D80064B47C /* MyOrderDetailViewController.swift in Sources */,
 				2B5FF44E1CA523D60067909D /* ShareView.swift in Sources */,
@@ -3355,11 +3376,13 @@
 				3C9099381C76A6E9006B7D2C /* BarChartDataProvider.swift in Sources */,
 				3C90992F1C76A6E9006B7D2C /* ChartDefaultXAxisValueFormatter.swift in Sources */,
 				3C90991C1C76A6E9006B7D2C /* CandleChartData.swift in Sources */,
+				2B8739CD1CBF7AA3007FE81A /* InvitatinCodeViewController.swift in Sources */,
 				3C90994D1C76A6E9006B7D2C /* CombinedChartRenderer.swift in Sources */,
 				3C90994E1C76A6E9006B7D2C /* HorizontalBarChartRenderer.swift in Sources */,
 				2B02B4B41CAA62FA0064B47C /* LeasePackageView.swift in Sources */,
 				2B3AC6171C97DDC100CC8662 /* LogisticsViewController.swift in Sources */,
 				3C9099421C76A6E9006B7D2C /* ChartAxisRendererBase.swift in Sources */,
+				2B8739C61CBF3BAD007FE81A /* MineBroweRecordViewController.swift in Sources */,
 				2B02B4BE1CAA77AE0064B47C /* DoubleGoodsTableViewCell.swift in Sources */,
 				3C9099011C76A6E9006B7D2C /* BarChartView.swift in Sources */,
 				3C90992D1C76A6E9006B7D2C /* ChartDataApproximatorFilter.swift in Sources */,
@@ -3393,6 +3416,7 @@
 				3C9099321C76A6E9006B7D2C /* BarChartHighlighter.swift in Sources */,
 				3C9099431C76A6E9006B7D2C /* ChartDataRendererBase.swift in Sources */,
 				3C90990B1C76A6E9006B7D2C /* RadarChartView.swift in Sources */,
+				2B8739C81CBF45D0007FE81A /* MineHomeHelpViewController.swift in Sources */,
 				3C9099331C76A6E9006B7D2C /* ChartHighlight.swift in Sources */,
 				3C9099221C76A6E9006B7D2C /* CombinedChartData.swift in Sources */,
 				3C9099271C76A6E9006B7D2C /* PieChartData.swift in Sources */,

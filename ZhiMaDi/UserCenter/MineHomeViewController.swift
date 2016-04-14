@@ -83,7 +83,7 @@ class MineHomeViewController: UIViewController,UITableViewDataSource, UITableVie
                 return UIImage(named: "user_earn")
             case UserInvitation :
                 return UIImage(named: "user_share")
-                
+
             case UserHelp :
                 return UIImage(named: "user_help")
             default :
@@ -114,10 +114,11 @@ class MineHomeViewController: UIViewController,UITableViewDataSource, UITableVie
             case UserCommission:
                 viewController = UIViewController()
             case UserInvitation:
-                viewController = UIViewController()
-                
+                viewController = InvitationShareHomeViewController()
+            case .UserMore :
+                viewController = MineBrowseRecordViewController.CreateFromMainStoryboard() as! MineBrowseRecordViewController
             case UserHelp:
-                viewController = UIViewController()
+                viewController = MineHomeHelpViewController()
             default :
                 viewController = UIViewController()
             }
@@ -193,6 +194,7 @@ class MineHomeViewController: UIViewController,UITableViewDataSource, UITableVie
             let cell = tableView.dequeueReusableCellWithIdentifier(cellId)
             if let personImgV = cell!.viewWithTag(10001) {
                 ZMDTool.configViewLayerWithSize(personImgV, size: 42)
+                
             }
             let followBtn = cell?.viewWithTag(10003) as! UIButton
             followBtn.rac_signalForControlEvents(.TouchUpInside).subscribeNext({ (sender) -> Void in

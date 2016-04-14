@@ -1,17 +1,19 @@
 //
-//  OrderGoodsScoreViewController.swift
+//  MineHomeHelpViewController.swift
 //  ZhiMaDi
 //
-//  Created by haijie on 16/4/13.
+//  Created by haijie on 16/4/14.
 //  Copyright © 2016年 ZhiMaDi. All rights reserved.
 //
 
 import UIKit
 import MWPhotoBrowser
-// 商品评分
-class OrderGoodsScoreViewController: UIViewController,UITextFieldDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,MWPhotoBrowserDelegate,ZMDInterceptorProtocol,ZMDInterceptorMoreProtocol {
+// 意见反馈
+class MineHomeHelpViewController: UIViewController,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextFieldDelegate,MWPhotoBrowserDelegate,ZMDInterceptorProtocol,ZMDInterceptorMoreProtocol {
     
     var scoreTextField : UITextField!
+    var contactTextField : UITextField!
+    var countLbl : UILabel!
     var pickBtn : UIButton!
     let picker: UIImagePickerController = UIImagePickerController()
     var photoView: UIView!
@@ -19,15 +21,28 @@ class OrderGoodsScoreViewController: UIViewController,UITextFieldDelegate,UIActi
     var goodsScoreRigthLbl : UILabel!
     var logisticsScoreRigthLbl : UILabel!
     var photos : NSMutableArray = NSMutableArray()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.updateUI()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    //MARK: - UITextFieldDelegate
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        let mulStr = NSMutableString(string: textField.text!)
+        mulStr.replaceCharactersInRange(range, withString: string)
+        let checkText = { (count : Int) -> Void in
+            if count - mulStr.length < 0 {
+                ZMDTool.showPromptView( "输入字数在200以内", nil)
+            }
+            self.countLbl.text = "\(count - mulStr.length)"
+        }
+        checkText(200)
+        return true
     }
     //MARK: UIImagePickerControllerDelegate
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
@@ -35,7 +50,7 @@ class OrderGoodsScoreViewController: UIViewController,UITextFieldDelegate,UIActi
         let headImageData = UIImageJPEGRepresentation(image.imageWithImageSimple(size), 0.125)
         photos.addObject(UIImage(data: headImageData!)!)
         self.configurePhotoBtn()
-//        self.uploadImg(headImageData)
+        //        self.uploadImg(headImageData)
         self.picker.dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -58,7 +73,7 @@ class OrderGoodsScoreViewController: UIViewController,UITextFieldDelegate,UIActi
     }
     //MARK: -  PrivateMethod
     func updateUI() {
-        self.title = "商品评分"
+        self.title = "意见反馈"
         self.view.backgroundColor = RGB(245,245,245,1)
         self.picker.delegate = self
         let headViewBg = UIView(frame: CGRect(x: 12, y: 15, width: kScreenWidth-24, height: 270))
@@ -66,36 +81,30 @@ class OrderGoodsScoreViewController: UIViewController,UITextFieldDelegate,UIActi
         ZMDTool.configViewLayer(headViewBg)
         ZMDTool.configViewLayerFrame(headViewBg)
         self.view.addSubview(headViewBg)
-        self.scoreTextField = ZMDTool.getTextField(CGRect(x: 16, y: 15, width: CGRectGetWidth(headViewBg.frame), height: 150), placeholder: "感谢您的宝贵评价~", fontSize: 17)
+        self.scoreTextField = ZMDTool.getTextField(CGRect(x: 16, y: 15, width: CGRectGetWidth(headViewBg.frame), height: 150), placeholder: "感谢您的宝贵意见", fontSize: 17)
         self.scoreTextField.contentVerticalAlignment = .Top //方向
+        self.scoreTextField.delegate = self
         headViewBg.addSubview(self.scoreTextField)
         
         photoView = UIView(frame: CGRect(x: 0, y: 150, width: kScreenWidth-24, height: 116))
         photoView.backgroundColor = UIColor.clearColor()
         headViewBg.addSubview(photoView)
         
+        countLbl = ZMDTool.getLabel(CGRect(x: kScreenWidth-24-12-30, y: 270-12-15, width: 30, height: 15), text: "200", fontSize: 15,textColor: defaultDetailTextColor,textAlignment: .Right)
+        headViewBg.addSubview(countLbl)
         self.configurePhotoBtn()
         
-        let goodsScoreTitleLbl = ZMDTool.getLabel(CGRect(x: 12, y: CGRectGetMaxY(headViewBg.frame)+27, width: 96, height: 17), text: "商品质量 :", fontSize: 17)
-        self.view.addSubview(goodsScoreTitleLbl)
-        let goodsScoreView = GoodsScoreView(frame: CGRect(x: 108, y: CGRectGetMaxY(headViewBg.frame)+22, width: 32*5, height: 26)){(str) ->Void in
-            self.goodsScoreRigthLbl.text = str as String
-        }
-        self.view.addSubview(goodsScoreView)
-        self.goodsScoreRigthLbl = ZMDTool.getLabel(CGRect(x: kScreenWidth - 12 - 96, y: CGRectGetMaxY(headViewBg.frame)+27, width: 96, height: 17), text: "满意", fontSize: 17,textColor: defaultDetailTextColor,textAlignment: .Right)
-        self.view.addSubview(goodsScoreRigthLbl)
         
-        // 物流评分
-        let logisticsitleLbl = ZMDTool.getLabel(CGRect(x: 12, y: CGRectGetMaxY(goodsScoreTitleLbl.frame)+32, width: 96, height: 17), text: "物流服务 :", fontSize: 17)
-        self.view.addSubview(logisticsitleLbl)
-        let logisticsScoreView = GoodsScoreView(frame: CGRect(x: 108, y: CGRectGetMaxY(goodsScoreTitleLbl.frame)+22, width: 32*5, height: 26)){(str) ->Void in
-            self.logisticsScoreRigthLbl.text = str as String
-        }
-        self.view.addSubview(logisticsScoreView)
-        self.logisticsScoreRigthLbl = ZMDTool.getLabel(CGRect(x: kScreenWidth - 12 - 96, y: CGRectGetMaxY(goodsScoreTitleLbl.frame)+32, width: 96, height: 17), text: "满意", fontSize: 17,textColor: defaultDetailTextColor,textAlignment: .Right)
-        self.view.addSubview(logisticsScoreRigthLbl)
+        let contactViewBg = UIView(frame: CGRect(x: 12, y: CGRectGetMaxY(headViewBg.frame) + 16, width: kScreenWidth-24, height: 55))
+        contactViewBg.backgroundColor = UIColor.whiteColor()
+        ZMDTool.configViewLayer(contactViewBg)
+        ZMDTool.configViewLayerFrame(contactViewBg)
+        self.view.addSubview(contactViewBg)
+        self.contactTextField = ZMDTool.getTextField(CGRect(x: 12, y: 0, width:kScreenWidth-24-24 , height: 55), placeholder: "邮箱/电话", fontSize: 17)
+        self.contactTextField.backgroundColor = UIColor.clearColor()
+        contactViewBg.addSubview(self.contactTextField)
         
-        let submitBtn = ZMDTool.getButton(CGRect(x: 12, y: kScreenHeight - 64 - 50 - 44, width: kScreenWidth-24, height: 50), textForNormal: "提交", fontSize: 17, backgroundColor: RGB(215,215,215,1)) { (sender) -> Void in
+        let submitBtn = ZMDTool.getButton(CGRect(x: 12, y: CGRectGetWidth(headViewBg.frame) + 38 , width: kScreenWidth-24, height: 50), textForNormal: "提交", fontSize: 17,textColorForNormal: UIColor.whiteColor(), backgroundColor: RGB(215,215,215,1)) { (sender) -> Void in
         }
         ZMDTool.configViewLayerWithSize(submitBtn, size: 25)
         self.view.addSubview(submitBtn)
@@ -128,8 +137,6 @@ class OrderGoodsScoreViewController: UIViewController,UITextFieldDelegate,UIActi
                     actionSheet.showInView(strongSelf.view)
                 }
             }
-            let bottomLbl = ZMDTool.getLabel(CGRect(x:0, y: CGRectGetMaxY(pickBtn.frame)+8, width: 75, height: 14), text: "上传图片", fontSize: 14)
-            pickBtn.addSubview(bottomLbl)
         }
         self.photoView.addSubview(self.pickBtn)
         if self.photos.count > 0 {

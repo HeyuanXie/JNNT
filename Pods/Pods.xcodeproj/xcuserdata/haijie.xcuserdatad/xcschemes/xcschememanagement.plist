@@ -64,6 +64,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>SnapKit.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>TYAttributedLabel.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -72,12 +77,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0F5F65AB187025AC2199C718323AA0EF</key>
+		<key>14E6E2E2484806AB62B60CA2EAD41F9B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>14E6E2E2484806AB62B60CA2EAD41F9B</key>
+		<key>210B483937642607BBDEBB06957C4016</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -92,6 +97,11 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>3129F09A17C33584227C4DBF4F6077A0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>6461FF73E606AC17ECB9C28944E4F30F</key>
 		<dict>
 			<key>primary</key>
@@ -102,17 +112,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6F9AF90D27C9EFAB35A89874BC5CC7DF</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>79C040AFDDCE1BCBF6D8B5EB0B85887F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8DB3DCFF5856839765DC92B407FC2904</key>
+		<key>88E5EA9EA66F546CEE30B2913A289E06</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -122,12 +127,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>BE18CEE8A398D5DB90735176B92D31AE</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>BE7A5E8E0FDE9CA58316BC4D6568818D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C06716605E6A0D78140B3AECB63EE5A6</key>
+		<key>DF85D50D23FA01B2D8B51FAE0189B522</key>
 		<dict>
 			<key>primary</key>
 			<true/>

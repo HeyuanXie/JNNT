@@ -24,6 +24,7 @@ PODS:
   - SDWebImage (3.7.5):
     - SDWebImage/Core (= 3.7.5)
   - SDWebImage/Core (3.7.5)
+  - SnapKit (0.19.1)
   - TYAttributedLabel (2.5.6)
 
 DEPENDENCIES:
@@ -35,6 +36,7 @@ DEPENDENCIES:
   - ReactiveCocoa
   - Result
   - SDWebImage
+  - SnapKit
   - TYAttributedLabel (~> 2.5.6)
 
 SPEC CHECKSUMS:
@@ -48,6 +50,7 @@ SPEC CHECKSUMS:
   ReactiveCocoa: f7011630aee4deeb16352fcb1b50d6bde9db4f90
   Result: dd3dd71af3fa2e262f1a999e14fba2c25ec14f16
   SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
+  SnapKit: eff58d6e3451bf2f482db2eccf86aecf371dc62d
   TYAttributedLabel: 251d4cb2bf35813815d0ad632b3e56ba626c6b01
 
 COCOAPODS: 0.39.0

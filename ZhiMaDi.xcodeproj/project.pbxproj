@@ -343,6 +343,8 @@
 		2B8BB2BC1CBE34B300CD2AD5 /* PhotoBroswerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8BB2BB1CBE34B300CD2AD5 /* PhotoBroswerViewController.swift */; };
 		2B8BB2BE1CBE46FC00CD2AD5 /* GoodsScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8BB2BD1CBE46FC00CD2AD5 /* GoodsScoreView.swift */; };
 		2B8CB2701CBB51DB00DA55F6 /* CardVolumeConsumerDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8CB26F1CBB51DB00DA55F6 /* CardVolumeConsumerDetailViewController.swift */; };
+		2B8DB08B1CC0DC6A004A0FB5 /* MsgOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8DB08A1CC0DC6A004A0FB5 /* MsgOrderViewController.swift */; };
+		2B8DB08D1CC0DCC1004A0FB5 /* MsgOrderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8DB08C1CC0DCC1004A0FB5 /* MsgOrderTableViewCell.swift */; };
 		2B959EC01C76F5D0002EA40D /* HomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B959EBF1C76F5D0002EA40D /* HomePageViewController.swift */; };
 		2B989C081CB4E968008C6D23 /* ShoppingCartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B989C071CB4E968008C6D23 /* ShoppingCartViewController.swift */; };
 		2B989C0A1CB4FB73008C6D23 /* WalletMyBillsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B989C091CB4FB73008C6D23 /* WalletMyBillsViewController.swift */; };
@@ -1009,6 +1011,8 @@
 		2B8BB2BB1CBE34B300CD2AD5 /* PhotoBroswerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoBroswerViewController.swift; sourceTree = "<group>"; };
 		2B8BB2BD1CBE46FC00CD2AD5 /* GoodsScoreView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoodsScoreView.swift; sourceTree = "<group>"; };
 		2B8CB26F1CBB51DB00DA55F6 /* CardVolumeConsumerDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardVolumeConsumerDetailViewController.swift; sourceTree = "<group>"; };
+		2B8DB08A1CC0DC6A004A0FB5 /* MsgOrderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MsgOrderViewController.swift; sourceTree = "<group>"; };
+		2B8DB08C1CC0DCC1004A0FB5 /* MsgOrderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MsgOrderTableViewCell.swift; sourceTree = "<group>"; };
 		2B959EBF1C76F5D0002EA40D /* HomePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageViewController.swift; sourceTree = "<group>"; };
 		2B989C071CB4E968008C6D23 /* ShoppingCartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoppingCartViewController.swift; sourceTree = "<group>"; };
 		2B989C091CB4FB73008C6D23 /* WalletMyBillsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletMyBillsViewController.swift; sourceTree = "<group>"; };
@@ -2064,7 +2068,9 @@
 			children = (
 				2BA287D71CC091DA00B6281E /* MsgHomeViewController.swift */,
 				2BA287EE1CC09C4900B6281E /* MsgActivityViewController.swift */,
+				2B8DB08A1CC0DC6A004A0FB5 /* MsgOrderViewController.swift */,
 				2BA287F01CC09CA700B6281E /* MsgActivityTableViewCell.swift */,
+				2B8DB08C1CC0DCC1004A0FB5 /* MsgOrderTableViewCell.swift */,
 			);
 			path = Msg;
 			sourceTree = "<group>";
@@ -3369,6 +3375,7 @@
 				2BB0EF001CB74A64000A186D /* AfterSalesReturnViewController.swift in Sources */,
 				2B989C081CB4E968008C6D23 /* ShoppingCartViewController.swift in Sources */,
 				3C90995C1C76A6E9006B7D2C /* NSData+AES.m in Sources */,
+				2B8DB08B1CC0DC6A004A0FB5 /* MsgOrderViewController.swift in Sources */,
 				3C9098FE1C76A6E9006B7D2C /* Aspects.m in Sources */,
 				2B8BB2B91CBE30F600CD2AD5 /* OrderGoodsScoreViewController.swift in Sources */,
 				3C9099031C76A6E9006B7D2C /* BubbleChartView.swift in Sources */,
@@ -3404,6 +3411,7 @@
 				3C9099411C76A6E9006B7D2C /* CandleStickChartRenderer.swift in Sources */,
 				3C9099441C76A6E9006B7D2C /* ChartLegendRenderer.swift in Sources */,
 				2B02B4C21CAA81140064B47C /* OrderGoodsTableViewCell.swift in Sources */,
+				2B8DB08D1CC0DCC1004A0FB5 /* MsgOrderTableViewCell.swift in Sources */,
 				2B989C141CB50AF2008C6D23 /* WalletInComeViewController.swift in Sources */,
 				2BC05C711CB630F700D3B1AE /* WalletRechargeViewController.swift in Sources */,
 				3C9099101C76A6E9006B7D2C /* ChartLimitLine.swift in Sources */,

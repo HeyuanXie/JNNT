@@ -1,5 +1,5 @@
 //
-//  MsgActivityViewController.swift
+//  MsgOrderViewController.swift
 //  ZhiMaDi
 //
 //  Created by haijie on 16/4/15.
@@ -7,8 +7,8 @@
 //
 
 import UIKit
-// 活动消息
-class MsgActivityViewController: UIViewController,UITableViewDataSource, UITableViewDelegate,ZMDInterceptorProtocol,ZMDInterceptorMoreProtocol {
+// 订单消息
+class MsgOrderViewController: UIViewController,UITableViewDataSource, UITableViewDelegate,ZMDInterceptorProtocol,ZMDInterceptorMoreProtocol {
     var currentTableView: UITableView!
     
     var dataArray : NSArray!
@@ -36,7 +36,7 @@ class MsgActivityViewController: UIViewController,UITableViewDataSource, UITable
         return 0
     }
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return MsgActivityTableViewCell.height
+        return MsgOrderTableViewCell.height
     }
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let lbl = ZMDTool.getLabel(CGRect(x: 0, y: 0, width: kScreenWidth, height: 52), text:QNFormatTool.dateString(NSDate(), format: "yyyy-MM-dd HH:mm"), fontSize: 13,textColor: defaultDetailTextColor,textAlignment: .Center)
@@ -44,9 +44,9 @@ class MsgActivityViewController: UIViewController,UITableViewDataSource, UITable
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cellId = "OtherCell"
-        var cell = tableView.dequeueReusableCellWithIdentifier(cellId) as? MsgActivityTableViewCell
+        var cell = tableView.dequeueReusableCellWithIdentifier(cellId) as? MsgOrderTableViewCell
         if cell == nil {
-            cell = MsgActivityTableViewCell(style: .Subtitle, reuseIdentifier: cellId)
+            cell = MsgOrderTableViewCell(style: .Subtitle, reuseIdentifier: cellId)
             cell?.accessoryType = UITableViewCellAccessoryType.None
             cell!.selectionStyle = .None
         }
@@ -57,7 +57,7 @@ class MsgActivityViewController: UIViewController,UITableViewDataSource, UITable
     }
     //MARK: -  PrivateMethod
     private func subViewInit(){
-        self.title = "活动消息"
+        self.title = "订单消息"
         self.currentTableView = UITableView(frame: self.view.bounds)
         self.currentTableView.backgroundColor = tableViewdefaultBackgroundColor
         self.currentTableView.separatorStyle = .None

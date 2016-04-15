@@ -10,17 +10,21 @@ import UIKit
 import SnapKit
 // 消息 Cell
 class MsgActivityTableViewCell: UITableViewCell {
-
+    static var height = 165 + 0.5 * (kScreenWidth-48)
+    var titleLbl:UILabel!
+    var timeLbl :UILabel!
+    var detailLbl :UILabel!
+    var imaV : UIImageView!
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.backgroundColor = tableViewdefaultBackgroundColor
         let bgV = UIView()
         bgV.backgroundColor = UIColor.whiteColor()
         ZMDTool.configViewLayer(bgV)
-        let titleLbl = ZMDTool.getLabel(CGRect.zero, text: "宝孩梦工厂", fontSize: 17)
-        let timeLbl = ZMDTool.getLabel(CGRect.zero, text: "2016-10-22 10：29", fontSize: 13,textColor: defaultDetailTextColor)
-        let imaV = UIImageView(image: UIImage(named: "home_banner03"))
-        let detailLbl = ZMDTool.getLabel(CGRect.zero, text: "小房间也有梦想，孩子们", fontSize: 15)
+        titleLbl = ZMDTool.getLabel(CGRect.zero, text: "宝孩梦工厂", fontSize: 17)
+        timeLbl = ZMDTool.getLabel(CGRect.zero, text: "2016-10-22 10：29", fontSize: 13,textColor: defaultDetailTextColor)
+        imaV = UIImageView(image: UIImage(named: "home_banner03"))
+        detailLbl = ZMDTool.getLabel(CGRect.zero, text: "小房间也有梦想，孩子们", fontSize: 15,textColor: defaultDetailTextColor)
         let line = ZMDTool.getLine(CGRect.zero)
         let readLbl = ZMDTool.getLabel(CGRect.zero, text: "阅读全文", fontSize: 15)
         let nextImag = UIImageView(image: UIImage(named: "common_forward"))
@@ -29,13 +33,13 @@ class MsgActivityTableViewCell: UITableViewCell {
         bgV.addSubview(titleLbl)
         bgV.addSubview(timeLbl)
         bgV.addSubview(imaV)
-//        bgV.addSubview(detailLbl)
-//        bgV.addSubview(line)
-//        bgV.addSubview(readLbl)
-//        bgV.addSubview(nextImag)
+        bgV.addSubview(detailLbl)
+        bgV.addSubview(line)
+        bgV.addSubview(readLbl)
+        bgV.addSubview(nextImag)
         
         bgV.snp_makeConstraints { (make) -> Void in
-            make.edges.equalTo(EdgeInsets(top: 0, left: 12, bottom: 0, right: 12))
+            make.edges.equalTo(EdgeInsets(top: 0, left: 12, bottom: 0, right: -12))
         }
         titleLbl.snp_makeConstraints { (make) -> Void in
             make.topMargin.equalTo(18)
@@ -53,32 +57,32 @@ class MsgActivityTableViewCell: UITableViewCell {
             make.top.equalTo(timeLbl.snp_bottom).offset(8)
             make.left.equalTo(12)
             make.right.equalTo(-12)
-            make.height.equalTo(imaV.frame.size.width).multipliedBy(120/325)
+            make.height.equalTo(imaV.snp_width).multipliedBy(0.5)
         }
-//        detailLbl.snp_makeConstraints { (make) -> Void in
-//            make.height.equalTo(44)
-//            make.edges.top.equalTo(imaV.snp_bottom)
-//            make.left.equalTo(12)
-//            make.right.equalTo(-12)
-//        }
-//        line.snp_makeConstraints { (make) -> Void in
-//            make.edges.top.equalTo(detailLbl.snp_bottom)
-//            make.left.equalTo(0)
-//            make.right.equalTo(0)
-//            make.height.equalTo(0.5)
-//        }
-//        readLbl.snp_makeConstraints { (make) -> Void in
-//            make.edges.top.equalTo(line.snp_bottom)
-//            make.left.equalTo(12)
-//            make.width.equalTo(100)
-//            make.height.equalTo(50)
-//        }
-//        readLbl.snp_makeConstraints { (make) -> Void in
-//            make.center.equalTo(readLbl)
-//            make.right.equalTo(-12)
-//            make.width.equalTo(10)
-//            make.height.equalTo(15)
-//        }
+        detailLbl.snp_makeConstraints { (make) -> Void in
+            make.height.equalTo(44)
+            make.top.equalTo(imaV.snp_bottom)
+            make.left.equalTo(12)
+            make.right.equalTo(-12)
+        }
+        line.snp_makeConstraints { (make) -> Void in
+            make.top.equalTo(detailLbl.snp_bottom)
+            make.left.equalTo(0)
+            make.right.equalTo(0)
+            make.height.equalTo(0.5)
+        }
+        readLbl.snp_makeConstraints { (make) -> Void in
+            make.top.equalTo(line.snp_bottom)
+            make.left.equalTo(12)
+            make.width.equalTo(100)
+            make.height.equalTo(50)
+        }
+        nextImag.snp_makeConstraints { (make) -> Void in
+            make.center.equalTo(readLbl)
+            make.right.equalTo(-8)
+            make.width.equalTo(10)
+            make.height.equalTo(15)
+        }
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -93,8 +97,11 @@ class MsgActivityTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    //MARK: -  PrivateMethod
+    func updateUIWithData() {
+        titleLbl.text = "title"
+    }
 }
-
 class ZMD_ActivityMsg: QN_BaseDataModel, QN_DataModelProtocol {
     private(set) var msgId: Int?     // 消息ID
     private(set) var title: String?    // 标题

@@ -36,7 +36,7 @@ class MsgHomeViewController: UIViewController,UITableViewDataSource, UITableView
             case Activity:
                 viewController = MsgActivityViewController()
             case Order:
-                viewController = UIViewController()
+                viewController = MsgOrderViewController()
             case Goods:
                 viewController = UIViewController()
             case Chat:
@@ -57,6 +57,8 @@ class MsgHomeViewController: UIViewController,UITableViewDataSource, UITableView
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        // 让导航栏支持右滑返回功能
+        ZMDTool.addInteractive(self.navigationController)
         self.subViewInit()
     }
     

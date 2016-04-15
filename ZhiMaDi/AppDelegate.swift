@@ -24,9 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // 开启推送服务
         ZMDPushTool.startPushTool(launchOptions)
-        
         ZMDPushTool.clear()
-
         // 启动过渡页
         let allowShowStartPages = !NSUserDefaults.standardUserDefaults().boolForKey(kKeyIsFirstStartApp)
         if allowShowStartPages {

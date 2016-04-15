@@ -320,14 +320,15 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
             let btn = cell?.contentView.viewWithTag(10000 + i) as! UIButton
             let label = cell?.contentView.viewWithTag(10010 + i) as! UILabel
             let imgV = cell?.contentView.viewWithTag(10020 + i) as! UIImageView
-            
-            btn.rac_signalForControlEvents(.TouchUpInside).subscribeNext { (sender) -> Void in
+            btn.rac_command = RACCommand(signalBlock: { (sender) -> RACSignal! in
                 let btnType = self.menuType[sender.tag - 10000]
                 if btnType == MenuType.Sale {
                     self.tabBarController?.selectedIndex = 1
+                } else {
+                    btnType.didSelect(self.navigationController!)
                 }
-                btnType.didSelect(self.navigationController!)
-            }
+                return RACSignal.empty()
+            })
             label.text = menuType.title
             imgV.image = menuType.image
         }

@@ -180,10 +180,6 @@ class MineHomeViewController: UIViewController,UITableViewDataSource, UITableVie
         default :
             return 55
         }
-        if indexPath.section == 0 {
-            return 200
-        }
-        return indexPath.section == 1 ? kScreenWidth/3 * 2 : 44
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -197,14 +193,16 @@ class MineHomeViewController: UIViewController,UITableViewDataSource, UITableVie
                 
             }
             let followBtn = cell?.viewWithTag(10003) as! UIButton
-            followBtn.rac_signalForControlEvents(.TouchUpInside).subscribeNext({ (sender) -> Void in
+            followBtn.rac_command = RACCommand(signalBlock: { (sender) -> RACSignal! in
                 let vc = MineFollowViewController()
                 self.navigationController?.pushViewController(vc, animated: true)
+                return RACSignal.empty()
             })
             let collectionBtn = cell?.viewWithTag(10004) as! UIButton
-            collectionBtn.rac_signalForControlEvents(.TouchUpInside).subscribeNext({ (sender) -> Void in
+            collectionBtn.rac_command = RACCommand(signalBlock: { (sender) -> RACSignal! in
                 let vc = MineCollectionViewController()
                 self.navigationController?.pushViewController(vc, animated: true)
+                return RACSignal.empty()
             })
             return cell!
         case .UserMyOrder :
@@ -272,8 +270,9 @@ class MineHomeViewController: UIViewController,UITableViewDataSource, UITableVie
         switch cellType{
         case .UserMyOrder:
             cellType.didSelect(self.navigationController!)
+            break
         default:
-            cellType.didSelect(self.navigationController!)
+            break
         }
     }
     //MARK:Private Method

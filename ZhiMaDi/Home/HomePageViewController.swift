@@ -20,6 +20,42 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
         init(){
             self = HomeContentTypeHead
         }
+        var heightForHeadOfSection : CGFloat {
+            switch  self {
+            case .HomeContentTypeHead :
+                return 0
+            case .HomeContentTypeAd :
+                return 0
+            case .HomeContentTypeMenu :
+                return 4
+            case .HomeContentTypeGoods :
+                return 0
+            case .HomeContentTypeRecommendationHead:
+                return 12
+            case .HomeContentTypeRecommendation :
+                return 0
+            case .HomeContentTypeTheme :
+                return 16
+            }
+        }
+        var height : CGFloat {
+            switch  self {
+            case .HomeContentTypeHead :
+                return 44
+            case .HomeContentTypeAd :
+                return kScreenWidth * 280 / 750
+            case .HomeContentTypeMenu :
+                return kScreenWidth * 250 / 750
+            case .HomeContentTypeGoods :
+                return kScreenWidth * 430 / 750
+            case .HomeContentTypeRecommendationHead:
+                return 48
+            case .HomeContentTypeRecommendation :
+                return 202
+            case .HomeContentTypeTheme :
+                return 206
+            }
+        }
     }
     enum MenuType{
         case Offer
@@ -118,22 +154,7 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        switch  self.userCenterData[section] {
-        case .HomeContentTypeHead :
-            return 0
-        case .HomeContentTypeAd :
-            return 0
-        case .HomeContentTypeMenu :
-            return 4
-        case .HomeContentTypeGoods :
-            return 0
-        case .HomeContentTypeRecommendationHead:
-            return 12
-        case .HomeContentTypeRecommendation :
-            return 0
-        case .HomeContentTypeTheme :
-            return 16
-        }
+        return self.userCenterData[section].heightForHeadOfSection
     }
     func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0
@@ -144,22 +165,7 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
         return headView
     }
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        switch  self.userCenterData[indexPath.section] {
-        case .HomeContentTypeHead :
-            return 44
-        case .HomeContentTypeAd :
-            return kScreenWidth * 280 / 750
-        case .HomeContentTypeMenu :
-            return kScreenWidth * 250 / 750
-        case .HomeContentTypeGoods :
-            return kScreenWidth * 430 / 750
-        case .HomeContentTypeRecommendationHead:
-            return 48
-        case .HomeContentTypeRecommendation :
-            return 202
-        case .HomeContentTypeTheme :
-            return 206
-        }
+        return self.userCenterData[indexPath.section].height
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         switch  self.userCenterData[indexPath.section] {
@@ -200,9 +206,6 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
             scrollView.contentSize = CGSize(width: width * menuTitles.count, height: height)
             cell?.contentView.addSubview(scrollView)
             var i = 0
-            for index in [1,2,3,4] {
-                
-            }
             for title in menuTitles {
                 let x = i * width,y = 0
                 let frame = CGRect(x: x, y: y, width: width, height: height)

@@ -512,7 +512,7 @@
         <!--学堂-->
         <scene sceneID="fCj-G9-JQl">
             <objects>
-                <viewController id="o3Q-ZI-4nI" sceneMemberID="viewController">
+                <viewController id="o3Q-ZI-4nI" customClass="MsgHomeViewController" customModule="ZhiMaDi" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="9gh-c6-sAb"/>
                         <viewControllerLayoutGuide type="bottom" id="bER-yC-1Nt"/>

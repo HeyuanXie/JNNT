@@ -37,10 +37,10 @@ extension UIView {
                     badgeLabel.tag = kTagBadgeLabel
                     badgeLabel.autoresizingMask = .FlexibleLeftMargin
                     badgeLabel.textColor = UIColor.whiteColor()
-                    badgeLabel.backgroundColor = UIColor(red: 251/255.0, green: 55/255.0, blue: 55/255.0, alpha: 1.0)
+                    badgeLabel.backgroundColor = UIColor(red: 234/255.0, green: 61/255.0, blue: 60/255.0, alpha: 1.0)
                     badgeLabel.textAlignment = .Center
                     badgeLabel.layer.masksToBounds = true
-                    badgeLabel.font = UIFont.systemFontOfSize(14)
+                    badgeLabel.font = UIFont.systemFontOfSize(12)
                     self.addSubview(badgeLabel)
                 }
                 

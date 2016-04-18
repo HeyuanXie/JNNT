@@ -265,6 +265,7 @@ class MineHomeViewController: UIViewController,UITableViewDataSource, UITableVie
             return cell!
         }
     }
+    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cellType = self.userCenterData[indexPath.section][indexPath.row]
         switch cellType{
@@ -272,6 +273,7 @@ class MineHomeViewController: UIViewController,UITableViewDataSource, UITableVie
             cellType.didSelect(self.navigationController!)
             break
         default:
+            cellType.didSelect(self.navigationController!)
             break
         }
     }
@@ -279,6 +281,7 @@ class MineHomeViewController: UIViewController,UITableViewDataSource, UITableVie
     func configHead() {
         
     }
+    
     func updateUI() {
         self.currentTableView.backgroundColor = tableViewdefaultBackgroundColor
         let rightItem = UIBarButtonItem(image: UIImage(named: "user_set"), style: .Done, target: nil, action: nil)

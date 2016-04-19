@@ -46,3 +46,5 @@
 #import <CoreText/CoreText.h>
 #import <TYAttributedLabel/TYAttributedLabel.h>
 #endif /* SleepCare_Bridging_Header_h */
+// 第三方数据库框架
+#import <FMDB/FMDB.h>

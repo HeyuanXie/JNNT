@@ -79,6 +79,5 @@ class SortViewController: UIViewController,UICollectionViewDataSource,UICollecti
         searchBar.layer.cornerRadius = 6
         searchBar.layer.masksToBounds = true
         self.view.addSubview(searchBar)
-        
     }
 }

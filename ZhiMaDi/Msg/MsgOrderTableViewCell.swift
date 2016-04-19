@@ -20,6 +20,9 @@ class MsgOrderTableViewCell: UITableViewCell {
         let bgV = UIView()
         bgV.backgroundColor = UIColor.whiteColor()
         ZMDTool.configViewLayer(bgV)
+        ZMDTool.getButton(CGRect.zero, textForNormal: "拍照", fontSize: 17, backgroundColor: UIColor.clearColor()) { (sender) -> Void in
+            
+        }
         titleLbl = ZMDTool.getLabel(CGRect.zero, text: "宝孩梦工厂", fontSize: 17)
         detailLbl = ZMDTool.getLabel(CGRect.zero, text: "你的订单正在派送中，已送达松山湖", fontSize: 17,textColor: defaultDetailTextColor)
         detailLbl.numberOfLines = 2

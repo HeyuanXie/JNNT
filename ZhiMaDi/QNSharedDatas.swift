@@ -50,13 +50,3 @@ func cleanAccount(){
     removeObjectAtUserDefaults(kKeyAccount)
 }
 
-
-// MARK: -搜索记录
-let KeyHistory = ("History" as NSString).encrypt(g_SecretKey)
-//保存搜索记录
-func saveSearchHistory (goodes: NSArray) {
-    saveObjectToUserDefaults(KeyHistory, value: goodes)
-}
-var g_SearchHistory : AnyObject? {
-    return getObjectFromUserDefaults(KeyHistory) 
-}

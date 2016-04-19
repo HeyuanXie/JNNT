@@ -7,21 +7,22 @@
 //
 
 import UIKit
+import FMDB
 // 商品搜索
-class HomeBuyGoodsSearchViewController: UIViewController, ZMDInterceptorProtocol, UITableViewDataSource, UITableViewDelegate {
+class HomeBuyGoodsSearchViewController: UIViewController, ZMDInterceptorProtocol, UITableViewDataSource, UITableViewDelegate,UISearchBarDelegate {
     
     @IBOutlet weak var currentTableView: UITableView!
     let goodses  = ["睡袋","婴儿床","床垫","儿童椅","奶酪","七万"]
-    var histories = g_SearchHistory == nil  ? [] : g_SearchHistory as!  NSArray
+    var goodsHistory = NSMutableArray()
     let goodsData = ["",""]
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.dataInit()
         self.currentTableView.backgroundColor = tableViewdefaultBackgroundColor
         self.setupNewNavigation()
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
-        histories = g_SearchHistory == nil  ? [] : g_SearchHistory as!  NSArray
         self.currentTableView.reloadData()
     }
     override func didReceiveMemoryWarning() {
@@ -32,7 +33,7 @@ class HomeBuyGoodsSearchViewController: UIViewController, ZMDInterceptorProtocol
     //MARK:- UITableViewDataSource,UITableViewDelegate
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 1 {
-            return self.histories.count + 1
+            return self.goodsHistory.count + 1
         } else if section == 3 {
             return goodsData.count
         }
@@ -120,14 +121,7 @@ class HomeBuyGoodsSearchViewController: UIViewController, ZMDInterceptorProtocol
                 btn.layer.masksToBounds = true
                 btn.rac_signalForControlEvents(.TouchUpInside).subscribeNext({ (sender) -> Void in
                     let goods = self.goodses[index]
-                    let tmp = NSMutableArray(array: self.histories)
-                    tmp.addObject(goods)
-                    for history in self.histories {
-                        if history as! String == goods {
-                            tmp.removeObject(history)
-                        }
-                    }
-                    saveSearchHistory(tmp)
+                    // save
                     let homeBuyListViewController = HomeBuyListViewController.CreateFromMainStoryboard() as! HomeBuyListViewController
                     self.navigationController?.pushViewController(homeBuyListViewController, animated: true)
                 })
@@ -156,7 +150,7 @@ class HomeBuyGoodsSearchViewController: UIViewController, ZMDInterceptorProtocol
             return cell!
         case 1 :
             //记录
-            if indexPath.row == self.histories.count {
+            if indexPath.row == self.goodsHistory.count {
                 let cellId = "cleanCell"
                 var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
                 if cell == nil {
@@ -194,20 +188,15 @@ class HomeBuyGoodsSearchViewController: UIViewController, ZMDInterceptorProtocol
                 let btn = UIButton(frame: CGRectMake(kScreenWidth-26, 20, 14, 14))
                 btn.backgroundColor = UIColor.clearColor()
                 btn.setImage(UIImage(named: "GoodsSearch_close"), forState: .Normal)
+                btn.tag = indexPath.row
                 btn.rac_signalForControlEvents(.TouchUpInside).subscribeNext({ (sender) -> Void in
-                    let goods = self.goodses[indexPath.row]
-                    let tmp = NSMutableArray()
-                    for history in self.histories {
-                        if goods != history as! String {
-                            tmp.addObject(goods)
-                        }
-                    }
-                    saveSearchHistory(tmp)
+                    //delete
+                    self.deleteValueFromDB(self.createOrOpenDB(),text:(self.goodsHistory[(sender as! UIButton).tag] as! String))
                     self.currentTableView.reloadData()
                 })
                 
                 let label = UILabel(frame: CGRectMake(14, 20,100, 16))
-                label.text = self.histories[indexPath.row] as? String
+                label.text = self.goodsHistory[indexPath.row] as? String
                 label.textColor = defaultDetailTextColor
                 label.font = UIFont.systemFontOfSize(16)
                 
@@ -234,7 +223,7 @@ class HomeBuyGoodsSearchViewController: UIViewController, ZMDInterceptorProtocol
         case 3 :
             //
             let cellId = "doubleGoodsCell"
-            var cell = tableView.dequeueReusableCellWithIdentifier(cellId) as! DoubleGoodsTableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier(cellId) as! DoubleGoodsTableViewCell
             cell.goodsImgVLeft.image = UIImage(named: "home_banner02")
             return cell
    
@@ -244,6 +233,13 @@ class HomeBuyGoodsSearchViewController: UIViewController, ZMDInterceptorProtocol
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
+    }
+    //MARK: - UISearchBarDelegate
+    func searchBarSearchButtonClicked(searchBar: UISearchBar)  {
+        self.view.endEditing(true)
+        insertValueToDB(createOrOpenDB(),text: searchBar.text!)
+        let homeBuyListViewController = HomeBuyListViewController.CreateFromMainStoryboard() as! HomeBuyListViewController
+        self.navigationController?.pushViewController(homeBuyListViewController, animated: true)
     }
     //MARK: -  PrivateMethod
     func setupNewNavigation() {
@@ -255,6 +251,7 @@ class HomeBuyGoodsSearchViewController: UIViewController, ZMDInterceptorProtocol
         searchBar.layer.borderWidth = 0.5
         searchBar.layer.cornerRadius = 6
         searchBar.layer.masksToBounds = true
+        searchBar.delegate = self
         searchView.addSubview(searchBar)
         self.navigationItem.titleView = searchView
 
@@ -264,5 +261,59 @@ class HomeBuyGoodsSearchViewController: UIViewController, ZMDInterceptorProtocol
             return RACSignal.empty()
         })
         self.navigationItem.rightBarButtonItem = rightItem
+    }
+    func dataInit() {
+        self.queryValueToDB(self.createOrOpenDB())
+    }
+    func createOrOpenDB() -> FMDatabase {
+        let documents = try! NSFileManager.defaultManager().URLForDirectory(.DocumentDirectory, inDomain: .UserDomainMask, appropriateForURL: nil, create: false)
+        let fileURL = documents.URLByAppendingPathComponent("Zmd.sqlite")
+        let database = FMDatabase(path: fileURL.path)
+        if !database.open() {
+            print("Unable to open database")
+            return database
+        }
+        do {
+            try database.executeUpdate("create table if not exists GoodsHistory(id integer PRIMARY KEY AUTOINCREMENT,goodsTitle text)", values: nil)
+        } catch let error as NSError {
+            print("failed: \(error.localizedDescription)")
+        }
+        return database
+    }
+    func insertValueToDB(database:FMDatabase,text:String) {
+        for tmp in self.goodsHistory {
+            if tmp as? String == text {
+                return
+            }
+        }
+        do {
+            try database.executeUpdate("insert into GoodsHistory (goodsTitle) values (?)", values: [text])
+        } catch let error as NSError {
+            print("failed: \(error.localizedDescription)")
+        }
+        database.close()
+    }
+    func deleteValueFromDB(database:FMDatabase,text:String) {
+        do {
+            try database.executeUpdate("delete from GoodsHistory where goodsTitle = \(text)",values:nil)
+        } catch let error as NSError {
+            print("failed: \(error.localizedDescription)")
+        }
+        database.close()
+        self.currentTableView.reloadSections(NSIndexSet(index: 1), withRowAnimation: UITableViewRowAnimation.Bottom)
+    }
+    func queryValueToDB(database:FMDatabase) {
+        do {
+            let rs = try database.executeQuery("select goodsTitle from GoodsHistory", values: nil)
+            self.goodsHistory.removeAllObjects()
+            while rs.next() {
+                let goodsTitle = rs.stringForColumn("goodsTitle")
+                self.goodsHistory.addObject(goodsTitle)
+            }
+            self.currentTableView.reloadData()
+        } catch let error as NSError {
+            print("failed: \(error.localizedDescription)")
+        }
+        database.close()
     }
 }

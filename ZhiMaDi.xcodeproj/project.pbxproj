@@ -345,6 +345,7 @@
 		2B8CB2701CBB51DB00DA55F6 /* CardVolumeConsumerDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8CB26F1CBB51DB00DA55F6 /* CardVolumeConsumerDetailViewController.swift */; };
 		2B8DB08B1CC0DC6A004A0FB5 /* MsgOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8DB08A1CC0DC6A004A0FB5 /* MsgOrderViewController.swift */; };
 		2B8DB08D1CC0DCC1004A0FB5 /* MsgOrderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8DB08C1CC0DCC1004A0FB5 /* MsgOrderTableViewCell.swift */; };
+		2B90956F1CC62F4000959E55 /* VipClubHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B90956E1CC62F4000959E55 /* VipClubHomeViewController.swift */; };
 		2B959EC01C76F5D0002EA40D /* HomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B959EBF1C76F5D0002EA40D /* HomePageViewController.swift */; };
 		2B989C081CB4E968008C6D23 /* ShoppingCartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B989C071CB4E968008C6D23 /* ShoppingCartViewController.swift */; };
 		2B989C0A1CB4FB73008C6D23 /* WalletMyBillsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B989C091CB4FB73008C6D23 /* WalletMyBillsViewController.swift */; };
@@ -1013,6 +1014,7 @@
 		2B8CB26F1CBB51DB00DA55F6 /* CardVolumeConsumerDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardVolumeConsumerDetailViewController.swift; sourceTree = "<group>"; };
 		2B8DB08A1CC0DC6A004A0FB5 /* MsgOrderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MsgOrderViewController.swift; sourceTree = "<group>"; };
 		2B8DB08C1CC0DCC1004A0FB5 /* MsgOrderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MsgOrderTableViewCell.swift; sourceTree = "<group>"; };
+		2B90956E1CC62F4000959E55 /* VipClubHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VipClubHomeViewController.swift; sourceTree = "<group>"; };
 		2B959EBF1C76F5D0002EA40D /* HomePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageViewController.swift; sourceTree = "<group>"; };
 		2B989C071CB4E968008C6D23 /* ShoppingCartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoppingCartViewController.swift; sourceTree = "<group>"; };
 		2B989C091CB4FB73008C6D23 /* WalletMyBillsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletMyBillsViewController.swift; sourceTree = "<group>"; };
@@ -1911,6 +1913,21 @@
 			path = PhotoBroswer;
 			sourceTree = "<group>";
 		};
+		2B90956D1CC62EFF00959E55 /* UserVipClub */ = {
+			isa = PBXGroup;
+			children = (
+				2B90956E1CC62F4000959E55 /* VipClubHomeViewController.swift */,
+			);
+			path = UserVipClub;
+			sourceTree = "<group>";
+		};
+		2B9095701CC6337F00959E55 /* StoreShow */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = StoreShow;
+			sourceTree = "<group>";
+		};
 		2B959E921C76C33B002EA40D /* Images */ = {
 			isa = PBXGroup;
 			children = (
@@ -2721,6 +2738,8 @@
 		3C9098F71C76A6E9006B7D2C /* UserCenter */ = {
 			isa = PBXGroup;
 			children = (
+				2B9095701CC6337F00959E55 /* StoreShow */,
+				2B90956D1CC62EFF00959E55 /* UserVipClub */,
 				2B8739C91CBF6322007FE81A /* Invitation */,
 				2B8BB2B51CBE2D3A00CD2AD5 /* MyCrowdfund */,
 				2B07BA2E1CB7AF990012929B /* CardVolume */,
@@ -3474,6 +3493,7 @@
 				2BB6A8D61C87E447008209E8 /* HomeLoanViewController.swift in Sources */,
 				2B73D85F1C86D36E0016FEB2 /* PhoneSeteMsgVerifyViewController.swift in Sources */,
 				2BA287EF1CC09C4900B6281E /* MsgActivityViewController.swift in Sources */,
+				2B90956F1CC62F4000959E55 /* VipClubHomeViewController.swift in Sources */,
 				3C9099071C76A6E9006B7D2C /* HorizontalBarChartView.swift in Sources */,
 				3C90990F1C76A6E9006B7D2C /* ChartLegend.swift in Sources */,
 				3C9099021C76A6E9006B7D2C /* BarLineChartViewBase.swift in Sources */,
@@ -3691,8 +3711,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

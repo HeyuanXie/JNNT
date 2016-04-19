@@ -73,7 +73,6 @@ private var configAssociationKey: UInt8 = 0
  *  UIViewController + STZPopupView
  */
 extension UIViewController {
-    
     /// Popup view
     private var popupView: UIView? {
         get {
@@ -103,6 +102,12 @@ extension UIViewController {
     */
     public func presentPopupView(popupView: UIView,config: ZMDPopViewConfig!) {
         self.view.addSubview(popupView)
+        self.popupView = popupView
+        self.config = config
+        showAnimation()
+    }
+    public func presentPopupViewForNav(popupView: UIView,config: ZMDPopViewConfig!) {
+        self.navigationController?.view.addSubview(popupView)
         self.popupView = popupView
         self.config = config
         showAnimation()
@@ -231,14 +236,15 @@ extension UIViewController {
     }
     
     private func slideInFromRight() {
-        if let containerView = self.view, let popupView = popupView {
-            
+        if let containerView = self.navigationController!.view, let popupView = popupView {
             var frame = popupView.frame
-            frame.origin.x = CGRectGetWidth(containerView.frame)
+            frame.origin.x = CGRectGetWidth(containerView.frame)+CGRectGetWidth(frame)
             popupView.frame = frame
             
             UIView.animateWithDuration(0.3, animations: {
-                popupView.center = containerView.center
+                var frame = popupView.frame
+                frame.origin.x = CGRectGetWidth(containerView.frame)-CGRectGetWidth(frame)
+                popupView.frame = frame
                 }, completion: completionShowAnimation)
         }
     }
@@ -283,7 +289,6 @@ extension UIViewController {
                 }, completion: completionDismissAnimation)
         }
     }
-    
     private func slideOutToRight() {
         if let containerView = self.view, let popupView = popupView {
             UIView.animateWithDuration(0.3, animations: {
@@ -293,5 +298,40 @@ extension UIViewController {
                 }, completion: completionDismissAnimation)
         }
     }
-    
+    // 自定义个黑色背景
+    // 使用于self.view中
+    func viewShowWithBg(view:UIView,showAnimation:ZMDPopupShowAnimation = .None,dismissAnimation:ZMDPopupDismissAnimation = .None) {
+        let bg = UIButton(frame: self.view.bounds)
+        bg.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.4) //半透明色值
+        bg.rac_command = RACCommand(signalBlock: { (sender) -> RACSignal! in
+            self.dismissPopupView(view)
+            return RACSignal.empty()
+        })
+        self.presentPopupView(bg,config: ZMDPopViewConfig())
+        let config = ZMDPopViewConfig()
+        config.dismissCompletion = { (view) ->Void in
+            bg.removeFromSuperview()
+        }
+        config.showAnimation = showAnimation
+        config.dismissAnimation = dismissAnimation
+        self.presentPopupView(view,config: config)
+    }
+    // 使用于全屏
+    func viewShowWithBgForNav(view:UIView,showAnimation:ZMDPopupShowAnimation = .None,dismissAnimation:ZMDPopupDismissAnimation = .None) {
+        let bg = UIButton(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: kScreenHeight))
+        bg.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.4) //半透明色值
+        bg.rac_command = RACCommand(signalBlock: { (sender) -> RACSignal! in
+            self.dismissPopupView(view)
+            return RACSignal.empty()
+        })
+        
+        self.presentPopupViewForNav(bg,config: ZMDPopViewConfig())
+        let config = ZMDPopViewConfig()
+        config.dismissCompletion = { (view) ->Void in
+            bg.removeFromSuperview()
+        }
+        config.showAnimation = showAnimation
+        config.dismissAnimation = dismissAnimation
+        self.presentPopupViewForNav(view,config: config)
+    }
 }

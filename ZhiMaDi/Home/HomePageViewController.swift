@@ -210,6 +210,7 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
                 let x = i * width,y = 0
                 let frame = CGRect(x: x, y: y, width: width, height: height)
                 i++
+                
                 let headBtn = UIButton(frame: frame)
                 headBtn.setTitle(title, forState: .Normal)
                 headBtn.titleLabel?.font = defaultDetailTextSize

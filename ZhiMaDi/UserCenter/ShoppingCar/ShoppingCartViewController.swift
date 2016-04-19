@@ -75,15 +75,8 @@ class ShoppingCartViewController: UIViewController,UITableViewDataSource,UITable
     @IBAction func settlementBtnCli(sender: UIButton) {
     }
     //MARK: -  PrivateMethod
+    
     func editViewShow() {
-        let bg = UIButton(frame: self.view.bounds)
-        bg.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.4) //半透明色值
-        let config = ZMDPopViewConfig()
-        config.dismissCompletion = { (view) ->Void in
-            bg.removeFromSuperview()
-        }
-        self.presentPopupView(bg,config: config)
-        
         let view = UIView(frame: CGRect(x: 0, y: self.view.bounds.height - 300, width: kScreenWidth, height: 300))
         view.backgroundColor = UIColor.whiteColor()
         
@@ -130,9 +123,6 @@ class ShoppingCartViewController: UIViewController,UITableViewDataSource,UITable
             let line = ZMDTool.getLine(CGRect(x: 0, y: 60*CGFloat(i), width: kScreenWidth, height: 0.5))
             view.addSubview(line)
         }
-        config.showAnimation = .SlideInFromBottom
-        config.dismissAnimation = .SlideOutToBottom
-        self.presentPopupView(view,config: config)
-        
+        self.viewShowWithBg(view,showAnimation: .SlideInFromBottom,dismissAnimation: .SlideOutToBottom)
     }
 }

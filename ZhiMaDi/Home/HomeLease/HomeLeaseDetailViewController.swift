@@ -352,7 +352,6 @@ class HomeLeaseDetailViewController:UIViewController,UITableViewDataSource,UITab
             btn.setTitleColor(UIColor.yellowColor(), forState: .Selected)
             btn.titleLabel?.font = UIFont.systemFontOfSize(17)
             view.addSubview(btn)
-            
             btn.rac_signalForControlEvents(.TouchUpInside).subscribeNext({ (sender) -> Void in
             })
             if i < 2{
@@ -432,11 +431,9 @@ class HomeLeaseDetailViewController:UIViewController,UITableViewDataSource,UITab
             bottomBtn.rac_signalForControlEvents(.TouchUpInside).subscribeNext({ [weak self](sender) -> Void in
                 if let StrongSelf = self {
                     if (sender as! UIButton).titleLabel!.text == titles[0] {
-                        
                     } else if (sender as! UIButton).titleLabel?.text == titles[1] {
                         StrongSelf.contractViewShow()
                     } else if (sender as! UIButton).titleLabel?.text == titles[2] {
-                        
                     }
                 }
                 })
@@ -464,14 +461,8 @@ class HomeLeaseDetailViewController:UIViewController,UITableViewDataSource,UITab
         contractView?.showAsPop(setBgColor: false)
     }
     func packageViewShow() {
-        let bg = UIButton(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: kScreenHeight))
-        bg.showAsPop()
         let contractView = LeasePackageView.leasePackageView()
         contractView.frame = CGRect(x: 86, y: 0, width: kScreenWidth - 86, height: kScreenHeight)
-        contractView.showAsPop()
-        bg.rac_signalForControlEvents(.TouchUpInside).subscribeNext { (sender) -> Void in
-            bg.removePop()
-            contractView.removePop()
-        }
+        self.viewShowWithBgForNav(contractView,showAnimation: .SlideInFromRight,dismissAnimation: .SlideOutToRight)
     }
 }

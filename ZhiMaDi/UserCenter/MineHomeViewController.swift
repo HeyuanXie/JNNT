@@ -281,7 +281,6 @@ class MineHomeViewController: UIViewController,UITableViewDataSource, UITableVie
     func configHead() {
         
     }
-    
     func updateUI() {
         self.currentTableView.backgroundColor = tableViewdefaultBackgroundColor
         let rightItem = UIBarButtonItem(image: UIImage(named: "user_set"), style: .Done, target: nil, action: nil)

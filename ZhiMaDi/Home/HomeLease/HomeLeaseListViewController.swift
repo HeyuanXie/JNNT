@@ -9,15 +9,18 @@
 import UIKit
 //租赁列表
 class HomeLeaseListViewController: UIViewController ,ZMDInterceptorProtocol, UITableViewDataSource, UITableViewDelegate{
-    
+    enum TypeSetting {
+        case Horizontal
+        case vertical
+    }
     @IBOutlet weak var currentTableView: UITableView!
     var popView : UIView!
     var cityPop : FindDoctorCityPopView!
     var filtedView : UIView!
     var filtedBtnSelect : UIButton!             //筛选-分类高亮btn
     var leaseBtnSelect : UIButton!              //筛选-租期高亮btn
-    var isHorizontal = true      // 横屏
     var dataArray = ["","","",""]
+    var typeSetting = TypeSetting.Horizontal      // 横屏
     override func viewDidLoad() {
         super.viewDidLoad()
         self.currentTableView.backgroundColor = tableViewdefaultBackgroundColor
@@ -36,7 +39,7 @@ class HomeLeaseListViewController: UIViewController ,ZMDInterceptorProtocol, UIT
         return 1
     }
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return self.isHorizontal ? (self.dataArray.count/2 + 1) : self.dataArray.count
+        return self.typeSetting == .Horizontal ? (self.dataArray.count/2 + 1) : self.dataArray.count
     }
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return section == 0 ? 52 + 16 : 10
@@ -45,7 +48,7 @@ class HomeLeaseListViewController: UIViewController ,ZMDInterceptorProtocol, UIT
         return 0
     }
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return self.isHorizontal ? 581/750 * kScreenWidth + 10 : 300/750 * kScreenWidth
+        return self.typeSetting == .Horizontal ? 581/750 * kScreenWidth + 10 : 300/750 * kScreenWidth
     }
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 0 {
@@ -58,10 +61,10 @@ class HomeLeaseListViewController: UIViewController ,ZMDInterceptorProtocol, UIT
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cellId = self.isHorizontal ? "doubleLeaseCell" : "goodsLeaseCell"
-        var cell = tableView.dequeueReusableCellWithIdentifier(cellId) as! DoubleGoodsLeaseTableViewCell
+        let cellId = self.typeSetting == .Horizontal ? "doubleLeaseCell" : "goodsLeaseCell"
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellId) as! DoubleGoodsLeaseTableViewCell
         cell.goodsImgVLeft.image = UIImage(named: "home_banner02")
-        if self.isHorizontal {
+        if self.typeSetting == .Horizontal {
             let size = cell.currentPriceLblLeft.text?.sizeWithFont(UIFont.systemFontOfSize(15), maxWidth: 160)
             cell.currentPriceWidthLayout.constant = (size?.width)!
         } else {
@@ -76,17 +79,22 @@ class HomeLeaseListViewController: UIViewController ,ZMDInterceptorProtocol, UIT
     //MARK: -  PrivateMethod
     func createFilterMenu() -> UIView{
         let prices = ["默认","人气","价格","筛选",""]
-        let countForBtn = CGFloat(prices.count)
+        let countForBtn = CGFloat(prices.count) - 1
         let view = UIView(frame: CGRectMake(0 , 0, kScreenWidth, 52 + 16))
         view.backgroundColor = UIColor.clearColor()
         for var i=0;i<prices.count;i++ {
             let index = i%prices.count
-            let btn = UIButton(frame:  CGRectMake(CGFloat(index) * kScreenWidth/countForBtn , 0, kScreenWidth/countForBtn, 52))
+            let btn = UIButton(frame:  CGRectMake(CGFloat(index) * (kScreenWidth-54)/countForBtn , 0, (kScreenWidth-54)/countForBtn, 52))
             btn.backgroundColor = UIColor.whiteColor()
-            //            btn.setImage(UIImage(named: imageNormal), forState: .Normal)
-            //            btn.setImage(UIImage(named: imageSelected), forState: .Selected)
-            btn.setTitle(prices[i], forState: .Normal)
-            btn.setTitle(prices[i], forState: .Normal)
+            if prices[i] == "" {
+                btn.frame = CGRectMake(CGFloat(index) * (kScreenWidth-54)/countForBtn, 0, 54, 52)
+                btn.setImage(UIImage(named: "list_hengpai"), forState: .Normal)
+                btn.setImage(UIImage(named: "list_shupai"), forState: .Selected)
+                btn.selected = self.typeSetting == .Horizontal ? false : true
+            } else {
+                btn.setTitle(prices[i], forState: .Normal)
+                btn.setTitle(prices[i], forState: .Normal)
+            }
             btn.setTitleColor(UIColor.blackColor(), forState: .Normal)
             btn.setTitleColor(UIColor.yellowColor(), forState: .Selected)
             btn.titleLabel?.font = UIFont.systemFontOfSize(13)
@@ -95,7 +103,8 @@ class HomeLeaseListViewController: UIViewController ,ZMDInterceptorProtocol, UIT
             
             btn.rac_signalForControlEvents(.TouchUpInside).subscribeNext({ (sender) -> Void in
                 if (sender.tag - 1000) == prices.count - 1 {
-                    self.isHorizontal = !self.isHorizontal
+                    self.typeSetting = self.typeSetting == .Horizontal ? .vertical : .Horizontal
+                    (sender as! UIButton).selected = !(sender as! UIButton).selected
                     self.currentTableView.reloadData()
                     return
                 }
@@ -113,10 +122,8 @@ class HomeLeaseListViewController: UIViewController ,ZMDInterceptorProtocol, UIT
                 }
                 self.presentPopupView(self.filtedView,config: config)
             })
-            if i < 3 {
-                let line = ZMDTool.getLine(CGRectMake(kScreenWidth/4 - 1, 20, 1, 13))
-                btn.addSubview(line)
-            }
+            let line = ZMDTool.getLine(CGRectMake(CGRectGetMaxX(btn.frame)-1, 20, 1, 13))
+            btn.addSubview(line)
         }
         return view
     }

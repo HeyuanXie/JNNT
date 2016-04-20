@@ -307,7 +307,6 @@ class HomeLeaseDetailViewController:UIViewController,UITableViewDataSource,UITab
                 }
                 scrollView.contentSize = CGSize(width: scrollvWidth, height: 0)
             }
-            
         }
         let textArray = ["组合价：","613.00","（已为你节省：100)"]
         let label = TYAttributedLabel(frame: CGRect(x: 12, y: 207 + 15, width: kScreenWidth - 24, height: 22))

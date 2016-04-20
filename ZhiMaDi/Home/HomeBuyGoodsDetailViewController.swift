@@ -138,7 +138,14 @@ class HomeBuyGoodsDetailViewController: UIViewController,UITableViewDataSource,U
         }
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-       
+        let cellType = self.goodsCellTypes[indexPath.section]
+        switch cellType {
+        case .HomeContentTypeStore :
+            let vc = StoreShowHomeViewController.CreateFromMainStoryboard() as! StoreShowHomeViewController
+            self.navigationController?.pushViewController(vc, animated: true)
+        default :
+            break
+        }
     }
     //MARK: QNShareViewDelegate
     func qnShareView(view: ShareView) -> (image: UIImage, url: String, title: String?, description: String)? {

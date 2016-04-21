@@ -9,28 +9,38 @@
 import UIKit
 // 会员俱乐部 goods cell
 class VipClubGoodsTableViewCell: UITableViewCell {
-
+    let height = 176
+    var imgV : UIImageView!
+    var goodsLbl : UILabel!
+    var goodsPriceLbl: UILabel!
+    var hasLbl: UILabel!
+    var cancelBtn:UIButton!
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        self.backgroundColor = UIColor.whiteColor()
+        self.backgroundColor = tableViewdefaultBackgroundColor
+        self.selectionStyle = .None
         
-        let imgV = UIImageView(frame: CGRect(x: 12, y: 12, width: 135, height: 135))
+        let viewBg = UIView(frame: CGRect(x: 0, y: 16, width: kScreenWidth, height: 135+24))
+        viewBg.backgroundColor = UIColor.whiteColor()
+        self.contentView.addSubview(viewBg)
+         imgV = UIImageView(frame: CGRect(x: 12, y: 12, width: 135, height: 135))
         imgV.backgroundColor = UIColor.clearColor()
-        self.contentView.addSubview(imgV)
+        viewBg.addSubview(imgV)
         
-        let goodsLbl = ZMDTool.getLabel(CGRect(x: 12+135+10, y: 12, width: kScreenWidth - 24-135-10, height: 40), text: "", fontSize: 17)
-        self.contentView.addSubview(goodsLbl)
+         goodsLbl = ZMDTool.getLabel(CGRect(x: 12+135+10, y: 12, width: kScreenWidth - 24-135-10, height: 40), text: "", fontSize: 17)
+        goodsLbl.numberOfLines = 2
+        viewBg.addSubview(goodsLbl)
         
-        let goodsPriceLbl = ZMDTool.getLabel(CGRect(x: 12+135+10, y:160/2-17/2, width: kScreenWidth - 24-135-10, height: 17), text: "", fontSize: 17,textColor: RGB(254,145,86,1.0))
-        self.contentView.addSubview(goodsPriceLbl)
+         goodsPriceLbl = ZMDTool.getLabel(CGRect(x: 12+135+10, y:160/2-17/2, width: kScreenWidth - 24-135-10, height: 17), text: "", fontSize: 17,textColor: RGB(254,145,86,1.0))
+        viewBg.addSubview(goodsPriceLbl)
         
-        let hasLbl = ZMDTool.getLabel(CGRect(x: 12+135+10, y: 160-12-14, width: kScreenWidth - 24-135-10-100, height: 14), text: "", fontSize: 15,textColor: defaultDetailTextColor)
-        self.contentView.addSubview(hasLbl)
+         hasLbl = ZMDTool.getLabel(CGRect(x: 12+135+10, y: 160-12-14, width: kScreenWidth - 24-135-10-100, height: 14), text: "", fontSize: 15,textColor: defaultDetailTextColor)
+        viewBg.addSubview(hasLbl)
         
-        let cancelBtn = ZMDTool.getButton(CGRect(x: kScreenWidth - 80, y: 160-12-34, width: 80, height: 34), textForNormal: "马上兑换", fontSize: 15,textColorForNormal:UIColor.whiteColor(), backgroundColor: RGB(254,145,89,1.0), blockForCli: { (sender) -> Void in
+         cancelBtn = ZMDTool.getButton(CGRect(x: kScreenWidth - 80 - 12, y: 160-12-34, width: 80, height: 34), textForNormal: "马上兑换", fontSize: 15,textColorForNormal:UIColor.whiteColor(), backgroundColor: RGB(254,145,89,1.0), blockForCli: { (sender) -> Void in
         })
         ZMDTool.configViewLayer(cancelBtn)
-        self.contentView.addSubview(cancelBtn)
+        viewBg.addSubview(cancelBtn)
     }
 
     required init?(coder aDecoder: NSCoder) {

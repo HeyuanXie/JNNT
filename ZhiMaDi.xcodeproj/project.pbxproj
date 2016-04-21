@@ -402,6 +402,8 @@
 		2BB6A8DB1C87EE7E008209E8 /* HomeSell_Contract.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BB6A8DA1C87EE7E008209E8 /* HomeSell_Contract.png */; };
 		2BB6A8DE1C880548008209E8 /* HomeSell_Deposit.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BB6A8DC1C880548008209E8 /* HomeSell_Deposit.png */; };
 		2BB6A8DF1C880548008209E8 /* HomeSell_NotDeposit.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BB6A8DD1C880548008209E8 /* HomeSell_NotDeposit.png */; };
+		2BBB12C61CC874290076C775 /* VipClubGoodsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBB12C51CC874290076C775 /* VipClubGoodsDetailViewController.swift */; };
+		2BBB12C81CC87D5A0076C775 /* VipClubGoodsDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBB12C71CC87D5A0076C775 /* VipClubGoodsDetailTableViewCell.swift */; };
 		2BC05C671CB630C300D3B1AE /* AddBankCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC05C621CB630C300D3B1AE /* AddBankCardViewController.swift */; };
 		2BC05C681CB630C300D3B1AE /* BankCardAuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC05C631CB630C300D3B1AE /* BankCardAuthenticationViewController.swift */; };
 		2BC05C691CB630C300D3B1AE /* BankCardDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC05C641CB630C300D3B1AE /* BankCardDetailViewController.swift */; };
@@ -1098,6 +1100,8 @@
 		2BB6A8DA1C87EE7E008209E8 /* HomeSell_Contract.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HomeSell_Contract.png; sourceTree = "<group>"; };
 		2BB6A8DC1C880548008209E8 /* HomeSell_Deposit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HomeSell_Deposit.png; sourceTree = "<group>"; };
 		2BB6A8DD1C880548008209E8 /* HomeSell_NotDeposit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HomeSell_NotDeposit.png; sourceTree = "<group>"; };
+		2BBB12C51CC874290076C775 /* VipClubGoodsDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VipClubGoodsDetailViewController.swift; sourceTree = "<group>"; };
+		2BBB12C71CC87D5A0076C775 /* VipClubGoodsDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VipClubGoodsDetailTableViewCell.swift; sourceTree = "<group>"; };
 		2BC05C621CB630C300D3B1AE /* AddBankCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBankCardViewController.swift; sourceTree = "<group>"; };
 		2BC05C631CB630C300D3B1AE /* BankCardAuthenticationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankCardAuthenticationViewController.swift; sourceTree = "<group>"; };
 		2BC05C641CB630C300D3B1AE /* BankCardDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankCardDetailViewController.swift; sourceTree = "<group>"; };
@@ -1972,6 +1976,8 @@
 			children = (
 				2B90956E1CC62F4000959E55 /* VipClubHomeViewController.swift */,
 				2BD96D231CC785A4005DC87F /* VipClubGoodsTableViewCell.swift */,
+				2BBB12C71CC87D5A0076C775 /* VipClubGoodsDetailTableViewCell.swift */,
+				2BBB12C51CC874290076C775 /* VipClubGoodsDetailViewController.swift */,
 			);
 			path = UserVipClub;
 			sourceTree = "<group>";
@@ -3517,12 +3523,14 @@
 				3C90992A1C76A6E9006B7D2C /* RadarChartDataSet.swift in Sources */,
 				3C9099291C76A6E9006B7D2C /* RadarChartData.swift in Sources */,
 				2B8BB2B71CBE2D4E00CD2AD5 /* MyCrowdfundHomeViewController.swift in Sources */,
+				2BBB12C61CC874290076C775 /* VipClubGoodsDetailViewController.swift in Sources */,
 				2B0662F91C7DA4A800EA822F /* HomeBuyViewController.swift in Sources */,
 				3C9099041C76A6E9006B7D2C /* CandleStickChartView.swift in Sources */,
 				3C9099511C76A6E9006B7D2C /* PieChartRenderer.swift in Sources */,
 				2B9D9F9F1C917B8F00141D31 /* HomeMarketViewController.swift in Sources */,
 				2B73D85D1C86D1530016FEB2 /* PhoneSetPsVerifyViewController.swift in Sources */,
 				3C9099261C76A6E9006B7D2C /* LineScatterCandleChartDataSet.swift in Sources */,
+				2BBB12C81CC87D5A0076C775 /* VipClubGoodsDetailTableViewCell.swift in Sources */,
 				2BA287F11CC09CA700B6281E /* MsgActivityTableViewCell.swift in Sources */,
 				3C9099461C76A6E9006B7D2C /* ChartXAxisRenderer.swift in Sources */,
 				3C9099151C76A6E9006B7D2C /* BarChartDataEntry.swift in Sources */,

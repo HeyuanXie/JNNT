@@ -19,7 +19,12 @@ class VipClubHomeViewController: UIViewController ,UITableViewDataSource,UITable
             self = Head
         }
         var heightForHeadOfSection : CGFloat {
-           return 16
+            switch  self {
+            case .Recommendation :
+                return 0
+            default :
+                return 16
+            }
         }
         var height : CGFloat {
             switch  self {
@@ -28,9 +33,9 @@ class VipClubHomeViewController: UIViewController ,UITableViewDataSource,UITable
             case .Menu :
                 return 207/750 * kScreenWidth
             case .Theme :
-                return 430 / 750 * kScreenWidth
+                return 430/750 * kScreenWidth
             case .Recommendation :
-                return 321/750 * kScreenWidth
+                return 176
             }
         }
     }
@@ -116,7 +121,7 @@ class VipClubHomeViewController: UIViewController ,UITableViewDataSource,UITable
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 16
+        return self.cellTypes[section].heightForHeadOfSection
     }
     func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0
@@ -143,7 +148,8 @@ class VipClubHomeViewController: UIViewController ,UITableViewDataSource,UITable
         }
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
+        let vc = VipClubGoodsDetailViewController.CreateFromMainStoryboard() as!  VipClubGoodsDetailViewController
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     //MARK: private method
     
@@ -188,10 +194,11 @@ class VipClubHomeViewController: UIViewController ,UITableViewDataSource,UITable
             for var i=0;i<3;i++ {
                 let btnHeight = celltype.height
                 let width = kScreenWidth/3
-                let btn = ZMDTool.getBtn(CGRect(x: CGFloat(i) * kScreenWidth/3, y: 0, width: width, height: btnHeight))
-                btn.setTitle(self.menuType[i].title, forState: .Normal)
+                let btn = ZMDTool.getButton(CGRect(x: CGFloat(i) * kScreenWidth/3, y: 0, width: width, height: btnHeight), textForNormal: self.menuType[i].title, fontSize: 15, textColorForNormal: defaultTextColor, backgroundColor: UIColor.whiteColor(), blockForCli: { (sender) -> Void in
+                    self.menuType[i].didSelect(self.navigationController!)
+                })
                 btn.setImage(self.menuType[i].image, forState: .Normal)
-                cell!.contentView.addSubview(btn)
+                cell?.contentView.addSubview(btn)
             }
         }
         return cell!
@@ -202,96 +209,31 @@ class VipClubHomeViewController: UIViewController ,UITableViewDataSource,UITable
         let cell = tableView.dequeueReusableCellWithIdentifier(cellId)
         return cell!
     }
-    //MARK: - 商品 cell
-    func cellForHomeGoods(tableView: UITableView,indexPath: NSIndexPath)-> UITableViewCell {
-        let cellId = "goodsCell"
-        var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
-        if cell == nil {
-            cell = UITableViewCell(style: .Default, reuseIdentifier: cellId)
-            cell!.selectionStyle = .None
-            cell!.contentView.backgroundColor = UIColor.whiteColor()
-        }
-        let titleLbl = cell?.viewWithTag(10001) as! UILabel
-        titleLbl.textColor = defaultTextColor
-        let detailLbl = cell?.viewWithTag(10002) as! UILabel
-        detailLbl.textColor = defaultDetailTextColor
-        return cell!
-    }
-    //MARK: - 推荐Head cell
-    func cellForHomeRecommendationHead(tableView: UITableView,indexPath: NSIndexPath)-> UITableViewCell {
-        let cellId = "RecommendationHeadCell"
-        var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
-        if cell == nil {
-            cell = UITableViewCell(style: .Default, reuseIdentifier: cellId)
-            cell!.selectionStyle = .None
-            cell!.contentView.backgroundColor =  tableViewdefaultBackgroundColor
-        }
-        return cell!
-    }
     //MARK: - 推荐 cell
     func cellForHomeRecommendation(tableView: UITableView,indexPath: NSIndexPath)-> UITableViewCell {
         let cellId = "RecommendationCell"
-        var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
+        var cell = tableView.dequeueReusableCellWithIdentifier(cellId) as? VipClubGoodsTableViewCell
         if cell == nil {
-            cell = UITableViewCell(style: .Default, reuseIdentifier: cellId)
-            cell!.selectionStyle = .None
-            cell!.contentView.backgroundColor = tableViewdefaultBackgroundColor
-            
-            let data = ["product03","product03","product03","product03","product03"]
-            let scrollView = UIScrollView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: 180)) //66
-            scrollView.contentSize = CGSize(width: (136 + 10) * CGFloat(data.count), height: 180)
-            cell?.contentView.addSubview(scrollView)
-            for var i=0;i<data.count;i++ {
-                let btnHeight = CGFloat(180)
-                let width = CGFloat(136)
-                let btn = UIButton(frame: CGRectMake(10*CGFloat(i + 1)+CGFloat(i) * width, 0,width, btnHeight))
-                btn.tag = 10000 + i
-                btn.backgroundColor = UIColor.whiteColor()
-                
-                let titleLbl = UILabel(frame: CGRectMake(0, btnHeight-15-11 - 10 - 11, width, 11))
-                titleLbl.font = UIFont.systemFontOfSize(11)
-                titleLbl.textColor = defaultSelectColor
-                titleLbl.textAlignment =  .Center
-                titleLbl.tag = 10010 + i
-                titleLbl.text = "儿童桌"
-                btn.addSubview(titleLbl)
-                
-                let moneyLbl = UILabel(frame: CGRectMake(0, btnHeight-15-11, width, 11))
-                moneyLbl.font = UIFont.systemFontOfSize(11)
-                moneyLbl.textColor = defaultSelectColor
-                moneyLbl.textAlignment =  .Center
-                moneyLbl.tag = 10020 + i
-                moneyLbl.text = "2毛"
-                btn.addSubview(moneyLbl)
-                
-                let imgV = UIImageView(frame: CGRectMake(width/2-48, 30, 96,96))
-                imgV.tag = 10030 + i
-                imgV.image = UIImage(named: data[i])
-                btn.addSubview(imgV)
-                cell!.contentView.addSubview(btn)
-                scrollView.addSubview(btn)
-            }
+            cell = VipClubGoodsTableViewCell(style: .Default, reuseIdentifier: cellId)
         }
+        cell!.imgV.image = UIImage(named: "")
+        cell!.goodsLbl.text = "电动车棉袄空调被子....衣柜"
+        cell!.goodsPriceLbl.text = "5200 积分"
+        cell!.hasLbl.text = "已兑换 3件"
+        cell!.cancelBtn.rac_command = RACCommand(signalBlock: { (sender) -> RACSignal! in
+            return RACSignal.empty()
+        })
         return cell!
     }
     
     func setupNewNavigation() {
-        let leftItem = UIBarButtonItem(image: UIImage(named: "Code-Scanner")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate), style: UIBarButtonItemStyle.Done, target: nil, action: nil)
-        leftItem.customView?.tintColor = UIColor.whiteColor()
-        leftItem.rac_command = RACCommand(signalBlock: { (input) -> RACSignal! in
+        let rightItm = UIBarButtonItem(title:"兑换历史", style: UIBarButtonItemStyle.Done, target: nil, action: nil)
+        rightItm.customView?.tintColor = defaultDetailTextColor
+        rightItm.rac_command = RACCommand(signalBlock: { (input) -> RACSignal! in
             
             return RACSignal.empty()
         })
-        self.navigationItem.rightBarButtonItem = leftItem
-        let rightItem = UIBarButtonItem(image: UIImage(named: "home_search")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate), style: UIBarButtonItemStyle.Bordered, target: nil, action: nil)
-        rightItem.rac_command = RACCommand(signalBlock: { (input) -> RACSignal! in
-            let vc = HomeBuyGoodsSearchViewController.CreateFromMainStoryboard() as! HomeBuyGoodsSearchViewController
-            self.navigationController?.pushViewController(vc, animated: true)
-            return RACSignal.empty()
-        })
-        rightItem.customView?.tintColor = UIColor.whiteColor()
-        self.navigationItem.rightBarButtonItem = rightItem
-        self.navigationItem.titleView = UIImageView(image: UIImage(named: "home_logo"))
+        self.navigationItem.rightBarButtonItem = rightItm
     }
     
     func updateData (){
@@ -307,6 +249,7 @@ class VipClubHomeViewController: UIViewController ,UITableViewDataSource,UITable
         self.currentTableView.backgroundColor = tableViewdefaultBackgroundColor
     }
 }
+// 头部 Cell
 class VipClubHomeHeadCell : UITableViewCell {
     @IBOutlet weak var headImgV: UIImageView!
     @IBOutlet weak var nameLbl: UILabel!

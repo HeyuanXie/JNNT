@@ -110,7 +110,7 @@ class MineHomeViewController: UIViewController,UITableViewDataSource, UITableVie
             case UserMyStore:
                 viewController = UIViewController()
             case UserVipClub:
-                viewController = UIViewController()
+                viewController = VipClubHomeViewController.CreateFromMainStoryboard() as! VipClubHomeViewController
             case UserCommission:
                 viewController = UIViewController()
             case UserInvitation:

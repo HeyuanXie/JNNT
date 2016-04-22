@@ -388,7 +388,6 @@ class HomeLeaseDetailViewController:UIViewController,UITableViewDataSource,UITab
             }, completion: { (bool) -> Void in
                 self.secondTableView.mj_header.endRefreshing()
         })
-        
     }
     func updateUI() {
         // 底部刷新

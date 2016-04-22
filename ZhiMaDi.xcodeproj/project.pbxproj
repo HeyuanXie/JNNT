@@ -393,6 +393,7 @@
 		2BA3FDE61CA0E43A00018F3C /* TabBar_Mine_Selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BA3FDDE1CA0E43A00018F3C /* TabBar_Mine_Selected@2x.png */; };
 		2BA3FDE71CA0E43A00018F3C /* TabBar_School_Normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BA3FDDF1CA0E43A00018F3C /* TabBar_School_Normal@2x.png */; };
 		2BA3FDE81CA0E43A00018F3C /* TabBar_School_Selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BA3FDE01CA0E43A00018F3C /* TabBar_School_Selected@2x.png */; };
+		2BA4B0251CC8B2A7009A568D /* MyStoreHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA4B0241CC8B2A7009A568D /* MyStoreHomeViewController.swift */; };
 		2BB0EEFE1CB743C1000A186D /* AfterSalesHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB0EEFD1CB743C1000A186D /* AfterSalesHomeViewController.swift */; };
 		2BB0EF001CB74A64000A186D /* AfterSalesReturnViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB0EEFF1CB74A64000A186D /* AfterSalesReturnViewController.swift */; };
 		2BB6A8D01C87DF12008209E8 /* SignPSSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6A8CF1C87DF12008209E8 /* SignPSSetViewController.swift */; };
@@ -1091,6 +1092,7 @@
 		2BA3FDDE1CA0E43A00018F3C /* TabBar_Mine_Selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabBar_Mine_Selected@2x.png"; sourceTree = "<group>"; };
 		2BA3FDDF1CA0E43A00018F3C /* TabBar_School_Normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabBar_School_Normal@2x.png"; sourceTree = "<group>"; };
 		2BA3FDE01CA0E43A00018F3C /* TabBar_School_Selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabBar_School_Selected@2x.png"; sourceTree = "<group>"; };
+		2BA4B0241CC8B2A7009A568D /* MyStoreHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyStoreHomeViewController.swift; sourceTree = "<group>"; };
 		2BB0EEFD1CB743C1000A186D /* AfterSalesHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AfterSalesHomeViewController.swift; sourceTree = "<group>"; };
 		2BB0EEFF1CB74A64000A186D /* AfterSalesReturnViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AfterSalesReturnViewController.swift; sourceTree = "<group>"; };
 		2BB6A8CF1C87DF12008209E8 /* SignPSSetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignPSSetViewController.swift; sourceTree = "<group>"; };
@@ -2192,6 +2194,14 @@
 			path = Word;
 			sourceTree = "<group>";
 		};
+		2BA4B0231CC8B296009A568D /* MyStore */ = {
+			isa = PBXGroup;
+			children = (
+				2BA4B0241CC8B2A7009A568D /* MyStoreHomeViewController.swift */,
+			);
+			path = MyStore;
+			sourceTree = "<group>";
+		};
 		2BB0EEFC1CB743B5000A186D /* AfterSales */ = {
 			isa = PBXGroup;
 			children = (
@@ -2833,6 +2843,7 @@
 		3C9098F71C76A6E9006B7D2C /* UserCenter */ = {
 			isa = PBXGroup;
 			children = (
+				2BA4B0231CC8B296009A568D /* MyStore */,
 				2B9095701CC6337F00959E55 /* StoreShow */,
 				2B90956D1CC62EFF00959E55 /* UserVipClub */,
 				2B8739C91CBF6322007FE81A /* Invitation */,
@@ -3587,6 +3598,7 @@
 				3C9099631C76A6E9006B7D2C /* ZMDTool.swift in Sources */,
 				2BE373001C895F28004A1DDF /* BusinessAuthenticationViewController.swift in Sources */,
 				3C9099181C76A6E9006B7D2C /* BarLineScatterCandleBubbleChartDataSet.swift in Sources */,
+				2BA4B0251CC8B2A7009A568D /* MyStoreHomeViewController.swift in Sources */,
 				3C90995F1C76A6E9006B7D2C /* QNChartsTool.swift in Sources */,
 				2BF8D8BF1CAE67D7006E0C4D /* PsWordFindViewController.swift in Sources */,
 				3C9099381C76A6E9006B7D2C /* BarChartDataProvider.swift in Sources */,

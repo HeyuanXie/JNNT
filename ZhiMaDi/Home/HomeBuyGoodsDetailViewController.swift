@@ -10,7 +10,7 @@ import UIKit
 import TYAttributedLabel
 import MJRefresh
 //商品详请
-class HomeBuyGoodsDetailViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,ZMDInterceptorProtocol,ZMDInterceptorNavigationBarShowProtocol,QNShareViewDelegate {
+class HomeBuyGoodsDetailViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,QNShareViewDelegate,ZMDInterceptorProtocol{
     enum GoodsCellType{
         case HomeContentTypeAd                      /* 广告显示页 */
         case HomeContentTypeDetail                   /* 菜单参数栏目 */
@@ -31,15 +31,17 @@ class HomeBuyGoodsDetailViewController: UIViewController,UITableViewDataSource,U
     
     var countForBounght = 0                         // 购买数量
     var goodsCellTypes: [GoodsCellType]!
-    
+    var navBackView : UIView!
+    var navLine : UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.dataInit()
         self.updateUI()
+        self.getBackView((self.navigationController?.navigationBar)!)
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
-        self.setupNewNavigation()
+        self.setupNavigationWithBg()
     }
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(true)
@@ -145,6 +147,25 @@ class HomeBuyGoodsDetailViewController: UIViewController,UITableViewDataSource,U
             self.navigationController?.pushViewController(vc, animated: true)
         default :
             break
+        }
+    }
+    //MARK: - scrollView
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        var alaph = (scrollView.contentOffset.y) / 150.0
+        alaph = alaph > 1 ? 1 : alaph
+        if self.navBackView != nil {
+            if alaph == 0 {
+                self.navLine.hidden = true
+                self.navLine.alpha = alaph
+            } else {
+                 self.navLine.hidden = false
+            }
+            if alaph > 0.5 {
+                self.setupNavigation()
+            } else {
+                self.setupNavigationWithBg()
+            }
+            self.navBackView.alpha = alaph
         }
     }
     //MARK: QNShareViewDelegate
@@ -415,7 +436,15 @@ class HomeBuyGoodsDetailViewController: UIViewController,UITableViewDataSource,U
         }
         return view
     }
-    func setupNewNavigation() {
+    func setupNavigation() {
+        let item = UIBarButtonItem(image: UIImage(named: "Navigation_Back")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate), style: UIBarButtonItemStyle.Done, target: self, action: Selector("back"))
+        item.customView?.tintColor = UIColor.blackColor()
+        self.navigationItem.leftBarButtonItem = item
+    }
+    func setupNavigationWithBg() {
+        let item = UIBarButtonItem(image: UIImage(named: "product_return")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate), style: UIBarButtonItemStyle.Done, target: self, action: Selector("back"))
+        item.customView?.tintColor = UIColor.blackColor()
+        self.navigationItem.leftBarButtonItem = item
     }
     
     private func dataInit(){
@@ -497,4 +526,25 @@ class HomeBuyGoodsDetailViewController: UIViewController,UITableViewDataSource,U
             i++
         }
     }
+    // 配置navigationBar
+    func getBackView(superView : UIView) {
+        if superView.isKindOfClass(NSClassFromString("_UINavigationBarBackground")!) {
+            for view in superView.subviews {
+                //移除分割线
+                if view.isKindOfClass(UIImageView.classForCoder()) {
+                    self.navLine = view
+                    self.navLine.hidden = true
+                }
+            }
+            self.navBackView = superView
+            self.navBackView.backgroundColor = navigationBackgroundColor
+            self.navBackView.alpha = 0
+        } else if superView.isKindOfClass(NSClassFromString("_UIBackdropView")!) {
+            superView.hidden = true
+        }
+        for view in superView.subviews {
+            self.getBackView(view)
+        }
+    }
+
 }

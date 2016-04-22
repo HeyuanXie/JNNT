@@ -3478,11 +3478,11 @@
                         <viewControllerLayoutGuide type="bottom" id="Rzs-O0-86M"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="4IT-0w-cpK">
-                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="RKH-UL-Gag">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="545"/>
+                                <rect key="frame" x="0.0" y="-64" width="375" height="673"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -3699,7 +3699,7 @@
                                 </connections>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="518-8h-6mY" userLabel="bottomView">
-                                <rect key="frame" x="0.0" y="545" width="375" height="58"/>
+                                <rect key="frame" x="0.0" y="609" width="375" height="58"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="58" id="2O4-qk-H1O"/>
@@ -3709,16 +3709,15 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Rzs-O0-86M" firstAttribute="top" secondItem="518-8h-6mY" secondAttribute="bottom" id="0iU-Jh-rKc"/>
+                            <constraint firstItem="RKH-UL-Gag" firstAttribute="top" secondItem="4IT-0w-cpK" secondAttribute="top" constant="-64" id="K7w-1U-54C"/>
                             <constraint firstItem="518-8h-6mY" firstAttribute="leading" secondItem="4IT-0w-cpK" secondAttribute="leading" id="KR6-55-RCk"/>
                             <constraint firstAttribute="trailing" secondItem="RKH-UL-Gag" secondAttribute="trailing" id="baI-do-PoB"/>
-                            <constraint firstItem="RKH-UL-Gag" firstAttribute="top" secondItem="4IT-0w-cpK" secondAttribute="top" id="fbi-OF-LIS"/>
                             <constraint firstItem="RKH-UL-Gag" firstAttribute="leading" secondItem="4IT-0w-cpK" secondAttribute="leading" id="mYB-r5-krs"/>
                             <constraint firstItem="Rzs-O0-86M" firstAttribute="top" secondItem="RKH-UL-Gag" secondAttribute="bottom" constant="58" id="pV2-Mr-bYc"/>
                             <constraint firstAttribute="trailing" secondItem="518-8h-6mY" secondAttribute="trailing" id="tjv-jE-KRi"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="oXI-bE-kBD"/>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="bottomV" destination="518-8h-6mY" id="cwI-xD-vRF"/>

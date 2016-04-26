@@ -217,7 +217,10 @@ extension ZMDTool {
         let vc = UIStoryboard(name: "Login", bundle: nil).instantiateInitialViewController()!
         ZMDTool.enterRootViewController(vc)
     }
-    
+    class func enterMyStoreViewController() {
+        let vc = UIStoryboard(name: "Store", bundle: nil).instantiateInitialViewController()!
+        ZMDTool.enterRootViewController(vc)
+    }
     
 }
 

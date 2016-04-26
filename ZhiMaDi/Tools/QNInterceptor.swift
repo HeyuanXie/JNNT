@@ -91,6 +91,7 @@ class ZMDInterceptor : NSObject {
         repeat {
             let block : @convention(block) (aspectInfo: AspectInfo) -> Void = { [weak self](aspectInfo: AspectInfo) -> Void in
                 if let _ = self, let viewController = aspectInfo.instance() as? UIViewController where viewController is ZMDInterceptorProtocol {
+                    
                     if viewController.navigationController != nil {
                         // 修改导航栏的显示和隐藏
                         if viewController is ZMDInterceptorNavigationBarShowProtocol {
@@ -114,6 +115,8 @@ class ZMDInterceptor : NSObject {
                             //填充色
                             viewController.navigationController?.navigationBar.barTintColor = UIColor(red: 14/255, green: 48/255, blue: 141/255, alpha: 1.0)
                         } else {
+                            // 设置统一的背景色
+                            viewController.view.backgroundColor = UIColor.whiteColor()
                             UIApplication.sharedApplication().statusBarStyle = .Default
                             viewController.navigationController?.navigationBar.barTintColor = navigationBackgroundColor
                             viewController.navigationController?.navigationBar.tintColor = navigationTextColor

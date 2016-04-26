@@ -571,6 +571,7 @@
 		2BF7F0741C8EB18B001C4595 /* FortuneCenterSelectPayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF7F0731C8EB18B001C4595 /* FortuneCenterSelectPayViewController.swift */; };
 		2BF8D8BF1CAE67D7006E0C4D /* PsWordFindViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF8D8BE1CAE67D7006E0C4D /* PsWordFindViewController.swift */; };
 		2BF8D8C11CAE6CFB006E0C4D /* ResisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF8D8C01CAE6CFB006E0C4D /* ResisterViewController.swift */; };
+		2BF8E6721CCF57FB00091F33 /* Store.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BF8E6711CCF57FB00091F33 /* Store.storyboard */; };
 		3C9098581C76A482006B7D2C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9098571C76A482006B7D2C /* AppDelegate.swift */; };
 		3C90985A1C76A482006B7D2C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9098591C76A482006B7D2C /* ViewController.swift */; };
 		3C90985D1C76A482006B7D2C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C90985B1C76A482006B7D2C /* Main.storyboard */; };
@@ -1271,6 +1272,7 @@
 		2BF7F0731C8EB18B001C4595 /* FortuneCenterSelectPayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FortuneCenterSelectPayViewController.swift; path = ../FortuneCenterSelectPayViewController.swift; sourceTree = "<group>"; };
 		2BF8D8BE1CAE67D7006E0C4D /* PsWordFindViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PsWordFindViewController.swift; sourceTree = "<group>"; };
 		2BF8D8C01CAE6CFB006E0C4D /* ResisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResisterViewController.swift; sourceTree = "<group>"; };
+		2BF8E6711CCF57FB00091F33 /* Store.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Store.storyboard; sourceTree = "<group>"; };
 		31D2DB4A35812B2A2B5A22B4 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C9098541C76A482006B7D2C /* ZhiMaDi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZhiMaDi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C9098571C76A482006B7D2C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -2538,6 +2540,7 @@
 				3C9098571C76A482006B7D2C /* AppDelegate.swift */,
 				3C9098591C76A482006B7D2C /* ViewController.swift */,
 				3C90985B1C76A482006B7D2C /* Main.storyboard */,
+				2BF8E6711CCF57FB00091F33 /* Store.storyboard */,
 				2B197DA71C8424F2006494CF /* Login.storyboard */,
 				2B28F4D31CA3CE65004B8DA4 /* Test.storyboard */,
 				3C9098601C76A482006B7D2C /* LaunchScreen.storyboard */,
@@ -3056,6 +3059,7 @@
 				2B02B56D1CAE44B60064B47C /* login_promise_zp@2x.png in Resources */,
 				2B5FF4121CA3F03C0067909D /* common_return_black@3x.png in Resources */,
 				2BF52F991CB3BA2D0099F296 /* bank_ny@2x.png in Resources */,
+				2BF8E6721CCF57FB00091F33 /* Store.storyboard in Resources */,
 				2BF52F6A1CB39B060099F296 /* shop_06activity@3x.png in Resources */,
 				2BF3C10B1CA14333002AEF4D /* product03.png in Resources */,
 				2B02B50C1CABABCF0064B47C /* user_wallet_selected@2x.png in Resources */,

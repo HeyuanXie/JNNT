@@ -41,7 +41,7 @@ class HomeBuyGoodsDetailViewController: UIViewController,UITableViewDataSource,U
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
-        self.setupNavigationWithBg()
+        self.setupNavigation()
     }
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(true)
@@ -437,16 +437,8 @@ class HomeBuyGoodsDetailViewController: UIViewController,UITableViewDataSource,U
         return view
     }
     func setupNavigation() {
-        let leftNav = UIImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
-        leftNav.image = UIImage(named: "Navigation_Back")
-        leftNav.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1.0)
-        ZMDTool.configViewLayerWithSize(leftNav, size: 20)
-        let item = UIBarButtonItem(customView: leftNav)//UIBarButtonItem(image: UIImage(named: "Navigation_Back")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate), style: UIBarButtonItemStyle.Done, target: self, action: Selector("back"))
-        item.rac_command = RACCommand(signalBlock: { (sender) -> RACSignal! in
-            self.back()
-            return RACSignal.empty()
-        })
-        item.customView?.tintColor = UIColor.blackColor()
+        let item = UIBarButtonItem(image: UIImage(named: "Navigation_Back")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate), style: UIBarButtonItemStyle.Done, target: self, action: Selector("back"))
+        item.customView?.tintColor = UIColor.whiteColor()
         self.navigationItem.leftBarButtonItem = item
     }
     func setupNavigationWithBg() {
@@ -454,7 +446,6 @@ class HomeBuyGoodsDetailViewController: UIViewController,UITableViewDataSource,U
         item.customView?.tintColor = UIColor.whiteColor()
         self.navigationItem.leftBarButtonItem = item
     }
-    
     private func dataInit(){
         self.goodsCellTypes = [.HomeContentTypeAd,.HomeContentTypeDetail,.HomeContentTypeMenu,.HomeContentTypeDistribution,.HomeContentTypeStore,.HomeContentTypeDaPeiGou, .HomeContentTypeNextMenu]
     }

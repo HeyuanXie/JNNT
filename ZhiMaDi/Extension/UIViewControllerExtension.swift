@@ -18,6 +18,10 @@ extension UIViewController {
     public class func CreateFromLoginStoryboard() ->  AnyObject! {
         return self.CreateFromStoryboard("Login")
     }
+    public class func CreateFromStoreStoryboard() ->  AnyObject! {
+        return self.CreateFromStoryboard("Store")
+    }
+
     //MARK: 从 storyboardName.storyboard 初始化一个当前类
     // 从 storyboardName.storyboard 中创建一个使用了当前类作为 StoryboardID 的类
     public class func CreateFromStoryboard(name: String) -> AnyObject! {

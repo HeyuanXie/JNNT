@@ -108,7 +108,7 @@ class MineHomeViewController: UIViewController,UITableViewDataSource, UITableVie
                 viewController = MyCrowdfundHomeViewController()
                 
             case UserMyStore:
-                viewController = UIViewController()
+                viewController = MyStoreHomeViewController.CreateFromStoreStoryboard() as! MyStoreHomeViewController
             case UserVipClub:
                 viewController = VipClubHomeViewController.CreateFromMainStoryboard() as! VipClubHomeViewController
             case UserCommission:

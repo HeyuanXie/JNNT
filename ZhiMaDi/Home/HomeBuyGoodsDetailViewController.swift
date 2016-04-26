@@ -437,13 +437,21 @@ class HomeBuyGoodsDetailViewController: UIViewController,UITableViewDataSource,U
         return view
     }
     func setupNavigation() {
-        let item = UIBarButtonItem(image: UIImage(named: "Navigation_Back")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate), style: UIBarButtonItemStyle.Done, target: self, action: Selector("back"))
+        let leftNav = UIImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+        leftNav.image = UIImage(named: "Navigation_Back")
+        leftNav.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1.0)
+        ZMDTool.configViewLayerWithSize(leftNav, size: 20)
+        let item = UIBarButtonItem(customView: leftNav)//UIBarButtonItem(image: UIImage(named: "Navigation_Back")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate), style: UIBarButtonItemStyle.Done, target: self, action: Selector("back"))
+        item.rac_command = RACCommand(signalBlock: { (sender) -> RACSignal! in
+            self.back()
+            return RACSignal.empty()
+        })
         item.customView?.tintColor = UIColor.blackColor()
         self.navigationItem.leftBarButtonItem = item
     }
     func setupNavigationWithBg() {
         let item = UIBarButtonItem(image: UIImage(named: "product_return")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate), style: UIBarButtonItemStyle.Done, target: self, action: Selector("back"))
-        item.customView?.tintColor = UIColor.blackColor()
+        item.customView?.tintColor = UIColor.whiteColor()
         self.navigationItem.leftBarButtonItem = item
     }
     

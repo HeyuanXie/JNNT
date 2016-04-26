@@ -203,6 +203,7 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
             let width = 80,height = 44
             let scrollView = UIScrollView(frame: CGRect(x: 0, y: 0, width: kScreenWidth - 44, height: 44)) //66
             scrollView.backgroundColor = UIColor.clearColor()
+            scrollView.showsHorizontalScrollIndicator = false
             scrollView.contentSize = CGSize(width: width * menuTitles.count, height: height)
             cell?.contentView.addSubview(scrollView)
             var i = 0
@@ -228,13 +229,27 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
             下拉.setImage(UIImage(named: "home_up"), forState: .Selected)
             下拉.rac_signalForControlEvents(.TouchUpInside).subscribeNext({ (sender) -> Void in
                 if self.下拉视窗 == nil {
-                    self.下拉视窗 = UIView(frame: CGRect(x: 0, y: 46, width: kScreenWidth, height: 150))
-                    self.下拉视窗.backgroundColor = UIColor.whiteColor()
-                    self.下拉视窗.alpha = 0.9
+                    self.下拉视窗 = UIView(frame: CGRect(x: 0, y: -1, width: kScreenWidth, height: 44+150))
+                    self.下拉视窗.backgroundColor = UIColor.clearColor()
+                    let topV = UIView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: 44))
+                    topV.backgroundColor = UIColor.whiteColor()
+                    self.下拉视窗.addSubview(topV)
+                    let titleLbl = ZMDTool.getLabel(CGRect(x: 16, y: 0, width: 100, height: 44), text: " 选择分类", fontSize: 17)
+                    topV.addSubview(titleLbl)
+                    let 上拉 = UIButton(frame: CGRect(x: kScreenWidth - 44, y: 8, width: 44, height: 28))
+                    上拉.backgroundColor = UIColor.whiteColor()
+                    上拉.setImage(UIImage(named: "home_up"), forState: .Normal)
+                    上拉.rac_command = RACCommand(signalBlock: { (sender) -> RACSignal! in
+                        self.dismissPopupView(self.下拉视窗)
+                        return RACSignal.empty()
+                    })
+                    topV.addSubview(上拉)
+                    topV.addSubview(ZMDTool.getLine(CGRect(x: kScreenWidth - 44, y: 8, width: 0.5, height: 28)))
+
                     var i = 0
-//                    let btnBg = UIView(frame: self.下拉视窗.bounds)
-//                    btnBg.backgroundColor = UIColor(red: 239/255, green: 239/255, blue: 239/255, alpha: 1.0)
-//                    self.下拉视窗.addSubview(btnBg)
+                    let btnBg = UIView(frame: CGRect(x: 0, y: 44, width: kScreenWidth, height: 150))
+                    btnBg.backgroundColor = UIColor(white: 1.0, alpha: 0.9)
+                    self.下拉视窗.addSubview(btnBg)
                     for title in menuTitles {
                         let width = kScreenWidth/CGFloat(3),height = CGFloat(50)
                         let columnIndex  = i%3
@@ -243,24 +258,26 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
                         i++
 
                         let menuBtn = UIButton(frame: CGRect(x: x, y: y, width: width, height: height))
-                        menuBtn.backgroundColor = UIColor.grayColor()
+                        menuBtn.backgroundColor = UIColor.clearColor()
                         menuBtn.setTitle(title, forState: .Normal)
                         menuBtn.titleLabel?.font = defaultDetailTextSize
                         menuBtn.setTitleColor(defaultTextColor, forState: .Normal)
                         menuBtn.setTitleColor(defaultSelectColor, forState: .Selected)
                         menuBtn.rac_signalForControlEvents(.TouchUpInside).subscribeNext({ (sender) -> Void in
                         })
-                        self.下拉视窗.addSubview(menuBtn)
+                        btnBg.addSubview(menuBtn)
+                        ZMDTool.configViewLayerFrameWithColor(menuBtn, color: UIColor.whiteColor())
                     }
                 }
-                if 下拉.selected {
-                    self.下拉视窗.removeFromSuperview()
+                if CGRectGetMinY(self.下拉视窗.frame) < 0  {
+                    self.下拉视窗.frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: 44+150)
+                    self.viewShowWithBg(self.下拉视窗,showAnimation: .SlideInFromTop,dismissAnimation: .SlideOutToTop)
                 } else {
-                    cell?.contentView.addSubview(self.下拉视窗)
+                    self.dismissPopupView(self.下拉视窗)
                 }
-                下拉.selected = !下拉.selected
             })
             cell?.contentView.addSubview(下拉)
+            cell?.contentView.addSubview(ZMDTool.getLine(CGRect(x: kScreenWidth - 44, y: 8, width: 0.5, height: 28)))
         }
         return cell!
     }
@@ -384,6 +401,7 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
             
             let data = ["product03","product03","product03","product03","product03"]
             let scrollView = UIScrollView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: 180)) //66
+            scrollView.showsHorizontalScrollIndicator = false
             scrollView.contentSize = CGSize(width: (136 + 10) * CGFloat(data.count), height: 180)
             cell?.contentView.addSubview(scrollView)
             for var i=0;i<data.count;i++ {

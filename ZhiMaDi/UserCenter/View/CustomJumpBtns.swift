@@ -16,12 +16,15 @@ class CustomJumpBtns: UIView {
     var menuTitle:[String]!
     var finished : ((index:Int)->Void)!
     var btnTextSize = CGFloat(14)
+    var IsLineAdaptText = true  //是否随字宽度改变
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
-    init(frame: CGRect,menuTitle:[String],textColorForNormal:UIColor = defaultTextColor,textColorForSelect:UIColor = RGB(235,61,61,1.0)) {
+    init(frame: CGRect,menuTitle:[String],textColorForNormal:UIColor = defaultTextColor,textColorForSelect:UIColor = RGB(235,61,61,1.0),IsLineAdaptText : Bool = true) {
         self.menuTitle = menuTitle
         self.textColorForNormal = textColorForNormal
+        self.textColorForSelect = textColorForSelect
+        self.IsLineAdaptText = IsLineAdaptText
         super.init(frame: frame)
         self.updateUI(self.menuTitle)
     }
@@ -38,9 +41,14 @@ class CustomJumpBtns: UIView {
             self.selectBtn = btn
             self.selectBtn.selected = true
             UIView.animateWithDuration(0.2, animations: { () -> Void in
-                let size = self.selectBtn.titleLabel!.text?.sizeWithFont(UIFont.systemFontOfSize(self.btnTextSize), maxWidth: 100)
                 let selectBtnFrame = self.selectBtn.frame
-                self.redLine.frame = CGRect(x: CGRectGetMinX(selectBtnFrame) + (CGRectGetWidth(selectBtnFrame) - size!.width)/2, y: CGRectGetHeight(self.frame) - 3.5, width: size!.width, height: 3.5)
+                if self.IsLineAdaptText {
+                    let size = self.selectBtn.titleLabel!.text?.sizeWithFont(UIFont.systemFontOfSize(self.btnTextSize), maxWidth: 100)
+                    self.redLine.frame = CGRect(x: CGRectGetMinX(selectBtnFrame) + (CGRectGetWidth(selectBtnFrame) - size!.width)/2, y: CGRectGetHeight(self.frame) - 3.5, width:  size!.width, height: 3.5)
+                } else {
+                    self.redLine.frame = CGRect(x: CGRectGetMinX(selectBtnFrame), y: CGRectGetHeight(self.frame) - 3.5, width:kScreenWidth/CGFloat(menuTitle.count), height: 3.5)
+                }
+                
             })
             if self.finished != nil {
                 self.finished(index: btn.tag - 1000)
@@ -63,6 +71,7 @@ class CustomJumpBtns: UIView {
             }
             i++
         }
+        self.addSubview(ZMDTool.getLine(CGRect(x: 0, y:self.frame.height-0.5, width:CGRectGetWidth(self.frame), height:0.5)))
     }
     // 分割线
     func addSeparatedLine(color:UIColor = defaultLineColor) {

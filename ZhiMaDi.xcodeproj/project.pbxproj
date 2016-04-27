@@ -569,6 +569,11 @@
 		2BF52FA01CB3BA2D0099F296 /* bank_zs@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BF52F921CB3BA2D0099F296 /* bank_zs@3x.png */; };
 		2BF7F06E1C8E6C1E001C4595 /* Navigation_Back_R.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BF7F06D1C8E6C1E001C4595 /* Navigation_Back_R.png */; };
 		2BF7F0741C8EB18B001C4595 /* FortuneCenterSelectPayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF7F0731C8EB18B001C4595 /* FortuneCenterSelectPayViewController.swift */; };
+		2BF8D8501CD0542A008237D9 /* MyStoreSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF8D84F1CD0542A008237D9 /* MyStoreSetViewController.swift */; };
+		2BF8D8711CD0AC52008237D9 /* MyStoreOrderDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF8D86F1CD0AC52008237D9 /* MyStoreOrderDetailViewController.swift */; };
+		2BF8D8721CD0AC52008237D9 /* MyStoreOrderHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF8D8701CD0AC52008237D9 /* MyStoreOrderHomeViewController.swift */; };
+		2BF8D8761CD0AD45008237D9 /* MyStoreDistributionHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF8D8751CD0AD45008237D9 /* MyStoreDistributionHomeViewController.swift */; };
+		2BF8D8781CD0B881008237D9 /* MyStoreDistributionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF8D8771CD0B881008237D9 /* MyStoreDistributionTableViewCell.swift */; };
 		2BF8D8BF1CAE67D7006E0C4D /* PsWordFindViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF8D8BE1CAE67D7006E0C4D /* PsWordFindViewController.swift */; };
 		2BF8D8C11CAE6CFB006E0C4D /* ResisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF8D8C01CAE6CFB006E0C4D /* ResisterViewController.swift */; };
 		2BF8E6721CCF57FB00091F33 /* Store.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BF8E6711CCF57FB00091F33 /* Store.storyboard */; };
@@ -1270,6 +1275,11 @@
 		2BF52F921CB3BA2D0099F296 /* bank_zs@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bank_zs@3x.png"; sourceTree = "<group>"; };
 		2BF7F06D1C8E6C1E001C4595 /* Navigation_Back_R.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Navigation_Back_R.png; sourceTree = "<group>"; };
 		2BF7F0731C8EB18B001C4595 /* FortuneCenterSelectPayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FortuneCenterSelectPayViewController.swift; path = ../FortuneCenterSelectPayViewController.swift; sourceTree = "<group>"; };
+		2BF8D84F1CD0542A008237D9 /* MyStoreSetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyStoreSetViewController.swift; sourceTree = "<group>"; };
+		2BF8D86F1CD0AC52008237D9 /* MyStoreOrderDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyStoreOrderDetailViewController.swift; sourceTree = "<group>"; };
+		2BF8D8701CD0AC52008237D9 /* MyStoreOrderHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyStoreOrderHomeViewController.swift; sourceTree = "<group>"; };
+		2BF8D8751CD0AD45008237D9 /* MyStoreDistributionHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyStoreDistributionHomeViewController.swift; sourceTree = "<group>"; };
+		2BF8D8771CD0B881008237D9 /* MyStoreDistributionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyStoreDistributionTableViewCell.swift; sourceTree = "<group>"; };
 		2BF8D8BE1CAE67D7006E0C4D /* PsWordFindViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PsWordFindViewController.swift; sourceTree = "<group>"; };
 		2BF8D8C01CAE6CFB006E0C4D /* ResisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResisterViewController.swift; sourceTree = "<group>"; };
 		2BF8E6711CCF57FB00091F33 /* Store.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Store.storyboard; sourceTree = "<group>"; };
@@ -1465,8 +1475,8 @@
 		2B02B4AB1CAA62FA0064B47C /* HomeLease */ = {
 			isa = PBXGroup;
 			children = (
-				2B02B4AC1CAA62FA0064B47C /* HomeLeaseDetailViewController.swift */,
 				2B02B4AD1CAA62FA0064B47C /* HomeLeaseListViewController.swift */,
+				2B02B4AC1CAA62FA0064B47C /* HomeLeaseDetailViewController.swift */,
 				2B02B4AE1CAA62FA0064B47C /* LeaseContractView.xib */,
 				2B02B4AF1CAA62FA0064B47C /* LeasePackageView.swift */,
 				2B02B4B01CAA62FA0064B47C /* LeasePackageView.xib */,
@@ -2200,6 +2210,9 @@
 			isa = PBXGroup;
 			children = (
 				2BA4B0241CC8B2A7009A568D /* MyStoreHomeViewController.swift */,
+				2BF8D84F1CD0542A008237D9 /* MyStoreSetViewController.swift */,
+				2BF8D86E1CD0AC52008237D9 /* MyStoreOrder */,
+				2BF8D8741CD0AC67008237D9 /* MyStoreDistribution */,
 			);
 			path = MyStore;
 			sourceTree = "<group>";
@@ -2486,6 +2499,24 @@
 				2BF52F921CB3BA2D0099F296 /* bank_zs@3x.png */,
 			);
 			path = Bank;
+			sourceTree = "<group>";
+		};
+		2BF8D86E1CD0AC52008237D9 /* MyStoreOrder */ = {
+			isa = PBXGroup;
+			children = (
+				2BF8D86F1CD0AC52008237D9 /* MyStoreOrderDetailViewController.swift */,
+				2BF8D8701CD0AC52008237D9 /* MyStoreOrderHomeViewController.swift */,
+			);
+			path = MyStoreOrder;
+			sourceTree = "<group>";
+		};
+		2BF8D8741CD0AC67008237D9 /* MyStoreDistribution */ = {
+			isa = PBXGroup;
+			children = (
+				2BF8D8751CD0AD45008237D9 /* MyStoreDistributionHomeViewController.swift */,
+				2BF8D8771CD0B881008237D9 /* MyStoreDistributionTableViewCell.swift */,
+			);
+			path = MyStoreDistribution;
 			sourceTree = "<group>";
 		};
 		2C475CDFCB51F0D44C1096F4 /* Pods */ = {
@@ -3496,12 +3527,14 @@
 				3C9099051C76A6E9006B7D2C /* ChartViewBase.swift in Sources */,
 				2BC05C671CB630C300D3B1AE /* AddBankCardViewController.swift in Sources */,
 				2B0662F71C7DA27E00EA822F /* UIImageExtension.swift in Sources */,
+				2BF8D8721CD0AC52008237D9 /* MyStoreOrderHomeViewController.swift in Sources */,
 				3C9099531C76A6E9006B7D2C /* ScatterChartRenderer.swift in Sources */,
 				2BF8D8C11CAE6CFB006E0C4D /* ResisterViewController.swift in Sources */,
 				2BEBF5F01CBB843C00830585 /* CardVolumeMemberDetailViewController.swift in Sources */,
 				2B02B5531CAE18230064B47C /* OrderLogisticsMsgViewController.swift in Sources */,
 				3C90986F1C76A6AA006B7D2C /* Constents.swift in Sources */,
 				2B3AC61C1C97FAE000CC8662 /* VerificationPSViewController.swift in Sources */,
+				2BF8D8781CD0B881008237D9 /* MyStoreDistributionTableViewCell.swift in Sources */,
 				2B07BA2D1CB7A1540012929B /* ZMDMultiselectView.swift in Sources */,
 				2B9D9F9B1C91543D00141D31 /* MyFollowViewController.swift in Sources */,
 				3C9099131C76A6E9006B7D2C /* ChartYAxis.swift in Sources */,
@@ -3543,6 +3576,7 @@
 				3C9099041C76A6E9006B7D2C /* CandleStickChartView.swift in Sources */,
 				3C9099511C76A6E9006B7D2C /* PieChartRenderer.swift in Sources */,
 				2B9D9F9F1C917B8F00141D31 /* HomeMarketViewController.swift in Sources */,
+				2BF8D8501CD0542A008237D9 /* MyStoreSetViewController.swift in Sources */,
 				2B73D85D1C86D1530016FEB2 /* PhoneSetPsVerifyViewController.swift in Sources */,
 				3C9099261C76A6E9006B7D2C /* LineScatterCandleChartDataSet.swift in Sources */,
 				2BBB12C81CC87D5A0076C775 /* VipClubGoodsDetailTableViewCell.swift in Sources */,
@@ -3558,6 +3592,7 @@
 				3C9099241C76A6E9006B7D2C /* LineChartDataSet.swift in Sources */,
 				2BB0EEFE1CB743C1000A186D /* AfterSalesHomeViewController.swift in Sources */,
 				2B959EC01C76F5D0002EA40D /* HomePageViewController.swift in Sources */,
+				2BF8D8711CD0AC52008237D9 /* MyStoreOrderDetailViewController.swift in Sources */,
 				2B02B4B21CAA62FA0064B47C /* HomeLeaseListViewController.swift in Sources */,
 				2B02B5131CABB7510064B47C /* MyOrderViewController.swift in Sources */,
 				2B0ACCB31C858E31000EC299 /* PersonInfoViewController.swift in Sources */,
@@ -3623,6 +3658,7 @@
 				3C9099231C76A6E9006B7D2C /* LineChartData.swift in Sources */,
 				3C9099401C76A6E9006B7D2C /* BubbleChartRenderer.swift in Sources */,
 				2B6F90741CB6508300BD7A5D /* BankCardVerifyPhoneViewController.swift in Sources */,
+				2BF8D8761CD0AD45008237D9 /* MyStoreDistributionHomeViewController.swift in Sources */,
 				2B8BB2B41CBDF41000CD2AD5 /* CircleScaleCustomView.swift in Sources */,
 				2B8BB2BC1CBE34B300CD2AD5 /* PhotoBroswerViewController.swift in Sources */,
 				3C9099301C76A6E9006B7D2C /* ChartFillFormatter.swift in Sources */,

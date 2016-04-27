@@ -8,7 +8,7 @@
 
 import UIKit
 // 我的店铺首页
-class MyStoreHomeViewController: UIViewController {
+class MyStoreHomeViewController: UIViewController,ZMDInterceptorProtocol {
     enum CellType {
         case Head,Income,IncomeDetail,Menu
         var cellId : String {
@@ -90,13 +90,10 @@ class MyStoreHomeViewController: UIViewController {
             return cell!
         case .Income :
             let cellId = cellType.cellId
-            var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
-            if cell == nil {
-                cell = UITableViewCell(style: .Default, reuseIdentifier: cellId)
-                cell?.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
-                cell!.selectionStyle = .None
-                ZMDTool.configTableViewCellDefault(cell!)
-            }
+            let cell = tableView.dequeueReusableCellWithIdentifier(cellId)
+            cell?.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+            cell!.selectionStyle = .None
+            ZMDTool.configTableViewCellDefault(cell!)
             
             return cell!
         case .IncomeDetail :
@@ -127,29 +124,46 @@ class MyStoreHomeViewController: UIViewController {
         var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
         if cell == nil {
             cell = UITableViewCell(style: .Default, reuseIdentifier: cellId)
-            cell?.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+            cell?.accessoryType = UITableViewCellAccessoryType.None
             cell!.selectionStyle = .None
             ZMDTool.configTableViewCellDefault(cell!)
         }
-//        let titleAndImgForMenuBtn = [("商品管理",UIImage(named: "shop_01product")),("订单管理",UIImage(named: "shop_02order")),("分销管理",UIImage(named: "shop_03fenxiao")),("物流管理",UIImage(named: "shop_04express")),("客户管理",UIImage(named: "shop_05customer")),("营销管理",UIImage(named: "shop_06activity"))]
-//        var i = 0
-//        for tmp in titleAndImgForMenuBtn {
-//            let x = CGFloat(i)%3*(kScreenWidth/3)
-//            let y = CGFloat(i)/3*100
-//            let view = UIView(frame: CGRect(x: x, y: y, width: kScreenWidth/3, height: 100))
-//            view.backgroundColor = UIColor.clearColor()
-//            let btn = UIButton(frame: CGRect(x: x, y:y, width: 60, height: 45))
-//            btn.setImage(UIImage(named: tmp.0), forState: .Normal)
-//            view.addSubview(btn)
-//            let lbl = ZMDTool.getLabel(CGRect(x: x, y: y, width: kScreenWidth/3, height: 15), text: tmp.0, fontSize: 15)
-//            view.addSubview(lbl)
-//            i++
-//        }
-//        cell?.contentView.addSubview(view)
+        
+        let titleAndImgForMenuBtn = [("商品管理",UIImage(named: "shop_01product"),MyStoreOrderHomeViewController.CreateFromStoreStoryboard() as! MyStoreOrderHomeViewController),
+            ("订单管理",UIImage(named: "shop_02order"),MyStoreDistributionHomeViewController.CreateFromStoreStoryboard() as! MyStoreDistributionHomeViewController),
+            ("分销管理",UIImage(named: "shop_03fenxiao"),UIViewController()),
+            ("物流管理",UIImage(named: "shop_04express"),UIViewController()),
+            ("客户管理",UIImage(named: "shop_05customer"),UIViewController()),
+            ("营销管理",UIImage(named: "shop_06activity"),UIViewController())]
+        var i = 0
+        for tmp in titleAndImgForMenuBtn {
+            let x = CGFloat(i)%3*(kScreenWidth/3)
+            let row = i/3
+            let y = CGFloat(row)*100
+            let btn = UIButton(frame: CGRect(x: x, y: y,width: kScreenWidth/3-10, height: 100-10))//ZMDTool.getBtn(CGRect(x: x, y: y,width: kScreenWidth/3, height: 100))
+            btn.setImage(tmp.1, forState: .Normal)
+            btn.setTitle(tmp.0, forState: .Normal)
+            btn.setTitleColor(defaultTextColor, forState: .Normal)
+            btn.titleLabel?.font = defaultSysFontWithSize(15)
+            btn.tag = i++
+            btn.rac_command = RACCommand(signalBlock: { (sender) -> RACSignal! in
+                let tag = (sender as! UIButton).tag
+                self.navigationController?.pushViewController(titleAndImgForMenuBtn[tag].2, animated: true)
+                return RACSignal.empty()
+            })
+            cell?.contentView.addSubview(btn)
+        }
         return cell!
     }
     func updateUI() {
         self.tableView.backgroundColor = tableViewdefaultBackgroundColor
-        
+        let rightItem = UIBarButtonItem(image: UIImage(named: "shop_set"), style: .Done, target: nil, action: nil)
+        rightItem.tintColor = defaultTextColor
+        rightItem.rac_command = RACCommand(signalBlock: { (sender) -> RACSignal! in
+            let vc = MyStoreSetViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+            return RACSignal.empty()
+        })
+        self.navigationItem.rightBarButtonItem = rightItem
     }
 }

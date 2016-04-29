@@ -86,7 +86,7 @@ class MyStoreOrderHomeViewController: UIViewController,UITableViewDataSource,UIT
                 let line = ZMDTool.getLine(CGRect(x: 0, y: 55.5, width: kScreenWidth, height: 0.5))
                 cell?.contentView.addSubview(line)
             }
-            let titles = ["联系卖家","立即发货"]
+            let titles = ["立即发货","联系卖家"]
             var i = 0,minX = CGFloat(0)
             for title in titles {
                 let size = title.sizeWithFont(UIFont.systemFontOfSize(14), maxWidth: 100)

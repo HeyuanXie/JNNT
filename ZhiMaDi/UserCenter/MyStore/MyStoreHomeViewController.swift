@@ -116,6 +116,7 @@ class MyStoreHomeViewController: UIViewController,ZMDInterceptorProtocol {
     }
     //MRAK: - ACtion
     @IBAction func addBtnCli(sender: UIButton) {
+        self.viewShowWithBgForNav(self.viewForAddGoods(), showAnimation: ZMDPopupShowAnimation.FadeIn, dismissAnimation: ZMDPopupDismissAnimation.FadeOut)
     }
     //MARK: -  PrivateMethod
     func cellForMenu(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell  {
@@ -129,11 +130,11 @@ class MyStoreHomeViewController: UIViewController,ZMDInterceptorProtocol {
             ZMDTool.configTableViewCellDefault(cell!)
         }
         
-        let titleAndImgForMenuBtn = [("商品管理",UIImage(named: "shop_01product"),MyStoreOrderHomeViewController.CreateFromStoreStoryboard() as! MyStoreOrderHomeViewController),
-            ("订单管理",UIImage(named: "shop_02order"),MyStoreDistributionHomeViewController.CreateFromStoreStoryboard() as! MyStoreDistributionHomeViewController),
-            ("分销管理",UIImage(named: "shop_03fenxiao"),UIViewController()),
+        let titleAndImgForMenuBtn = [("商品管理",UIImage(named: "shop_01product"),UIViewController()),
+            ("订单管理",UIImage(named: "shop_02order"),MyStoreOrderHomeViewController.CreateFromStoreStoryboard() as! MyStoreOrderHomeViewController),
+            ("分销管理",UIImage(named: "shop_03fenxiao"),MyStoreDistributionHomeViewController.CreateFromStoreStoryboard() as! MyStoreDistributionHomeViewController),
             ("物流管理",UIImage(named: "shop_04express"),UIViewController()),
-            ("客户管理",UIImage(named: "shop_05customer"),UIViewController()),
+            ("客户管理",UIImage(named: "shop_05customer"),MyStoreCustomerViewController.CreateFromStoreStoryboard() as! MyStoreCustomerViewController),
             ("营销管理",UIImage(named: "shop_06activity"),UIViewController())]
         var i = 0
         for tmp in titleAndImgForMenuBtn {
@@ -165,5 +166,24 @@ class MyStoreHomeViewController: UIViewController,ZMDInterceptorProtocol {
             return RACSignal.empty()
         })
         self.navigationItem.rightBarButtonItem = rightItem
+    }
+    func viewForAddGoods() -> UIView{
+        let titlesAndImg = [("添加出售商品",UIImage(named: "")),("添加出租商品",UIImage(named: ""))]
+        let view = UIView(frame: CGRect(x: 36, y: kScreenHeight/2-125, width: kScreenWidth-72, height: 125*2))
+        view.backgroundColor = UIColor.whiteColor()
+        ZMDTool.configViewLayer(view)
+        var i = 0
+        for tmp in titlesAndImg {
+            let btn = ZMDTool.getButton(CGRect(x: 0, y: CGFloat(i++) * 125, width: CGRectGetWidth(view.frame), height: 125), textForNormal: tmp.0, fontSize: 17, textColorForNormal: defaultTextColor, backgroundColor: UIColor.clearColor(), blockForCli: { (sender) -> Void in
+                
+            })
+            btn.setImage(tmp.1, forState: .Normal)
+            view.addSubview(btn)
+            if i < titlesAndImg.count - 1 {
+                let line = ZMDTool.getLine(CGRect(x: 0, y: 124.5, width: CGRectGetWidth(view.frame), height: 0.5))
+                btn.addSubview(line)
+            }
+        }
+        return view
     }
 }

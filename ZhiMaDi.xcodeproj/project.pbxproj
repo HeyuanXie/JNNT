@@ -245,6 +245,10 @@
 		2B539C081C9B91EB00FFE6CD /* ZMDInterface.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2B539C071C9B91EB00FFE6CD /* ZMDInterface.plist */; };
 		2B539C0A1C9BA68900FFE6CD /* GoodsPurchaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B539C091C9BA68900FFE6CD /* GoodsPurchaseViewController.swift */; };
 		2B539C0C1C9BD49200FFE6CD /* DataCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B539C0B1C9BD49200FFE6CD /* DataCenterViewController.swift */; };
+		2B5BBC111CD2F8F900D2AC9F /* MyStoreDisDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5BBC101CD2F8F900D2AC9F /* MyStoreDisDetailViewController.swift */; };
+		2B5BBC141CD30ADD00D2AC9F /* MyStoreCustomerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5BBC131CD30ADD00D2AC9F /* MyStoreCustomerViewController.swift */; };
+		2B5BBC161CD3348500D2AC9F /* MyStoreCusDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5BBC151CD3348500D2AC9F /* MyStoreCusDetailViewController.swift */; };
+		2B5BBC1A1CD33DBD00D2AC9F /* MyStoreAddSellGoodsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5BBC191CD33DBD00D2AC9F /* MyStoreAddSellGoodsViewController.swift */; };
 		2B5FF3ED1CA3F03C0067909D /* common_01unselected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B5FF3B91CA3F03C0067909D /* common_01unselected@2x.png */; };
 		2B5FF3EE1CA3F03C0067909D /* common_02selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B5FF3BA1CA3F03C0067909D /* common_02selected@2x.png */; };
 		2B5FF3EF1CA3F03C0067909D /* common_add_pho@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B5FF3BB1CA3F03C0067909D /* common_add_pho@2x.png */; };
@@ -950,6 +954,10 @@
 		2B539C071C9B91EB00FFE6CD /* ZMDInterface.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ZMDInterface.plist; sourceTree = "<group>"; };
 		2B539C091C9BA68900FFE6CD /* GoodsPurchaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoodsPurchaseViewController.swift; sourceTree = "<group>"; };
 		2B539C0B1C9BD49200FFE6CD /* DataCenterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataCenterViewController.swift; sourceTree = "<group>"; };
+		2B5BBC101CD2F8F900D2AC9F /* MyStoreDisDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyStoreDisDetailViewController.swift; sourceTree = "<group>"; };
+		2B5BBC131CD30ADD00D2AC9F /* MyStoreCustomerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyStoreCustomerViewController.swift; sourceTree = "<group>"; };
+		2B5BBC151CD3348500D2AC9F /* MyStoreCusDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyStoreCusDetailViewController.swift; sourceTree = "<group>"; };
+		2B5BBC191CD33DBD00D2AC9F /* MyStoreAddSellGoodsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyStoreAddSellGoodsViewController.swift; sourceTree = "<group>"; };
 		2B5FF3B91CA3F03C0067909D /* common_01unselected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "common_01unselected@2x.png"; sourceTree = "<group>"; };
 		2B5FF3BA1CA3F03C0067909D /* common_02selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "common_02selected@2x.png"; sourceTree = "<group>"; };
 		2B5FF3BB1CA3F03C0067909D /* common_add_pho@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "common_add_pho@2x.png"; sourceTree = "<group>"; };
@@ -1854,6 +1862,23 @@
 			path = LibBPush;
 			sourceTree = "<group>";
 		};
+		2B5BBC121CD30ABF00D2AC9F /* MyStoreCustomer */ = {
+			isa = PBXGroup;
+			children = (
+				2B5BBC131CD30ADD00D2AC9F /* MyStoreCustomerViewController.swift */,
+				2B5BBC151CD3348500D2AC9F /* MyStoreCusDetailViewController.swift */,
+			);
+			path = MyStoreCustomer;
+			sourceTree = "<group>";
+		};
+		2B5BBC171CD33D3D00D2AC9F /* AddGoods */ = {
+			isa = PBXGroup;
+			children = (
+				2B5BBC191CD33DBD00D2AC9F /* MyStoreAddSellGoodsViewController.swift */,
+			);
+			path = AddGoods;
+			sourceTree = "<group>";
+		};
 		2B5FF3851CA3EF980067909D /* Commond */ = {
 			isa = PBXGroup;
 			children = (
@@ -2209,9 +2234,11 @@
 		2BA4B0231CC8B296009A568D /* MyStore */ = {
 			isa = PBXGroup;
 			children = (
+				2B5BBC171CD33D3D00D2AC9F /* AddGoods */,
 				2BA4B0241CC8B2A7009A568D /* MyStoreHomeViewController.swift */,
 				2BF8D84F1CD0542A008237D9 /* MyStoreSetViewController.swift */,
 				2BF8D86E1CD0AC52008237D9 /* MyStoreOrder */,
+				2B5BBC121CD30ABF00D2AC9F /* MyStoreCustomer */,
 				2BF8D8741CD0AC67008237D9 /* MyStoreDistribution */,
 			);
 			path = MyStore;
@@ -2504,8 +2531,8 @@
 		2BF8D86E1CD0AC52008237D9 /* MyStoreOrder */ = {
 			isa = PBXGroup;
 			children = (
-				2BF8D86F1CD0AC52008237D9 /* MyStoreOrderDetailViewController.swift */,
 				2BF8D8701CD0AC52008237D9 /* MyStoreOrderHomeViewController.swift */,
+				2BF8D86F1CD0AC52008237D9 /* MyStoreOrderDetailViewController.swift */,
 			);
 			path = MyStoreOrder;
 			sourceTree = "<group>";
@@ -2514,6 +2541,7 @@
 			isa = PBXGroup;
 			children = (
 				2BF8D8751CD0AD45008237D9 /* MyStoreDistributionHomeViewController.swift */,
+				2B5BBC101CD2F8F900D2AC9F /* MyStoreDisDetailViewController.swift */,
 				2BF8D8771CD0B881008237D9 /* MyStoreDistributionTableViewCell.swift */,
 			);
 			path = MyStoreDistribution;
@@ -3518,6 +3546,7 @@
 				3C9099611C76A6E9006B7D2C /* QNInterceptor.swift in Sources */,
 				3C9099161C76A6E9006B7D2C /* BarChartDataSet.swift in Sources */,
 				2B6F90721CB64B7400BD7A5D /* BankCardUnbindViewController.swift in Sources */,
+				2B5BBC161CD3348500D2AC9F /* MyStoreCusDetailViewController.swift in Sources */,
 				3C9098FC1C76A6E9006B7D2C /* UIViewControllerExtension.swift in Sources */,
 				2BA3FDB51C9F842800018F3C /* QN_Area.swift in Sources */,
 				3C9098701C76A6AA006B7D2C /* QNSharedDatas.swift in Sources */,
@@ -3543,6 +3572,7 @@
 				3C9098FB1C76A6E9006B7D2C /* StringExtension.swift in Sources */,
 				2BC05C6A1CB630C300D3B1AE /* BankCardHomeViewController.swift in Sources */,
 				3C90993E1C76A6E9006B7D2C /* ScatterChartDataProvider.swift in Sources */,
+				2B5BBC1A1CD33DBD00D2AC9F /* MyStoreAddSellGoodsViewController.swift in Sources */,
 				3C9099351C76A6E9006B7D2C /* ChartRange.swift in Sources */,
 				2B02B5161CABBF0C0064B47C /* CustomJumpBtns.swift in Sources */,
 				3C9099141C76A6E9006B7D2C /* BarChartData.swift in Sources */,
@@ -3615,6 +3645,7 @@
 				3C90994C1C76A6E9006B7D2C /* ChartYAxisRendererRadarChart.swift in Sources */,
 				3C90995D1C76A6E9006B7D2C /* NSString+AES.m in Sources */,
 				2B73D8551C86B6D00016FEB2 /* PersonIntroductionViewController.swift in Sources */,
+				2B5BBC141CD30ADD00D2AC9F /* MyStoreCustomerViewController.swift in Sources */,
 				2B539C051C9AACD000FFE6CD /* StartImageView.swift in Sources */,
 				3C9098711C76A6AA006B7D2C /* QNStyleAttribute.swift in Sources */,
 				2B6F90701CB6372900BD7A5D /* UITableViewExtension.swift in Sources */,
@@ -3697,6 +3728,7 @@
 				2B73D85B1C86CBBD0016FEB2 /* PhoneSetViewController.swift in Sources */,
 				3C9098581C76A482006B7D2C /* AppDelegate.swift in Sources */,
 				3C9099341C76A6E9006B7D2C /* ChartHighlighter.swift in Sources */,
+				2B5BBC111CD2F8F900D2AC9F /* MyStoreDisDetailViewController.swift in Sources */,
 				3C9099481C76A6E9006B7D2C /* ChartXAxisRendererHorizontalBarChart.swift in Sources */,
 				3C90993A1C76A6E9006B7D2C /* BubbleChartDataProvider.swift in Sources */,
 				3C9099501C76A6E9006B7D2C /* LineScatterCandleRadarChartRenderer.swift in Sources */,

@@ -84,9 +84,9 @@ class MyStoreDistributionHomeViewController: UIViewController,UITableViewDataSou
             let statusImgV = cell?.viewWithTag(tag++) as! UIImageView
             let detailLbl = cell?.viewWithTag(tag++) as! UILabel
             
-            imgV.image = UIImage(named: "user_vipcard_bg")
+            imgV.image = UIImage(named: "shop_level_gold")
             titleLbl.text = "葫芦堡旗舰店"
-            statusImgV.image = UIImage(named: "user_vipcard_bg")
+            statusImgV.image = UIImage(named: "shop_level_gold")  // shop_level_gold shop_level_silver shop_level_copper
             let sizeForTitleLbl =  titleLbl.text?.sizeWithFont(defaultSysFontWithSize(15), maxWidth: 200)
             statusImgV.frame = CGRect(x: CGRectGetMinX(titleLbl.frame) + (sizeForTitleLbl?.width)! + 8, y: 12, width: 20, height: 20)
             detailLbl.text = "代销商品：10"
@@ -100,8 +100,10 @@ class MyStoreDistributionHomeViewController: UIViewController,UITableViewDataSou
         }
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        //        let vc = self.cardType == .Goods ? CardVolumeGoodsDetailViewController() : CardVolumeSellerDetailViewController()
-        //        self.navigationController?.pushViewController(vc, animated: true)
+        if self.cardType == CardType.Seller {
+            let vc =  MyStoreDisDetailViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
     //MARK: -  PrivateMethod

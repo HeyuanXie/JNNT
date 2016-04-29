@@ -194,13 +194,13 @@ class MineHomeViewController: UIViewController,UITableViewDataSource, UITableVie
             }
             let followBtn = cell?.viewWithTag(10003) as! UIButton
             followBtn.rac_command = RACCommand(signalBlock: { (sender) -> RACSignal! in
-                let vc = MineFollowViewController()
+                let vc = MineCollectionViewController()
                 self.navigationController?.pushViewController(vc, animated: true)
                 return RACSignal.empty()
             })
             let collectionBtn = cell?.viewWithTag(10004) as! UIButton
             collectionBtn.rac_command = RACCommand(signalBlock: { (sender) -> RACSignal! in
-                let vc = MineCollectionViewController()
+                let vc = MineFollowViewController()
                 self.navigationController?.pushViewController(vc, animated: true)
                 return RACSignal.empty()
             })

@@ -65,37 +65,9 @@ class MineCollectionViewController: UIViewController,UITableViewDataSource, UITa
             return cell!
         }
         let cellId = "OtherCell"
-        var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
+        var cell = tableView.dequeueReusableCellWithIdentifier(cellId) as? CollectionGoodsCell
         if cell == nil {
-            cell = UITableViewCell(style: .Subtitle, reuseIdentifier: cellId)
-            cell?.accessoryType = UITableViewCellAccessoryType.None
-            cell!.selectionStyle = .None
-            
-            ZMDTool.configTableViewCellDefault(cell!)
-            var tag = 10000
-            let imgV = UIImageView(frame: CGRect(x: 12, y: 12, width: 125, height: 125))
-            imgV.backgroundColor = UIColor.clearColor()
-            imgV.tag = tag++
-            cell?.contentView.addSubview(imgV)
-            
-            let goodsLbl = ZMDTool.getLabel(CGRect(x: 12+125+10, y: 12, width: kScreenWidth - 12-125-10-12, height: 15), text: "", fontSize: 15)
-            goodsLbl.tag = tag++
-            cell?.contentView.addSubview(goodsLbl)
-            
-            let goodsPriceLbl = ZMDTool.getLabel(CGRect(x: 12+125+10, y: 150-12-14-14-15, width: kScreenWidth - 12-125-10-12, height: 15), text: "", fontSize: 15,textColor: RGB(235,61,61,1.0))
-            goodsPriceLbl.tag = tag++
-            cell?.contentView.addSubview(goodsPriceLbl)
-            
-            let freightLbl = ZMDTool.getLabel(CGRect(x: 12+125+10, y: 150-12-14, width: kScreenWidth - 12-125-10-100, height: 15), text: "", fontSize: 15,textColor: defaultDetailTextColor)
-            freightLbl.tag = tag++
-            cell?.contentView.addSubview(freightLbl)
-            
-            let cancelBtn = ZMDTool.getButton(CGRect(x: kScreenWidth - 80, y: 150-12-15, width: 80, height: 15), textForNormal: "取消收藏", fontSize: 15,textColorForNormal:defaultDetailTextColor, backgroundColor: UIColor.clearColor(), blockForCli: { (sender) -> Void in
-            })
-            cancelBtn.tag = tag++
-            cell?.contentView.addSubview(cancelBtn)
-            
-            cell?.contentView.addSubview(ZMDTool.getLine(CGRect(x: 0, y: 149.5, width: kScreenWidth, height: 0.5)))
+            cell = CollectionGoodsCell(style: .Subtitle, reuseIdentifier: cellId)
         }
         var tag = 10000
         let imgV = cell?.viewWithTag(tag++) as! UIImageView
@@ -127,4 +99,44 @@ class MineCollectionViewController: UIViewController,UITableViewDataSource, UITa
         self.currentTableView.delegate = self
         self.view.addSubview(self.currentTableView)
     }
+}
+// 收藏商品  cell
+class CollectionGoodsCell : UITableViewCell {
+    
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.accessoryType = UITableViewCellAccessoryType.None
+        self.selectionStyle = .None
+        
+        ZMDTool.configTableViewCellDefault(self)
+        var tag = 10000
+        let imgV = UIImageView(frame: CGRect(x: 12, y: 12, width: 125, height: 125))
+        imgV.backgroundColor = UIColor.clearColor()
+        imgV.tag = tag++
+        self.contentView.addSubview(imgV)
+        
+        let goodsLbl = ZMDTool.getLabel(CGRect(x: 12+125+10, y: 12, width: kScreenWidth - 12-125-10-12, height: 15), text: "", fontSize: 15)
+        goodsLbl.tag = tag++
+        self.contentView.addSubview(goodsLbl)
+        
+        let goodsPriceLbl = ZMDTool.getLabel(CGRect(x: 12+125+10, y: 150-12-14-14-15, width: kScreenWidth - 12-125-10-12, height: 15), text: "", fontSize: 15,textColor: RGB(235,61,61,1.0))
+        goodsPriceLbl.tag = tag++
+        self.contentView.addSubview(goodsPriceLbl)
+        
+        let freightLbl = ZMDTool.getLabel(CGRect(x: 12+125+10, y: 150-12-14, width: kScreenWidth - 12-125-10-100, height: 15), text: "", fontSize: 15,textColor: defaultDetailTextColor)
+        freightLbl.tag = tag++
+        self.contentView.addSubview(freightLbl)
+        
+        let cancelBtn = ZMDTool.getButton(CGRect(x: kScreenWidth - 80, y: 150-12-15, width: 80, height: 15), textForNormal: "取消收藏", fontSize: 15,textColorForNormal:defaultDetailTextColor, backgroundColor: UIColor.clearColor(), blockForCli: { (sender) -> Void in
+        })
+        cancelBtn.tag = tag++
+        self.contentView.addSubview(cancelBtn)
+        
+        self.contentView.addSubview(ZMDTool.getLine(CGRect(x: 0, y: 149.5, width: kScreenWidth, height: 0.5)))
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
 }

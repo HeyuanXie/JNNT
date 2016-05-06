@@ -171,7 +171,11 @@ class MineHomeViewController: UIViewController,UITableViewDataSource, UITableVie
     func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0
     }
-    
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headView = UIView(frame: CGRectMake(0, 0, kScreenWidth, 16))
+        headView.backgroundColor = UIColor.clearColor()
+        return headView
+    }
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         let cellType = self.userCenterData[indexPath.section][indexPath.row]
         switch cellType {

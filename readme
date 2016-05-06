@@ -7,6 +7,7 @@
  
 - 开发注意：
  ·· 本项目主要使用Swift语言进行开发；
+ ·· 开发环境 : Xcode 7.2.1
  ·· AppID 和 SKU 已经有定义好的常量，不允许直接使用 "...", 有用到的地方，必须用 APP_ID APP_SKU；（其他常量请查看 Constents 和 QNSharedDatas 文件）
  ·· 有需要用到App前缀的地方 请使用 ZMD**** ；
  ·· 数据模型使用统一的前缀 ZMD_**** ；

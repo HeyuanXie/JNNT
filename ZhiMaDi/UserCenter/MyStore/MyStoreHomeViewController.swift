@@ -130,7 +130,7 @@ class MyStoreHomeViewController: UIViewController,ZMDInterceptorProtocol {
             ZMDTool.configTableViewCellDefault(cell!)
         }
         
-        let titleAndImgForMenuBtn = [("商品管理",UIImage(named: "shop_01product"),UIViewController()),
+        let titleAndImgForMenuBtn = [("商品管理",UIImage(named: "shop_01product"),GoodsManagerHomeViewController()),
             ("订单管理",UIImage(named: "shop_02order"),MyStoreOrderHomeViewController.CreateFromStoreStoryboard() as! MyStoreOrderHomeViewController),
             ("分销管理",UIImage(named: "shop_03fenxiao"),MyStoreDistributionHomeViewController.CreateFromStoreStoryboard() as! MyStoreDistributionHomeViewController),
             ("物流管理",UIImage(named: "shop_04express"),UIViewController()),
@@ -175,14 +175,24 @@ class MyStoreHomeViewController: UIViewController,ZMDInterceptorProtocol {
         var i = 0
         for tmp in titlesAndImg {
             let btn = ZMDTool.getButton(CGRect(x: 0, y: CGFloat(i++) * 125, width: CGRectGetWidth(view.frame), height: 125), textForNormal: tmp.0, fontSize: 17, textColorForNormal: defaultTextColor, backgroundColor: UIColor.clearColor(), blockForCli: { (sender) -> Void in
-                
+                if (sender as! UIButton).tag == 1 {
+
+                } else {
+                    let vc = MyStoreAddLeaseHomeViewController()
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
+                self.dismissPopupView(view)
             })
+            btn.tag = i
             btn.setImage(tmp.1, forState: .Normal)
             view.addSubview(btn)
-            if i < titlesAndImg.count - 1 {
+            if i < titlesAndImg.count {
                 let line = ZMDTool.getLine(CGRect(x: 0, y: 124.5, width: CGRectGetWidth(view.frame), height: 0.5))
                 btn.addSubview(line)
             }
+            let imgV = UIImageView(frame: CGRect(x: CGRectGetWidth(view.frame)-12-10, y: 55, width: 10, height: 16))
+            imgV.image = UIImage(named: "common_forward")
+            btn.addSubview(imgV)
         }
         return view
     }

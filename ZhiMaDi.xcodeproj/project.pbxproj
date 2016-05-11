@@ -398,6 +398,8 @@
 		2BA3FDE71CA0E43A00018F3C /* TabBar_School_Normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BA3FDDF1CA0E43A00018F3C /* TabBar_School_Normal@2x.png */; };
 		2BA3FDE81CA0E43A00018F3C /* TabBar_School_Selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BA3FDE01CA0E43A00018F3C /* TabBar_School_Selected@2x.png */; };
 		2BA4B0251CC8B2A7009A568D /* MyStoreHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA4B0241CC8B2A7009A568D /* MyStoreHomeViewController.swift */; };
+		2BAADABF1CE07616002137B5 /* MarketManagerHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAADABE1CE07616002137B5 /* MarketManagerHomeViewController.swift */; };
+		2BAADAC11CE1B527002137B5 /* NetworkTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAADAC01CE1B527002137B5 /* NetworkTest.swift */; };
 		2BB0EEFE1CB743C1000A186D /* AfterSalesHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB0EEFD1CB743C1000A186D /* AfterSalesHomeViewController.swift */; };
 		2BB0EF001CB74A64000A186D /* AfterSalesReturnViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB0EEFF1CB74A64000A186D /* AfterSalesReturnViewController.swift */; };
 		2BB6A8D01C87DF12008209E8 /* SignPSSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6A8CF1C87DF12008209E8 /* SignPSSetViewController.swift */; };
@@ -417,6 +419,9 @@
 		2BC05C6F1CB630F700D3B1AE /* WalletCaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC05C6C1CB630F700D3B1AE /* WalletCaseViewController.swift */; };
 		2BC05C701CB630F700D3B1AE /* WalletHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC05C6D1CB630F700D3B1AE /* WalletHomeViewController.swift */; };
 		2BC05C711CB630F700D3B1AE /* WalletRechargeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC05C6E1CB630F700D3B1AE /* WalletRechargeViewController.swift */; };
+		2BC7A8A61CE03BA80038F6E9 /* GoodsManagerGoodsSortViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC7A8A51CE03BA80038F6E9 /* GoodsManagerGoodsSortViewController.swift */; };
+		2BC7A8A81CE03F960038F6E9 /* GoodsManagerGoodsSortCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC7A8A71CE03F960038F6E9 /* GoodsManagerGoodsSortCell.swift */; };
+		2BC83E7D1CE314ED00143697 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2BC83E7C1CE314ED00143697 /* Info.plist */; };
 		2BC861571CD8349500B8D449 /* MyStoreAddLeaseHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC861561CD8349500B8D449 /* MyStoreAddLeaseHomeViewController.swift */; };
 		2BC861591CD8393D00B8D449 /* MyStoreAddLeaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC861581CD8393D00B8D449 /* MyStoreAddLeaseViewController.swift */; };
 		2BD96CEF1CC717D3005DC87F /* StoreShowHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD96CEE1CC717D3005DC87F /* StoreShowHomeViewController.swift */; };
@@ -1106,6 +1111,8 @@
 		2BA3FDDF1CA0E43A00018F3C /* TabBar_School_Normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabBar_School_Normal@2x.png"; sourceTree = "<group>"; };
 		2BA3FDE01CA0E43A00018F3C /* TabBar_School_Selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabBar_School_Selected@2x.png"; sourceTree = "<group>"; };
 		2BA4B0241CC8B2A7009A568D /* MyStoreHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyStoreHomeViewController.swift; sourceTree = "<group>"; };
+		2BAADABE1CE07616002137B5 /* MarketManagerHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarketManagerHomeViewController.swift; sourceTree = "<group>"; };
+		2BAADAC01CE1B527002137B5 /* NetworkTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkTest.swift; sourceTree = "<group>"; };
 		2BB0EEFD1CB743C1000A186D /* AfterSalesHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AfterSalesHomeViewController.swift; sourceTree = "<group>"; };
 		2BB0EEFF1CB74A64000A186D /* AfterSalesReturnViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AfterSalesReturnViewController.swift; sourceTree = "<group>"; };
 		2BB6A8CF1C87DF12008209E8 /* SignPSSetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignPSSetViewController.swift; sourceTree = "<group>"; };
@@ -1125,6 +1132,9 @@
 		2BC05C6C1CB630F700D3B1AE /* WalletCaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletCaseViewController.swift; sourceTree = "<group>"; };
 		2BC05C6D1CB630F700D3B1AE /* WalletHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletHomeViewController.swift; sourceTree = "<group>"; };
 		2BC05C6E1CB630F700D3B1AE /* WalletRechargeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletRechargeViewController.swift; sourceTree = "<group>"; };
+		2BC7A8A51CE03BA80038F6E9 /* GoodsManagerGoodsSortViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoodsManagerGoodsSortViewController.swift; sourceTree = "<group>"; };
+		2BC7A8A71CE03F960038F6E9 /* GoodsManagerGoodsSortCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoodsManagerGoodsSortCell.swift; sourceTree = "<group>"; };
+		2BC83E7C1CE314ED00143697 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2BC861561CD8349500B8D449 /* MyStoreAddLeaseHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyStoreAddLeaseHomeViewController.swift; sourceTree = "<group>"; };
 		2BC861581CD8393D00B8D449 /* MyStoreAddLeaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyStoreAddLeaseViewController.swift; sourceTree = "<group>"; };
 		2BD96CEE1CC717D3005DC87F /* StoreShowHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreShowHomeViewController.swift; sourceTree = "<group>"; };
@@ -1296,7 +1306,6 @@
 		3C90985C1C76A482006B7D2C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3C90985E1C76A482006B7D2C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../Assets.xcassets; sourceTree = "<group>"; };
 		3C9098611C76A482006B7D2C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		3C9098631C76A482006B7D2C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3C9098691C76A687006B7D2C /* readme */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readme; sourceTree = "<group>"; };
 		3C90986B1C76A6AA006B7D2C /* Constents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constents.swift; sourceTree = "<group>"; };
 		3C90986C1C76A6AA006B7D2C /* QNSharedDatas.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QNSharedDatas.swift; sourceTree = "<group>"; };
@@ -1766,8 +1775,10 @@
 				2B3ADCBA1CDAF90600A0C63B /* GoodsManagerHomeViewController.swift */,
 				2B74BEAE1CDC8FF6005E0866 /* GoodsManagerSearchViewController.swift */,
 				2B74BEB01CDC9897005E0866 /* GoodsManagerBatchViewController.swift */,
+				2BC7A8A51CE03BA80038F6E9 /* GoodsManagerGoodsSortViewController.swift */,
 				2BB8E3931CDC3059004B9655 /* MyStoreManagerGoodsCell.swift */,
 				2B74BEB21CDC9B49005E0866 /* GoodsManagerBatchCell.swift */,
+				2BC7A8A71CE03F960038F6E9 /* GoodsManagerGoodsSortCell.swift */,
 			);
 			path = GoodsManager;
 			sourceTree = "<group>";
@@ -2248,6 +2259,7 @@
 			children = (
 				2BA4B0241CC8B2A7009A568D /* MyStoreHomeViewController.swift */,
 				2BF8D84F1CD0542A008237D9 /* MyStoreSetViewController.swift */,
+				2BAADABD1CE075F8002137B5 /* MarketingManager */,
 				2B3ADCB91CDAF8D700A0C63B /* GoodsManager */,
 				2B5BBC171CD33D3D00D2AC9F /* AddGoods */,
 				2BF8D86E1CD0AC52008237D9 /* MyStoreOrder */,
@@ -2255,6 +2267,14 @@
 				2BF8D8741CD0AC67008237D9 /* MyStoreDistribution */,
 			);
 			path = MyStore;
+			sourceTree = "<group>";
+		};
+		2BAADABD1CE075F8002137B5 /* MarketingManager */ = {
+			isa = PBXGroup;
+			children = (
+				2BAADABE1CE07616002137B5 /* MarketManagerHomeViewController.swift */,
+			);
+			path = MarketingManager;
 			sourceTree = "<group>";
 		};
 		2BB0EEFC1CB743B5000A186D /* AfterSales */ = {
@@ -2617,7 +2637,7 @@
 				2B197DA71C8424F2006494CF /* Login.storyboard */,
 				2B28F4D31CA3CE65004B8DA4 /* Test.storyboard */,
 				3C9098601C76A482006B7D2C /* LaunchScreen.storyboard */,
-				3C9098631C76A482006B7D2C /* Info.plist */,
+				2BC83E7C1CE314ED00143697 /* Info.plist */,
 			);
 			path = ZhiMaDi;
 			sourceTree = "<group>";
@@ -2911,6 +2931,7 @@
 				3C9098F31C76A6E9006B7D2C /* QNFormatTool.swift */,
 				3C9098F41C76A6E9006B7D2C /* QNInterceptor.swift */,
 				3C9098F51C76A6E9006B7D2C /* QNNetworkTool.swift */,
+				2BAADAC01CE1B527002137B5 /* NetworkTest.swift */,
 				3C9098F61C76A6E9006B7D2C /* ZMDTool.swift */,
 			);
 			path = Tools;
@@ -3314,6 +3335,7 @@
 				2B539BFE1C9AAAB000FFE6CD /* Start_index1.png in Resources */,
 				2BF3C11C1CA14394002AEF4D /* home_banner03@2x.png in Resources */,
 				2B02B5371CAD18FE0064B47C /* pay_alipay@3x.png in Resources */,
+				2BC83E7D1CE314ED00143697 /* Info.plist in Resources */,
 				2BF3C1041CA14333002AEF4D /* home_search@2x.png in Resources */,
 				2B0662ED1C7C2B5800EA822F /* Home_Middle01_Advertisement.png in Resources */,
 				2B02B5661CAE44B60064B47C /* login_invisible@3x.png in Resources */,
@@ -3540,8 +3562,10 @@
 				3C90995E1C76A6E9006B7D2C /* Reachability.m in Sources */,
 				2B9D9F921C8FCC0400141D31 /* CustomPassWordView.swift in Sources */,
 				2B73D84D1C8678C40016FEB2 /* AddressViewController.swift in Sources */,
+				2BAADABF1CE07616002137B5 /* MarketManagerHomeViewController.swift in Sources */,
 				2B02B5511CAD2CCD0064B47C /* OrderPaySucceedViewController.swift in Sources */,
 				2B73D8531C868FC50016FEB2 /* CustomPickView.swift in Sources */,
+				2BC7A8A81CE03F960038F6E9 /* GoodsManagerGoodsSortCell.swift in Sources */,
 				3C9099201C76A6E9006B7D2C /* ChartDataEntry.swift in Sources */,
 				3C90993F1C76A6E9006B7D2C /* BarChartRenderer.swift in Sources */,
 				2B6F90961CB6599500BD7A5D /* BankCardSetPsViewController.swift in Sources */,
@@ -3579,6 +3603,7 @@
 				3C90993E1C76A6E9006B7D2C /* ScatterChartDataProvider.swift in Sources */,
 				2B5BBC1A1CD33DBD00D2AC9F /* MyStoreAddSellGoodsViewController.swift in Sources */,
 				3C9099351C76A6E9006B7D2C /* ChartRange.swift in Sources */,
+				2BAADAC11CE1B527002137B5 /* NetworkTest.swift in Sources */,
 				2B02B5161CABBF0C0064B47C /* CustomJumpBtns.swift in Sources */,
 				3C9099141C76A6E9006B7D2C /* BarChartData.swift in Sources */,
 				2BDEF3CC1C7F028F00927F64 /* CycleScrollView.m in Sources */,
@@ -3725,6 +3750,7 @@
 				3C9099221C76A6E9006B7D2C /* CombinedChartData.swift in Sources */,
 				3C9099271C76A6E9006B7D2C /* PieChartData.swift in Sources */,
 				3C90994F1C76A6E9006B7D2C /* LineChartRenderer.swift in Sources */,
+				2BC7A8A61CE03BA80038F6E9 /* GoodsManagerGoodsSortViewController.swift in Sources */,
 				2BD96CF11CC75C4B005DC87F /* StoreShowGoodsSortViewController.swift in Sources */,
 				2BC05C701CB630F700D3B1AE /* WalletHomeViewController.swift in Sources */,
 				2B5FF44C1CA523C70067909D /* ZMDShareSDKTool.swift in Sources */,
@@ -3873,7 +3899,7 @@
 					"$(PROJECT_DIR)/ZhiMaDi/Librarys/ShareSDK",
 					3/Support/Required,
 				);
-				INFOPLIST_FILE = ZhiMaDi/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/ZhiMaDi/Resources/ZMDInterface.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -3910,7 +3936,7 @@
 					"-ObjC",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
-				PRODUCT_BUNDLE_IDENTIFIER = zhimadi.cn.app.test;
+				PRODUCT_BUNDLE_IDENTIFIER = com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "ZhiMaDi/ZhiMaDi-Bridging-Header.h";
@@ -3941,7 +3967,7 @@
 					"$(PROJECT_DIR)/ZhiMaDi/Librarys/ShareSDK",
 					3/Support/Required,
 				);
-				INFOPLIST_FILE = ZhiMaDi/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/ZhiMaDi/Resources/ZMDInterface.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -3978,7 +4004,7 @@
 					"-ObjC",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
-				PRODUCT_BUNDLE_IDENTIFIER = zhimadi.cn.app.test;
+				PRODUCT_BUNDLE_IDENTIFIER = com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "ZhiMaDi/ZhiMaDi-Bridging-Header.h";

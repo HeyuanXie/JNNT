@@ -15,6 +15,7 @@ class GoodsManagerBatchViewController: UIViewController,UITableViewDataSource, U
     var filtedSortBtnSelect : UIButton!             //筛选-分类高亮btn
     var sellV,filtedV: UIView!
     var goods = NSArray()
+    var indexS = -1
     override func viewDidLoad() {
         super.viewDidLoad()
         self.subViewInit()
@@ -53,7 +54,15 @@ class GoodsManagerBatchViewController: UIViewController,UITableViewDataSource, U
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cellId = "GoodsCell"
         let cell = tableView.dequeueReusableCellWithIdentifier(cellId) as? GoodsManagerBatchCell
-        return cell
+        cell!.selectBtn.superview?.tag = indexPath.row + 1000
+        cell!.selectBtn.selected =  self.indexS == indexPath.row - 1000
+        cell!.selectBtn.rac_command = RACCommand(signalBlock: { (sender) -> RACSignal! in
+            self.indexS = (sender as! UIButton).superview!.tag - 1000
+            self.currentTableView.reloadData()
+            return RACSignal.empty()
+        })
+        cell!.selectBtn.selected = self.indexS == indexPath.row
+        return cell!
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let homeBuyListViewController = HomeBuyListViewController.CreateFromMainStoryboard() as! HomeBuyListViewController
@@ -113,7 +122,12 @@ class GoodsManagerBatchViewController: UIViewController,UITableViewDataSource, U
         view.addSubview(ZMDTool.getLine(CGRectMake(0, 54.5, kScreenWidth, 0.5)))
         return view
     }
-
+    //MARK: - Action
+    
+    @IBAction func changeSortBtnCli(sender: UIButton) {
+        let sortV = self.viewForSort()
+        self.viewShowWithBg(sortV,showAnimation: .SlideInFromBottom,dismissAnimation: .SlideOutToBottom)
+    }
     private func subViewInit(){
 //        self.currentTableView = UITableView(frame: self.view.bounds)
         self.currentTableView.backgroundColor = tableViewdefaultBackgroundColor
@@ -249,5 +263,53 @@ class GoodsManagerBatchViewController: UIViewController,UITableViewDataSource, U
         mainV.addSubview(okBtn)
         return mainV
     }
-
+    func viewForSort () -> UIView{
+        let filtedView = UIView(frame: CGRectMake(0 , self.view.bounds.height - 220, kScreenWidth, 220))
+        filtedView.backgroundColor = UIColor.whiteColor()
+        
+        let filtedTitleLbl = ZMDTool.getLabel(CGRect(x: 12, y: 16, width: 200, height: 16), text: "选择分类（可多选）", fontSize: 16, textColor: defaultTextColor)
+        filtedView.addSubview(filtedTitleLbl)
+        let filetTitle = ["床上用品","家具","日用品","植物","装饰品"]
+        var i = 0
+        var maxY : CGFloat = 0
+        for title in filetTitle {
+            let width = (kScreenWidth - 24 - 2 * 8)/3
+            let Tmp = i%3 , Tmp2 = i/3
+            let x = 12 + CGFloat(Tmp) * width + CGFloat(Tmp) * 8
+            let y = 16 + 16 + 20 + CGFloat(Tmp2) * (38 + 8)
+            
+            let btn = UIButton(frame: CGRect(x: x, y: y, width: width, height: 38))
+            btn.setBackgroundImage(UIImage.imageWithColor(RGB(240,240,240,1), size: btn.frame.size), forState: .Normal)
+            btn.setBackgroundImage(UIImage.imageWithColor(RGB(235,61,61,1.0), size: btn.frame.size), forState: .Selected)
+            
+            btn.tag = 1000 + NSInteger(i)
+            btn.titleLabel!.font = defaultSysFontWithSize(15)
+            btn.setTitle(title, forState: .Normal)
+            btn.setTitle(title, forState: .Selected)
+            btn.setTitleColor(defaultDetailTextColor, forState: .Normal)
+            btn.setTitleColor(UIColor.whiteColor(), forState: .Selected)
+            ZMDTool.configViewLayer(btn)
+            filtedView.addSubview(btn)
+            btn.rac_signalForControlEvents(.TouchUpInside).subscribeNext({ (sender) -> Void in
+                self.filtedSortBtnSelect.selected = false
+                self.filtedSortBtnSelect = sender as! UIButton
+                self.filtedSortBtnSelect.selected = true
+            })
+            if i == 0 {
+                btn.selected = true
+                self.filtedSortBtnSelect = btn
+            }
+            i++
+            if i == filetTitle.count {
+                maxY = CGRectGetMaxY(btn.frame)
+            }
+        }
+        filtedView.addSubview( ZMDTool.getLine(CGRect(x: 0, y: CGRectGetHeight(filtedView.frame) - 58.5, width: kScreenWidth, height: 0.5)))
+        
+        let okBtn = ZMDTool.getButton(CGRect(x: 0, y: CGRectGetHeight(filtedView.frame) - 58, width: kScreenWidth, height: 58), textForNormal: "确定",fontSize: 20,textColorForNormal :defaultTextColor, backgroundColor:  RGB(247,247,247,1.0), blockForCli: ({ (sender) -> Void in
+            filtedView.removeFromSuperview()
+        }))
+        filtedView.addSubview(okBtn)
+        return filtedView
+    }
 }

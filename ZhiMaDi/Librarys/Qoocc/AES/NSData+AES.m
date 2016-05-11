@@ -9,7 +9,6 @@
 #import "NSData+AES.h"
 #import <CommonCrypto/CommonDigest.h>   // MD5
 #import <CommonCrypto/CommonCryptor.h>  // AES128
-
 @implementation NSData (AES)
 
 // 加密
@@ -49,10 +48,21 @@
 // 为了保证密钥必须是16位，所以需要对密钥进行求md5，取16位
 - (NSString *)md5:(NSString *)key {
     const char * cStrValue = key.UTF8String;  
-    unsigned char theResult[CC_MD5_DIGEST_LENGTH];  
+    unsigned char theResult[32];
     CC_MD5(cStrValue, (CC_LONG)(strlen(cStrValue)), theResult);  
-    return [NSString stringWithFormat:@"%02X%02X%02X%02X%02X%02X%02X%02X",
+    return [NSString stringWithFormat:@"%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X",
             theResult[0], theResult[1], theResult[2], theResult[3],   
-            theResult[4], theResult[5], theResult[6], theResult[7]];
+            theResult[4], theResult[5], theResult[6], theResult[7], theResult[8], theResult[9], theResult[10], theResult[11],
+            theResult[12], theResult[13], theResult[14], theResult[15]];
 }
+- (NSString *)zmdMd5:(NSString *)key {
+    const char * cStrValue = key.UTF8String;
+    unsigned char theResult[32];
+    CC_MD5(cStrValue, (CC_LONG)(strlen(cStrValue)), theResult);
+    return [NSString stringWithFormat:@"%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X",
+            theResult[0], theResult[1], theResult[2], theResult[3],
+            theResult[4], theResult[5], theResult[6], theResult[7], theResult[8], theResult[9], theResult[10], theResult[11],
+            theResult[12], theResult[13], theResult[14], theResult[15]];
+}
+
 @end

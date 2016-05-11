@@ -13,6 +13,17 @@ import Alamofire
 private let kServerAddress = { () -> String in
     "http://115.159.28.132:8080"
 }()
+
+//yyyy-MM-ddTHH:mm:ss.
+let publicKey = "c81de5387d36d1ec6a4ad4d483ffae0a";
+let secretKey = "6cb0c990dc6ec7e99e5cf3a9ec6260ae";
+let method = "get";
+let accept = "application/json, text/javascript, */*";
+let timestamp = QNFormatTool.dateString02(NSDate(),format: "yyyy-MM-dd") + "T" + QNFormatTool.dateString02(NSDate(),format: "HH:mm:ss") + ".0000000+08:00"
+let timestamp02 = QNFormatTool.dateString02(NSDate(),format: "yyyy-MM-dd") + "T" + QNFormatTool.dateString02(NSDate(),format: "HH:mm:ss") + ".0000000"
+// string url = "http://od.ccw.cn/odata/v1/Orders?$top=10&$filter=CreatedOnUtc+lt+datetime'2016-02-20T00:00:00'";
+let urlTmp = "http://od.ccw.cn/odata/v1/Orders?$top=10&$filter=CreatedOnUtc+lt+datetime'\(timestamp02)'";
+
 // 芝麻地后台接口配置文件
 /*private*/let ZMDInterface = { () -> NSDictionary in
     let plistPath = NSBundle.mainBundle().pathForResource("ZMDInterface", ofType: "plist")
@@ -20,6 +31,7 @@ private let kServerAddress = { () -> String in
 }()
 
 class QNNetworkTool: NSObject {
+   
 }
 // MARK: - 网络基础处理
 private extension QNNetworkTool {
@@ -32,11 +44,29 @@ private extension QNNetworkTool {
     private class func productRequest(url: NSURL!, method: NSString!) -> NSMutableURLRequest {
         let request = NSMutableURLRequest(URL: url)
         request.HTTPMethod = method as String
-//        request.addValue(g_currentGroup?.auth ?? "", forHTTPHeaderField: "AUTH") // 用户身份串,在调用/api/login 成功后会返回这个串;未登录时为空
-        
-        
+
+        let tmp = [method as String,"",accept,urlTmp,timestamp,publicKey]
+        var messageRepresentation = ""
+        for str in tmp {
+            if str != publicKey {
+                messageRepresentation = messageRepresentation + str.lowercaseString + "&"
+            } else {
+                messageRepresentation = messageRepresentation + str.lowercaseString
+            }
+        }
+//
+        let signature = messageRepresentation.hmac(CryptoAlgorithm.SHA256, key: secretKey)
+//        let data = NSString(string: signature).dataUsingEncoding(NSUTF8StringEncoding)?.base64EncodedDataWithOptions(NSDataBase64EncodingOptions.Encoding64CharacterLineLength)
+//        signature = NSString(data: data!, encoding: NSUTF8StringEncoding)!
+        request.addValue("SmNetHmac1 \(signature)", forHTTPHeaderField: "Authorization")
+        request.addValue("My shopping data consumer v.1.0", forHTTPHeaderField: "UserAgent")
+        request.addValue(accept, forHTTPHeaderField: "Accept")
+        request.addValue("Accept-Charset", forHTTPHeaderField: "UTF-8")
+        request.addValue(publicKey, forHTTPHeaderField: "SmartStore-Net-Api-PublicKey")
+        request.addValue(timestamp, forHTTPHeaderField: "SmartStore-Net-Api-Date")
         return request
     }
+    
     /**
      后台返回的数据错误，格式不正确 的 NSError
      */
@@ -88,7 +118,7 @@ private extension QNNetworkTool {
      :param: completionHandler 请求完成后的回掉， 如果 dictionary 为nil，那么 error 就不可能为空
      */
     private class func requestForSelf(url: NSURL?, method: String, parameters: [String : AnyObject]?, completionHandler: (request: NSURLRequest, response: NSHTTPURLResponse?, data: AnyObject?, dictionary: NSDictionary?, error: NSError?) -> Void) {
-        request(ParameterEncoding.URL.encode(self.productRequest(url, method: method), parameters: parameters).0).response{
+        request(ParameterEncoding.URLEncodedInURL.encode(self.productRequest(url, method: method), parameters: parameters).0).response{
             if $3 != nil {  // 直接出错了
                 completionHandler(request: $0!, response: $1, data: $2, dictionary: nil, error: $3); return
             }
@@ -259,7 +289,7 @@ extension QNNetworkTool {
      :param: corpId       厂商的id（咨询博创海云获取）
      */
     class func getSleepLevel(userId: String,date: String,corpId: String,completion: (NSDictionary?, NSError?, String?) -> Void) {
-        requestGET(kServerAddress + "/SleepCareIIServer/getSleepLevel.action", parameters: paramsToJsonDataParams(["userId" : userId,"date" : date,"corpId" : corpId])) { (_, response, _, dictionary, error) -> Void in
+        requestGET(urlTmp, parameters: nil) { (_, response, _, dictionary, error) -> Void in
             if dictionary != nil{
                 completion(dictionary, nil, nil)
             }else {
@@ -301,4 +331,14 @@ extension QNNetworkTool {
         }
     }
     
+}
+extension QNNetworkTool {
+    class func test() {
+        requestGET(urlTmp, parameters: nil) { (_, _, _, dictionary, error) -> Void in
+            if dictionary != nil{
+                println(dictionary)
+            }else {
+            }
+        }
+    }
 }

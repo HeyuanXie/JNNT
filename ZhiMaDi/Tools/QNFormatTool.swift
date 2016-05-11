@@ -14,6 +14,8 @@ class QNFormatTool: NSObject {
 
 /// 默认的输入日期格式
 private let defaultDateInputFormat = "yyyy-MM-dd HH:mm:ss"
+private let defaultDateInputFormatTmp = "yyyy-MM-ddTHH:mm:ss+08:00"
+
 /// 默认的输出日期格式
 private let defaultDateOutputFormat = "MM-dd HH:mm"
 /// 输出日期格式

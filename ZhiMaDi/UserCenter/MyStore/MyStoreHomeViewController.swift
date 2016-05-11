@@ -135,7 +135,7 @@ class MyStoreHomeViewController: UIViewController,ZMDInterceptorProtocol {
             ("分销管理",UIImage(named: "shop_03fenxiao"),MyStoreDistributionHomeViewController.CreateFromStoreStoryboard() as! MyStoreDistributionHomeViewController),
             ("物流管理",UIImage(named: "shop_04express"),UIViewController()),
             ("客户管理",UIImage(named: "shop_05customer"),MyStoreCustomerViewController.CreateFromStoreStoryboard() as! MyStoreCustomerViewController),
-            ("营销管理",UIImage(named: "shop_06activity"),UIViewController())]
+            ("营销管理",UIImage(named: "shop_06activity"),MarketManagerHomeViewController())]
         var i = 0
         for tmp in titleAndImgForMenuBtn {
             let x = CGFloat(i)%3*(kScreenWidth/3)

@@ -11,18 +11,21 @@ import UIKit
 class GoodsManagerBatchCell: UITableViewCell {
     let height = CGFloat(150)
 
+    @IBOutlet weak var selectBtn: UIButton!
+    @IBOutlet weak var imgV: UIImageView!
     @IBOutlet weak var deleteBtn: UIButton!
+    @IBOutlet weak var removedBtn: UIButton!
+    @IBOutlet weak var titleLbl: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         ZMDTool.configViewLayerFrameWithColor(deleteBtn, color: defaultTextColor)
         ZMDTool.configViewLayer(deleteBtn)
+        ZMDTool.configViewLayerFrameWithColor(removedBtn, color: defaultTextColor)
+        ZMDTool.configViewLayer(removedBtn)
     }
-    class func configCell(cell:MyStoreManagerGoodsCell) {
+    class func configCell(cell:GoodsManagerBatchCell) {
         cell.imgV.image = UIImage(named: "list_product01")
-        cell.goodsLbl.text = "星球系列902E1 床头柜 拷贝"
-        cell.goodsPriceLbl.text = "￥495.0"
-        cell.nextPriceLbl.text = "原价:￥595.0"
-        cell.botLbl.text = "已售:15    库存:215"
+        cell.titleLbl.text = "星球系列902E1 床头柜 拷贝"
     }
     
 }

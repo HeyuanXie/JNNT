@@ -20,5 +20,4 @@
 - (NSData *)encrypt:(NSString *)key;
 // 解密
 - (NSData *)decrypt:(NSString *)key;
-
 @end

@@ -68,7 +68,7 @@ class GoodsManagerHomeViewController:UIViewController ,UIScrollViewDelegate, UIT
             let viewController: UIViewController
             switch self{
             case Sort:
-                let homeBuyListViewController = HomeLeaseListViewController.CreateFromMainStoryboard() as! HomeLeaseListViewController
+                let homeBuyListViewController = GoodsManagerGoodsSortViewController.CreateFromStoreStoryboard() as! GoodsManagerGoodsSortViewController
                 viewController = homeBuyListViewController
             case StoreHourse:
                 viewController = CrowdfundingHomeViewController()
@@ -243,7 +243,6 @@ class GoodsManagerHomeViewController:UIViewController ,UIScrollViewDelegate, UIT
                 self.filtedV.removeFromSuperview()
                 
                 let showVs = [self.sellV,self.countV,self.filtedV]
-                let tmp = (sender as! UIButton).tag
                 self.currentTableView.scrollEnabled = false
                 self.currentTableView.addSubview(showVs[sender.tag - 1000])
 //                let config = ZMDPopViewConfig()

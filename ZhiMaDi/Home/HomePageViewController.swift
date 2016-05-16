@@ -137,14 +137,14 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
         super.viewWillAppear(true)
         QNNetworkTool.test()
         //
-//        let tmp = "get&&application/json, text/javascript, */*&http://od.ccw.cn/odata/v1/orders?$top=10&$filter=createdonutc lt datetime'2016-02-20t00:00:00'&2016-05-10t15:25:51.0000000+08:00&c81de5387d36d1ec6a4ad4d483ffae0a".hmac(CryptoAlgorithm.SHA256, key: secretKey)
-//        let data = NSString(string: tmp).dataUsingEncoding(NSUTF8StringEncoding)?.base64EncodedDataWithOptions(NSDataBase64EncodingOptions.Encoding64CharacterLineLength)
-//        let dataStr = NSString(data: data!, encoding: NSUTF8StringEncoding)
+        //        let tmp = "get&&application/json, text/javascript, */*&http://od.ccw.cn/odata/v1/orders?$top=10&$filter=createdonutc lt datetime'2016-02-20t00:00:00'&2016-05-10t15:25:51.0000000+08:00&c81de5387d36d1ec6a4ad4d483ffae0a".hmac(CryptoAlgorithm.SHA256, key: secretKey)
+        //        let data = NSString(string: tmp).dataUsingEncoding(NSUTF8StringEncoding)?.base64EncodedDataWithOptions(NSDataBase64EncodingOptions.Encoding64CharacterLineLength)
+        //        let dataStr = NSString(data: data!, encoding: NSUTF8StringEncoding)
         
-//        let tmp = "get&&application/json, text/javascript, */*&http://od.ccw.cn/odata/v1/orders?$top=10&$filter=createdonutc lt datetime'2016-02-20t00:00:00'&2016-05-10t15:25:51.0000000+08:00&c81de5387d36d1ec6a4ad4d483ffae0a".hmac(CryptoAlgorithm.SHA256, key: secretKey)
-//        let data = NSString(string: "abc").dataUsingEncoding(NSUTF8StringEncoding)?.base64EncodedDataWithOptions(NSDataBase64EncodingOptions.Encoding64CharacterLineLength)
-//        let dataStr = NSString(data: data!, encoding: NSUTF8StringEncoding)
-//        UIApplication.sharedApplication().statusBarHidden = false //info.plist  View controller-based status bar appearance = no
+        //        let tmp = "get&&application/json, text/javascript, */*&http://od.ccw.cn/odata/v1/orders?$top=10&$filter=createdonutc lt datetime'2016-02-20t00:00:00'&2016-05-10t15:25:51.0000000+08:00&c81de5387d36d1ec6a4ad4d483ffae0a".hmac(CryptoAlgorithm.SHA256, key: secretKey)
+        //        let data = NSString(string: "abc").dataUsingEncoding(NSUTF8StringEncoding)?.base64EncodedDataWithOptions(NSDataBase64EncodingOptions.Encoding64CharacterLineLength)
+        //        let dataStr = NSString(data: data!, encoding: NSUTF8StringEncoding)
+        //        UIApplication.sharedApplication().statusBarHidden = false //info.plist  View controller-based status bar appearance = no
         self.setupNewNavigation()
     }
     override func viewWillDisappear(animated: Bool) {

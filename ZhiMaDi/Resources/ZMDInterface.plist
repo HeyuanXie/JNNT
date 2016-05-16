@@ -4,11 +4,5 @@
 <dict>
 	<key>1</key>
 	<string>芝麻地后台接口配置文件</string>
-	<key>CFBundleIdentifier</key>
-	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
-	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
-	<key>CFBundleVersion</key>
-	<string>1</string>
 </dict>
 </plist>

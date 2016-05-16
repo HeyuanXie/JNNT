@@ -68,8 +68,7 @@ class GoodsManagerHomeViewController:UIViewController ,UIScrollViewDelegate, UIT
             let viewController: UIViewController
             switch self{
             case Sort:
-                let homeBuyListViewController = GoodsManagerGoodsSortViewController.CreateFromStoreStoryboard() as! GoodsManagerGoodsSortViewController
-                viewController = homeBuyListViewController
+                viewController = UIViewController()
             case StoreHourse:
                 viewController = CrowdfundingHomeViewController()
             case Batch:

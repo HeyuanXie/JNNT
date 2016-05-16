@@ -86,7 +86,8 @@ class MyStoreHomeViewController: UIViewController,ZMDInterceptorProtocol {
             followBtn.rac_command = RACCommand(signalBlock: { (sender) -> RACSignal! in
                 return RACSignal.empty()
             })
-
+            storeLbl.text = ""
+            detailLbl.text = ""
             return cell!
         case .Income :
             let cellId = cellType.cellId

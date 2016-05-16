@@ -376,6 +376,21 @@
 		2BA222F21CE96CB3006BC426 /* GoodsManagerGoodsSortCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA222F01CE96CB3006BC426 /* GoodsManagerGoodsSortCell.swift */; };
 		2BA222F31CE96CB3006BC426 /* GoodsManagerGoodsSortViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA222F11CE96CB3006BC426 /* GoodsManagerGoodsSortViewController.swift */; };
 		2BA222F61CE96CFB006BC426 /* MarketManagerHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA222F51CE96CFB006BC426 /* MarketManagerHomeViewController.swift */; };
+		2BA222FC1CE96E00006BC426 /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2BA222F81CE96E00006BC426 /* AlipaySDK.bundle */; };
+		2BA222FD1CE96E00006BC426 /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BA222F91CE96E00006BC426 /* AlipaySDK.framework */; };
+		2BA222FE1CE96E00006BC426 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BA222FA1CE96E00006BC426 /* libcrypto.a */; };
+		2BA222FF1CE96E00006BC426 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BA222FB1CE96E00006BC426 /* libssl.a */; };
+		2BA223161CE9B169006BC426 /* MJExtensionConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BA223031CE9B169006BC426 /* MJExtensionConst.m */; };
+		2BA223171CE9B169006BC426 /* MJFoundation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BA223051CE9B169006BC426 /* MJFoundation.m */; };
+		2BA223181CE9B169006BC426 /* MJProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BA223071CE9B169006BC426 /* MJProperty.m */; };
+		2BA223191CE9B169006BC426 /* MJPropertyKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BA223091CE9B169006BC426 /* MJPropertyKey.m */; };
+		2BA2231A1CE9B169006BC426 /* MJPropertyType.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BA2230B1CE9B169006BC426 /* MJPropertyType.m */; };
+		2BA2231B1CE9B169006BC426 /* NSObject+MJClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BA2230D1CE9B169006BC426 /* NSObject+MJClass.m */; };
+		2BA2231C1CE9B169006BC426 /* NSObject+MJCoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BA2230F1CE9B169006BC426 /* NSObject+MJCoding.m */; };
+		2BA2231D1CE9B169006BC426 /* NSObject+MJKeyValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BA223111CE9B169006BC426 /* NSObject+MJKeyValue.m */; };
+		2BA2231E1CE9B169006BC426 /* NSObject+MJProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BA223131CE9B169006BC426 /* NSObject+MJProperty.m */; };
+		2BA2231F1CE9B169006BC426 /* NSString+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BA223151CE9B169006BC426 /* NSString+MJExtension.m */; };
+		2BA223211CE9BA37006BC426 /* ZMDProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA223201CE9BA37006BC426 /* ZMDProduct.swift */; };
 		2BA287D81CC091DA00B6281E /* MsgHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA287D71CC091DA00B6281E /* MsgHomeViewController.swift */; };
 		2BA287E41CC0942900B6281E /* message_activity@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BA287DA1CC0942900B6281E /* message_activity@2x.png */; };
 		2BA287E51CC0942900B6281E /* message_activity@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BA287DB1CC0942900B6281E /* message_activity@3x.png */; };
@@ -1088,6 +1103,32 @@
 		2BA222F01CE96CB3006BC426 /* GoodsManagerGoodsSortCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoodsManagerGoodsSortCell.swift; sourceTree = "<group>"; };
 		2BA222F11CE96CB3006BC426 /* GoodsManagerGoodsSortViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoodsManagerGoodsSortViewController.swift; sourceTree = "<group>"; };
 		2BA222F51CE96CFB006BC426 /* MarketManagerHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarketManagerHomeViewController.swift; sourceTree = "<group>"; };
+		2BA222F81CE96E00006BC426 /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
+		2BA222F91CE96E00006BC426 /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
+		2BA222FA1CE96E00006BC426 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = "<group>"; };
+		2BA222FB1CE96E00006BC426 /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libssl.a; sourceTree = "<group>"; };
+		2BA223011CE9B169006BC426 /* MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJExtension.h; sourceTree = "<group>"; };
+		2BA223021CE9B169006BC426 /* MJExtensionConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJExtensionConst.h; sourceTree = "<group>"; };
+		2BA223031CE9B169006BC426 /* MJExtensionConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJExtensionConst.m; sourceTree = "<group>"; };
+		2BA223041CE9B169006BC426 /* MJFoundation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJFoundation.h; sourceTree = "<group>"; };
+		2BA223051CE9B169006BC426 /* MJFoundation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJFoundation.m; sourceTree = "<group>"; };
+		2BA223061CE9B169006BC426 /* MJProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJProperty.h; sourceTree = "<group>"; };
+		2BA223071CE9B169006BC426 /* MJProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJProperty.m; sourceTree = "<group>"; };
+		2BA223081CE9B169006BC426 /* MJPropertyKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJPropertyKey.h; sourceTree = "<group>"; };
+		2BA223091CE9B169006BC426 /* MJPropertyKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJPropertyKey.m; sourceTree = "<group>"; };
+		2BA2230A1CE9B169006BC426 /* MJPropertyType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJPropertyType.h; sourceTree = "<group>"; };
+		2BA2230B1CE9B169006BC426 /* MJPropertyType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJPropertyType.m; sourceTree = "<group>"; };
+		2BA2230C1CE9B169006BC426 /* NSObject+MJClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MJClass.h"; sourceTree = "<group>"; };
+		2BA2230D1CE9B169006BC426 /* NSObject+MJClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MJClass.m"; sourceTree = "<group>"; };
+		2BA2230E1CE9B169006BC426 /* NSObject+MJCoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MJCoding.h"; sourceTree = "<group>"; };
+		2BA2230F1CE9B169006BC426 /* NSObject+MJCoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MJCoding.m"; sourceTree = "<group>"; };
+		2BA223101CE9B169006BC426 /* NSObject+MJKeyValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MJKeyValue.h"; sourceTree = "<group>"; };
+		2BA223111CE9B169006BC426 /* NSObject+MJKeyValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MJKeyValue.m"; sourceTree = "<group>"; };
+		2BA223121CE9B169006BC426 /* NSObject+MJProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MJProperty.h"; sourceTree = "<group>"; };
+		2BA223131CE9B169006BC426 /* NSObject+MJProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MJProperty.m"; sourceTree = "<group>"; };
+		2BA223141CE9B169006BC426 /* NSString+MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MJExtension.h"; sourceTree = "<group>"; };
+		2BA223151CE9B169006BC426 /* NSString+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MJExtension.m"; sourceTree = "<group>"; };
+		2BA223201CE9BA37006BC426 /* ZMDProduct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZMDProduct.swift; sourceTree = "<group>"; };
 		2BA287D71CC091DA00B6281E /* MsgHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MsgHomeViewController.swift; sourceTree = "<group>"; };
 		2BA287DA1CC0942900B6281E /* message_activity@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "message_activity@2x.png"; sourceTree = "<group>"; };
 		2BA287DB1CC0942900B6281E /* message_activity@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "message_activity@3x.png"; sourceTree = "<group>"; };
@@ -1436,11 +1477,14 @@
 				2B539ABD1C99511C00FFE6CD /* CoreTelephony.framework in Frameworks */,
 				2B539AC71C99518900FFE6CD /* Security.framework in Frameworks */,
 				2B539AC51C99514200FFE6CD /* UIKit.framework in Frameworks */,
+				2BA222FE1CE96E00006BC426 /* libcrypto.a in Frameworks */,
 				2B539AC31C99513A00FFE6CD /* Foundation.framework in Frameworks */,
 				2B539AC11C99513300FFE6CD /* CoreGraphics.framework in Frameworks */,
+				2BA222FD1CE96E00006BC426 /* AlipaySDK.framework in Frameworks */,
 				2B539ABB1C9950F400FFE6CD /* CoreFoundation.framework in Frameworks */,
 				2B539AB91C9950EC00FFE6CD /* CFNetwork.framework in Frameworks */,
 				2B3AC5E31C96BF6B00CC8662 /* ImageIO.framework in Frameworks */,
+				2BA222FF1CE96E00006BC426 /* libssl.a in Frameworks */,
 				2B539A9B1C992C6100FFE6CD /* libWeChatSDK.a in Frameworks */,
 				2B539A961C992C6100FFE6CD /* ShareSDKUI.framework in Frameworks */,
 				2B539A971C992C6100FFE6CD /* TencentOpenAPI.framework in Frameworks */,
@@ -2212,6 +2256,45 @@
 			path = MarketingManager;
 			sourceTree = "<group>";
 		};
+		2BA222F71CE96E00006BC426 /* AlipaySDK */ = {
+			isa = PBXGroup;
+			children = (
+				2BA222F81CE96E00006BC426 /* AlipaySDK.bundle */,
+				2BA222F91CE96E00006BC426 /* AlipaySDK.framework */,
+				2BA222FA1CE96E00006BC426 /* libcrypto.a */,
+				2BA222FB1CE96E00006BC426 /* libssl.a */,
+			);
+			path = AlipaySDK;
+			sourceTree = "<group>";
+		};
+		2BA223001CE9B169006BC426 /* MJExtension */ = {
+			isa = PBXGroup;
+			children = (
+				2BA223011CE9B169006BC426 /* MJExtension.h */,
+				2BA223021CE9B169006BC426 /* MJExtensionConst.h */,
+				2BA223031CE9B169006BC426 /* MJExtensionConst.m */,
+				2BA223041CE9B169006BC426 /* MJFoundation.h */,
+				2BA223051CE9B169006BC426 /* MJFoundation.m */,
+				2BA223061CE9B169006BC426 /* MJProperty.h */,
+				2BA223071CE9B169006BC426 /* MJProperty.m */,
+				2BA223081CE9B169006BC426 /* MJPropertyKey.h */,
+				2BA223091CE9B169006BC426 /* MJPropertyKey.m */,
+				2BA2230A1CE9B169006BC426 /* MJPropertyType.h */,
+				2BA2230B1CE9B169006BC426 /* MJPropertyType.m */,
+				2BA2230C1CE9B169006BC426 /* NSObject+MJClass.h */,
+				2BA2230D1CE9B169006BC426 /* NSObject+MJClass.m */,
+				2BA2230E1CE9B169006BC426 /* NSObject+MJCoding.h */,
+				2BA2230F1CE9B169006BC426 /* NSObject+MJCoding.m */,
+				2BA223101CE9B169006BC426 /* NSObject+MJKeyValue.h */,
+				2BA223111CE9B169006BC426 /* NSObject+MJKeyValue.m */,
+				2BA223121CE9B169006BC426 /* NSObject+MJProperty.h */,
+				2BA223131CE9B169006BC426 /* NSObject+MJProperty.m */,
+				2BA223141CE9B169006BC426 /* NSString+MJExtension.h */,
+				2BA223151CE9B169006BC426 /* NSString+MJExtension.m */,
+			);
+			path = MJExtension;
+			sourceTree = "<group>";
+		};
 		2BA287D61CC091CD00B6281E /* Msg */ = {
 			isa = PBXGroup;
 			children = (
@@ -2653,6 +2736,7 @@
 			isa = PBXGroup;
 			children = (
 				3C9098751C76A6E9006B7D2C /* QN_BaseDataModel.swift */,
+				2BA223201CE9BA37006BC426 /* ZMDProduct.swift */,
 			);
 			path = DataModule;
 			sourceTree = "<group>";
@@ -2673,6 +2757,8 @@
 		3C90987A1C76A6E9006B7D2C /* Librarys */ = {
 			isa = PBXGroup;
 			children = (
+				2BA223001CE9B169006BC426 /* MJExtension */,
+				2BA222F71CE96E00006BC426 /* AlipaySDK */,
 				2B539ACA1C9961F400FFE6CD /* LibBPush */,
 				2B539A701C992C6100FFE6CD /* ShareSDK */,
 				2BDEF3C91C7F028F00927F64 /* CycleScrollView */,
@@ -3449,6 +3535,7 @@
 				2BF52F961CB3BA2D0099F296 /* bank_js@3x.png in Resources */,
 				2BF52F741CB39B060099F296 /* shop_coins@3x.png in Resources */,
 				2B02B4FB1CABABCF0064B47C /* user_pingfen_selected@2x.png in Resources */,
+				2BA222FC1CE96E00006BC426 /* AlipaySDK.bundle in Resources */,
 				2B02B4F71CABABCF0064B47C /* user_interview_QRcode@2x.png in Resources */,
 				2BF52F661CB39B060099F296 /* shop_04express@3x.png in Resources */,
 				2B3AC5FE1C96C05B00CC8662 /* Share_Email@2x.png in Resources */,
@@ -3532,6 +3619,7 @@
 				3C9099591C76A6E9006B7D2C /* ChartViewPortHandler.swift in Sources */,
 				2B02B51C1CAD07CF0064B47C /* InvoiceTypeViewController.swift in Sources */,
 				3C9098FD1C76A6E9006B7D2C /* UIViewExtension.swift in Sources */,
+				2BA223171CE9B169006BC426 /* MJFoundation.m in Sources */,
 				2B74BEB11CDC9897005E0866 /* GoodsManagerBatchViewController.swift in Sources */,
 				3C90992B1C76A6E9006B7D2C /* ScatterChartData.swift in Sources */,
 				2B3ADCBB1CDAF90600A0C63B /* GoodsManagerHomeViewController.swift in Sources */,
@@ -3561,6 +3649,7 @@
 				3C90995E1C76A6E9006B7D2C /* Reachability.m in Sources */,
 				2B9D9F921C8FCC0400141D31 /* CustomPassWordView.swift in Sources */,
 				2B73D84D1C8678C40016FEB2 /* AddressViewController.swift in Sources */,
+				2BA223191CE9B169006BC426 /* MJPropertyKey.m in Sources */,
 				2B02B5511CAD2CCD0064B47C /* OrderPaySucceedViewController.swift in Sources */,
 				2BA222F21CE96CB3006BC426 /* GoodsManagerGoodsSortCell.swift in Sources */,
 				2B73D8531C868FC50016FEB2 /* CustomPickView.swift in Sources */,
@@ -3603,6 +3692,8 @@
 				3C9099351C76A6E9006B7D2C /* ChartRange.swift in Sources */,
 				2B02B5161CABBF0C0064B47C /* CustomJumpBtns.swift in Sources */,
 				3C9099141C76A6E9006B7D2C /* BarChartData.swift in Sources */,
+				2BA2231F1CE9B169006BC426 /* NSString+MJExtension.m in Sources */,
+				2BA2231E1CE9B169006BC426 /* NSObject+MJProperty.m in Sources */,
 				2BDEF3CC1C7F028F00927F64 /* CycleScrollView.m in Sources */,
 				2BC05C681CB630C300D3B1AE /* BankCardAuthenticationViewController.swift in Sources */,
 				3C9099601C76A6E9006B7D2C /* QNFormatTool.swift in Sources */,
@@ -3616,6 +3707,7 @@
 				3C9099581C76A6E9006B7D2C /* ChartUtils.swift in Sources */,
 				2B197DB81C843515006494CF /* LoginViewController.swift in Sources */,
 				2BB0EF001CB74A64000A186D /* AfterSalesReturnViewController.swift in Sources */,
+				2BA223161CE9B169006BC426 /* MJExtensionConst.m in Sources */,
 				2B989C081CB4E968008C6D23 /* ShoppingCartViewController.swift in Sources */,
 				3C90995C1C76A6E9006B7D2C /* NSData+AES.m in Sources */,
 				2B8DB08B1CC0DC6A004A0FB5 /* MsgOrderViewController.swift in Sources */,
@@ -3624,6 +3716,7 @@
 				2B74BEAF1CDC8FF6005E0866 /* GoodsManagerSearchViewController.swift in Sources */,
 				2B8BB2B91CBE30F600CD2AD5 /* OrderGoodsScoreViewController.swift in Sources */,
 				3C9099031C76A6E9006B7D2C /* BubbleChartView.swift in Sources */,
+				2BA223211CE9BA37006BC426 /* ZMDProduct.swift in Sources */,
 				2BF7F0741C8EB18B001C4595 /* FortuneCenterSelectPayViewController.swift in Sources */,
 				3C90992A1C76A6E9006B7D2C /* RadarChartDataSet.swift in Sources */,
 				3C9099291C76A6E9006B7D2C /* RadarChartData.swift in Sources */,
@@ -3659,6 +3752,8 @@
 				3C9099441C76A6E9006B7D2C /* ChartLegendRenderer.swift in Sources */,
 				2B02B4C21CAA81140064B47C /* OrderGoodsTableViewCell.swift in Sources */,
 				2B8DB08D1CC0DCC1004A0FB5 /* MsgOrderTableViewCell.swift in Sources */,
+				2BA2231C1CE9B169006BC426 /* NSObject+MJCoding.m in Sources */,
+				2BA2231D1CE9B169006BC426 /* NSObject+MJKeyValue.m in Sources */,
 				2B989C141CB50AF2008C6D23 /* WalletInComeViewController.swift in Sources */,
 				2BC05C711CB630F700D3B1AE /* WalletRechargeViewController.swift in Sources */,
 				3C9099101C76A6E9006B7D2C /* ChartLimitLine.swift in Sources */,
@@ -3711,6 +3806,7 @@
 				2B02B4BE1CAA77AE0064B47C /* DoubleGoodsTableViewCell.swift in Sources */,
 				2BC861571CD8349500B8D449 /* MyStoreAddLeaseHomeViewController.swift in Sources */,
 				3C9099011C76A6E9006B7D2C /* BarChartView.swift in Sources */,
+				2BA2231B1CE9B169006BC426 /* NSObject+MJClass.m in Sources */,
 				3C90992D1C76A6E9006B7D2C /* ChartDataApproximatorFilter.swift in Sources */,
 				3C9099541C76A6E9006B7D2C /* ChartColorTemplates.swift in Sources */,
 				3C9099231C76A6E9006B7D2C /* LineChartData.swift in Sources */,
@@ -3743,6 +3839,7 @@
 				3C9099061C76A6E9006B7D2C /* CombinedChartView.swift in Sources */,
 				3C9099321C76A6E9006B7D2C /* BarChartHighlighter.swift in Sources */,
 				3C9099431C76A6E9006B7D2C /* ChartDataRendererBase.swift in Sources */,
+				2BA2231A1CE9B169006BC426 /* MJPropertyType.m in Sources */,
 				3C90990B1C76A6E9006B7D2C /* RadarChartView.swift in Sources */,
 				2B8739C81CBF45D0007FE81A /* MineHomeHelpViewController.swift in Sources */,
 				3C9099331C76A6E9006B7D2C /* ChartHighlight.swift in Sources */,
@@ -3756,6 +3853,7 @@
 				3C9098581C76A482006B7D2C /* AppDelegate.swift in Sources */,
 				3C9099341C76A6E9006B7D2C /* ChartHighlighter.swift in Sources */,
 				2B5BBC111CD2F8F900D2AC9F /* MyStoreDisDetailViewController.swift in Sources */,
+				2BA223181CE9B169006BC426 /* MJProperty.m in Sources */,
 				3C9099481C76A6E9006B7D2C /* ChartXAxisRendererHorizontalBarChart.swift in Sources */,
 				3C90993A1C76A6E9006B7D2C /* BubbleChartDataProvider.swift in Sources */,
 				3C9099501C76A6E9006B7D2C /* LineScatterCandleRadarChartRenderer.swift in Sources */,
@@ -3896,6 +3994,7 @@
 					3/Support/PlatformSDK/QQSDK,
 					"$(PROJECT_DIR)/ZhiMaDi/Librarys/ShareSDK",
 					3/Support/Required,
+					"$(PROJECT_DIR)/ZhiMaDi/Librarys/AlipaySDK",
 				);
 				INFOPLIST_FILE = ZhiMaDi/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -3910,6 +4009,7 @@
 					3/Support/PlatformSDK/WeChatSDK,
 					"$(PROJECT_DIR)/ZhiMaDi/Librarys/JPush",
 					"$(PROJECT_DIR)/ZhiMaDi/Librarys/LibBPush",
+					"$(PROJECT_DIR)/ZhiMaDi/Librarys/AlipaySDK",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -3964,6 +4064,7 @@
 					3/Support/PlatformSDK/QQSDK,
 					"$(PROJECT_DIR)/ZhiMaDi/Librarys/ShareSDK",
 					3/Support/Required,
+					"$(PROJECT_DIR)/ZhiMaDi/Librarys/AlipaySDK",
 				);
 				INFOPLIST_FILE = ZhiMaDi/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -3978,6 +4079,7 @@
 					3/Support/PlatformSDK/WeChatSDK,
 					"$(PROJECT_DIR)/ZhiMaDi/Librarys/JPush",
 					"$(PROJECT_DIR)/ZhiMaDi/Librarys/LibBPush",
+					"$(PROJECT_DIR)/ZhiMaDi/Librarys/AlipaySDK",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",

@@ -20,12 +20,13 @@ class HomeBuyListViewController: UIViewController ,ZMDInterceptorProtocol, UITab
     
     var isLease = false             //租赁
     var typeSetting = TypeSetting.Horizontal      // 横屏
-    var dataArray = ["","","",""]
+    var dataArray = NSArray()
     var isStore = false  //商店展示搜索
     override func viewDidLoad() {
         super.viewDidLoad()
         self.currentTableView.backgroundColor = tableViewdefaultBackgroundColor
         self.setupNewNavigation()
+        self.updateData()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -40,7 +41,9 @@ class HomeBuyListViewController: UIViewController ,ZMDInterceptorProtocol, UITab
         return 1
     }
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return self.typeSetting == .Horizontal ? (self.dataArray.count/2 + 1) : self.dataArray.count
+        let tmp01 = self.dataArray.count/2
+        let tmp02 = self.dataArray.count%2
+        return self.typeSetting == .Horizontal ? (tmp01 + tmp02) : self.dataArray.count
     }
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return section == 0 ? 52 + 16 : 10
@@ -61,14 +64,20 @@ class HomeBuyListViewController: UIViewController ,ZMDInterceptorProtocol, UITab
         }
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
         let cellId = self.typeSetting == .Horizontal ? "doubleGoodsCell" : "goodsCell"
         let cell = tableView.dequeueReusableCellWithIdentifier(cellId) as! DoubleGoodsTableViewCell
         cell.goodsImgVLeft.image = UIImage(named: "home_banner02")
         if self.typeSetting == .Horizontal {
-            
+            let productL = self.dataArray[indexPath.section*2+1] as! ZMDProduct
+            if indexPath.section*2+1 == self.dataArray.count - 1{
+                let productR = self.dataArray[indexPath.section*2+1] as! ZMDProduct
+                DoubleGoodsTableViewCell.configCell(cell, product: productR,productR:productR)
+            } else {
+                DoubleGoodsTableViewCell.configCell(cell, product: productL,productR:nil)
+            }
         } else {
-            
+            let productL = self.dataArray[indexPath.section] as! ZMDProduct
+            DoubleGoodsTableViewCell.configCell(cell, product: productL,productR:nil)
         }
         return cell
     }
@@ -163,5 +172,15 @@ class HomeBuyListViewController: UIViewController ,ZMDInterceptorProtocol, UITab
         self.popView = UIView(frame: CGRectMake(0 , 64+52, kScreenWidth,  self.view.bounds.height - 100))
         self.popView.backgroundColor = UIColor.blueColor()
         self.popView.showAsPopAndhideWhenClickGray()
+    }
+    func updateData() {
+        QNNetworkTool.products { (products, error, dictionary) -> Void in
+            if let products = products {
+                self.dataArray = products
+                self.currentTableView.reloadData()
+            } else {
+                ZMDTool.showErrorPromptView(nil, error: error)
+            }
+        }
     }
 }

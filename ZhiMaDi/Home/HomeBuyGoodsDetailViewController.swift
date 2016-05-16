@@ -545,5 +545,5 @@ class HomeBuyGoodsDetailViewController: UIViewController,UITableViewDataSource,U
             self.getBackView(view)
         }
     }
-
+    
 }

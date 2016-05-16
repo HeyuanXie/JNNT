@@ -34,5 +34,16 @@ class DoubleGoodsTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
+    class func configCell(cell:DoubleGoodsTableViewCell!,product : ZMDProduct!,productR : ZMDProduct?) {
+        cell.titleLblLeft.text = product.Name
+        cell.currentPriceLblLeft.text = "￥\(product.Price)"
+        cell.originalPriceLblLeft.text = "原价:￥\(product.OldPrice)"
+        cell.countLblLeft.text = "已售\(product.Sold)件"
+        if let productR = productR {
+            cell.titleLblRight.text = productR.Name
+            cell.currentPriceLblRight.text = "￥\(productR.Price)"
+            cell.originalPriceLblRight.text = "原价:￥\(productR.OldPrice)"
+            cell.countLblRight.text = "已售\(productR.Sold)件"
+        }
+    }
 }

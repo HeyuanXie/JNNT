@@ -11,7 +11,7 @@ import Alamofire
 
 /// 服务器地址
 private let kServerAddress = { () -> String in
-    "http://115.159.28.132:8080"
+    "http://od.ccw.cn/odata/v1"//"http://115.159.28.132:8080"
 }()
 
 //yyyy-MM-ddTHH:mm:ss.
@@ -332,13 +332,106 @@ extension QNNetworkTool {
     }
     
 }
+
+//MARK:- 产品相关
 extension QNNetworkTool {
-    class func test() {
-        requestGET(urlTmp, parameters: nil) { (_, _, _, dictionary, error) -> Void in
+    class func products(completion: (products : NSArray?,error:NSError?,dictionary:NSDictionary?) -> Void) {
+        requestGET(kServerAddress + "/Products?$top=10", parameters: nil) { (_, _, _, dictionary, error) -> Void in
             if dictionary != nil{
-                println(dictionary)
+                let value = dictionary!["value"]
+                let products = ZMDProduct.mj_objectArrayWithKeyValuesArray(value)
+                completion(products:products,error: nil,dictionary:dictionary)
             }else {
+                completion(products:nil,error: error,dictionary:nil)
             }
         }
     }
 }
+//MARK:- 支付相关
+extension QNNetworkTool {
+    //MARK: 微信支付订单
+    /**
+    :param: orderNo     预约订单号
+    */
+    
+    class func wxpayOrderCheck(orderNo: NSString, completion: (NSDictionary?, NSError?, String?) -> Void) {
+        requestPOST(kServerAddress + "/api/payment/wxpayOrderCheck", parameters: paramsToJsonDataParams(["orderNo" : orderNo])) { (_, _, _, dictionary, error) -> Void in
+            print(dictionary)
+            if dictionary != nil, let errorCode = dictionary!["errorCode"]?.integerValue where errorCode == 1000{
+                completion(dictionary, nil, nil);
+            }
+            else {
+                completion(nil, error, dictionary?["errorMsg"] as? String)
+            }
+        }
+    }
+    //MARK: 微信支付订单 第三步：去后台确认支付结果
+    /**
+    :param: outTradeNo     商户订单号，看第一步
+    */
+    class func queryWxpayResult(outTradeNo: NSString, completion: (NSDictionary?, NSError?, String?) -> Void) {
+        requestPOST(kServerAddress + "/api/payment/queryWxpayResult", parameters: paramsToJsonDataParams(["outTradeNo" : outTradeNo])) { (_, _, _, dictionary, error) -> Void in
+            if dictionary != nil, let errorCode = dictionary!["errorCode"]?.integerValue where errorCode == 1000{
+                completion(dictionary, nil, nil);
+            }
+            else {
+                completion(nil, error, dictionary?["errorMsg"] as? String)
+            }
+        }
+    }
+    
+    //MARK: 支付宝支付订单
+    /**
+    :param: orderNo     预约订单号
+    */
+    class func alipayOrderCheck(orderNo: NSString, completion: (NSDictionary?, NSError?, String?) -> Void) {
+        requestPOST(kServerAddress + "/api/payment/aliPayOrderCheck", parameters: paramsToJsonDataParams(["orderNo" : orderNo])) { (_, _, _, dictionary, error) -> Void in
+            if dictionary != nil, let errorCode = dictionary!["errorCode"]?.integerValue where errorCode == 1000{
+                completion(dictionary, nil, nil);
+            }
+            else {
+                completion(nil, error, dictionary?["errorMsg"] as? String)
+            }
+        }
+    }
+    //MARK: 获取余额支付订单验证码
+    /**
+    */
+    class func payCheckCode(completion: (NSDictionary?, NSError?, String?) -> Void) {
+        requestPOST(kServerAddress + "/api/payment/checkcode", parameters: nil) { (_, _, _, dictionary, error) -> Void in
+            if dictionary != nil {
+                if let errorCode = dictionary!["errorCode"]?.integerValue where errorCode == 1000 {
+                    completion(dictionary, nil, nil);
+                } /*else if let errorCode = dictionary!["errorCode"]?.integerValue where errorCode == 1007 {
+                    //短信获取过于频繁
+                    completion(nil, error, "1007")
+                } */else {
+                    completion(nil, error, dictionary?["errorMsg"] as? String)
+                }
+            } else {
+                completion(nil, error, nil)
+            }
+        }
+    }
+    //MARK: 余额支付订单
+    /**
+    :param: orderNo     预约订单号
+    :param: checkCode   验证码
+    */
+    class func balancePayOrder(orderNo : String,checkCode : String,completion: (succeed : Bool!,NSDictionary?, NSError?, String?) -> Void) {
+        requestPOST(kServerAddress + "/api/payment/balancePayOrder", parameters: paramsToJsonDataParams(["orderNo" : orderNo,"checkCode" : checkCode])) { (_, _, _, dictionary, error) -> Void in
+            if dictionary != nil {
+                if let errorCode = dictionary!["errorCode"]?.integerValue where errorCode == 1000 {
+                    completion(succeed: true,dictionary, nil, nil);
+                }  else if let errorCode = dictionary!["errorCode"]?.integerValue where errorCode == 1010 { //验证码有误
+                    completion(succeed:false,dictionary, nil, nil);
+                }  else {
+                    completion(succeed:false,nil, error, dictionary?["errorMsg"] as? String)
+                }
+            } else {
+                completion(succeed:false,nil, error, nil)
+            }
+        }
+    }
+}
+

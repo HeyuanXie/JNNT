@@ -113,11 +113,48 @@ class CashierViewController: UIViewController,UITableViewDataSource,UITableViewD
         let footV = UIView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: 36+50))
         footV.backgroundColor = UIColor.clearColor()
         let btn = ZMDTool.getButton(CGRect(x: 12, y: 36, width: kScreenWidth - 24, height: 50), textForNormal: "确认支付", fontSize: 20, textColorForNormal:UIColor.whiteColor(),backgroundColor: UIColor.redColor()) { (sender) -> Void in
-            let vc = OrderPaySucceedViewController()
-            self.navigationController?.pushViewController(vc, animated: true)
+            
+            self.submitAliOrder(NSDictionary())
+//            let vc = OrderPaySucceedViewController()
+//            self.navigationController?.pushViewController(vc, animated: true)
         }
         ZMDTool.configViewLayer(btn)
         footV.addSubview(btn)
         tableView.tableFooterView = footV
+    }
+    //支付宝支付
+    private func aliPayCheck(){
+        //self.order!.orderNo
+        QNNetworkTool.alipayOrderCheck("", completion: { (dictionary, error, errorMsg) -> Void in
+            if dictionary != nil {
+                self.submitAliOrder(dictionary!)
+            }else {
+                ZMDTool.showPromptView( errorMsg!)
+            }
+        })
+    }
+    private func submitAliOrder(dic: NSDictionary){
+        //应用注册scheme,在AlixPayDemo-Info.plist定义URL types
+        let appScheme: String = "alisdkforQoocc"
+        let orderString = "_input_charset=\"utf-8\"&body=\"支付葫芦堡订单：9341100036\"&notify_url=\"http://localhost:2726/Plugins/AliPay/AppNotify\"&out_trade_no=\"36\"&partner=\"2088601988095231\"&payment_type=\"1\"&seller_id=\"2433420816@qq.com\"&service=\"mobile.securitypay.pay\"&subject=\"葫芦堡订单：9341100036\"&total_fee=\"0.01\"&sign=\"QWOKih770qUROSNN4/SP0oTWlAuiK0kvjOaX95uzl4zEJVI7xyZJQ+R458/T29PVg4oFeMHFkPyvhbtiL3YMqAWX25xqPTfDL177K73ugcACN8N7tH55b11ruqzMA0G29QriLQDRdta1gjPHJWlk+jOinn8FLbbGx98YZJK6OZM=\"&sign_type=\"RSA\""       //dic["payInfo"] as! String
+        
+        AlipaySDK.defaultService().payOrder(orderString, fromScheme: appScheme, callback: { (resultDic) -> Void in
+            if let Alipayjson = resultDic as? NSDictionary {
+                let resultStatus = Alipayjson.valueForKey("resultStatus") as! String
+                if resultStatus == "9000"{
+                    let vc = OrderPaySucceedViewController()
+                    self.navigationController?.pushViewController(vc, animated: true)
+                    ZMDTool.showPromptView( "支付成功")
+                }else if resultStatus == "8000" {
+                    ZMDTool.showPromptView( "正在处理中")
+                }else if resultStatus == "4000" {
+                    ZMDTool.showPromptView( "订单支付失败")
+                }else if resultStatus == "6001" {
+                    ZMDTool.showPromptView( "用户中途取消")
+                }else if resultStatus == "6002" {
+                    ZMDTool.showPromptView( "网络连接出错")
+                }
+            }
+        })
     }
 }

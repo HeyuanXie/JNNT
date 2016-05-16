@@ -97,5 +97,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
         println("DeviceToken 获取失败，原因：\(error)")
     }
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+        if url.host == "safepay" {
+            //跳转支付宝钱包进行支付，处理支付结果
+            AlipaySDK.defaultService().processOrderWithPaymentResult(url, standbyCallback: { (resultDic) -> Void in
+                
+            })
+        }
+        return true
+    }
+    // @available(iOS 9.0, *)
+    func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
+        if url.host == "safepay" {
+            //跳转支付宝钱包进行支付，处理支付结果
+            AlipaySDK.defaultService().processOrderWithPaymentResult(url, standbyCallback: { (resultDic) -> Void in
+                
+            })
+        }
+        return true
+    }
 }
 

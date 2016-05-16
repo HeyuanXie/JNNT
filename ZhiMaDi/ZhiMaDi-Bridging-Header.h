@@ -45,10 +45,11 @@
 // 富文本控件
 #import <CoreText/CoreText.h>
 #import <TYAttributedLabel/TYAttributedLabel.h>
-
+// 模型转换
+#import "MJExtension.h"
 // 第三方数据库框架
 #import <FMDB/FMDB.h>
 
 #import <CommonCrypto/CommonHMAC.h>
-
+#import <AlipaySDK/AlipaySDK.h>
 #endif /* SleepCare_Bridging_Header_h */

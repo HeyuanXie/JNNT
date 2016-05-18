@@ -87,6 +87,9 @@
                                 <state key="normal" title="登录">
                                     <color key="titleColor" red="0.29019607843137257" green="0.35686274509803922" blue="0.56862745098039214" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="login:" destination="ndF-P1-mWi" eventType="touchUpInside" id="MvX-RV-NJk"/>
+                                </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_promise_zp.png" translatesAutoresizingMaskIntoConstraints="NO" id="T5x-aB-yGy">
                                 <rect key="frame" x="113" y="439" width="95" height="30"/>
@@ -221,7 +224,7 @@
         <!--验证码登录-->
         <scene sceneID="p8e-g6-BD6">
             <objects>
-                <viewController id="F1v-9a-opS" customClass="LoginViewController" customModule="ZhiMaDi" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginWithCodeViewController" id="F1v-9a-opS" customClass="LoginWithCodeViewController" customModule="ZhiMaDi" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="zM2-lT-Snf"/>
                         <viewControllerLayoutGuide type="bottom" id="GN6-IS-25m"/>
@@ -288,6 +291,9 @@
                                 <state key="normal" title="登录">
                                     <color key="titleColor" red="0.2901960784" green="0.35686274509999999" blue="0.56862745100000001" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="login:" destination="F1v-9a-opS" eventType="touchUpInside" id="dlB-GZ-usR"/>
+                                </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_promise_zp.png" translatesAutoresizingMaskIntoConstraints="NO" id="4FU-yf-bpQ">
                                 <rect key="frame" x="113" y="439" width="95" height="30"/>
@@ -522,7 +528,7 @@
                                     <constraint firstAttribute="height" constant="60" id="AUY-jm-wv3"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="next"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="88u-7h-HhA" userLabel="line  分割线">
                                 <rect key="frame" x="0.0" y="75" width="320" height="1"/>
@@ -541,7 +547,7 @@
                                     <constraint firstAttribute="height" constant="60" id="OO7-4B-ZR7"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="next"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4bJ-4x-l9m" userLabel="line  分割线">
                                 <rect key="frame" x="0.0" y="136" width="320" height="1"/>
@@ -562,6 +568,9 @@
                                 <state key="normal" title="确定">
                                     <color key="titleColor" red="0.76862745099999996" green="0.76862745099999996" blue="0.76862745099999996" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="login:" destination="ZLp-yc-eEN" eventType="touchUpInside" id="c6Q-AQ-2RJ"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Etq-ja-3KV" userLabel="line  分割线">
                                 <rect key="frame" x="0.0" y="197" width="320" height="1"/>
@@ -580,7 +589,7 @@
                                     <constraint firstAttribute="height" constant="60" id="1ZX-Ec-a3k"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="好友邀请码(可选)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TPr-n1-Swr">
                                 <rect key="frame" x="0.0" y="198" width="320" height="60"/>
@@ -589,7 +598,7 @@
                                     <constraint firstAttribute="height" constant="60" id="Yze-7g-7OG"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="144-aO-XnO">
                                 <rect key="frame" x="0.0" y="258" width="42" height="42"/>
@@ -599,6 +608,9 @@
                                 </constraints>
                                 <state key="normal" image="common_01unselected.png"/>
                                 <state key="selected" image="common_02selected.png"/>
+                                <connections>
+                                    <action selector="agreeBtnCli:" destination="ZLp-yc-eEN" eventType="touchUpInside" id="8hd-ME-mFR"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我已同意葫芦堡" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EAu-Ja-2mN" userLabel="Label  4f4f4f">
                                 <rect key="frame" x="42" y="268" width="106" height="21"/>

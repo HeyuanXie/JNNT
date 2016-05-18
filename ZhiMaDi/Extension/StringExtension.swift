@@ -85,11 +85,11 @@ extension String{
         let phonePred = NSPredicate(format: "SELF MATCHES %@", phoneRegex)
         let phoneIsMatch = phonePred.evaluateWithObject(self)
         // 固定电话大陆
-        let telRegex = "^0\\d{2,3}(\\-)?\\d{7,8}$"
-        let telPred = NSPredicate(format: "SELF MATCHES %@", telRegex)
-        let telIsMatch = telPred.evaluateWithObject(self)
+//        let telRegex = "^0\\d{2,3}(\\-)?\\d{7,8}$"
+//        let telPred = NSPredicate(format: "SELF MATCHES %@", telRegex)
+//        let telIsMatch = telPred.evaluateWithObject(self)
         
-        return (phoneIsMatch || telIsMatch)
+        return phoneIsMatch
     }
     //MARK: 判断11位数字（手机号）
      func checkStingIsPhoneNum() -> Bool {

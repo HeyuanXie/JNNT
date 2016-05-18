@@ -11,9 +11,15 @@ import Alamofire
 
 /// 服务器地址
 private let kServerAddress = { () -> String in
-    "http://od.ccw.cn/odata/v1"//"http://115.159.28.132:8080"
+    "http://od.ccw.cn"//
 }()
-
+private let kOdataAddress = { () -> String in
+    "http://od.ccw.cn/odata/v1"
+}()
+// 图片地址
+private let kImageAddressMain = { () -> String in
+    "http://od.ccw.cn"
+}()
 //yyyy-MM-ddTHH:mm:ss.
 let publicKey = "c81de5387d36d1ec6a4ad4d483ffae0a";
 let secretKey = "6cb0c990dc6ec7e99e5cf3a9ec6260ae";
@@ -314,7 +320,7 @@ extension QNNetworkTool {
         }
     }
     // MARK:test
-    class func login(){
+    class func loginTest(){
         requestPOST("http://api.ccw.cn/api/auth/login", parameters: paramsToJsonDataParams(["mobile" : "13713368658","password" : "123456"])) { (_,response, _, dictionary, error) -> Void in
             
             let head = response?.allHeaderFields
@@ -330,13 +336,100 @@ extension QNNetworkTool {
 //            let cookies = NSHTTPCookieStorage.sharedHTTPCookieStorage().cookies
         }
     }
-    
 }
 
+//MARK:- 登陆相关
+extension QNNetworkTool {
+    // 验证手机验证码
+    class func checkCode(mobile:String,code:String,completion: (success: Bool!,error:NSError?,dictionary:NSDictionary?) -> Void){
+        requestPOST(kServerAddress + "/CheckCode", parameters: paramsToJsonDataParams(["mobile" : mobile,"code" : code])) { (_,response, _, dictionary, error) -> Void in
+            guard let dic = dictionary else {
+                completion(success:false,error: error,dictionary:nil)
+                return
+            }
+            if (dic["Success"] as? NSNumber)!.boolValue {
+                completion(success:true,error: nil,dictionary:nil)
+            } else {
+                completion(success:false,error: nil,dictionary:nil)
+            }
+        }
+    }
+    
+    // 手机发送验证码
+    class func sendCode(phone:String,completion: (success: Bool!,error:NSError?,dictionary:NSDictionary?) -> Void){
+        requestPOST(kServerAddress + "/SendCode", parameters: paramsToJsonDataParams(["mobile" : phone])) { (_,response, _, dictionary, error) -> Void in
+            guard let dic = dictionary else {
+                completion(success:false,error: error,dictionary:nil)
+                return
+            }
+            if (dic["Success"] as? NSNumber)!.boolValue {
+                completion(success:true,error: nil,dictionary:nil)
+            } else {
+                completion(success:false,error: nil,dictionary:nil)
+            }
+        }
+    }
+    // 手机验证码注册并登录
+    class func registerAndLogin(mobile:String,code:String,psw:String,completion: (success: Bool!,error:NSError?,dictionary:NSDictionary?) -> Void){
+        requestPOST(kServerAddress + "/PhoneLogin", parameters: paramsToJsonDataParams(["mobile" : mobile,"code" : code,"psw" : psw])) { (_,response, _, dictionary, error) -> Void in
+            guard let dic = dictionary else {
+                completion(success:false,error: error,dictionary:nil)
+                return
+            }
+            if (dic["Success"] as? NSNumber)!.boolValue {
+                completion(success:true,error: nil,dictionary:nil)
+            } else {
+                completion(success:false,error: nil,dictionary:nil)
+            }
+        }
+    }
+    // 用户登录
+    class func loginAjax(Username:String,Password:String,completion: (success: Bool!,error:NSError?,dictionary:NSDictionary?) -> Void){
+        requestPOST(kServerAddress + "/Customer/LoginAjax", parameters: paramsToJsonDataParams(["Username" : Username,"Password" : Password])) { (_,response, _, dictionary, error) -> Void in
+            guard let dic = dictionary else {
+                completion(success:false,error: error,dictionary:nil)
+                return
+            }
+            if (dic["Success"] as? String) == "0" {
+                completion(success:true,error: nil,dictionary:nil)
+            } else {
+                completion(success:false,error: nil,dictionary:nil)
+            }
+        }
+    }
+    // 手机验证码登录
+    class func loginWithPhoneCode(mobile:String,code:String,completion: (success: Bool!,error:NSError?,dictionary:NSDictionary?) -> Void){
+        requestPOST(kServerAddress + "/PhoneLogin", parameters: paramsToJsonDataParams(["mobile" : mobile,"code" : code])) { (_,response, _, dictionary, error) -> Void in
+            guard let dic = dictionary else {
+                completion(success:false,error: error,dictionary:nil)
+                return
+            }
+            if (dic["Success"] as? NSNumber)!.boolValue {
+                completion(success:true,error: nil,dictionary:nil)
+            } else {
+                completion(success:false,error: nil,dictionary:nil)
+            }
+        }
+    }
+}
 //MARK:- 产品相关
 extension QNNetworkTool {
-    class func products(completion: (products : NSArray?,error:NSError?,dictionary:NSDictionary?) -> Void) {
-        requestGET(kServerAddress + "/Products?$top=10", parameters: nil) { (_, _, _, dictionary, error) -> Void in
+    class func products(pagenumber:String,completion: (products : NSArray?,error:NSError?,dictionary:NSDictionary?) -> Void) {
+        requestGET(kServerAddress + "/catalog/searchajax?as=true&pagenumber=\(pagenumber)&q=", parameters: nil) { (_, _, _, dictionary, error) -> Void in
+            if dictionary != nil{
+                let productsData = dictionary!["Products"]
+                let products = ZMDProduct.mj_objectArrayWithKeyValuesArray(productsData)
+                completion(products:products,error: nil,dictionary:dictionary)
+            }else {
+                completion(products:nil,error: error,dictionary:nil)
+            }
+        }
+    }
+    
+    class func products(skip:Int,order : String?,isAsc : Bool? = true,completion: (products : NSArray?,error:NSError?,dictionary:NSDictionary?) -> Void) {
+        let ascTmp = (isAsc == nil || isAsc!) ? "desc" : "asc"
+        let urlTmp = order == nil ? "/Products?$top=20&$skip=\(skip*20)"  : "/Products?&$orderby=\(order!)+\(ascTmp)&$top=20&$skip=\(skip*20)"
+        requestGET(kServerAddress + urlTmp, parameters: nil) { (_, _, _, dictionary, error) -> Void in
             if dictionary != nil{
                 let value = dictionary!["value"]
                 let products = ZMDProduct.mj_objectArrayWithKeyValuesArray(value)
@@ -346,6 +439,21 @@ extension QNNetworkTool {
             }
         }
     }
+
+    
+    class func categories(completion: (categories : NSArray?,error:NSError?,dictionary:NSDictionary?) -> Void) {
+        //        "/Categories?$top=10"
+        requestGET(kServerAddress + "/Categories?$top=6", parameters: nil) { (_, _, _, dictionary, error) -> Void in
+            if dictionary != nil{
+                let value = dictionary!["value"]
+                let categories = ZMDCategory.mj_objectArrayWithKeyValuesArray(value)
+                completion(categories:categories,error: nil,dictionary:dictionary)
+            }else {
+                completion(categories:nil,error: error,dictionary:nil)
+            }
+        }
+    }
+    
 }
 //MARK:- 支付相关
 extension QNNetworkTool {

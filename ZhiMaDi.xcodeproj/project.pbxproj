@@ -340,6 +340,7 @@
 		2B74BEAF1CDC8FF6005E0866 /* GoodsManagerSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B74BEAE1CDC8FF6005E0866 /* GoodsManagerSearchViewController.swift */; };
 		2B74BEB11CDC9897005E0866 /* GoodsManagerBatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B74BEB01CDC9897005E0866 /* GoodsManagerBatchViewController.swift */; };
 		2B74BEB31CDC9B49005E0866 /* GoodsManagerBatchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B74BEB21CDC9B49005E0866 /* GoodsManagerBatchCell.swift */; };
+		2B79155D1CEAF54B00182F82 /* ZMDCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B79155C1CEAF54B00182F82 /* ZMDCategory.swift */; };
 		2B8739C61CBF3BAD007FE81A /* MineBroweRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8739C51CBF3BAD007FE81A /* MineBroweRecordViewController.swift */; };
 		2B8739C81CBF45D0007FE81A /* MineHomeHelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8739C71CBF45D0007FE81A /* MineHomeHelpViewController.swift */; };
 		2B8739CB1CBF6342007FE81A /* InvitationShareHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8739CA1CBF6342007FE81A /* InvitationShareHomeViewController.swift */; };
@@ -353,7 +354,9 @@
 		2B8DB08B1CC0DC6A004A0FB5 /* MsgOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8DB08A1CC0DC6A004A0FB5 /* MsgOrderViewController.swift */; };
 		2B8DB08D1CC0DCC1004A0FB5 /* MsgOrderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8DB08C1CC0DCC1004A0FB5 /* MsgOrderTableViewCell.swift */; };
 		2B90956F1CC62F4000959E55 /* VipClubHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B90956E1CC62F4000959E55 /* VipClubHomeViewController.swift */; };
+		2B91832A1CEC6FA20026F167 /* NetworkRemind in Resources */ = {isa = PBXBuildFile; fileRef = 2B9183291CEC6FA20026F167 /* NetworkRemind */; };
 		2B959EC01C76F5D0002EA40D /* HomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B959EBF1C76F5D0002EA40D /* HomePageViewController.swift */; };
+		2B9708031CEC0A32008BAEC4 /* LoginWithCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9708021CEC0A32008BAEC4 /* LoginWithCodeViewController.swift */; };
 		2B989C081CB4E968008C6D23 /* ShoppingCartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B989C071CB4E968008C6D23 /* ShoppingCartViewController.swift */; };
 		2B989C0A1CB4FB73008C6D23 /* WalletMyBillsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B989C091CB4FB73008C6D23 /* WalletMyBillsViewController.swift */; };
 		2B989C0D1CB50736008C6D23 /* none_bankcard@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B989C0B1CB50736008C6D23 /* none_bankcard@2x.png */; };
@@ -1067,6 +1070,7 @@
 		2B74BEAE1CDC8FF6005E0866 /* GoodsManagerSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoodsManagerSearchViewController.swift; sourceTree = "<group>"; };
 		2B74BEB01CDC9897005E0866 /* GoodsManagerBatchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoodsManagerBatchViewController.swift; sourceTree = "<group>"; };
 		2B74BEB21CDC9B49005E0866 /* GoodsManagerBatchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoodsManagerBatchCell.swift; sourceTree = "<group>"; };
+		2B79155C1CEAF54B00182F82 /* ZMDCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZMDCategory.swift; sourceTree = "<group>"; };
 		2B8739C51CBF3BAD007FE81A /* MineBroweRecordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineBroweRecordViewController.swift; sourceTree = "<group>"; };
 		2B8739C71CBF45D0007FE81A /* MineHomeHelpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineHomeHelpViewController.swift; sourceTree = "<group>"; };
 		2B8739CA1CBF6342007FE81A /* InvitationShareHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvitationShareHomeViewController.swift; sourceTree = "<group>"; };
@@ -1080,7 +1084,9 @@
 		2B8DB08A1CC0DC6A004A0FB5 /* MsgOrderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MsgOrderViewController.swift; sourceTree = "<group>"; };
 		2B8DB08C1CC0DCC1004A0FB5 /* MsgOrderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MsgOrderTableViewCell.swift; sourceTree = "<group>"; };
 		2B90956E1CC62F4000959E55 /* VipClubHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VipClubHomeViewController.swift; sourceTree = "<group>"; };
+		2B9183291CEC6FA20026F167 /* NetworkRemind */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NetworkRemind; sourceTree = "<group>"; };
 		2B959EBF1C76F5D0002EA40D /* HomePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageViewController.swift; sourceTree = "<group>"; };
+		2B9708021CEC0A32008BAEC4 /* LoginWithCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginWithCodeViewController.swift; sourceTree = "<group>"; };
 		2B989C071CB4E968008C6D23 /* ShoppingCartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoppingCartViewController.swift; sourceTree = "<group>"; };
 		2B989C091CB4FB73008C6D23 /* WalletMyBillsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletMyBillsViewController.swift; sourceTree = "<group>"; };
 		2B989C0B1CB50736008C6D23 /* none_bankcard@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "none_bankcard@2x.png"; sourceTree = "<group>"; };
@@ -2737,6 +2743,7 @@
 			children = (
 				3C9098751C76A6E9006B7D2C /* QN_BaseDataModel.swift */,
 				2BA223201CE9BA37006BC426 /* ZMDProduct.swift */,
+				2B79155C1CEAF54B00182F82 /* ZMDCategory.swift */,
 			);
 			path = DataModule;
 			sourceTree = "<group>";
@@ -3003,6 +3010,7 @@
 			isa = PBXGroup;
 			children = (
 				2B197DB71C843515006494CF /* LoginViewController.swift */,
+				2B9708021CEC0A32008BAEC4 /* LoginWithCodeViewController.swift */,
 				2BF8D8BE1CAE67D7006E0C4D /* PsWordFindViewController.swift */,
 				2BF8D8C01CAE6CFB006E0C4D /* ResisterViewController.swift */,
 			);
@@ -3017,6 +3025,7 @@
 				3C9098F31C76A6E9006B7D2C /* QNFormatTool.swift */,
 				3C9098F41C76A6E9006B7D2C /* QNInterceptor.swift */,
 				3C9098F51C76A6E9006B7D2C /* QNNetworkTool.swift */,
+				2B9183291CEC6FA20026F167 /* NetworkRemind */,
 				3C9098F61C76A6E9006B7D2C /* ZMDTool.swift */,
 			);
 			path = Tools;
@@ -3025,6 +3034,7 @@
 		3C9098F71C76A6E9006B7D2C /* UserCenter */ = {
 			isa = PBXGroup;
 			children = (
+				2B0ACCB11C858E11000EC299 /* MineSet */,
 				2BA4B0231CC8B296009A568D /* MyStore */,
 				2B9095701CC6337F00959E55 /* StoreShow */,
 				2B90956D1CC62EFF00959E55 /* UserVipClub */,
@@ -3034,7 +3044,6 @@
 				2BB0EEFC1CB743B5000A186D /* AfterSales */,
 				2BC05C611CB630C300D3B1AE /* BankCard */,
 				2B989C051CB4D96E008C6D23 /* Wallet */,
-				2B0ACCB11C858E11000EC299 /* MineSet */,
 				2B02B5141CABBEF40064B47C /* View */,
 				2B02B5111CABB7510064B47C /* Order */,
 				2B68C44E1C7A9C3000B401A9 /* MineHomeViewController.swift */,
@@ -3245,6 +3254,7 @@
 				2B5FF3ED1CA3F03C0067909D /* common_01unselected@2x.png in Resources */,
 				2BF2B0E21C96651100B310D5 /* Market01.png in Resources */,
 				2B3AC60C1C96C05B00CC8662 /* Share_WX@3x.png in Resources */,
+				2B91832A1CEC6FA20026F167 /* NetworkRemind in Resources */,
 				2BF52F721CB39B060099F296 /* shop_add_sale@3x.png in Resources */,
 				2BF2B0E61C96651100B310D5 /* Market05.png in Resources */,
 				2B02B5091CABABCF0064B47C /* user_wallet_coins@2x.png in Resources */,
@@ -3653,6 +3663,7 @@
 				2B02B5511CAD2CCD0064B47C /* OrderPaySucceedViewController.swift in Sources */,
 				2BA222F21CE96CB3006BC426 /* GoodsManagerGoodsSortCell.swift in Sources */,
 				2B73D8531C868FC50016FEB2 /* CustomPickView.swift in Sources */,
+				2B79155D1CEAF54B00182F82 /* ZMDCategory.swift in Sources */,
 				3C9099201C76A6E9006B7D2C /* ChartDataEntry.swift in Sources */,
 				3C90993F1C76A6E9006B7D2C /* BarChartRenderer.swift in Sources */,
 				2B6F90961CB6599500BD7A5D /* BankCardSetPsViewController.swift in Sources */,
@@ -3838,6 +3849,7 @@
 				3C9098FF1C76A6E9006B7D2C /* ChartAnimationEasing.swift in Sources */,
 				3C9099061C76A6E9006B7D2C /* CombinedChartView.swift in Sources */,
 				3C9099321C76A6E9006B7D2C /* BarChartHighlighter.swift in Sources */,
+				2B9708031CEC0A32008BAEC4 /* LoginWithCodeViewController.swift in Sources */,
 				3C9099431C76A6E9006B7D2C /* ChartDataRendererBase.swift in Sources */,
 				2BA2231A1CE9B169006BC426 /* MJPropertyType.m in Sources */,
 				3C90990B1C76A6E9006B7D2C /* RadarChartView.swift in Sources */,

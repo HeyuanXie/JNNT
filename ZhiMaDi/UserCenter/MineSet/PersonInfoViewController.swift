@@ -104,7 +104,11 @@ class PersonInfoViewController:UIViewController,UITableViewDataSource, UITableVi
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return indexPath.section == 0 ? 85 : tableViewCellDefaultHeight
     }
-    
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headView = UIView(frame: CGRectMake(0, 0, kScreenWidth, 16))
+        headView.backgroundColor = UIColor.clearColor()
+        return headView
+    }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cellId = "cell\(indexPath.row)\(indexPath.section)"
         var cell = tableView.dequeueReusableCellWithIdentifier(cellId) as UITableViewCell!
@@ -264,11 +268,19 @@ class PersonInfoViewController:UIViewController,UITableViewDataSource, UITableVi
     private func subViewInit(){
         self.title = "个人设置"
         self.tableView = UITableView(frame: self.view.bounds, style: UITableViewStyle.Plain)
-        self.tableView.backgroundColor = defaultBackgroundGrayColor
+        self.tableView.backgroundColor = RGB(245,245,245,1)
         self.tableView.separatorStyle = .None
         self.tableView.dataSource = self
         self.tableView.delegate = self
         self.view.addSubview(self.tableView)
+        let footV = UIView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: 64 + 50))
+        footV.backgroundColor = UIColor.clearColor()
+        let btn = ZMDTool.getButton(CGRect(x: 12, y: 64, width: kScreenWidth - 24, height: 50), textForNormal: "退出登录", fontSize: 17,textColorForNormal:RGB(173,173,173,1), backgroundColor: UIColor.clearColor()) { (sender) -> Void in
+            cleanPassword()
+            ZMDTool.enterLoginViewController()
+        }
+        footV.addSubview(btn)
+        self.tableView.tableFooterView = footV
     }
     private func dataInit(){
         self.userCenterData = [UserCenterCellType.Head,UserCenterCellType.NickN,UserCenterCellType.RealName, UserCenterCellType.Address, UserCenterCellType.ChangePs, UserCenterCellType.Clean]

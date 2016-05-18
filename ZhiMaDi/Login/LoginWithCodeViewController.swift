@@ -1,15 +1,15 @@
 //
-//  LoginViewController.swift
+//  LoginWithCodeViewController.swift
 //  ZhiMaDi
 //
-//  Created by haijie on 16/2/29.
+//  Created by haijie on 16/5/18.
 //  Copyright © 2016年 ZhiMaDi. All rights reserved.
 //
 
 import UIKit
-// 登录
-class LoginViewController: UIViewController , ZMDInterceptorNavigationBarHiddenProtocol, UITextFieldDelegate{
 
+class LoginWithCodeViewController: UIViewController , ZMDInterceptorNavigationBarHiddenProtocol, UITextFieldDelegate{
+    
     @IBOutlet weak var accountTextField: UITextField!
     @IBOutlet weak var verificationTextField: UITextField!
     @IBOutlet weak var thirdView: UIView!
@@ -17,12 +17,11 @@ class LoginViewController: UIViewController , ZMDInterceptorNavigationBarHiddenP
     @IBOutlet weak var loginBtn: UIButton!
     
     @IBOutlet weak var rightBar: UIBarButtonItem!
+    var getVerificationBtn: UIButton!  //  getVerificationBtn == nil ？ 密码登录 ： 验证码登录
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.updateUI()
-        // 如果有本地账号了，就自动登录
-        self.autoLogin()
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
@@ -48,20 +47,20 @@ class LoginViewController: UIViewController , ZMDInterceptorNavigationBarHiddenP
     @IBAction func login(sender: UIButton) {
         self.login()
     }
-//    @IBAction func goBack(sender: UIButton) {
-//        if self.getVerificationBtn == nil {
-//            self.navigationController?.popToRootViewControllerAnimated(true)
-//        } else {
-//            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()
-//            ZMDTool.enterRootViewController(vc!)
-//        }
-//    }
+    //    @IBAction func goBack(sender: UIButton) {
+    //        if self.getVerificationBtn == nil {
+    //            self.navigationController?.popToRootViewControllerAnimated(true)
+    //        } else {
+    //            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()
+    //            ZMDTool.enterRootViewController(vc!)
+    //        }
+    //    }
     //回到帐户登录
     @IBAction func accountBtnCli(sender: UIButton) {
         self.navigationController?.popViewControllerAnimated(true)
     }
     
-    //MARK: - PrivateMethod 
+    //MARK: - PrivateMethod
     func updateUI() {
         // 进一步配置账号和密码输入UI
         let accountImageView = UIImageView(frame: CGRectMake(10, 0, 40, 20))
@@ -86,11 +85,41 @@ class LoginViewController: UIViewController , ZMDInterceptorNavigationBarHiddenP
         }
         self.view.addGestureRecognizer(tap)
         
+        
+        // 获取验证码的按钮
+        let btn = ZMDTool.getButton(CGRect(x: kScreenWidth - 92 - 12-12, y: 14, width: 92, height: 32), textForNormal: "获取验证码", fontSize: 13, textColorForNormal:defaultDetailTextColor,backgroundColor: UIColor.clearColor(), blockForCli: { (sender) -> Void in
+            
+        })
+        ZMDTool.configViewLayerWithSize(btn, size: 18)
+        btn.layer.borderWidth = 1
+        btn.layer.borderColor = defaultLineColor.CGColor
+        
+        self.accountTextField.rightViewMode =  UITextFieldViewMode.Always
+        self.accountTextField.rightView = btn
+        self.getVerificationBtn = btn
+        
+        
+        LoginViewController.waitingAuthCode(self.getVerificationBtn, start: false)
+        self.getVerificationBtn.rac_signalForControlEvents(.TouchUpInside).subscribeNext { [weak self](sender) -> Void in
+            if let strongSelf = self {
+                LoginViewController.fetchAuthCode(strongSelf, phone: { () -> String? in
+                    if !strongSelf.accountTextField.text!.checkStingIsPhone()  {
+                        ZMDTool.showPromptView( "请填写手机号码")
+                        strongSelf.accountTextField.text = nil; strongSelf.accountTextField.becomeFirstResponder()
+                        return nil
+                    }
+                    else {
+                        return strongSelf.accountTextField.text!
+                    }
+                    }, authCodeButton: strongSelf.getVerificationBtn, isRegister: true)
+            }
+        }
+        
         let thirdTitle = ["微信","微博","QQ"]
         let thirdImage = ["common_share_wechat","common_share_weibo","common_share_qq"]
         var i = CGFloat(0)
         for title in thirdTitle {
-            //105 50 50 
+            //105 50 50
             let width = CGFloat(50),height = CGFloat(75)
             let x = 25+width*i + 50*i
             let btn = ZMDTool.getBtn(CGRect(x: x, y: 0, width: width, height: height))
@@ -104,11 +133,10 @@ class LoginViewController: UIViewController , ZMDInterceptorNavigationBarHiddenP
     }
     func login() {
         if !self.checkAccountPassWord() {return}
-        if let usrN = self.accountTextField.text, let ps = self.verificationTextField.text {
-            QNNetworkTool.loginAjax(usrN, Password: ps, completion: { (success, error, dictionary) -> Void in
+        if let phone = self.accountTextField.text, let code = self.verificationTextField.text {
+            QNNetworkTool.loginWithPhoneCode(phone, code: code, completion: { (success, error, dictionary) -> Void in
                 if success! {
                     ZMDTool.showPromptView("成功")
-                    saveAccountAndPassword(usrN, password: ps)
                     g_currentGroup = ""
                     let vc = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()
                     ZMDTool.enterRootViewController(vc!)
@@ -152,62 +180,3 @@ class LoginViewController: UIViewController , ZMDInterceptorNavigationBarHiddenP
         return true
     }
 }
-// MARK: - 获取验证码UI 显示的超时时间
-private let overTimeMax = 60
-// MARK: - 获取验证码的支持
-extension LoginViewController {
-    // MARK: 验证码
-    // 从服务器获取验证码
-    
-    class func fetchAuthCode(viewController: UIViewController, phone: (() -> String?), authCodeButton: UIButton?, isRegister: Bool) {
-        // where phoneNum > 0
-        if let phoneNum = phone(){
-            ZMDTool.showActivityView("正在获取验证码...", inView: viewController.view)
-            if isRegister {
-                QNNetworkTool.sendCode(phoneNum, completion: { (success, error, dictionary) -> Void in
-                    ZMDTool.hiddenActivityView()
-                    if success! {
-                        ZMDTool.showPromptView( "验证码已发送到你手机", nil)
-                        self.waitingAuthCode(authCodeButton, start: true)
-                    }
-                    else {
-                        ZMDTool.showErrorPromptView(nil, error: error, errorMsg: nil)
-                    }
-                })
-            }else{}
-        }
-    }
-    // 显示获取验证码倒计时
-    class func waitingAuthCode(button: UIButton!, start: Bool = false) {
-        if button == nil { return } // 验证码的UI变化，如果没有button，则不会有变化
-        
-        let overTimer = button.tag
-        if overTimer == 0 && start {
-            button.tag = overTimeMax
-        }
-        else {
-            button.tag = max(overTimer - 1, 0)
-        }
-        
-        if button.tag == 0 {
-            button.setTitle("获取验证码", forState: .Normal)
-            button.backgroundColor = UIColor.clearColor()
-            button.setTitleColor(UIColor.grayColor(), forState: .Normal)
-            button.setTitleColor(UIColor.grayColor(), forState: .Highlighted)
-            button.enabled = true
-        }
-        else {
-            button.setTitle("\(button.tag)S", forState: .Normal)
-            button.backgroundColor = UIColor.whiteColor()
-            button.setTitleColor(appThemeColor, forState: .Normal)
-            button.enabled = false
-            button.setNeedsLayout()
-            
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (Int64)(UInt64(1) * NSEC_PER_SEC)), dispatch_get_main_queue(), { () in
-                self.waitingAuthCode(button)
-            })
-        }
-    }
-}
-
-

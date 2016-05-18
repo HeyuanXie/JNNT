@@ -18,12 +18,9 @@ class ResisterViewController: UIViewController, UITextFieldDelegate{
     @IBOutlet weak var loginBtn: UIButton!
     
     var getVerificationBtn: UIButton!  //  getVerificationBtn == nil ？ 密码登录 ： 验证码登录
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.updateUI()
-        // 如果有本地账号了，就自动登录
-        self.autoLogin()
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
@@ -45,9 +42,16 @@ class ResisterViewController: UIViewController, UITextFieldDelegate{
     
     // @IBAction
     // MARK: 登录
-    //    @IBAction func login(sender: UIButton) {
-    //        self.login()
-    //    }
+    @IBAction func login(sender: UIButton) {
+        if self.agreeBtn.selected {
+            self.login()
+        } else {
+            ZMDTool.showPromptView("请先同意葫芦堡用户注册协议")
+        }
+    }
+    @IBAction func agreeBtnCli(sender: UIButton) {
+        self.agreeBtn.selected = !self.agreeBtn.selected
+    }
     //    @IBAction func goBack(sender: UIButton) {
     //        if self.getVerificationBtn == nil {
     //            self.navigationController?.popToRootViewControllerAnimated(true)
@@ -105,9 +109,10 @@ class ResisterViewController: UIViewController, UITextFieldDelegate{
         self.getVerificationBtn.rac_signalForControlEvents(.TouchUpInside).subscribeNext { [weak self](sender) -> Void in
             if let strongSelf = self {
                 LoginViewController.fetchAuthCode(strongSelf, phone: { () -> String? in
-                    if strongSelf.accountTextField.text!.checkStingIsPhone()  {
-                        ZMDTool.showPromptView( "请填写手机号码")
-                        strongSelf.accountTextField.text = nil; strongSelf.accountTextField.becomeFirstResponder()
+                    if !strongSelf.accountTextField.text!.checkStingIsPhone()  {
+                        ZMDTool.showPromptView( "请正确填写手机号码")
+                        strongSelf.accountTextField.text = nil
+                        strongSelf.accountTextField.becomeFirstResponder()
                         return nil
                     }
                     else {
@@ -119,24 +124,19 @@ class ResisterViewController: UIViewController, UITextFieldDelegate{
     }
     func login() {
         if !self.checkAccountPassWord() {return}
-        if let groupId = self.accountTextField.text, let groupPassword = self.verificationTextField.text {
-            //            QNNetworkTool.login(GroupId: groupId, GroupPassword: groupPassword)
+        if let phone = self.accountTextField.text,let code = self.verificationTextField.text , let psw = self.verificationTextField.text {
+            QNNetworkTool.registerAndLogin(phone, code: code, psw: psw, completion: { (success, error, dictionary) -> Void in
+                if success! {
+                    ZMDTool.showPromptView("成功")
+                    let vc = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()
+                    ZMDTool.enterRootViewController(vc!)
+                } else {
+                    ZMDTool.showErrorPromptView(nil, error: error, errorMsg: "失败")
+                }
+            })
         }
     }
-    
-    // MARK: 登录，并把accoutn和password写入的页面上
-    func login(account: String, password: String) {
-        self.accountTextField.text = account
-        self.verificationTextField.text = password
-        self.login()
-    }
-    
-    // MARK: 自动登录，获取本机保存的账号密码进行登录
-    func autoLogin() {
-        if let account = g_Account, password = g_Password {
-            self.login(account, password: password)
-        }
-    }
+
     
     // 判断输入的合法性
     private func checkAccountPassWord() -> Bool {
@@ -145,13 +145,17 @@ class ResisterViewController: UIViewController, UITextFieldDelegate{
             self.accountTextField.becomeFirstResponder()
             return false
         }else if(self.accountTextField.text?.characters.count == 0) {
-            ZMDTool.showPromptView("请输入密码")
+            ZMDTool.showPromptView("请输入帐号")
             self.verificationTextField.becomeFirstResponder()
             return false
             
         }else if (self.verificationTextField.text?.characters.count == 0){
-            ZMDTool.showPromptView("请输入账号")
-            self.accountTextField.becomeFirstResponder()
+            ZMDTool.showPromptView("请输入验证码")
+            self.verificationTextField.becomeFirstResponder()
+            return false
+        }else if (self.psTextField.text?.characters.count == 0){
+            ZMDTool.showPromptView("请输入密码")
+            self.psTextField.becomeFirstResponder()
             return false
         }
         return true

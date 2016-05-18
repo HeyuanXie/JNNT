@@ -33,18 +33,25 @@ class HomeBuyGoodsDetailViewController: UIViewController,UITableViewDataSource,U
     var goodsCellTypes: [GoodsCellType]!
     var navBackView : UIView!
     var navLine : UIView!
+    var product : ZMDProduct!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.dataInit()
         self.updateUI()
-        self.getBackView((self.navigationController?.navigationBar)!)
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
-        self.setupNavigation()
+    }
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(true)
+        self.getBackView((self.navigationController?.navigationBar)!)
+        self.setupNavigationWithBg()
     }
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(true)
+        self.navBackView.alpha = 1.0
+        self.navLine.alpha = 1.0
+        self.navLine.hidden = false
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -151,14 +158,17 @@ class HomeBuyGoodsDetailViewController: UIViewController,UITableViewDataSource,U
     }
     //MARK: - scrollView
     func scrollViewDidScroll(scrollView: UIScrollView) {
+        if scrollView != self.currentTableView {
+            return
+        }
         var alaph = (scrollView.contentOffset.y) / 150.0
         alaph = alaph > 1 ? 1 : alaph
         if self.navBackView != nil {
             if alaph == 0 {
                 self.navLine.hidden = true
-                self.navLine.alpha = alaph
             } else {
-                 self.navLine.hidden = false
+                self.navLine.alpha = alaph
+                self.navLine.hidden = false
             }
             if alaph > 0.5 {
                 self.setupNavigation()
@@ -213,13 +223,11 @@ class HomeBuyGoodsDetailViewController: UIViewController,UITableViewDataSource,U
     //MARK: 商品详请 cell
     func cellForHomeDetail(tableView: UITableView,indexPath: NSIndexPath)-> UITableViewCell {
         let cellId = "detailCell"
-        var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
-        if cell == nil {
-            cell = UITableViewCell(style: .Default, reuseIdentifier: cellId)
-            cell!.selectionStyle = .None
-            cell!.contentView.backgroundColor = UIColor.whiteColor()
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellId) as! ContentTypeDetailCell
+        if self.product != nil {
+            ContentTypeDetailCell.configProductDetailCell(cell, product: self.product)
         }
-        return cell!
+        return cell
     }
     //MARK: 商品购买选项 cell
     func cellForHomeMenu(tableView: UITableView,indexPath: NSIndexPath)-> UITableViewCell {
@@ -536,8 +544,8 @@ class HomeBuyGoodsDetailViewController: UIViewController,UITableViewDataSource,U
                 }
             }
             self.navBackView = superView
-            self.navBackView.backgroundColor = navigationBackgroundColor
             self.navBackView.alpha = 0
+            self.navBackView.backgroundColor = navigationBackgroundColor
         } else if superView.isKindOfClass(NSClassFromString("_UIBackdropView")!) {
             superView.hidden = true
         }
@@ -545,5 +553,30 @@ class HomeBuyGoodsDetailViewController: UIViewController,UITableViewDataSource,U
             self.getBackView(view)
         }
     }
-    
+}
+class ContentTypeDetailCell: UITableViewCell {
+    @IBOutlet weak var nameLbl: UILabel!
+    @IBOutlet weak var priceLbl: UILabel!
+    @IBOutlet weak var priceLblWidthcon: NSLayoutConstraint!
+    @IBOutlet weak var oldPriceLbl: UILabel!
+    @IBOutlet weak var skuLbl: UILabel!
+    @IBOutlet weak var isFreeLbl: UILabel!
+    @IBOutlet weak var soldCountLbl: UILabel!
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+    }
+    class func configProductDetailCell(cell:ContentTypeDetailCell!,product : ZMDProduct) {
+            cell.nameLbl.text = product.Name
+        if let productPrice = product.ProductPrice {
+            cell.priceLbl.text = "￥\(productPrice.Price)"
+            cell.priceLblWidthcon.constant = "￥\(productPrice.Price)".sizeWithFont(defaultSysFontWithSize(20), maxWidth: 200).width
+            //          cell.layoutIfNeeded()
+            cell.oldPriceLbl.text = "原价:￥\(productPrice.OldPrice)"
+        }
+
+        cell.soldCountLbl.text = "已售\(product.Sold)件"
+        cell.skuLbl.text = "商品货号:\(product.Sku)"
+        cell.isFreeLbl.text = product.IsFreeShipping!.boolValue ? "运费:免邮" : "运费:不免邮"
+    }
 }

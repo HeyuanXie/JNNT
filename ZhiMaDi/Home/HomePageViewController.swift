@@ -126,6 +126,7 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
     var userCenterData: [UserCenterCellType]!
     var menuType: [MenuType]!
     var 下拉视窗 : UIView!
+    var categories = NSMutableArray()
     override func viewDidLoad() {
         super.viewDidLoad()
         // 让导航栏支持右滑返回功能
@@ -135,6 +136,8 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
+        self.fetchData()
+
         //
         //        let tmp = "get&&application/json, text/javascript, */*&http://od.ccw.cn/odata/v1/orders?$top=10&$filter=createdonutc lt datetime'2016-02-20t00:00:00'&2016-05-10t15:25:51.0000000+08:00&c81de5387d36d1ec6a4ad4d483ffae0a".hmac(CryptoAlgorithm.SHA256, key: secretKey)
         //        let data = NSString(string: tmp).dataUsingEncoding(NSUTF8StringEncoding)?.base64EncodedDataWithOptions(NSDataBase64EncodingOptions.Encoding64CharacterLineLength)
@@ -202,34 +205,21 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
     func cellForHomeHead(tableView: UITableView,indexPath: NSIndexPath)-> UITableViewCell {
         let cellId = "HeadCell"
         var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
+        let menuTitles = self.categories
         if cell == nil {
             cell = UITableViewCell(style: .Default, reuseIdentifier: cellId)
             cell!.selectionStyle = .None
             cell!.contentView.backgroundColor = UIColor.whiteColor()
             
-            let menuTitles = ["全部","床上用品","儿童家用","生活万花筒","布艺/软饰","生活空间"]
             let width = 80,height = 44
             let scrollView = UIScrollView(frame: CGRect(x: 0, y: 0, width: kScreenWidth - 44, height: 44)) //66
+            scrollView.tag = 10001
             scrollView.backgroundColor = UIColor.clearColor()
             scrollView.showsHorizontalScrollIndicator = false
             scrollView.contentSize = CGSize(width: width * menuTitles.count, height: height)
             cell?.contentView.addSubview(scrollView)
-            var i = 0
-            for title in menuTitles {
-                let x = i * width,y = 0
-                let frame = CGRect(x: x, y: y, width: width, height: height)
-                i++
-                
-                let headBtn = UIButton(frame: frame)
-                headBtn.setTitle(title, forState: .Normal)
-                headBtn.titleLabel?.font = defaultDetailTextSize
-                headBtn.setTitleColor(defaultDetailTextColor, forState: .Normal)
-                headBtn.setTitleColor(defaultSelectColor, forState: .Selected)
-                headBtn.titleLabel?.textAlignment = .Center
-                headBtn.rac_signalForControlEvents(.TouchUpInside).subscribeNext({ (sender) -> Void in
-                })
-                scrollView.addSubview(headBtn)
-            }
+      
+            
             //下部弹窗
             let 下拉 = UIButton(frame: CGRect(x: kScreenWidth - 44, y: 8, width: 44, height: 28))
             下拉.backgroundColor = UIColor.whiteColor()
@@ -267,7 +257,7 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
 
                         let menuBtn = UIButton(frame: CGRect(x: x, y: y, width: width, height: height))
                         menuBtn.backgroundColor = UIColor.clearColor()
-                        menuBtn.setTitle(title, forState: .Normal)
+                        menuBtn.setTitle((title as! ZMDCategory).Name, forState: .Normal)
                         menuBtn.titleLabel?.font = defaultDetailTextSize
                         menuBtn.setTitleColor(defaultTextColor, forState: .Normal)
                         menuBtn.setTitleColor(defaultSelectColor, forState: .Selected)
@@ -287,6 +277,25 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
             cell?.contentView.addSubview(下拉)
             cell?.contentView.addSubview(ZMDTool.getLine(CGRect(x: kScreenWidth - 44, y: 8, width: 0.5, height: 28)))
         }
+        let scrollView = cell?.viewWithTag(10001) as! UIScrollView
+        var i = 0
+        let width = 80,height = 44
+        for title in menuTitles {
+            let x = i * width,y = 0
+            let frame = CGRect(x: x, y: y, width: width, height: height)
+            i++
+            
+            let headBtn = UIButton(frame: frame)
+            headBtn.setTitle((title as! ZMDCategory).Name, forState: .Normal)
+            headBtn.titleLabel?.font = defaultDetailTextSize
+            headBtn.setTitleColor(defaultDetailTextColor, forState: .Normal)
+            headBtn.setTitleColor(defaultSelectColor, forState: .Selected)
+            headBtn.titleLabel?.textAlignment = .Center
+            headBtn.rac_signalForControlEvents(.TouchUpInside).subscribeNext({ (sender) -> Void in
+            })
+            scrollView.addSubview(headBtn)
+        }
+
         return cell!
     }
     //MARK: 广告 cell
@@ -469,6 +478,16 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
         
     }
     func fetchData(){
+        QNNetworkTool.categories { (categories, error, dictionary) -> Void in
+            if let categories = categories {
+                self.categories.removeAllObjects()
+                self.categories.addObjectsFromArray(categories as [AnyObject])
+                
+                self.currentTableView.reloadData()
+            } else {
+                ZMDTool.showErrorPromptView(nil, error: error)
+            }
+        }
     }
     private func dataInit(){
         self.userCenterData = [.HomeContentTypeHead,.HomeContentTypeAd,.HomeContentTypeMenu,.HomeContentTypeGoods,.HomeContentTypeRecommendationHead,.HomeContentTypeRecommendation, .HomeContentTypeTheme]

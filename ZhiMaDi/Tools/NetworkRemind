@@ -1,0 +1,22 @@
+/**********************************************
+// ******* 重要说明 ******* //
+
+
+
+// ******* 本文件对做一个简单的说明 ******* //
+ 
+1、产品搜索栏目
+    地址：http://od.ccw.cn/catalog/searchajax?as=true
+    参数说明：
+    1、查询字符 - Q (String)
+    2、产品类别 - Cid (int)
+    3、页码 - pagenumber (Int)
+    4、排序 - orderby (int)
+        （5 ： 名称升序，6 ：名称降序）
+        （10：价格升，11：价格降）
+        （15：日期升，16：日期降）
+        （17：销售升，18：销售降）
+        （19：热点升，20：热点降）
+    例：http://od.ccw.cn/catalog/searchajax?as=true&pagenumber=1&q=
+    备注：图片地址前缀为http://od.ccw.cn 例： http://od.ccw.cn/Media/Thumbs/0000/0000177-100.jpg
+

@@ -107,46 +107,48 @@ class HomeBuyGoodsSearchViewController: UIViewController, ZMDInterceptorProtocol
                 label.textColor = UIColor.blackColor()
                 label.font = UIFont.systemFontOfSize(15)
                 cell?.contentView.addSubview(label)
-            }
-            
-            let size = "热搜 ：".sizeWithFont(UIFont.systemFontOfSize(15), maxWidth: 100)
-            let getBtn = { (text : String,index : Int) -> UIButton in
-                let btn = UIButton(frame: CGRect.zero)
-                btn.setTitle(text, forState: .Normal)
-                btn.setTitleColor(defaultTextColor, forState: .Normal)
-                btn.titleLabel?.font = UIFont.systemFontOfSize(17)
-                btn.layer.borderColor = UIColor.grayColor().CGColor;
-                btn.layer.borderWidth = 0.5
-                btn.layer.cornerRadius = 10
-                btn.layer.masksToBounds = true
-                btn.rac_signalForControlEvents(.TouchUpInside).subscribeNext({ (sender) -> Void in
-                    let goods = self.goodses[index]
-                    // save
-                    let homeBuyListViewController = HomeBuyListViewController.CreateFromMainStoryboard() as! HomeBuyListViewController
-                    self.navigationController?.pushViewController(homeBuyListViewController, animated: true)
-                })
-                return btn
-            }
-            var x = 14 + size.width
-            var y = 12
-            let space = CGFloat(12)
-            var index = 0
-            for goods in goodses {
-                let sizeTmp = goods.sizeWithFont(UIFont.systemFontOfSize(15), maxWidth: 100) //名宽度
-                let xTmp = x + space + sizeTmp.width + 20  + 12
-                let btn = getBtn(goods,index)
-                btn.tag = index++
-                if xTmp < kScreenWidth {
-                    btn.frame = CGRectMake(x + space , CGFloat(y),sizeTmp.width + 20, 26)
-                    cell?.contentView.addSubview(btn)
-                    x = x + space + sizeTmp.width + 20
-                } else {
-                    y += 38
-                    x = 14 + sizeTmp.width + 20
-                    btn.frame = CGRectMake(14, CGFloat(y),sizeTmp.width + 20, 26)
-                    cell?.contentView.addSubview(btn)
+                
+                
+                let size = "热搜 ：".sizeWithFont(UIFont.systemFontOfSize(15), maxWidth: 100)
+                let getBtn = { (text : String,index : Int) -> UIButton in
+                    let btn = UIButton(frame: CGRect.zero)
+                    btn.setTitle(text, forState: .Normal)
+                    btn.setTitleColor(defaultTextColor, forState: .Normal)
+                    btn.titleLabel?.font = UIFont.systemFontOfSize(17)
+                    btn.layer.borderColor = UIColor.grayColor().CGColor;
+                    btn.layer.borderWidth = 0.5
+                    btn.layer.cornerRadius = 10
+                    btn.layer.masksToBounds = true
+                    btn.rac_signalForControlEvents(.TouchUpInside).subscribeNext({ (sender) -> Void in
+                        let goods = self.goodses[index]
+                        // save
+                        let homeBuyListViewController = HomeBuyListViewController.CreateFromMainStoryboard() as! HomeBuyListViewController
+                        self.navigationController?.pushViewController(homeBuyListViewController, animated: true)
+                    })
+                    return btn
+                }
+                var x = 14 + size.width
+                var y = 12
+                let space = CGFloat(12)
+                var index = 0
+                for goods in goodses {
+                    let sizeTmp = goods.sizeWithFont(UIFont.systemFontOfSize(15), maxWidth: 100) //名宽度
+                    let xTmp = x + space + sizeTmp.width + 20  + 12
+                    let btn = getBtn(goods,index)
+                    btn.tag = index++
+                    if xTmp < kScreenWidth {
+                        btn.frame = CGRectMake(x + space , CGFloat(y),sizeTmp.width + 20, 26)
+                        cell?.contentView.addSubview(btn)
+                        x = x + space + sizeTmp.width + 20
+                    } else {
+                        y += 38
+                        x = 14 + sizeTmp.width + 20
+                        btn.frame = CGRectMake(14, CGFloat(y),sizeTmp.width + 20, 26)
+                        cell?.contentView.addSubview(btn)
+                    }
                 }
             }
+            
             return cell!
         case 1 :
             //记录
@@ -159,21 +161,20 @@ class HomeBuyGoodsSearchViewController: UIViewController, ZMDInterceptorProtocol
                     cell!.selectionStyle = .None
                     
                     ZMDTool.configTableViewCellDefault(cell!)
+                    let title = "清除搜索记录"
+                    let size = title.sizeWithFont(UIFont.systemFontOfSize(14), maxWidth: kScreenWidth)
+                    let label = UILabel(frame: CGRectMake(kScreenWidth/2-size.width/2,0,size.width, 55))
+                    label.text = title
+                    label.textAlignment = .Center
+                    
+                    label.textColor = defaultDetailTextColor
+                    label.font = UIFont.systemFontOfSize(14)
+                    cell?.contentView.addSubview(label)
+                    
+                    let imgV = UIImageView(frame: CGRect(x: label.frame.origin.x - 29, y: 18, width: 19, height: 19))
+                    imgV.image = UIImage(named: "GoodsSearch_Trash")
+                    cell?.contentView.addSubview(imgV)
                 }
-                let title = "清除搜索记录"
-                let size = title.sizeWithFont(UIFont.systemFontOfSize(14), maxWidth: kScreenWidth)
-                let label = UILabel(frame: CGRectMake(kScreenWidth/2-size.width/2,0,size.width, 55))
-                label.text = title
-                label.textAlignment = .Center
-                
-                label.textColor = defaultDetailTextColor
-                label.font = UIFont.systemFontOfSize(14)
-                cell?.contentView.addSubview(label)
-                
-                let imgV = UIImageView(frame: CGRect(x: label.frame.origin.x - 29, y: 18, width: 19, height: 19))
-                imgV.image = UIImage(named: "GoodsSearch_Trash")
-                cell?.contentView.addSubview(imgV)
-                
                 return cell!
             }
             let cellId = "historyCell"

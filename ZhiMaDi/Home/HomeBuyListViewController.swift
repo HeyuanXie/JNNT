@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ReactiveCocoa
 //商品列表
 class HomeBuyListViewController: UIViewController ,ZMDInterceptorProtocol, UITableViewDataSource, UITableViewDelegate,UISearchBarDelegate{
 
@@ -20,13 +21,18 @@ class HomeBuyListViewController: UIViewController ,ZMDInterceptorProtocol, UITab
     
     var isLease = false             //租赁
     var typeSetting = TypeSetting.Horizontal      // 横屏
-    var dataArray = NSArray()
+    var dataArray = NSMutableArray()
     var isStore = false  //商店展示搜索
+    var indexSkip = 0
+    var IndexFilter = 0
+    var isHasNext = true
+    let filters = ["","Sold","Price","UpdatedOnUtc",""]
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.currentTableView.backgroundColor = tableViewdefaultBackgroundColor
         self.setupNewNavigation()
-        self.updateData()
+        self.updateData(nil, isAsc: nil,indexSkip:nil)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -66,24 +72,45 @@ class HomeBuyListViewController: UIViewController ,ZMDInterceptorProtocol, UITab
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cellId = self.typeSetting == .Horizontal ? "doubleGoodsCell" : "goodsCell"
         let cell = tableView.dequeueReusableCellWithIdentifier(cellId) as! DoubleGoodsTableViewCell
-        cell.goodsImgVLeft.image = UIImage(named: "home_banner02")
         if self.typeSetting == .Horizontal {
-            let productL = self.dataArray[indexPath.section*2+1] as! ZMDProduct
-            if indexPath.section*2+1 == self.dataArray.count - 1{
-                let productR = self.dataArray[indexPath.section*2+1] as! ZMDProduct
+            let productL = self.dataArray[indexPath.section*2] as! ZMDProduct
+            cell.leftBtn.superview!.tag = indexPath.section
+            cell.leftBtn.rac_command = RACCommand(signalBlock: { (sender) -> RACSignal! in
+                let product = self.dataArray[sender.superview!!.tag] as! ZMDProduct
+                self.pushDetailVc(product)
+                return RACSignal.empty()
+            })
+            if indexPath.section*2+1 <= self.dataArray.count - 1{
+                let productR = self.dataArray[indexPath.section+1] as! ZMDProduct
                 DoubleGoodsTableViewCell.configCell(cell, product: productR,productR:productR)
+                cell.rightBtn.rac_command = RACCommand(signalBlock: { (sender) -> RACSignal! in
+                    let product = self.dataArray[sender.superview!!.tag+1] as! ZMDProduct
+                    self.pushDetailVc(product)
+                    return RACSignal.empty()
+                })
+                self.updateFilter(indexPath.section*2+1)
             } else {
                 DoubleGoodsTableViewCell.configCell(cell, product: productL,productR:nil)
             }
         } else {
             let productL = self.dataArray[indexPath.section] as! ZMDProduct
             DoubleGoodsTableViewCell.configCell(cell, product: productL,productR:nil)
+            self.updateFilter(indexPath.section)
         }
+    
         return cell
     }
+   
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if self.typeSetting == .vertical {
+            var product = self.dataArray[indexPath.section] as! ZMDProduct
+            self.pushDetailVc(product)
+        }
+    }
+    func pushDetailVc(product : ZMDProduct) {
         let vc = HomeBuyGoodsDetailViewController.CreateFromMainStoryboard() as! HomeBuyGoodsDetailViewController
         vc.hidesBottomBarWhenPushed = true
+        vc.product = product
         self.navigationController?.pushViewController(vc, animated: true)
     }
     //MARK: - UISearchBarDelegate
@@ -91,47 +118,65 @@ class HomeBuyListViewController: UIViewController ,ZMDInterceptorProtocol, UITab
         self.view.endEditing(true)
     }
     //MARK: -  PrivateMethod
+    func updateFilter(index : Int) {
+        if index == self.dataArray.count - 1 && self.isHasNext {
+            let filter = self.filters[self.IndexFilter]
+            if filter == "" {
+                self.updateData(nil, isAsc: nil, indexSkip: self.indexSkip)
+            } else {
+                self.updateData(filter, isAsc: true, indexSkip: self.indexSkip)
+            }
+        }
+    }
     func createFilterMenu() -> UIView{
-        let prices = self.isLease ? ["默认","人气","价格","筛选",""] : ["默认","销量","价格","最新",""]
-        let countForBtn = CGFloat(prices.count) - 1
+        let filterTitles = self.isLease ? ["默认","人气","价格","筛选",""] : ["默认","销量","价格","最新",""]
+        let countForBtn = CGFloat(filterTitles.count) - 1
         let view = UIView(frame: CGRectMake(0 , 0, kScreenWidth, 52 + 16))
         view.backgroundColor = UIColor.clearColor()
-        for var i=0;i<prices.count;i++ {
-            let index = i%prices.count
+        for var i=0;i<filterTitles.count;i++ {
+            let index = i%filterTitles.count
             let btn = UIButton(frame:  CGRectMake(CGFloat(index) * (kScreenWidth-54)/countForBtn , 0, (kScreenWidth-54)/countForBtn, 52))
             btn.backgroundColor = UIColor.whiteColor()
-            if prices[i] == "" {
+            btn.selected = i == self.IndexFilter ? true : false
+            if filterTitles[i] == "" {
                 btn.frame = CGRectMake(CGFloat(index) * (kScreenWidth-54)/countForBtn, 0, 54, 52)
                 btn.setImage(UIImage(named: "list_hengpai"), forState: .Normal)
                 btn.setImage(UIImage(named: "list_shupai"), forState: .Selected)
                 btn.selected = self.typeSetting == .Horizontal ? false : true
             } else {
-                btn.setTitle(prices[i], forState: .Normal)
-                btn.setTitle(prices[i], forState: .Normal)
+                btn.setTitle(filterTitles[i], forState: .Normal)
+                btn.setTitle(filterTitles[i], forState: .Normal)
             }
             btn.setTitleColor(defaultTextColor, forState: .Normal)
             btn.setTitleColor(RGB(235,61,61,1.0), forState: .Selected)
             btn.titleLabel?.font = UIFont.systemFontOfSize(13)
             btn.tag = 1000 + i
             view.addSubview(btn)
-            
             btn.rac_signalForControlEvents(.TouchUpInside).subscribeNext({ (sender) -> Void in
-                if (sender.tag - 1000) == prices.count - 1 {
+                self.IndexFilter = sender.tag - 1000
+                if (sender.tag - 1000) == filterTitles.count - 1 {
                     self.typeSetting = self.typeSetting == .Horizontal ? .vertical : .Horizontal
                     (sender as! UIButton).selected = !(sender as! UIButton).selected
                     self.currentTableView.reloadData()
                     return
                 }
-                if self.cityPop == nil {
-                    let height = kScreenHeight/3 * 2 - kScreenHeight/3 * 2 % 40
-                    self.cityPop = FindDoctorCityPopView(frame: CGRectMake(0, CGRectGetMaxY(btn.frame), kScreenWidth,height))
-//                    if self.currentCity != nil {
-//                        cityPop.titleLbl.text = self.currentCity
-//                    }
+                let title = filterTitles[sender.tag - 1000]
+                switch title {
+                case "默认" :
+                    self.updateData(nil, isAsc: nil,indexSkip:0)
+                    break
+                case "销量" :
+                    self.updateData("Sold", isAsc: true,indexSkip:0)
+                    break
+                case "价格" :
+                    self.updateData("Price", isAsc: true,indexSkip:0)
+                case "最新" :
+                    self.updateData("UpdatedOnUtc", isAsc: true,indexSkip:0)
+                    break
+                default :
+                    break
                 }
-                let config = ZMDPopViewConfig()
-                config.showAnimation = .SlideInFromTop
-                self.presentPopupView(self.cityPop,config: config)
+                
             })
             let line = ZMDTool.getLine(CGRectMake(CGRectGetMaxX(btn.frame)-1, 20, 1, 13))
             btn.addSubview(line)
@@ -173,14 +218,34 @@ class HomeBuyListViewController: UIViewController ,ZMDInterceptorProtocol, UITab
         self.popView.backgroundColor = UIColor.blueColor()
         self.popView.showAsPopAndhideWhenClickGray()
     }
-    func updateData() {
-        QNNetworkTool.products { (products, error, dictionary) -> Void in
+    
+    func updateData(order:String?,isAsc:Bool?,indexSkip:Int?) {
+        let skip = indexSkip == nil ? self.indexSkip : indexSkip
+        QNNetworkTool.products("\(skip)") { (products, error, dictionary) -> Void in
             if let products = products {
-                self.dataArray = products
+                if skip == 0 {
+                    self.dataArray.removeAllObjects()
+                }
+                self.dataArray.addObjectsFromArray(products as [AnyObject])
+                self.indexSkip = indexSkip ?? self.indexSkip + 1
+                self.isHasNext = products.count < 20 ? false : true
                 self.currentTableView.reloadData()
             } else {
                 ZMDTool.showErrorPromptView(nil, error: error)
             }
         }
+//        QNNetworkTool.products(skip!, order: order, isAsc: isAsc) { (products, error, dictionary) -> Void in
+//            if let products = products {
+//                if skip == 0 {
+//                    self.dataArray.removeAllObjects()
+//                }
+//                self.dataArray.addObjectsFromArray(products as [AnyObject])
+//                self.indexSkip = indexSkip ?? self.indexSkip + 1
+//                self.isHasNext = products.count < 20 ? false : true
+//                self.currentTableView.reloadData()
+//            } else {
+//                ZMDTool.showErrorPromptView(nil, error: error)
+//            }
+//        }
     }
 }

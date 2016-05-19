@@ -226,47 +226,7 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
             下拉.setImage(UIImage(named: "home_down"), forState: .Normal)
             下拉.setImage(UIImage(named: "home_up"), forState: .Selected)
             下拉.rac_signalForControlEvents(.TouchUpInside).subscribeNext({ (sender) -> Void in
-                if self.下拉视窗 == nil {
-                    self.下拉视窗 = UIView(frame: CGRect(x: 0, y: -1, width: kScreenWidth, height: 44+150))
-                    self.下拉视窗.backgroundColor = UIColor.clearColor()
-                    let topV = UIView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: 44))
-                    topV.backgroundColor = UIColor.whiteColor()
-                    self.下拉视窗.addSubview(topV)
-                    let titleLbl = ZMDTool.getLabel(CGRect(x: 16, y: 0, width: 100, height: 44), text: " 选择分类", fontSize: 17)
-                    topV.addSubview(titleLbl)
-                    let 上拉 = UIButton(frame: CGRect(x: kScreenWidth - 44, y: 8, width: 44, height: 28))
-                    上拉.backgroundColor = UIColor.whiteColor()
-                    上拉.setImage(UIImage(named: "home_up"), forState: .Normal)
-                    上拉.rac_command = RACCommand(signalBlock: { (sender) -> RACSignal! in
-                        self.dismissPopupView(self.下拉视窗)
-                        return RACSignal.empty()
-                    })
-                    topV.addSubview(上拉)
-                    topV.addSubview(ZMDTool.getLine(CGRect(x: kScreenWidth - 44, y: 8, width: 0.5, height: 28)))
-
-                    var i = 0
-                    let btnBg = UIView(frame: CGRect(x: 0, y: 44, width: kScreenWidth, height: 150))
-                    btnBg.backgroundColor = UIColor(white: 1.0, alpha: 0.9)
-                    self.下拉视窗.addSubview(btnBg)
-                    for title in menuTitles {
-                        let width = kScreenWidth/CGFloat(3),height = CGFloat(50)
-                        let columnIndex  = i%3
-                        let rowIndex = i/3
-                        let x = CGFloat(columnIndex) * width ,y  = CGFloat(rowIndex)*50
-                        i++
-
-                        let menuBtn = UIButton(frame: CGRect(x: x, y: y, width: width, height: height))
-                        menuBtn.backgroundColor = UIColor.clearColor()
-                        menuBtn.setTitle((title as! ZMDCategory).Name, forState: .Normal)
-                        menuBtn.titleLabel?.font = defaultDetailTextSize
-                        menuBtn.setTitleColor(defaultTextColor, forState: .Normal)
-                        menuBtn.setTitleColor(defaultSelectColor, forState: .Selected)
-                        menuBtn.rac_signalForControlEvents(.TouchUpInside).subscribeNext({ (sender) -> Void in
-                        })
-                        btnBg.addSubview(menuBtn)
-                        ZMDTool.configViewLayerFrameWithColor(menuBtn, color: UIColor.whiteColor())
-                    }
-                }
+                self.updateViewForNextMenu()
                 if CGRectGetMinY(self.下拉视窗.frame) < 0  {
                     self.下拉视窗.frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: 44+150)
                     self.viewShowWithBg(self.下拉视窗,showAnimation: .SlideInFromTop,dismissAnimation: .SlideOutToTop)
@@ -278,6 +238,9 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
             cell?.contentView.addSubview(ZMDTool.getLine(CGRect(x: kScreenWidth - 44, y: 8, width: 0.5, height: 28)))
         }
         let scrollView = cell?.viewWithTag(10001) as! UIScrollView
+        for subView in scrollView.subviews {
+            subView.removeFromSuperview()
+        }
         var i = 0
         let width = 80,height = 44
         for title in menuTitles {
@@ -454,7 +417,70 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
         }
         return cell!
     }
+    // 下拉视窗
+    class ViewForNextMenu: UIView {
+        override init(frame: CGRect) {
+            super.init(frame: frame)
+        }
 
+        required init?(coder aDecoder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
+        }
+        
+    }
+    func updateViewForNextMenu()  {
+        let menuTitles = self.categories
+        if self.下拉视窗 != nil {
+            for subV in self.下拉视窗.subviews {
+                subV.removeFromSuperview()
+            }
+        }
+
+        self.下拉视窗 = UIView(frame: CGRect(x: 0, y: -1, width: kScreenWidth, height: 44+150))
+        self.下拉视窗.backgroundColor = UIColor.clearColor()
+        let topV = UIView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: 44))
+        topV.backgroundColor = UIColor.whiteColor()
+        self.下拉视窗.addSubview(topV)
+        let titleLbl = ZMDTool.getLabel(CGRect(x: 16, y: 0, width: 100, height: 44), text: " 选择分类", fontSize: 17)
+        topV.addSubview(titleLbl)
+        let 上拉 = UIButton(frame: CGRect(x: kScreenWidth - 44, y: 8, width: 44, height: 28))
+        上拉.backgroundColor = UIColor.whiteColor()
+        上拉.setImage(UIImage(named: "home_up"), forState: .Normal)
+        上拉.rac_command = RACCommand(signalBlock: { (sender) -> RACSignal! in
+            self.dismissPopupView(self.下拉视窗)
+            return RACSignal.empty()
+        })
+        topV.addSubview(上拉)
+        topV.addSubview(ZMDTool.getLine(CGRect(x: kScreenWidth - 44, y: 8, width: 0.5, height: 28)))
+        
+        var i = 0
+        let btnBg = UIView(frame: CGRect(x: 0, y: 44, width: kScreenWidth, height: 150))
+        btnBg.backgroundColor = UIColor(white: 1.0, alpha: 0.9)
+        self.下拉视窗.addSubview(btnBg)
+        for title in menuTitles {
+            let width = kScreenWidth/CGFloat(3),height = CGFloat(50)
+            let columnIndex  = i%3
+            let rowIndex = i/3
+            let x = CGFloat(columnIndex) * width ,y  = CGFloat(rowIndex)*50
+            i++
+            
+            let menuBtn = UIButton(frame: CGRect(x: x, y: y, width: width, height: height))
+            menuBtn.backgroundColor = UIColor.clearColor()
+            menuBtn.setTitle((title as! ZMDCategory).Name, forState: .Normal)
+            menuBtn.titleLabel?.font = defaultDetailTextSize
+            menuBtn.setTitleColor(defaultTextColor, forState: .Normal)
+            menuBtn.setTitleColor(defaultSelectColor, forState: .Selected)
+            menuBtn.tag = 1000 + i
+            menuBtn.rac_signalForControlEvents(.TouchUpInside).subscribeNext({ (sender) -> Void in
+                let category = menuTitles[sender.tag - 1001] as! ZMDCategory
+                let homeBuyListViewController = HomeBuyListViewController.CreateFromMainStoryboard() as! HomeBuyListViewController
+                homeBuyListViewController.Cid = category.Id.stringValue
+                self.navigationController?.pushViewController(homeBuyListViewController, animated: true)
+            })
+            btnBg.addSubview(menuBtn)
+            ZMDTool.configViewLayerFrameWithColor(menuBtn, color: UIColor.whiteColor())
+        }
+    }
     func setupNewNavigation() {
         let leftItem = UIBarButtonItem(image: UIImage(named: "Code-Scanner")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate), style: UIBarButtonItemStyle.Done, target: nil, action: nil)
         leftItem.customView?.tintColor = UIColor.whiteColor()
@@ -493,6 +519,7 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
         self.userCenterData = [.HomeContentTypeHead,.HomeContentTypeAd,.HomeContentTypeMenu,.HomeContentTypeGoods,.HomeContentTypeRecommendationHead,.HomeContentTypeRecommendation, .HomeContentTypeTheme]
         self.menuType = [MenuType.Offer,MenuType.Market,MenuType.News, MenuType.Sale, MenuType.Buy]
     }
+
     func updateUI() {
         self.currentTableView.backgroundColor = tableViewdefaultBackgroundColor
     }

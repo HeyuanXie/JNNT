@@ -3,7 +3,7 @@
 
 
 
-// ******* 本文件对做一个简单的说明 ******* //
+// ******* 本文件对所需接口做一个简单的说明 ******* //
  
 1、产品搜索栏目
     地址：http://od.ccw.cn/catalog/searchajax?as=true
@@ -19,4 +19,44 @@
         （19：热点升，20：热点降）
     例：http://od.ccw.cn/catalog/searchajax?as=true&pagenumber=1&q=
     备注：图片地址前缀为http://od.ccw.cn 例： http://od.ccw.cn/Media/Thumbs/0000/0000177-100.jpg
+2、收货地址接口
+（1）http://od.ccw.cn/Customer/AddressEditAjax   方法：post
+    model[Address][FirstName]:John
+    model[Address][Address1]:街道信息
+    model[Address][Address2]:北京街道
+    model[Address][IsDefault]:false
+    model[Address][CountryId]:23
+    model[Address][City]:
+    model[Address][PhoneNumber]:13685685685
+    model[Address][AreaCode]:11010101
+    model[Address][Id]:1
+    id:1 (地址id）
+    customerId: 当前用户id
 
+（2）http://od.ccw.cn/Customer/AddressDeleteAjax   方法：post
+
+    id:1(地址id）
+    customerId: 当前用户id
+
+（3）http://od.ccw.cn/Customer/AddressAddAjax  方法：post
+
+    model[Address][FirstName]:John
+    model[Address][Address1]:街道信息
+    model[Address][Address2]:北京街道
+    model[Address][IsDefault]:false
+    model[Address][CountryId]:23
+    model[Address][City]:
+    model[Address][PhoneNumber]:13685685685
+    model[Address][AreaCode]:11010101
+    customerId: 当前用户id
+3、登录相关
+（1）用户登录
+    /Customer/LoginAjax (post)  【string Username,  string Password】
+（2）手机验证码登录
+    /PhoneLogin （post） 【string mobile,  string code】
+（3）手机验证码注册并登录
+    /PhoneLogin （post） 【string mobile,  string code，string psw】
+（4）手机发送验证码
+    /SendCode   （post）【string mobile】
+（5）验证手机验证码
+    /CheckCode   （post）【string mobile, string code】

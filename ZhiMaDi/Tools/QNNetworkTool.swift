@@ -17,7 +17,7 @@ private let kOdataAddress = { () -> String in
     "http://od.ccw.cn/odata/v1"
 }()
 // 图片地址
-private let kImageAddressMain = { () -> String in
+let kImageAddressMain = { () -> String in
     "http://od.ccw.cn"
 }()
 //yyyy-MM-ddTHH:mm:ss.
@@ -132,7 +132,11 @@ private extension QNNetworkTool {
                 let jsonObject: AnyObject? = try NSJSONSerialization.JSONObjectWithData($2! as NSData, options: NSJSONReadingOptions.MutableContainers)
                 let dictionary = jsonObject as? NSDictionary
                 if dictionary == nil {  // Json解析结果出错
-                    completionHandler(request: $0!, response: $1, data: $2, dictionary: nil, error: NSError(domain: "JSON解析错误", code: 10086, userInfo: nil)); return
+                    guard let _ = jsonObject as? NSArray else {
+                        completionHandler(request: $0!, response: $1, data: $2, dictionary: nil, error: NSError(domain: "JSON解析错误", code: 10086, userInfo: nil));
+                        return
+                    }
+                    completionHandler(request: $0!, response: $1, data: $2, dictionary: nil, error: NSError(domain: "返回的为array", code: 10086, userInfo: nil));
                 }
                 completionHandler(request: $0!, response: $1, data: $2, dictionary: dictionary, error: nil)
             }
@@ -414,8 +418,12 @@ extension QNNetworkTool {
 }
 //MARK:- 产品相关
 extension QNNetworkTool {
-    class func products(pagenumber:String,completion: (products : NSArray?,error:NSError?,dictionary:NSDictionary?) -> Void) {
-        requestGET(kServerAddress + "/catalog/searchajax?as=true&pagenumber=\(pagenumber)&q=", parameters: nil) { (_, _, _, dictionary, error) -> Void in
+    class func products(Q:String,pagenumber:String,orderby:Int?,Cid : String?,completion: (products : NSArray?,error:NSError?,dictionary:NSDictionary?) -> Void) {
+        var urlStr = orderby == nil ? kServerAddress + "/catalog/searchajax?as=true&pagenumber=\(pagenumber)&q=\(Q)" : kServerAddress + "/catalog/searchajax?as=true&pagenumber=\(pagenumber)&orderby=16&q=\(Q)"
+        if Cid != nil && Cid != "" {
+            urlStr.appendContentsOf("&Cid="+Cid!)
+        }
+        requestGET(urlStr.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!, parameters: nil) { (_, _, _, dictionary, error) -> Void in //
             if dictionary != nil{
                 let productsData = dictionary!["Products"]
                 let products = ZMDProduct.mj_objectArrayWithKeyValuesArray(productsData)
@@ -443,7 +451,7 @@ extension QNNetworkTool {
     
     class func categories(completion: (categories : NSArray?,error:NSError?,dictionary:NSDictionary?) -> Void) {
         //        "/Categories?$top=10"
-        requestGET(kServerAddress + "/Categories?$top=6", parameters: nil) { (_, _, _, dictionary, error) -> Void in
+        requestGET(kOdataAddress + "/Categories?$top=6", parameters: nil) { (_, _, _, dictionary, error) -> Void in
             if dictionary != nil{
                 let value = dictionary!["value"]
                 let categories = ZMDCategory.mj_objectArrayWithKeyValuesArray(value)
@@ -542,4 +550,26 @@ extension QNNetworkTool {
         }
     }
 }
-
+// MARK : - 地址相关
+extension QNNetworkTool {
+    // 获取地址列表
+    class func areas(id:String,completion: (areas : NSArray?,error: NSError?,dictionary:NSDictionary?) -> Void) {
+        requestGET(kServerAddress + "/admin/Area/GetChildAreas?id=\(id)", parameters: nil) { (_, _, data, _, error) -> Void in
+            if data != nil{
+                do {
+                    let jsonObject: AnyObject? = try NSJSONSerialization.JSONObjectWithData(data as! NSData, options: NSJSONReadingOptions.MutableContainers)
+                    guard let array = jsonObject as? NSArray else {
+                        completion(areas:nil,error: error,dictionary:nil)
+                        return
+                    }
+                    let areas = ZMDArea.mj_objectArrayWithKeyValuesArray(array)
+                    completion(areas:areas,error: nil,dictionary:nil)
+                } catch {
+                    println("Json解析过程出错")
+                }
+            }else {
+                completion(areas:nil,error: error,dictionary:nil)
+            }
+        }
+    }
+}

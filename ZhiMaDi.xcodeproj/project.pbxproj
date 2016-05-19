@@ -184,6 +184,8 @@
 		2B28F5131CA3DD4E004B8DA4 /* product_share@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B28F5031CA3DD4E004B8DA4 /* product_share@3x.png */; };
 		2B28F5141CA3DD4E004B8DA4 /* product_shopping-cart@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B28F5041CA3DD4E004B8DA4 /* product_shopping-cart@3x.png */; };
 		2B28F5151CA3DD4E004B8DA4 /* product_up@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B28F5051CA3DD4E004B8DA4 /* product_up@3x.png */; };
+		2B2B0A2A1CED980000358F1B /* ZMDAreaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2B0A291CED980000358F1B /* ZMDAreaView.swift */; };
+		2B2B0A2C1CEDA1FD00358F1B /* ZMDArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2B0A2B1CEDA1FD00358F1B /* ZMDArea.swift */; };
 		2B3AC5DB1C96BF1E00CC8662 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B3AC5DA1C96BF1E00CC8662 /* libz.tbd */; };
 		2B3AC5DD1C96BF3600CC8662 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B3AC5DC1C96BF3600CC8662 /* libicucore.tbd */; };
 		2B3AC5DF1C96BF4A00CC8662 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B3AC5DE1C96BF4A00CC8662 /* libstdc++.tbd */; };
@@ -899,6 +901,8 @@
 		2B28F5031CA3DD4E004B8DA4 /* product_share@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "product_share@3x.png"; sourceTree = "<group>"; };
 		2B28F5041CA3DD4E004B8DA4 /* product_shopping-cart@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "product_shopping-cart@3x.png"; sourceTree = "<group>"; };
 		2B28F5051CA3DD4E004B8DA4 /* product_up@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "product_up@3x.png"; sourceTree = "<group>"; };
+		2B2B0A291CED980000358F1B /* ZMDAreaView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZMDAreaView.swift; sourceTree = "<group>"; };
+		2B2B0A2B1CEDA1FD00358F1B /* ZMDArea.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZMDArea.swift; sourceTree = "<group>"; };
 		2B3AC5DA1C96BF1E00CC8662 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		2B3AC5DC1C96BF3600CC8662 /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
 		2B3AC5DE1C96BF4A00CC8662 /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
@@ -2338,6 +2342,7 @@
 				2B07BA2C1CB7A1540012929B /* ZMDMultiselectView.swift */,
 				2B8BB2B31CBDF41000CD2AD5 /* CircleScaleCustomView.swift */,
 				2B8BB2BD1CBE46FC00CD2AD5 /* GoodsScoreView.swift */,
+				2B2B0A291CED980000358F1B /* ZMDAreaView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2714,9 +2719,9 @@
 				3C9098F71C76A6E9006B7D2C /* UserCenter */,
 				2BA287D61CC091CD00B6281E /* Msg */,
 				2B989C061CB4E955008C6D23 /* ShoppingCar */,
+				2B197DA21C83DB7E006494CF /* Sort */,
 				2B959EBE1C76F5A9002EA40D /* Home */,
 				2BA3FDB11C9F83AD00018F3C /* View */,
-				2B197DA21C83DB7E006494CF /* Sort */,
 				3C9099651C76A6FD006B7D2C /* Resources */,
 				3C9098571C76A482006B7D2C /* AppDelegate.swift */,
 				3C9098591C76A482006B7D2C /* ViewController.swift */,
@@ -2744,6 +2749,7 @@
 				3C9098751C76A6E9006B7D2C /* QN_BaseDataModel.swift */,
 				2BA223201CE9BA37006BC426 /* ZMDProduct.swift */,
 				2B79155C1CEAF54B00182F82 /* ZMDCategory.swift */,
+				2B2B0A2B1CEDA1FD00358F1B /* ZMDArea.swift */,
 			);
 			path = DataModule;
 			sourceTree = "<group>";
@@ -3729,6 +3735,7 @@
 				3C9099031C76A6E9006B7D2C /* BubbleChartView.swift in Sources */,
 				2BA223211CE9BA37006BC426 /* ZMDProduct.swift in Sources */,
 				2BF7F0741C8EB18B001C4595 /* FortuneCenterSelectPayViewController.swift in Sources */,
+				2B2B0A2A1CED980000358F1B /* ZMDAreaView.swift in Sources */,
 				3C90992A1C76A6E9006B7D2C /* RadarChartDataSet.swift in Sources */,
 				3C9099291C76A6E9006B7D2C /* RadarChartData.swift in Sources */,
 				2B8BB2B71CBE2D4E00CD2AD5 /* MyCrowdfundHomeViewController.swift in Sources */,
@@ -3816,6 +3823,7 @@
 				2B8739C61CBF3BAD007FE81A /* MineBroweRecordViewController.swift in Sources */,
 				2B02B4BE1CAA77AE0064B47C /* DoubleGoodsTableViewCell.swift in Sources */,
 				2BC861571CD8349500B8D449 /* MyStoreAddLeaseHomeViewController.swift in Sources */,
+				2B2B0A2C1CEDA1FD00358F1B /* ZMDArea.swift in Sources */,
 				3C9099011C76A6E9006B7D2C /* BarChartView.swift in Sources */,
 				2BA2231B1CE9B169006BC426 /* NSObject+MJClass.m in Sources */,
 				3C90992D1C76A6E9006B7D2C /* ChartDataApproximatorFilter.swift in Sources */,

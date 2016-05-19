@@ -240,6 +240,7 @@ class HomeBuyGoodsSearchViewController: UIViewController, ZMDInterceptorProtocol
         self.view.endEditing(true)
         insertValueToDB(createOrOpenDB(),text: searchBar.text!)
         let homeBuyListViewController = HomeBuyListViewController.CreateFromMainStoryboard() as! HomeBuyListViewController
+        homeBuyListViewController.titleForFilter = searchBar.text ?? ""
         self.navigationController?.pushViewController(homeBuyListViewController, animated: true)
     }
     //MARK: -  PrivateMethod
@@ -248,7 +249,7 @@ class HomeBuyGoodsSearchViewController: UIViewController, ZMDInterceptorProtocol
         let searchBar = UISearchBar(frame: CGRectMake(0, 4, kScreenWidth - 120, 36))
         searchBar.backgroundImage = UIImage.imageWithColor(UIColor.clearColor(), size: searchBar.bounds.size)
         searchBar.placeholder = "商品关键字"
-        searchBar.layer.borderColor = UIColor.grayColor().CGColor;
+        searchBar.layer.borderColor = UIColor.grayColor().CGColor
         searchBar.layer.borderWidth = 0.5
         searchBar.layer.cornerRadius = 6
         searchBar.layer.masksToBounds = true

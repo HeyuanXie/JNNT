@@ -41,11 +41,12 @@ class DoubleGoodsTableViewCell: UITableViewCell {
         cell.titleLblLeft.text = product.Name
         cell.countLblLeft.text = "已售\(product.Sold)件"
         if let productPrice = product.ProductPrice {
-            cell.currentPriceLblLeft.text = "￥\(productPrice.Price)"
-            cell.originalPriceLblLeft.text = "原价:￥\(productPrice.OldPrice)"
+            cell.currentPriceLblLeft.text = "\(productPrice.Price)"
+            cell.originalPriceLblLeft.text = "原价:\(productPrice.OldPrice ?? "")"
         }
         if let pictureModel = product.DefaultPictureModel {
-            cell.goodsImgVLeft.setImageWithURL(NSURL(string: "kImageAddressMain\(pictureModel.ImageUrl ?? "")"), placeholderImage: UIImage(named: "Home_Buy_AppleGoods"))
+            let imgUrl = kImageAddressMain + (pictureModel.ImageUrl ?? "")
+            cell.goodsImgVLeft.setImageWithURL(NSURL(string: imgUrl), placeholderImage: UIImage(named: "Home_Buy_AppleGoods"))
         }
         guard let productR = productR else {
             if cell.rightView != nil {
@@ -56,11 +57,12 @@ class DoubleGoodsTableViewCell: UITableViewCell {
         cell.rightView.hidden = false
         cell.titleLblRight.text = productR.Name
         if let productPrice = productR.ProductPrice {
-            cell.currentPriceLblLeft.text = "￥\(productPrice.Price)"
-            cell.originalPriceLblLeft.text = "原价:￥\(productPrice.OldPrice)"
+            cell.currentPriceLblRight.text = "\(productPrice.Price)"
+            cell.originalPriceLblRight.text = "原价:\(productPrice.OldPrice ?? "")"
         }
         if let pictureModel = productR.DefaultPictureModel {
-            cell.goodsImgVRight.setImageWithURL(NSURL(string: "kImageAddressMain\(pictureModel.ImageUrl ?? "")"), placeholderImage: UIImage(named: "Home_Buy_AppleGoods"))
+            let imgUrl = kImageAddressMain + (pictureModel.ImageUrl ?? "")
+            cell.goodsImgVRight.setImageWithURL(NSURL(string: imgUrl), placeholderImage: UIImage(named: "Home_Buy_AppleGoods"))
         }
         cell.countLblRight.text = "已售\(productR.Sold)件"
     }

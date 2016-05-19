@@ -12,7 +12,7 @@ class ZMDProduct: NSObject {
     var ProductTypeId : NSNumber!
     var Name : String!
     var ShortDescription : String!
-    var Sku  : String!                  // 商品货号
+    var Sku  : String?                  // 商品货号
     var ShowSku : NSNumber?             //
     var Sold : String!                  // 已售
     var IsFreeShipping : NSNumber? = 0  // 免邮
@@ -25,7 +25,7 @@ class ZMDProduct: NSObject {
 }
 class ZMDProductPrice : NSObject {
     var Price : String! = ""
-    var OldPrice : String? = ""         // 原价
+    var OldPrice : String?         // 原价
     var Rent : String? = ""
 }
 class ZMDPictureModel : NSObject {

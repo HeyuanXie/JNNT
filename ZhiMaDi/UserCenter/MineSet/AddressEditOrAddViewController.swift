@@ -10,8 +10,8 @@ import UIKit
 //编辑或增加收货地址
 class AddressEditOrAddViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,ZMDInterceptorProtocol,ZMDInterceptorNavigationBarShowProtocol,ZMDInterceptorMoreProtocol {
     var currentTableView: UITableView!
-    var usrNameTextFidld : UITextField!,phoneTextFidld : UITextField!,areaTextFidld : UITextField!,codeTextFidld : UITextField!,addressTextFidld : UITextField!
-    
+    var usrNameTextFidld : UITextField!,phoneTextFidld : UITextField!,codeTextFidld : UITextField!,addressTextFidld : UITextField!
+    var areaLbl : UILabel!
     var isAdd : Bool = true
     let titles = ["收件人 : ","手机号码 : ","所在地区 : ","邮政编码 : ","街道地址 : ","设为默认地址 : "]
 
@@ -92,10 +92,9 @@ class AddressEditOrAddViewController: UIViewController,UITableViewDataSource,UIT
             }
             cell?.textLabel?.text = self.titles[indexPath.section]
             let size = self.titles[indexPath.section].sizeWithFont(defaultSysFontWithSize(17), maxWidth: 320)
-            if self.areaTextFidld == nil {
-                self.areaTextFidld = UITextField(frame: CGRect(x: 20 + size.width, y: 0, width: kScreenWidth - 20 - size.width - 12, height: 56))
-                self.areaTextFidld.font = defaultSysFontWithSize(17)
-                cell?.contentView.addSubview(self.areaTextFidld)
+            if self.areaLbl == nil {
+                self.areaLbl = ZMDTool.getLabel( CGRect(x: 20 + size.width, y: 0, width: kScreenWidth - 20 - size.width - 12, height: 56), text: "", fontSize: 17)
+                cell?.contentView.addSubview(self.areaLbl)
             }
             return cell!
         case 3 :
@@ -153,7 +152,14 @@ class AddressEditOrAddViewController: UIViewController,UITableViewDataSource,UIT
         }
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
+        if self.titles[indexPath.section] == "所在地区 : " {
+            let areaView = ZMDAreaView(frame: CGRect(x: 0, y: kScreenHeight-400, width: kScreenWidth, height: 400))
+            areaView.finished = { (address,addressId) ->Void in
+                self.areaLbl.text = address
+                self.dismissPopupView(areaView)
+            }
+            self.viewShowWithBg(areaView,showAnimation: .SlideInFromBottom,dismissAnimation: .SlideOutToBottom)
+        }
     }
     //MARK:- Private Method
     private func subViewInit(){

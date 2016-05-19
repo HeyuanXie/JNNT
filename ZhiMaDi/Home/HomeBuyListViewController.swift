@@ -27,12 +27,15 @@ class HomeBuyListViewController: UIViewController ,ZMDInterceptorProtocol, UITab
     var IndexFilter = 0
     var isHasNext = true
     let filters = ["","Sold","Price","UpdatedOnUtc",""]
-
+    var titleForFilter = ""                         // 关键字
+    var orderby = 16                                // 排序
+    var orderbyPriceUp = true                       // 升序
+    var Cid = ""                                    // 产品类别
     override func viewDidLoad() {
         super.viewDidLoad()
         self.currentTableView.backgroundColor = tableViewdefaultBackgroundColor
         self.setupNewNavigation()
-        self.updateData(nil, isAsc: nil,indexSkip:nil)
+        self.updateData(nil, orderby: self.orderby)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -82,7 +85,7 @@ class HomeBuyListViewController: UIViewController ,ZMDInterceptorProtocol, UITab
             })
             if indexPath.section*2+1 <= self.dataArray.count - 1{
                 let productR = self.dataArray[indexPath.section+1] as! ZMDProduct
-                DoubleGoodsTableViewCell.configCell(cell, product: productR,productR:productR)
+                DoubleGoodsTableViewCell.configCell(cell, product: productL,productR:productR)
                 cell.rightBtn.rac_command = RACCommand(signalBlock: { (sender) -> RACSignal! in
                     let product = self.dataArray[sender.superview!!.tag+1] as! ZMDProduct
                     self.pushDetailVc(product)
@@ -122,9 +125,9 @@ class HomeBuyListViewController: UIViewController ,ZMDInterceptorProtocol, UITab
         if index == self.dataArray.count - 1 && self.isHasNext {
             let filter = self.filters[self.IndexFilter]
             if filter == "" {
-                self.updateData(nil, isAsc: nil, indexSkip: self.indexSkip)
+                self.updateData(nil, orderby: self.orderby)
             } else {
-                self.updateData(filter, isAsc: true, indexSkip: self.indexSkip)
+                self.updateData(nil, orderby: self.orderby)
             }
         }
     }
@@ -145,7 +148,20 @@ class HomeBuyListViewController: UIViewController ,ZMDInterceptorProtocol, UITab
                 btn.selected = self.typeSetting == .Horizontal ? false : true
             } else {
                 btn.setTitle(filterTitles[i], forState: .Normal)
-                btn.setTitle(filterTitles[i], forState: .Normal)
+                btn.setTitle(filterTitles[i], forState: .Selected)
+                if filterTitles[i] == "价格" {
+                    let width = (kScreenWidth-54)/countForBtn
+                    btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: (width-50)/2+40, bottom: 0, right: 0)
+                    btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: (width-50)/2+16)
+
+                    if self.IndexFilter == i {
+                        btn.setImage(UIImage(named: "list_price_down"), forState: .Normal)
+                        btn.setImage(UIImage(named: "list_price_up"), forState: .Selected)
+                        btn.selected = self.orderbyPriceUp
+                    } else {
+                        btn.setImage(UIImage(named: "list_price_normal"), forState: .Normal)
+                    }
+                }
             }
             btn.setTitleColor(defaultTextColor, forState: .Normal)
             btn.setTitleColor(RGB(235,61,61,1.0), forState: .Selected)
@@ -159,19 +175,24 @@ class HomeBuyListViewController: UIViewController ,ZMDInterceptorProtocol, UITab
                     (sender as! UIButton).selected = !(sender as! UIButton).selected
                     self.currentTableView.reloadData()
                     return
+                } else if filterTitles[sender.tag - 1000] == "价格" {
+                    (sender as! UIButton).selected = !(sender as! UIButton).selected
                 }
+                let orderbys = [(-1,-1),(17,18),(10,11),(15,16)]
                 let title = filterTitles[sender.tag - 1000]
+                let orderby = orderbys[sender.tag - 1000]
                 switch title {
                 case "默认" :
-                    self.updateData(nil, isAsc: nil,indexSkip:0)
+                    self.updateData(0, orderby: nil)
                     break
                 case "销量" :
-                    self.updateData("Sold", isAsc: true,indexSkip:0)
+                    self.updateData(0, orderby: orderby.1)
                     break
                 case "价格" :
-                    self.updateData("Price", isAsc: true,indexSkip:0)
+                    self.orderbyPriceUp = (sender as! UIButton).selected
+                    self.updateData(0, orderby: self.orderbyPriceUp ? orderby.0 : orderby.1)
                 case "最新" :
-                    self.updateData("UpdatedOnUtc", isAsc: true,indexSkip:0)
+                    self.updateData(0, orderby: orderby.1)
                     break
                 default :
                     break
@@ -219,9 +240,9 @@ class HomeBuyListViewController: UIViewController ,ZMDInterceptorProtocol, UITab
         self.popView.showAsPopAndhideWhenClickGray()
     }
     
-    func updateData(order:String?,isAsc:Bool?,indexSkip:Int?) {
+    func updateData(indexSkip:Int?,orderby:Int?) {
         let skip = indexSkip == nil ? self.indexSkip : indexSkip
-        QNNetworkTool.products("\(skip)") { (products, error, dictionary) -> Void in
+        QNNetworkTool.products(self.titleForFilter,pagenumber: "\(skip!)",orderby:orderby,Cid: self.Cid) { (products, error, dictionary) -> Void in
             if let products = products {
                 if skip == 0 {
                     self.dataArray.removeAllObjects()
@@ -234,18 +255,5 @@ class HomeBuyListViewController: UIViewController ,ZMDInterceptorProtocol, UITab
                 ZMDTool.showErrorPromptView(nil, error: error)
             }
         }
-//        QNNetworkTool.products(skip!, order: order, isAsc: isAsc) { (products, error, dictionary) -> Void in
-//            if let products = products {
-//                if skip == 0 {
-//                    self.dataArray.removeAllObjects()
-//                }
-//                self.dataArray.addObjectsFromArray(products as [AnyObject])
-//                self.indexSkip = indexSkip ?? self.indexSkip + 1
-//                self.isHasNext = products.count < 20 ? false : true
-//                self.currentTableView.reloadData()
-//            } else {
-//                ZMDTool.showErrorPromptView(nil, error: error)
-//            }
-//        }
     }
 }

@@ -211,12 +211,14 @@ class HomeBuyGoodsDetailViewController: UIViewController,UITableViewDataSource,U
             
             let cycleScroll = CycleScrollView(frame: CGRectMake(0, 0, kScreenWidth, kScreenWidth))
             cycleScroll.backgroundColor = UIColor.blueColor()
-            let image = ["product_pic","product_pic"]
-            cycleScroll.imgArray = image
-            //            cycleScroll.delegate = self
-            cycleScroll.autoScroll = true
-            cycleScroll.autoTime = 2.5
+            cycleScroll.autoScroll = false
+            cycleScroll.tag = 10001
             cell?.addSubview(cycleScroll)
+        }
+        if let pictureModel = product.DefaultPictureModel {
+            let imgUrl = kImageAddressMain + (pictureModel.ImageUrl ?? "")
+            let cycleScroll = cell?.viewWithTag(10001) as! CycleScrollView
+            cycleScroll.urlArray = [NSURL(string: imgUrl)!]
         }
         return cell!
     }
@@ -569,14 +571,14 @@ class ContentTypeDetailCell: UITableViewCell {
     class func configProductDetailCell(cell:ContentTypeDetailCell!,product : ZMDProduct) {
             cell.nameLbl.text = product.Name
         if let productPrice = product.ProductPrice {
-            cell.priceLbl.text = "￥\(productPrice.Price)"
-            cell.priceLblWidthcon.constant = "￥\(productPrice.Price)".sizeWithFont(defaultSysFontWithSize(20), maxWidth: 200).width
+            cell.priceLbl.text = "\(productPrice.Price)"
+            cell.priceLblWidthcon.constant = "\(productPrice.Price)".sizeWithFont(defaultSysFontWithSize(20), maxWidth: 200).width
             //          cell.layoutIfNeeded()
-            cell.oldPriceLbl.text = "原价:￥\(productPrice.OldPrice)"
+            cell.oldPriceLbl.text = "原价:\(productPrice.OldPrice ?? "")"
         }
 
         cell.soldCountLbl.text = "已售\(product.Sold)件"
-        cell.skuLbl.text = "商品货号:\(product.Sku)"
+        cell.skuLbl.text = "商品货号:\(product.Sku ?? "")"
         cell.isFreeLbl.text = product.IsFreeShipping!.boolValue ? "运费:免邮" : "运费:不免邮"
     }
 }

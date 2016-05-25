@@ -15,9 +15,9 @@ import UIKit
 let g_SecretKey = "qoocc"
 
 /// 是否登录
-var g_isLogin: Bool! { return g_currentGroup != nil }
+var g_isLogin: Bool! { return g_customerId != nil }
 /// 当前账号
-var g_currentGroup : String? = ""
+var g_customerId : Int?
 
 // MARK: - 账号 & 账号管理
 private let kKeyAccount = ("Account" as NSString).encrypt(g_SecretKey)

@@ -109,7 +109,6 @@ class LoginViewController: UIViewController , ZMDInterceptorNavigationBarHiddenP
                 if success! {
                     ZMDTool.showPromptView("成功")
                     saveAccountAndPassword(usrN, password: ps)
-                    g_currentGroup = ""
                     let vc = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()
                     ZMDTool.enterRootViewController(vc!)
                 } else {

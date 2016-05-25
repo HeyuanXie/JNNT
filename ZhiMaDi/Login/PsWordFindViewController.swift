@@ -103,7 +103,7 @@ class PsWordFindViewController: UIViewController, ZMDInterceptorNavigationBarHid
         self.getVerificationBtn.rac_signalForControlEvents(.TouchUpInside).subscribeNext { [weak self](sender) -> Void in
             if let strongSelf = self {
                 LoginViewController.fetchAuthCode(strongSelf, phone: { () -> String? in
-                    if strongSelf.accountTextField.text!.checkStingIsPhone()  {
+                    if !strongSelf.accountTextField.text!.checkStingIsPhone()  {
                         ZMDTool.showPromptView( "请填写手机号码")
                         strongSelf.accountTextField.text = nil; strongSelf.accountTextField.becomeFirstResponder()
                         return nil

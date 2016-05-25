@@ -7,7 +7,8 @@
 //
 
 import UIKit
-
+// 订单
 class ZMDOrder: NSObject {
+    var OrderNumber:String!        //
 
 }

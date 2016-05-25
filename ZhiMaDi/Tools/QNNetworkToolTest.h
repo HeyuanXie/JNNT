@@ -9,5 +9,5 @@
 #import <Foundation/Foundation.h>
 
 @interface QNNetworkToolTest : NSObject
-
++ (void)setFormDataRequest:(NSMutableURLRequest *)request fromData:(NSDictionary *)formdata;
 @end

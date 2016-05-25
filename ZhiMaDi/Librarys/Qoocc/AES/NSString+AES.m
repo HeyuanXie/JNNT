@@ -80,4 +80,5 @@
     NSString* s = [self base64forData:hash];
     return s;
 }
+
 @end

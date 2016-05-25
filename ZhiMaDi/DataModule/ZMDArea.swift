@@ -7,7 +7,7 @@
 //
 
 import UIKit
-// 地址
+// 地区
 class ZMDArea: NSObject {
     var id : String!
     var name : String!

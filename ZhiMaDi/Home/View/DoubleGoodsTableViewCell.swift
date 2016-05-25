@@ -27,6 +27,7 @@ class DoubleGoodsTableViewCell: UITableViewCell {
     @IBOutlet weak var originalPriceLblRight: UILabel!
     @IBOutlet weak var countLblRight: UILabel!
     @IBOutlet weak var isCollectionRight: UIButton!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

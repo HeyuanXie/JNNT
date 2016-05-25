@@ -434,6 +434,7 @@
 		2BB8E3941CDC3059004B9655 /* MyStoreManagerGoodsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB8E3931CDC3059004B9655 /* MyStoreManagerGoodsCell.swift */; };
 		2BBB12C61CC874290076C775 /* VipClubGoodsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBB12C51CC874290076C775 /* VipClubGoodsDetailViewController.swift */; };
 		2BBB12C81CC87D5A0076C775 /* VipClubGoodsDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBB12C71CC87D5A0076C775 /* VipClubGoodsDetailTableViewCell.swift */; };
+		2BBFEEFC1CEEA09A00272BB0 /* ZMDAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBFEEFB1CEEA09A00272BB0 /* ZMDAddress.swift */; };
 		2BC05C671CB630C300D3B1AE /* AddBankCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC05C621CB630C300D3B1AE /* AddBankCardViewController.swift */; };
 		2BC05C681CB630C300D3B1AE /* BankCardAuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC05C631CB630C300D3B1AE /* BankCardAuthenticationViewController.swift */; };
 		2BC05C691CB630C300D3B1AE /* BankCardDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC05C641CB630C300D3B1AE /* BankCardDetailViewController.swift */; };
@@ -441,6 +442,7 @@
 		2BC05C6F1CB630F700D3B1AE /* WalletCaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC05C6C1CB630F700D3B1AE /* WalletCaseViewController.swift */; };
 		2BC05C701CB630F700D3B1AE /* WalletHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC05C6D1CB630F700D3B1AE /* WalletHomeViewController.swift */; };
 		2BC05C711CB630F700D3B1AE /* WalletRechargeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC05C6E1CB630F700D3B1AE /* WalletRechargeViewController.swift */; };
+		2BC4E7351CF44D79007C0AC5 /* ZMDOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC4E7341CF44D79007C0AC5 /* ZMDOrder.swift */; };
 		2BC861571CD8349500B8D449 /* MyStoreAddLeaseHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC861561CD8349500B8D449 /* MyStoreAddLeaseHomeViewController.swift */; };
 		2BC861591CD8393D00B8D449 /* MyStoreAddLeaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC861581CD8393D00B8D449 /* MyStoreAddLeaseViewController.swift */; };
 		2BD96CEF1CC717D3005DC87F /* StoreShowHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD96CEE1CC717D3005DC87F /* StoreShowHomeViewController.swift */; };
@@ -596,6 +598,7 @@
 		2BF52FA01CB3BA2D0099F296 /* bank_zs@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BF52F921CB3BA2D0099F296 /* bank_zs@3x.png */; };
 		2BF7F06E1C8E6C1E001C4595 /* Navigation_Back_R.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BF7F06D1C8E6C1E001C4595 /* Navigation_Back_R.png */; };
 		2BF7F0741C8EB18B001C4595 /* FortuneCenterSelectPayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF7F0731C8EB18B001C4595 /* FortuneCenterSelectPayViewController.swift */; };
+		2BF86CF41CF29C13000FF7F0 /* QNNetworkToolTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BF86CF31CF29C13000FF7F0 /* QNNetworkToolTest.m */; };
 		2BF8D8501CD0542A008237D9 /* MyStoreSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF8D84F1CD0542A008237D9 /* MyStoreSetViewController.swift */; };
 		2BF8D8711CD0AC52008237D9 /* MyStoreOrderDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF8D86F1CD0AC52008237D9 /* MyStoreOrderDetailViewController.swift */; };
 		2BF8D8721CD0AC52008237D9 /* MyStoreOrderHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF8D8701CD0AC52008237D9 /* MyStoreOrderHomeViewController.swift */; };
@@ -1177,6 +1180,7 @@
 		2BB8E3931CDC3059004B9655 /* MyStoreManagerGoodsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyStoreManagerGoodsCell.swift; sourceTree = "<group>"; };
 		2BBB12C51CC874290076C775 /* VipClubGoodsDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VipClubGoodsDetailViewController.swift; sourceTree = "<group>"; };
 		2BBB12C71CC87D5A0076C775 /* VipClubGoodsDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VipClubGoodsDetailTableViewCell.swift; sourceTree = "<group>"; };
+		2BBFEEFB1CEEA09A00272BB0 /* ZMDAddress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZMDAddress.swift; sourceTree = "<group>"; };
 		2BC05C621CB630C300D3B1AE /* AddBankCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBankCardViewController.swift; sourceTree = "<group>"; };
 		2BC05C631CB630C300D3B1AE /* BankCardAuthenticationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankCardAuthenticationViewController.swift; sourceTree = "<group>"; };
 		2BC05C641CB630C300D3B1AE /* BankCardDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankCardDetailViewController.swift; sourceTree = "<group>"; };
@@ -1184,6 +1188,7 @@
 		2BC05C6C1CB630F700D3B1AE /* WalletCaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletCaseViewController.swift; sourceTree = "<group>"; };
 		2BC05C6D1CB630F700D3B1AE /* WalletHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletHomeViewController.swift; sourceTree = "<group>"; };
 		2BC05C6E1CB630F700D3B1AE /* WalletRechargeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletRechargeViewController.swift; sourceTree = "<group>"; };
+		2BC4E7341CF44D79007C0AC5 /* ZMDOrder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZMDOrder.swift; sourceTree = "<group>"; };
 		2BC861561CD8349500B8D449 /* MyStoreAddLeaseHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyStoreAddLeaseHomeViewController.swift; sourceTree = "<group>"; };
 		2BC861581CD8393D00B8D449 /* MyStoreAddLeaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyStoreAddLeaseViewController.swift; sourceTree = "<group>"; };
 		2BD96CEE1CC717D3005DC87F /* StoreShowHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreShowHomeViewController.swift; sourceTree = "<group>"; };
@@ -1340,6 +1345,8 @@
 		2BF52F921CB3BA2D0099F296 /* bank_zs@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bank_zs@3x.png"; sourceTree = "<group>"; };
 		2BF7F06D1C8E6C1E001C4595 /* Navigation_Back_R.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Navigation_Back_R.png; sourceTree = "<group>"; };
 		2BF7F0731C8EB18B001C4595 /* FortuneCenterSelectPayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FortuneCenterSelectPayViewController.swift; path = ../FortuneCenterSelectPayViewController.swift; sourceTree = "<group>"; };
+		2BF86CF21CF29C13000FF7F0 /* QNNetworkToolTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNNetworkToolTest.h; sourceTree = "<group>"; };
+		2BF86CF31CF29C13000FF7F0 /* QNNetworkToolTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QNNetworkToolTest.m; sourceTree = "<group>"; };
 		2BF8D84F1CD0542A008237D9 /* MyStoreSetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyStoreSetViewController.swift; sourceTree = "<group>"; };
 		2BF8D86F1CD0AC52008237D9 /* MyStoreOrderDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyStoreOrderDetailViewController.swift; sourceTree = "<group>"; };
 		2BF8D8701CD0AC52008237D9 /* MyStoreOrderHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyStoreOrderHomeViewController.swift; sourceTree = "<group>"; };
@@ -2750,6 +2757,8 @@
 				2BA223201CE9BA37006BC426 /* ZMDProduct.swift */,
 				2B79155C1CEAF54B00182F82 /* ZMDCategory.swift */,
 				2B2B0A2B1CEDA1FD00358F1B /* ZMDArea.swift */,
+				2BBFEEFB1CEEA09A00272BB0 /* ZMDAddress.swift */,
+				2BC4E7341CF44D79007C0AC5 /* ZMDOrder.swift */,
 			);
 			path = DataModule;
 			sourceTree = "<group>";
@@ -3033,6 +3042,8 @@
 				3C9098F51C76A6E9006B7D2C /* QNNetworkTool.swift */,
 				2B9183291CEC6FA20026F167 /* NetworkRemind */,
 				3C9098F61C76A6E9006B7D2C /* ZMDTool.swift */,
+				2BF86CF21CF29C13000FF7F0 /* QNNetworkToolTest.h */,
+				2BF86CF31CF29C13000FF7F0 /* QNNetworkToolTest.m */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -3648,6 +3659,7 @@
 				3C90994A1C76A6E9006B7D2C /* ChartYAxisRenderer.swift in Sources */,
 				3C9098F91C76A6E9006B7D2C /* tabBarViewController.swift in Sources */,
 				2B3AC6151C97B49100CC8662 /* BuyConfirmOrderViewController.swift in Sources */,
+				2BBFEEFC1CEEA09A00272BB0 /* ZMDAddress.swift in Sources */,
 				3C90985A1C76A482006B7D2C /* ViewController.swift in Sources */,
 				2BDEF3AF1C7EE0CA00927F64 /* HomeBuyGoodsDetailViewController.swift in Sources */,
 				2BE372D61C883AEC004A1DDF /* ReleaseGoodsViewController.swift in Sources */,
@@ -3743,6 +3755,7 @@
 				2B0662F91C7DA4A800EA822F /* HomeBuyViewController.swift in Sources */,
 				3C9099041C76A6E9006B7D2C /* CandleStickChartView.swift in Sources */,
 				3C9099511C76A6E9006B7D2C /* PieChartRenderer.swift in Sources */,
+				2BC4E7351CF44D79007C0AC5 /* ZMDOrder.swift in Sources */,
 				2B9D9F9F1C917B8F00141D31 /* HomeMarketViewController.swift in Sources */,
 				2BF8D8501CD0542A008237D9 /* MyStoreSetViewController.swift in Sources */,
 				2B73D85D1C86D1530016FEB2 /* PhoneSetPsVerifyViewController.swift in Sources */,
@@ -3846,6 +3859,7 @@
 				3C9099021C76A6E9006B7D2C /* BarLineChartViewBase.swift in Sources */,
 				2BB6A8D81C87E8F2008209E8 /* HomeSellViewController.swift in Sources */,
 				3C90993D1C76A6E9006B7D2C /* LineChartDataProvider.swift in Sources */,
+				2BF86CF41CF29C13000FF7F0 /* QNNetworkToolTest.m in Sources */,
 				2BEBF5F31CBB8B7300830585 /* CrowdfundingHomeViewController.swift in Sources */,
 				3C9099391C76A6E9006B7D2C /* BarLineScatterCandleBubbleChartDataProvider.swift in Sources */,
 				3C9099081C76A6E9006B7D2C /* LineChartView.swift in Sources */,

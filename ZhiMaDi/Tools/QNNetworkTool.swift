@@ -7,18 +7,20 @@
 //
 
 import UIKit
+import Foundation
 import Alamofire
 
 /// 服务器地址
 private let kServerAddress = { () -> String in
-    "http://od.ccw.cn"//
+//  "http://od.ccw.cn"
+    "http://xw.ccw.cn"  // 伟
 }()
 private let kOdataAddress = { () -> String in
-    "http://od.ccw.cn/odata/v1"
+    kServerAddress + "/odata/v1"
 }()
 // 图片地址
 let kImageAddressMain = { () -> String in
-    "http://od.ccw.cn"
+    kServerAddress
 }()
 //yyyy-MM-ddTHH:mm:ss.
 let publicKey = "c81de5387d36d1ec6a4ad4d483ffae0a";
@@ -50,7 +52,6 @@ private extension QNNetworkTool {
     private class func productRequest(url: NSURL!, method: NSString!) -> NSMutableURLRequest {
         let request = NSMutableURLRequest(URL: url)
         request.HTTPMethod = method as String
-
         let tmp = [method as String,"",accept,urlTmp,timestamp,publicKey]
         var messageRepresentation = ""
         for str in tmp {
@@ -124,7 +125,7 @@ private extension QNNetworkTool {
      :param: completionHandler 请求完成后的回掉， 如果 dictionary 为nil，那么 error 就不可能为空
      */
     private class func requestForSelf(url: NSURL?, method: String, parameters: [String : AnyObject]?, completionHandler: (request: NSURLRequest, response: NSHTTPURLResponse?, data: AnyObject?, dictionary: NSDictionary?, error: NSError?) -> Void) {
-        request(ParameterEncoding.URLEncodedInURL.encode(self.productRequest(url, method: method), parameters: parameters).0).response{
+        request(ParameterEncoding.URL.encode(self.productRequest(url, method: method), parameters: parameters).0).response{
             if $3 != nil {  // 直接出错了
                 completionHandler(request: $0!, response: $1, data: $2, dictionary: nil, error: $3); return
             }
@@ -409,9 +410,12 @@ extension QNNetworkTool {
                 return
             }
             if (dic["Success"] as? NSNumber)!.boolValue {
-                completion(success:true,error: nil,dictionary:nil)
+                if let customerId = dic["customerId"] as? Int {
+                    g_customerId = customerId
+                }
+                completion(success:true,error: nil,dictionary:dictionary)
             } else {
-                completion(success:false,error: nil,dictionary:nil)
+                completion(success:false,error: nil,dictionary:dictionary)
             }
         }
     }
@@ -461,6 +465,9 @@ extension QNNetworkTool {
             }
         }
     }
+}
+//MARK:- 订单相关
+extension QNNetworkTool {
     
 }
 //MARK:- 支付相关
@@ -569,6 +576,67 @@ extension QNNetworkTool {
                 }
             }else {
                 completion(areas:nil,error: error,dictionary:nil)
+            }
+        }
+    }
+    
+    class func fetchAddresses(completion: (addresses : NSArray?,error:NSError?,dictionary:NSDictionary?) -> Void) {
+        requestGET(kOdataAddress + "/Customers(\(g_customerId!))?$expand=Addresses", parameters: nil) { (_, _, _, dictionary, error) -> Void in
+            if dictionary != nil{
+                let value = dictionary!["Addresses"]
+                let addresses = ZMDAddress.mj_objectArrayWithKeyValuesArray(value)
+                completion(addresses:addresses,error: nil,dictionary:dictionary)
+            }else {
+                completion(addresses:nil,error: error,dictionary:nil)
+            }
+        }
+    }
+    // add
+    class func addOrEditAddress(address : ZMDAddress,completion: (succeed : Bool!,dictionary:NSDictionary?,error: NSError?) -> Void) {
+        var parms : [NSObject : AnyObject]!
+        if address.Id == nil {
+            parms = ["model[Address][FirstName]":address.FirstName,"model[Address][Address1]":address.Address1!,"model[Address][Address2]":address.Address2!,"model[Address][IsDefault]":(address.IsDefault.boolValue ? "true" : "false"),"model[Address][PhoneNumber]":address.PhoneNumber!,"model[Address][AreaCode]":address.AreaCode!,"customerId": g_customerId!,"model[Address][CountryId]":23,"model[Address][City]":address.City!]
+        } else {
+            parms = ["model[Address][FirstName]":address.FirstName,"model[Address][Address1]":address.Address1!,"model[Address][Address2]":address.Address2!,"model[Address][IsDefault]":(address.IsDefault.boolValue ? "true" : "false"),"model[Address][PhoneNumber]":address.PhoneNumber!,"model[Address][AreaCode]":address.AreaCode!,"model[Address][CountryId]":23,"model[Address][City]":address.City!,"model[Address][Id]":address.Id!,"customerId": g_customerId!,"id":address.Id!]
+        }
+        let url = address.Id == nil ? NSURL(string: kServerAddress + "/Customer/AddressAddAjax") : NSURL(string: kServerAddress + "/Customer/AddressEditAjax")
+        let tmp = self.productRequest(url, method: "POST")
+        QNNetworkToolTest.setFormDataRequest(tmp, fromData: parms as [NSObject : AnyObject])
+        request(ParameterEncoding.URL.encode(tmp, parameters: nil).0).response {
+            do {
+                let jsonObject: AnyObject? = try NSJSONSerialization.JSONObjectWithData($2!, options: NSJSONReadingOptions.MutableContainers)
+                let dictionary = jsonObject as? NSDictionary
+                guard let success = dictionary?["success"] as? NSNumber where success.boolValue else {
+                    completion(succeed:false,dictionary: dictionary, error: $3)
+                    return
+                }
+                completion(succeed:true,dictionary: dictionary, error: $3)
+            } catch {
+                completion(succeed:false,dictionary: nil, error: $3)
+            }
+        }
+    }
+    //
+    //MARK: 地址 delete
+    /**
+    :param: id:1        (地址id）
+    :param: customerId: 当前用户id
+    */
+    class func deleteAddress(id : Int,customerId:Int,completion: (succeed:Bool!,NSDictionary?, NSError?) -> Void) {
+        let url = NSURL(string: kServerAddress + "/Customer/AddressDeleteAjax")
+        let tmp = self.productRequest(url, method: "POST")
+        QNNetworkToolTest.setFormDataRequest(tmp, fromData: ["customerId":customerId,"id":id])
+        request(tmp).response {
+            do {
+                let jsonObject: AnyObject? = try NSJSONSerialization.JSONObjectWithData($2!, options: NSJSONReadingOptions.MutableContainers)
+                let dictionary = jsonObject as? NSDictionary
+                guard let success = dictionary?["success"] as? NSNumber where success.boolValue else {
+                    completion(succeed:false,dictionary, $3)
+                    return
+                }
+                completion(succeed:true,dictionary, $3)
+            } catch {
+                completion(succeed:false,nil, $3)
             }
         }
     }

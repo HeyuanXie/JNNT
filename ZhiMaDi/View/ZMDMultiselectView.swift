@@ -30,6 +30,7 @@ class ZMDMultiselectView: UIView {
                 (sender as! UIButton).selected = true
                 self.selectBtn = (sender as! UIButton)
                 self.finished(index: sender.tag)
+                // 我要干嘛   ..
             })
             btn.setBackgroundImage(UIImage.colorImage(RGB(240,240,240,1.0)), forState: .Normal)
             btn.setBackgroundImage(UIImage.colorImage(RGB(235,61,61,1.0)), forState: .Selected)
@@ -61,6 +62,7 @@ class ZMDMultiselectView: UIView {
             }
         }
     }
+    
     class func getHeight(titles:[String]) -> CGFloat {
         var x = CGFloat(14)
         var y = CGFloat(50)

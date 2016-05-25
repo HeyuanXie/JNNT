@@ -25,5 +25,9 @@ class AdressTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-   
+    class func configCell(cell:AdressTableViewCell,address:ZMDAddress) {
+        cell.title.text = address.FirstName
+        cell.address.text = (address.Address1 ?? "") + (address.Address2 ?? "")
+        cell.selectedBtn.selected = address.IsDefault.boolValue
+    }
 }

@@ -125,7 +125,7 @@ class CashierViewController: UIViewController,UITableViewDataSource,UITableViewD
     //支付宝支付
     private func aliPayCheck(){
         //self.order!.orderNo
-        QNNetworkTool.alipayOrderCheck("", completion: { (dictionary, error, errorMsg) -> Void in
+        QNNetworkTool.alipayOrderCheck("orderId", completion: { (dictionary, error, errorMsg) -> Void in
             if dictionary != nil {
                 self.submitAliOrder(dictionary!)
             }else {
@@ -135,9 +135,9 @@ class CashierViewController: UIViewController,UITableViewDataSource,UITableViewD
     }
     private func submitAliOrder(dic: NSDictionary){
         //应用注册scheme,在AlixPayDemo-Info.plist定义URL types
-        let appScheme: String = "alisdkforQoocc"
-        let orderString = "_input_charset=\"utf-8\"&body=\"支付葫芦堡订单：9341100036\"&notify_url=\"http://localhost:2726/Plugins/AliPay/AppNotify\"&out_trade_no=\"36\"&partner=\"2088601988095231\"&payment_type=\"1\"&seller_id=\"2433420816@qq.com\"&service=\"mobile.securitypay.pay\"&subject=\"葫芦堡订单：9341100036\"&total_fee=\"0.01\"&sign=\"QWOKih770qUROSNN4/SP0oTWlAuiK0kvjOaX95uzl4zEJVI7xyZJQ+R458/T29PVg4oFeMHFkPyvhbtiL3YMqAWX25xqPTfDL177K73ugcACN8N7tH55b11ruqzMA0G29QriLQDRdta1gjPHJWlk+jOinn8FLbbGx98YZJK6OZM=\"&sign_type=\"RSA\""       //dic["payInfo"] as! String
-        
+        let appScheme: String = "alisdkforHLB"
+        let orderString = "_input_charset=\"utf-8\"&body=\"支付葫芦堡订单：0615100039\"&notify_url=\"http://localhost:2726/Plugins/AliPay/AppNotify\"&out_trade_no=\"39\"&partner=\"2088411055133951\"&payment_type=\"1\"&seller_id=\"2088411055133951\"&service=\"mobile.securitypay.pay\"&subject=\"葫芦堡订单：0615100039\"&total_fee=\"0.01\"&sign=\"RNoYCPH%2fSpp%2fxWQnmhd8kkKmobosYtzzwuYyn3jJQJHZg8GN4qKmghfdMM38roe014WjSuKimF7%2fwUukQgq%2b2vsMrTw0HrkH%2b2V6ksM%2bz5KzZBzToOzv%2fL79DdfKVt4327s89%2fMM8ypbD9t6dcFYDn6o1floUJMFo6RStPp6rdQ%3d\"&sign_type=\"RSA\""
+        //dic["payInfo"] as! String
         AlipaySDK.defaultService().payOrder(orderString, fromScheme: appScheme, callback: { (resultDic) -> Void in
             if let Alipayjson = resultDic as? NSDictionary {
                 let resultStatus = Alipayjson.valueForKey("resultStatus") as! String

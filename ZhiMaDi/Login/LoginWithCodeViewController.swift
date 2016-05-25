@@ -137,7 +137,6 @@ class LoginWithCodeViewController: UIViewController , ZMDInterceptorNavigationBa
             QNNetworkTool.loginWithPhoneCode(phone, code: code, completion: { (success, error, dictionary) -> Void in
                 if success! {
                     ZMDTool.showPromptView("成功")
-                    g_currentGroup = ""
                     let vc = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()
                     ZMDTool.enterRootViewController(vc!)
                 } else {

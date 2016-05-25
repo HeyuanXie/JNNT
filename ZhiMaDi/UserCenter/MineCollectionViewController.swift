@@ -60,6 +60,7 @@ class MineCollectionViewController: UIViewController,UITableViewDataSource, UITa
             let multiselectView = ZMDMultiselectView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: ZMDMultiselectView.getHeight(goodses)),titles: goodses)
             multiselectView.finished = { (index) ->Void in
                 let title = self.goodses[index]
+                // 我要干嘛   ..
             }
             cell?.contentView.addSubview(multiselectView)
             return cell!
@@ -85,6 +86,7 @@ class MineCollectionViewController: UIViewController,UITableViewDataSource, UITa
         }
         return cell!
     }
+
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let vc = HomeBuyGoodsDetailViewController.CreateFromMainStoryboard() as! HomeBuyGoodsDetailViewController
         self.navigationController?.pushViewController(vc, animated: true)
@@ -128,6 +130,8 @@ class CollectionGoodsCell : UITableViewCell {
         self.contentView.addSubview(freightLbl)
         
         let cancelBtn = ZMDTool.getButton(CGRect(x: kScreenWidth - 80, y: 150-12-15, width: 80, height: 15), textForNormal: "取消收藏", fontSize: 15,textColorForNormal:defaultDetailTextColor, backgroundColor: UIColor.clearColor(), blockForCli: { (sender) -> Void in
+            //
+            
         })
         cancelBtn.tag = tag++
         self.contentView.addSubview(cancelBtn)

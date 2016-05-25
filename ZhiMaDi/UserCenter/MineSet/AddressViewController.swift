@@ -15,15 +15,17 @@ class AddressViewController: UIViewController,UITableViewDataSource, UITableView
     var rightItem : UIBarButtonItem!
     
     var selectAddressFinished : ((address : String)->Void)?
-    var indexDefault = 0
     var isEdit = false
+    var addresses = NSMutableArray()
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.updateUI()
         // Do any additional setup after loading the view.
     }
-
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        self.fetchData()
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -33,7 +35,7 @@ class AddressViewController: UIViewController,UITableViewDataSource, UITableView
         return 1
     }
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 4
+        return self.addresses.count
     }
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 16
@@ -52,30 +54,45 @@ class AddressViewController: UIViewController,UITableViewDataSource, UITableView
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cellId = "cell"
         let cell = tableView.dequeueReusableCellWithIdentifier(cellId) as! AdressTableViewCell
+        let address = self.addresses[indexPath.section] as! ZMDAddress
+        AdressTableViewCell.configCell(cell, address: address)
         if !self.isEdit {
+            cell.editBtn.hidden = true
             UIView.animateWithDuration(0.2, animations: { () -> Void in
-                cell.editBtnWidthConstraint.constant = 0
+                cell.editBtnWidthConstraint.constant = 12
                 cell.selectedBtn.setImage(UIImage(named: "common_01unselected"), forState: .Normal)
                 cell.selectedBtn.setImage(UIImage(named: "common_02selected"), forState: .Selected)
                 cell.layoutIfNeeded()
             })
-            if self.indexDefault == indexPath.section {
-                cell.selectedBtn.selected = true
-            }
-            cell.selectedBtn.rac_signalForControlEvents(.TouchUpInside).subscribeNext { (sender) -> Void in
-            }
         } else {
+            cell.editBtn.hidden = false
             UIView.animateWithDuration(0.2, animations: { () -> Void in
                 cell.editBtnWidthConstraint.constant = 60
                 cell.selectedBtn.setImage(UIImage(named: "btn_delete"), forState: .Normal)
                 cell.selectedBtn.setImage(UIImage(named: "btn_delete"), forState: .Selected)
                 cell.layoutIfNeeded()
             })
-            cell.editBtn.rac_signalForControlEvents(.TouchUpInside).subscribeNext({ (sender) -> Void in
+            cell.editBtn.tag = 1000 + indexPath.section
+            cell.editBtn.rac_command = RACCommand(signalBlock: { (sender) -> RACSignal! in
+                let address = self.addresses[sender.tag - 1000] as! ZMDAddress
+                let vc = AddressEditOrAddViewController()
+                vc.isAdd = false
+                vc.address = address
+                self.navigationController?.pushViewController(vc, animated: true)
+                return RACSignal.empty()
             })
             //delete
+            cell.selectedBtn.tag = 1000 + indexPath.section
             cell.selectedBtn.rac_signalForControlEvents(.TouchUpInside).subscribeNext { (sender) -> Void in
-
+                let address = self.addresses[sender.tag - 1000] as! ZMDAddress
+                QNNetworkTool.deleteAddress(address.Id!.integerValue, customerId: g_customerId!, completion: { (succeed, dictionary,error) -> Void in
+                    if error == nil {
+                        self.fetchData()
+                        ZMDTool.showPromptView("删除成功")
+                    } else {
+                        ZMDTool.showErrorPromptView(nil, error: error, errorMsg: "")
+                    }
+                })
             }
         }
         return cell
@@ -85,6 +102,7 @@ class AddressViewController: UIViewController,UITableViewDataSource, UITableView
     //MARK: -  Action
     @IBAction func addAddressBtnCli(sender: UIButton) {
         let vc = AddressEditOrAddViewController()
+        vc.isAdd = true
         self.navigationController?.pushViewController(vc, animated: true)
     }
     //MARK: -  PrivateMethod
@@ -104,4 +122,16 @@ class AddressViewController: UIViewController,UITableViewDataSource, UITableView
         }
         self.currentTableView.backgroundColor = tableViewdefaultBackgroundColor
     }
+    func fetchData() {
+        QNNetworkTool.fetchAddresses { (addresses, error, dictionary) -> Void in
+            if addresses != nil {
+                self.addresses.removeAllObjects()
+                self.addresses.addObjectsFromArray(addresses! as [AnyObject])
+                self.currentTableView.reloadData()
+            } else {
+                ZMDTool.showErrorPromptView(nil, error: error, errorMsg: "")
+            }
+        }
+    }
+    
 }

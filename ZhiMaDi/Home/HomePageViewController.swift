@@ -127,6 +127,7 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
     var menuType: [MenuType]!
     var 下拉视窗 : UIView!
     var categories = NSMutableArray()
+    var advertisementAll : ZMDAdvertisementAll!
     override func viewDidLoad() {
         super.viewDidLoad()
         // 让导航栏支持右滑返回功能
@@ -158,6 +159,9 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
     }
     //MARK:- UITableViewDataSource,UITableViewDelegate
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if let advertisements = self.advertisementAll,let topic = advertisements.topic where self.userCenterData[section] == .HomeContentTypeTheme {
+            return topic.count
+        }
         return 1
     }
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -269,16 +273,25 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
             cell = UITableViewCell(style: .Default, reuseIdentifier: cellId)
             cell!.selectionStyle = .None
             cell!.contentView.backgroundColor = UIColor.whiteColor()
-            
-            let cycleScroll = CycleScrollView(frame: CGRectMake(0, 0, kScreenWidth, kScreenWidth * 280 / 750))
-            cycleScroll.backgroundColor = UIColor.blueColor()
-            let image = ["home_banner01","home_banner02","home_banner03","home_banner04","home_banner05"]
-            cycleScroll.imgArray = image
-//            cycleScroll.delegate = self
-            cycleScroll.autoScroll = true
-            cycleScroll.autoTime = 2.5
-            cell?.addSubview(cycleScroll)
         }
+        if let v = cell?.viewWithTag(10001) {
+            v.removeFromSuperview()
+        }
+        let cycleScroll = CycleScrollView(frame: CGRectMake(0, 0, kScreenWidth, kScreenWidth * 280 / 750))
+        cycleScroll.tag = 10001
+        cycleScroll.backgroundColor = UIColor.blueColor()
+        //            cycleScroll.delegate = self
+        cycleScroll.autoScroll = true
+        cycleScroll.autoTime = 2.5
+        let imgUrls = NSMutableArray()
+        if self.advertisementAll != nil && self.advertisementAll.top != nil {
+            for id in self.advertisementAll.top! {
+                let url = kImageAddressNew + (id.ResourcesCDNPath ?? "")
+                imgUrls.addObject(NSURL(string: url)!)
+            }
+            cycleScroll.urlArray = imgUrls as [AnyObject]
+        }
+        cell?.addSubview(cycleScroll)
         return cell!
     }
     // 菜单
@@ -340,24 +353,27 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
             cell = UITableViewCell(style: .Default, reuseIdentifier: cellId)
             cell!.selectionStyle = .None
             cell!.contentView.backgroundColor = UIColor.whiteColor()
-            
+        }
+        var tag = 10001
+        let imgV = cell?.viewWithTag(tag++) as! UIImageView
+        let titleLbl = cell?.viewWithTag(tag++) as! UILabel
+        let timeLbl = cell?.viewWithTag(tag++) as! UILabel
+        if let advertisements = self.advertisementAll,let topic = advertisements.topic {
+            let id = topic[indexPath.row]
+            let url = kImageAddressNew + (id.ResourcesCDNPath ?? "")
+            imgV.sd_setImageWithURL(NSURL(string: url))
+            titleLbl.text = id.Title ?? ""
         }
         return cell!
     }
-    //MARK: - 商品 cell
+    //MARK: - 商品 cell  offer
     func cellForHomeGoods(tableView: UITableView,indexPath: NSIndexPath)-> UITableViewCell {
         let cellId = "goodsCell"
-        var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
-        if cell == nil {
-            cell = UITableViewCell(style: .Default, reuseIdentifier: cellId)
-            cell!.selectionStyle = .None
-            cell!.contentView.backgroundColor = UIColor.whiteColor()
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellId) as! AdvertisementOfferCell
+        if  self.advertisementAll != nil {
+            AdvertisementOfferCell.configCell(cell, advertisementAll: self.advertisementAll.offer)
         }
-        let titleLbl = cell?.viewWithTag(10001) as! UILabel
-        titleLbl.textColor = defaultTextColor
-        let detailLbl = cell?.viewWithTag(10002) as! UILabel
-        detailLbl.textColor = defaultDetailTextColor
-        return cell!
+        return cell
     }
     //MARK: - 推荐Head cell
     func cellForHomeRecommendationHead(tableView: UITableView,indexPath: NSIndexPath)-> UITableViewCell {
@@ -372,6 +388,7 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
     }
     //MARK: - 推荐 cell
     func cellForHomeRecommendation(tableView: UITableView,indexPath: NSIndexPath)-> UITableViewCell {
+        let kTagScrollView = 10001
         let cellId = "RecommendationCell"
         var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
         if cell == nil {
@@ -379,12 +396,18 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
             cell!.selectionStyle = .None
             cell!.contentView.backgroundColor = tableViewdefaultBackgroundColor
             
-            let data = ["product03","product03","product03","product03","product03"]
             let scrollView = UIScrollView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: 180)) //66
             scrollView.showsHorizontalScrollIndicator = false
-            scrollView.contentSize = CGSize(width: (136 + 10) * CGFloat(data.count), height: 180)
+            scrollView.tag = kTagScrollView
             cell?.contentView.addSubview(scrollView)
-            for var i=0;i<data.count;i++ {
+        }
+        let scrollView = cell?.viewWithTag(kTagScrollView) as! UIScrollView
+        if let advertisements = self.advertisementAll,let guess = advertisements.guess {
+            for subView in scrollView.subviews {
+                subView.removeFromSuperview()
+            }
+            scrollView.contentSize = CGSize(width: (136 + 10) * CGFloat(guess.count), height: 180)
+            for var i=0;i<guess.count;i++ {
                 let btnHeight = CGFloat(180)
                 let width = CGFloat(136)
                 let btn = UIButton(frame: CGRectMake(10*CGFloat(i + 1)+CGFloat(i) * width, 0,width, btnHeight))
@@ -408,8 +431,8 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
                 btn.addSubview(moneyLbl)
                 
                 let imgV = UIImageView(frame: CGRectMake(width/2-48, 30, 96,96))
-                imgV.tag = 10030 + i
-                imgV.image = UIImage(named: data[i])
+                let url = kImageAddressNew + (guess[i].ResourcesCDNPath ?? "")
+                imgV.sd_setImageWithURL(NSURL(string: url))
                 btn.addSubview(imgV)
                 cell!.contentView.addSubview(btn)
                 scrollView.addSubview(btn)
@@ -512,6 +535,12 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
                 self.currentTableView.reloadData()
             } else {
                 ZMDTool.showErrorPromptView(nil, error: error)
+            }
+        }
+        QNNetworkTool.fetchMainPageInto { (advertisementAll, error, dictionary) -> Void in
+            if advertisementAll != nil {
+                self.advertisementAll = advertisementAll
+                self.currentTableView.reloadData()
             }
         }
     }

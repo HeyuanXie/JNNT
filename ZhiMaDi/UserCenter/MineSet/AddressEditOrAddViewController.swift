@@ -159,18 +159,23 @@ class AddressEditOrAddViewController: UIViewController,UITableViewDataSource,UIT
                 cell!.selectionStyle = .None
                 
                 ZMDTool.configTableViewCellDefault(cell!)
+                
+                if self.swithBtn == nil {
+                    self.swithBtn = UISwitch(frame: CGRect(x: kScreenWidth - 12 - 56, y: 14, width: 56, height: 28))
+                    cell?.contentView.addSubview(swithBtn)
+                    if !self.isAdd && self.address != nil {
+                        self.swithBtn.on = self.address.IsDefault.boolValue
+                    }
+                }
             }
             cell?.textLabel?.text = self.titles[indexPath.section]
-            if self.swithBtn == nil {
-                self.swithBtn = UISwitch(frame: CGRect(x: kScreenWidth - 12 - 56, y: 14, width: 56, height: 28))
-                cell?.contentView.addSubview(swithBtn)
-            }
             
             return cell!
         default :
             return UITableViewCell()
         }
     }
+    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if self.titles[indexPath.section] == "所在地区 : " {
             let areaView = ZMDAreaView(frame: CGRect(x: 0, y: kScreenHeight-400, width: kScreenWidth, height: 400))

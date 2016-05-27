@@ -9,7 +9,6 @@
 import UIKit
 import Foundation
 import Alamofire
-
 /// 服务器地址
 private let kServerAddress = { () -> String in
 //  "http://od.ccw.cn"
@@ -21,6 +20,10 @@ private let kOdataAddress = { () -> String in
 // 图片地址
 let kImageAddressMain = { () -> String in
     kServerAddress
+}()
+// 图片地址
+let kImageAddressNew = { () -> String in
+    kServerAddress + "/media"
 }()
 //yyyy-MM-ddTHH:mm:ss.
 let publicKey = "c81de5387d36d1ec6a4ad4d483ffae0a";
@@ -347,7 +350,7 @@ extension QNNetworkTool {
 extension QNNetworkTool {
     // 验证手机验证码
     class func checkCode(mobile:String,code:String,completion: (success: Bool!,error:NSError?,dictionary:NSDictionary?) -> Void){
-        requestPOST(kServerAddress + "/CheckCode", parameters: paramsToJsonDataParams(["mobile" : mobile,"code" : code])) { (_,response, _, dictionary, error) -> Void in
+        requestPOST(kServerAddress + "/api/v1/extend/Login/CheckCode", parameters: ["mobile" : mobile,"code" : code]) { (_,response, _, dictionary, error) -> Void in
             guard let dic = dictionary else {
                 completion(success:false,error: error,dictionary:nil)
                 return
@@ -362,12 +365,12 @@ extension QNNetworkTool {
     
     // 手机发送验证码
     class func sendCode(phone:String,completion: (success: Bool!,error:NSError?,dictionary:NSDictionary?) -> Void){
-        requestPOST(kServerAddress + "/SendCode", parameters: paramsToJsonDataParams(["mobile" : phone])) { (_,response, _, dictionary, error) -> Void in
-            guard let dic = dictionary else {
+        requestPOST(kServerAddress + "/api/v1/extend/Login/SendCode", parameters: paramsToJsonDataParams(["mobile" : phone])) { (_,response, _, dictionary, error) -> Void in
+            guard let dic = dictionary , let succeed = dic["Success"] as? NSNumber else {
                 completion(success:false,error: error,dictionary:nil)
                 return
             }
-            if (dic["Success"] as? NSNumber)!.boolValue {
+            if succeed.boolValue {
                 completion(success:true,error: nil,dictionary:nil)
             } else {
                 completion(success:false,error: nil,dictionary:nil)
@@ -376,7 +379,7 @@ extension QNNetworkTool {
     }
     // 手机验证码注册并登录
     class func registerAndLogin(mobile:String,code:String,psw:String,completion: (success: Bool!,error:NSError?,dictionary:NSDictionary?) -> Void){
-        requestPOST(kServerAddress + "/PhoneLogin", parameters: paramsToJsonDataParams(["mobile" : mobile,"code" : code,"psw" : psw])) { (_,response, _, dictionary, error) -> Void in
+        requestPOST(kServerAddress + "/api/v1/extend/Login//PhoneLogin", parameters: paramsToJsonDataParams(["mobile" : mobile,"code" : code,"psw" : psw])) { (_,response, _, dictionary, error) -> Void in
             guard let dic = dictionary else {
                 completion(success:false,error: error,dictionary:nil)
                 return
@@ -388,9 +391,9 @@ extension QNNetworkTool {
             }
         }
     }
-    // 用户登录
+    // 用户登录  /api/v1/extend/Login/
     class func loginAjax(Username:String,Password:String,completion: (success: Bool!,error:NSError?,dictionary:NSDictionary?) -> Void){
-        requestPOST(kServerAddress + "/Customer/LoginAjax", parameters: paramsToJsonDataParams(["Username" : Username,"Password" : Password])) { (_,response, _, dictionary, error) -> Void in
+        requestPOST(kServerAddress + "/api/v1/extend/Login/LoginAjax", parameters: paramsToJsonDataParams(["Username" : Username,"Password" : Password])) { (_,response, _, dictionary, error) -> Void in
             guard let dic = dictionary else {
                 completion(success:false,error: error,dictionary:nil)
                 return
@@ -404,7 +407,7 @@ extension QNNetworkTool {
     }
     // 手机验证码登录
     class func loginWithPhoneCode(mobile:String,code:String,completion: (success: Bool!,error:NSError?,dictionary:NSDictionary?) -> Void){
-        requestPOST(kServerAddress + "/PhoneLogin", parameters: paramsToJsonDataParams(["mobile" : mobile,"code" : code])) { (_,response, _, dictionary, error) -> Void in
+        requestPOST(kServerAddress + "/api/v1/extend/Login/PhoneLogin", parameters: paramsToJsonDataParams(["mobile" : mobile,"code" : code])) { (_,response, _, dictionary, error) -> Void in
             guard let dic = dictionary else {
                 completion(success:false,error: error,dictionary:nil)
                 return
@@ -451,7 +454,6 @@ extension QNNetworkTool {
             }
         }
     }
-
     
     class func categories(completion: (categories : NSArray?,error:NSError?,dictionary:NSDictionary?) -> Void) {
         //        "/Categories?$top=10"
@@ -463,6 +465,16 @@ extension QNNetworkTool {
             }else {
                 completion(categories:nil,error: error,dictionary:nil)
             }
+        }
+    }
+    //MARK: 首页数据
+    class func fetchMainPageInto(completion: (advertisementAll: ZMDAdvertisementAll?,error:NSError?,dictionary:NSDictionary?) -> Void){
+        requestPOST(kServerAddress + "/api/v1/extend/Advertisement/IndexAds", parameters: nil) { (_,response, _, dictionary, error) -> Void in
+            guard let dic = dictionary ,let advertisementAll = ZMDAdvertisementAll.mj_objectWithKeyValues(dic) else {
+                completion(advertisementAll:nil,error: error,dictionary:nil)
+                return
+            }
+            completion(advertisementAll:advertisementAll,error: nil,dictionary:dictionary)
         }
     }
 }
@@ -557,7 +569,7 @@ extension QNNetworkTool {
         }
     }
 }
-// MARK : - 地址相关
+//MARK: - 地址相关
 extension QNNetworkTool {
     // 获取地址列表
     class func areas(id:String,completion: (areas : NSArray?,error: NSError?,dictionary:NSDictionary?) -> Void) {
@@ -593,28 +605,22 @@ extension QNNetworkTool {
     }
     // add
     class func addOrEditAddress(address : ZMDAddress,completion: (succeed : Bool!,dictionary:NSDictionary?,error: NSError?) -> Void) {
-        var parms : [NSObject : AnyObject]!
+        var parms : [String : AnyObject]!
         if address.Id == nil {
-            parms = ["model[Address][FirstName]":address.FirstName,"model[Address][Address1]":address.Address1!,"model[Address][Address2]":address.Address2!,"model[Address][IsDefault]":(address.IsDefault.boolValue ? "true" : "false"),"model[Address][PhoneNumber]":address.PhoneNumber!,"model[Address][AreaCode]":address.AreaCode!,"customerId": g_customerId!,"model[Address][CountryId]":23,"model[Address][City]":address.City!]
+            parms = ["FirstName":address.FirstName,"Address1":address.Address1!,"Address2":address.Address2!,"IsDefault":(address.IsDefault.boolValue ? "true" : "false"),"PhoneNumber":address.PhoneNumber!,"AreaCode":address.AreaCode!,"customerId": g_customerId!,"CountryId":23,"City":address.City!]
         } else {
-            parms = ["model[Address][FirstName]":address.FirstName,"model[Address][Address1]":address.Address1!,"model[Address][Address2]":address.Address2!,"model[Address][IsDefault]":(address.IsDefault.boolValue ? "true" : "false"),"model[Address][PhoneNumber]":address.PhoneNumber!,"model[Address][AreaCode]":address.AreaCode!,"model[Address][CountryId]":23,"model[Address][City]":address.City!,"model[Address][Id]":address.Id!,"customerId": g_customerId!,"id":address.Id!]
+            parms = ["FirstName":address.FirstName,"Address1":address.Address1!,"Address2":address.Address2!,"IsDefault":(address.IsDefault.boolValue ? "true" : "false"),"PhoneNumber":address.PhoneNumber!,"AreaCode":address.AreaCode!,"CountryId":23,"City":address.City!,"customerId": g_customerId!,"id":address.Id!]
         }
-        let url = address.Id == nil ? NSURL(string: kServerAddress + "/Customer/AddressAddAjax") : NSURL(string: kServerAddress + "/Customer/AddressEditAjax")
-        let tmp = self.productRequest(url, method: "POST")
-        QNNetworkToolTest.setFormDataRequest(tmp, fromData: parms as [NSObject : AnyObject])
-        request(ParameterEncoding.URL.encode(tmp, parameters: nil).0).response {
-            do {
-                let jsonObject: AnyObject? = try NSJSONSerialization.JSONObjectWithData($2!, options: NSJSONReadingOptions.MutableContainers)
-                let dictionary = jsonObject as? NSDictionary
-                guard let success = dictionary?["success"] as? NSNumber where success.boolValue else {
-                    completion(succeed:false,dictionary: dictionary, error: $3)
-                    return
-                }
-                completion(succeed:true,dictionary: dictionary, error: $3)
-            } catch {
-                completion(succeed:false,dictionary: nil, error: $3)
+        let url = address.Id == nil ? (kServerAddress + "/api/v1/extend/Customer/AddressAdd") : (kServerAddress + "/api/v1/extend/Customer/AddressEdit")
+        requestPOST(url, parameters: parms) { (_, _, _, dictionary, error) -> Void in
+            guard let success = dictionary?["success"] as? NSNumber where success.boolValue else {
+                completion(succeed:false,dictionary: dictionary, error: error)
+                return
             }
+            completion(succeed:true,dictionary: dictionary, error: nil)
         }
+
+        
     }
     //
     //MARK: 地址 delete
@@ -623,21 +629,12 @@ extension QNNetworkTool {
     :param: customerId: 当前用户id
     */
     class func deleteAddress(id : Int,customerId:Int,completion: (succeed:Bool!,NSDictionary?, NSError?) -> Void) {
-        let url = NSURL(string: kServerAddress + "/Customer/AddressDeleteAjax")
-        let tmp = self.productRequest(url, method: "POST")
-        QNNetworkToolTest.setFormDataRequest(tmp, fromData: ["customerId":customerId,"id":id])
-        request(tmp).response {
-            do {
-                let jsonObject: AnyObject? = try NSJSONSerialization.JSONObjectWithData($2!, options: NSJSONReadingOptions.MutableContainers)
-                let dictionary = jsonObject as? NSDictionary
-                guard let success = dictionary?["success"] as? NSNumber where success.boolValue else {
-                    completion(succeed:false,dictionary, $3)
-                    return
-                }
-                completion(succeed:true,dictionary, $3)
-            } catch {
-                completion(succeed:false,nil, $3)
+        requestPOST(kServerAddress + "/api/v1/extend/Customer/AddressDelete", parameters: ["customerId":customerId,"id":id]) { (_, _, _, dictionary, error) -> Void in
+            guard let success = dictionary?["success"] as? NSNumber where success.boolValue else {
+                completion(succeed:false,dictionary, error)
+                return
             }
+            completion(succeed:true,dictionary, nil)
         }
     }
 }

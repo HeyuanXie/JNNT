@@ -496,6 +496,8 @@
 		2BE373001C895F28004A1DDF /* BusinessAuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE372FF1C895F28004A1DDF /* BusinessAuthenticationViewController.swift */; };
 		2BE373071C89836A004A1DDF /* btn_Arrow_TurnDown1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BE373051C89836A004A1DDF /* btn_Arrow_TurnDown1@2x.png */; };
 		2BE373081C89836A004A1DDF /* btn_Arrow_TurnUp1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BE373061C89836A004A1DDF /* btn_Arrow_TurnUp1@2x.png */; };
+		2BEAE90A1CF693EF00727B04 /* ZMDAdvertisement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEAE9091CF693EF00727B04 /* ZMDAdvertisement.swift */; };
+		2BEAE90C1CF6A43600727B04 /* AdvertisementOfferCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEAE90B1CF6A43600727B04 /* AdvertisementOfferCell.swift */; };
 		2BEBF5F01CBB843C00830585 /* CardVolumeMemberDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEBF5EF1CBB843C00830585 /* CardVolumeMemberDetailViewController.swift */; };
 		2BEBF5F31CBB8B7300830585 /* CrowdfundingHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEBF5F21CBB8B7300830585 /* CrowdfundingHomeViewController.swift */; };
 		2BF2B0D01C9659B500B310D5 /* HomeMarketDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF2B0CF1C9659B500B310D5 /* HomeMarketDetailViewController.swift */; };
@@ -1243,6 +1245,8 @@
 		2BE372FF1C895F28004A1DDF /* BusinessAuthenticationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusinessAuthenticationViewController.swift; sourceTree = "<group>"; };
 		2BE373051C89836A004A1DDF /* btn_Arrow_TurnDown1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_Arrow_TurnDown1@2x.png"; sourceTree = "<group>"; };
 		2BE373061C89836A004A1DDF /* btn_Arrow_TurnUp1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_Arrow_TurnUp1@2x.png"; sourceTree = "<group>"; };
+		2BEAE9091CF693EF00727B04 /* ZMDAdvertisement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZMDAdvertisement.swift; sourceTree = "<group>"; };
+		2BEAE90B1CF6A43600727B04 /* AdvertisementOfferCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdvertisementOfferCell.swift; sourceTree = "<group>"; };
 		2BEBF5EF1CBB843C00830585 /* CardVolumeMemberDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardVolumeMemberDetailViewController.swift; sourceTree = "<group>"; };
 		2BEBF5F21CBB8B7300830585 /* CrowdfundingHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrowdfundingHomeViewController.swift; sourceTree = "<group>"; };
 		2BF2B0CF1C9659B500B310D5 /* HomeMarketDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeMarketDetailViewController.swift; sourceTree = "<group>"; };
@@ -1567,6 +1571,7 @@
 				2B02B4BB1CAA77AE0064B47C /* DoubleGoodsTableViewCell.swift */,
 				2B02B4BF1CAA78790064B47C /* CountView.swift */,
 				2B02B4C11CAA81140064B47C /* OrderGoodsTableViewCell.swift */,
+				2BEAE90B1CF6A43600727B04 /* AdvertisementOfferCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2759,6 +2764,7 @@
 				2B2B0A2B1CEDA1FD00358F1B /* ZMDArea.swift */,
 				2BBFEEFB1CEEA09A00272BB0 /* ZMDAddress.swift */,
 				2BC4E7341CF44D79007C0AC5 /* ZMDOrder.swift */,
+				2BEAE9091CF693EF00727B04 /* ZMDAdvertisement.swift */,
 			);
 			path = DataModule;
 			sourceTree = "<group>";
@@ -3755,6 +3761,7 @@
 				2B0662F91C7DA4A800EA822F /* HomeBuyViewController.swift in Sources */,
 				3C9099041C76A6E9006B7D2C /* CandleStickChartView.swift in Sources */,
 				3C9099511C76A6E9006B7D2C /* PieChartRenderer.swift in Sources */,
+				2BEAE90C1CF6A43600727B04 /* AdvertisementOfferCell.swift in Sources */,
 				2BC4E7351CF44D79007C0AC5 /* ZMDOrder.swift in Sources */,
 				2B9D9F9F1C917B8F00141D31 /* HomeMarketViewController.swift in Sources */,
 				2BF8D8501CD0542A008237D9 /* MyStoreSetViewController.swift in Sources */,
@@ -3807,6 +3814,7 @@
 				3C90995B1C76A6E9006B7D2C /* LyPrompt.swift in Sources */,
 				2BB8E3941CDC3059004B9655 /* MyStoreManagerGoodsCell.swift in Sources */,
 				3C90993B1C76A6E9006B7D2C /* CandleChartDataProvider.swift in Sources */,
+				2BEAE90A1CF693EF00727B04 /* ZMDAdvertisement.swift in Sources */,
 				2B02B51A1CACD4140064B47C /* ConfirmOrderViewController.swift in Sources */,
 				3C9099521C76A6E9006B7D2C /* RadarChartRenderer.swift in Sources */,
 				2B73D84F1C867C280016FEB2 /* AdressTableViewCell.swift in Sources */,

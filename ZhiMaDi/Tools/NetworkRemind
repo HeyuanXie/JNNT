@@ -60,3 +60,11 @@
     /SendCode   （post）【string mobile】
 （5）验证手机验证码
     /CheckCode   （post）【string mobile, string code】
+4、首页数据
+    地址：http://xw.ccw.cn/api/v1/extend/Advertisement/IndexAds/ 方法 post   返回 首页广告所有内容
+    解释：从上到下 依次对应 top、 icon、  offer、 guess、 topic
+    备注：
+            图片地址取  ResourcesCDNPath  地址格式为  imageUrl+ ResourcesCDNPath
+            如："http://xw.ccw.cn/media" + "/Advertisement/help.png"
+            Other1: 标记当前点击链接类型（Product：代表产品，Seckill：代表产品秒杀，Topic：代表专题，Coupon：代表优惠券）
+            Other2：代表对应的相关Id。 如果是优惠券 则代表优惠券的领券Post地址。

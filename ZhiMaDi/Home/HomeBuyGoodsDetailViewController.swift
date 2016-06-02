@@ -34,10 +34,13 @@ class HomeBuyGoodsDetailViewController: UIViewController,UITableViewDataSource,U
     var navBackView : UIView!
     var navLine : UIView!
     var product : ZMDProduct!
+    var productDetail : ZMDProductDetail!
+    var attrSelectArray = NSMutableArray()          // 属性选择
+    var attrSelects = NSMutableArray(capacity: 3)          // 属性选择  上传用
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.dataInit()
         self.updateUI()
+        self.dataInit()
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
@@ -57,6 +60,24 @@ class HomeBuyGoodsDetailViewController: UIViewController,UITableViewDataSource,U
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    //MARK:- Action
+    @IBAction func AddProductToCard(sender: UIButton) {
+        let dic = NSMutableDictionary()
+        for tmp in self.attrSelects {
+            let tmps = (tmp as! NSString).componentsSeparatedByString(":")
+            if tmps.count == 2 {
+                dic.setValue(NSString(string: tmps[1]).integerValue, forKey: tmps[0])
+            }
+        }
+        if dic.count < 3 {
+            ZMDTool.showPromptView("还有没选的")
+        }
+        if g_isLogin! {
+            QNNetworkTool.addProductToCart(self.productDetail.Id.integerValue, CustomerId: g_customerId!, Quantity: 2, formData: dic, completion: { (succeed, dictionary, error) -> Void in
+                
+            })
+        }
+    }
     //MARK:- UITableViewDataSource,UITableViewDelegate
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == self.secondTableView {
@@ -68,6 +89,9 @@ class HomeBuyGoodsDetailViewController: UIViewController,UITableViewDataSource,U
         case .HomeContentTypeAd :
             return 1
         case .HomeContentTypeMenu :
+            if self.productDetail != nil && self.productDetail.ProductVariantAttributes != nil {
+                return self.productDetail.ProductVariantAttributes!.count + 1
+            }
             return 3
         case .HomeContentTypeDaPeiGou :
             return 1
@@ -208,72 +232,74 @@ class HomeBuyGoodsDetailViewController: UIViewController,UITableViewDataSource,U
             cell = UITableViewCell(style: .Default, reuseIdentifier: cellId)
             cell!.selectionStyle = .None
             cell!.contentView.backgroundColor = UIColor.whiteColor()
-            
-            let cycleScroll = CycleScrollView(frame: CGRectMake(0, 0, kScreenWidth, kScreenWidth))
-            cycleScroll.backgroundColor = UIColor.blueColor()
-            cycleScroll.autoScroll = false
-            cycleScroll.tag = 10001
-            cell?.addSubview(cycleScroll)
         }
-        if let pictureModel = product.DefaultPictureModel {
-            let imgUrl = kImageAddressMain + (pictureModel.ImageUrl ?? "")
-            let cycleScroll = cell?.viewWithTag(10001) as! CycleScrollView
-            cycleScroll.urlArray = [NSURL(string: imgUrl)!]
+        if let v = cell?.viewWithTag(10001) {
+            v.removeFromSuperview()
         }
+        let cycleScroll = CycleScrollView(frame: CGRectMake(0, 0, kScreenWidth, kScreenWidth))
+        cycleScroll.tag = 10001
+        cycleScroll.backgroundColor = UIColor.clearColor()
+        //            cycleScroll.delegate = self
+        cycleScroll.autoScroll = true
+        cycleScroll.autoTime = 2.5
+        if self.productDetail != nil && self.productDetail.DetailsPictureModel != nil {
+            if let pictureModel = self.productDetail.DetailsPictureModel!.PictureModels {
+                let arr = NSMutableArray()
+                for pic in pictureModel {
+                    let imgUrl = kImageAddressMain + (pic.ImageUrl ?? "")
+                    arr.addObject(NSURL(string: imgUrl)!)
+                }
+                cycleScroll.urlArray = arr as [AnyObject]
+            }
+        }
+        cell?.addSubview(cycleScroll)
         return cell!
     }
     //MARK: 商品详请 cell
     func cellForHomeDetail(tableView: UITableView,indexPath: NSIndexPath)-> UITableViewCell {
         let cellId = "detailCell"
         let cell = tableView.dequeueReusableCellWithIdentifier(cellId) as! ContentTypeDetailCell
-        if self.product != nil {
-            ContentTypeDetailCell.configProductDetailCell(cell, product: self.product)
+        if self.productDetail != nil {
+            ContentTypeDetailCell.configProductDetailCell(cell, product: self.productDetail)
         }
         return cell
     }
+    func viewForMenu(cell:UITableViewCell,indexPath: NSIndexPath) {
+        let attr = self.productDetail.ProductVariantAttributes![indexPath.row]
+        let size = attr.TextPrompt!.sizeWithFont(defaultSysFontWithSize(16), maxWidth: 100)
+        let label = ZMDTool.getLabel(CGRectMake(0, 0,size.width + 16, 60), text: attr.TextPrompt!, fontSize: 16,textAlignment:.Center)
+        label.tag = 10002
+        cell.contentView.addSubview(label)
+        
+        let valueNames = NSMutableArray()
+        for value in attr.Values! {
+            valueNames.addObject(value.Name!)
+        }
+        let menuTitle = valueNames as! [String]
+        let attrStr = NSMutableString()
+        let multiselectView = ZMDAttrView(frame:CGRect(x: CGRectGetMaxX(label.frame), y: 0, width: kScreenWidth - CGRectGetMaxX(label.frame), height: 60),titles: menuTitle,attrStr: attrStr as String)
+        multiselectView.tag = indexPath.row
+        multiselectView.finished = { (index) ->Void in
+            let tmpForPost = "product_attribute_\(attr.ProductId)_\(attr.BundleItemId)_\(attr.ProductAttributeId)_\(attr.Id):\(attr.Values![index].Id)"
+            let indexT = indexPath.row
+            self.attrSelects.insertObject(tmpForPost, atIndex: indexPath.row)
+        }
+        cell.contentView.addSubview(multiselectView)
+    }
     //MARK: 商品购买选项 cell
     func cellForHomeMenu(tableView: UITableView,indexPath: NSIndexPath)-> UITableViewCell {
-        if indexPath.row == 2 {
-            let cellId = "menuCountCell"
+        if self.productDetail != nil && self.productDetail.ProductVariantAttributes != nil && indexPath.row < self.productDetail.ProductVariantAttributes?.count {
+            let cellId = "menuOtherCell"
             var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
             if cell == nil {
                 cell = UITableViewCell(style: .Default, reuseIdentifier: cellId)
                 cell!.selectionStyle = .None
                 cell!.contentView.backgroundColor = UIColor.whiteColor()
             }
-            let label = UILabel(frame: CGRect(x: 12, y: 0, width: 200, height: 60))
-            label.text = "购买数量（库存量: 15）"
-            label.textColor = defaultTextColor
-            label.font = defaultSysFontWithSize(17)
-            cell?.contentView.addSubview(label)
-            
-            let viewBg = UIView(frame: CGRect(x: kScreenWidth - 12 - 120, y: 10, width: 120, height: 40))
-            ZMDTool.configViewLayerFrame(viewBg)
-            cell?.contentView.addSubview(viewBg)
-            var titles = ["-","0","+"],i=0
-            for title in titles {
-                let btn = UIButton(frame: CGRect(x: 40*i, y: 0, width: 40, height: 40))
-                if title == "0" {
-                    self.countForBounghtLbl = btn
-                }
-                btn.titleLabel?.font = defaultSysFontWithSize(15)
-                btn.setTitle(title, forState: .Normal)
-                btn.setTitleColor(defaultTextColor, forState: .Normal)
-                btn.tag = 1000+i
-                viewBg.addSubview(btn)
-                btn.rac_signalForControlEvents(.TouchUpInside).subscribeNext({ (sender) -> Void in
-                    if (btn.tag - 1000) == 0 && self.countForBounght != 0 {
-                        self.countForBounght--
-                    } else if (btn.tag - 1000) == 2 {
-                        self.countForBounght++
-                    }
-                    self.countForBounghtLbl.setTitle("\(self.countForBounght)", forState: .Normal)
-                })
-                i++
-            }
+            self.viewForMenu(cell!, indexPath: indexPath)
             return cell!
         } else {
-            let cellId = "menuOtherCell"
+            let cellId = "menuCountCell"
             var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
             if cell == nil {
                 cell = UITableViewCell(style: .Default, reuseIdentifier: cellId)
@@ -281,24 +307,37 @@ class HomeBuyGoodsDetailViewController: UIViewController,UITableViewDataSource,U
                 cell!.contentView.backgroundColor = UIColor.whiteColor()
                 
                 let label = UILabel(frame: CGRect(x: 12, y: 0, width: 200, height: 60))
-                label.text = "规格"
+                label.text = "购买数量（库存量: 15）"
                 label.textColor = defaultTextColor
-                label.font = defaultSysFontWithSize(16)
+                label.font = defaultSysFontWithSize(17)
                 cell?.contentView.addSubview(label)
                 
-                let size = "配送".sizeWithFont(label.font, maxWidth: 100)
-                let sizeTmp = "90cm*190cm".sizeWithFont(label.font, maxWidth: 100)
-                let btn = UIButton(frame: CGRect(x: 12 + size.width + 12 , y: 0, width: sizeTmp.width + 30, height: 60))
-                btn.titleLabel?.font = defaultSysFontWithSize(16)
-                btn.titleLabel?.textAlignment = .Center
-                btn.setTitle(title, forState: .Normal)
-                btn.setTitleColor(defaultTextColor, forState: .Normal)
-                btn.tag = 10001
-                cell?.contentView.addSubview(btn)
-                btn.rac_signalForControlEvents(.TouchUpInside).subscribeNext({ (sender) -> Void in
-                })
-                btn.setTitle("90cm*190cm", forState: .Normal)
+                let viewBg = UIView(frame: CGRect(x: kScreenWidth - 12 - 120, y: 10, width: 120, height: 40))
+                ZMDTool.configViewLayerFrame(viewBg)
+                cell?.contentView.addSubview(viewBg)
+                var titles = ["-","0","+"],i=0
+                for title in titles {
+                    let btn = UIButton(frame: CGRect(x: 40*i, y: 0, width: 40, height: 40))
+                    if title == "0" {
+                        self.countForBounghtLbl = btn
+                    }
+                    btn.titleLabel?.font = defaultSysFontWithSize(15)
+                    btn.setTitle(title, forState: .Normal)
+                    btn.setTitleColor(defaultTextColor, forState: .Normal)
+                    btn.tag = 1000+i
+                    viewBg.addSubview(btn)
+                    btn.rac_signalForControlEvents(.TouchUpInside).subscribeNext({ (sender) -> Void in
+                        if (btn.tag - 1000) == 0 && self.countForBounght != 0 {
+                            self.countForBounght--
+                        } else if (btn.tag - 1000) == 2 {
+                            self.countForBounght++
+                        }
+                        self.countForBounghtLbl.setTitle("\(self.countForBounght)", forState: .Normal)
+                    })
+                    i++
+                }
             }
+            self.countForBounghtLbl.setTitle("\(self.countForBounght)", forState: .Normal)
             return cell!
         }
     }
@@ -345,70 +384,77 @@ class HomeBuyGoodsDetailViewController: UIViewController,UITableViewDataSource,U
             cell!.selectionStyle = .None
             cell!.contentView.backgroundColor = UIColor.whiteColor()
         }
-        let datas = ["","","","","",""]
-        if let scrollView = cell?.viewWithTag(10001) as? UIScrollView {
-            var i = 0
-            var scrollvWidth = CGFloat(0)
-            for _ in datas {
-                var x = 0
-                if i == 0 {
-                    x = 12
-                } else {
-                    x = 12 + 80 + (36 + 80) * (i-1)
-                    let addLbl = UILabel(frame: CGRect(x: x, y: 46, width: 36, height: 15))
-                    addLbl.textColor = UIColor.blackColor()
-                    addLbl.text = "+"
-                    addLbl.textAlignment = .Center
-                    addLbl.font = defaultSysFontWithSize(15)
-                    scrollView.addSubview(addLbl)
+        if self.productDetail != nil && self.productDetail.BundledItems != nil {
+            let datas = self.productDetail.BundledItems!
+            if let scrollView = cell?.viewWithTag(10001) as? UIScrollView {
+                var i = 0
+                var scrollvWidth = CGFloat(0)
+                for bundledItem in datas {
+                    var x = 0
+                    if i == 0 {
+                        x = 12
+                    } else {
+                        x = 12 + 80 + (36 + 80) * (i-1)
+                        let addLbl = UILabel(frame: CGRect(x: x, y: 46, width: 36, height: 15))
+                        addLbl.textColor = UIColor.blackColor()
+                        addLbl.text = "+"
+                        addLbl.textAlignment = .Center
+                        addLbl.font = defaultSysFontWithSize(15)
+                        scrollView.addSubview(addLbl)
+                    }
+                    //主
+                    if i > 0 {
+                        x += 36
+                    }
+                    let view = UIView(frame: CGRect(x: x, y: 0, width: 80, height: 144))
+                    let imgV = UIImageView(frame: CGRect(x: 0, y: 12, width: 80, height: 80))
+                    if let pictureModel = bundledItem.DetailsPictureModel?.DefaultPictureModel {
+                        let imgUrl = kImageAddressMain + (pictureModel.ImageUrl ?? "")
+                        imgV.sd_setImageWithURL(NSURL(string: imgUrl)!)
+                    }
+                    view.addSubview(imgV)
+                    
+                    let priceLbl = UILabel(frame: CGRect(x: 0, y: 144 - 12 - 13, width: 80, height: 13))
+                    if let productPrice = bundledItem.ProductPrice {
+                        priceLbl.text = "原价:\(productPrice.OldPrice ?? "")"
+                    }
+                    priceLbl.textColor = defaultTextColor
+                    priceLbl.font = defaultSysFontWithSize(12)
+                    view.addSubview(priceLbl)
+                    
+                    let titleLbl = UILabel(frame: CGRect(x: 0, y: 144 - 12 - 13 - 8 - 12, width: 80, height: 12))
+                    titleLbl.text = bundledItem.Name
+                    titleLbl.textAlignment = .Center
+                    titleLbl.textColor = defaultDetailTextColor
+                    titleLbl.font = defaultSysFontWithSize(12)
+//                    titleLbl.adjustsFontSizeToFitWidth = true
+                    view.addSubview(titleLbl)
+                    scrollView.addSubview(view)
+                    i++
+                    if i == datas.count-1 {
+                        scrollvWidth = CGRectGetMaxX(view.frame) + 80 + 12
+                    }
+                    scrollView.contentSize = CGSize(width: scrollvWidth, height: 0)
                 }
-                //主
-                if i > 0 {
-                    x += 36
-                }
-                let view = UIView(frame: CGRect(x: x, y: 0, width: 80, height: 144))
-                let imgV = UIImageView(frame: CGRect(x: 0, y: 12, width: 80, height: 80))
-                imgV.image = UIImage(named: "product_pic")
-                view.addSubview(imgV)
-                
-                let priceLbl = UILabel(frame: CGRect(x: 0, y: 144 - 12 - 13, width: 80, height: 13))
-                priceLbl.text = "原价：218.0"
-                priceLbl.textColor = defaultTextColor
-                priceLbl.font = defaultSysFontWithSize(12)
-                view.addSubview(priceLbl)
-                
-                let titleLbl = UILabel(frame: CGRect(x: 0, y: 144 - 12 - 13 - 8 - 12, width: 80, height: 12))
-                titleLbl.text = "家纺被"
-                titleLbl.textAlignment = .Center
-                titleLbl.textColor = defaultDetailTextColor
-                titleLbl.font = defaultSysFontWithSize(12)
-                view.addSubview(titleLbl)
-                scrollView.addSubview(view)
-                i++
-                if i == datas.count-1 {
-                    scrollvWidth = CGRectGetMaxX(view.frame) + 80 + 12
-                }
-                scrollView.contentSize = CGSize(width: scrollvWidth, height: 0)
             }
-            
+            let textArray = ["组合价：","613.00","（已为你节省：100)"]
+            let label = TYAttributedLabel(frame: CGRect(x: 12, y: 207 + 15, width: kScreenWidth - 24, height: 22))
+            label.textColor = defaultTextColor
+            label.backgroundColor = UIColor.clearColor()
+            label.font = defaultSysFontWithSize(15)
+            label.textAlignment = .Left
+            label.characterSpacing = 0
+            let colors = [defaultTextColor,UIColor.redColor(),defaultDetailTextColor]
+            var i = 0
+            for text in textArray {
+                let attributedStr = NSMutableAttributedString(string: text)
+                attributedStr.addAttributeTextColor(colors[i])
+                attributedStr.addAttributeFont(defaultSysFontWithSize(15))
+                label.appendTextAttributedString(attributedStr)
+                i++
+            }
+            cell?.contentView.addSubview(label)
         }
-        let textArray = ["组合价：","613.00","（已为你节省：100)"]
-        let label = TYAttributedLabel(frame: CGRect(x: 12, y: 207 + 15, width: kScreenWidth - 24, height: 22))
-        label.textColor = defaultTextColor
-        label.backgroundColor = UIColor.clearColor()
-        label.font = defaultSysFontWithSize(15)
-        label.textAlignment = .Left
-        label.characterSpacing = 0
-        let colors = [defaultTextColor,UIColor.redColor(),defaultDetailTextColor]
-        var i = 0
-        for text in textArray {
-            let attributedStr = NSMutableAttributedString(string: text)
-            attributedStr.addAttributeTextColor(colors[i])
-            attributedStr.addAttributeFont(defaultSysFontWithSize(15))
-            label.appendTextAttributedString(attributedStr)
-            i++
-        }
-        cell?.contentView.addSubview(label)
         return cell!
     }
     //MARK:  下一页菜单 cell
@@ -457,9 +503,30 @@ class HomeBuyGoodsDetailViewController: UIViewController,UITableViewDataSource,U
         self.navigationItem.leftBarButtonItem = item
     }
     private func dataInit(){
-        self.goodsCellTypes = [.HomeContentTypeAd,.HomeContentTypeDetail,.HomeContentTypeMenu,.HomeContentTypeDistribution,.HomeContentTypeStore,.HomeContentTypeDaPeiGou, .HomeContentTypeNextMenu]
+        self.goodsCellTypes = [.HomeContentTypeAd,.HomeContentTypeDetail,.HomeContentTypeMenu,/*.HomeContentTypeDistribution,.HomeContentTypeStore,*/.HomeContentTypeDaPeiGou, .HomeContentTypeNextMenu]
+        QNNetworkTool.fetchProductDetail(36) { (productDetail, error, dictionary) -> Void in
+            if productDetail != nil {
+                self.productDetail = productDetail
+                self.currentTableView.reloadData()
+            } else {
+                ZMDTool.showErrorPromptView(nil, error: error)
+            }
+        }
+        var areaFile : NSDictionary!
+        if let areaFilePath = NSBundle.mainBundle().pathForResource("textDetail", ofType: "json"), let areaData = NSData(contentsOfFile: areaFilePath) {
+            do {
+                areaFile = try NSJSONSerialization.JSONObjectWithData(areaData, options: NSJSONReadingOptions()) as? NSDictionary
+                let dicTmp  = areaFile
+                let productDetail = ZMDProductDetail.mj_objectWithKeyValues(dicTmp["produc"])
+                self.productDetail = productDetail
+                for var i = 0;i<self.productDetail.ProductVariantAttributes!.count;i++ {
+                    self.attrSelects.addObject("")
+                }
+                self.currentTableView.reloadData()
+            }catch {}
+        }
     }
-
+    
     func footerRefresh(){
         UIView.animateWithDuration(0.38, animations: { () -> Void in
             var frame = self.currentTableView.frame
@@ -568,12 +635,12 @@ class ContentTypeDetailCell: UITableViewCell {
         super.awakeFromNib()
         
     }
-    class func configProductDetailCell(cell:ContentTypeDetailCell!,product : ZMDProduct) {
-            cell.nameLbl.text = product.Name
+    class func configProductDetailCell(cell:ContentTypeDetailCell!,product : ZMDProductDetail) {
+        cell.nameLbl.text = product.Name
         if let productPrice = product.ProductPrice {
             cell.priceLbl.text = "\(productPrice.Price)"
             cell.priceLblWidthcon.constant = "\(productPrice.Price)".sizeWithFont(defaultSysFontWithSize(20), maxWidth: 200).width
-            //          cell.layoutIfNeeded()
+            cell.layoutIfNeeded()
             cell.oldPriceLbl.text = "原价:\(productPrice.OldPrice ?? "")"
         }
 

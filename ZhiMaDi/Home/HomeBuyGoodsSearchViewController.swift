@@ -108,7 +108,6 @@ class HomeBuyGoodsSearchViewController: UIViewController, ZMDInterceptorProtocol
                 label.font = UIFont.systemFontOfSize(15)
                 cell?.contentView.addSubview(label)
                 
-                
                 let size = "热搜 ：".sizeWithFont(UIFont.systemFontOfSize(15), maxWidth: 100)
                 let getBtn = { (text : String,index : Int) -> UIButton in
                     let btn = UIButton(frame: CGRect.zero)

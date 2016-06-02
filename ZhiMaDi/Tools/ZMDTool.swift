@@ -270,13 +270,25 @@ extension ZMDTool {
         label.textAlignment = textAlignment
         return label
     }
-    class func getButton (frame:CGRect,textForNormal:String,fontSize:CGFloat,textColorForNormal:UIColor = defaultTextColor,backgroundColor:UIColor,blockForCli : ((AnyObject!) -> Void)!) -> UIButton{
+    class func getButton (frame:CGRect,textForNormal:String,fontSize:CGFloat,textColorForNormal:UIColor = defaultTextColor,backgroundColor:UIColor,blockForCli : ((AnyObject!) -> Void)!) -> UIButton {
         let btn = UIButton(frame: frame)
         btn.backgroundColor = backgroundColor
         btn.setTitle(textForNormal, forState: .Normal)
         btn.setTitleColor(textColorForNormal, forState: .Normal)
         btn.titleLabel!.font = defaultSysFontWithSize(fontSize)
+        btn.rac_command = RACCommand(signalBlock: { (sender) -> RACSignal! in
+            return RACSignal.empty()
+        })
         btn.rac_signalForControlEvents(.TouchUpInside).subscribeNext(blockForCli)
+        return btn
+    }
+    class func getButton (frame:CGRect,textForNormal:String,fontSize:CGFloat,textColorForNormal:UIColor = defaultTextColor,backgroundColor:UIColor,blockForCom : ((AnyObject!) -> RACSignal!)!) -> UIButton {
+        let btn = UIButton(frame: frame)
+        btn.backgroundColor = backgroundColor
+        btn.setTitle(textForNormal, forState: .Normal)
+        btn.setTitleColor(textColorForNormal, forState: .Normal)
+        btn.titleLabel!.font = defaultSysFontWithSize(fontSize)
+        btn.rac_command = RACCommand(signalBlock: blockForCom)
         return btn
     }
     class func getMutilButton (frame:CGRect,textForNormal:String,textColorForNormal:UIColor = defaultTextColor,textColorForSelect:UIColor = RGB(235,61,61,1.0),fontSize:CGFloat,backgroundColor:UIColor,blockForCli : ((AnyObject!) -> Void)!) -> UIButton{

@@ -83,7 +83,7 @@ class AddressViewController: UIViewController,UITableViewDataSource, UITableView
             })
             //delete
             cell.selectedBtn.tag = 1000 + indexPath.section
-            cell.selectedBtn.rac_signalForControlEvents(.TouchUpInside).subscribeNext { (sender) -> Void in
+            cell.selectedBtn.rac_command = RACCommand(signalBlock: { (sender) -> RACSignal! in
                 let address = self.addresses[sender.tag - 1000] as! ZMDAddress
                 QNNetworkTool.deleteAddress(address.Id!.integerValue, customerId: g_customerId!, completion: { (succeed, dictionary,error) -> Void in
                     if error == nil {
@@ -93,7 +93,8 @@ class AddressViewController: UIViewController,UITableViewDataSource, UITableView
                         ZMDTool.showErrorPromptView(nil, error: error, errorMsg: "")
                     }
                 })
-            }
+                return RACSignal.empty()
+            })
         }
         return cell
     }

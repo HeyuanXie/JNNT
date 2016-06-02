@@ -9,6 +9,7 @@
 import UIKit
 import Foundation
 import Alamofire
+
 /// 服务器地址
 private let kServerAddress = { () -> String in
 //  "http://od.ccw.cn"
@@ -467,6 +468,17 @@ extension QNNetworkTool {
             }
         }
     }
+
+    class func fetchProductDetail(Id:Int,completion: (productDetail: ZMDProductDetail?,error:NSError?,dictionary:NSDictionary?) -> Void){
+        requestPOST(kServerAddress + "/api/v1/extend/Product/ProductDetails", parameters: ["Id":Id]) { (_,response, _, dictionary, error) -> Void in
+            
+//            guard let dic = dictionary ,let productDetail = ZMDProductDetail.mj_objectWithKeyValues(dic["produc"]) else {
+//                completion(productDetail:nil,error: error,dictionary:nil)
+//                return
+//            }
+//            completion(productDetail:productDetail,error: nil,dictionary:dictionary)
+        }
+    }
     //MARK: 首页数据
     class func fetchMainPageInto(completion: (advertisementAll: ZMDAdvertisementAll?,error:NSError?,dictionary:NSDictionary?) -> Void){
         requestPOST(kServerAddress + "/api/v1/extend/Advertisement/IndexAds", parameters: nil) { (_,response, _, dictionary, error) -> Void in
@@ -481,6 +493,28 @@ extension QNNetworkTool {
 //MARK:- 订单相关
 extension QNNetworkTool {
     
+}
+//MARK:- 购物车相关
+extension QNNetworkTool {
+    class func addProductToCart(Id : Int,CustomerId:Int,Quantity:Int,formData: NSDictionary,completion: (succeed : Bool!,dictionary:NSDictionary?,error: NSError?) -> Void) {
+        let requestT = self.productRequest(NSURL(string: kServerAddress + "/api/v1/extend/Product/AddProductToCart"), method: "POST")
+        QNNetworkToolTest.setFormDataRequest(requestT, fromData: formData as [NSObject : AnyObject])
+        //["Id":Id,"CustomerId":CustomerId,"Quantity":2]
+        request(ParameterEncoding.URL.encode(requestT, parameters: nil).0).response{
+            do {
+                let jsonObject: AnyObject? = try NSJSONSerialization.JSONObjectWithData($2! as NSData, options: NSJSONReadingOptions.MutableContainers)
+                let dictionary = jsonObject as? NSDictionary
+                guard let success = dictionary?["success"] as? NSNumber where success.boolValue else {
+                    completion(succeed:false,dictionary: dictionary, error: $3)
+                    return
+                }
+                completion(succeed:true,dictionary: dictionary, error: nil)
+            }
+            catch {
+                println("Json解析过程出错")
+            }
+        }
+    }
 }
 //MARK:- 支付相关
 extension QNNetworkTool {
@@ -514,7 +548,7 @@ extension QNNetworkTool {
             }
         }
     }
-    
+
     //MARK: 支付宝支付订单
     /**
     :param: orderNo     预约订单号
@@ -619,8 +653,6 @@ extension QNNetworkTool {
             }
             completion(succeed:true,dictionary: dictionary, error: nil)
         }
-
-        
     }
     //
     //MARK: 地址 delete

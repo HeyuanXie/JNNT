@@ -3321,6 +3321,17 @@
                                     <outlet property="delegate" destination="C0u-4K-FQZ" id="K8k-N3-oQq"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ii-br-L6l">
+                                <rect key="frame" x="313" y="150" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="Nxg-d0-XDU"/>
+                                    <constraint firstAttribute="height" constant="50" id="kAQ-mk-NK0"/>
+                                </constraints>
+                                <state key="normal" image="product_shopping-cart.png"/>
+                                <connections>
+                                    <action selector="AddProductToCard:" destination="C0u-4K-FQZ" eventType="touchUpInside" id="jOZ-X1-qVw"/>
+                                </connections>
+                            </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="518-8h-6mY" userLabel="bottomView">
                                 <rect key="frame" x="0.0" y="609" width="375" height="58"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -3332,10 +3343,12 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Rzs-O0-86M" firstAttribute="top" secondItem="518-8h-6mY" secondAttribute="bottom" id="0iU-Jh-rKc"/>
+                            <constraint firstItem="9ii-br-L6l" firstAttribute="top" secondItem="Feg-XN-wLc" secondAttribute="bottom" constant="130" id="AUk-YR-tV1"/>
                             <constraint firstItem="RKH-UL-Gag" firstAttribute="top" secondItem="4IT-0w-cpK" secondAttribute="top" constant="-64" id="K7w-1U-54C"/>
                             <constraint firstItem="518-8h-6mY" firstAttribute="leading" secondItem="4IT-0w-cpK" secondAttribute="leading" id="KR6-55-RCk"/>
                             <constraint firstAttribute="trailing" secondItem="RKH-UL-Gag" secondAttribute="trailing" id="baI-do-PoB"/>
                             <constraint firstItem="RKH-UL-Gag" firstAttribute="leading" secondItem="4IT-0w-cpK" secondAttribute="leading" id="mYB-r5-krs"/>
+                            <constraint firstAttribute="trailing" secondItem="9ii-br-L6l" secondAttribute="trailing" constant="12" id="pOR-dq-rK2"/>
                             <constraint firstItem="Rzs-O0-86M" firstAttribute="top" secondItem="RKH-UL-Gag" secondAttribute="bottom" constant="58" id="pV2-Mr-bYc"/>
                             <constraint firstAttribute="trailing" secondItem="518-8h-6mY" secondAttribute="trailing" id="tjv-jE-KRi"/>
                         </constraints>
@@ -5000,6 +5013,7 @@
         <image name="product03.png" width="220" height="220"/>
         <image name="product_dapei.png" width="20" height="25"/>
         <image name="product_pic.png" width="375" height="375"/>
+        <image name="product_shopping-cart.png" width="50" height="50"/>
         <image name="shop_add_product.png" width="25" height="25"/>
         <image name="user_interview_QRcode.png" width="175" height="175"/>
         <image name="user_interview_download.png" width="25" height="25"/>

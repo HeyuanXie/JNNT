@@ -10,9 +10,7 @@
 
 @implementation QNNetworkToolTest
 + (void)setFormDataRequest:(NSMutableURLRequest *)request fromData:(NSDictionary *)formdata{
-    
     NSString *boundary = @"12436041281943726692693274280";
-    
     //设置请求体中内容
     NSMutableString *bodyString = [[NSMutableString alloc]init];
     int count = (int)([[formdata allKeys] count]-1);

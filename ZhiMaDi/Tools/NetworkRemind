@@ -68,3 +68,16 @@
             如："http://xw.ccw.cn/media" + "/Advertisement/help.png"
             Other1: 标记当前点击链接类型（Product：代表产品，Seckill：代表产品秒杀，Topic：代表专题，Coupon：代表优惠券）
             Other2：代表对应的相关Id。 如果是优惠券 则代表优惠券的领券Post地址。
+
+5 产品详情
+http://xw.ccw.cn/api/v1/extend/Product/ProductDetails  方法 post  参数  例子：  {"Id":23} 35
+ProductType 产品类型（5：普通产品    10：分组产品  15：搭配产品   20: 租凭产品     25: 秒杀产品)
+
+DetailsPictureModel         图片
+ProductPrice              - Price
+ProductType                 产品类型 （5：普通产品    10：分组产品  15：搭配产品   20: 租凭产品     25: 秒杀产品)
+ProductVariantAttributes  - 产品属性
+AttributesBundle            属性绑定
+IsFreeShipping              是免邮
+Sold                        售出数量
+BundledItems                搭配购

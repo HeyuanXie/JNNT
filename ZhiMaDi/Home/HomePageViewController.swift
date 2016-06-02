@@ -138,7 +138,6 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
         self.fetchData()
-
         //
         //        let tmp = "get&&application/json, text/javascript, */*&http://od.ccw.cn/odata/v1/orders?$top=10&$filter=createdonutc lt datetime'2016-02-20t00:00:00'&2016-05-10t15:25:51.0000000+08:00&c81de5387d36d1ec6a4ad4d483ffae0a".hmac(CryptoAlgorithm.SHA256, key: secretKey)
         //        let data = NSString(string: tmp).dataUsingEncoding(NSUTF8StringEncoding)?.base64EncodedDataWithOptions(NSDataBase64EncodingOptions.Encoding64CharacterLineLength)
@@ -514,8 +513,16 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
         self.navigationItem.rightBarButtonItem = leftItem
         let rightItem = UIBarButtonItem(image: UIImage(named: "home_search")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate), style: UIBarButtonItemStyle.Bordered, target: nil, action: nil)
         rightItem.rac_command = RACCommand(signalBlock: { (input) -> RACSignal! in
-            let vc = HomeBuyGoodsSearchViewController.CreateFromMainStoryboard() as! HomeBuyGoodsSearchViewController
+//            let vc = HomeBuyGoodsSearchViewController.CreateFromMainStoryboard() as! HomeBuyGoodsSearchViewController
+//            self.navigationController?.pushViewController(vc, animated: true)
+            
+            let vc = HomeBuyGoodsDetailViewController.CreateFromMainStoryboard() as! HomeBuyGoodsDetailViewController
+            vc.hidesBottomBarWhenPushed = true
+            let tmp = ZMDProduct()
+            tmp.ProductTypeId = 2
+            vc.product = tmp
             self.navigationController?.pushViewController(vc, animated: true)
+            
             return RACSignal.empty()
         })
         rightItem.customView?.tintColor = UIColor.whiteColor()

@@ -422,6 +422,8 @@
 		2BA3FDE71CA0E43A00018F3C /* TabBar_School_Normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BA3FDDF1CA0E43A00018F3C /* TabBar_School_Normal@2x.png */; };
 		2BA3FDE81CA0E43A00018F3C /* TabBar_School_Selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BA3FDE01CA0E43A00018F3C /* TabBar_School_Selected@2x.png */; };
 		2BA4B0251CC8B2A7009A568D /* MyStoreHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA4B0241CC8B2A7009A568D /* MyStoreHomeViewController.swift */; };
+		2BAB77251CFFCD1200FC6A02 /* ZMDShoppingProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAB77241CFFCD1200FC6A02 /* ZMDShoppingProduct.swift */; };
+		2BAB77271D00127700FC6A02 /* ZMDProductAttrView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAB77261D00127700FC6A02 /* ZMDProductAttrView.swift */; };
 		2BB0EEFE1CB743C1000A186D /* AfterSalesHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB0EEFD1CB743C1000A186D /* AfterSalesHomeViewController.swift */; };
 		2BB0EF001CB74A64000A186D /* AfterSalesReturnViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB0EEFF1CB74A64000A186D /* AfterSalesReturnViewController.swift */; };
 		2BB1B2C41CFD6AB4005624B3 /* ZMDAttrView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB1B2C31CFD6AB4005624B3 /* ZMDAttrView.swift */; };
@@ -1173,6 +1175,8 @@
 		2BA3FDDF1CA0E43A00018F3C /* TabBar_School_Normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabBar_School_Normal@2x.png"; sourceTree = "<group>"; };
 		2BA3FDE01CA0E43A00018F3C /* TabBar_School_Selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabBar_School_Selected@2x.png"; sourceTree = "<group>"; };
 		2BA4B0241CC8B2A7009A568D /* MyStoreHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyStoreHomeViewController.swift; sourceTree = "<group>"; };
+		2BAB77241CFFCD1200FC6A02 /* ZMDShoppingProduct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZMDShoppingProduct.swift; sourceTree = "<group>"; };
+		2BAB77261D00127700FC6A02 /* ZMDProductAttrView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZMDProductAttrView.swift; sourceTree = "<group>"; };
 		2BB0EEFD1CB743C1000A186D /* AfterSalesHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AfterSalesHomeViewController.swift; sourceTree = "<group>"; };
 		2BB0EEFF1CB74A64000A186D /* AfterSalesReturnViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AfterSalesReturnViewController.swift; sourceTree = "<group>"; };
 		2BB1B2C31CFD6AB4005624B3 /* ZMDAttrView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZMDAttrView.swift; sourceTree = "<group>"; };
@@ -2262,6 +2266,7 @@
 			isa = PBXGroup;
 			children = (
 				2B989C071CB4E968008C6D23 /* ShoppingCartViewController.swift */,
+				2BAB77261D00127700FC6A02 /* ZMDProductAttrView.swift */,
 			);
 			name = ShoppingCar;
 			path = UserCenter/ShoppingCar;
@@ -2768,6 +2773,7 @@
 				3C9098751C76A6E9006B7D2C /* QN_BaseDataModel.swift */,
 				2BA223201CE9BA37006BC426 /* ZMDProduct.swift */,
 				2BCD07921CFBE7C0000E7E9F /* ZMDProductDetail.swift */,
+				2BAB77241CFFCD1200FC6A02 /* ZMDShoppingProduct.swift */,
 				2B79155C1CEAF54B00182F82 /* ZMDCategory.swift */,
 				2B2B0A2B1CEDA1FD00358F1B /* ZMDArea.swift */,
 				2BBFEEFB1CEEA09A00272BB0 /* ZMDAddress.swift */,
@@ -3710,6 +3716,7 @@
 				2B6F90721CB64B7400BD7A5D /* BankCardUnbindViewController.swift in Sources */,
 				2B5BBC161CD3348500D2AC9F /* MyStoreCusDetailViewController.swift in Sources */,
 				3C9098FC1C76A6E9006B7D2C /* UIViewControllerExtension.swift in Sources */,
+				2BAB77271D00127700FC6A02 /* ZMDProductAttrView.swift in Sources */,
 				2BA3FDB51C9F842800018F3C /* QN_Area.swift in Sources */,
 				3C9098701C76A6AA006B7D2C /* QNSharedDatas.swift in Sources */,
 				2B07BA301CB7AFAC0012929B /* CardVolumeHomeViewController.swift in Sources */,
@@ -3748,6 +3755,7 @@
 				3C9099451C76A6E9006B7D2C /* ChartRendererBase.swift in Sources */,
 				2B539C061C9AACD000FFE6CD /* StartPagesViewController.swift in Sources */,
 				3C9099211C76A6E9006B7D2C /* ChartDataSet.swift in Sources */,
+				2BAB77251CFFCD1200FC6A02 /* ZMDShoppingProduct.swift in Sources */,
 				2BA287D81CC091DA00B6281E /* MsgHomeViewController.swift in Sources */,
 				3C9099581C76A6E9006B7D2C /* ChartUtils.swift in Sources */,
 				2B197DB81C843515006494CF /* LoginViewController.swift in Sources */,

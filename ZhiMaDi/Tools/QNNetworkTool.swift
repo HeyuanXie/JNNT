@@ -120,6 +120,7 @@ private extension QNNetworkTool {
         }
         return ["jsonData" : ""]
     }
+
     /**
      Request 请求通用简化版
      
@@ -468,15 +469,19 @@ extension QNNetworkTool {
             }
         }
     }
-
+    /**
+     获取详情页
+     
+     - parameter Id:         Id description
+     - parameter completion: completion description
+     */
     class func fetchProductDetail(Id:Int,completion: (productDetail: ZMDProductDetail?,error:NSError?,dictionary:NSDictionary?) -> Void){
         requestPOST(kServerAddress + "/api/v1/extend/Product/ProductDetails", parameters: ["Id":Id]) { (_,response, _, dictionary, error) -> Void in
-            
-//            guard let dic = dictionary ,let productDetail = ZMDProductDetail.mj_objectWithKeyValues(dic["produc"]) else {
-//                completion(productDetail:nil,error: error,dictionary:nil)
-//                return
-//            }
-//            completion(productDetail:productDetail,error: nil,dictionary:dictionary)
+            guard let dic = dictionary ,let productDetail = ZMDProductDetail.mj_objectWithKeyValues(dic["produc"]) else {
+                completion(productDetail:nil,error: error,dictionary:nil)
+                return
+            }
+            completion(productDetail:productDetail,error: nil,dictionary:dictionary)
         }
     }
     //MARK: 首页数据
@@ -496,23 +501,59 @@ extension QNNetworkTool {
 }
 //MARK:- 购物车相关
 extension QNNetworkTool {
-    class func addProductToCart(Id : Int,CustomerId:Int,Quantity:Int,formData: NSDictionary,completion: (succeed : Bool!,dictionary:NSDictionary?,error: NSError?) -> Void) {
-        let requestT = self.productRequest(NSURL(string: kServerAddress + "/api/v1/extend/Product/AddProductToCart"), method: "POST")
-        QNNetworkToolTest.setFormDataRequest(requestT, fromData: formData as [NSObject : AnyObject])
-        //["Id":Id,"CustomerId":CustomerId,"Quantity":2]
-        request(ParameterEncoding.URL.encode(requestT, parameters: nil).0).response{
-            do {
-                let jsonObject: AnyObject? = try NSJSONSerialization.JSONObjectWithData($2! as NSData, options: NSJSONReadingOptions.MutableContainers)
-                let dictionary = jsonObject as? NSDictionary
-                guard let success = dictionary?["success"] as? NSNumber where success.boolValue else {
-                    completion(succeed:false,dictionary: dictionary, error: $3)
-                    return
-                }
-                completion(succeed:true,dictionary: dictionary, error: nil)
+    /**
+     添加购物车
+     */
+    class func addProductToCart(formData: NSDictionary,completion: (succeed : Bool!,dictionary:NSDictionary?,error: NSError?) -> Void) {
+        requestPOST(kServerAddress + "/api/v1/extend/Product/AddProductToCart", parameters: formData as! [String : AnyObject]) { (_, _, _, dictionary, error) -> Void in
+            guard let success = dictionary?["success"] as? NSNumber where success.boolValue else {
+                completion(succeed:false,dictionary: dictionary, error: error)
+                return
             }
-            catch {
-                println("Json解析过程出错")
+            completion(succeed:true,dictionary: dictionary, error: nil)
+        }
+    }
+    /**
+    编辑
+     
+     - parameter formData:   formData description
+     - parameter completion: completion description
+     */
+    class func editCartItemAttribute(formData: NSDictionary,completion: (succeed : Bool!,dictionary:NSDictionary?,error: NSError?) -> Void) {
+        requestPOST(kServerAddress + "/api/v1/extend/ShoppingCart/EditCartItemAttribute", parameters: formData as! [String : AnyObject]) { (_, _, _, dictionary, error) -> Void in
+            guard let success = dictionary?["success"] as? NSNumber where success.boolValue else {
+                completion(succeed:false,dictionary: dictionary, error: error)
+                return
             }
+            completion(succeed:true,dictionary: dictionary, error: nil)
+        }
+    }
+    /**
+     查看购物车
+     
+     - parameter completion: 完成回调
+     */
+    class func fetchShoppingCart(completion: (shoppingItems : NSArray?,dictionary:NSDictionary?,error: NSError?) -> Void) {
+        requestPOST(kServerAddress + "/api/v1/extend/ShoppingCart/Cart", parameters: ["customerId":g_customerId!]) { (_, _, _, dictionary, error) -> Void in
+            guard let Items = dictionary?["Items"],let shoppingItems = ZMDShoppingItem.mj_objectArrayWithKeyValuesArray(Items) else {
+                completion(shoppingItems:nil,dictionary: dictionary, error: error)
+                return
+            }
+            completion(shoppingItems:shoppingItems,dictionary: dictionary, error: nil)
+        }
+    }
+    /**
+     删除购物车item
+     
+     - parameter completion:
+     */
+    class func deleteCartItem(completion: (succeed : Bool!,dictionary:NSDictionary?,error: NSError?) -> Void) {
+        requestPOST(kServerAddress + "/api/v1/extend/ShoppingCart/DeleteCartItem", parameters: ["customerId":g_customerId!,"SciId":152]) { (_, _, _, dictionary, error) -> Void in
+            guard let success = dictionary?["success"] as? NSNumber where success.boolValue else {
+                completion(succeed:false,dictionary: dictionary, error: error)
+                return
+            }
+            completion(succeed:true,dictionary: dictionary, error: nil)
         }
     }
 }

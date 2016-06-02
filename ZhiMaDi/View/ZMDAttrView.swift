@@ -13,17 +13,21 @@ class ZMDAttrView: UIView {
     var redLine : UIView!
     
     var titles : [String]!
-    var finished : ((index:Int)->Void)!
+    var finished : ((index:Int,isAdd:Bool)->Void)!
     var enableIndex = ""
+    var menuIndexTrue : NSMutableArray!
     var IsLineAdaptText = true  //是否随字宽度改变
-    var attrStr = ""
+    var attrSet = NSMutableArray()
+    var attr : ProductVariantAttribute!
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
-    init(frame: CGRect,titles:[String],attrStr : String) {
+    init(frame: CGRect,titles:[String],menuIndexTrue : NSMutableArray,attrSet:NSMutableArray,attr:ProductVariantAttribute) {
         super.init(frame: frame)
         self.titles = titles
-        self.attrStr = attrStr
+        self.menuIndexTrue = menuIndexTrue
+        self.attrSet = attrSet
+        self.attr = attr
         self.updateUI([])
     }
     required init?(coder aDecoder: NSCoder) {
@@ -35,27 +39,35 @@ class ZMDAttrView: UIView {
         self.addSubview(redLine)
         
         let SetSelectBtn = { (btn : UIButton) in
-            self.selectBtn = btn
-            UIView.animateWithDuration(0.2, animations: { () -> Void in
-                let selectBtnFrame = self.selectBtn.frame
-                if self.IsLineAdaptText {
-                    let size = self.selectBtn.titleLabel!.text?.sizeWithFont(self.selectBtn.titleLabel!.font, maxWidth: 100)
-                    self.redLine.frame = CGRect(x: CGRectGetMinX(selectBtnFrame) + (CGRectGetWidth(selectBtnFrame) - size!.width)/2, y: CGRectGetHeight(self.frame) - 3.5, width:size!.width, height: 3.5)
-                } else {
-                    self.redLine.frame = CGRect(x: CGRectGetMinX(selectBtnFrame), y: CGRectGetHeight(self.frame) - 3.5, width:kScreenWidth/CGFloat(menuTitle.count), height: 3.5)
+            if self.selectBtn != nil && self.selectBtn == btn {
+                self.selectBtn = nil
+                self.redLine.hidden = true
+                if self.finished != nil {
+                    self.finished(index: btn.tag - 1000,isAdd: false)
                 }
-            })
-            if self.finished != nil {
-                self.finished(index: btn.tag - 1000)
+            } else {
+                self.redLine.hidden = false
+                self.selectBtn = btn
+                self.selectBtn.userInteractionEnabled = true
+                UIView.animateWithDuration(0.2, animations: { () -> Void in
+                    let selectBtnFrame = self.selectBtn.frame
+                    if self.IsLineAdaptText {
+                        let size = self.selectBtn.titleLabel!.text?.sizeWithFont(self.selectBtn.titleLabel!.font, maxWidth: 100)
+                        self.redLine.frame = CGRect(x: CGRectGetMinX(selectBtnFrame) + (CGRectGetWidth(selectBtnFrame) - size!.width)/2, y: CGRectGetHeight(self.frame) - 3.5, width:size!.width, height: 3.5)
+                    } else {
+                        self.redLine.frame = CGRect(x: CGRectGetMinX(selectBtnFrame), y: CGRectGetHeight(self.frame) - 3.5, width:kScreenWidth/CGFloat(menuTitle.count), height: 3.5)
+                    }
+                })
+                if self.finished != nil {
+                    self.finished(index: btn.tag - 1000,isAdd: true)
+                }
             }
         }
         let getBtn = { (text : String,index : Int) -> UIButton in
-            let btn = ZMDTool.getButton(CGRect.zero, textForNormal: text, fontSize: 16,textColorForNormal:defaultTextColor, backgroundColor: UIColor.clearColor(), blockForCom: { (sender) -> RACSignal in
+            let btn = ZMDTool.getButton(CGRect.zero, textForNormal: text, fontSize: 16,textColorForNormal:defaultDetailTextColor, backgroundColor: UIColor.clearColor(), blockForCom: { (sender) -> RACSignal in
                 SetSelectBtn(sender as! UIButton)
                 return RACSignal.empty()
             })
-            btn.setTitle(text, forState: .Selected)
-            btn.setTitleColor(defaultDetailTextColor, forState: .Selected)
             btn.titleLabel?.numberOfLines = 1
             btn.titleLabel?.textAlignment = .Center
             return btn
@@ -64,12 +76,20 @@ class ZMDAttrView: UIView {
         var x = CGFloat(14)
         var y = 0
         let space = CGFloat(25)
-        var index = 0
+        var index = -1
         for title in titles {
+            index++
             let sizeTmp = title.sizeWithFont(UIFont.systemFontOfSize(16), maxWidth: 150) //名宽度
             let xTmp = x + space * 2 + sizeTmp.width + 20
             let btn = getBtn(title,index)
-            btn.tag = 1000 + index++
+            btn.userInteractionEnabled = false
+            for tmpIndex in self.menuIndexTrue {
+                if (tmpIndex as! Int) == index {
+                    btn.userInteractionEnabled = true
+                    btn.setTitleColor(defaultTextColor, forState: .Normal)
+                }
+            }
+            btn.tag = 1000 + index
             if xTmp < self.frame.width {
                 btn.frame = CGRectMake(x, CGFloat(y),sizeTmp.width + 20, 60)
                 self.addSubview(btn)
@@ -80,11 +100,15 @@ class ZMDAttrView: UIView {
                 btn.frame = CGRectMake(12, CGFloat(y),sizeTmp.width + 20, 60)
                 self.addSubview(btn)
             }
-            if btn.tag == 0 {
-                self.selectBtn = btn
-                SetSelectBtn(self.selectBtn)
+            let tmpForPost = "\(attr.Id):\(attr.Values![index].Id)"
+            
+            for tmp in self.attrSet {
+                if tmp as! String == tmpForPost {
+                    SetSelectBtn(btn)
+                }
             }
         }
+
     }
     
     class func getHeight(titles:[String],width:CGFloat) -> CGFloat {

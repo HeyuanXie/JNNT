@@ -106,7 +106,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="495.0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mFF-zJ-Lmv" userLabel="Label  4f4f4f">
-                                                    <rect key="frame" x="143" y="83" width="165" height="13"/>
+                                                    <rect key="frame" x="143" y="83" width="104" height="13"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="13" id="ckc-pw-768"/>
                                                     </constraints>
@@ -132,6 +132,16 @@
                                                     </constraints>
                                                     <state key="normal" title="Button" image="common_edit.png"/>
                                                 </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="x1" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="We8-Z1-fAH" userLabel="Label  4f4f4f">
+                                                    <rect key="frame" x="258" y="83" width="50" height="13"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="13" id="EoQ-ab-k9K"/>
+                                                        <constraint firstAttribute="width" constant="50" id="pJU-SB-tpd"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
+                                                    <color key="textColor" red="0.68235294117647061" green="0.68235294117647061" blue="0.68235294117647061" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="Sqv-Gc-AFf" firstAttribute="top" secondItem="BJp-2n-vsR" secondAttribute="top" constant="16" id="ADG-Yk-IKi"/>
@@ -140,7 +150,8 @@
                                                 <constraint firstAttribute="trailing" secondItem="Sqv-Gc-AFf" secondAttribute="trailing" constant="12" id="Lrs-Hk-Q0J"/>
                                                 <constraint firstItem="5Ot-zb-70B" firstAttribute="top" secondItem="Sqv-Gc-AFf" secondAttribute="bottom" constant="12" id="MpJ-NC-doA"/>
                                                 <constraint firstItem="WJ7-VG-NGS" firstAttribute="top" secondItem="BJp-2n-vsR" secondAttribute="top" constant="15" id="QeP-9W-6TN"/>
-                                                <constraint firstAttribute="trailing" secondItem="mFF-zJ-Lmv" secondAttribute="trailing" constant="12" id="YhH-GP-PM4"/>
+                                                <constraint firstAttribute="trailing" secondItem="We8-Z1-fAH" secondAttribute="trailing" constant="12" id="V9R-Eo-DCb"/>
+                                                <constraint firstAttribute="trailing" secondItem="mFF-zJ-Lmv" secondAttribute="trailing" constant="73" id="YhH-GP-PM4"/>
                                                 <constraint firstAttribute="trailing" secondItem="7JN-9U-eJx" secondAttribute="trailing" id="aYw-gV-cvU"/>
                                                 <constraint firstAttribute="bottom" secondItem="mFF-zJ-Lmv" secondAttribute="bottom" constant="14" id="aaE-27-3sa"/>
                                                 <constraint firstItem="7JN-9U-eJx" firstAttribute="leading" secondItem="TLw-qC-9Zb" secondAttribute="trailing" id="elZ-j1-5LT"/>
@@ -153,6 +164,7 @@
                                                 <constraint firstItem="zYG-Q7-De7" firstAttribute="centerY" secondItem="TLw-qC-9Zb" secondAttribute="centerY" id="keE-BD-4gg"/>
                                                 <constraint firstAttribute="bottom" secondItem="7JN-9U-eJx" secondAttribute="bottom" id="lF9-aK-njT"/>
                                                 <constraint firstItem="TLw-qC-9Zb" firstAttribute="top" secondItem="BJp-2n-vsR" secondAttribute="top" id="mmi-uy-isq"/>
+                                                <constraint firstItem="We8-Z1-fAH" firstAttribute="centerY" secondItem="mFF-zJ-Lmv" secondAttribute="centerY" id="szc-Kw-ipR"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -161,6 +173,7 @@
                                             <outlet property="goodsImgV" destination="zYG-Q7-De7" id="aN9-cI-QPx"/>
                                             <outlet property="goodsNameLbl" destination="WJ7-VG-NGS" id="Hu9-kN-t59"/>
                                             <outlet property="priceLbl" destination="mFF-zJ-Lmv" id="Hd1-7Q-Kxv"/>
+                                            <outlet property="quantityLbl" destination="We8-Z1-fAH" id="TPO-NN-u4S"/>
                                             <outlet property="selectBtn" destination="TLw-qC-9Zb" id="VvY-A7-hlG"/>
                                         </connections>
                                     </tableViewCell>

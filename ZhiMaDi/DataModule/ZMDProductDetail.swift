@@ -21,7 +21,7 @@ class ZMDProductDetail: NSObject {
     var DetailsPictureModel : DetailsPicture?
     var BundledItems : [ZMDProductDetail]? // 搭配购
     var ProductVariantAttributes : [ProductVariantAttribute]?    // 产品属性
-    var AttributesBundle : NSDictionary?
+    var AttributesBundle : String?
     override static func mj_objectClassInArray() -> [NSObject : AnyObject]! {
         return ["ProductPrice":ZMDProductPrice.classForCoder(),"DetailsPictureModel":DetailsPicture.classForCoder(),"BundledItems":ZMDProductDetail.classForCoder(),"ProductVariantAttributes":ProductVariantAttribute.classForCoder()]
     }

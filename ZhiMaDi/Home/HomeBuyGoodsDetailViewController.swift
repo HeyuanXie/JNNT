@@ -69,12 +69,19 @@ class HomeBuyGoodsDetailViewController: UIViewController,UITableViewDataSource,U
                 dic.setValue(NSString(string: tmps[1]).integerValue, forKey: tmps[0])
             }
         }
-        if dic.count < 3 {
+        if dic.count < self.productDetail.ProductVariantAttributes!.count {
             ZMDTool.showPromptView("还有没选的")
         }
+        dic.setValue(self.productDetail.Id.integerValue, forKey: "Id")
+        dic.setValue(g_customerId!, forKey: "CustomerId")
+        dic.setValue(2, forKey: "Quantity")
         if g_isLogin! {
-            QNNetworkTool.addProductToCart(self.productDetail.Id.integerValue, CustomerId: g_customerId!, Quantity: 2, formData: dic, completion: { (succeed, dictionary, error) -> Void in
-                
+            QNNetworkTool.addProductToCart(dic, completion: { (succeed, dictionary, error) -> Void in
+                if succeed! {
+                    ZMDTool.showPromptView("添加成功")
+                } else {
+                    ZMDTool.showErrorPromptView(dictionary, error: error, errorMsg: "添加失败")
+                }
             })
         }
     }
@@ -277,9 +284,9 @@ class HomeBuyGoodsDetailViewController: UIViewController,UITableViewDataSource,U
         }
         let menuTitle = valueNames as! [String]
         let attrStr = NSMutableString()
-        let multiselectView = ZMDAttrView(frame:CGRect(x: CGRectGetMaxX(label.frame), y: 0, width: kScreenWidth - CGRectGetMaxX(label.frame), height: 60),titles: menuTitle,attrStr: attrStr as String)
+        let multiselectView = ZMDAttrView(frame:CGRect(x: CGRectGetMaxX(label.frame), y: 0, width: kScreenWidth - CGRectGetMaxX(label.frame), height: 60),titles: menuTitle,menuIndexTrue: NSMutableArray(),attrSet:NSMutableArray(),attr:attr)
         multiselectView.tag = indexPath.row
-        multiselectView.finished = { (index) ->Void in
+        multiselectView.finished = { (index,isAdd) ->Void in
             let tmpForPost = "product_attribute_\(attr.ProductId)_\(attr.BundleItemId)_\(attr.ProductAttributeId)_\(attr.Id):\(attr.Values![index].Id)"
             let indexT = indexPath.row
             self.attrSelects.insertObject(tmpForPost, atIndex: indexPath.row)
@@ -507,23 +514,13 @@ class HomeBuyGoodsDetailViewController: UIViewController,UITableViewDataSource,U
         QNNetworkTool.fetchProductDetail(36) { (productDetail, error, dictionary) -> Void in
             if productDetail != nil {
                 self.productDetail = productDetail
-                self.currentTableView.reloadData()
-            } else {
-                ZMDTool.showErrorPromptView(nil, error: error)
-            }
-        }
-        var areaFile : NSDictionary!
-        if let areaFilePath = NSBundle.mainBundle().pathForResource("textDetail", ofType: "json"), let areaData = NSData(contentsOfFile: areaFilePath) {
-            do {
-                areaFile = try NSJSONSerialization.JSONObjectWithData(areaData, options: NSJSONReadingOptions()) as? NSDictionary
-                let dicTmp  = areaFile
-                let productDetail = ZMDProductDetail.mj_objectWithKeyValues(dicTmp["produc"])
-                self.productDetail = productDetail
                 for var i = 0;i<self.productDetail.ProductVariantAttributes!.count;i++ {
                     self.attrSelects.addObject("")
                 }
                 self.currentTableView.reloadData()
-            }catch {}
+            } else {
+                ZMDTool.showErrorPromptView(nil, error: error)
+            }
         }
     }
     

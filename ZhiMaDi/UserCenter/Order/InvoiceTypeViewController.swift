@@ -9,11 +9,12 @@
 import UIKit
 // 选择发票类型
 class InvoiceTypeViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,ZMDInterceptorProtocol {
-    var tableView : UITableView!
-    let datas = [["不开发票","个人","公司"],["床上用品","家具","日用品"]]
-    var indexTypeRow = 0,indexDetailRow = 0
-    var finished : ((indexType:Int,IndexDetail:Int)->Void)!
     var invoiceStrTextF : UITextField!
+    var tableView : UITableView!
+    var datas : ZMDPublicInfo!
+    var indexTypeRow = 0,indexDetailRow = 0
+    var finished : ((dic:NSDictionary?)->Void)!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "选择发票类型"
@@ -24,18 +25,19 @@ class InvoiceTypeViewController: UIViewController,UITableViewDataSource,UITableV
         rightBar.tintColor = defaultTextColor
         self.navigationController?.navigationItem.rightBarButtonItem = rightBar
         self.updateUI()
+        self.dataUpdate()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     //MARK:- UITableViewDataSource,UITableViewDelegate
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.datas[section].count
+        return section == 0 ? self.datas.getCategorys().count : self.datas.getBodys().count
     }
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return self.datas.count
+        return self.datas == nil ? 0 : 2
     }
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return section == 0 ? 12 : 57
@@ -72,18 +74,22 @@ class InvoiceTypeViewController: UIViewController,UITableViewDataSource,UITableV
             imgV.tag = 10001
             imgV.hidden = true
             cell?.contentView.addSubview(imgV)
-            
-            if indexPath.section == 0 && indexPath.row == 2 {
-                let textField = UITextField(frame: CGRect(x: 64, y: 0, width: kScreenWidth - 64 - 12, height: 55))
-                textField.textColor = defaultDetailTextColor
-                textField.font = defaultSysFontWithSize(17)
-                textField.placeholder = "输入发票台头"
-                cell?.contentView.addSubview(textField)
-                self.invoiceStrTextF = textField
-            }
         }
-        cell?.textLabel?.text = self.datas[indexPath.section][indexPath.row]
-
+        var text = ""
+        if indexPath.section == 0 {
+            text = self.datas.getCategorys()[indexPath.row]
+        } else {
+            text = self.datas.getBodys()[indexPath.row]
+        }
+        cell?.textLabel?.text = text
+        if text == "企业" {
+            let textField = UITextField(frame: CGRect(x: 64, y: 0, width: kScreenWidth - 64 - 12, height: 55))
+            textField.textColor = defaultDetailTextColor
+            textField.font = defaultSysFontWithSize(17)
+            textField.placeholder = "输入发票台头"
+            cell?.contentView.addSubview(textField)
+            self.invoiceStrTextF = textField
+        }
         if (indexPath.section == 0 && indexPath.row == self.indexTypeRow) || (indexPath.section == 1 && indexPath.row == self.indexDetailRow) {
             if let tmp = cell?.contentView.viewWithTag(10001) as? UIImageView {
                 tmp.hidden = false
@@ -95,8 +101,6 @@ class InvoiceTypeViewController: UIViewController,UITableViewDataSource,UITableV
                 tmp.hidden = true
             }
         }
-        
-       
         return cell!
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -114,5 +118,28 @@ class InvoiceTypeViewController: UIViewController,UITableViewDataSource,UITableV
         tableView.dataSource = self
         tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         self.view.addSubview(tableView)
+    }
+    func dataUpdate() {
+        QNNetworkTool.fetchPublicInfo { (publicInfo, dictionary, error) -> Void in
+            if publicInfo != nil {
+                self.datas = publicInfo
+                self.tableView.reloadData()
+            } else {
+                ZMDTool.showErrorPromptView(nil, error: error, errorMsg: nil)
+            }
+        }
+    }
+    func getPostData() -> NSDictionary? {
+        if self.datas == nil {
+            return nil
+        }
+        let body = self.datas.getBodys()[self.indexDetailRow]
+        let category = self.datas.getCategorys()[self.indexTypeRow]
+        let dic = ["CustomerId":g_customerId!,"Body":body,"HeadTitle":self.invoiceStrTextF.text ?? "","Type":self.datas.Types,"Category":category]
+        return dic
+    }
+    override func back() {
+        self.finished(dic: self.getPostData())
+        self.navigationController?.popViewControllerAnimated(true)
     }
 }

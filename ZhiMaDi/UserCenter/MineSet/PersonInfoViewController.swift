@@ -46,7 +46,7 @@ class PersonInfoViewController:UIViewController,UITableViewDataSource, UITableVi
             case Head:
                 viewController = UIViewController()
             case NickN:
-                viewController = PersonIntroductionViewController()
+                viewController = InputTextViewController()
             case RealName :
                 viewController = RealAuthenticationViewController()
             case ChangePs:

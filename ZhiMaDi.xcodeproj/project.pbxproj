@@ -328,7 +328,7 @@
 		2B73D84F1C867C280016FEB2 /* AdressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B73D84E1C867C280016FEB2 /* AdressTableViewCell.swift */; };
 		2B73D8511C8682050016FEB2 /* AddressEditOrAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B73D8501C8682050016FEB2 /* AddressEditOrAddViewController.swift */; };
 		2B73D8531C868FC50016FEB2 /* CustomPickView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B73D8521C868FC50016FEB2 /* CustomPickView.swift */; };
-		2B73D8551C86B6D00016FEB2 /* PersonIntroductionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B73D8541C86B6D00016FEB2 /* PersonIntroductionViewController.swift */; };
+		2B73D8551C86B6D00016FEB2 /* InputTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B73D8541C86B6D00016FEB2 /* InputTextViewController.swift */; };
 		2B73D8571C86B8510016FEB2 /* AccoutSafeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B73D8561C86B8510016FEB2 /* AccoutSafeViewController.swift */; };
 		2B73D85B1C86CBBD0016FEB2 /* PhoneSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B73D85A1C86CBBD0016FEB2 /* PhoneSetViewController.swift */; };
 		2B73D85D1C86D1530016FEB2 /* PhoneSetPsVerifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B73D85C1C86D1530016FEB2 /* PhoneSetPsVerifyViewController.swift */; };
@@ -422,6 +422,7 @@
 		2BA3FDE71CA0E43A00018F3C /* TabBar_School_Normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BA3FDDF1CA0E43A00018F3C /* TabBar_School_Normal@2x.png */; };
 		2BA3FDE81CA0E43A00018F3C /* TabBar_School_Selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BA3FDE01CA0E43A00018F3C /* TabBar_School_Selected@2x.png */; };
 		2BA4B0251CC8B2A7009A568D /* MyStoreHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA4B0241CC8B2A7009A568D /* MyStoreHomeViewController.swift */; };
+		2BA835511D01838E008B29F7 /* ZMDPublicInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA835501D01838E008B29F7 /* ZMDPublicInfo.swift */; };
 		2BAB77251CFFCD1200FC6A02 /* ZMDShoppingProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAB77241CFFCD1200FC6A02 /* ZMDShoppingProduct.swift */; };
 		2BAB77271D00127700FC6A02 /* ZMDProductAttrView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAB77261D00127700FC6A02 /* ZMDProductAttrView.swift */; };
 		2BB0EEFE1CB743C1000A186D /* AfterSalesHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB0EEFD1CB743C1000A186D /* AfterSalesHomeViewController.swift */; };
@@ -1070,7 +1071,7 @@
 		2B73D84E1C867C280016FEB2 /* AdressTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdressTableViewCell.swift; sourceTree = "<group>"; };
 		2B73D8501C8682050016FEB2 /* AddressEditOrAddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressEditOrAddViewController.swift; sourceTree = "<group>"; };
 		2B73D8521C868FC50016FEB2 /* CustomPickView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPickView.swift; sourceTree = "<group>"; };
-		2B73D8541C86B6D00016FEB2 /* PersonIntroductionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonIntroductionViewController.swift; sourceTree = "<group>"; };
+		2B73D8541C86B6D00016FEB2 /* InputTextViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputTextViewController.swift; sourceTree = "<group>"; };
 		2B73D8561C86B8510016FEB2 /* AccoutSafeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccoutSafeViewController.swift; sourceTree = "<group>"; };
 		2B73D85A1C86CBBD0016FEB2 /* PhoneSetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneSetViewController.swift; sourceTree = "<group>"; };
 		2B73D85C1C86D1530016FEB2 /* PhoneSetPsVerifyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneSetPsVerifyViewController.swift; sourceTree = "<group>"; };
@@ -1175,6 +1176,7 @@
 		2BA3FDDF1CA0E43A00018F3C /* TabBar_School_Normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabBar_School_Normal@2x.png"; sourceTree = "<group>"; };
 		2BA3FDE01CA0E43A00018F3C /* TabBar_School_Selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabBar_School_Selected@2x.png"; sourceTree = "<group>"; };
 		2BA4B0241CC8B2A7009A568D /* MyStoreHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyStoreHomeViewController.swift; sourceTree = "<group>"; };
+		2BA835501D01838E008B29F7 /* ZMDPublicInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZMDPublicInfo.swift; sourceTree = "<group>"; };
 		2BAB77241CFFCD1200FC6A02 /* ZMDShoppingProduct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZMDShoppingProduct.swift; sourceTree = "<group>"; };
 		2BAB77261D00127700FC6A02 /* ZMDProductAttrView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZMDProductAttrView.swift; sourceTree = "<group>"; };
 		2BB0EEFD1CB743C1000A186D /* AfterSalesHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AfterSalesHomeViewController.swift; sourceTree = "<group>"; };
@@ -1751,7 +1753,7 @@
 				2B73D8521C868FC50016FEB2 /* CustomPickView.swift */,
 				2B73D8601C86E0650016FEB2 /* RealAuthenticationViewController.swift */,
 				2B73D8641C86EB8A0016FEB2 /* PersonAuthenticationViewController.swift */,
-				2B73D8541C86B6D00016FEB2 /* PersonIntroductionViewController.swift */,
+				2B73D8541C86B6D00016FEB2 /* InputTextViewController.swift */,
 				2B73D8561C86B8510016FEB2 /* AccoutSafeViewController.swift */,
 				2BB6A8CF1C87DF12008209E8 /* SignPSSetViewController.swift */,
 				2B73D85A1C86CBBD0016FEB2 /* PhoneSetViewController.swift */,
@@ -2774,6 +2776,7 @@
 				2BA223201CE9BA37006BC426 /* ZMDProduct.swift */,
 				2BCD07921CFBE7C0000E7E9F /* ZMDProductDetail.swift */,
 				2BAB77241CFFCD1200FC6A02 /* ZMDShoppingProduct.swift */,
+				2BA835501D01838E008B29F7 /* ZMDPublicInfo.swift */,
 				2B79155C1CEAF54B00182F82 /* ZMDCategory.swift */,
 				2B2B0A2B1CEDA1FD00358F1B /* ZMDArea.swift */,
 				2BBFEEFB1CEEA09A00272BB0 /* ZMDAddress.swift */,
@@ -3821,7 +3824,7 @@
 				3C9099111C76A6E9006B7D2C /* ChartMarker.swift in Sources */,
 				3C90994C1C76A6E9006B7D2C /* ChartYAxisRendererRadarChart.swift in Sources */,
 				3C90995D1C76A6E9006B7D2C /* NSString+AES.m in Sources */,
-				2B73D8551C86B6D00016FEB2 /* PersonIntroductionViewController.swift in Sources */,
+				2B73D8551C86B6D00016FEB2 /* InputTextViewController.swift in Sources */,
 				2B5BBC141CD30ADD00D2AC9F /* MyStoreCustomerViewController.swift in Sources */,
 				2B539C051C9AACD000FFE6CD /* StartImageView.swift in Sources */,
 				3C9098711C76A6AA006B7D2C /* QNStyleAttribute.swift in Sources */,
@@ -3926,6 +3929,7 @@
 				3C90991F1C76A6E9006B7D2C /* ChartData.swift in Sources */,
 				2B74BEB31CDC9B49005E0866 /* GoodsManagerBatchCell.swift in Sources */,
 				2BC05C6F1CB630F700D3B1AE /* WalletCaseViewController.swift in Sources */,
+				2BA835511D01838E008B29F7 /* ZMDPublicInfo.swift in Sources */,
 				3C90991B1C76A6E9006B7D2C /* BubbleChartDataSet.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

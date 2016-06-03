@@ -49,7 +49,7 @@ class ZMDAttrView: UIView {
                 self.redLine.hidden = false
                 self.selectBtn = btn
                 self.selectBtn.userInteractionEnabled = true
-                UIView.animateWithDuration(0.2, animations: { () -> Void in
+//                UIView.animateWithDuration(0.2, animations: { () -> Void in
                     let selectBtnFrame = self.selectBtn.frame
                     if self.IsLineAdaptText {
                         let size = self.selectBtn.titleLabel!.text?.sizeWithFont(self.selectBtn.titleLabel!.font, maxWidth: 100)
@@ -57,7 +57,7 @@ class ZMDAttrView: UIView {
                     } else {
                         self.redLine.frame = CGRect(x: CGRectGetMinX(selectBtnFrame), y: CGRectGetHeight(self.frame) - 3.5, width:kScreenWidth/CGFloat(menuTitle.count), height: 3.5)
                     }
-                })
+//                })
                 if self.finished != nil {
                     self.finished(index: btn.tag - 1000,isAdd: true)
                 }

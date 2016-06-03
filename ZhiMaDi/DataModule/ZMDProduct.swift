@@ -9,6 +9,7 @@
 import UIKit
 // 商品
 class ZMDProduct: NSObject {
+    var Id : NSNumber!
     var ProductTypeId : NSNumber!
     var Name : String!
     var ShortDescription : String!

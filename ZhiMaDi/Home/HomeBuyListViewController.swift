@@ -8,6 +8,7 @@
 
 import UIKit
 import ReactiveCocoa
+import MJRefresh
 //商品列表
 class HomeBuyListViewController: UIViewController ,ZMDInterceptorProtocol, UITableViewDataSource, UITableViewDelegate,UISearchBarDelegate{
 
@@ -17,8 +18,7 @@ class HomeBuyListViewController: UIViewController ,ZMDInterceptorProtocol, UITab
     }
     @IBOutlet weak var currentTableView: UITableView!
     var popView : UIView!
-    var cityPop : FindDoctorCityPopView!
-    
+    var footer : MJRefreshAutoNormalFooter!
     var isLease = false             //租赁
     var typeSetting = TypeSetting.Horizontal      // 横屏
     var dataArray = NSMutableArray()
@@ -26,16 +26,21 @@ class HomeBuyListViewController: UIViewController ,ZMDInterceptorProtocol, UITab
     var indexSkip = 0
     var IndexFilter = 0
     var isHasNext = true
-    let filters = ["","Sold","Price","UpdatedOnUtc",""]
     var titleForFilter = ""                         // 关键字
     var orderby = 16                                // 排序
     var orderbyPriceUp = true                       // 升序
     var Cid = ""                                    // 产品类别
+    var orderBy : Int?
     override func viewDidLoad() {
         super.viewDidLoad()
         self.currentTableView.backgroundColor = tableViewdefaultBackgroundColor
+        // 底部刷新
+        footer = MJRefreshAutoNormalFooter()
+        footer.setRefreshingTarget(self, refreshingAction: Selector("footerRefresh"))
+        self.currentTableView.mj_footer = footer
+        
         self.setupNewNavigation()
-        self.updateData(nil, orderby: self.orderby)
+        self.updateData(self.orderby)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -91,14 +96,12 @@ class HomeBuyListViewController: UIViewController ,ZMDInterceptorProtocol, UITab
                     self.pushDetailVc(product)
                     return RACSignal.empty()
                 })
-                self.updateFilter(indexPath.section*2+1)
             } else {
                 DoubleGoodsTableViewCell.configCell(cell, product: productL,productR:nil)
             }
         } else {
             let productL = self.dataArray[indexPath.section] as! ZMDProduct
             DoubleGoodsTableViewCell.configCell(cell, product: productL,productR:nil)
-            self.updateFilter(indexPath.section)
         }
     
         return cell
@@ -106,14 +109,14 @@ class HomeBuyListViewController: UIViewController ,ZMDInterceptorProtocol, UITab
    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if self.typeSetting == .vertical {
-            var product = self.dataArray[indexPath.section] as! ZMDProduct
+            let product = self.dataArray[indexPath.section] as! ZMDProduct
             self.pushDetailVc(product)
         }
     }
     func pushDetailVc(product : ZMDProduct) {
         let vc = HomeBuyGoodsDetailViewController.CreateFromMainStoryboard() as! HomeBuyGoodsDetailViewController
         vc.hidesBottomBarWhenPushed = true
-        vc.product = product
+        vc.productId = product.Id.integerValue
         self.navigationController?.pushViewController(vc, animated: true)
     }
     //MARK: - UISearchBarDelegate
@@ -121,16 +124,6 @@ class HomeBuyListViewController: UIViewController ,ZMDInterceptorProtocol, UITab
         self.view.endEditing(true)
     }
     //MARK: -  PrivateMethod
-    func updateFilter(index : Int) {
-        if index == self.dataArray.count - 1 && self.isHasNext {
-            let filter = self.filters[self.IndexFilter]
-            if filter == "" {
-                self.updateData(nil, orderby: self.orderby)
-            } else {
-                self.updateData(nil, orderby: self.orderby)
-            }
-        }
-    }
     func createFilterMenu() -> UIView{
         let filterTitles = self.isLease ? ["默认","人气","价格","筛选",""] : ["默认","销量","价格","最新",""]
         let countForBtn = CGFloat(filterTitles.count) - 1
@@ -141,6 +134,8 @@ class HomeBuyListViewController: UIViewController ,ZMDInterceptorProtocol, UITab
             let btn = UIButton(frame:  CGRectMake(CGFloat(index) * (kScreenWidth-54)/countForBtn , 0, (kScreenWidth-54)/countForBtn, 52))
             btn.backgroundColor = UIColor.whiteColor()
             btn.selected = i == self.IndexFilter ? true : false
+            btn.setTitleColor(defaultTextColor, forState: .Normal)
+            btn.setTitleColor(RGB(235,61,61,1.0), forState: .Selected)
             if filterTitles[i] == "" {
                 btn.frame = CGRectMake(CGFloat(index) * (kScreenWidth-54)/countForBtn, 0, 54, 52)
                 btn.setImage(UIImage(named: "list_hengpai"), forState: .Normal)
@@ -157,14 +152,13 @@ class HomeBuyListViewController: UIViewController ,ZMDInterceptorProtocol, UITab
                     if self.IndexFilter == i {
                         btn.setImage(UIImage(named: "list_price_down"), forState: .Normal)
                         btn.setImage(UIImage(named: "list_price_up"), forState: .Selected)
+                        btn.setTitleColor(RGB(235,61,61,1.0), forState: .Normal)
                         btn.selected = self.orderbyPriceUp
                     } else {
                         btn.setImage(UIImage(named: "list_price_normal"), forState: .Normal)
                     }
                 }
             }
-            btn.setTitleColor(defaultTextColor, forState: .Normal)
-            btn.setTitleColor(RGB(235,61,61,1.0), forState: .Selected)
             btn.titleLabel?.font = UIFont.systemFontOfSize(13)
             btn.tag = 1000 + i
             view.addSubview(btn)
@@ -183,21 +177,22 @@ class HomeBuyListViewController: UIViewController ,ZMDInterceptorProtocol, UITab
                 let orderby = orderbys[sender.tag - 1000]
                 switch title {
                 case "默认" :
-                    self.updateData(0, orderby: nil)
+                    self.orderBy = nil
                     break
                 case "销量" :
-                    self.updateData(0, orderby: orderby.1)
+                    self.orderBy = orderby.1
                     break
                 case "价格" :
                     self.orderbyPriceUp = (sender as! UIButton).selected
-                    self.updateData(0, orderby: self.orderbyPriceUp ? orderby.0 : orderby.1)
+                    self.orderBy = self.orderbyPriceUp ? orderby.0 : orderby.1
                 case "最新" :
-                    self.updateData(0, orderby: orderby.1)
+                    self.orderBy = orderby.1
                     break
                 default :
                     break
                 }
-                
+                self.indexSkip = 0
+                self.updateData(self.orderBy)
             })
             let line = ZMDTool.getLine(CGRectMake(CGRectGetMaxX(btn.frame)-1, 20, 1, 13))
             btn.addSubview(line)
@@ -240,20 +235,24 @@ class HomeBuyListViewController: UIViewController ,ZMDInterceptorProtocol, UITab
         self.popView.showAsPopAndhideWhenClickGray()
     }
     
-    func updateData(indexSkip:Int?,orderby:Int?) {
-        let skip = indexSkip == nil ? self.indexSkip : indexSkip
-        QNNetworkTool.products(self.titleForFilter,pagenumber: "\(skip!)",orderby:orderby,Cid: self.Cid) { (products, error, dictionary) -> Void in
+    func updateData(orderby:Int?) {
+        QNNetworkTool.products(self.titleForFilter,pagenumber: "\(self.indexSkip)",orderby:orderby,Cid: self.Cid) { (products, error, dictionary) -> Void in
             if let products = products {
-                if skip == 0 {
+                if self.indexSkip == 0 {
                     self.dataArray.removeAllObjects()
                 }
                 self.dataArray.addObjectsFromArray(products as [AnyObject])
-                self.indexSkip = indexSkip ?? self.indexSkip + 1
+                self.indexSkip = self.indexSkip + 1
                 self.isHasNext = products.count < 20 ? false : true
                 self.currentTableView.reloadData()
+                self.footer.endRefreshing()
             } else {
                 ZMDTool.showErrorPromptView(nil, error: error)
             }
         }
+    }
+    // MARK:-底部刷新
+    func footerRefresh(){
+        self.updateData(self.orderBy)
     }
 }

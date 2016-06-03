@@ -12,10 +12,13 @@ class ShoppingCartViewController: UIViewController,UITableViewDataSource,UITable
 
     @IBOutlet weak var currentTableView: UITableView!
     @IBOutlet weak var settlementBtn: UIButton!
-
+    @IBOutlet weak var allSelectBtn: UIButton!
+    var productAttrV : ZMDProductAttrView!
     var dataArray = NSArray()
     var hideStore = true
     var attrSelects = NSMutableArray()
+    var scis = NSMutableArray()             // 选中的购物单
+    var countForBounght = 0                 // 购买数量
     override func viewDidLoad() {
         super.viewDidLoad()
         self.currentTableView.backgroundColor = tableViewdefaultBackgroundColor
@@ -24,11 +27,13 @@ class ShoppingCartViewController: UIViewController,UITableViewDataSource,UITable
         rightBtn.setImage(UIImage(named: "common_delete"), forState: .Normal)
         rightBtn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
         rightBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right:0)
-        let item = UIBarButtonItem(customView: rightBtn)
-        item.rac_command = RACCommand(signalBlock: { (sender) -> RACSignal! in
-            
+        rightBtn.rac_command = RACCommand(signalBlock: { (sender) -> RACSignal! in
+            if self.scis.count != 0 {
+                self.deleteCartItem()
+            }
             return RACSignal.empty()
         })
+        let item = UIBarButtonItem(customView: rightBtn)
         item.customView?.tintColor = defaultDetailTextColor
         self.navigationItem.rightBarButtonItem = item
     }
@@ -73,31 +78,60 @@ class ShoppingCartViewController: UIViewController,UITableViewDataSource,UITable
             let cellId = "GoodsCell"
             let cell = tableView.dequeueReusableCellWithIdentifier(cellId) as! OrderGoodsTableViewCell
             let item = self.dataArray[indexPath.section] as! ZMDShoppingItem
-            cell.configCell(item)
-            cell.editFinish = { (productDetail) -> Void in
+            cell.configCell(item,scis:self.scis)
+            cell.editFinish = { (productDetail,SciId) -> Void in
                 self.attrSelects.removeAllObjects()
                 for var i = 0;i<productDetail.ProductVariantAttributes!.count;i++ {
                     self.attrSelects.addObject(";")
                 }
-                self.editViewShow(productDetail)
+                self.editViewShow(productDetail,SciId: SciId)
+            }
+            cell.selectFinish = { (Sci,isAdd) -> Void in
+                if isAdd {
+                    self.scis.addObject(Sci)
+                } else {
+                    self.scis.removeAllObjects()
+                }
             }
             return cell
         }
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
+        let item = self.dataArray[indexPath.section] as! ZMDShoppingItem
+        let vc = HomeBuyGoodsDetailViewController.CreateFromMainStoryboard() as! HomeBuyGoodsDetailViewController
+        vc.hidesBottomBarWhenPushed = true
+        vc.productId = item.ProductId.integerValue
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     //MARK: -Action
-    
+    //全选
     @IBAction func selectAllBtnCli(sender: UIButton) {
+        self.allSelectBtn.selected = !self.allSelectBtn.selected
+        if self.allSelectBtn.selected {
+            for item in self.dataArray {
+                self.scis.addObject(item)
+            }
+        } else {
+             self.scis.removeAllObjects()
+        }
+        self.currentTableView.reloadData()
     }
     // 结算
     @IBAction func settlementBtnCli(sender: UIButton) {
+        QNNetworkTool.selectCart(self.getSciids(),completion: { (succeed, dictionary, error) -> Void in
+            if succeed! {
+                let vc = ConfirmOrderViewController.CreateFromMainStoryboard() as! ConfirmOrderViewController
+                vc.hidesBottomBarWhenPushed = true
+                vc.scis = self.scis
+                self.navigationController?.pushViewController(vc, animated: true)
+            } else {
+                ZMDTool.showErrorPromptView(dictionary, error: error, errorMsg: nil)
+            }
+        })
     }
     //MARK: -  PrivateMethod
-    
-    func editViewShow(productDetail:ZMDProductDetail) {
-        let view = UIView(frame: CGRect(x: 0, y: self.view.bounds.height - 300, width: kScreenWidth, height: 300))
+    func editViewShow(productDetail:ZMDProductDetail,SciId:Int) {
+        let view = UIView(frame: CGRect.zero)
         view.backgroundColor = UIColor.whiteColor()
         // top
         let countLbl = UILabel(frame: CGRect(x: 12, y: 0, width: 200, height: 60))
@@ -108,17 +142,23 @@ class ShoppingCartViewController: UIViewController,UITableViewDataSource,UITable
         view.addSubview(countLbl)
         
         let countView = CountView(frame: CGRect(x: kScreenWidth - 12 - 120, y: 10, width: 120, height: 40))
+        countView.finished = {(count)->Void in
+            self.countForBounght = count
+        }
         view.addSubview(countView)
        
-        let productAttrV = ZMDProductAttrView(frame: CGRectMake(0, 60,kScreenWidth, 60*3), productDetail: productDetail)
+        productAttrV = ZMDProductAttrView(frame: CGRect.zero, productDetail: productDetail)
+        productAttrV.SciId = SciId
+        productAttrV.frame = CGRectMake(0, 60,kScreenWidth, productAttrV.getHeight())
         view.addSubview(productAttrV)
         // bottom
-        let okBtn = ZMDTool.getButton(CGRect(x: kScreenWidth - 14 - 110, y: 4*60+12, width: 110, height: 36), textForNormal: "确定", fontSize: 17,textColorForNormal: UIColor.whiteColor(), backgroundColor: RGB(235,61,61,1.0)) { (sender) -> Void in
+        let okBtn = ZMDTool.getButton(CGRect(x: kScreenWidth - 14 - 110, y:CGRectGetMaxY(productAttrV.frame)+12, width: 110, height: 36), textForNormal: "确定", fontSize: 17,textColorForNormal: UIColor.whiteColor(), backgroundColor: RGB(235,61,61,1.0)) { (sender) -> Void in
+            self.editCart()
             self.dismissPopupView(view)
         }
         ZMDTool.configViewLayerWithSize(okBtn, size: 18)
         view.addSubview(okBtn)
-        let cancelBtn = ZMDTool.getButton(CGRect(x: kScreenWidth - 14 - 110 - 8 - 80, y: 4*60+12, width: 80, height: 36), textForNormal: "取消", fontSize: 17, backgroundColor: UIColor.clearColor()) { (sender) -> Void in
+        let cancelBtn = ZMDTool.getButton(CGRect(x: kScreenWidth - 14 - 110 - 8 - 80, y: CGRectGetMaxY(productAttrV.frame)+12, width: 80, height: 36), textForNormal: "取消", fontSize: 17, backgroundColor: UIColor.clearColor()) { (sender) -> Void in
             self.dismissPopupView(view)
         }
         view.addSubview(cancelBtn)
@@ -129,20 +169,7 @@ class ShoppingCartViewController: UIViewController,UITableViewDataSource,UITable
             view.addSubview(line)
         }
         self.viewShowWithBg(view,showAnimation: .SlideInFromBottom,dismissAnimation: .SlideOutToBottom)
-    }
-    
-    func nowSelectStr(attrSelects:NSMutableArray) -> String{
-        let str = NSMutableString()
-        for attrStr in attrSelects {
-            if (attrStr as? String) != "" {
-                str.appendString(attrStr as! String)
-                str.appendString(";")
-            }
-        }
-        return str as String
-    }
-    func hideIndexs() {
-        
+        view.frame = CGRect(x: 0, y: self.view.bounds.height - (CGRectGetMaxY(productAttrV.frame) + 60), width: kScreenWidth, height: CGRectGetMaxY(productAttrV.frame) + 60)
     }
     func dataUpdate() {
         QNNetworkTool.fetchShoppingCart { (shoppingItems, dictionary, error) -> Void in
@@ -154,27 +181,44 @@ class ShoppingCartViewController: UIViewController,UITableViewDataSource,UITable
             }
         }
     }
-
-    func viewForMenu(cell:UITableViewCell,indexPath: NSIndexPath) {
-//        let attr = productDetail.ProductVariantAttributes![indexPath.row]
-//        let size = attr.TextPrompt!.sizeWithFont(defaultSysFontWithSize(16), maxWidth: 100)
-//        let label = ZMDTool.getLabel(CGRectMake(0, 0,size.width + 16, 60), text: attr.TextPrompt!, fontSize: 16,textAlignment:.Center)
-//        label.tag = 10002
-//        cell.contentView.addSubview(label)
-//        
-//        let valueNames = NSMutableArray()
-//        for value in attr.Values! {
-//            valueNames.addObject(value.Name!)
-//        }
-//        let menuTitle = valueNames as! [String]
-//        let attrStr = NSMutableString()
-//        let multiselectView = ZMDAttrView(frame:CGRect(x: CGRectGetMaxX(label.frame), y: 0, width: kScreenWidth - CGRectGetMaxX(label.frame), height: 60),titles: menuTitle,attrStr: attrStr as String)
-//        multiselectView.tag = indexPath.row
-//        multiselectView.finished = { (index) ->Void in
-//            let tmpForPost = "product_attribute_\(attr.ProductId)_\(attr.BundleItemId)_\(attr.ProductAttributeId)_\(attr.Id):\(attr.Values![index].Id)"
-//            let indexT = indexPath.row
-//            self.attrSelects.insertObject(tmpForPost, atIndex: indexPath.row)
-//        }
-//        cell.contentView.addSubview(multiselectView)
+    func editCart() {
+        let dic = self.productAttrV.getPostData(self.countForBounght)
+        if dic == nil {
+            return
+        }
+        if g_isLogin! {
+            QNNetworkTool.editCartItemAttribute(dic!, completion: { (succeed, dictionary, error) -> Void in
+                if succeed! {
+                    self.dataUpdate()
+                } else {
+                    ZMDTool.showErrorPromptView(dictionary, error: error, errorMsg: "修改失败")
+                }
+            })
+        }
+    }
+    func getSciids()  -> String {
+        let items = NSMutableString()
+        var index = -1
+        for tmp in self.scis {
+            index++
+            let sciId = (tmp as! ZMDShoppingItem).Id
+            let scid = index == self.scis.count - 1 ? "\(sciId)" : "\(sciId),"
+            items.appendString(scid)
+        }
+        return items as String
+    }
+    func deleteCartItem() {
+        let items = self.getSciids()
+        if g_isLogin! {
+            QNNetworkTool.deleteCartItem(items,completion: { (succeed, dictionary, error) -> Void in
+                if succeed! {
+                    self.scis.removeAllObjects()
+                    self.allSelectBtn.selected = false
+                    self.dataUpdate()
+                } else {
+                    ZMDTool.showErrorPromptView(dictionary, error: error, errorMsg: "删除失败")
+                }
+            })
+        }
     }
 }

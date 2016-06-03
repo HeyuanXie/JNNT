@@ -79,6 +79,7 @@
                                                         <constraint firstAttribute="width" constant="48" id="F5X-y1-3MG"/>
                                                     </constraints>
                                                     <state key="normal" image="common_01unselected.png"/>
+                                                    <state key="selected" image="common_02selected.png"/>
                                                 </button>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="product_pic.png" translatesAutoresizingMaskIntoConstraints="NO" id="zYG-Q7-De7">
                                                     <rect key="frame" x="48" y="15" width="80" height="80"/>
@@ -88,9 +89,9 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="星珠 床头柜" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WJ7-VG-NGS" userLabel="Label  4f4f4f">
-                                                    <rect key="frame" x="143" y="15" width="139" height="14"/>
+                                                    <rect key="frame" x="143" y="15" width="139" height="15"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="14" id="FnB-tA-yKW"/>
+                                                        <constraint firstAttribute="height" constant="15" id="FnB-tA-yKW"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                     <color key="textColor" red="0.30980392159999998" green="0.30980392159999998" blue="0.30980392159999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -192,6 +193,7 @@
                                             <constraint firstAttribute="width" constant="48" id="jGb-0U-AXb"/>
                                         </constraints>
                                         <state key="normal" image="common_01unselected.png"/>
+                                        <state key="selected" image="common_02selected.png"/>
                                         <connections>
                                             <action selector="selectAllBtnCli:" destination="gkQ-u0-WOs" eventType="touchUpInside" id="l70-fQ-h10"/>
                                         </connections>
@@ -260,6 +262,7 @@
                     <navigationItem key="navigationItem" title="购物车" id="WRB-6e-Gom"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
+                        <outlet property="allSelectBtn" destination="qNO-fc-r1A" id="HPv-fN-1Xf"/>
                         <outlet property="currentTableView" destination="jwb-DG-YYb" id="cXX-3j-DCR"/>
                         <outlet property="settlementBtn" destination="Gy8-3Q-GaR" id="xkJ-gc-f4b"/>
                     </connections>
@@ -1756,6 +1759,7 @@
                                             <outlet property="goodsImgV" destination="che-Fd-0M1" id="B87-mG-c6i"/>
                                             <outlet property="goodsNameLbl" destination="DWu-p7-H3H" id="Dow-Vg-q2y"/>
                                             <outlet property="priceLbl" destination="dKQ-F4-8gi" id="Z3f-Ed-7Z7"/>
+                                            <outlet property="quantityLbl" destination="RKQ-8D-S2l" id="edw-hc-QC9"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

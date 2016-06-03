@@ -82,3 +82,22 @@ IsFreeShipping              是免邮
 Sold                        售出数量
 BundledItems                搭配购
 6 购物车
+    获取用户购物车（post）
+        http://localhost:2726/api/v1/extend/ShoppingCart/Cart
+
+        {"customerId":1}
+
+    编辑购物车项 （post）
+        http://localhost:2726/api/v1/extend/ShoppingCart/EditCartItemAttribute
+
+        {"customerId":1,"Quantity":30,"SciId":152}
+
+        SciId：当前购物车编辑项的Id
+        同时Post 相应属性Form   组成项：product_attribute_{0}_{1}_{2}_{3}", attribute.ProductId, attribute.BundleItemId, attribute.ProductAttributeId, attribute.Id);
+
+    删除购物车项 （post）
+        http://localhost:2726/api/v1/extend/ShoppingCart/DeleteCartItem
+        {"customerId":1,"SciId":152}
+        DeleteCartItems
+        {"customerId":2,"SciIds","2,3,45"}
+        SciId：当前购物车编辑项的Id

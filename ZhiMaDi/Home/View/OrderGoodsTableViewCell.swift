@@ -17,7 +17,8 @@ class OrderGoodsTableViewCell: UITableViewCell {
     @IBOutlet weak var detailLbl: UILabel!
     @IBOutlet weak var priceLbl: UILabel!
     @IBOutlet weak var quantityLbl: UILabel!
-    var editFinish : ((productDetail:ZMDProductDetail)->Void)!
+    var editFinish : ((productDetail:ZMDProductDetail,SciId:Int)->Void)!
+    var selectFinish : ((Sci:ZMDShoppingItem,isAdd:Bool)->Void)!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -28,7 +29,18 @@ class OrderGoodsTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    func configCell(item:ZMDShoppingItem) {
+    //确认订单
+    func configCellForConfig(item:ZMDShoppingItem) {
+        if let imgUrl = item.DefaultPictureModel?.ImageUrl {
+            goodsImgV.sd_setImageWithURL(NSURL(string: imgUrl))
+        }
+        goodsNameLbl.text = item.ProductName
+        detailLbl.text = (item.AttributeInfo as NSString).stringByReplacingOccurrencesOfString("<br />", withString: " ")
+        priceLbl.text = item.SubTotal
+        quantityLbl.text = "x\(item.Quantity)"
+    }
+
+    func configCell(item:ZMDShoppingItem,scis:NSArray) {
         if let imgUrl = item.DefaultPictureModel?.ImageUrl {
             goodsImgV.sd_setImageWithURL(NSURL(string: imgUrl))
         }
@@ -40,12 +52,23 @@ class OrderGoodsTableViewCell: UITableViewCell {
         editBtn.rac_command = RACCommand(signalBlock: { (sender) -> RACSignal! in
             QNNetworkTool.fetchProductDetail(item.ProductId.integerValue) { (productDetail, error, dictionary) -> Void in
                 if productDetail != nil {
-                    self.editFinish(productDetail: productDetail!)
+                    self.editFinish(productDetail: productDetail!,SciId:item.Id.integerValue)
                 } else {
                     ZMDTool.showErrorPromptView(nil, error: error)
                 }
             }
             return RACSignal.empty()
         })
+        selectBtn.rac_command = RACCommand(signalBlock: { (sender) -> RACSignal! in
+            (sender as! UIButton).selected = !(sender as! UIButton).selected
+            self.selectFinish(Sci: item,isAdd: (sender as! UIButton).selected)
+            return RACSignal.empty()
+        })
+        selectBtn.selected = false
+        for tmp in scis {
+            if (tmp as! ZMDShoppingItem).Id == item.Id {
+                selectBtn.selected = true
+            }
+        }
     }
 }

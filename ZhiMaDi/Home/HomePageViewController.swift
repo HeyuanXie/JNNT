@@ -513,16 +513,9 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
         self.navigationItem.rightBarButtonItem = leftItem
         let rightItem = UIBarButtonItem(image: UIImage(named: "home_search")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate), style: UIBarButtonItemStyle.Bordered, target: nil, action: nil)
         rightItem.rac_command = RACCommand(signalBlock: { (input) -> RACSignal! in
-//            let vc = HomeBuyGoodsSearchViewController.CreateFromMainStoryboard() as! HomeBuyGoodsSearchViewController
-//            self.navigationController?.pushViewController(vc, animated: true)
-            
-            let vc = HomeBuyGoodsDetailViewController.CreateFromMainStoryboard() as! HomeBuyGoodsDetailViewController
+            let vc = HomeBuyGoodsSearchViewController.CreateFromMainStoryboard() as! HomeBuyGoodsSearchViewController
             vc.hidesBottomBarWhenPushed = true
-            let tmp = ZMDProduct()
-            tmp.ProductTypeId = 2
-            vc.product = tmp
             self.navigationController?.pushViewController(vc, animated: true)
-            
             return RACSignal.empty()
         })
         rightItem.customView?.tintColor = UIColor.whiteColor()

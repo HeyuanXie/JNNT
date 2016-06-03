@@ -12,6 +12,7 @@ class CountView: UIView {
     
     var countForBounghtLbl : UIButton!
     var countForBounght = 0
+    var finished:((count:Int)->Void)!
     override init(frame:CGRect) {
         super.init(frame: frame)
         var titles = ["-","0","+"],i=0
@@ -32,6 +33,7 @@ class CountView: UIView {
                     self.countForBounght++
                 }
                 self.countForBounghtLbl.setTitle("\(self.countForBounght)", forState: .Normal)
+                self.finished(count: self.countForBounght)
             })
             i++
         }

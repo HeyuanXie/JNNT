@@ -97,9 +97,10 @@ class ConfirmOrderViewController: UIViewController,UITableViewDataSource,UITable
     }
     
     @IBOutlet weak var currentTableView: UITableView!
+    var markTF : UITextField!
     var userCenterData: [[UserCenterCellType]]!
-    
-    
+    var scis : NSArray!
+    var publicInfo : NSDictionary?
     override func viewDidLoad() {
         super.viewDidLoad()
         self.dataInit()
@@ -117,6 +118,10 @@ class ConfirmOrderViewController: UIViewController,UITableViewDataSource,UITable
     }
     //MARK:- UITableViewDataSource,UITableViewDelegate
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        let cellType = self.userCenterData[section][0]
+        if cellType == .Goods {
+            return self.scis.count
+        }
         return self.userCenterData[section].count
     }
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -130,20 +135,28 @@ class ConfirmOrderViewController: UIViewController,UITableViewDataSource,UITable
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if self.userCenterData[indexPath.section][0] == .Goods {
+            return 110
+        }
         let cellType = self.userCenterData[indexPath.section][indexPath.row]
         switch cellType {
         case .AddressSelect :
             return 55
         case .Store:
             return 48
-        case .Goods :
-            return 110
         default :
             return 56
         }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        if self.userCenterData[indexPath.section][0] == .Goods {
+            let cellId = "GoodsCell"
+            let cell = tableView.dequeueReusableCellWithIdentifier(cellId) as! OrderGoodsTableViewCell
+            let item = self.scis[indexPath.row] as! ZMDShoppingItem
+            cell.configCellForConfig(item)
+            return cell
+        }
         let cellType = self.userCenterData[indexPath.section][indexPath.row]
         switch cellType {
         case .AddressSelect:
@@ -154,10 +167,11 @@ class ConfirmOrderViewController: UIViewController,UITableViewDataSource,UITable
                 cell?.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
                 cell!.selectionStyle = .None
                 ZMDTool.configTableViewCellDefault(cell!)
+                
+                cell?.imageView?.image = UIImage(named: "pay_select_adress")
+                let numLbl = ZMDTool.getLabel(CGRect(x: 44, y: 0, width: 300, height: 55), text: "选择收获地址", fontSize: 17)
+                cell?.contentView.addSubview(numLbl)
             }
-            cell?.imageView?.image = UIImage(named: "pay_select_adress")
-            let numLbl = ZMDTool.getLabel(CGRect(x: 44, y: 0, width: 300, height: 55), text: "选择收获地址", fontSize: 17)
-            cell?.contentView.addSubview(numLbl)
             return cell!
         case .Store :
             let cellId = "StoreCell"
@@ -165,10 +179,6 @@ class ConfirmOrderViewController: UIViewController,UITableViewDataSource,UITable
             let line = ZMDTool.getLine(CGRect(x: 0, y: 47.5, width: kScreenWidth, height: 0.5))
             cell?.contentView.addSubview(line)
             return cell!
-        case .Goods :
-            let cellId = "GoodsCell"
-            let cell = tableView.dequeueReusableCellWithIdentifier(cellId) as! OrderGoodsTableViewCell
-            return cell
         case .Discount :
             let cellId = "DiscountCell"
             var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
@@ -194,13 +204,18 @@ class ConfirmOrderViewController: UIViewController,UITableViewDataSource,UITable
                 cell!.selectionStyle = .None
                 ZMDTool.configTableViewCellDefault(cell!)
                 cell?.contentView.addSubview(ZMDTool.getLine(CGRect(x: 0, y: 55.5, width: kScreenWidth, height: 0.5)))
+                
             }
             cell!.textLabel?.text = cellType.title
-            let textField = UITextField(frame: CGRect(x: 64, y: 0, width: kScreenWidth - 64 - 12, height: 55))
-            textField.textColor = defaultDetailTextColor
-            textField.font = defaultSysFontWithSize(17)
-            textField.placeholder = "给商家留言"
-            cell?.contentView.addSubview(textField)
+            if self.markTF == nil {
+                let textField = UITextField(frame: CGRect(x: 64, y: 0, width: kScreenWidth - 64 - 12, height: 55))
+                textField.textColor = defaultDetailTextColor
+                textField.font = defaultSysFontWithSize(17)
+                textField.tag = 10001
+                textField.placeholder = "给商家留言"
+                cell?.contentView.addSubview(textField)
+                self.markTF = textField
+            }
             return cell!
         case .GoodsCount :
             let cellId = "GoodsCountCell"
@@ -242,11 +257,16 @@ class ConfirmOrderViewController: UIViewController,UITableViewDataSource,UITable
                 ZMDTool.configTableViewCellDefault(cell!)
         
                 cell?.contentView.addSubview(ZMDTool.getLine(CGRect(x: 0, y: 55.5, width: kScreenWidth, height: 0.5)))
+                let label = ZMDTool.getLabel(CGRect(x: kScreenWidth - 12 - 150, y: 0, width: 150, height: 55.5), text: "", fontSize: 17,textColor: defaultDetailTextColor)
+                label.textAlignment = .Right
+                label.tag = 10000 + indexPath.section*10 + indexPath.row
+                cell?.contentView.addSubview(label)
             }
-            let label = ZMDTool.getLabel(CGRect(x: kScreenWidth - 12 - 150, y: 0, width: 150, height: 55.5), text: "个人", fontSize: 17,textColor: defaultDetailTextColor)
-            label.textAlignment = .Right
-            cell?.contentView.addSubview(label)
             cell!.textLabel?.text = cellType.title
+            if let category = self.publicInfo?["Category"] as? String {
+                let lbl = cell?.viewWithTag(10000 + indexPath.section*10 + indexPath.row) as! UILabel
+                lbl.text = category
+            }
             return cell!
         case .InvoiceDetail :
             let cellId = "InvoiceDetailCell"
@@ -256,13 +276,17 @@ class ConfirmOrderViewController: UIViewController,UITableViewDataSource,UITable
                 cell?.accessoryType = UITableViewCellAccessoryType.None
                 cell!.selectionStyle = .None
                 ZMDTool.configTableViewCellDefault(cell!)
-                
                 cell?.contentView.addSubview(ZMDTool.getLine(CGRect(x: 0, y: 55.5, width: kScreenWidth, height: 0.5)))
+                let label = ZMDTool.getLabel(CGRect(x: kScreenWidth - 12 - 150, y: 0, width: 150, height: 55.5), text: "", fontSize: 17,textColor: defaultDetailTextColor)
+                label.textAlignment = .Right
+                label.tag = 10000 + indexPath.section*10 + indexPath.row
+                cell?.contentView.addSubview(label)
             }
-            let label = ZMDTool.getLabel(CGRect(x: kScreenWidth - 12 - 110, y: 0, width: 110, height: 55.5), text: "床上用品", fontSize: 17,textColor: defaultDetailTextColor)
-            label.textAlignment = .Right
-            cell?.contentView.addSubview(label)
             cell!.textLabel?.text = cellType.title
+            if let body = self.publicInfo?["Body"] as? String {
+                let lbl = cell?.viewWithTag(10000 + indexPath.section*10 + indexPath.row) as! UILabel
+                lbl.text = body
+            }
             return cell!
         case .InvoiceFor :
             let cellId = "InvoiceForCell"
@@ -312,7 +336,25 @@ class ConfirmOrderViewController: UIViewController,UITableViewDataSource,UITable
         switch cellType{
         case .Invoice://发票
             let vc = InvoiceTypeViewController()
-            vc.finished = {(indexType,IndexDetail)->Void in
+            vc.finished = {(dic)->Void in
+               self.publicInfo = dic
+            }
+            self.navigationController?.pushViewController(vc, animated: true)
+            break
+        case .AddressSelect :
+            let vc = AddressViewController.CreateFromMainStoryboard() as! AddressViewController
+            vc.finished = { (addressId) -> Void in
+                ZMDTool.showActivityView(nil)
+                QNNetworkTool.selectShoppingAddress(addressId) { (succeed, dictionary, error) -> Void in
+                    ZMDTool.hiddenActivityView()
+                    if succeed! {
+                        if let message = dictionary?["message"] as? String {
+                            ZMDTool.showErrorPromptView(dictionary, error: error, errorMsg: message)
+                        }
+                    } else {
+                        ZMDTool.showErrorPromptView(dictionary, error: error, errorMsg: nil)
+                    }
+                }
             }
             self.navigationController?.pushViewController(vc, animated: true)
             break
@@ -321,7 +363,6 @@ class ConfirmOrderViewController: UIViewController,UITableViewDataSource,UITable
         }
     }
     //MARK:Private Method
- 
     func updateUI() {
         self.currentTableView.backgroundColor = tableViewdefaultBackgroundColor
         
@@ -330,8 +371,23 @@ class ConfirmOrderViewController: UIViewController,UITableViewDataSource,UITable
         self.view.addSubview(view)
 
         let confirmBtn = ZMDTool.getButton(CGRect(x: kScreenWidth - 12 - 110, y: 12, width: 110, height: 34), textForNormal: "提交订单", fontSize: 15,textColorForNormal:UIColor.whiteColor(), backgroundColor:RGB(235,61,61,1.0)) { (sender) -> Void in
-            let vc = CashierViewController()
-            self.navigationController?.pushViewController(vc, animated: true)
+            self.view.endEditing(true)
+            ZMDTool.showActivityView(nil)
+            var mark = ""
+            if self.markTF != nil {
+                mark = self.markTF!.text!
+            }
+            QNNetworkTool.confirmOrder(mark, completion: { (succeed, dictionary, error) -> Void in
+                if succeed! {
+                    let vc = CashierViewController()
+                    self.navigationController?.pushViewController(vc, animated: true)
+//                    if let message = dictionary?["message"] as? String {
+//                        ZMDTool.showErrorPromptView(dictionary, error: error, errorMsg: message)
+//                    }
+                } else {
+                    ZMDTool.showErrorPromptView(dictionary, error: error, errorMsg: nil)
+                }
+            })
         }
         ZMDTool.configViewLayerWithSize(confirmBtn, size: 15)
         view.addSubview(confirmBtn)
@@ -341,6 +397,6 @@ class ConfirmOrderViewController: UIViewController,UITableViewDataSource,UITable
         view.addSubview(jifengLbl)
     }
     private func dataInit(){
-        self.userCenterData = [[.AddressSelect],[.Store,.Goods,.Discount,.freight,.Mark,.GoodsCount], [.Invoice,.InvoiceType,.InvoiceDetail,.InvoiceFor],[.UseDiscount]]
+        self.userCenterData = [[.AddressSelect],[.Goods],[.GoodsCount,.Mark], [.Invoice,.InvoiceType,.InvoiceDetail,.InvoiceFor],[.UseDiscount]]
     }
 }

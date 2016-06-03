@@ -14,6 +14,7 @@ class ZMDProductAttrView: UIView {
     var refreshArr = NSMutableArray()
     var attrSet = NSMutableArray()
     var kTagAttrView = 10000
+    var SciId = 0
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -91,6 +92,17 @@ class ZMDProductAttrView: UIView {
     }
     // 选择某个属性后
     func func1() {
+        var result = true
+        for tmp in self.attrSet {
+            if tmp as! String != ";" {
+                result = false
+                break
+            }
+        }
+        if result {
+            refreshArr.removeAllObjects()
+            return
+        }
         do {
             let jsonObject: AnyObject? = try NSJSONSerialization.JSONObjectWithData(productDetail.AttributesBundle!.dataUsingEncoding(NSUTF8StringEncoding)!, options: NSJSONReadingOptions.MutableContainers)
             let attrBundle = jsonObject as! NSDictionary
@@ -113,4 +125,34 @@ class ZMDProductAttrView: UIView {
         catch {
         }
     }
+    func getPostData(quantity:Int,IsEdit:Bool = true) -> NSDictionary? {
+        let dic = NSMutableDictionary()
+        if productDetail.ProductVariantAttributes!.count != 0 {
+            let attr = productDetail.ProductVariantAttributes![0]
+            for tmp in self.attrSelects {
+                let tmps = (tmp as! NSString).componentsSeparatedByString(":")
+                if tmps.count == 2 {
+                    let tmpForPost = "product_attribute_\(attr.ProductId)_\(attr.BundleItemId)_\(attr.ProductAttributeId)_\(tmps[0])"
+                    dic.setValue(NSString(string: tmps[1]).integerValue, forKey:tmpForPost)
+                }
+            }
+        }
+        if dic.count < self.productDetail.ProductVariantAttributes!.count {
+            ZMDTool.showPromptView("还有没选的")
+            return nil
+        }
+        if IsEdit {
+            dic.setValue(SciId, forKey: "SciId")
+        } 
+        dic.setValue(g_customerId!, forKey: "CustomerId")
+        dic.setValue(quantity, forKey: "Quantity")
+        return dic
+    }
+    func getHeight() -> CGFloat {
+        return  CGFloat(productDetail.ProductVariantAttributes!.count * 60)
+    }
+    class func getHeight(productDetail:ZMDProductDetail) -> CGFloat {
+        return  CGFloat(productDetail.ProductVariantAttributes!.count * 60)
+    }
+
 }

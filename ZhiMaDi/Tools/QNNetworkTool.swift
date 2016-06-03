@@ -147,6 +147,7 @@ private extension QNNetworkTool {
                 completionHandler(request: $0!, response: $1, data: $2, dictionary: dictionary, error: nil)
             }
             catch {
+                completionHandler(request: $0!, response: $1, data: $2, dictionary: nil, error: NSError(domain: "JSON解析错误", code: 10086, userInfo: nil));
                 println("Json解析过程出错")
             }
         }
@@ -427,6 +428,15 @@ extension QNNetworkTool {
 }
 //MARK:- 产品相关
 extension QNNetworkTool {
+    /**
+     产品列表
+     
+     - parameter Q:          关键词
+     - parameter pagenumber: 页码
+     - parameter orderby:    orderby description
+     - parameter Cid:        Cid description
+     - parameter completion: completion description
+     */
     class func products(Q:String,pagenumber:String,orderby:Int?,Cid : String?,completion: (products : NSArray?,error:NSError?,dictionary:NSDictionary?) -> Void) {
         var urlStr = orderby == nil ? kServerAddress + "/catalog/searchajax?as=true&pagenumber=\(pagenumber)&q=\(Q)" : kServerAddress + "/catalog/searchajax?as=true&pagenumber=\(pagenumber)&orderby=16&q=\(Q)"
         if Cid != nil && Cid != "" {
@@ -476,7 +486,8 @@ extension QNNetworkTool {
      - parameter completion: completion description
      */
     class func fetchProductDetail(Id:Int,completion: (productDetail: ZMDProductDetail?,error:NSError?,dictionary:NSDictionary?) -> Void){
-        requestPOST(kServerAddress + "/api/v1/extend/Product/ProductDetails", parameters: ["Id":Id]) { (_,response, _, dictionary, error) -> Void in
+        
+        requestPOST(kServerAddress + "/api/v1/extend/Product/ProductDetails", parameters: ["Id":Id,"customerId":g_customerId ?? 0]) { (_,response, _, dictionary, error) -> Void in
             guard let dic = dictionary ,let productDetail = ZMDProductDetail.mj_objectWithKeyValues(dic["produc"]) else {
                 completion(productDetail:nil,error: error,dictionary:nil)
                 return
@@ -497,7 +508,61 @@ extension QNNetworkTool {
 }
 //MARK:- 订单相关
 extension QNNetworkTool {
-    
+    /**
+     下订单
+     
+     - parameter ItemIds:    订单id
+     - parameter completion: completion description
+     */
+    class func selectCart(ItemIds: String,completion: (succeed : Bool!,dictionary:NSDictionary?,error: NSError?) -> Void) {
+        requestPOST(kServerAddress + "/api/v1/extend/Checkout/SelectCart", parameters: ["ItemIds" : ItemIds,"CustomerId":g_customerId!]) { (_, _, _, dictionary, error) -> Void in
+            guard let success = dictionary?["success"] as? NSNumber where success.boolValue else {
+                completion(succeed:false,dictionary: dictionary, error: error)
+                return
+            }
+            completion(succeed:true,dictionary: dictionary, error: nil)
+        }
+    }
+    /**
+     选择地址
+     
+     - parameter AddressId:  产品Id
+     - parameter completion: completion description
+     */
+    class func selectShoppingAddress(AddressId: Int,completion: (succeed : Bool!,dictionary:NSDictionary?,error: NSError?) -> Void) {
+        requestPOST(kServerAddress + "/api/v1/extend/Checkout/SelectShippingAddress", parameters: ["AddressId" : AddressId,"CustomerId":g_customerId!]) { (_, _, _, dictionary, error) -> Void in
+            guard let success = dictionary?["success"] as? NSNumber where success.boolValue else {
+                completion(succeed:false,dictionary: dictionary, error: error)
+                return
+            }
+            completion(succeed:true,dictionary: dictionary, error: nil)
+        }
+    }
+    // 获取发票信息
+    class func fetchPublicInfo(completion: (publicInfo : ZMDPublicInfo?,dictionary:NSDictionary?,error: NSError?) -> Void) {
+        requestPOST(kServerAddress + "/api/v1/extend/Invoices/PublicInfo", parameters: nil) { (_, _, _, dictionary, error) -> Void in
+            guard let publicInfo = ZMDPublicInfo.mj_objectWithKeyValues(dictionary) else {
+                completion(publicInfo:nil,dictionary: dictionary, error: error)
+                return
+            }
+            completion(publicInfo:publicInfo,dictionary: dictionary, error: nil)
+        }
+    }
+    /**
+     确认订单
+     
+     - parameter CustomerComment: 备注
+     - parameter completion:      completion description
+     */
+    class func confirmOrder(CustomerComment: String,completion: (succeed : Bool!,dictionary:NSDictionary?,error: NSError?) -> Void) {
+        requestPOST(kServerAddress + "/api/v1/extend/Checkout/ConfirmOrder", parameters: ["CustomerComment" : CustomerComment,"CustomerId":g_customerId!]) { (_, _, _, dictionary, error) -> Void in
+            guard let success = dictionary?["success"] as? NSNumber where success.boolValue else {
+                completion(succeed:false,dictionary: dictionary, error: error)
+                return
+            }
+            completion(succeed:true,dictionary: dictionary, error: nil)
+        }
+    }
 }
 //MARK:- 购物车相关
 extension QNNetworkTool {
@@ -547,8 +612,8 @@ extension QNNetworkTool {
      
      - parameter completion:
      */
-    class func deleteCartItem(completion: (succeed : Bool!,dictionary:NSDictionary?,error: NSError?) -> Void) {
-        requestPOST(kServerAddress + "/api/v1/extend/ShoppingCart/DeleteCartItem", parameters: ["customerId":g_customerId!,"SciId":152]) { (_, _, _, dictionary, error) -> Void in
+    class func deleteCartItem(SciIds:String,completion: (succeed : Bool!,dictionary:NSDictionary?,error: NSError?) -> Void) {
+        requestPOST(kServerAddress + "/api/v1/extend/ShoppingCart/DeleteCartItems", parameters: ["customerId":g_customerId!,"SciIds":SciIds]) { (_, _, _, dictionary, error) -> Void in
             guard let success = dictionary?["success"] as? NSNumber where success.boolValue else {
                 completion(succeed:false,dictionary: dictionary, error: error)
                 return

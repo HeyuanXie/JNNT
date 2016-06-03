@@ -7,19 +7,20 @@
 //
 
 import UIKit
-//个人简介
-class PersonIntroductionViewController: UIViewController ,UITextViewDelegate {
-    
+//  通用的单输出页面
+class InputTextViewController: UIViewController ,UITextViewDelegate,ZMDInterceptorProtocol {
     private var inputTextView: UITextView!
     var countLbl : UILabel!
+    var text = ""                           // 初始文本
+    var maxLength = 0                       // 字数限制
+    var finished : ((text:String)->Void)!
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "个人简介"
         self.view.backgroundColor = defaultBackgroundGrayColor
         self.inputTextView = UITextView(frame: CGRectMake(0, 10, self.view.frame.width, 180))
         self.inputTextView.backgroundColor = UIColor.whiteColor()
         self.inputTextView.returnKeyType = UIReturnKeyType.Done
-        self.inputTextView.text = "称"
+        self.inputTextView.text = text
         self.inputTextView.font = UIFont.systemFontOfSize(15)
         self.inputTextView.layer.masksToBounds = true
         self.inputTextView.layer.borderColor = defaultLineColor.CGColor
@@ -28,9 +29,9 @@ class PersonIntroductionViewController: UIViewController ,UITextViewDelegate {
         self.inputTextView.returnKeyType = UIReturnKeyType.Default
         self.view.addSubview(self.inputTextView)
         
-        self.countLbl = UILabel(frame: CGRectMake(self.view.frame.width - 40 , CGRectGetMaxY(self.inputTextView.frame) , 30, 13))
-        let count =  (("称") as NSString).length
-        self.countLbl.text = "\(100 - count)/100"
+        self.countLbl = UILabel(frame: CGRectMake(self.view.frame.width - 88 , CGRectGetMaxY(self.inputTextView.frame) , 100, 13))
+        let count =  (text as NSString).length
+        self.countLbl.text = "\(self.maxLength - count)/\(self.maxLength)"
         self.countLbl.font = UIFont.systemFontOfSize(13)
         self.countLbl.textColor = UIColor.grayColor()
         self.view.addSubview(self.countLbl)
@@ -66,9 +67,9 @@ class PersonIntroductionViewController: UIViewController ,UITextViewDelegate {
     }
     func textViewDidChange(textView: UITextView) {
         let mulStr = NSMutableString(string: textView.text)
-        self.countLbl.text = (500 - mulStr.length).description
+        self.countLbl.text = (self.maxLength - mulStr.length).description
         self.countLbl.textColor = UIColor.grayColor()
-        if  500 - mulStr.length < 0 {
+        if  self.maxLength - mulStr.length < 0 {
             self.countLbl.textColor = UIColor.redColor()
         }
     }
@@ -85,23 +86,13 @@ class PersonIntroductionViewController: UIViewController ,UITextViewDelegate {
             ZMDTool.showPromptView("个人简介超过100字")
             return false
         }
-        // 限制输入范围在10以内
-        if tmpResume!.length > 500 {
-            tmpResume = tmpResume!.substringToIndex(500)
-        }
-        
-        ZMDTool.showActivityView(nil, inView: viewController?.view)
-//        QNNetworkTool.saveDocIntroduce(g_doctor!.doctorId, introduce: tmpResume as! String) { (dictionry, error, string) -> Void in
-//            QNTool.hiddenActivityView()
-//            if dictionry?["errorCode"] as? String == "0"  {
-//                QNTool.showPromptView("保存成功", nil)
-//                g_doctor!.introduce = tmpResume as? String
-//                viewController!.navigationController?.popViewControllerAnimated(true)
-//            }else {
-//                QNTool.showErrorPromptView(nil, error: error, errorMsg: dictionry?["errorMsg"] as? String)
-//            }
+        // 限制输入范围
+//        if tmpResume!.length > self.maxLength {
+//            tmpResume = tmpResume!.substringToIndex(self.maxLength)
 //        }
-        
         return true
+    }
+    override func back() {
+        self.finished(text: self.inputTextView.text)
     }
 }

@@ -17,6 +17,8 @@ class AddressViewController: UIViewController,UITableViewDataSource, UITableView
     var selectAddressFinished : ((address : String)->Void)?
     var isEdit = false
     var addresses = NSMutableArray()
+    var selectIndex = 0
+    var finished : ((addressId:Int)->Void)?
     override func viewDidLoad() {
         super.viewDidLoad()
         self.updateUI()
@@ -56,6 +58,7 @@ class AddressViewController: UIViewController,UITableViewDataSource, UITableView
         let cell = tableView.dequeueReusableCellWithIdentifier(cellId) as! AdressTableViewCell
         let address = self.addresses[indexPath.section] as! ZMDAddress
         AdressTableViewCell.configCell(cell, address: address)
+        cell.selectedBtn.selected = indexPath.section == self.selectIndex
         if !self.isEdit {
             cell.editBtn.hidden = true
             UIView.animateWithDuration(0.2, animations: { () -> Void in
@@ -64,7 +67,15 @@ class AddressViewController: UIViewController,UITableViewDataSource, UITableView
                 cell.selectedBtn.setImage(UIImage(named: "common_02selected"), forState: .Selected)
                 cell.layoutIfNeeded()
             })
+            //delete
+            cell.selectedBtn.tag = 1000 + indexPath.section
+            cell.selectedBtn.rac_command = RACCommand(signalBlock: { (sender) -> RACSignal! in
+                self.selectIndex = sender.tag - 1000
+                self.currentTableView.reloadData()
+                return RACSignal.empty()
+            })
         } else {
+            // 编辑
             cell.editBtn.hidden = false
             UIView.animateWithDuration(0.2, animations: { () -> Void in
                 cell.editBtnWidthConstraint.constant = 60
@@ -128,11 +139,26 @@ class AddressViewController: UIViewController,UITableViewDataSource, UITableView
             if addresses != nil {
                 self.addresses.removeAllObjects()
                 self.addresses.addObjectsFromArray(addresses! as [AnyObject])
+                var index = -1
+                for address in self.addresses {
+                    index++
+                    if (address as! ZMDAddress).IsDefault.boolValue {
+                        self.selectIndex = index
+                    }
+                }
                 self.currentTableView.reloadData()
             } else {
                 ZMDTool.showErrorPromptView(nil, error: error, errorMsg: "")
             }
         }
     }
-    
+    override func back() {
+        if self.addresses.count != 0 {
+            let address = self.addresses[self.selectIndex] as! ZMDAddress
+            if self.finished != nil {
+                self.finished!(addressId: address.Id!.integerValue)
+            }
+        }
+        self.navigationController?.popViewControllerAnimated(true)
+    }
 }

@@ -31,6 +31,7 @@ class CardVolumeConsumerDetailViewController: UIViewController,UITableViewDataSo
     }
     var currentTableView: UITableView!
     var cellType = [[CellType.Head,.Count],[CellType.Method,.Explain]]
+    var coupon : ZMDCoupon!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.updateUI()
@@ -73,17 +74,24 @@ class CardVolumeConsumerDetailViewController: UIViewController,UITableViewDataSo
                 cell!.selectionStyle = .None
                 cell!.contentView.backgroundColor = RGB(234,196,64,1)
             }
-            let titleLbl = ZMDTool.getLabel(CGRect(x: 0, y: 15, width: kScreenWidth, height: 16), text: "APP下单满1000立减", fontSize: 16,textColor: UIColor.whiteColor(),textAlignment:.Center)
+            if self.coupon.Discount.Name == nil {
+                return cell!
+            }
+            let titleLbl = ZMDTool.getLabel(CGRect(x: 0, y: 15, width: kScreenWidth, height: 16), text: self.coupon.Discount.Name, fontSize: 16,textColor: UIColor.whiteColor(),textAlignment:.Center)
             cell?.contentView.addSubview(titleLbl)
-            let text = "使用期限 ：2016.12.19-2016.12.30"
+            let starts = coupon.Discount.StartDateUtc!.componentsSeparatedByString("T")[0].stringByReplacingOccurrencesOfString("-", withString: ".")
+            let ends = coupon.Discount.EndDateUtc!.componentsSeparatedByString("T")[0].stringByReplacingOccurrencesOfString("-", withString: ".")
+            let text = "使用期限 ：\(starts)-\(ends)"
             let size = text.sizeWithFont(defaultSysFontWithSize(14), maxWidth: 300)
-            let termLbl = ZMDTool.getLabel(CGRect(x: kScreenWidth/2-size.width/2, y: 15+16+12, width: size.width, height: 14), text: "使用期限 ：2016.12.19-2016.12.30", fontSize: 14,textColor: UIColor.whiteColor(),textAlignment:.Center)
+            let termLbl = ZMDTool.getLabel(CGRect(x: kScreenWidth/2-size.width/2, y: 15+16+12, width: size.width, height: 14), text: text, fontSize: 14,textColor: UIColor.whiteColor(),textAlignment:.Center)
             cell?.contentView.addSubview(termLbl)
             cell?.contentView.addSubview(ZMDTool.getLine(CGRect(x: 12, y: 15+16+12+7, width: kScreenWidth/2-size.width/2 - 24, height: 0.5)))
             cell?.contentView.addSubview(ZMDTool.getLine(CGRect(x: CGRectGetMaxX(termLbl.frame)+12, y: 15+16+12+7, width: kScreenWidth - CGRectGetMaxX(termLbl.frame) - 24, height: 0.5)))
             
             let moneyLbl = ZMDTool.getLabel(CGRect(x: 0, y: 15+16+12+14+28, width: kScreenWidth, height: 16), text: "", fontSize: 32,textColor: UIColor.whiteColor(),textAlignment:.Center)
-            moneyLbl.attributedText = "10.0元".AttributeText(["10",".0元"], textSizes: [32,20])
+            let money = String(format: "%.2f元", self.coupon.Discount.DiscountAmount.doubleValue)
+            let moneys = money.componentsSeparatedByString(".")
+            moneyLbl.attributedText = money.AttributeText(moneys, textSizes: [32,20])
             cell?.contentView.addSubview(moneyLbl)
             return cell!
         case .Count :
@@ -122,7 +130,7 @@ class CardVolumeConsumerDetailViewController: UIViewController,UITableViewDataSo
             }
             let titleLbl = ZMDTool.getLabel(CGRect(x: 12, y: 20, width: kScreenWidth, height: 16), text: "使用说明", fontSize: 17)
             cell?.contentView.addSubview(titleLbl)
-            let detailLbl = ZMDTool.getLabel(CGRect(x: 12, y: 20+16+12, width: kScreenWidth, height: 40), text: "优惠券逾期无效，请及时使用；\n活动最终解释权归葫芦堡公司所有", fontSize: 15,textColor: defaultDetailTextColor)
+            let detailLbl = ZMDTool.getLabel(CGRect(x: 12, y: 20+16+12, width: kScreenWidth, height: 40), text: self.coupon.Discount.Explain, fontSize: 15,textColor: defaultDetailTextColor)
             detailLbl.numberOfLines = 2
             cell?.contentView.addSubview(detailLbl)
             return cell!
@@ -136,6 +144,14 @@ class CardVolumeConsumerDetailViewController: UIViewController,UITableViewDataSo
     func updateUI() {
         self.title = "详情"
         let rightBtn = ZMDTool.getButton(CGRect(x: 0, y: 0, width: 62, height: 44), textForNormal: "删除", fontSize: 16,backgroundColor: UIColor.clearColor(), blockForCli: { (sender) -> Void in
+            QNNetworkTool.deleteCoupons(self.coupon.Id!.integerValue) { (succeed, dictionary, error) -> Void in
+                if succeed! {
+                    ZMDTool.showPromptView("删除成功")
+                    self.navigationController?.popViewControllerAnimated(true)
+                } else {
+                    ZMDTool.showErrorPromptView(nil, error: error, errorMsg: nil)
+                }
+            }
         })
         rightBtn.setImage(UIImage(named: "common_delete"), forState: .Normal)
         rightBtn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)

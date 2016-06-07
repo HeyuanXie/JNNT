@@ -366,6 +366,7 @@
 		2B989C111CB5074A008C6D23 /* none_bankcard@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B989C0F1CB5074A008C6D23 /* none_bankcard@3x.png */; };
 		2B989C121CB5074A008C6D23 /* none_wallet@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B989C101CB5074A008C6D23 /* none_wallet@3x.png */; };
 		2B989C141CB50AF2008C6D23 /* WalletInComeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B989C131CB50AF2008C6D23 /* WalletInComeViewController.swift */; };
+		2B9A570D1D06B6BA007A6D43 /* ZhiMaDiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9A570C1D06B6BA007A6D43 /* ZhiMaDiTests.swift */; };
 		2B9D9F901C8FC3D800141D31 /* PayPassWordSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9D9F8F1C8FC3D800141D31 /* PayPassWordSetViewController.swift */; };
 		2B9D9F921C8FCC0400141D31 /* CustomPassWordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9D9F911C8FCC0400141D31 /* CustomPassWordView.swift */; };
 		2B9D9F961C9004CC00141D31 /* password_in@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B9D9F941C9004CC00141D31 /* password_in@2x.png */; };
@@ -447,6 +448,9 @@
 		2BC05C6F1CB630F700D3B1AE /* WalletCaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC05C6C1CB630F700D3B1AE /* WalletCaseViewController.swift */; };
 		2BC05C701CB630F700D3B1AE /* WalletHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC05C6D1CB630F700D3B1AE /* WalletHomeViewController.swift */; };
 		2BC05C711CB630F700D3B1AE /* WalletRechargeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC05C6E1CB630F700D3B1AE /* WalletRechargeViewController.swift */; };
+		2BC0EA981D051930004BF176 /* ZMDCoupon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC0EA971D051930004BF176 /* ZMDCoupon.swift */; };
+		2BC0EA9A1D052877004BF176 /* DiscountCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC0EA991D052877004BF176 /* DiscountCardViewController.swift */; };
+		2BC0EA9C1D055348004BF176 /* ZMDFileHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC0EA9B1D055348004BF176 /* ZMDFileHelper.swift */; };
 		2BC4E7351CF44D79007C0AC5 /* ZMDOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC4E7341CF44D79007C0AC5 /* ZMDOrder.swift */; };
 		2BC861571CD8349500B8D449 /* MyStoreAddLeaseHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC861561CD8349500B8D449 /* MyStoreAddLeaseHomeViewController.swift */; };
 		2BC861591CD8393D00B8D449 /* MyStoreAddLeaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC861581CD8393D00B8D449 /* MyStoreAddLeaseViewController.swift */; };
@@ -606,7 +610,6 @@
 		2BF52FA01CB3BA2D0099F296 /* bank_zs@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BF52F921CB3BA2D0099F296 /* bank_zs@3x.png */; };
 		2BF7F06E1C8E6C1E001C4595 /* Navigation_Back_R.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BF7F06D1C8E6C1E001C4595 /* Navigation_Back_R.png */; };
 		2BF7F0741C8EB18B001C4595 /* FortuneCenterSelectPayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF7F0731C8EB18B001C4595 /* FortuneCenterSelectPayViewController.swift */; };
-		2BF86CF41CF29C13000FF7F0 /* QNNetworkToolTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BF86CF31CF29C13000FF7F0 /* QNNetworkToolTest.m */; };
 		2BF8D8501CD0542A008237D9 /* MyStoreSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF8D84F1CD0542A008237D9 /* MyStoreSetViewController.swift */; };
 		2BF8D8711CD0AC52008237D9 /* MyStoreOrderDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF8D86F1CD0AC52008237D9 /* MyStoreOrderDetailViewController.swift */; };
 		2BF8D8721CD0AC52008237D9 /* MyStoreOrderHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF8D8701CD0AC52008237D9 /* MyStoreOrderHomeViewController.swift */; };
@@ -733,6 +736,16 @@
 		3C9099631C76A6E9006B7D2C /* ZMDTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9098F61C76A6E9006B7D2C /* ZMDTool.swift */; };
 		CCC2E90F973B87889ED9CCB6 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31D2DB4A35812B2A2B5A22B4 /* Pods.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		2B9A570F1D06B6BA007A6D43 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3C90984C1C76A482006B7D2C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3C9098531C76A482006B7D2C;
+			remoteInfo = ZhiMaDi;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		2B02B4AC1CAA62FA0064B47C /* HomeLeaseDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeLeaseDetailViewController.swift; sourceTree = "<group>"; };
@@ -1109,6 +1122,9 @@
 		2B989C0F1CB5074A008C6D23 /* none_bankcard@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "none_bankcard@3x.png"; sourceTree = "<group>"; };
 		2B989C101CB5074A008C6D23 /* none_wallet@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "none_wallet@3x.png"; sourceTree = "<group>"; };
 		2B989C131CB50AF2008C6D23 /* WalletInComeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletInComeViewController.swift; sourceTree = "<group>"; };
+		2B9A570A1D06B6B9007A6D43 /* ZhiMaDiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZhiMaDiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2B9A570C1D06B6BA007A6D43 /* ZhiMaDiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZhiMaDiTests.swift; sourceTree = "<group>"; };
+		2B9A570E1D06B6BA007A6D43 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2B9D9F8F1C8FC3D800141D31 /* PayPassWordSetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PayPassWordSetViewController.swift; sourceTree = "<group>"; };
 		2B9D9F911C8FCC0400141D31 /* CustomPassWordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPassWordView.swift; sourceTree = "<group>"; };
 		2B9D9F941C9004CC00141D31 /* password_in@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "password_in@2x.png"; sourceTree = "<group>"; };
@@ -1201,6 +1217,9 @@
 		2BC05C6C1CB630F700D3B1AE /* WalletCaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletCaseViewController.swift; sourceTree = "<group>"; };
 		2BC05C6D1CB630F700D3B1AE /* WalletHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletHomeViewController.swift; sourceTree = "<group>"; };
 		2BC05C6E1CB630F700D3B1AE /* WalletRechargeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletRechargeViewController.swift; sourceTree = "<group>"; };
+		2BC0EA971D051930004BF176 /* ZMDCoupon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZMDCoupon.swift; sourceTree = "<group>"; };
+		2BC0EA991D052877004BF176 /* DiscountCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscountCardViewController.swift; sourceTree = "<group>"; };
+		2BC0EA9B1D055348004BF176 /* ZMDFileHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZMDFileHelper.swift; sourceTree = "<group>"; };
 		2BC4E7341CF44D79007C0AC5 /* ZMDOrder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZMDOrder.swift; sourceTree = "<group>"; };
 		2BC861561CD8349500B8D449 /* MyStoreAddLeaseHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyStoreAddLeaseHomeViewController.swift; sourceTree = "<group>"; };
 		2BC861581CD8393D00B8D449 /* MyStoreAddLeaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyStoreAddLeaseViewController.swift; sourceTree = "<group>"; };
@@ -1361,8 +1380,6 @@
 		2BF52F921CB3BA2D0099F296 /* bank_zs@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bank_zs@3x.png"; sourceTree = "<group>"; };
 		2BF7F06D1C8E6C1E001C4595 /* Navigation_Back_R.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Navigation_Back_R.png; sourceTree = "<group>"; };
 		2BF7F0731C8EB18B001C4595 /* FortuneCenterSelectPayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FortuneCenterSelectPayViewController.swift; path = ../FortuneCenterSelectPayViewController.swift; sourceTree = "<group>"; };
-		2BF86CF21CF29C13000FF7F0 /* QNNetworkToolTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNNetworkToolTest.h; sourceTree = "<group>"; };
-		2BF86CF31CF29C13000FF7F0 /* QNNetworkToolTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QNNetworkToolTest.m; sourceTree = "<group>"; };
 		2BF8D84F1CD0542A008237D9 /* MyStoreSetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyStoreSetViewController.swift; sourceTree = "<group>"; };
 		2BF8D86F1CD0AC52008237D9 /* MyStoreOrderDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyStoreOrderDetailViewController.swift; sourceTree = "<group>"; };
 		2BF8D8701CD0AC52008237D9 /* MyStoreOrderHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyStoreOrderHomeViewController.swift; sourceTree = "<group>"; };
@@ -1500,6 +1517,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		2B9A57071D06B6B9007A6D43 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3C9098511C76A482006B7D2C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1640,6 +1664,7 @@
 				2B02B5521CAE18230064B47C /* OrderLogisticsMsgViewController.swift */,
 				2B02B5191CACD4140064B47C /* ConfirmOrderViewController.swift */,
 				2B02B51B1CAD07CF0064B47C /* InvoiceTypeViewController.swift */,
+				2BC0EA991D052877004BF176 /* DiscountCardViewController.swift */,
 				2B8BB2B81CBE30F600CD2AD5 /* OrderGoodsScoreViewController.swift */,
 				2B02B54E1CAD21E70064B47C /* CashierViewController.swift */,
 				2B02B5501CAD2CCD0064B47C /* OrderPaySucceedViewController.swift */,
@@ -2274,6 +2299,15 @@
 			path = UserCenter/ShoppingCar;
 			sourceTree = "<group>";
 		};
+		2B9A570B1D06B6B9007A6D43 /* ZhiMaDiTests */ = {
+			isa = PBXGroup;
+			children = (
+				2B9A570C1D06B6BA007A6D43 /* ZhiMaDiTests.swift */,
+				2B9A570E1D06B6BA007A6D43 /* Info.plist */,
+			);
+			path = ZhiMaDiTests;
+			sourceTree = "<group>";
+		};
 		2B9D9F931C9004CC00141D31 /* tmp */ = {
 			isa = PBXGroup;
 			children = (
@@ -2714,6 +2748,7 @@
 			children = (
 				3C9098691C76A687006B7D2C /* readme */,
 				3C9098561C76A482006B7D2C /* ZhiMaDi */,
+				2B9A570B1D06B6B9007A6D43 /* ZhiMaDiTests */,
 				3C9098551C76A482006B7D2C /* Products */,
 				2C475CDFCB51F0D44C1096F4 /* Pods */,
 				18E2BC74B095F0976F695BAA /* Frameworks */,
@@ -2724,6 +2759,7 @@
 			isa = PBXGroup;
 			children = (
 				3C9098541C76A482006B7D2C /* ZhiMaDi.app */,
+				2B9A570A1D06B6B9007A6D43 /* ZhiMaDiTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2782,6 +2818,7 @@
 				2BBFEEFB1CEEA09A00272BB0 /* ZMDAddress.swift */,
 				2BC4E7341CF44D79007C0AC5 /* ZMDOrder.swift */,
 				2BEAE9091CF693EF00727B04 /* ZMDAdvertisement.swift */,
+				2BC0EA971D051930004BF176 /* ZMDCoupon.swift */,
 			);
 			path = DataModule;
 			sourceTree = "<group>";
@@ -3065,8 +3102,7 @@
 				3C9098F51C76A6E9006B7D2C /* QNNetworkTool.swift */,
 				2B9183291CEC6FA20026F167 /* NetworkRemind */,
 				3C9098F61C76A6E9006B7D2C /* ZMDTool.swift */,
-				2BF86CF21CF29C13000FF7F0 /* QNNetworkToolTest.h */,
-				2BF86CF31CF29C13000FF7F0 /* QNNetworkToolTest.m */,
+				2BC0EA9B1D055348004BF176 /* ZMDFileHelper.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -3113,6 +3149,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		2B9A57091D06B6B9007A6D43 /* ZhiMaDiTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2B9A57111D06B6BA007A6D43 /* Build configuration list for PBXNativeTarget "ZhiMaDiTests" */;
+			buildPhases = (
+				2B9A57061D06B6B9007A6D43 /* Sources */,
+				2B9A57071D06B6B9007A6D43 /* Frameworks */,
+				2B9A57081D06B6B9007A6D43 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2B9A57101D06B6BA007A6D43 /* PBXTargetDependency */,
+			);
+			name = ZhiMaDiTests;
+			productName = ZhiMaDiTests;
+			productReference = 2B9A570A1D06B6B9007A6D43 /* ZhiMaDiTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		3C9098531C76A482006B7D2C /* ZhiMaDi */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3C9098661C76A482006B7D2C /* Build configuration list for PBXNativeTarget "ZhiMaDi" */;
@@ -3143,6 +3197,10 @@
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = ZhiMaDi;
 				TargetAttributes = {
+					2B9A57091D06B6B9007A6D43 = {
+						CreatedOnToolsVersion = 7.2.1;
+						TestTargetID = 3C9098531C76A482006B7D2C;
+					};
 					3C9098531C76A482006B7D2C = {
 						CreatedOnToolsVersion = 7.2.1;
 						DevelopmentTeam = 4MU4T6A6ME;
@@ -3168,11 +3226,19 @@
 			projectRoot = "";
 			targets = (
 				3C9098531C76A482006B7D2C /* ZhiMaDi */,
+				2B9A57091D06B6B9007A6D43 /* ZhiMaDiTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		2B9A57081D06B6B9007A6D43 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3C9098521C76A482006B7D2C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -3660,6 +3726,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		2B9A57061D06B6B9007A6D43 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2B9A570D1D06B6BA007A6D43 /* ZhiMaDiTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3C9098501C76A482006B7D2C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -3711,6 +3785,7 @@
 				3C90993F1C76A6E9006B7D2C /* BarChartRenderer.swift in Sources */,
 				2B6F90961CB6599500BD7A5D /* BankCardSetPsViewController.swift in Sources */,
 				3C9099471C76A6E9006B7D2C /* ChartXAxisRendererBarChart.swift in Sources */,
+				2BC0EA981D051930004BF176 /* ZMDCoupon.swift in Sources */,
 				2B9E44A61CBCA41D00B645ED /* CrowdfundDetailViewController.swift in Sources */,
 				3C9099281C76A6E9006B7D2C /* PieChartDataSet.swift in Sources */,
 				2B07BA291CB78E7C0012929B /* MineFollowViewController.swift in Sources */,
@@ -3737,6 +3812,7 @@
 				2B3AC61C1C97FAE000CC8662 /* VerificationPSViewController.swift in Sources */,
 				2BF8D8781CD0B881008237D9 /* MyStoreDistributionTableViewCell.swift in Sources */,
 				2B07BA2D1CB7A1540012929B /* ZMDMultiselectView.swift in Sources */,
+				2BC0EA9A1D052877004BF176 /* DiscountCardViewController.swift in Sources */,
 				3C9099131C76A6E9006B7D2C /* ChartYAxis.swift in Sources */,
 				2B07BA2B1CB799490012929B /* MineCollectionViewController.swift in Sources */,
 				2B68C44F1C7A9C3000B401A9 /* MineHomeViewController.swift in Sources */,
@@ -3881,6 +3957,7 @@
 				3C9099301C76A6E9006B7D2C /* ChartFillFormatter.swift in Sources */,
 				3C9099621C76A6E9006B7D2C /* QNNetworkTool.swift in Sources */,
 				2B539C041C9AACD000FFE6CD /* BlinkView.swift in Sources */,
+				2BC0EA9C1D055348004BF176 /* ZMDFileHelper.swift in Sources */,
 				2BB6A8D61C87E447008209E8 /* HomeLoanViewController.swift in Sources */,
 				2B73D85F1C86D36E0016FEB2 /* PhoneSeteMsgVerifyViewController.swift in Sources */,
 				2BA287EF1CC09C4900B6281E /* MsgActivityViewController.swift in Sources */,
@@ -3890,7 +3967,6 @@
 				3C9099021C76A6E9006B7D2C /* BarLineChartViewBase.swift in Sources */,
 				2BB6A8D81C87E8F2008209E8 /* HomeSellViewController.swift in Sources */,
 				3C90993D1C76A6E9006B7D2C /* LineChartDataProvider.swift in Sources */,
-				2BF86CF41CF29C13000FF7F0 /* QNNetworkToolTest.m in Sources */,
 				2BEBF5F31CBB8B7300830585 /* CrowdfundingHomeViewController.swift in Sources */,
 				3C9099391C76A6E9006B7D2C /* BarLineScatterCandleBubbleChartDataProvider.swift in Sources */,
 				3C9099081C76A6E9006B7D2C /* LineChartView.swift in Sources */,
@@ -3936,6 +4012,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		2B9A57101D06B6BA007A6D43 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3C9098531C76A482006B7D2C /* ZhiMaDi */;
+			targetProxy = 2B9A570F1D06B6BA007A6D43 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		3C90985B1C76A482006B7D2C /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -3956,6 +4040,30 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		2B9A57121D06B6BA007A6D43 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = ZhiMaDiTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.test.ZhiMaDiTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ZhiMaDi.app/ZhiMaDi";
+			};
+			name = Debug;
+		};
+		2B9A57131D06B6BA007A6D43 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = ZhiMaDiTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.test.ZhiMaDiTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ZhiMaDi.app/ZhiMaDi";
+			};
+			name = Release;
+		};
 		3C9098641C76A482006B7D2C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -3992,7 +4100,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -4030,7 +4138,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -4180,6 +4288,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		2B9A57111D06B6BA007A6D43 /* Build configuration list for PBXNativeTarget "ZhiMaDiTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2B9A57121D06B6BA007A6D43 /* Debug */,
+				2B9A57131D06B6BA007A6D43 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		3C90984F1C76A482006B7D2C /* Build configuration list for PBXProject "ZhiMaDi" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

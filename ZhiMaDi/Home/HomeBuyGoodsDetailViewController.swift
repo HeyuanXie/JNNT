@@ -18,12 +18,16 @@ class HomeBuyGoodsDetailViewController: UIViewController,UITableViewDataSource,U
         case HomeContentTypeDistribution             /* 商品配送栏目 */
         case HomeContentTypeStore                   /* 店家  */
         case HomeContentTypeDaPeiGou               /* 搭配购商品 */
-        case HomeContentTypeNextMenu                /* 下面展示菜单 */
         init(){
             self = HomeContentTypeAd
         }
     }
-    
+    enum SecondCellType {
+        case SecondDetail,SecondScore,SecondParameter
+        init(){
+            self = SecondDetail
+        }
+    }
     @IBOutlet weak var currentTableView: UITableView!
     var secondTableView: UITableView!
     var countForBounghtLbl : UIButton!               // 购买数量Lbl
@@ -31,8 +35,9 @@ class HomeBuyGoodsDetailViewController: UIViewController,UITableViewDataSource,U
     var productAttrV : ZMDProductAttrView!
     var kTagEditViewShow = 100001
     
-    var countForBounght = 0                         // 购买数量
+    var countForBounght = 1                         // 购买数量
     var goodsCellTypes: [GoodsCellType]!
+    var secondCellType = SecondCellType()
     var navBackView : UIView!
     var navLine : UIView!
     var productId : Int!
@@ -98,11 +103,11 @@ class HomeBuyGoodsDetailViewController: UIViewController,UITableViewDataSource,U
         }
     }
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        if self.productDetail == nil {
+        if tableView == self.currentTableView && self.productDetail == nil {
             return 0
         }
         if tableView == self.secondTableView {
-            return 1
+            return 2
         }
         
         return self.goodsCellTypes.count
@@ -126,7 +131,7 @@ class HomeBuyGoodsDetailViewController: UIViewController,UITableViewDataSource,U
     }
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if tableView == self.secondTableView {
-            return 325
+            return indexPath.section == 0 ? 60 : kScreenHeight - 64 - 80 - 58
         }
 
         let cellType = self.goodsCellTypes[indexPath.section]
@@ -143,14 +148,16 @@ class HomeBuyGoodsDetailViewController: UIViewController,UITableViewDataSource,U
             return 120
         case .HomeContentTypeDaPeiGou :
             return 60 + 144 + 56
-        case .HomeContentTypeNextMenu :
-            return 60
         }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if tableView == self.secondTableView {
-             return cellForSecond(tableView, indexPath: indexPath)
+            if indexPath.section == 0 {
+               return cellForHomeNextMenu(tableView, indexPath: indexPath)
+            } else {
+                return cellForSecondDetail(tableView, indexPath: indexPath)
+            }
         }
 
         let cellType = self.goodsCellTypes[indexPath.section]
@@ -167,8 +174,6 @@ class HomeBuyGoodsDetailViewController: UIViewController,UITableViewDataSource,U
             return cellForHomeStore(tableView, indexPath: indexPath)
         case .HomeContentTypeDaPeiGou :
             return cellForHomeDapeigou(tableView, indexPath: indexPath)
-        case .HomeContentTypeNextMenu :
-            return cellForHomeNextMenu(tableView, indexPath: indexPath)
         }
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -208,7 +213,40 @@ class HomeBuyGoodsDetailViewController: UIViewController,UITableViewDataSource,U
         return (UIImage(named: "Share_Icon")!, "http://www.baidu.com", self.title ?? "", "成为喜特用户，享有更多服务!")
     }
     //MARK: -  PrivateMethod
-    //MARK: 广告 cell
+    //MARK: Second cell
+    
+    func cellForSecondDetail(tableView: UITableView,indexPath: NSIndexPath)-> UITableViewCell {
+        let cellId = "SecondDetailCell"
+        var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
+        if cell == nil {
+            cell = UITableViewCell(style: .Default, reuseIdentifier: cellId)
+            cell!.selectionStyle = .None
+            cell!.contentView.backgroundColor = UIColor.whiteColor()
+            
+            let webView = UIWebView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: kScreenWidth - 64 - 70 - 58))
+            cell?.contentView.addSubview(webView)
+            //self.productId
+            QNNetworkTool.fetchProductDetailView(34) { (succeed, data, error) -> Void in
+                if succeed! {
+                    webView.loadHTMLString(data!, baseURL: nil)
+                }
+            }
+        }
+        return cell!
+    }
+    //MARK:  下一页菜单 cell
+    func cellForHomeNextMenu(tableView: UITableView,indexPath: NSIndexPath)-> UITableViewCell {
+        let cellId = "NextMenuCell"
+        var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
+        if cell == nil {
+            cell = UITableViewCell(style: .Default, reuseIdentifier: cellId)
+            cell!.selectionStyle = .None
+            cell!.contentView.backgroundColor = UIColor.whiteColor()
+            cell?.addSubview(self.createFilterMenu())
+        }
+        return cell!
+    }
+
     func cellForSecond(tableView: UITableView,indexPath: NSIndexPath)-> UITableViewCell {
         let cellId = "testCell"
         var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
@@ -294,7 +332,10 @@ class HomeBuyGoodsDetailViewController: UIViewController,UITableViewDataSource,U
         countView.finished = {(count)->Void in
             self.countForBounght = count
         }
+        countView.countForBounght = 1
+        countView.updateUI()
         editView.addSubview(countView)
+        
         let countLbl = UILabel(frame: CGRect(x: 12, y: CGRectGetMaxY(productAttrV.frame), width: 200, height: 60))
         let kucunText = "（库存量: 15）"
         let countText = "购买数量\(kucunText)"
@@ -419,18 +460,6 @@ class HomeBuyGoodsDetailViewController: UIViewController,UITableViewDataSource,U
         }
         return cell!
     }
-    //MARK:  下一页菜单 cell
-    func cellForHomeNextMenu(tableView: UITableView,indexPath: NSIndexPath)-> UITableViewCell {
-        let cellId = "NextMenuCell"
-        var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
-        if cell == nil {
-            cell = UITableViewCell(style: .Default, reuseIdentifier: cellId)
-            cell!.selectionStyle = .None
-            cell!.contentView.backgroundColor = UIColor.whiteColor()
-        }
-        cell?.addSubview(self.createFilterMenu())
-        return cell!
-    }
     func createFilterMenu() -> UIView{
         let titles = ["图文详情","评分","相关推荐"]
         let view = UIView(frame: CGRectMake(0 , 0, kScreenWidth, 60))
@@ -445,6 +474,7 @@ class HomeBuyGoodsDetailViewController: UIViewController,UITableViewDataSource,U
             view.addSubview(btn)
             
             btn.rac_signalForControlEvents(.TouchUpInside).subscribeNext({ (sender) -> Void in
+                self.secondCellType
             })
             if i < 2{
                 let lineView = UIView(frame: CGRectMake(CGFloat(i + 1) * kScreenWidth/3, 18, 0.5, 21))
@@ -465,7 +495,7 @@ class HomeBuyGoodsDetailViewController: UIViewController,UITableViewDataSource,U
         self.navigationItem.leftBarButtonItem = item
     }
     private func dataInit(){
-        self.goodsCellTypes = [.HomeContentTypeAd,.HomeContentTypeDetail,.HomeContentTypeMenu,/*.HomeContentTypeDistribution,.HomeContentTypeStore,*/.HomeContentTypeDaPeiGou, .HomeContentTypeNextMenu]
+        self.goodsCellTypes = [.HomeContentTypeAd,.HomeContentTypeDetail,.HomeContentTypeMenu,/*.HomeContentTypeDistribution,.HomeContentTypeStore,.HomeContentTypeDaPeiGou,*/]
         QNNetworkTool.fetchProductDetail(self.productId) { (productDetail, error, dictionary) -> Void in
             if productDetail != nil {
                 self.productDetail = productDetail
@@ -478,22 +508,29 @@ class HomeBuyGoodsDetailViewController: UIViewController,UITableViewDataSource,U
     func footerRefresh(){
         UIView.animateWithDuration(0.38, animations: { () -> Void in
             var frame = self.currentTableView.frame
+            frame.origin = CGPoint(x: 0, y: frame.origin.y + 64)
             self.secondTableView.frame = frame
-            frame.origin = CGPoint(x: 0, y: frame.origin.y - frame.size.height)
+            frame.origin = CGPoint(x: 0, y: frame.origin.y - frame.size.height - 64)
             self.currentTableView.frame = frame
             }, completion: { (bool) -> Void in
-            self.currentTableView.mj_footer.endRefreshing()
+                self.currentTableView.mj_footer.endRefreshing()
+                if self.navBackView != nil {
+                    self.navLine.hidden = false
+                    self.setupNavigation()
+                    self.navBackView.alpha = 1.0
+                }
         })
     }
     // 顶部刷新
     func headerRefresh(){
         UIView.animateWithDuration(0.38, animations: { () -> Void in
             var frame = self.secondTableView.frame
+            frame.origin = CGPoint(x: 0, y: frame.origin.y - 64)
             self.currentTableView.frame = frame
             frame.origin = CGPoint(x: 0, y: 64 + frame.size.height)
             self.secondTableView.frame = frame
             }, completion: { (bool) -> Void in
-            self.secondTableView.mj_header.endRefreshing()
+                self.secondTableView.mj_header.endRefreshing()
         })
 
     }
@@ -510,10 +547,12 @@ class HomeBuyGoodsDetailViewController: UIViewController,UITableViewDataSource,U
        
         self.bottomV.backgroundColor = RGB(247,247,247,1)
         secondTableView = UITableView(frame: CGRect(x: 0, y: CGRectGetMaxY(self.currentTableView.frame), width: kScreenWidth, height: self.currentTableView.frame.size.height))
+        secondTableView.separatorStyle = .None
         secondTableView.dataSource = self
         secondTableView.delegate = self
         self.view.addSubview(secondTableView)
         self.secondTableView.mj_header = header
+        self.secondTableView.reloadData()
         
         let titles = ["咨询","分享赚佣金","购买"]
         var i = 0
@@ -543,8 +582,8 @@ class HomeBuyGoodsDetailViewController: UIViewController,UITableViewDataSource,U
                     }
                 } else if (sender as! UIButton).titleLabel?.text == titles[2] {
                     // 下单
-                    let vc = ConfirmOrderViewController.CreateFromMainStoryboard() as! ConfirmOrderViewController
-                    self?.navigationController?.pushViewController(vc, animated: true)
+//                    let vc = ConfirmOrderViewController.CreateFromMainStoryboard() as! ConfirmOrderViewController
+//                    self?.navigationController?.pushViewController(vc, animated: true)
                 }
             })
             self.bottomV.addSubview(bottomBtn)

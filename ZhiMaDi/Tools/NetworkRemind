@@ -101,3 +101,20 @@ BundledItems                搭配购
         DeleteCartItems
         {"customerId":2,"SciIds","2,3,45"}
         SciId：当前购物车编辑项的Id
+7 优惠券
+    Request: POST http://localhost:2726/api/v1/extend/CustomerCoupons/Coupons    用户优惠券
+
+        {"customerId":1}
+
+    Request: POST http://localhost:2726/api/v1/extend/CustomerCoupons/Delete    删除优惠券
+
+        {"Id":1}
+
+    Request: POST http://localhost:2726/api/v1/extend/CustomerCoupons/PublicInfo  结算的可用优惠券列表
+
+        {"customerId":1}
+
+    Request: POST http://localhost:2726/api/v1/extend/CustomerCoupons/UseDiscountCoupon  使用优惠券
+        {"customerId":1,"Discountcouponcode":"sasd"}
+
+    Discountcouponcode:优惠券券号

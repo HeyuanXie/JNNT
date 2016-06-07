@@ -134,6 +134,7 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
         ZMDTool.addInteractive(self.navigationController)
         updateUI()
         self.dataInit()
+        QNNetworkTool.requestForGet()
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)

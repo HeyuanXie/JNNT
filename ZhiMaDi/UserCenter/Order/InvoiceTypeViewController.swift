@@ -13,6 +13,7 @@ class InvoiceTypeViewController: UIViewController,UITableViewDataSource,UITableV
     var tableView : UITableView!
     var datas : ZMDPublicInfo!
     var indexTypeRow = 0,indexDetailRow = 0
+    var invoiceFinish : NSDictionary?
     var finished : ((dic:NSDictionary?)->Void)!
 
     override func viewDidLoad() {
@@ -82,7 +83,7 @@ class InvoiceTypeViewController: UIViewController,UITableViewDataSource,UITableV
             text = self.datas.getBodys()[indexPath.row]
         }
         cell?.textLabel?.text = text
-        if text == "企业" {
+        if text == "企业" && self.invoiceStrTextF == nil {
             let textField = UITextField(frame: CGRect(x: 64, y: 0, width: kScreenWidth - 64 - 12, height: 55))
             textField.textColor = defaultDetailTextColor
             textField.font = defaultSysFontWithSize(17)
@@ -90,6 +91,12 @@ class InvoiceTypeViewController: UIViewController,UITableViewDataSource,UITableV
             cell?.contentView.addSubview(textField)
             self.invoiceStrTextF = textField
         }
+        if text == "企业" && self.invoiceStrTextF != nil {
+            if let body = self.invoiceFinish?["HeadTitle"] as? String {
+                self.invoiceStrTextF.text = body
+            }
+        }
+       
         if (indexPath.section == 0 && indexPath.row == self.indexTypeRow) || (indexPath.section == 1 && indexPath.row == self.indexDetailRow) {
             if let tmp = cell?.contentView.viewWithTag(10001) as? UIImageView {
                 tmp.hidden = false
@@ -123,6 +130,24 @@ class InvoiceTypeViewController: UIViewController,UITableViewDataSource,UITableV
         QNNetworkTool.fetchPublicInfo { (publicInfo, dictionary, error) -> Void in
             if publicInfo != nil {
                 self.datas = publicInfo
+                if self.invoiceFinish == nil {
+                    self.tableView.reloadData()
+                    return
+                }
+                var index = -1
+                for tmp in self.datas.getCategorys() {
+                    index = index + 1
+                    if tmp == self.invoiceFinish!["Category"] as? String {
+                        self.indexTypeRow = index
+                    }
+                }
+                index = -1
+                for tmp in self.datas.getBodys() {
+                    index = index + 1
+                    if tmp == self.invoiceFinish!["Body"] as? String {
+                        self.indexDetailRow = index
+                    }
+                }
                 self.tableView.reloadData()
             } else {
                 ZMDTool.showErrorPromptView(nil, error: error, errorMsg: nil)

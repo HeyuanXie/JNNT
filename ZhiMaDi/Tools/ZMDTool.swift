@@ -276,9 +276,6 @@ extension ZMDTool {
         btn.setTitle(textForNormal, forState: .Normal)
         btn.setTitleColor(textColorForNormal, forState: .Normal)
         btn.titleLabel!.font = defaultSysFontWithSize(fontSize)
-        btn.rac_command = RACCommand(signalBlock: { (sender) -> RACSignal! in
-            return RACSignal.empty()
-        })
         btn.rac_signalForControlEvents(.TouchUpInside).subscribeNext(blockForCli)
         return btn
     }

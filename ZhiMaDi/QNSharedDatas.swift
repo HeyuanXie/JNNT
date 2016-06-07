@@ -17,7 +17,7 @@ let g_SecretKey = "qoocc"
 /// 是否登录
 var g_isLogin: Bool! { return g_customerId != nil }
 /// 当前账号
-var g_customerId : Int? = 408
+var g_customerId : Int? = 1 // 408
 
 // MARK: - 账号 & 账号管理
 private let kKeyAccount = ("Account" as NSString).encrypt(g_SecretKey)

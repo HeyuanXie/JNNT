@@ -13,12 +13,14 @@ class ShoppingCartViewController: UIViewController,UITableViewDataSource,UITable
     @IBOutlet weak var currentTableView: UITableView!
     @IBOutlet weak var settlementBtn: UIButton!
     @IBOutlet weak var allSelectBtn: UIButton!
+    @IBOutlet weak var totalLbl: UILabel!
     var productAttrV : ZMDProductAttrView!
     var dataArray = NSArray()
     var hideStore = true
     var attrSelects = NSMutableArray()
     var scis = NSMutableArray()             // 选中的购物单
     var countForBounght = 0                 // 购买数量
+    var subTotal = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         self.currentTableView.backgroundColor = tableViewdefaultBackgroundColor
@@ -79,19 +81,20 @@ class ShoppingCartViewController: UIViewController,UITableViewDataSource,UITable
             let cell = tableView.dequeueReusableCellWithIdentifier(cellId) as! OrderGoodsTableViewCell
             let item = self.dataArray[indexPath.section] as! ZMDShoppingItem
             cell.configCell(item,scis:self.scis)
-            cell.editFinish = { (productDetail,SciId) -> Void in
+            cell.editFinish = { (productDetail,item) -> Void in
                 self.attrSelects.removeAllObjects()
                 for var i = 0;i<productDetail.ProductVariantAttributes!.count;i++ {
                     self.attrSelects.addObject(";")
                 }
-                self.editViewShow(productDetail,SciId: SciId)
+                self.editViewShow(productDetail,item: item)
             }
             cell.selectFinish = { (Sci,isAdd) -> Void in
                 if isAdd {
                     self.scis.addObject(Sci)
                 } else {
-                    self.scis.removeAllObjects()
+                    self.scis.removeObject(Sci)
                 }
+                self.updateTotal()
             }
             return cell
         }
@@ -112,17 +115,22 @@ class ShoppingCartViewController: UIViewController,UITableViewDataSource,UITable
                 self.scis.addObject(item)
             }
         } else {
-             self.scis.removeAllObjects()
+            self.scis.removeAllObjects()
         }
+        self.updateTotal()
         self.currentTableView.reloadData()
     }
     // 结算
     @IBAction func settlementBtnCli(sender: UIButton) {
+        if self.scis.count == 0 {
+            return 
+        }
         QNNetworkTool.selectCart(self.getSciids(),completion: { (succeed, dictionary, error) -> Void in
             if succeed! {
                 let vc = ConfirmOrderViewController.CreateFromMainStoryboard() as! ConfirmOrderViewController
                 vc.hidesBottomBarWhenPushed = true
                 vc.scis = self.scis
+                vc.total = self.subTotal
                 self.navigationController?.pushViewController(vc, animated: true)
             } else {
                 ZMDTool.showErrorPromptView(dictionary, error: error, errorMsg: nil)
@@ -130,7 +138,7 @@ class ShoppingCartViewController: UIViewController,UITableViewDataSource,UITable
         })
     }
     //MARK: -  PrivateMethod
-    func editViewShow(productDetail:ZMDProductDetail,SciId:Int) {
+    func editViewShow(productDetail:ZMDProductDetail,item:ZMDShoppingItem) {
         let view = UIView(frame: CGRect.zero)
         view.backgroundColor = UIColor.whiteColor()
         // top
@@ -145,10 +153,12 @@ class ShoppingCartViewController: UIViewController,UITableViewDataSource,UITable
         countView.finished = {(count)->Void in
             self.countForBounght = count
         }
+        countView.countForBounght = item.Quantity.integerValue
+        countView.updateUI()
         view.addSubview(countView)
        
         productAttrV = ZMDProductAttrView(frame: CGRect.zero, productDetail: productDetail)
-        productAttrV.SciId = SciId
+        productAttrV.SciId = item.Id.integerValue
         productAttrV.frame = CGRectMake(0, 60,kScreenWidth, productAttrV.getHeight())
         view.addSubview(productAttrV)
         // bottom
@@ -175,6 +185,7 @@ class ShoppingCartViewController: UIViewController,UITableViewDataSource,UITable
         QNNetworkTool.fetchShoppingCart { (shoppingItems, dictionary, error) -> Void in
             if shoppingItems != nil {
                 self.dataArray = shoppingItems!
+                self.updateTotal()
                 self.currentTableView.reloadData()
             } else {
                 ZMDTool.showErrorPromptView(dictionary, error: error, errorMsg: nil)
@@ -207,13 +218,34 @@ class ShoppingCartViewController: UIViewController,UITableViewDataSource,UITable
         }
         return items as String
     }
+    func setTotal(subTotal:Double) {
+        self.subTotal = "\(subTotal)"
+        self.totalLbl.text = String(format: "合计:%.2f", subTotal)
+    }
+    func updateTotal() {
+        var tmp = Double(0)
+        var index = -1
+        for item in self.scis {
+            index++
+            for tmp in self.dataArray{
+                if (item as! ZMDShoppingItem).Id == (tmp as! ZMDShoppingItem).Id {
+                    self.scis.replaceObjectAtIndex(index, withObject: tmp)
+                }
+            }
+        }
+        for item in self.scis {
+            let subTotal = (item as! ZMDShoppingItem).SubTotal.stringByReplacingOccurrencesOfString("¥", withString: "").stringByReplacingOccurrencesOfString(",", withString: "")
+            tmp = tmp + Double(subTotal)!
+        }
+        self.setTotal(tmp)
+    }
     func deleteCartItem() {
         let items = self.getSciids()
         if g_isLogin! {
             QNNetworkTool.deleteCartItem(items,completion: { (succeed, dictionary, error) -> Void in
                 if succeed! {
                     self.scis.removeAllObjects()
-                    self.allSelectBtn.selected = false
+                    self.updateTotal()
                     self.dataUpdate()
                 } else {
                     ZMDTool.showErrorPromptView(dictionary, error: error, errorMsg: "删除失败")

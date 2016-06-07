@@ -208,7 +208,7 @@
                                         <color key="textColor" red="0.30980392159999998" green="0.30980392159999998" blue="0.30980392159999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="合计:525.0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HBc-du-tLn" userLabel="Label  4f4f4f">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="合计:0.0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HBc-du-tLn" userLabel="Label  4f4f4f">
                                         <rect key="frame" x="95" y="22" width="89" height="15"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="15" id="tH8-Sg-dve"/>
@@ -265,6 +265,7 @@
                         <outlet property="allSelectBtn" destination="qNO-fc-r1A" id="HPv-fN-1Xf"/>
                         <outlet property="currentTableView" destination="jwb-DG-YYb" id="cXX-3j-DCR"/>
                         <outlet property="settlementBtn" destination="Gy8-3Q-GaR" id="xkJ-gc-f4b"/>
+                        <outlet property="totalLbl" destination="HBc-du-tLn" id="nz5-Go-DiH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o7B-rK-kO9" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -14,6 +14,7 @@ class CashierViewController: UIViewController,UITableViewDataSource,UITableViewD
     let images = ["pay_alipay","pay_wechat"]
     var indexTypeRow = 0
     var finished : ((indexType:Int,IndexDetail:Int)->Void)!
+    var mark = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "收银台"
@@ -101,6 +102,17 @@ class CashierViewController: UIViewController,UITableViewDataSource,UITableViewD
         if indexPath.section == 0 {
             self.indexTypeRow = indexPath.row
         }
+        if indexPath.section == 1 && indexPath.row == 0 {
+            // 支付宝
+            ZMDTool.showActivityView(nil)
+            QNNetworkTool.confirmOrder(mark, completion: { (succeed, dictionary, error) -> Void in
+                ZMDTool.hiddenActivityView()
+                if succeed! {
+                } else {
+                    ZMDTool.showErrorPromptView(dictionary, error: error, errorMsg: nil)
+                }
+            })
+        }
         self.tableView.reloadData()
     }
     func updateUI() {
@@ -113,10 +125,7 @@ class CashierViewController: UIViewController,UITableViewDataSource,UITableViewD
         let footV = UIView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: 36+50))
         footV.backgroundColor = UIColor.clearColor()
         let btn = ZMDTool.getButton(CGRect(x: 12, y: 36, width: kScreenWidth - 24, height: 50), textForNormal: "确认支付", fontSize: 20, textColorForNormal:UIColor.whiteColor(),backgroundColor: UIColor.redColor()) { (sender) -> Void in
-            
             self.submitAliOrder(NSDictionary())
-//            let vc = OrderPaySucceedViewController()
-//            self.navigationController?.pushViewController(vc, animated: true)
         }
         ZMDTool.configViewLayer(btn)
         footV.addSubview(btn)
@@ -144,7 +153,7 @@ class CashierViewController: UIViewController,UITableViewDataSource,UITableViewD
                 if resultStatus == "9000"{
                     let vc = OrderPaySucceedViewController()
                     self.navigationController?.pushViewController(vc, animated: true)
-                    ZMDTool.showPromptView( "支付成功")
+//                    ZMDTool.showPromptView( "支付成功")
                 }else if resultStatus == "8000" {
                     ZMDTool.showPromptView( "正在处理中")
                 }else if resultStatus == "4000" {

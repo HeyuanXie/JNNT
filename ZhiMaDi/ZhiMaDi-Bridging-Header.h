@@ -52,5 +52,4 @@
 
 #import <CommonCrypto/CommonHMAC.h>
 #import <AlipaySDK/AlipaySDK.h>
-#import "QNNetworkToolTest.h"
 #endif /* SleepCare_Bridging_Header_h */

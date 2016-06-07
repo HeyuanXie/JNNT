@@ -17,7 +17,7 @@ class OrderGoodsTableViewCell: UITableViewCell {
     @IBOutlet weak var detailLbl: UILabel!
     @IBOutlet weak var priceLbl: UILabel!
     @IBOutlet weak var quantityLbl: UILabel!
-    var editFinish : ((productDetail:ZMDProductDetail,SciId:Int)->Void)!
+    var editFinish : ((productDetail:ZMDProductDetail,item:ZMDShoppingItem)->Void)!
     var selectFinish : ((Sci:ZMDShoppingItem,isAdd:Bool)->Void)!
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -52,7 +52,7 @@ class OrderGoodsTableViewCell: UITableViewCell {
         editBtn.rac_command = RACCommand(signalBlock: { (sender) -> RACSignal! in
             QNNetworkTool.fetchProductDetail(item.ProductId.integerValue) { (productDetail, error, dictionary) -> Void in
                 if productDetail != nil {
-                    self.editFinish(productDetail: productDetail!,SciId:item.Id.integerValue)
+                    self.editFinish(productDetail: productDetail!,item:item)
                 } else {
                     ZMDTool.showErrorPromptView(nil, error: error)
                 }

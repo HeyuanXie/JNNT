@@ -6,13 +6,13 @@
 //  Copyright © 2015年 juxi. All rights reserved.
 //
 
-import UIKit
 import Foundation
 import Alamofire
 
 /// 服务器地址
 private let kServerAddress = { () -> String in
 //  "http://od.ccw.cn"
+//    "http://10.0.0.10"
     "http://xw.ccw.cn"  // 伟
 }()
 private let kOdataAddress = { () -> String in
@@ -495,6 +495,17 @@ extension QNNetworkTool {
             completion(productDetail:productDetail,error: nil,dictionary:dictionary)
         }
     }
+    // 产品详情信息 html
+    class func fetchProductDetailView(productId:Int,completion: (succeed : Bool!,data:String?,error: NSError?) -> Void){
+        let url = NSURL(string: kServerAddress + "/product/ProductDetailview?productId=\(productId)")
+        request(ParameterEncoding.URL.encode(self.productRequest(url, method: "POST"), parameters: nil).0).responseString { (response) -> Void in
+            guard let data = response.result.value else {
+                completion(succeed:false,data: nil, error: response.result.error)
+                return
+            }
+            completion(succeed:true,data: data, error: nil)
+        }
+    }
     //MARK: 首页数据
     class func fetchMainPageInto(completion: (advertisementAll: ZMDAdvertisementAll?,error:NSError?,dictionary:NSDictionary?) -> Void){
         requestPOST(kServerAddress + "/api/v1/extend/Advertisement/IndexAds", parameters: nil) { (_,response, _, dictionary, error) -> Void in
@@ -546,6 +557,72 @@ extension QNNetworkTool {
                 return
             }
             completion(publicInfo:publicInfo,dictionary: dictionary, error: nil)
+        }
+    }
+    // 用户优惠券
+    class func fetchCustomerCoupons(completion: (coupons : NSArray?,datas:NSData?,error: NSError?) -> Void) {
+        requestPOST(kServerAddress + "/api/v1/extend/CustomerCoupons/Coupons", parameters: ["customerId":1]) { (_, _, data, _, error) -> Void in
+            do {
+                let jsonObject: AnyObject? = try NSJSONSerialization.JSONObjectWithData(data as! NSData, options: NSJSONReadingOptions.MutableContainers)
+                guard let _ = jsonObject as? NSArray else {
+                    completion(coupons:nil,datas: nil, error: error)
+                    return
+                }
+                guard let coupons = ZMDCoupon.mj_objectArrayWithKeyValuesArray(jsonObject) else {
+                    completion(coupons:nil,datas: nil, error: error)
+                    return
+                }
+                completion(coupons:coupons,datas: data as? NSData, error: nil)
+            }
+            catch {
+
+            }
+
+        }
+    }
+    // 删除优惠券
+    class func deleteCoupons(Id:Int,completion: (succeed : Bool!,dictionary:NSDictionary?,error: NSError?) -> Void) {
+        requestPOST(kServerAddress + "/api/v1/extend/CustomerCoupons/Delete", parameters: ["Id":Id]) { (_, _, _, dictionary, error) -> Void in
+            guard let success = dictionary?["success"] as? NSNumber where success.boolValue else {
+                completion(succeed:false,dictionary: dictionary, error: error)
+                return
+            }
+            completion(succeed:true,dictionary: dictionary, error: nil)
+        }
+    }
+    // 结算的可用优惠券列表
+    class func fetchCustomerCouponsForOrder(completion: (coupon : NSArray?,dictionary:NSDictionary?,error: NSError?) -> Void) {
+        requestPOST(kServerAddress + "/api/v1/extend/CustomerCoupons/PublicInfo", parameters: ["customerId":g_customerId!]) { (_, _, _, dictionary, error) -> Void in
+            guard let coupon = ZMDCoupon.mj_objectArrayWithKeyValuesArray(dictionary) else {
+                completion(coupon:nil,dictionary: dictionary, error: error)
+                return
+            }
+            completion(coupon:coupon,dictionary: dictionary, error: nil)
+        }
+    }
+    // 使用优惠券
+    class func useDiscountCoupo(Discountcouponcode:String,completion: (succeed : Bool!,dictionary:NSDictionary?,error: NSError?) -> Void) {
+        requestPOST(kServerAddress + "/api/v1/extend/CustomerCoupons/UseDiscountCoupon", parameters: ["customerId":g_customerId!,"Discountcouponcode":Discountcouponcode]) { (_, _, _, dictionary, error) -> Void in
+            guard let success = dictionary?["success"] as? NSNumber where success.boolValue else {
+                completion(succeed:false,dictionary: dictionary, error: error)
+                return
+            }
+            completion(succeed:true,dictionary: dictionary, error: nil)
+        }
+    }
+    // MARK: - 获取当前要结算订单的合计
+    /**
+    获取当前要结算订单的合计
+    
+    - parameter completion:      completion
+    */
+    class func getOrderTotals(completion: (OrderTotal : AnyObject?,dictionary:NSDictionary?,error: NSError?) -> Void) {
+        requestPOST(kServerAddress + "/api/v1/extend/Checkout/OrderTotals", parameters: ["CustomerId":g_customerId!]) { (_, _, _, dictionary, error) -> Void in
+            guard let orderTotal = dictionary?["OrderTotal"]  else {
+                completion(OrderTotal:nil,dictionary: dictionary, error: error)
+                return
+            }
+            completion(OrderTotal:orderTotal,dictionary: dictionary, error: nil)
         }
     }
     /**
@@ -774,5 +851,18 @@ extension QNNetworkTool {
             }
             completion(succeed:true,dictionary, nil)
         }
+    }
+}
+// MARK: - 网络基础处理
+extension QNNetworkTool {
+    class func requestForGet() {
+        let url = NSURL(string: kOdataAddress + "/Customers(\(g_customerId!))?$expand=Addresses")
+        let request = self.productRequest(url, method: "GET")
+        let session = NSURLSession()
+        let sessionDataTask = session.dataTaskWithRequest(request) { (data, response, error) -> Void in
+            let tmp = data
+            print(data)
+        }
+        sessionDataTask.resume()
     }
 }

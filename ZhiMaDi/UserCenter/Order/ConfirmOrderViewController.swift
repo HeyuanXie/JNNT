@@ -46,9 +46,9 @@ class ConfirmOrderViewController: UIViewController,UITableViewDataSource,UITable
             case InvoiceType:
                 return "发票类型:"
             case InvoiceDetail:
-                return "优惠明细:"
+                return "发票明细:"
             case InvoiceFor:
-                return "优惠抬头:"
+                return "发票抬头:"
                 
             case UseDiscount:
                 return "使用优惠券"
@@ -98,9 +98,12 @@ class ConfirmOrderViewController: UIViewController,UITableViewDataSource,UITable
     
     @IBOutlet weak var currentTableView: UITableView!
     var markTF : UITextField!
+    var payLbl : UILabel!
+    var totalLbl : UILabel!
     var userCenterData: [[UserCenterCellType]]!
     var scis : NSArray!
     var publicInfo : NSDictionary?
+    var total = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         self.dataInit()
@@ -227,12 +230,14 @@ class ConfirmOrderViewController: UIViewController,UITableViewDataSource,UITable
                 ZMDTool.configTableViewCellDefault(cell!)
                 
                 cell?.contentView.addSubview(ZMDTool.getLine(CGRect(x: 0, y: 55.5, width: kScreenWidth, height: 0.5)))
+                
+                let label = ZMDTool.getLabel(CGRect(x: kScreenWidth - 12 - 150, y: 0, width: 150, height: 55.5), text: "", fontSize: 17)
+                label.attributedText = "合计 : ￥525.0".AttributedText("￥525", color: RGB(235,61,61,1.0))
+                label.textAlignment = .Right
+                cell?.contentView.addSubview(label)
+                self.totalLbl = label
             }
-            cell!.textLabel?.text = cellType.title
-            let label = ZMDTool.getLabel(CGRect(x: kScreenWidth - 12 - 150, y: 0, width: 150, height: 55.5), text: "", fontSize: 17)
-            label.attributedText = "合计 : ￥525.0".AttributedText("￥525", color: RGB(235,61,61,1.0))
-            label.textAlignment = .Right
-            cell?.contentView.addSubview(label)
+            cell!.textLabel?.text = "共\(self.scis.count)件商品"
             return cell!
         case .Invoice :
             let cellId = "InvoiceCell"
@@ -296,24 +301,32 @@ class ConfirmOrderViewController: UIViewController,UITableViewDataSource,UITable
                 cell?.accessoryType = UITableViewCellAccessoryType.None
                 cell!.selectionStyle = .None
                 ZMDTool.configTableViewCellDefault(cell!)
-              
+                
+                let label = ZMDTool.getLabel(CGRect(x: kScreenWidth - 12 - 150, y: 0, width: 150, height: 55.5), text: "", fontSize: 17,textColor: defaultDetailTextColor)
+                label.textAlignment = .Right
+                label.tag = 10000 + indexPath.section*10 + indexPath.row
+                cell?.contentView.addSubview(label)
                 cell?.contentView.addSubview(ZMDTool.getLine(CGRect(x: 0, y: 55.5, width: kScreenWidth, height: 0.5)))
             }
             cell!.textLabel?.text = cellType.title
+            if let body = self.publicInfo?["HeadTitle"] as? String {
+                let lbl = cell?.viewWithTag(10000 + indexPath.section*10 + indexPath.row) as! UILabel
+                lbl.text = body
+            }
             return cell!
         case .UseDiscount :
             let cellId = "UseDiscountCell"
             var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
             if cell == nil {
                 cell = UITableViewCell(style: .Default, reuseIdentifier: cellId)
-                cell?.accessoryType = UITableViewCellAccessoryType.None
+                cell?.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
                 cell!.selectionStyle = .None
                 ZMDTool.configTableViewCellDefault(cell!)
                 
                 cell?.contentView.addSubview(ZMDTool.getLine(CGRect(x: 0, y: 55.5, width: kScreenWidth, height: 0.5)))
+                let label = ZMDTool.getLabel(CGRect(x: kScreenWidth - 32 - 150, y: 0, width: 150, height: 55.5), text: "可使用优惠券：0张", fontSize: 17,textColor: defaultDetailTextColor)
+                cell?.contentView.addSubview(label)
             }
-            let label = ZMDTool.getLabel(CGRect(x: kScreenWidth - 32 - 150, y: 0, width: 150, height: 55.5), text: "可使用优惠券：0张", fontSize: 17,textColor: defaultDetailTextColor)
-            cell?.contentView.addSubview(label)
             cell!.textLabel?.text = cellType.title
             return cell!
         default :
@@ -336,8 +349,12 @@ class ConfirmOrderViewController: UIViewController,UITableViewDataSource,UITable
         switch cellType{
         case .Invoice://发票
             let vc = InvoiceTypeViewController()
+            if self.publicInfo != nil {
+                vc.invoiceFinish = self.publicInfo
+            }
             vc.finished = {(dic)->Void in
-               self.publicInfo = dic
+                self.publicInfo = dic
+                self.currentTableView.reloadSections(NSIndexSet(index: 3), withRowAnimation: .None)
             }
             self.navigationController?.pushViewController(vc, animated: true)
             break
@@ -348,6 +365,7 @@ class ConfirmOrderViewController: UIViewController,UITableViewDataSource,UITable
                 QNNetworkTool.selectShoppingAddress(addressId) { (succeed, dictionary, error) -> Void in
                     ZMDTool.hiddenActivityView()
                     if succeed! {
+                        self.getTotal()
                         if let message = dictionary?["message"] as? String {
                             ZMDTool.showErrorPromptView(dictionary, error: error, errorMsg: message)
                         }
@@ -355,6 +373,19 @@ class ConfirmOrderViewController: UIViewController,UITableViewDataSource,UITable
                         ZMDTool.showErrorPromptView(dictionary, error: error, errorMsg: nil)
                     }
                 }
+            }
+            self.navigationController?.pushViewController(vc, animated: true)
+            break
+        case .UseDiscount:
+            let vc = DiscountCardViewController()
+            vc.finished = {(couponcode)->Void in
+                QNNetworkTool.useDiscountCoupo(couponcode, completion: { (succeed, dictionary, error) -> Void in
+                    if !succeed! {
+                       ZMDTool.showErrorPromptView(nil, error: error, errorMsg: nil)
+                    } else {
+                        self.getTotal()
+                    }
+                })
             }
             self.navigationController?.pushViewController(vc, animated: true)
             break
@@ -372,31 +403,36 @@ class ConfirmOrderViewController: UIViewController,UITableViewDataSource,UITable
 
         let confirmBtn = ZMDTool.getButton(CGRect(x: kScreenWidth - 12 - 110, y: 12, width: 110, height: 34), textForNormal: "提交订单", fontSize: 15,textColorForNormal:UIColor.whiteColor(), backgroundColor:RGB(235,61,61,1.0)) { (sender) -> Void in
             self.view.endEditing(true)
-            ZMDTool.showActivityView(nil)
             var mark = ""
             if self.markTF != nil {
                 mark = self.markTF!.text!
             }
-            QNNetworkTool.confirmOrder(mark, completion: { (succeed, dictionary, error) -> Void in
-                if succeed! {
-                    let vc = CashierViewController()
-                    self.navigationController?.pushViewController(vc, animated: true)
-//                    if let message = dictionary?["message"] as? String {
-//                        ZMDTool.showErrorPromptView(dictionary, error: error, errorMsg: message)
-//                    }
-                } else {
-                    ZMDTool.showErrorPromptView(dictionary, error: error, errorMsg: nil)
-                }
-            })
+            let vc = CashierViewController()
+            vc.mark = mark
+            self.navigationController?.pushViewController(vc, animated: true)
         }
         ZMDTool.configViewLayerWithSize(confirmBtn, size: 15)
         view.addSubview(confirmBtn)
         let payLbl = ZMDTool.getLabel(CGRect(x: 12, y: 12, width: 200, height: 15), text: "实付：525.0（含运费39.0）", fontSize: 14,textColor: defaultDetailTextColor)
         view.addSubview(payLbl)
+        self.payLbl = payLbl
         let jifengLbl = ZMDTool.getLabel(CGRect(x: 12, y: 12 + 15 + 7, width: 200, height: 12), text: "可获得20积分", fontSize: 12,textColor: defaultDetailTextColor)
         view.addSubview(jifengLbl)
     }
     private func dataInit(){
         self.userCenterData = [[.AddressSelect],[.Goods],[.GoodsCount,.Mark], [.Invoice,.InvoiceType,.InvoiceDetail,.InvoiceFor],[.UseDiscount]]
+    }
+    func getTotal() {
+        ZMDTool.showActivityView(nil)
+        QNNetworkTool.getOrderTotals { (orderTotal, dictionary, error) -> Void in
+            ZMDTool.hiddenActivityView()
+            if orderTotal != nil {
+                self.total = "\(orderTotal!)"
+                self.payLbl.text = "实付：\(self.total)（含运费39.0）"
+                self.totalLbl.attributedText = "合计 : \(self.total)".AttributedText("\(self.total)", color: RGB(235,61,61,1.0))
+            } else {
+                ZMDTool.showErrorPromptView(nil, error: error, errorMsg: nil)
+            }
+        }
     }
 }

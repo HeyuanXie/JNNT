@@ -18,14 +18,16 @@ class CardVolumeHomeViewController: UIViewController,UITableViewDataSource, UITa
     }
     var currentTableView: UITableView!
     var manageBtn : UIButton!
-    var dataArray : NSArray!
+    var memberArray = NSArray()
+    var coupons = NSMutableArray()                         // 优惠券
     let cardTypeAll = [CardType.Consumer,.Member]
     var cardType = CardType()
     var isManage = false
+    var consumerIds = NSMutableArray()
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.dataArray = ["",""]
         self.updateUI()
+        self.updateData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -37,7 +39,7 @@ class CardVolumeHomeViewController: UIViewController,UITableViewDataSource, UITa
         return 1
     }
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return self.dataArray.count
+        return self.cardType == .Consumer ? self.coupons.count : self.memberArray.count
     }
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 16
@@ -53,10 +55,28 @@ class CardVolumeHomeViewController: UIViewController,UITableViewDataSource, UITa
             let view = UIView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: 30))
             view.backgroundColor = UIColor.clearColor()
             let btn = ZMDTool.getButton(CGRect(x: kScreenWidth - 12 - 68, y: 0, width: 68, height: 30), textForNormal: "删除", fontSize: 15,backgroundColor: UIColor.clearColor(), blockForCli: { (sender) -> Void in
+                if self.cardType == .Consumer {
+                    let coupon = self.coupons[section] as! ZMDCoupon
+                    if !(sender as! UIButton).selected {
+                        coupon.indexForDelete = section
+                        self.consumerIds.addObject(coupon)
+                    } else {
+                        self.consumerIds.removeAllObjects()
+                    }
+                    self.currentTableView.reloadData()
+                }
             })
             btn.setImage(UIImage(named: "common_01unselected"), forState: .Normal)
+            btn.setImage(UIImage(named: "common_02selected"), forState: .Selected)
             btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
             view.addSubview(btn)
+            btn.selected = false
+            let currentItem = self.coupons[section] as! ZMDCoupon
+            for tmp in self.consumerIds {
+                if (tmp as! ZMDCoupon).Id == currentItem.Id {
+                    btn.selected = true
+                }
+            }
             return view
         }
         let view = UIView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: 0))
@@ -122,9 +142,6 @@ class CardVolumeHomeViewController: UIViewController,UITableViewDataSource, UITa
                 bgV.tag = 100000
                 bgV.backgroundColor = UIColor.clearColor()
                 cell?.contentView.addSubview(bgV)
-                //            let imgV = UIImageView(frame: CGRect(x: 12+15, y: 17, width: 38, height: 38))
-                //            imgV.tag = 100001
-                //            cell?.contentView.addSubview(imgV)
                 let titleLbl = ZMDTool.getLabel(CGRect(x: 112, y: 15, width: 200, height: 15), text: "", fontSize: 15)
                 titleLbl.tag = 100002
                 cell?.contentView.addSubview(titleLbl)
@@ -141,29 +158,46 @@ class CardVolumeHomeViewController: UIViewController,UITableViewDataSource, UITa
                 cell?.contentView.addSubview(typeImgV)
             }
             let bgV = cell?.viewWithTag(100000) as! UIImageView
-            //        let imgV = cell?.viewWithTag(100001) as! UIImageView
             let titleLbl = cell?.viewWithTag(100002) as! UILabel
             let conditionLbl = cell?.viewWithTag(100003) as! UILabel
             let cardTermLbl = cell?.viewWithTag(100004) as! UILabel
             let typeImgV = cell?.viewWithTag(100005) as! UIImageView
             
             ZMDTool.configViewLayer(bgV)
-            bgV.image = indexPath.section == 0 ?  UIImage(named: "user_coupon") : UIImage(named: "user_coupon_invaild")
             bgV.contentMode = .ScaleToFill
             
-            //        imgV.image = UIImage(named: "bank_gs")
-            titleLbl.text = "110抵扣券"
-            conditionLbl.text = "使用条件 ：App下单满1000元"
-            cardTermLbl.text = "使用期限 ：2016.01.22-2016.12.22"
-            typeImgV.image = indexPath.section == 0 ?  UIImage(named: "user_coupon_tip") : UIImage(named: "")
+            let coupon = self.coupons[indexPath.section] as! ZMDCoupon
+            if coupon.Discount.Name != nil {
+                titleLbl.text = coupon.Discount.Name
+                conditionLbl.text = coupon.Discount.Explain
+                let starts = coupon.Discount.StartDateUtc!.componentsSeparatedByString("T")[0].stringByReplacingOccurrencesOfString("-", withString: ".")
+                let ends = coupon.Discount.EndDateUtc!.componentsSeparatedByString("T")[0].stringByReplacingOccurrencesOfString("-", withString: ".")
+                cardTermLbl.text = "使用期限 ：\(starts)-\(ends)"
+                let formatter = NSDateFormatter()
+                formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                let date = formatter.dateFromString(coupon.Discount.EndDateUtc!.stringByReplacingOccurrencesOfString("T", withString: " "))
+                if NSDate().compare(date!) == .OrderedDescending {
+                    // 小于
+                    bgV.image = UIImage(named: "user_coupon_invaild")
+                } else {
+                    bgV.image = UIImage(named: "user_coupon")
+                    typeImgV.image =  UIImage(named: "user_coupon_tip")
+                }
+            }
             return cell!
         }
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let vc = self.cardType == .Consumer ? CardVolumeConsumerDetailViewController() : CardVolumeMemberDetailViewController()
-        self.navigationController?.pushViewController(vc, animated: true)
+        if self.cardType == .Consumer {
+            let coupon = self.coupons[indexPath.section] as! ZMDCoupon
+            let vc = CardVolumeConsumerDetailViewController()
+            vc.coupon = coupon
+            self.navigationController?.pushViewController(vc, animated: true)
+        } else {
+            let vc = CardVolumeMemberDetailViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
-
     //MARK: -  PrivateMethod
     func updateUI() {
         self.title = "卡券"
@@ -186,7 +220,7 @@ class CardVolumeHomeViewController: UIViewController,UITableViewDataSource, UITa
             self.currentTableView.reloadData()
         }
         
-        self.currentTableView = UITableView(frame: CGRect(x: 0, y: 55, width: kScreenWidth, height: self.view.bounds.size.height-64-58))
+        self.currentTableView = UITableView(frame: CGRect(x: 0, y: 55, width: kScreenWidth, height: self.view.bounds.size.height-64-58 - 55))
         self.currentTableView.backgroundColor = tableViewdefaultBackgroundColor
         self.currentTableView.separatorStyle = .None
         self.currentTableView.dataSource = self
@@ -219,15 +253,56 @@ class CardVolumeHomeViewController: UIViewController,UITableViewDataSource, UITa
         }
         manageView.addSubview(cancelBtn)
         let deleteBtn = ZMDTool.getButton(CGRect(x: kScreenWidth - 120, y: 0, width: 60, height: 58), textForNormal: "删除", fontSize: 17, backgroundColor:RGB(247,247,247,1)) { (sender) -> Void in
+            if self.cardType == .Consumer {
+                for tmp in self.consumerIds {
+                    self.deleteCoupon((tmp as! ZMDCoupon).Id!.integerValue,indexPath:NSIndexPath(forItem: 0, inSection: (tmp as! ZMDCoupon).indexForDelete!))
+                }
+            }
         }
         manageView.addSubview(deleteBtn)
         
         let btn = ZMDTool.getButton(CGRect(x: 0, y: 0, width: 68, height: 58), textForNormal: "全选", fontSize: 15,backgroundColor: UIColor.clearColor(), blockForCli: { (sender) -> Void in
+            (sender as! UIButton).selected = !(sender as! UIButton).selected
+            if self.cardType == .Consumer {
+                if (sender as! UIButton).selected {
+                    var index = -1
+                    for item in self.coupons {
+                        index++
+                        (item as! ZMDCoupon).indexForDelete = index
+                        self.consumerIds.addObject(item)
+                    }
+                } else {
+                    self.consumerIds.removeAllObjects()
+                }
+                self.currentTableView.reloadData()
+            }
         })
         btn.setImage(UIImage(named: "common_01unselected"), forState: .Normal)
+        btn.setImage(UIImage(named: "common_02selected"), forState: .Selected)
+
         btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
         btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right:0)
         manageView.addSubview(btn)
         return manageView
+    }
+    func updateData() {
+        QNNetworkTool.fetchCustomerCoupons { (coupons, data, error) -> Void in
+            if coupons != nil {
+                self.coupons = NSMutableArray(array: coupons!)
+                self.currentTableView.reloadData()
+            }
+        }
+    }
+    func deleteCoupon(id:Int,indexPath:NSIndexPath) {
+        QNNetworkTool.deleteCoupons(id) { (succeed, dictionary, error) -> Void in
+            if succeed! {
+                if self.cardType == .Consumer {
+                    self.coupons.removeObjectAtIndex(indexPath.section)
+                    self.currentTableView.deleteSections(NSIndexSet(index: indexPath.section), withRowAnimation: UITableViewRowAnimation.None)
+                }
+            } else {
+                ZMDTool.showErrorPromptView(nil, error: error, errorMsg: nil)
+            }
+        }
     }
 }

@@ -118,3 +118,6 @@ BundledItems                搭配购
         {"customerId":1,"Discountcouponcode":"sasd"}
 
     Discountcouponcode:优惠券券号
+8 修改头像
+    Request: POST http://xw.ccw.cn/api/v1/uploads/CustomerAvtar
+    form提交  给定 customerId 文件上传 form 名字 file

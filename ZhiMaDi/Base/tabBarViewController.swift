@@ -50,10 +50,14 @@ class tabBarViewController: UITabBarController,UITabBarControllerDelegate {
     
     // UITabBarControllerDelegate
     func tabBarController(tabBarController: UITabBarController, shouldSelectViewController viewController: UIViewController) -> Bool {
-        if viewController == (self.viewControllers?.last)! as UIViewController && !g_isLogin! {/*未登录*/
+        if viewController != (self.viewControllers?.first)! as UIViewController && !g_isLogin! {/*未登录*/
             ZMDTool.enterLoginViewController()
             return false
         }
+//        if viewController == (self.viewControllers?.last)! as UIViewController && !g_isLogin! {/*未登录*/
+//            ZMDTool.enterLoginViewController()
+//            return false
+//        }
         return true
     }
     //MARK:-Private Method

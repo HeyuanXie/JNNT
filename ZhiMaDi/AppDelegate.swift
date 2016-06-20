@@ -26,19 +26,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ZMDPushTool.startPushTool(launchOptions)
         ZMDPushTool.clear()
         // 启动过渡页
-        let allowShowStartPages = !NSUserDefaults.standardUserDefaults().boolForKey(kKeyIsFirstStartApp)
-        if allowShowStartPages {
-            UIApplication.sharedApplication().statusBarHidden = true
-            let startPages = StartPagesWindow()
-            startPages.finished = { () -> Void in
-                NSUserDefaults.standardUserDefaults().setBool(true, forKey: kKeyIsFirstStartApp)
-                let vc = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()!
-                ZMDTool.enterRootViewController(vc)
-            }
-            window = UIWindow(frame: UIScreen.mainScreen().bounds)
-            window?.rootViewController = startPages
-            window?.makeKeyAndVisible()
-        }
+//        let allowShowStartPages = !NSUserDefaults.standardUserDefaults().boolForKey(kKeyIsFirstStartApp)
+//        if allowShowStartPages {
+//            UIApplication.sharedApplication().statusBarHidden = true
+//            let startPages = StartPagesWindow()
+//            startPages.finished = { () -> Void in
+//                NSUserDefaults.standardUserDefaults().setBool(true, forKey: kKeyIsFirstStartApp)
+//                let vc = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()!
+//                ZMDTool.enterRootViewController(vc)
+//            }
+//            window = UIWindow(frame: UIScreen.mainScreen().bounds)
+//            window?.rootViewController = startPages
+//            window?.makeKeyAndVisible()
+//        }
         
         // 开启拦截器
         ZMDInterceptor.start()

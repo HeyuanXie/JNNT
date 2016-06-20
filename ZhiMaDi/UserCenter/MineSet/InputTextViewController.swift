@@ -93,6 +93,9 @@ class InputTextViewController: UIViewController ,UITextViewDelegate,ZMDIntercept
         return true
     }
     override func back() {
-        self.finished(text: self.inputTextView.text)
+        if self.finished != nil {
+            self.finished(text: self.inputTextView.text)
+        }
+        self.navigationController?.popViewControllerAnimated(true)
     }
 }

@@ -10,11 +10,13 @@ import UIKit
 // 收银台
 class CashierViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,ZMDInterceptorProtocol {
     var tableView : UITableView!
-    let datas = [["余额支付","货到付款"],["支付宝支付","微信"]]
+    let datas = [[/*"余额支付",*/"货到付款"],["支付宝支付","微信"]]
     let images = ["pay_alipay","pay_wechat"]
     var indexTypeRow = 0
     var finished : ((indexType:Int,IndexDetail:Int)->Void)!
     var mark = ""
+    var total = ""
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "收银台"
@@ -47,7 +49,7 @@ class CashierViewController: UIViewController,UITableViewDataSource,UITableViewD
             headView.backgroundColor = UIColor.clearColor()
             let label = ZMDTool.getLabel(CGRect(x: 12, y: 30, width: 150, height: 17), text: "选择其它支付方式", fontSize: 17)
             headView.addSubview(label)
-            let paylbl = ZMDTool.getLabel(CGRect(x: kScreenWidth - 12 - 150, y: 30, width: 150, height: 17), text: "仍需支付：25.0", fontSize: 17,textColor: RGB(235,61,61,1.0))
+            let paylbl = ZMDTool.getLabel(CGRect(x: kScreenWidth - 12 - 150, y: 30, width: 150, height: 17), text: "仍需支付：￥\(self.total)", fontSize: 17,textColor: RGB(235,61,61,1.0))
             paylbl.textAlignment = .Right
             headView.addSubview(paylbl)
             return headView
@@ -72,7 +74,7 @@ class CashierViewController: UIViewController,UITableViewDataSource,UITableViewD
                 cell?.contentView.addSubview(imgV)
                 cell?.contentView.addSubview(ZMDTool.getLine(CGRect(x: 0, y: 54.5, width: kScreenWidth, height: 0.5)))
 
-                let label = ZMDTool.getLabel(CGRect(x: kScreenWidth - 45 - 100, y: 0, width: 100, height: 54), text: "余额：500", fontSize: 15)
+                let label = ZMDTool.getLabel(CGRect(x: kScreenWidth - 45 - 100, y: 0, width: 100, height: 54), text: "余额：0.0", fontSize: 15)
                 label.textAlignment = .Right
                 cell?.contentView.addSubview(label)
             }
@@ -107,10 +109,6 @@ class CashierViewController: UIViewController,UITableViewDataSource,UITableViewD
             ZMDTool.showActivityView(nil)
             QNNetworkTool.confirmOrder(mark, completion: { (succeed, dictionary, error) -> Void in
                 ZMDTool.hiddenActivityView()
-                if succeed! {
-                } else {
-                    ZMDTool.showErrorPromptView(dictionary, error: error, errorMsg: nil)
-                }
             })
         }
         self.tableView.reloadData()
@@ -125,7 +123,6 @@ class CashierViewController: UIViewController,UITableViewDataSource,UITableViewD
         let footV = UIView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: 36+50))
         footV.backgroundColor = UIColor.clearColor()
         let btn = ZMDTool.getButton(CGRect(x: 12, y: 36, width: kScreenWidth - 24, height: 50), textForNormal: "确认支付", fontSize: 20, textColorForNormal:UIColor.whiteColor(),backgroundColor: UIColor.redColor()) { (sender) -> Void in
-            self.submitAliOrder(NSDictionary())
         }
         ZMDTool.configViewLayer(btn)
         footV.addSubview(btn)

@@ -49,7 +49,7 @@ class MsgHomeViewController: UIViewController,UITableViewDataSource, UITableView
         }
         
         func didSelect(navViewController:UINavigationController){
-            navViewController.pushViewController(pushViewController, animated: true)
+//            navViewController.pushViewController(pushViewController, animated: true)
         }
     }
     var currentTableView: UITableView!
@@ -99,11 +99,11 @@ class MsgHomeViewController: UIViewController,UITableViewDataSource, UITableView
             cell?.contentView.addSubview(ZMDTool.getLine(CGRect(x: 0, y: 54.5, width: kScreenWidth, height: 0.5)))
         }
         let cellType = self.msgCellTypes[indexPath.row]
-        if cellType == .Activity {
-            cell?.contentView.setBadgeValue("3", center: CGPoint(x: 130, y: 27.5))
-        }
         cell?.imageView?.image = cellType.data.msgImg
         cell?.textLabel?.text = cellType.data.title
+        if cellType == .Activity {
+            cell?.contentView.setBadgeValue("3", center: CGPoint(x: CGRectGetMaxX(cell!.textLabel!.frame)+25, y: 27.5))
+        }
         return cell!
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

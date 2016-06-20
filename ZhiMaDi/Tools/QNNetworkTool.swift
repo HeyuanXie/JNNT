@@ -153,202 +153,50 @@ private extension QNNetworkTool {
         }
     }
 }
-// MARK: -
+// MARK: - 网络基础处理(上传)
 extension QNNetworkTool {
+    
     /**
-     获得此厂商所有的用户信息
+     生产一个用于上传的Request
      
-     :param: corpId       注册成功时返回的用户ID
+     :param: url      上传的接口的地址
+     :param: method   上传的方式， Get Post Put ...
+     :param: data     需要被上传的数据
+     :param: fileName 上传的文件名
      */
-    class func getCorpAllUserInfo(corpId: String,completion: (NSDictionary?, NSError?, String?) -> Void) {
-        requestGET(kServerAddress + "/SleepCareIIServer/getCorpAllUserInfo.action", parameters: paramsToJsonDataParams(["corpId" : corpId])) { (_, _, _, dictionary, error) -> Void in
-            if dictionary != nil{
-                completion(dictionary, nil, nil)
-            }else {
-                completion(nil, self.formatError(), dictionary?["errorMsg"] as? String)
-            }
-        }
+    private class func productUploadRequest(url: NSURL!, method: NSString, data: NSData, fileName: NSString) -> NSURLRequest {
+        let request = self.productRequest(url, method: method)
+        // 定制一post方式上传数据，数据格式必须和下面方式相同
+        let boundary = "abcdefg"
+        request.setValue(String(format: "multipart/form-data;boundary=%@", boundary), forHTTPHeaderField: "Content-Type")
+        // 注意 ："face"这个字段需要看文档服务端的要求，他们要取该字段进行图片命名
+        let str = NSMutableString(format: "--%@\r\nContent-Disposition: form-data; name=\"%@\";filename=\"%@\"\r\nContent-Type: %@\r\nContent-Transfer-Encoding: binary\r\n\r\n",boundary, "face", fileName, "application/octet-stream")
+        // 配置内容
+        let bodyData = str.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false) as! NSMutableData
+        bodyData.appendData(data)
+        bodyData.appendData("\r\n".dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!)
+        bodyData.appendData(NSString(format: "--%@--\r\n",boundary).dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!)
+        request.HTTPBody = bodyData
+        return request
     }
-    /**
-     获得就寝活动信息
-     
-     :param: userId       使用者id
-     :param: date         时间字符串，格式是YYYY-MM-DD
-     :param: corpId       厂商的id（咨询博创海云获取）
-     */
-    class func getSleepActivityInfo(userId: String,date: String,corpId: String,completion: (NSDictionary?, NSError?, String?) -> Void) {
-        requestGET(kServerAddress + "/SleepCareIIServer/getSleepActivityInfo.action", parameters: paramsToJsonDataParams(["userId" : userId,"date" : date,"corpId" : corpId])) { (_, _, _, dictionary, error) -> Void in
-            if dictionary != nil{
-                completion(dictionary, nil, nil)
-            }else {
-                completion(nil, self.formatError(), dictionary?["errorMsg"] as? String)
-            }
-        }
-    }
-    /**
-     获得呼吸心拍信息
-     
-     :param: userId       使用者id
-     :param: date         时间字符串，格式是YYYY-MM-DD
-     :param: corpId       厂商的id（咨询博创海云获取）
-     */
-    class func getBreathStatus(userId: String,date: String,corpId: String,completion: (NSDictionary?, NSError?, String?) -> Void) {
-        requestGET(kServerAddress + "/SleepCareIIServer/getBreathStatus.action", parameters: paramsToJsonDataParams(["userId" : userId,"date" : date,"corpId" : corpId])) { (_, _, _, dictionary, error) -> Void in
-            if dictionary != nil{
-                completion(dictionary, nil, nil)
-            }else {
-                completion(nil, self.formatError(), dictionary?["errorMsg"] as? String)
-            }
-        }
-    }
-    /**
-     获得当前睡眠状态
-     
-     :param: userId       使用者id
-     :param: corpId       厂商的id（咨询博创海云获取）
-     */
-    class func getCurrentSleepStatus(userId: String,corpId: String,completion: (NSDictionary?, NSError?, String?) -> Void) {
-        requestGET(kServerAddress + "/SleepCareIIServer/getCurrentSleepStatus.action", parameters: paramsToJsonDataParams(["userId" : userId,"corpId" : corpId])) { (_, _, _, dictionary, error) -> Void in
-            if dictionary != nil{
-                completion(dictionary, nil, nil)
-            }else {
-                completion(nil, self.formatError(), dictionary?["errorMsg"] as? String)
-            }
-        }
-    }
-    /**
-     获得心跳信息
-     
-     :param: userId       使用者id
-     :param: date         时间字符串，格式是YYYY-MM-DD
-     :param: corpId       厂商的id（咨询博创海云获取）
-     */
-    class func getHeartbeatStatus(userId: String,date: String,corpId: String,completion: (NSDictionary?, NSError?, String?) -> Void) {
-        requestGET(kServerAddress + "/SleepCareIIServer/getHeartbeatStatus.action", parameters: paramsToJsonDataParams(["userId" : userId,"date" : date,"corpId" : corpId])) { (_, _, _, dictionary, error) -> Void in
-            if dictionary != nil{
-                completion(dictionary, nil, nil)
-            }else {
-                completion(nil, self.formatError(), dictionary?["errorMsg"] as? String)
-            }
-        }
-    }
-    /**
-     历史生命体征数据
-     
-     :param: userId       使用者id
-     :param: date         时间字符串，格式是YYYY-MM-DD
-     :param: period       Int	天数（7，14，28）
-     :param: corpId       厂商的id（咨询博创海云获取）
-     */
-    class func getPeriodBodyStatus(userId: String,date: String,period: String,corpId: String,completion: (NSDictionary?, NSError?, String?) -> Void) {
-        requestGET(kServerAddress + "/SleepCareIIServer/getPeriodBodyStatus.action", parameters: paramsToJsonDataParams(["userId" : userId,"date" : date,"period" : period,"corpId" : corpId])) { (_, _, _, dictionary, error) -> Void in
-            if dictionary != nil{
-                completion(dictionary, nil, nil)
-            }else {
-                completion(nil, self.formatError(), dictionary?["errorMsg"] as? String)
-            }
-        }
-    }
-    /**
-     历史睡眠状态
-     
-     :param: userId       使用者id
-     :param: date         时间字符串，格式是YYYY-MM-DD
-     :param: period       Int	天数（7，14，28）
-     :param: corpId       厂商的id（咨询博创海云获取）
-     */
-    class func getPeriodInBed(userId: String,date: String,period: String,corpId: String,completion: (NSDictionary?, NSError?, String?) -> Void) {
-        requestGET(kServerAddress + "/SleepCareIIServer/getPeriodInBed.action", parameters: paramsToJsonDataParams(["userId" : userId,"date" : date,"period" : period,"corpId" : corpId])) { (_, _, _, dictionary, error) -> Void in
-            if dictionary != nil{
-                completion(dictionary, nil, nil)
-            }else {
-                completion(nil, self.formatError(), dictionary?["errorMsg"] as? String)
-            }
-        }
-    }
-    /**
-     历史睡眠质量
-     
-     :param: userId       使用者id
-     :param: date         时间字符串，格式是YYYY-MM-DD
-     :param: period       Int	天数（7，14，28）
-     :param: corpId       厂商的id（咨询博创海云获取）
-     */
-    class func getPeriodSleepQuilty(userId: String,date: String,period: String,corpId: String,completion: (NSDictionary?, NSError?, String?) -> Void) {
-        requestGET(kServerAddress + "/SleepCareIIServer/getPeriodSleepQuilty.action", parameters: paramsToJsonDataParams(["userId" : userId,"date" : date,"period" : period,"corpId" : corpId])) { (_, _, _, dictionary, error) -> Void in
-            if dictionary != nil{
-                completion(dictionary, nil, nil)
-            }else {
-                completion(nil, self.formatError(), dictionary?["errorMsg"] as? String)
-            }
-        }
-    }
-    /**
-     历史睡眠质量
-     
-     :param: userId       使用者id
-     :param: corpId       厂商的id（咨询博创海云获取）
-     */
-    class func getSleepRemind(userId: String,corpId: String,completion: (NSDictionary?, NSError?, String?) -> Void) {
-        requestGET(kServerAddress + "/SleepCareIIServer/getSleepRemind.action", parameters: paramsToJsonDataParams(["userId" : userId,"corpId" : corpId])) { (_, _, _, dictionary, error) -> Void in
-            if dictionary != nil{
-                completion(dictionary, nil, nil)
-            }else {
-                completion(nil, self.formatError(), dictionary?["errorMsg"] as? String)
-            }
-        }
-    }
-    /**
-     详细--睡眠信息
-     
-     :param: userId       使用者id
-     :param: date         时间字符串，格式是YYYY-MM-DD
-     :param: corpId       厂商的id（咨询博创海云获取）
-     */
-    class func getSleepLevel(userId: String,date: String,corpId: String,completion: (NSDictionary?, NSError?, String?) -> Void) {
-        requestGET(urlTmp, parameters: nil) { (_, response, _, dictionary, error) -> Void in
-            if dictionary != nil{
-                completion(dictionary, nil, nil)
-            }else {
-                completion(nil, self.formatError(), dictionary?["errorMsg"] as? String)
-            }
-        }
-    }
-    /**
-     详细—睡眠阶段
-     
-     :param: userId       使用者id
-     :param: date         时间字符串，格式是YYYY-MM-DD
-     :param: corpId       厂商的id（咨询博创海云获取）
-     */
-    class func getSleepRange(userId: String,date: String,corpId: String,completion: (NSDictionary?, NSError?, String?) -> Void) {
-        requestGET(kServerAddress + "/SleepCareIIServer/getSleepRange.action", parameters: paramsToJsonDataParams(["userId" : userId,"date" : date,"corpId" : corpId])) { (_, _, _, dictionary, error) -> Void in
-            if dictionary != nil{
-                completion(dictionary, nil, nil)
-            }else {
-                completion(nil, self.formatError(), dictionary?["errorMsg"] as? String)
-            }
-        }
-    }
-    // MARK:test
-    class func loginTest(){
-        requestPOST("http://api.ccw.cn/api/auth/login", parameters: paramsToJsonDataParams(["mobile" : "13713368658","password" : "123456"])) { (_,response, _, dictionary, error) -> Void in
-            
-            let head = response?.allHeaderFields
-            let cookieTmp = head!["Set-Cookie"]
-            // set cookie
-            let properties = [NSHTTPCookieOriginURL: "http://api.ccw.cn",
-                NSHTTPCookieName: "cookie_name",
-                NSHTTPCookieValue: cookieTmp as! String,
-                NSHTTPCookiePath : "/"]
-            let cookie : NSHTTPCookie = NSHTTPCookie(properties: properties )!
-            NSHTTPCookieStorage.sharedHTTPCookieStorage().setCookie(cookie)
-            // get cookie
-//            let cookies = NSHTTPCookieStorage.sharedHTTPCookieStorage().cookies
-        }
+    //生产多参数上传Request
+    private class func uploadRequest(url: NSURL!, method: NSString, data: NSData, fileName: NSString,customerId: Int) -> NSURLRequest {
+        
+        let request = self.productRequest(url, method: method)
+        // 定制一post方式上传数据，数据格式必须和下面方式相同
+        let boundary = "abcdefg"
+        request.setValue(String(format: "multipart/form-data;boundary=%@", boundary), forHTTPHeaderField: "Content-Type")
+        let str1 = NSMutableString(format: "--%@\r\nContent-Disposition: form-data; name=\"%@\"\r\n\r\n%d\r\n",boundary, "customerId",customerId)
+        let str = NSMutableString(format: "%@--%@\r\nContent-Disposition: form-data; name=\"%@\";filename=\"%@\"\r\nContent-Type: %@\r\nContent-Transfer-Encoding: binary\r\n\r\n",str1,boundary, "img", fileName, "application/octet-stream")
+        // 配置内容
+        let bodyData = str.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false) as! NSMutableData
+        bodyData.appendData(data)
+        bodyData.appendData("\r\n".dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!)
+        bodyData.appendData(NSString(format: "--%@--\r\n",boundary).dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!)
+        request.HTTPBody = bodyData
+        return request
     }
 }
-
 //MARK:- 登陆相关
 extension QNNetworkTool {
     // 验证手机验证码
@@ -397,15 +245,14 @@ extension QNNetworkTool {
     // 用户登录  /api/v1/extend/Login/
     class func loginAjax(Username:String,Password:String,completion: (success: Bool!,error:NSError?,dictionary:NSDictionary?) -> Void){
         requestPOST(kServerAddress + "/api/v1/extend/Login/LoginAjax", parameters: paramsToJsonDataParams(["Username" : Username,"Password" : Password])) { (_,response, _, dictionary, error) -> Void in
-            guard let dic = dictionary else {
+            guard let dic = dictionary,success = dic["success"] as? Bool where success else {
                 completion(success:false,error: error,dictionary:nil)
                 return
             }
-            if (dic["Success"] as? String) == "0" {
-                completion(success:true,error: nil,dictionary:nil)
-            } else {
-                completion(success:false,error: nil,dictionary:nil)
+            if let customerId = dic["customerId"] as? Int {
+                g_customerId = customerId
             }
+            completion(success:true,error: nil,dictionary:nil)
         }
     }
     // 手机验证码登录
@@ -425,6 +272,68 @@ extension QNNetworkTool {
             }
         }
     }
+    // 修改密码
+    class func changePassword(mobile:String,code:String,psw:String,completion: (success: Bool!,error:NSError?,dictionary:NSDictionary?) -> Void){
+        requestPOST(kServerAddress + "/api/v1/extend/Login/ChangePassword", parameters: paramsToJsonDataParams(["mobile" : mobile,"code" : code,"psw":psw])) { (_,response, _, dictionary, error) -> Void in
+            guard let dic = dictionary ,success = dic["Success"] as? NSDictionary , succeed = success["Success"] as? Bool where succeed else {
+                completion(success:false,error: error,dictionary:nil)
+                return
+            }
+            saveAccountAndPassword(mobile, password: nil)
+            completion(success:true,error: nil,dictionary:dictionary)
+        }
+    }
+}
+//MARK:- 用户中心
+extension QNNetworkTool {
+    /**
+     修改头像
+     
+     - parameter file:       文件
+     - parameter fileName:   文件名字
+     - parameter customerId: customerId description
+     - parameter completion: completion description
+     */
+    class func uploadCustomerHead(file: NSData, fileName: NSString,customerId: NSString, completion: (NSDictionary?, NSError?) -> Void) {
+        let url = NSURL(string: kServerAddress+"/api/v1/uploads/CustomerAvtar")
+//        request(ParameterEncoding.URL.encode(self.uploadRequest(url, method: "POST", data: file, fileName: "file",customerId:g_customerId!), parameters: nil).0).response{
+        request(self.uploadRequest(url, method: "POST", data: file, fileName: "file",customerId:g_customerId!)).response{
+            do {
+                let jsonObject: AnyObject? = try NSJSONSerialization.JSONObjectWithData($2!, options: NSJSONReadingOptions.MutableContainers)
+                let dictionary = jsonObject as? NSDictionary
+                completion(dictionary, $3)
+            } catch {}
+        }
+        
+        let tmpRequest = ParameterEncoding.URL.encode(self.productRequest(url, method: "POST"), parameters: ["customerId":g_customerId!]).0
+        upload(tmpRequest, data: file).response{
+            do {
+                let jsonObject: AnyObject? = try NSJSONSerialization.JSONObjectWithData($2!, options: NSJSONReadingOptions.MutableContainers)
+                let dictionary = jsonObject as? NSDictionary
+                completion(dictionary, $3)
+            } catch {}
+        }
+        upload(tmpRequest, multipartFormData: { (multipartFormData) -> Void in
+            multipartFormData.appendBodyPart(data: file, name: "file")
+            }) { (encodingResult) -> Void in
+                switch encodingResult {
+                case .Success(let upload, _, _):
+                    upload.responseJSON(completionHandler: { (Response) -> Void in
+                        var value = Response.result.value
+                        let data = Response.data
+                        let _ = ""
+                        do {
+                            let jsonObject: AnyObject? = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers)
+                            let dictionary = jsonObject as? NSDictionary
+                            let _ = ""
+                        } catch {}
+                    })
+                    break
+                case .Failure:
+                    break
+                }
+        }
+    }
 }
 //MARK:- 产品相关
 extension QNNetworkTool {
@@ -438,7 +347,10 @@ extension QNNetworkTool {
      - parameter completion: completion description
      */
     class func products(Q:String,pagenumber:String,orderby:Int?,Cid : String?,completion: (products : NSArray?,error:NSError?,dictionary:NSDictionary?) -> Void) {
-        var urlStr = orderby == nil ? kServerAddress + "/catalog/searchajax?as=true&pagenumber=\(pagenumber)&q=\(Q)" : kServerAddress + "/catalog/searchajax?as=true&pagenumber=\(pagenumber)&orderby=16&q=\(Q)"
+        var urlStr = kServerAddress + "/catalog/searchajax?as=true&pagenumber=\(pagenumber)&q=\(Q)"
+        if  orderby != nil {
+            urlStr.appendContentsOf("&orderby=\(orderby!)")
+        }
         if Cid != nil && Cid != "" {
             urlStr.appendContentsOf("&Cid="+Cid!)
         }
@@ -638,6 +550,27 @@ extension QNNetworkTool {
                 return
             }
             completion(succeed:true,dictionary: dictionary, error: nil)
+        }
+    }
+    
+    //
+    class func fetchOrder(completion: ( value: NSArray?,error: NSError?) -> Void) {
+        var str = kOdataAddress + "/Orders?$top=1&$filter=OrderStatusId eq 10 and CustomerId eq 1 &$expand=OrderItems,OrderItems/Product,OrderItems/Product/ProductPictures&$select=OrderTotal,OrderItems/Product/Name,OrderItems/UnitPriceInclTax,OrderItems/UnitPriceExclTax,OrderItems/Quantity,Id,OrderItems/AttributeDescription,OrderItems/Product/ProductPictures/PictureId,OrderStatusId,ShippingStatusId,PaymentStatusId&$skip=9"
+        str = str.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+        let url = NSURL(string:str)
+        request(self.productRequest(url, method: "GET")).responseString { (response) -> Void in
+            guard let data = response.result.value else {
+                completion(value:nil, error: response.result.error)
+                return
+            }
+            do {
+                if let value = try NSJSONSerialization.JSONObjectWithData(data.dataUsingEncoding(NSUTF8StringEncoding)!, options: NSJSONReadingOptions.MutableContainers) as? NSDictionary {
+                    completion(value:value["value"] as? NSArray,error: nil)
+                }
+            }
+            catch {
+                completion(value:nil, error: nil)
+            }
         }
     }
 }
@@ -853,7 +786,7 @@ extension QNNetworkTool {
         }
     }
 }
-// MARK: - 网络基础处理
+// MARK: - 个人测试
 extension QNNetworkTool {
     class func requestForGet() {
         let url = NSURL(string: kOdataAddress + "/Customers(\(g_customerId!))?$expand=Addresses")

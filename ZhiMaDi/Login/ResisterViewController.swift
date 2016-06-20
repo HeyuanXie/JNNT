@@ -8,7 +8,7 @@
 
 import UIKit
 // 注册
-class ResisterViewController: UIViewController, UITextFieldDelegate{
+class ResisterViewController: UIViewController, UITextFieldDelegate,ZMDInterceptorProtocol{
     
     @IBOutlet weak var accountTextField: UITextField!
     @IBOutlet weak var verificationTextField: UITextField!
@@ -24,6 +24,7 @@ class ResisterViewController: UIViewController, UITextFieldDelegate{
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
+        self.view.backgroundColor = tableViewdefaultBackgroundColor
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -93,15 +94,17 @@ class ResisterViewController: UIViewController, UITextFieldDelegate{
         
         
         // 获取验证码的按钮
-        let btn = ZMDTool.getButton(CGRect(x: kScreenWidth - 92 - 12-12, y: 14, width: 92, height: 32), textForNormal: "获取验证码", fontSize: 13, textColorForNormal:defaultDetailTextColor,backgroundColor: UIColor.clearColor(), blockForCli: { (sender) -> Void in
+        let codeRightV = UIView(frame: CGRect(x: 0, y: 0, width: 92+12, height: 60))
+        codeRightV.backgroundColor = UIColor.clearColor()
+        let btn = ZMDTool.getButton(CGRect(x: 0, y: 14, width: 92, height: 32), textForNormal: "获取验证码", fontSize: 13, textColorForNormal:defaultDetailTextColor,backgroundColor: UIColor.clearColor(), blockForCli: { (sender) -> Void in
             
         })
         ZMDTool.configViewLayerWithSize(btn, size: 18)
         btn.layer.borderWidth = 1
         btn.layer.borderColor = defaultLineColor.CGColor
-        
+        codeRightV.addSubview(btn)
         self.accountTextField.rightViewMode =  UITextFieldViewMode.Always
-        self.accountTextField.rightView = btn
+        self.accountTextField.rightView = codeRightV
         self.getVerificationBtn = btn
         
         

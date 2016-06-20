@@ -134,7 +134,6 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
         ZMDTool.addInteractive(self.navigationController)
         updateUI()
         self.dataInit()
-        QNNetworkTool.requestForGet()
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
@@ -498,6 +497,7 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
                 let category = menuTitles[sender.tag - 1001] as! ZMDCategory
                 let homeBuyListViewController = HomeBuyListViewController.CreateFromMainStoryboard() as! HomeBuyListViewController
                 homeBuyListViewController.Cid = category.Id.stringValue
+                homeBuyListViewController.hidesBottomBarWhenPushed = true
                 self.navigationController?.pushViewController(homeBuyListViewController, animated: true)
             })
             btnBg.addSubview(menuBtn)

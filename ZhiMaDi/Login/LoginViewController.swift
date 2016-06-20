@@ -21,12 +21,14 @@ class LoginViewController: UIViewController , ZMDInterceptorNavigationBarHiddenP
     override func viewDidLoad() {
         super.viewDidLoad()
         self.updateUI()
+        self.configBackButton()
         // 如果有本地账号了，就自动登录
         self.autoLogin()
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
         self.navigationController?.navigationBarHidden = false
+        self.view.backgroundColor = tableViewdefaultBackgroundColor
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -48,14 +50,6 @@ class LoginViewController: UIViewController , ZMDInterceptorNavigationBarHiddenP
     @IBAction func login(sender: UIButton) {
         self.login()
     }
-//    @IBAction func goBack(sender: UIButton) {
-//        if self.getVerificationBtn == nil {
-//            self.navigationController?.popToRootViewControllerAnimated(true)
-//        } else {
-//            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()
-//            ZMDTool.enterRootViewController(vc!)
-//        }
-//    }
     //回到帐户登录
     @IBAction func accountBtnCli(sender: UIButton) {
         self.navigationController?.popViewControllerAnimated(true)
@@ -107,7 +101,6 @@ class LoginViewController: UIViewController , ZMDInterceptorNavigationBarHiddenP
         if let usrN = self.accountTextField.text, let ps = self.verificationTextField.text {
             QNNetworkTool.loginAjax(usrN, Password: ps, completion: { (success, error, dictionary) -> Void in
                 if success! {
-                    ZMDTool.showPromptView("成功")
                     saveAccountAndPassword(usrN, password: ps)
                     let vc = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()
                     ZMDTool.enterRootViewController(vc!)
@@ -142,13 +135,16 @@ class LoginViewController: UIViewController , ZMDInterceptorNavigationBarHiddenP
             ZMDTool.showPromptView("请输入账号")
             self.verificationTextField.becomeFirstResponder()
             return false
-            
         }else if (self.verificationTextField.text?.characters.count == 0){
             ZMDTool.showPromptView("请输入密码")
             self.accountTextField.becomeFirstResponder()
             return false
         }
         return true
+    }
+    override func back() {
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()
+        ZMDTool.enterRootViewController(vc!)
     }
 }
 // MARK: - 获取验证码UI 显示的超时时间

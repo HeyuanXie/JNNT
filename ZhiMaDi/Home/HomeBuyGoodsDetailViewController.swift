@@ -68,21 +68,9 @@ class HomeBuyGoodsDetailViewController: UIViewController,UITableViewDataSource,U
     }
     //MARK:- Action
     @IBAction func AddProductToCard(sender: UIButton) {
-        
-        let postDic = self.productAttrV.getPostData(self.countForBounght,IsEdit: false)
-        if postDic == nil {
-            return
-        }
-        postDic!.setValue(self.productDetail.Id.integerValue, forKey: "Id")
-        if g_isLogin! {
-            QNNetworkTool.addProductToCart(postDic!, completion: { (succeed, dictionary, error) -> Void in
-                if succeed! {
-                    ZMDTool.showPromptView("添加成功")
-                } else {
-                    ZMDTool.showErrorPromptView(dictionary, error: error, errorMsg: "添加失败")
-                }
-            })
-        }
+        // 购物车
+        let vc = ShoppingCartViewController.CreateFromMainStoryboard() as! ShoppingCartViewController
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     //MARK:- UITableViewDataSource,UITableViewDelegate
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -275,23 +263,26 @@ class HomeBuyGoodsDetailViewController: UIViewController,UITableViewDataSource,U
         if let v = cell?.viewWithTag(10001) {
             v.removeFromSuperview()
         }
-        let cycleScroll = CycleScrollView(frame: CGRectMake(0, 0, kScreenWidth, kScreenWidth))
-        cycleScroll.tag = 10001
-        cycleScroll.backgroundColor = UIColor.clearColor()
-        //            cycleScroll.delegate = self
-        cycleScroll.autoScroll = true
-        cycleScroll.autoTime = 2.5
+       
         if self.productDetail != nil && self.productDetail.DetailsPictureModel != nil {
+            let arr = NSMutableArray()
             if let pictureModel = self.productDetail.DetailsPictureModel!.PictureModels {
-                let arr = NSMutableArray()
                 for pic in pictureModel {
                     let imgUrl = kImageAddressMain + (pic.ImageUrl ?? "")
                     arr.addObject(NSURL(string: imgUrl)!)
                 }
+            }
+            let cycleScroll = CycleScrollView(frame: CGRectMake(0, 0, kScreenWidth, kScreenWidth))
+            cycleScroll.tag = 10001
+            cycleScroll.backgroundColor = UIColor.clearColor()
+            //            cycleScroll.delegate = self
+            cycleScroll.autoScroll = true
+            cycleScroll.autoTime = 2.5
+            if arr.count != 0 {
                 cycleScroll.urlArray = arr as [AnyObject]
             }
+            cell?.addSubview(cycleScroll)
         }
-        cell?.addSubview(cycleScroll)
         return cell!
     }
     //MARK: 商品详请 cell
@@ -495,10 +486,14 @@ class HomeBuyGoodsDetailViewController: UIViewController,UITableViewDataSource,U
         self.navigationItem.leftBarButtonItem = item
     }
     private func dataInit(){
-        self.goodsCellTypes = [.HomeContentTypeAd,.HomeContentTypeDetail,.HomeContentTypeMenu,/*.HomeContentTypeDistribution,.HomeContentTypeStore,.HomeContentTypeDaPeiGou,*/]
+        self.goodsCellTypes = [.HomeContentTypeAd,.HomeContentTypeDetail,.HomeContentTypeMenu,/*.HomeContentTypeDistribution,.HomeContentTypeStore,.HomeContentTypeDaPeiGou*/]
         QNNetworkTool.fetchProductDetail(self.productId) { (productDetail, error, dictionary) -> Void in
             if productDetail != nil {
                 self.productDetail = productDetail
+                if self.productDetail.ProductType?.integerValue == 15 {
+                    // 搭配产品
+                    self.goodsCellTypes = [.HomeContentTypeAd,.HomeContentTypeDetail,.HomeContentTypeMenu,/*.HomeContentTypeDistribution,.HomeContentTypeStore,*/.HomeContentTypeDaPeiGou]
+                }
                 self.currentTableView.reloadData()
             } else {
                 ZMDTool.showErrorPromptView(nil, error: error)
@@ -554,10 +549,14 @@ class HomeBuyGoodsDetailViewController: UIViewController,UITableViewDataSource,U
         self.secondTableView.mj_header = header
         self.secondTableView.reloadData()
         
-        let titles = ["咨询","分享赚佣金","购买"]
+        let titles = ["咨询","分享赚佣金","加入购物车"]
         var i = 0
         let colorsBg = [UIColor.clearColor(),RGB(225,188,42,1),RGB(232,61,60,1)]
         for title in titles {
+            if i < 2 {
+                i++
+                continue
+            }
             let bottomBtn = UIButton(frame: CGRect(x: kScreenWidth/3 * CGFloat(i) + 18, y: 12, width: kScreenWidth/3 - 36, height: 34))
             bottomBtn.backgroundColor = UIColor.clearColor()
             bottomBtn.setTitle(title, forState: .Normal)
@@ -581,9 +580,22 @@ class HomeBuyGoodsDetailViewController: UIViewController,UITableViewDataSource,U
                         shareView.showShareView()
                     }
                 } else if (sender as! UIButton).titleLabel?.text == titles[2] {
-                    // 下单
-//                    let vc = ConfirmOrderViewController.CreateFromMainStoryboard() as! ConfirmOrderViewController
-//                    self?.navigationController?.pushViewController(vc, animated: true)
+                    if let strongSelf = self {
+                        let postDic = strongSelf.productAttrV.getPostData(strongSelf.countForBounght,IsEdit: false)
+                        if postDic == nil {
+                            return
+                        }
+                        postDic!.setValue(strongSelf.productDetail.Id.integerValue, forKey: "Id")
+                        if g_isLogin! {
+                            QNNetworkTool.addProductToCart(postDic!, completion: { (succeed, dictionary, error) -> Void in
+                                if succeed! {
+                                    ZMDTool.showPromptView("添加成功")
+                                } else {
+                                    ZMDTool.showErrorPromptView(dictionary, error: error, errorMsg: "添加失败")
+                                }
+                            })
+                        }
+                    }
                 }
             })
             self.bottomV.addSubview(bottomBtn)

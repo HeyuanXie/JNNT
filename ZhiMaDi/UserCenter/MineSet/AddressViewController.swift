@@ -67,6 +67,7 @@ class AddressViewController: UIViewController,UITableViewDataSource, UITableView
                 cell.selectedBtn.setImage(UIImage(named: "common_02selected"), forState: .Selected)
                 cell.layoutIfNeeded()
             })
+
             //delete
             cell.selectedBtn.tag = 1000 + indexPath.section
             cell.selectedBtn.rac_command = RACCommand(signalBlock: { (sender) -> RACSignal! in

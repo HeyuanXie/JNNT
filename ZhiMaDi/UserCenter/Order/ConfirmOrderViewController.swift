@@ -232,7 +232,7 @@ class ConfirmOrderViewController: UIViewController,UITableViewDataSource,UITable
                 cell?.contentView.addSubview(ZMDTool.getLine(CGRect(x: 0, y: 55.5, width: kScreenWidth, height: 0.5)))
                 
                 let label = ZMDTool.getLabel(CGRect(x: kScreenWidth - 12 - 150, y: 0, width: 150, height: 55.5), text: "", fontSize: 17)
-                label.attributedText = "合计 : ￥525.0".AttributedText("￥525", color: RGB(235,61,61,1.0))
+                label.attributedText = "合计 : ￥\(self.total)".AttributedText("￥\(self.total)", color: RGB(235,61,61,1.0))
                 label.textAlignment = .Right
                 cell?.contentView.addSubview(label)
                 self.totalLbl = label
@@ -409,15 +409,17 @@ class ConfirmOrderViewController: UIViewController,UITableViewDataSource,UITable
             }
             let vc = CashierViewController()
             vc.mark = mark
+            vc.total = self.total
+
             self.navigationController?.pushViewController(vc, animated: true)
         }
         ZMDTool.configViewLayerWithSize(confirmBtn, size: 15)
         view.addSubview(confirmBtn)
-        let payLbl = ZMDTool.getLabel(CGRect(x: 12, y: 12, width: 200, height: 15), text: "实付：525.0（含运费39.0）", fontSize: 14,textColor: defaultDetailTextColor)
+        let payLbl = ZMDTool.getLabel(CGRect(x: 12, y: 12, width: 200, height: 15), text: "实付：\(self.total)", fontSize: 14,textColor: defaultDetailTextColor)
         view.addSubview(payLbl)
         self.payLbl = payLbl
-        let jifengLbl = ZMDTool.getLabel(CGRect(x: 12, y: 12 + 15 + 7, width: 200, height: 12), text: "可获得20积分", fontSize: 12,textColor: defaultDetailTextColor)
-        view.addSubview(jifengLbl)
+//        let jifengLbl = ZMDTool.getLabel(CGRect(x: 12, y: 12 + 15 + 7, width: 200, height: 12), text: "可获得20积分", fontSize: 12,textColor: defaultDetailTextColor)
+//        view.addSubview(jifengLbl)
     }
     private func dataInit(){
         self.userCenterData = [[.AddressSelect],[.Goods],[.GoodsCount,.Mark], [.Invoice,.InvoiceType,.InvoiceDetail,.InvoiceFor],[.UseDiscount]]

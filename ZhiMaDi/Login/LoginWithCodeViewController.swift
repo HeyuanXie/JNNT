@@ -26,6 +26,7 @@ class LoginWithCodeViewController: UIViewController , ZMDInterceptorNavigationBa
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
         self.navigationController?.navigationBarHidden = false
+        self.view.backgroundColor = tableViewdefaultBackgroundColor
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -85,17 +86,18 @@ class LoginWithCodeViewController: UIViewController , ZMDInterceptorNavigationBa
         }
         self.view.addGestureRecognizer(tap)
         
-        
+        let codeRightV = UIView(frame: CGRect(x: 0, y: 0, width: 92+12, height: 60))
+        codeRightV.backgroundColor = UIColor.clearColor()
         // 获取验证码的按钮
-        let btn = ZMDTool.getButton(CGRect(x: kScreenWidth - 92 - 12-12, y: 14, width: 92, height: 32), textForNormal: "获取验证码", fontSize: 13, textColorForNormal:defaultDetailTextColor,backgroundColor: UIColor.clearColor(), blockForCli: { (sender) -> Void in
+        let btn = ZMDTool.getButton(CGRect(x: 0, y: 14, width: 92, height: 32), textForNormal: "获取验证码", fontSize: 13, textColorForNormal:defaultDetailTextColor,backgroundColor: UIColor.clearColor(), blockForCli: { (sender) -> Void in
             
         })
         ZMDTool.configViewLayerWithSize(btn, size: 18)
         btn.layer.borderWidth = 1
         btn.layer.borderColor = defaultLineColor.CGColor
-        
+        codeRightV.addSubview(btn)
         self.accountTextField.rightViewMode =  UITextFieldViewMode.Always
-        self.accountTextField.rightView = btn
+        self.accountTextField.rightView = codeRightV
         self.getVerificationBtn = btn
         
         

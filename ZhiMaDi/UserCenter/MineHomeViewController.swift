@@ -290,12 +290,14 @@ class MineHomeViewController: UIViewController,UITableViewDataSource, UITableVie
         let rightItem = UIBarButtonItem(image: UIImage(named: "user_set"), style: .Done, target: nil, action: nil)
         rightItem.rac_command = RACCommand(signalBlock: { (sender) -> RACSignal! in
             let vc = PersonInfoViewController()
+            vc.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(vc, animated: true)
             return RACSignal.empty()
         })
         self.navigationItem.rightBarButtonItem = rightItem
     }
     private func dataInit(){
-        self.userCenterData = [[.UserHead,.UserMyOrder,.UserMyOrderMenu], [.UserWallet,.UserBankCard,.UserCardVolume,.UserMyCrowdFunding],[.UserMyStore,.UserVipClub,.UserCommission,.UserInvitation],[.UserHelp],[.UserMore]]
+        //.UserWallet,.UserBankCard,.UserMyCrowdFunding   [.UserMyStore,.UserVipClub,.UserCommission,.UserInvitation], [.UserMore]
+        self.userCenterData = [[.UserHead,.UserMyOrder,.UserMyOrderMenu], [.UserCardVolume],[.UserHelp],]
     }
 }

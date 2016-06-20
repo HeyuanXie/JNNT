@@ -1436,6 +1436,7 @@
                                             <outlet property="goodsImgV" destination="Ib2-4z-eIr" id="36a-aX-D8o"/>
                                             <outlet property="goodsNameLbl" destination="rHc-pH-BQL" id="ELu-P3-dHB"/>
                                             <outlet property="priceLbl" destination="4Yo-8K-bjt" id="f9c-kn-zSH"/>
+                                            <outlet property="quantityLbl" destination="hCZ-KH-5D9" id="1br-zI-TEO"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -4354,11 +4355,11 @@
             </objects>
             <point key="canvasLocation" x="304" y="791"/>
         </scene>
-        <!--分类-->
+        <!--购物车-->
         <scene sceneID="BNG-G1-ZbQ">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="iJO-CY-UPf" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="分类" id="yTV-SN-iBB"/>
+                    <tabBarItem key="tabBarItem" title="购物车" id="yTV-SN-iBB"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="OjV-W5-VB1">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>

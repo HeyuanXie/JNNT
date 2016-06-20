@@ -9,7 +9,6 @@
 import UIKit
 // 购物车
 class ShoppingCartViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,ZMDInterceptorProtocol {
-
     @IBOutlet weak var currentTableView: UITableView!
     @IBOutlet weak var settlementBtn: UIButton!
     @IBOutlet weak var allSelectBtn: UIButton!

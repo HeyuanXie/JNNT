@@ -337,7 +337,30 @@ class CustomVerticalBtn : UIButton {
         
     }
 }
-// 文字 字体
+// test
+// map faltmap
+class ZMDHaijie {
+    func func1() {
+        // 1
+        let numbers = [1,2,3,4]
+        let result = numbers.map { $0 + 2 }
+        print(result)  // [3,4,5,6]
+        let _ = numbers.map{"key_\($0)"}
+        // 2
+        let numbersCompound = [[1,2,3],[4,5,6]];
+        let _ = numbersCompound.map { $0.map{ $0 + 2 } }
+        // [[3, 4, 5], [6, 7, 8]]
+        let _ = numbersCompound.flatMap { $0.map{ $0 + 2 } }
+        // [3, 4, 5, 6, 7, 8]
+        
+        // 3
+        let optionalArray: [String?] = ["AA", nil, "BB", "CC"];
+        let _ = optionalArray.flatMap{ $0 } // ["AA", "BB", "CC"]
+        // 无效的图片过滤掉：
+        let imageNames = ["test.png", "aa.png", "icon.png"];
+        let _ = imageNames.flatMap{ UIImage(named: $0) }
+    }
+}
 
 
 

@@ -39,7 +39,22 @@ class OrderGoodsTableViewCell: UITableViewCell {
         priceLbl.text = item.SubTotal
         quantityLbl.text = "x\(item.Quantity)"
     }
-
+    // 我的订单
+    func configCellWithDic(dic:NSDictionary) {
+        if let product = dic["Product"] as? NSDictionary,let productPictures = product["ProductPictures"] as? NSArray,let pictureId = (productPictures[0] as! NSDictionary)["PictureId"],let name = product["Name"] {
+            goodsImgV.sd_setImageWithURL(NSURL(string: "http://xw.ccw.cn/picture/index/\(pictureId)"))
+            goodsNameLbl.text = "\(name)"
+        }
+        if let attributeDescription = dic["AttributeDescription"] as? String {
+            detailLbl.text = (attributeDescription as NSString).stringByReplacingOccurrencesOfString("<br />", withString: " ")
+        }
+        if let UnitPriceInclTax = dic["UnitPriceInclTax"] as? String {
+            priceLbl.text = UnitPriceInclTax
+        }
+        if let Quantity = dic["Quantity"] {
+            quantityLbl.text = "x\(Quantity)"
+        }
+    }
     func configCell(item:ZMDShoppingItem,scis:NSArray) {
         if let imgUrl = item.DefaultPictureModel?.ImageUrl {
             goodsImgV.sd_setImageWithURL(NSURL(string: imgUrl))

@@ -4295,6 +4295,7 @@
 				2B9A57131D06B6BA007A6D43 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3C90984F1C76A482006B7D2C /* Build configuration list for PBXProject "ZhiMaDi" */ = {
 			isa = XCConfigurationList;

@@ -125,7 +125,7 @@ class PersonInfoViewController:UIViewController,UITableViewDataSource, UITableVi
         case .Head:
             cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
             if self.headerView == nil {
-                self.headerView = UIImageView(frame: CGRectMake(kScreenWidth - 60 - 38 - 19 , 17, 60, 60))
+                self.headerView = UIImageView(frame: CGRectMake(kScreenWidth - 60 - 38 , 17, 60, 60))
                 self.headerView.autoresizingMask = UIViewAutoresizing.FlexibleLeftMargin
                 self.headerView.layer.masksToBounds = true
                 self.headerView.layer.cornerRadius = self.headerView.frame.width/2
@@ -219,7 +219,12 @@ class PersonInfoViewController:UIViewController,UITableViewDataSource, UITableVi
             return
         }
         ZMDTool.showActivityView("正在上传...", inView: self.view, nil)
-
+        QNNetworkTool.uploadCustomerHead(imageData, fileName: "image.jpg", customerId: NSString(string: "\(g_customerId!)")) { (dic, error) -> Void in
+            ZMDTool.hiddenActivityView()
+            if let dic = dic {
+                
+            }
+        }
 //        QNNetworkTool.uploadDoctorImage(imageData, fileName: "" + ".jpg", type: "groupUserFace") { (dictionary, error) -> Void in
             ZMDTool.hiddenActivityView()
 //            if dictionary != nil, let errorCode = dictionary?["errorCode"] as? String where errorCode == "0" {
@@ -273,12 +278,14 @@ class PersonInfoViewController:UIViewController,UITableViewDataSource, UITableVi
         self.tableView.dataSource = self
         self.tableView.delegate = self
         self.view.addSubview(self.tableView)
-        let footV = UIView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: 64 + 50))
+        let footV = UIView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: 64+50+20))
         footV.backgroundColor = UIColor.clearColor()
         let btn = ZMDTool.getButton(CGRect(x: 12, y: 64, width: kScreenWidth - 24, height: 50), textForNormal: "退出登录", fontSize: 17,textColorForNormal:RGB(173,173,173,1), backgroundColor: UIColor.clearColor()) { (sender) -> Void in
             cleanPassword()
             ZMDTool.enterLoginViewController()
         }
+        ZMDTool.configViewLayerWithSize(btn, size: 20)
+        ZMDTool.configViewLayerFrameWithColor(btn, color: defaultTextColor)
         footV.addSubview(btn)
         self.tableView.tableFooterView = footV
     }

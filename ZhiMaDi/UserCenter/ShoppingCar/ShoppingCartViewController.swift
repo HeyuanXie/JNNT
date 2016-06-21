@@ -119,12 +119,14 @@ class ShoppingCartViewController: UIViewController,UITableViewDataSource,UITable
         self.updateTotal()
         self.currentTableView.reloadData()
     }
-    // 结算
+    // MARK: - 结算
     @IBAction func settlementBtnCli(sender: UIButton) {
         if self.scis.count == 0 {
             return 
         }
+        ZMDTool.showActivityView(nil)
         QNNetworkTool.selectCart(self.getSciids(),completion: { (succeed, dictionary, error) -> Void in
+            ZMDTool.hiddenActivityView()
             if succeed! {
                 let vc = ConfirmOrderViewController.CreateFromMainStoryboard() as! ConfirmOrderViewController
                 vc.hidesBottomBarWhenPushed = true

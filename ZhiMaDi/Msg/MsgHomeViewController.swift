@@ -101,9 +101,9 @@ class MsgHomeViewController: UIViewController,UITableViewDataSource, UITableView
         let cellType = self.msgCellTypes[indexPath.row]
         cell?.imageView?.image = cellType.data.msgImg
         cell?.textLabel?.text = cellType.data.title
-        if cellType == .Activity {
-            cell?.contentView.setBadgeValue("3", center: CGPoint(x: CGRectGetMaxX(cell!.textLabel!.frame)+25, y: 27.5))
-        }
+//        if cellType == .Activity {
+//            cell?.contentView.setBadgeValue("3", center: CGPoint(x: CGRectGetMaxX(cell!.textLabel!.frame)+25, y: 27.5))
+//        }
         return cell!
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

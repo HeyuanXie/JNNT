@@ -192,9 +192,11 @@ class MineHomeViewController: UIViewController,UITableViewDataSource, UITableVie
         case .UserHead:
             let cellId = "HeadCell"
             let cell = tableView.dequeueReusableCellWithIdentifier(cellId)
-            if let personImgV = cell!.viewWithTag(10001) {
+            if let personImgV = cell!.viewWithTag(10001) as? UIImageView{
                 ZMDTool.configViewLayerWithSize(personImgV, size: 42)
-                
+                if let urlStr = g_customer?.Avatar?.AvatarUrl,url = NSURL(string: urlStr) {
+                    personImgV.sd_setImageWithURL(url)
+                }
             }
             let followBtn = cell?.viewWithTag(10003) as! UIButton
             followBtn.rac_command = RACCommand(signalBlock: { (sender) -> RACSignal! in

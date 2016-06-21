@@ -39,7 +39,6 @@ class PersonInfoViewController:UIViewController,UITableViewDataSource, UITableVi
             }
         }
 
-        
         var pushViewController :UIViewController{
             let viewController: UIViewController
             switch self{
@@ -130,16 +129,21 @@ class PersonInfoViewController:UIViewController,UITableViewDataSource, UITableVi
                 self.headerView.layer.masksToBounds = true
                 self.headerView.layer.cornerRadius = self.headerView.frame.width/2
                 self.headerView.image = UIImage(named: "Home_Buy_PeopleTest")
+                cell.contentView.addSubview(self.headerView)
             }
-            cell.contentView.addSubview(self.headerView)
+            if let urlStr = g_customer?.Avatar?.AvatarUrl,url = NSURL(string: urlStr) {
+                self.headerView.sd_setImageWithURL(url)
+            }
         case .NickN:
             cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
-            self.nameLB = UILabel(frame: CGRectMake(kScreenWidth - 100 - 38 , 0, 100, tableViewCellDefaultHeight))
-            self.nameLB.font = UIFont.systemFontOfSize(17)
-            self.nameLB.text = "张三"
-            self.nameLB.textAlignment = NSTextAlignment.Right
-            self.nameLB.textColor = defaultDetailTextColor
-            cell.contentView.addSubview(self.nameLB)
+            if self.nameLB == nil {
+                self.nameLB = UILabel(frame: CGRectMake(kScreenWidth - 100 - 38 , 0, 100, tableViewCellDefaultHeight))
+                self.nameLB.font = UIFont.systemFontOfSize(17)
+                self.nameLB.textAlignment = NSTextAlignment.Right
+                self.nameLB.textColor = defaultDetailTextColor
+                cell.contentView.addSubview(self.nameLB)
+            }
+            self.nameLB.text = g_customer?.FirstName ?? ""
         case .RealName:
             cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
             self.sexLB = UILabel(frame: CGRectMake(kScreenWidth - 100 - 38, 0,100, tableViewCellDefaultHeight))
@@ -205,7 +209,6 @@ class PersonInfoViewController:UIViewController,UITableViewDataSource, UITableVi
         let headImageData = UIImageJPEGRepresentation(self.imageWithImageSimple(image, scaledSize: size), 0.125) //压缩
         self.uploadUserFace(headImageData)
         self.picker?.dismissViewControllerAnimated(true, completion: nil)
-        self.headerView.image = UIImage(data: headImageData!)
     }
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
@@ -219,33 +222,16 @@ class PersonInfoViewController:UIViewController,UITableViewDataSource, UITableVi
             return
         }
         ZMDTool.showActivityView("正在上传...", inView: self.view, nil)
-        QNNetworkTool.uploadCustomerHead(imageData, fileName: "image.jpg", customerId: NSString(string: "\(g_customerId!)")) { (dic, error) -> Void in
+         QNNetworkTool.uploadCustomerHead(imageData, fileName: "image.jpeg", customerId: NSString(string: "\(g_customerId!)")) { (succeed, dic, error) -> Void in
             ZMDTool.hiddenActivityView()
-            if let dic = dic {
-                
+            if succeed {
+                if let urlStr = g_customer?.Avatar?.AvatarUrl,url = NSURL(string: urlStr) {
+                    self.headerView.sd_setImageWithURL(url)
+                }
+            }else {
+                ZMDTool.showPromptView( "上传失败,点击重试或者重新选择图片", nil)
             }
         }
-//        QNNetworkTool.uploadDoctorImage(imageData, fileName: "" + ".jpg", type: "groupUserFace") { (dictionary, error) -> Void in
-            ZMDTool.hiddenActivityView()
-//            if dictionary != nil, let errorCode = dictionary?["errorCode"] as? String where errorCode == "0" {
-//                let dict = dictionary!["data"] as! NSDictionary
-//                let urlStr = dict["url"] as! String
-//                let fileName = dict["fileName"] as! String
-//                for temp in g_currentGroup!.users {
-//                    if temp.id == self.user.id {
-//                        temp.photoURL = urlStr
-//                    }
-//                }
-//                self.updateGroupPhoto(fileName,url: urlStr)
-//                self.headerView.sd_setImageWithURL(NSURL(string: urlStr), placeholderImage: UIImage(named: "UserCenter_HeaderImage"))
-//                self.tableView.reloadData()
-//                
-//            }else {
-//                QNTool.showPromptView( "上传失败,点击重试或者重新选择图片", nil)
-//            }
-//            
-//        }
-        
     }
     // 压缩图片
     private func imageWithImageSimple(image: UIImage, scaledSize: CGSize) -> UIImage {

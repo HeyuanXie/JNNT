@@ -307,6 +307,6 @@ class MyStoreOrderDetailViewController: UIViewController,ZMDInterceptorProtocol 
         self.view.addSubview(bottomView)
     }
     private func dataInit(){
-        self.userCenterData = [[.OrderNum,.LogisticsMsg,.AcceptMsg], [.Goods,.Service],[.Pay,.Mark,.Invoice,.Discount,.Jifeng],[.Total]]
+        self.userCenterData = [[.OrderNum,.AcceptMsg], [.Goods,.Service],[.Pay,.Mark,.Invoice,.Discount,.Jifeng],[.Total]]
     }
 }

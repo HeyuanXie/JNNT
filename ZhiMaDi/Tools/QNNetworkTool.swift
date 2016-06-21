@@ -183,11 +183,12 @@ extension QNNetworkTool {
     private class func uploadRequest(url: NSURL!, method: NSString, data: NSData, fileName: NSString,customerId: Int) -> NSURLRequest {
         
         let request = self.productRequest(url, method: method)
+        request.addValue("image/jpeg", forHTTPHeaderField: "ContentType")
         // 定制一post方式上传数据，数据格式必须和下面方式相同
         let boundary = "abcdefg"
         request.setValue(String(format: "multipart/form-data;boundary=%@", boundary), forHTTPHeaderField: "Content-Type")
         let str1 = NSMutableString(format: "--%@\r\nContent-Disposition: form-data; name=\"%@\"\r\n\r\n%d\r\n",boundary, "customerId",customerId)
-        let str = NSMutableString(format: "%@--%@\r\nContent-Disposition: form-data; name=\"%@\";filename=\"%@\"\r\nContent-Type: %@\r\nContent-Transfer-Encoding: binary\r\n\r\n",str1,boundary, "img", fileName, "application/octet-stream")
+        let str = NSMutableString(format: "%@--%@\r\nContent-Disposition: form-data; name=\"%@\";filename=\"%@\"\r\nContent-Type: %@\r\nContent-Transfer-Encoding: binary\r\n\r\n",str1,boundary, "file", fileName, "image/jpeg")  //  application/octet-stream
         // 配置内容
         let bodyData = str.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false) as! NSMutableData
         bodyData.appendData(data)
@@ -235,7 +236,7 @@ extension QNNetworkTool {
                 completion(success:false,error: error,dictionary:nil)
                 return
             }
-            if (dic["Success"] as? NSNumber)!.boolValue {
+            if (dic["success"] as? NSNumber)!.boolValue {
                 completion(success:true,error: nil,dictionary:nil)
             } else {
                 completion(success:false,error: nil,dictionary:nil)
@@ -244,13 +245,19 @@ extension QNNetworkTool {
     }
     // 用户登录  /api/v1/extend/Login/
     class func loginAjax(Username:String,Password:String,completion: (success: Bool!,error:NSError?,dictionary:NSDictionary?) -> Void){
-        requestPOST(kServerAddress + "/api/v1/extend/Login/LoginAjax", parameters: paramsToJsonDataParams(["Username" : Username,"Password" : Password])) { (_,response, _, dictionary, error) -> Void in
+        requestPOST(kServerAddress + "/api/v1/extend/Login/LoginAjax", parameters: ["Username" : Username,"Password" : Password]) { (_,response, _, dictionary, error) -> Void in
             guard let dic = dictionary,success = dic["success"] as? Bool where success else {
                 completion(success:false,error: error,dictionary:nil)
                 return
             }
             if let customerId = dic["customerId"] as? Int {
                 g_customerId = customerId
+            }
+            if let customerDic = dic["customer"] as? NSDictionary,customer = ZMDCustomer.mj_objectWithKeyValues(customerDic) {
+                g_customer = customer
+                if let url = g_customer?.Avatar?.AvatarUrl  {
+                    g_customer?.Avatar?.AvatarUrl = kImageAddressMain + url
+                }
             }
             completion(success:true,error: nil,dictionary:nil)
         }
@@ -262,7 +269,7 @@ extension QNNetworkTool {
                 completion(success:false,error: error,dictionary:nil)
                 return
             }
-            if (dic["Success"] as? NSNumber)!.boolValue {
+            if (dic["success"] as? NSNumber)!.boolValue {
                 if let customerId = dic["customerId"] as? Int {
                     g_customerId = customerId
                 }
@@ -275,7 +282,7 @@ extension QNNetworkTool {
     // 修改密码
     class func changePassword(mobile:String,code:String,psw:String,completion: (success: Bool!,error:NSError?,dictionary:NSDictionary?) -> Void){
         requestPOST(kServerAddress + "/api/v1/extend/Login/ChangePassword", parameters: paramsToJsonDataParams(["mobile" : mobile,"code" : code,"psw":psw])) { (_,response, _, dictionary, error) -> Void in
-            guard let dic = dictionary ,success = dic["Success"] as? NSDictionary , succeed = success["Success"] as? Bool where succeed else {
+            guard let dic = dictionary , succeed = dic["success"] as? Bool where succeed else {
                 completion(success:false,error: error,dictionary:nil)
                 return
             }
@@ -294,46 +301,22 @@ extension QNNetworkTool {
      - parameter customerId: customerId description
      - parameter completion: completion description
      */
-    class func uploadCustomerHead(file: NSData, fileName: NSString,customerId: NSString, completion: (NSDictionary?, NSError?) -> Void) {
+    class func uploadCustomerHead(file: NSData, fileName: NSString,customerId: NSString, completion: (succeed : Bool,dic:NSDictionary?, error:NSError?) -> Void) {
         let url = NSURL(string: kServerAddress+"/api/v1/uploads/CustomerAvtar")
 //        request(ParameterEncoding.URL.encode(self.uploadRequest(url, method: "POST", data: file, fileName: "file",customerId:g_customerId!), parameters: nil).0).response{
-        request(self.uploadRequest(url, method: "POST", data: file, fileName: "file",customerId:g_customerId!)).response{
+        request(self.uploadRequest(url, method: "POST", data: file, fileName: fileName,customerId:g_customerId!)).response{
             do {
                 let jsonObject: AnyObject? = try NSJSONSerialization.JSONObjectWithData($2!, options: NSJSONReadingOptions.MutableContainers)
-                let dictionary = jsonObject as? NSDictionary
-                completion(dictionary, $3)
-            } catch {}
-        }
-        
-        let tmpRequest = ParameterEncoding.URL.encode(self.productRequest(url, method: "POST"), parameters: ["customerId":g_customerId!]).0
-        upload(tmpRequest, data: file).response{
-            do {
-                let jsonObject: AnyObject? = try NSJSONSerialization.JSONObjectWithData($2!, options: NSJSONReadingOptions.MutableContainers)
-                let dictionary = jsonObject as? NSDictionary
-                completion(dictionary, $3)
-            } catch {}
-        }
-        upload(tmpRequest, multipartFormData: { (multipartFormData) -> Void in
-            multipartFormData.appendBodyPart(data: file, name: "file")
-            }) { (encodingResult) -> Void in
-                switch encodingResult {
-                case .Success(let upload, _, _):
-                    upload.responseJSON(completionHandler: { (Response) -> Void in
-                        var value = Response.result.value
-                        let data = Response.data
-                        let _ = ""
-                        do {
-                            let jsonObject: AnyObject? = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers)
-                            let dictionary = jsonObject as? NSDictionary
-                            let _ = ""
-                        } catch {}
-                    })
-                    break
-                case .Failure:
-                    break
+                guard let data = jsonObject as? NSArray,dic = data[0] as? NSDictionary,url = dic["ImageUrl"] as? String else {
+                    completion(succeed: false, dic: nil, error: $3)
+                    return
                 }
+                g_customer?.Avatar?.AvatarUrl = url
+                completion(succeed: true, dic: dic, error: $3)
+            } catch {}
         }
     }
+
 }
 //MARK:- 产品相关
 extension QNNetworkTool {
@@ -553,7 +536,7 @@ extension QNNetworkTool {
         }
     }
     
-    //
+    // 获取订单
     class func fetchOrder(completion: ( value: NSArray?,error: NSError?) -> Void) {
         var str = kOdataAddress + "/Orders?$top=1&$filter=OrderStatusId eq 10 and CustomerId eq 1 &$expand=OrderItems,OrderItems/Product,OrderItems/Product/ProductPictures&$select=OrderTotal,OrderItems/Product/Name,OrderItems/UnitPriceInclTax,OrderItems/UnitPriceExclTax,OrderItems/Quantity,Id,OrderItems/AttributeDescription,OrderItems/Product/ProductPictures/PictureId,OrderStatusId,ShippingStatusId,PaymentStatusId&$skip=9"
         str = str.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
@@ -571,6 +554,21 @@ extension QNNetworkTool {
             catch {
                 completion(value:nil, error: nil)
             }
+        }
+    }
+    /**
+     订单详情
+     
+     - parameter orderid:    订单ID
+     - parameter completion: completion description
+     */
+    class func orderDetail(orderid: String,completion: (succeed : Bool!,dictionary:NSDictionary?,error: NSError?) -> Void) {
+        requestPOST(kServerAddress + "/api/v1/extend/order/Details", parameters: ["orderid" : orderid]) { (_, _, _, dictionary, error) -> Void in
+            guard let dic = dictionary else {
+                completion(succeed:false,dictionary: dictionary, error: error)
+                return
+            }
+            completion(succeed:true,dictionary: dic, error: nil)
         }
     }
 }

@@ -482,6 +482,7 @@
 		2BD96D211CC76A34005DC87F /* list_shupai@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BD96D091CC76A34005DC87F /* list_shupai@2x.png */; };
 		2BD96D221CC76A34005DC87F /* list_shupai@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BD96D0A1CC76A34005DC87F /* list_shupai@3x.png */; };
 		2BD96D241CC785A4005DC87F /* VipClubGoodsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD96D231CC785A4005DC87F /* VipClubGoodsTableViewCell.swift */; };
+		2BDC09051D18EFF2008F26A8 /* ZMDCustomer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BDC09041D18EFF2008F26A8 /* ZMDCustomer.swift */; };
 		2BDEF38D1C7DB5FB00927F64 /* Navigation_Back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BDEF38C1C7DB5FB00927F64 /* Navigation_Back@2x.png */; };
 		2BDEF38F1C7DB73500927F64 /* HomeBuyListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BDEF38E1C7DB73500927F64 /* HomeBuyListViewController.swift */; };
 		2BDEF3931C7E9D5700927F64 /* Home_Buy_Back03@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BDEF3911C7E9D5700927F64 /* Home_Buy_Back03@2x.png */; };
@@ -1251,6 +1252,7 @@
 		2BD96D091CC76A34005DC87F /* list_shupai@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "list_shupai@2x.png"; sourceTree = "<group>"; };
 		2BD96D0A1CC76A34005DC87F /* list_shupai@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "list_shupai@3x.png"; sourceTree = "<group>"; };
 		2BD96D231CC785A4005DC87F /* VipClubGoodsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VipClubGoodsTableViewCell.swift; sourceTree = "<group>"; };
+		2BDC09041D18EFF2008F26A8 /* ZMDCustomer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZMDCustomer.swift; sourceTree = "<group>"; };
 		2BDEF38C1C7DB5FB00927F64 /* Navigation_Back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Navigation_Back@2x.png"; sourceTree = "<group>"; };
 		2BDEF38E1C7DB73500927F64 /* HomeBuyListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeBuyListViewController.swift; sourceTree = "<group>"; };
 		2BDEF3911C7E9D5700927F64 /* Home_Buy_Back03@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Home_Buy_Back03@2x.png"; sourceTree = "<group>"; };
@@ -1510,7 +1512,7 @@
 		3C9098F21C76A6E9006B7D2C /* QNChartsTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QNChartsTool.swift; sourceTree = "<group>"; };
 		3C9098F31C76A6E9006B7D2C /* QNFormatTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QNFormatTool.swift; sourceTree = "<group>"; };
 		3C9098F41C76A6E9006B7D2C /* QNInterceptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QNInterceptor.swift; sourceTree = "<group>"; };
-		3C9098F51C76A6E9006B7D2C /* QNNetworkTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QNNetworkTool.swift; sourceTree = "<group>"; };
+		3C9098F51C76A6E9006B7D2C /* QNNetworkTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = QNNetworkTool.swift; sourceTree = "<group>"; };
 		3C9098F61C76A6E9006B7D2C /* ZMDTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZMDTool.swift; sourceTree = "<group>"; };
 		B87B3CB9214E0C97B64D9460 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		EAA66A338C1BF41B2A7175DB /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -2819,6 +2821,7 @@
 				2BC4E7341CF44D79007C0AC5 /* ZMDOrder.swift */,
 				2BEAE9091CF693EF00727B04 /* ZMDAdvertisement.swift */,
 				2BC0EA971D051930004BF176 /* ZMDCoupon.swift */,
+				2BDC09041D18EFF2008F26A8 /* ZMDCustomer.swift */,
 			);
 			path = DataModule;
 			sourceTree = "<group>";
@@ -4002,6 +4005,7 @@
 				2BD96CEF1CC717D3005DC87F /* StoreShowHomeViewController.swift in Sources */,
 				3C9099551C76A6E9006B7D2C /* ChartSelectionDetail.swift in Sources */,
 				3C90991D1C76A6E9006B7D2C /* CandleChartDataEntry.swift in Sources */,
+				2BDC09051D18EFF2008F26A8 /* ZMDCustomer.swift in Sources */,
 				3C90991F1C76A6E9006B7D2C /* ChartData.swift in Sources */,
 				2B74BEB31CDC9B49005E0866 /* GoodsManagerBatchCell.swift in Sources */,
 				2BC05C6F1CB630F700D3B1AE /* WalletCaseViewController.swift in Sources */,

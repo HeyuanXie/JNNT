@@ -89,7 +89,7 @@ class MyOrderDetailViewController: UIViewController,ZMDInterceptorProtocol {
     
     @IBOutlet weak var currentTableView: UITableView!
     var userCenterData: [[UserCenterCellType]]!
-    
+    var address : ZMDAddress!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -190,16 +190,29 @@ class MyOrderDetailViewController: UIViewController,ZMDInterceptorProtocol {
                 cell?.accessoryType = UITableViewCellAccessoryType.None
                 cell!.selectionStyle = .None
                 ZMDTool.configTableViewCellDefault(cell!)
+                
+                var tag = 10001
+                let userLbl = ZMDTool.getLabel(CGRect(x: 12, y: 16, width: 300, height: 17), text: "收货人 ：葫芦一娃", fontSize: 17)
+                userLbl.tag = tag++
+                cell?.contentView.addSubview(userLbl)
+                let phoneLbl = ZMDTool.getLabel(CGRect(x: kScreenWidth - 12 - 120, y: 16, width: 300, height: 17), text: "13780338447", fontSize: 17)
+                phoneLbl.tag = tag++
+                cell?.contentView.addSubview(phoneLbl)
+                let addressStr = "收货地址:广东省东莞市松山湖高新技术产业园新新"
+                let addressSize = addressStr.sizeWithFont(defaultSysFontWithSize(17), maxWidth: kScreenWidth - 24)
+                let addressLbl = ZMDTool.getLabel(CGRect(x: 12, y: 16 + 17 + 15, width: kScreenWidth - 24, height: addressSize.height), text: addressStr, fontSize: 17)
+                addressLbl.numberOfLines = 2
+                addressLbl.tag = tag++
+                cell?.contentView.addSubview(addressLbl)
             }
-            let userLbl = ZMDTool.getLabel(CGRect(x: 12, y: 16, width: 300, height: 17), text: "收货人 ：葫芦一娃", fontSize: 17)
-            cell?.contentView.addSubview(userLbl)
-            let phoneLbl = ZMDTool.getLabel(CGRect(x: kScreenWidth - 12 - 120, y: 16, width: 300, height: 17), text: "13780338447", fontSize: 17)
-            cell?.contentView.addSubview(phoneLbl)
-            let addressStr = "收货地址:广东省东莞市松山湖高新技术产业园新新"
-            let addressSize = addressStr.sizeWithFont(defaultSysFontWithSize(17), maxWidth: kScreenWidth - 24)
-            let addressLbl = ZMDTool.getLabel(CGRect(x: 12, y: 16 + 17 + 15, width: kScreenWidth - 24, height: addressSize.height), text: addressStr, fontSize: 17)
-            addressLbl.numberOfLines = 2
-            cell?.contentView.addSubview(addressLbl)
+            var tag = 10001
+            let userLbl = cell?.viewWithTag(tag++) as! UILabel
+            let phoneLbl = cell?.viewWithTag(tag++) as! UILabel
+            let addressLbl = cell?.viewWithTag(tag++) as! UILabel
+            userLbl.text = ""
+            phoneLbl.text = ""
+            addressLbl.text = ""
+
             return cell!
         case .Store :
             let cellId = "StoreCell"
@@ -297,9 +310,11 @@ class MyOrderDetailViewController: UIViewController,ZMDInterceptorProtocol {
         }
     }
     //MARK:Private Method
-//    func configHead() {
-//        
-//    }
+    func fetchData() {
+        QNNetworkTool.orderDetail("") { (succeed, dictionary, error) -> Void in
+            
+        }
+    }
     func updateUI() {
         self.currentTableView.backgroundColor = tableViewdefaultBackgroundColor
         
@@ -311,15 +326,16 @@ class MyOrderDetailViewController: UIViewController,ZMDInterceptorProtocol {
         ZMDTool.configViewLayerFrameWithColor(confirmBtn, color: RGB(235,61,61,1.0))
         ZMDTool.configViewLayer(confirmBtn)
         view.addSubview(confirmBtn)
-        let checkBtn = ZMDTool.getButton(CGRect(x: kScreenWidth - 12 - 90 - 10 - 90, y: 12, width: 90, height: 34), textForNormal: "查看物流", fontSize: 15,backgroundColor: UIColor.whiteColor()) { (sender) -> Void in
-            
-        }
-        ZMDTool.configViewLayerFrameWithColor(checkBtn, color: defaultTextColor)
-        ZMDTool.configViewLayer(checkBtn)
-        view.addSubview(checkBtn)
+//        let checkBtn = ZMDTool.getButton(CGRect(x: kScreenWidth - 12 - 90 - 10 - 90, y: 12, width: 90, height: 34), textForNormal: "查看物流", fontSize: 15,backgroundColor: UIColor.whiteColor()) { (sender) -> Void in
+//            
+//        }
+//        ZMDTool.configViewLayerFrameWithColor(checkBtn, color: defaultTextColor)
+//        ZMDTool.configViewLayer(checkBtn)
+//        view.addSubview(checkBtn)
         self.view.addSubview(view)
     }
     private func dataInit(){
-        self.userCenterData = [[.OrderNum,.LogisticsMsg,.AcceptMsg], [.Store,.Goods,.Service],[.Pay,.Mark,.Invoice,.Discount,.Jifeng],[.Total]]
+        self.userCenterData = [[.OrderNum,.AcceptMsg], [.Goods],[.Pay,.Mark,.Invoice],[.Total]]
     }
+    
 }

@@ -215,6 +215,7 @@
 		2B3AC61A1C97E8BF00CC8662 /* OrderDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B3AC6191C97E8BF00CC8662 /* OrderDetailViewController.swift */; };
 		2B3AC61C1C97FAE000CC8662 /* VerificationPSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B3AC61B1C97FAE000CC8662 /* VerificationPSViewController.swift */; };
 		2B3ADCBB1CDAF90600A0C63B /* GoodsManagerHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B3ADCBA1CDAF90600A0C63B /* GoodsManagerHomeViewController.swift */; };
+		2B4E982F1D1A91A1008A35DF /* ZMDPaymentMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4E982E1D1A91A1008A35DF /* ZMDPaymentMethod.swift */; };
 		2B539A931C992C6100FFE6CD /* ShareSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B539A711C992C6100FFE6CD /* ShareSDK.framework */; };
 		2B539A941C992C6100FFE6CD /* ShareSDKExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B539A741C992C6100FFE6CD /* ShareSDKExtension.framework */; };
 		2B539A951C992C6100FFE6CD /* ShareSDKUI.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2B539A751C992C6100FFE6CD /* ShareSDKUI.bundle */; };
@@ -343,6 +344,7 @@
 		2B74BEB11CDC9897005E0866 /* GoodsManagerBatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B74BEB01CDC9897005E0866 /* GoodsManagerBatchViewController.swift */; };
 		2B74BEB31CDC9B49005E0866 /* GoodsManagerBatchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B74BEB21CDC9B49005E0866 /* GoodsManagerBatchCell.swift */; };
 		2B79155D1CEAF54B00182F82 /* ZMDCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B79155C1CEAF54B00182F82 /* ZMDCategory.swift */; };
+		2B7966751D1B8A85002E4777 /* ZMDOrderDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7966741D1B8A85002E4777 /* ZMDOrderDetail.swift */; };
 		2B8739C61CBF3BAD007FE81A /* MineBroweRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8739C51CBF3BAD007FE81A /* MineBroweRecordViewController.swift */; };
 		2B8739C81CBF45D0007FE81A /* MineHomeHelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8739C71CBF45D0007FE81A /* MineHomeHelpViewController.swift */; };
 		2B8739CB1CBF6342007FE81A /* InvitationShareHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8739CA1CBF6342007FE81A /* InvitationShareHomeViewController.swift */; };
@@ -451,6 +453,7 @@
 		2BC0EA981D051930004BF176 /* ZMDCoupon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC0EA971D051930004BF176 /* ZMDCoupon.swift */; };
 		2BC0EA9A1D052877004BF176 /* DiscountCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC0EA991D052877004BF176 /* DiscountCardViewController.swift */; };
 		2BC0EA9C1D055348004BF176 /* ZMDFileHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC0EA9B1D055348004BF176 /* ZMDFileHelper.swift */; };
+		2BC413671D2A5BF5006E35C0 /* ShareSDKThirdLoginHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BC413661D2A5BF5006E35C0 /* ShareSDKThirdLoginHelper.m */; };
 		2BC4E7351CF44D79007C0AC5 /* ZMDOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC4E7341CF44D79007C0AC5 /* ZMDOrder.swift */; };
 		2BC861571CD8349500B8D449 /* MyStoreAddLeaseHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC861561CD8349500B8D449 /* MyStoreAddLeaseHomeViewController.swift */; };
 		2BC861591CD8393D00B8D449 /* MyStoreAddLeaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC861581CD8393D00B8D449 /* MyStoreAddLeaseViewController.swift */; };
@@ -957,6 +960,7 @@
 		2B3AC6191C97E8BF00CC8662 /* OrderDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderDetailViewController.swift; sourceTree = "<group>"; };
 		2B3AC61B1C97FAE000CC8662 /* VerificationPSViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerificationPSViewController.swift; sourceTree = "<group>"; };
 		2B3ADCBA1CDAF90600A0C63B /* GoodsManagerHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoodsManagerHomeViewController.swift; sourceTree = "<group>"; };
+		2B4E982E1D1A91A1008A35DF /* ZMDPaymentMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZMDPaymentMethod.swift; sourceTree = "<group>"; };
 		2B539A711C992C6100FFE6CD /* ShareSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDK.framework; sourceTree = "<group>"; };
 		2B539A741C992C6100FFE6CD /* ShareSDKExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDKExtension.framework; sourceTree = "<group>"; };
 		2B539A751C992C6100FFE6CD /* ShareSDKUI.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ShareSDKUI.bundle; sourceTree = "<group>"; };
@@ -1100,6 +1104,7 @@
 		2B74BEB01CDC9897005E0866 /* GoodsManagerBatchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoodsManagerBatchViewController.swift; sourceTree = "<group>"; };
 		2B74BEB21CDC9B49005E0866 /* GoodsManagerBatchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoodsManagerBatchCell.swift; sourceTree = "<group>"; };
 		2B79155C1CEAF54B00182F82 /* ZMDCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZMDCategory.swift; sourceTree = "<group>"; };
+		2B7966741D1B8A85002E4777 /* ZMDOrderDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZMDOrderDetail.swift; sourceTree = "<group>"; };
 		2B8739C51CBF3BAD007FE81A /* MineBroweRecordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineBroweRecordViewController.swift; sourceTree = "<group>"; };
 		2B8739C71CBF45D0007FE81A /* MineHomeHelpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineHomeHelpViewController.swift; sourceTree = "<group>"; };
 		2B8739CA1CBF6342007FE81A /* InvitationShareHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvitationShareHomeViewController.swift; sourceTree = "<group>"; };
@@ -1221,6 +1226,8 @@
 		2BC0EA971D051930004BF176 /* ZMDCoupon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZMDCoupon.swift; sourceTree = "<group>"; };
 		2BC0EA991D052877004BF176 /* DiscountCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscountCardViewController.swift; sourceTree = "<group>"; };
 		2BC0EA9B1D055348004BF176 /* ZMDFileHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZMDFileHelper.swift; sourceTree = "<group>"; };
+		2BC413651D2A5BF5006E35C0 /* ShareSDKThirdLoginHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareSDKThirdLoginHelper.h; sourceTree = "<group>"; };
+		2BC413661D2A5BF5006E35C0 /* ShareSDKThirdLoginHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareSDKThirdLoginHelper.m; sourceTree = "<group>"; };
 		2BC4E7341CF44D79007C0AC5 /* ZMDOrder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZMDOrder.swift; sourceTree = "<group>"; };
 		2BC861561CD8349500B8D449 /* MyStoreAddLeaseHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyStoreAddLeaseHomeViewController.swift; sourceTree = "<group>"; };
 		2BC861581CD8393D00B8D449 /* MyStoreAddLeaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyStoreAddLeaseViewController.swift; sourceTree = "<group>"; };
@@ -2822,6 +2829,8 @@
 				2BEAE9091CF693EF00727B04 /* ZMDAdvertisement.swift */,
 				2BC0EA971D051930004BF176 /* ZMDCoupon.swift */,
 				2BDC09041D18EFF2008F26A8 /* ZMDCustomer.swift */,
+				2B4E982E1D1A91A1008A35DF /* ZMDPaymentMethod.swift */,
+				2B7966741D1B8A85002E4777 /* ZMDOrderDetail.swift */,
 			);
 			path = DataModule;
 			sourceTree = "<group>";
@@ -3091,6 +3100,8 @@
 				2B9708021CEC0A32008BAEC4 /* LoginWithCodeViewController.swift */,
 				2BF8D8BE1CAE67D7006E0C4D /* PsWordFindViewController.swift */,
 				2BF8D8C01CAE6CFB006E0C4D /* ResisterViewController.swift */,
+				2BC413651D2A5BF5006E35C0 /* ShareSDKThirdLoginHelper.h */,
+				2BC413661D2A5BF5006E35C0 /* ShareSDKThirdLoginHelper.m */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -3810,6 +3821,7 @@
 				3C9099531C76A6E9006B7D2C /* ScatterChartRenderer.swift in Sources */,
 				2BF8D8C11CAE6CFB006E0C4D /* ResisterViewController.swift in Sources */,
 				2BEBF5F01CBB843C00830585 /* CardVolumeMemberDetailViewController.swift in Sources */,
+				2BC413671D2A5BF5006E35C0 /* ShareSDKThirdLoginHelper.m in Sources */,
 				2B02B5531CAE18230064B47C /* OrderLogisticsMsgViewController.swift in Sources */,
 				3C90986F1C76A6AA006B7D2C /* Constents.swift in Sources */,
 				2B3AC61C1C97FAE000CC8662 /* VerificationPSViewController.swift in Sources */,
@@ -3974,6 +3986,7 @@
 				3C9099391C76A6E9006B7D2C /* BarLineScatterCandleBubbleChartDataProvider.swift in Sources */,
 				3C9099081C76A6E9006B7D2C /* LineChartView.swift in Sources */,
 				3C90994B1C76A6E9006B7D2C /* ChartYAxisRendererHorizontalBarChart.swift in Sources */,
+				2B7966751D1B8A85002E4777 /* ZMDOrderDetail.swift in Sources */,
 				2B02B54F1CAD21E70064B47C /* CashierViewController.swift in Sources */,
 				3C90991E1C76A6E9006B7D2C /* CandleChartDataSet.swift in Sources */,
 				2B9DB8A61C801BF500259910 /* HomeBuyGoodsSearchViewController.swift in Sources */,
@@ -3984,6 +3997,7 @@
 				2B9708031CEC0A32008BAEC4 /* LoginWithCodeViewController.swift in Sources */,
 				3C9099431C76A6E9006B7D2C /* ChartDataRendererBase.swift in Sources */,
 				2BA2231A1CE9B169006BC426 /* MJPropertyType.m in Sources */,
+				2B4E982F1D1A91A1008A35DF /* ZMDPaymentMethod.swift in Sources */,
 				3C90990B1C76A6E9006B7D2C /* RadarChartView.swift in Sources */,
 				2B8739C81CBF45D0007FE81A /* MineHomeHelpViewController.swift in Sources */,
 				3C9099331C76A6E9006B7D2C /* ChartHighlight.swift in Sources */,
@@ -4212,7 +4226,7 @@
 					"-ObjC",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
-				PRODUCT_BUNDLE_IDENTIFIER = ZhiMadi.Hulubao.app.test;
+				PRODUCT_BUNDLE_IDENTIFIER = ZhiMadi.Hulubao.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "ZhiMaDi/ZhiMaDi-Bridging-Header.h";
@@ -4282,7 +4296,7 @@
 					"-ObjC",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
-				PRODUCT_BUNDLE_IDENTIFIER = ZhiMadi.Hulubao.app.test;
+				PRODUCT_BUNDLE_IDENTIFIER = ZhiMadi.Hulubao.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "ZhiMaDi/ZhiMaDi-Bridging-Header.h";

@@ -10,12 +10,12 @@ import UIKit
 // 收藏的商品
 class MineCollectionViewController: UIViewController,UITableViewDataSource, UITableViewDelegate,ZMDInterceptorProtocol,ZMDInterceptorMoreProtocol {
     var currentTableView: UITableView!
-    var data : NSArray!
+    var data = NSMutableArray()
     let goodses  = ["全部(5)","婴儿床","床垫","儿童椅","奶酪","七万"]
     override func viewDidLoad() {
         super.viewDidLoad()
         self.subViewInit()
-        self.data = ["","",""]
+        self.dataUpdate()
     }
     
     override func didReceiveMemoryWarning() {
@@ -77,19 +77,30 @@ class MineCollectionViewController: UIViewController,UITableViewDataSource, UITa
         let freightLbl = cell?.viewWithTag(tag++) as! UILabel
         let cancelBtn = cell?.viewWithTag(tag++) as! UIButton
         
-        imgV.image = UIImage(named: "product_pic")
-        goodsLbl.text = "星球系列毛毛虫"
-        goodsPriceLbl.attributedText = "495.0 594.0".AttributedText("594.0", color: RGB(235,61,61,1.0))
-        freightLbl.text = "运费 30"
-        cancelBtn.rac_signalForControlEvents(.TouchUpInside).subscribeNext { (sender) -> Void in
-            
+        if let item = self.data[indexPath.row] as? ZMDShoppingItem {
+            if let imgUrl = item.Picture?.ImageUrl {
+                imgV.sd_setImageWithURL(NSURL(string: kImageAddressMain+imgUrl))
+            }
+            goodsLbl.text = item.ProductName
+            //        detailLbl.text = (item.AttributeInfo as NSString).stringByReplacingOccurrencesOfString("<br />", withString: " ")
+            goodsPriceLbl.text = item.SubTotal
+            //        goodsPriceLbl.attributedText = "495.0 594.0".AttributedText("594.0", color: RGB(235,61,61,1.0))
+            //        freightLbl.text = "运费 30"
+            cancelBtn.rac_signalForControlEvents(.TouchUpInside).subscribeNext { (sender) -> Void in
+                // 取消收藏
+                self.deleteCartItem("\(item.Id)")
+            }
         }
         return cell!
     }
-
+    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let vc = HomeBuyGoodsDetailViewController.CreateFromMainStoryboard() as! HomeBuyGoodsDetailViewController
-        self.navigationController?.pushViewController(vc, animated: true)
+        if indexPath.section == 1 {
+            let item = self.data[indexPath.row] as? ZMDShoppingItem
+            let vc = HomeBuyGoodsDetailViewController.CreateFromMainStoryboard() as! HomeBuyGoodsDetailViewController
+            vc.productId = item?.Id.integerValue
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
     //MARK: -  PrivateMethod
     private func subViewInit(){
@@ -100,6 +111,29 @@ class MineCollectionViewController: UIViewController,UITableViewDataSource, UITa
         self.currentTableView.dataSource = self
         self.currentTableView.delegate = self
         self.view.addSubview(self.currentTableView)
+    }
+    func dataUpdate() {
+        QNNetworkTool.fetchShoppingCart(2){ (shoppingItems, dictionary, error) -> Void in
+            if shoppingItems != nil {
+                self.data = NSMutableArray(array: shoppingItems!)
+                self.currentTableView.reloadData()
+            } else {
+                ZMDTool.showErrorPromptView(dictionary, error: error, errorMsg: nil)
+            }
+        }
+    }
+    func deleteCartItem(id:String) {
+        if g_isLogin! {
+            QNNetworkTool.deleteCartItem(id,carttype: 2,completion: { (succeed, dictionary, error) -> Void in
+                if succeed! {
+                    self.data.removeAllObjects()
+                    self.dataUpdate()
+                    ZMDTool.showPromptView("删除成功")
+                } else {
+                    ZMDTool.showErrorPromptView(dictionary, error: error, errorMsg: "删除失败")
+                }
+            })
+        }
     }
 }
 // 收藏商品  cell
@@ -142,5 +176,4 @@ class CollectionGoodsCell : UITableViewCell {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }

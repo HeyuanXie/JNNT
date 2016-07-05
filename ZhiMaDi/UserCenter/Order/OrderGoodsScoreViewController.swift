@@ -19,7 +19,6 @@ class OrderGoodsScoreViewController: UIViewController,UITextFieldDelegate,UIActi
     var goodsScoreRigthLbl : UILabel!
     var logisticsScoreRigthLbl : UILabel!
     var photos : NSMutableArray = NSMutableArray()
-
     override func viewDidLoad() {
         super.viewDidLoad()
         self.updateUI()

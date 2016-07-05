@@ -10,10 +10,15 @@ import UIKit
 // 支付成功
 class OrderPaySucceedViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,ZMDInterceptorProtocol,ZMDInterceptorMoreProtocol {
     var tableView : UITableView!
+    var total = ""
+    var orderId : Int!
+    var finished : (()->Void)!
+    var dic : NSDictionary!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.updateUI()
+        self.fetchData()
         // Do any additional setup after loading the view.
     }
 
@@ -80,16 +85,35 @@ class OrderPaySucceedViewController: UIViewController,UITableViewDataSource,UITa
                 ZMDTool.configTableViewCellDefault(cell!)
                 
                 cell?.addSubview(ZMDTool.getLine(CGRect(x: 0, y: 101.5, width: kScreenWidth, height: 0.5)))
+                
+                var tag = 10001
+                let userLbl = ZMDTool.getLabel(CGRect(x: 12, y: 16, width: 300, height: 17), text: "", fontSize: 17)
+                userLbl.tag = tag++
+                cell?.contentView.addSubview(userLbl)
+                let phoneLbl = ZMDTool.getLabel(CGRect(x: kScreenWidth - 12 - 120, y: 16, width: 300, height: 17), text: "", fontSize: 17)
+                phoneLbl.tag = tag++
+                cell?.contentView.addSubview(phoneLbl)
+                let addressStr = ""
+                let addressSize = addressStr.sizeWithFont(defaultSysFontWithSize(17), maxWidth: kScreenWidth - 24)
+                let addressLbl = ZMDTool.getLabel(CGRect(x: 12, y: 16 + 17 + 15, width: kScreenWidth - 24, height: addressSize.height), text: addressStr, fontSize: 17)
+                addressLbl.numberOfLines = 2
+                addressLbl.tag = tag++
+                cell?.contentView.addSubview(addressLbl)
             }
-            let userLbl = ZMDTool.getLabel(CGRect(x: 12, y: 16, width: 300, height: 17), text: "收货人 ：葫芦一娃", fontSize: 17)
-            cell?.contentView.addSubview(userLbl)
-            let phoneLbl = ZMDTool.getLabel(CGRect(x: kScreenWidth - 12 - 120, y: 16, width: 300, height: 17), text: "13780338447", fontSize: 17)
-            cell?.contentView.addSubview(phoneLbl)
-            let addressStr = "收货地址:广东省东莞市松山湖高新技术产业园新新"
-            let addressSize = addressStr.sizeWithFont(defaultSysFontWithSize(17), maxWidth: kScreenWidth - 24)
-            let addressLbl = ZMDTool.getLabel(CGRect(x: 12, y: 16 + 17 + 15, width: kScreenWidth - 24, height: addressSize.height), text: addressStr, fontSize: 17)
-            addressLbl.numberOfLines = 2
-            cell?.contentView.addSubview(addressLbl)
+            
+            var tag = 10001
+            let userLbl = cell?.viewWithTag(tag++) as! UILabel
+            let phoneLbl = cell?.viewWithTag(tag++) as! UILabel
+            let addressLbl = cell?.viewWithTag(tag++) as! UILabel
+            
+            if let dicForAddress = self.dic?["ShippingAddress"] as? NSDictionary,address = ZMDAddress.mj_objectWithKeyValues(dicForAddress) {
+                userLbl.text = "收货人 ：\(address.FirstName)"
+                phoneLbl.text = "\(address.PhoneNumber)"
+                addressLbl.text = "收货地址:\(address.Address1!)\(address.Address2!)"
+                let addressStr = addressLbl.text
+                let addressSize = addressStr!.sizeWithFont(defaultSysFontWithSize(17), maxWidth: kScreenWidth - 24)
+                addressLbl.frame = CGRect(x: 12, y: 16 + 17 + 15, width: kScreenWidth - 24, height: addressSize.height)
+            }
             return cell!
         } else{
             let cellId = "botCell"
@@ -100,9 +124,15 @@ class OrderPaySucceedViewController: UIViewController,UITableViewDataSource,UITa
                 cell!.selectionStyle = .None
                 
                 ZMDTool.configTableViewCellDefault(cell!)
+                
+                let botLbl = ZMDTool.getLabel(CGRect(x: 12, y: 0 , width: kScreenWidth, height: 55.5), text: "实付：0.0 获得0积分", fontSize: 16)
+                botLbl.tag = 10001
+                cell?.contentView.addSubview(botLbl)
             }
-            let botLbl = ZMDTool.getLabel(CGRect(x: 12, y: 0 , width: kScreenWidth, height: 55.5), text: "实付：525.0 获得20积分", fontSize: 16)
-            cell?.contentView.addSubview(botLbl)
+            let botLbl = cell?.viewWithTag(10001) as! UILabel
+            if let total = self.dic?["OrderTotal"] as? String {
+                botLbl.text = "实付：\(total)"
+            }
             return cell!
         }
     }
@@ -118,5 +148,20 @@ class OrderPaySucceedViewController: UIViewController,UITableViewDataSource,UITa
         tableView.dataSource = self
         tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         self.view.addSubview(tableView)
+    }
+    override func back() {
+        if self.finished != nil {
+            self.finished()
+        } else {
+            super.back()
+        }
+    }
+    func fetchData() {
+        QNNetworkTool.orderDetail(self.orderId) { (succeed, dictionary, error) -> Void in
+            if succeed!  {
+                self.dic = dictionary
+                self.tableView.reloadData()
+            }
+        }
     }
 }

@@ -13,7 +13,7 @@ class ZMDAdvertisement: NSObject {
     var Title:String?                                   //"新品推荐",
     var Type:NSNumber?                                  //1,
     var Available:String?                               //true,
-    var Resources:NSNumber?                             //"/Media/Advertisement/new.png",
+    var Resources:String?                             //"/Media/Advertisement/new.png",
     var ResourcesCDNPath:String?                        //"/Advertisement/new.png",
     var StartTime:String?                               //"2016-05-26T00:00:00",
     var EndTime:String?                                 //"2016-07-22T00:00:00",

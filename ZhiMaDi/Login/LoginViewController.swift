@@ -92,6 +92,9 @@ class LoginViewController: UIViewController , ZMDInterceptorNavigationBarHiddenP
             btn.setTitleColor(defaultTextColor, forState: .Normal)
             btn.titleLabel?.font = defaultSysFontWithSize(15)
             self.thirdView.addSubview(btn)
+            btn.rac_signalForControlEvents(UIControlEvents.TouchUpInside).subscribeNext({ (sender) -> Void in
+                    ShareSDKThirdLoginHelper().login()
+            })
             i++
         }
     }

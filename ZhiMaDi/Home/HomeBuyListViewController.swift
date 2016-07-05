@@ -103,7 +103,7 @@ class HomeBuyListViewController: UIViewController ,ZMDInterceptorProtocol, UITab
             let productL = self.dataArray[indexPath.section] as! ZMDProduct
             DoubleGoodsTableViewCell.configCell(cell, product: productL,productR:nil)
         }
-    
+        
         return cell
     }
    

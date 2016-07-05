@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ReactiveCocoa
 // 商品双层形式cell
 class DoubleGoodsTableViewCell: UITableViewCell {
 
@@ -39,6 +40,7 @@ class DoubleGoodsTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     class func configCell(cell:DoubleGoodsTableViewCell!,product : ZMDProduct!,productR : ZMDProduct?) {
+        
         cell.titleLblLeft.text = product.Name
         cell.countLblLeft.text = "已售\(product.Sold)件"
         if let productPrice = product.ProductPrice {
@@ -49,6 +51,8 @@ class DoubleGoodsTableViewCell: UITableViewCell {
             let imgUrl = kImageAddressMain + (pictureModel.ImageUrl ?? "")
             cell.goodsImgVLeft.setImageWithURL(NSURL(string: imgUrl), placeholderImage: UIImage(named: "Home_Buy_AppleGoods"))
         }
+      
+        // 右边 item
         guard let productR = productR else {
             if cell.rightView != nil {
                 cell.rightView.hidden = true

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 //个人资料
 class PersonInfoViewController:UIViewController,UITableViewDataSource, UITableViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,ZMDInterceptorProtocol,ZMDInterceptorNavigationBarShowProtocol,ZMDInterceptorMoreProtocol {
     enum UserCenterCellType{
@@ -118,21 +119,19 @@ class PersonInfoViewController:UIViewController,UITableViewDataSource, UITableVi
         }
         
         let content = self.userCenterData[indexPath.section]
-        
         cell.textLabel?.text = content.title
         switch content {
         case .Head:
             cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
             if self.headerView == nil {
-                self.headerView = UIImageView(frame: CGRectMake(kScreenWidth - 60 - 38 , 17, 60, 60))
-                self.headerView.autoresizingMask = UIViewAutoresizing.FlexibleLeftMargin
+                self.headerView = UIImageView(frame: CGRectMake(kScreenWidth - 60 - 38, 17, 60, 60))
                 self.headerView.layer.masksToBounds = true
                 self.headerView.layer.cornerRadius = self.headerView.frame.width/2
-                self.headerView.image = UIImage(named: "Home_Buy_PeopleTest")
                 cell.contentView.addSubview(self.headerView)
             }
+
             if let urlStr = g_customer?.Avatar?.AvatarUrl,url = NSURL(string: urlStr) {
-                self.headerView.sd_setImageWithURL(url)
+                self.headerView.image = UIImage(data: NSData(contentsOfURL: url)!)
             }
         case .NickN:
             cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
@@ -156,7 +155,7 @@ class PersonInfoViewController:UIViewController,UITableViewDataSource, UITableVi
             cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
             self.addressLB = UILabel(frame: CGRectMake(kScreenWidth - 100 - 38,0,100,tableViewCellDefaultHeight))
             self.addressLB.font = UIFont.systemFontOfSize(17)
-            self.addressLB.text = "松山湖"
+            self.addressLB.text = ""
             self.addressLB.textAlignment = NSTextAlignment.Right
             self.addressLB.textColor = defaultDetailTextColor
             cell.contentView.addSubview(self.addressLB)
@@ -226,7 +225,7 @@ class PersonInfoViewController:UIViewController,UITableViewDataSource, UITableVi
             ZMDTool.hiddenActivityView()
             if succeed {
                 if let urlStr = g_customer?.Avatar?.AvatarUrl,url = NSURL(string: urlStr) {
-                    self.headerView.sd_setImageWithURL(url)
+                    self.headerView.image = UIImage(data: NSData(contentsOfURL: url)!)
                 }
             }else {
                 ZMDTool.showPromptView( "上传失败,点击重试或者重新选择图片", nil)
@@ -276,7 +275,7 @@ class PersonInfoViewController:UIViewController,UITableViewDataSource, UITableVi
         self.tableView.tableFooterView = footV
     }
     private func dataInit(){
-        self.userCenterData = [UserCenterCellType.Head,UserCenterCellType.NickN,UserCenterCellType.RealName, UserCenterCellType.Address, UserCenterCellType.ChangePs, UserCenterCellType.Clean]
+        self.userCenterData = [UserCenterCellType.Head,UserCenterCellType.NickN , UserCenterCellType.Address, UserCenterCellType.ChangePs, UserCenterCellType.Clean]
     }
     func moreViewUpdate() {
         if self.moreView == nil {
@@ -289,6 +288,7 @@ class PersonInfoViewController:UIViewController,UITableViewDataSource, UITableVi
                 btn.backgroundColor = UIColor(white: 0, alpha: 0.5)
                 btn.tag = i
                 btn.rac_signalForControlEvents(.TouchUpInside).subscribeNext({ (sender) -> Void in
+                    self.tabBarController?.hidesBottomBarWhenPushed = false
                     self.navigationController?.popToRootViewControllerAnimated(true)
                     self.tabBarController?.selectedIndex = 0
                 })

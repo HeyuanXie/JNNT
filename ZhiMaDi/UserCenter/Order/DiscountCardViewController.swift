@@ -119,7 +119,7 @@ class DiscountCardViewController: UIViewController,UITableViewDataSource, UITabl
         self.view.addSubview(self.currentTableView)
     }
     func updateData() {
-        QNNetworkTool.fetchCustomerCoupons { (coupons, dictionary, error) -> Void in
+        QNNetworkTool.fetchCustomerCouponsForOrder { (coupons, dictionary, error) -> Void in
             if coupons != nil {
                 self.coupons = coupons!
                 self.currentTableView.reloadData()

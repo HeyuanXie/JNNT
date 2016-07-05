@@ -105,7 +105,7 @@
                                     <constraint firstAttribute="height" constant="30" id="Y5w-BR-ESn"/>
                                 </constraints>
                             </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uRb-al-fC9">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uRb-al-fC9">
                                 <rect key="frame" x="3" y="324" width="315" height="75"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -113,7 +113,7 @@
                                     <constraint firstAttribute="height" constant="75" id="JR7-b9-Oyf"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="第三方帐号登录" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A1n-qA-1B9">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="第三方帐号登录" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A1n-qA-1B9">
                                 <rect key="frame" x="100" y="273" width="121" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="Kmw-LQ-4RW"/>
@@ -309,7 +309,7 @@
                                     <constraint firstAttribute="height" constant="30" id="fGm-d4-wGg"/>
                                 </constraints>
                             </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zuZ-le-rNN">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zuZ-le-rNN">
                                 <rect key="frame" x="3" y="324" width="315" height="75"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -317,7 +317,7 @@
                                     <constraint firstAttribute="height" constant="75" id="SfP-G4-KyC"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="第三方帐号登录" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e53-nL-dK8">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="第三方帐号登录" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e53-nL-dK8">
                                 <rect key="frame" x="100" y="273" width="121" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="121" id="VKa-Qo-lHs"/>

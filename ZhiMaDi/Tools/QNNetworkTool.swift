@@ -231,7 +231,7 @@ extension QNNetworkTool {
     }
     // 手机验证码注册并登录
     class func registerAndLogin(mobile:String,code:String,psw:String,completion: (success: Bool!,error:NSError?,dictionary:NSDictionary?) -> Void){
-        requestPOST(kServerAddress + "/api/v1/extend/Login//PhoneLogin", parameters: paramsToJsonDataParams(["mobile" : mobile,"code" : code,"psw" : psw])) { (_,response, _, dictionary, error) -> Void in
+        requestPOST(kServerAddress + "/api/v1/extend/Login/PhoneLogin", parameters: paramsToJsonDataParams(["mobile" : mobile,"code" : code,"psw" : psw])) { (_,response, _, dictionary, error) -> Void in
             guard let dic = dictionary else {
                 completion(success:false,error: error,dictionary:nil)
                 return
@@ -265,18 +265,20 @@ extension QNNetworkTool {
     // 手机验证码登录
     class func loginWithPhoneCode(mobile:String,code:String,completion: (success: Bool!,error:NSError?,dictionary:NSDictionary?) -> Void){
         requestPOST(kServerAddress + "/api/v1/extend/Login/PhoneLogin", parameters: paramsToJsonDataParams(["mobile" : mobile,"code" : code])) { (_,response, _, dictionary, error) -> Void in
-            guard let dic = dictionary else {
+            guard let dic = dictionary,success = dic["success"] as? Bool where success else {
                 completion(success:false,error: error,dictionary:nil)
                 return
             }
-            if (dic["success"] as? NSNumber)!.boolValue {
-                if let customerId = dic["customerId"] as? Int {
-                    g_customerId = customerId
-                }
-                completion(success:true,error: nil,dictionary:dictionary)
-            } else {
-                completion(success:false,error: nil,dictionary:dictionary)
+            if let customerId = dic["customerId"] as? Int {
+                g_customerId = customerId
             }
+            if let customerDic = dic["customer"] as? NSDictionary,customer = ZMDCustomer.mj_objectWithKeyValues(customerDic) {
+                g_customer = customer
+                if let url = g_customer?.Avatar?.AvatarUrl  {
+                    g_customer?.Avatar?.AvatarUrl = kImageAddressMain + url
+                }
+            }
+            completion(success:true,error: nil,dictionary:nil)
         }
     }
     // 修改密码
@@ -472,7 +474,6 @@ extension QNNetworkTool {
             catch {
 
             }
-
         }
     }
     // 删除优惠券
@@ -486,13 +487,23 @@ extension QNNetworkTool {
         }
     }
     // 结算的可用优惠券列表
-    class func fetchCustomerCouponsForOrder(completion: (coupon : NSArray?,dictionary:NSDictionary?,error: NSError?) -> Void) {
-        requestPOST(kServerAddress + "/api/v1/extend/CustomerCoupons/PublicInfo", parameters: ["customerId":g_customerId!]) { (_, _, _, dictionary, error) -> Void in
-            guard let coupon = ZMDCoupon.mj_objectArrayWithKeyValuesArray(dictionary) else {
-                completion(coupon:nil,dictionary: dictionary, error: error)
-                return
+    class func fetchCustomerCouponsForOrder(completion: (coupons : NSArray?,dictionary:NSDictionary?,error: NSError?) -> Void) {
+        requestPOST(kServerAddress + "/api/v1/extend/CustomerCoupons/PublicInfo", parameters: ["customerId":g_customerId!]) { (_, _, data, dictionary, error) -> Void in
+            do {
+                let jsonObject: AnyObject? = try NSJSONSerialization.JSONObjectWithData(data as! NSData, options: NSJSONReadingOptions.MutableContainers)
+                guard let _ = jsonObject as? NSArray else {
+                    completion(coupons:nil,dictionary: nil, error: error)
+                    return
+                }
+                guard let coupons = ZMDCoupon.mj_objectArrayWithKeyValuesArray(jsonObject) else {
+                    completion(coupons:nil,dictionary: nil, error: error)
+                    return
+                }
+                completion(coupons:coupons,dictionary: nil, error: nil)
             }
-            completion(coupon:coupon,dictionary: dictionary, error: nil)
+            catch {
+                
+            }
         }
     }
     // 使用优惠券
@@ -520,26 +531,39 @@ extension QNNetworkTool {
             completion(OrderTotal:orderTotal,dictionary: dictionary, error: nil)
         }
     }
+    // 获取支付方式列表
+    class func fetchPaymentMethod(completion: (paymentMethods : NSArray!,dictionary:NSDictionary?,error: NSError?) -> Void) {
+        requestPOST(kServerAddress + "/api/v1/extend/Checkout/PaymentMethod", parameters: ["CustomerId":g_customerId!]) { (_, _, _, dictionary, error) -> Void in
+                guard let paymentMethods = dictionary?["PaymentMethods"] as? NSArray,payMethods = ZMDPaymentMethod.mj_objectArrayWithKeyValuesArray(paymentMethods) else {
+                    completion(paymentMethods:nil,dictionary: dictionary, error: error)
+                    return
+                }
+                completion(paymentMethods:payMethods,dictionary: dictionary, error: nil)
+        }
+    }
     /**
      确认订单
      
      - parameter CustomerComment: 备注
      - parameter completion:      completion description
      */
-    class func confirmOrder(CustomerComment: String,completion: (succeed : Bool!,dictionary:NSDictionary?,error: NSError?) -> Void) {
-        requestPOST(kServerAddress + "/api/v1/extend/Checkout/ConfirmOrder", parameters: ["CustomerComment" : CustomerComment,"CustomerId":g_customerId!]) { (_, _, _, dictionary, error) -> Void in
-            guard let success = dictionary?["success"] as? NSNumber where success.boolValue else {
+    class func confirmOrder(CustomerComment: String,Paymentmethod:String,completion: (succeed : Bool!,dictionary:NSDictionary?,error: NSError?) -> Void) {
+        requestPOST(kServerAddress + "/api/v1/extend/Checkout/ConfirmOrder", parameters: ["CustomerComment" : CustomerComment,"CustomerId":g_customerId!,"Paymentmethod":Paymentmethod]) { (_, _, _, dictionary, error) -> Void in
+            guard let dic = dictionary else {
                 completion(succeed:false,dictionary: dictionary, error: error)
                 return
             }
-            completion(succeed:true,dictionary: dictionary, error: nil)
+            if let warn = dic["Warnings"] as? NSArray where warn.count != 0 {
+                completion(succeed:false,dictionary: dictionary, error: error)
+            } else {
+                completion(succeed:true,dictionary: dictionary, error: nil) 
+            }
         }
     }
     
     // 获取订单
-    class func fetchOrder(completion: ( value: NSArray?,error: NSError?) -> Void) {
-        var str = kOdataAddress + "/Orders?$top=1&$filter=OrderStatusId eq 10 and CustomerId eq 1 &$expand=OrderItems,OrderItems/Product,OrderItems/Product/ProductPictures&$select=OrderTotal,OrderItems/Product/Name,OrderItems/UnitPriceInclTax,OrderItems/UnitPriceExclTax,OrderItems/Quantity,Id,OrderItems/AttributeDescription,OrderItems/Product/ProductPictures/PictureId,OrderStatusId,ShippingStatusId,PaymentStatusId&$skip=9"
-        str = str.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+    class func fetchOrder(urlStr:String,completion: ( value: NSArray?,error: NSError?) -> Void) {
+        var str = (kOdataAddress + urlStr).stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
         let url = NSURL(string:str)
         request(self.productRequest(url, method: "GET")).responseString { (response) -> Void in
             guard let data = response.result.value else {
@@ -562,13 +586,43 @@ extension QNNetworkTool {
      - parameter orderid:    订单ID
      - parameter completion: completion description
      */
-    class func orderDetail(orderid: String,completion: (succeed : Bool!,dictionary:NSDictionary?,error: NSError?) -> Void) {
+    class func orderDetail(orderid: NSNumber,completion: (succeed : Bool!,dictionary:NSDictionary?,error: NSError?) -> Void) {
         requestPOST(kServerAddress + "/api/v1/extend/order/Details", parameters: ["orderid" : orderid]) { (_, _, _, dictionary, error) -> Void in
             guard let dic = dictionary else {
                 completion(succeed:false,dictionary: dictionary, error: error)
                 return
             }
             completion(succeed:true,dictionary: dic, error: nil)
+        }
+    }
+    // 取消订单
+    class func cancelOrder(orderid: Int,completion: (succeed : Bool!,dictionary:NSDictionary?,error: NSError?) -> Void) {
+        requestPOST(kServerAddress + "/api/v1/extend/order/cancel", parameters: ["orderid" : orderid]) { (_, _, _, dictionary, error) -> Void in
+            guard let success = dictionary?["success"] as? NSNumber where success.boolValue else {
+                completion(succeed:false,dictionary: dictionary, error: error)
+                return
+            }
+            completion(succeed:true,dictionary: dictionary, error: nil)
+        }
+    }
+    // 确认收货
+    class func completeOrder(orderid: Int,completion: (succeed : Bool!,dictionary:NSDictionary?,error: NSError?) -> Void) {
+        requestPOST(kServerAddress + "/api/v1/extend/order/Complete", parameters: ["orderid" : orderid]) { (_, _, _, dictionary, error) -> Void in
+            guard let success = dictionary?["success"] as? NSNumber where success.boolValue else {
+                completion(succeed:false,dictionary: dictionary, error: error)
+                return
+            }
+            completion(succeed:true,dictionary: dictionary, error: nil)
+        }
+    }
+    // 重新支付
+    class func rePostPayment(orderid: Int,Paymentmethod:String,completion: (succeed : Bool!,dictionary:NSDictionary?,error: NSError?) -> Void) {
+        requestPOST(kServerAddress + "/api/v1/extend/Checkout/RePostPayment", parameters: ["customerId": g_customer!,"orderid" : orderid,"Paymentmethod":Paymentmethod]) { (_, _, _, dictionary, error) -> Void in
+            guard let success = dictionary?["success"] as? NSNumber where success.boolValue else {
+                completion(succeed:false,dictionary: dictionary, error: error)
+                return
+            }
+            completion(succeed:true,dictionary: dictionary, error: nil)
         }
     }
 }
@@ -606,8 +660,8 @@ extension QNNetworkTool {
      
      - parameter completion: 完成回调
      */
-    class func fetchShoppingCart(completion: (shoppingItems : NSArray?,dictionary:NSDictionary?,error: NSError?) -> Void) {
-        requestPOST(kServerAddress + "/api/v1/extend/ShoppingCart/Cart", parameters: ["customerId":g_customerId!]) { (_, _, _, dictionary, error) -> Void in
+    class func fetchShoppingCart(carttype:Int,completion: (shoppingItems : NSArray?,dictionary:NSDictionary?,error: NSError?) -> Void) {
+        requestPOST(kServerAddress + "/api/v1/extend/ShoppingCart/Cart", parameters: ["customerId":g_customerId!,"carttype":carttype]) { (_, _, _, dictionary, error) -> Void in
             guard let Items = dictionary?["Items"],let shoppingItems = ZMDShoppingItem.mj_objectArrayWithKeyValuesArray(Items) else {
                 completion(shoppingItems:nil,dictionary: dictionary, error: error)
                 return
@@ -620,8 +674,8 @@ extension QNNetworkTool {
      
      - parameter completion:
      */
-    class func deleteCartItem(SciIds:String,completion: (succeed : Bool!,dictionary:NSDictionary?,error: NSError?) -> Void) {
-        requestPOST(kServerAddress + "/api/v1/extend/ShoppingCart/DeleteCartItems", parameters: ["customerId":g_customerId!,"SciIds":SciIds]) { (_, _, _, dictionary, error) -> Void in
+    class func deleteCartItem(SciIds:String,carttype:Int,completion: (succeed : Bool!,dictionary:NSDictionary?,error: NSError?) -> Void) {
+        requestPOST(kServerAddress + "/api/v1/extend/ShoppingCart/DeleteCartItems", parameters: ["customerId":g_customerId!,"SciIds":SciIds,"carttype":carttype]) { (_, _, _, dictionary, error) -> Void in
             guard let success = dictionary?["success"] as? NSNumber where success.boolValue else {
                 completion(succeed:false,dictionary: dictionary, error: error)
                 return

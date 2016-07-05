@@ -183,7 +183,7 @@ class ShoppingCartViewController: UIViewController,UITableViewDataSource,UITable
         view.frame = CGRect(x: 0, y: self.view.bounds.height - (CGRectGetMaxY(productAttrV.frame) + 60), width: kScreenWidth, height: CGRectGetMaxY(productAttrV.frame) + 60)
     }
     func dataUpdate() {
-        QNNetworkTool.fetchShoppingCart { (shoppingItems, dictionary, error) -> Void in
+        QNNetworkTool.fetchShoppingCart(1) { (shoppingItems, dictionary, error) -> Void in
             if shoppingItems != nil {
                 self.dataArray = shoppingItems!
                 self.updateTotal()
@@ -224,16 +224,19 @@ class ShoppingCartViewController: UIViewController,UITableViewDataSource,UITable
         self.totalLbl.text = String(format: "合计:%.2f", subTotal)
     }
     func updateTotal() {
+        var scisNes = NSMutableArray()
         var tmp = Double(0)
         var index = -1
         for item in self.scis {
             index++
-            for tmp in self.dataArray{
+            for tmp in self.dataArray {
                 if (item as! ZMDShoppingItem).Id == (tmp as! ZMDShoppingItem).Id {
                     self.scis.replaceObjectAtIndex(index, withObject: tmp)
+                    scisNes.addObject(tmp)
                 }
             }
         }
+        self.scis = scisNes
         for item in self.scis {
             let subTotal = (item as! ZMDShoppingItem).SubTotal.stringByReplacingOccurrencesOfString("¥", withString: "").stringByReplacingOccurrencesOfString(",", withString: "")
             tmp = tmp + Double(subTotal)!
@@ -243,7 +246,7 @@ class ShoppingCartViewController: UIViewController,UITableViewDataSource,UITable
     func deleteCartItem() {
         let items = self.getSciids()
         if g_isLogin! {
-            QNNetworkTool.deleteCartItem(items,completion: { (succeed, dictionary, error) -> Void in
+            QNNetworkTool.deleteCartItem(items,carttype: 1,completion: { (succeed, dictionary, error) -> Void in
                 if succeed! {
                     self.scis.removeAllObjects()
                     self.updateTotal()

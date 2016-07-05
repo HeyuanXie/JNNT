@@ -122,7 +122,7 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
         }
     }
     @IBOutlet weak var currentTableView: UITableView!
-
+    
     var userCenterData: [UserCenterCellType]!
     var menuType: [MenuType]!
     var 下拉视窗 : UIView!
@@ -137,6 +137,7 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
+        self.tabBarController!.tabBar.hidden = false
         self.fetchData()
         //
         //        let tmp = "get&&application/json, text/javascript, */*&http://od.ccw.cn/odata/v1/orders?$top=10&$filter=createdonutc lt datetime'2016-02-20t00:00:00'&2016-05-10t15:25:51.0000000+08:00&c81de5387d36d1ec6a4ad4d483ffae0a".hmac(CryptoAlgorithm.SHA256, key: secretKey)
@@ -203,7 +204,7 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
         
     }
     //MARK: private method
-
+    
     //MARK: 头部菜单 cell
     func cellForHomeHead(tableView: UITableView,indexPath: NSIndexPath)-> UITableViewCell {
         let cellId = "HeadCell"
@@ -217,11 +218,11 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
             let width = 80,height = 44
             let scrollView = UIScrollView(frame: CGRect(x: 0, y: 0, width: kScreenWidth - 44, height: 44)) //66
             scrollView.tag = 10001
+            
             scrollView.backgroundColor = UIColor.clearColor()
             scrollView.showsHorizontalScrollIndicator = false
             scrollView.contentSize = CGSize(width: width * menuTitles.count, height: height)
             cell?.contentView.addSubview(scrollView)
-      
             
             //下部弹窗
             let 下拉 = UIButton(frame: CGRect(x: kScreenWidth - 44, y: 8, width: 44, height: 28))
@@ -261,7 +262,7 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
             })
             scrollView.addSubview(headBtn)
         }
-
+        
         return cell!
     }
     //MARK: 广告 cell
@@ -285,7 +286,10 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
         let imgUrls = NSMutableArray()
         if self.advertisementAll != nil && self.advertisementAll.top != nil {
             for id in self.advertisementAll.top! {
-                let url = kImageAddressNew + (id.ResourcesCDNPath ?? "")
+                var url = kImageAddressNew + (id.Resources ?? "")
+                if id.ResourcesCDNPath!.hasPrefix("http") {
+                    url = id.ResourcesCDNPath!
+                }
                 imgUrls.addObject(NSURL(string: url)!)
             }
             cycleScroll.urlArray = imgUrls as [AnyObject]
@@ -325,6 +329,7 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
                 cell!.contentView.addSubview(btn)
             }
         }
+        
         for var i=0;i<5;i++ {
             let menuType = self.menuType[i]
             let btn = cell?.contentView.viewWithTag(10000 + i) as! UIButton
@@ -341,6 +346,16 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
             })
             label.text = menuType.title
             imgV.image = menuType.image
+            
+            if self.advertisementAll != nil  {
+                let icon = self.advertisementAll.icon![i]
+                label.text = icon.Title
+                var url = kImageAddressNew + (icon.Resources ?? "")
+                if icon.ResourcesCDNPath!.hasPrefix("http") {
+                    url = icon.ResourcesCDNPath!
+                }
+                imgV.sd_setImageWithURL(NSURL(string: url))
+            }
         }
         return cell!
     }
@@ -385,7 +400,7 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
         }
         return cell!
     }
-    //MARK: - 推荐 cell
+    //MARK: - 推荐 cell   猜你喜欢
     func cellForHomeRecommendation(tableView: UITableView,indexPath: NSIndexPath)-> UITableViewCell {
         let kTagScrollView = 10001
         let cellId = "RecommendationCell"
@@ -444,7 +459,7 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
         override init(frame: CGRect) {
             super.init(frame: frame)
         }
-
+        
         required init?(coder aDecoder: NSCoder) {
             fatalError("init(coder:) has not been implemented")
         }
@@ -457,7 +472,7 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
                 subV.removeFromSuperview()
             }
         }
-
+        
         self.下拉视窗 = UIView(frame: CGRect(x: 0, y: -1, width: kScreenWidth, height: 44+150))
         self.下拉视窗.backgroundColor = UIColor.clearColor()
         let topV = UIView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: 44))
@@ -523,7 +538,7 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
         self.navigationItem.rightBarButtonItem = rightItem
         self.navigationItem.titleView = UIImageView(image: UIImage(named: "home_logo"))
     }
-
+    
     func updateData (){
         
     }
@@ -549,7 +564,7 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
         self.userCenterData = [.HomeContentTypeHead,.HomeContentTypeAd,.HomeContentTypeMenu,.HomeContentTypeGoods,.HomeContentTypeRecommendationHead,.HomeContentTypeRecommendation, .HomeContentTypeTheme]
         self.menuType = [MenuType.Offer,MenuType.Market,MenuType.News, MenuType.Sale, MenuType.Buy]
     }
-
+    
     func updateUI() {
         self.currentTableView.backgroundColor = tableViewdefaultBackgroundColor
     }

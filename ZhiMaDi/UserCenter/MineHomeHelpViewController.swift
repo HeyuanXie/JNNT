@@ -26,7 +26,10 @@ class MineHomeHelpViewController: UIViewController,UIActionSheetDelegate,UIImage
         super.viewDidLoad()
         self.updateUI()
     }
-    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        self.view.backgroundColor = RGB(245,245,245,1)
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -74,7 +77,6 @@ class MineHomeHelpViewController: UIViewController,UIActionSheetDelegate,UIImage
     //MARK: -  PrivateMethod
     func updateUI() {
         self.title = "意见反馈"
-        self.view.backgroundColor = RGB(245,245,245,1)
         self.picker.delegate = self
         let headViewBg = UIView(frame: CGRect(x: 12, y: 15, width: kScreenWidth-24, height: 270))
         headViewBg.backgroundColor = UIColor.whiteColor()
@@ -104,7 +106,7 @@ class MineHomeHelpViewController: UIViewController,UIActionSheetDelegate,UIImage
         self.contactTextField.backgroundColor = UIColor.clearColor()
         contactViewBg.addSubview(self.contactTextField)
         
-        let submitBtn = ZMDTool.getButton(CGRect(x: 12, y: CGRectGetWidth(headViewBg.frame) + 38 , width: kScreenWidth-24, height: 50), textForNormal: "提交", fontSize: 17,textColorForNormal: UIColor.whiteColor(), backgroundColor: RGB(215,215,215,1)) { (sender) -> Void in
+        let submitBtn = ZMDTool.getButton(CGRect(x: 12, y: CGRectGetMaxY(contactViewBg.frame) + 38 , width: kScreenWidth-24, height: 50), textForNormal: "提交", fontSize: 17,textColorForNormal: UIColor.whiteColor(), backgroundColor: RGB(215,215,215,1)) { (sender) -> Void in
         }
         ZMDTool.configViewLayerWithSize(submitBtn, size: 25)
         self.view.addSubview(submitBtn)

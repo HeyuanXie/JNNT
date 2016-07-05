@@ -29,6 +29,17 @@ class OrderGoodsTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    //订单详情
+    func configCellForOrderDetail(product:ZMDProductForOrderDetail) {
+        if let imgUrl = product.PictureUrl {
+            let url = "http://xw.ccw.cn"+imgUrl
+            goodsImgV.sd_setImageWithURL(NSURL(string: url))
+        }
+        goodsNameLbl.text = product.ProductName
+        detailLbl.text = (product.AttributeInfo as NSString).stringByReplacingOccurrencesOfString("<br />", withString: " ")
+        priceLbl.text = product.SubTotal
+        quantityLbl.text = "x\(product.Quantity)"
+    }
     //确认订单
     func configCellForConfig(item:ZMDShoppingItem) {
         if let imgUrl = item.DefaultPictureModel?.ImageUrl {
@@ -55,9 +66,26 @@ class OrderGoodsTableViewCell: UITableViewCell {
             quantityLbl.text = "x\(Quantity)"
         }
     }
+    func configCellForMyOrder(orderItem:ZMDOrderDetailOrderItems) {
+        if orderItem.Product.ProductPictures?.count != 0 {
+            let pictureId = orderItem.Product.ProductPictures![0].PictureId
+            goodsImgV.sd_setImageWithURL(NSURL(string: "http://xw.ccw.cn/picture/index/\(pictureId)"))
+
+        }
+        goodsNameLbl.text = orderItem.Product.Name
+        if let attributeDescription = orderItem.AttributeDescription {
+            detailLbl.text = (attributeDescription as NSString).stringByReplacingOccurrencesOfString("<br />", withString: " ")
+        }
+        if let UnitPriceInclTax = orderItem.UnitPriceInclTax {
+            priceLbl.text = UnitPriceInclTax
+        }
+        if let Quantity = orderItem.Quantity {
+            quantityLbl.text = "x\(Quantity)"
+        }
+    }
     func configCell(item:ZMDShoppingItem,scis:NSArray) {
-        if let imgUrl = item.DefaultPictureModel?.ImageUrl {
-            goodsImgV.sd_setImageWithURL(NSURL(string: imgUrl))
+        if let imgUrl = item.Picture?.ImageUrl {
+            goodsImgV.sd_setImageWithURL(NSURL(string: kImageAddressMain+imgUrl))
         }
         goodsNameLbl.text = item.ProductName
         detailLbl.text = (item.AttributeInfo as NSString).stringByReplacingOccurrencesOfString("<br />", withString: " ")

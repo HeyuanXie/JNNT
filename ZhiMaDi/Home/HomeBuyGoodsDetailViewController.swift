@@ -479,11 +479,18 @@ class HomeBuyGoodsDetailViewController: UIViewController,UITableViewDataSource,U
         let item = UIBarButtonItem(image: UIImage(named: "Navigation_Back")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate), style: UIBarButtonItemStyle.Done, target: self, action: Selector("back"))
         item.customView?.tintColor = UIColor.whiteColor()
         self.navigationItem.leftBarButtonItem = item
+        
+        let rightItem = UIBarButtonItem(image: UIImage(named: "product_collect_03")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate), style: UIBarButtonItemStyle.Done, target: self, action: Selector("collect"))
+        rightItem.customView?.tintColor = UIColor.whiteColor()
+        self.navigationItem.rightBarButtonItem = rightItem
     }
     func setupNavigationWithBg() {
         let item = UIBarButtonItem(image: UIImage(named: "product_return")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate), style: UIBarButtonItemStyle.Done, target: self, action: Selector("back"))
         item.customView?.tintColor = UIColor.whiteColor()
         self.navigationItem.leftBarButtonItem = item
+        let rightItem = UIBarButtonItem(image: UIImage(named: "product_collect_01")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate), style: UIBarButtonItemStyle.Done, target: self, action: Selector("collect"))
+        rightItem.customView?.tintColor = UIColor.whiteColor()
+        self.navigationItem.rightBarButtonItem = rightItem
     }
     private func dataInit(){
         self.goodsCellTypes = [.HomeContentTypeAd,.HomeContentTypeDetail,.HomeContentTypeMenu,/*.HomeContentTypeDistribution,.HomeContentTypeStore,.HomeContentTypeDaPeiGou*/]
@@ -586,6 +593,7 @@ class HomeBuyGoodsDetailViewController: UIViewController,UITableViewDataSource,U
                             return
                         }
                         postDic!.setValue(strongSelf.productDetail.Id.integerValue, forKey: "Id")
+                        postDic!.setValue(1, forKey: "carttype")
                         if g_isLogin! {
                             QNNetworkTool.addProductToCart(postDic!, completion: { (succeed, dictionary, error) -> Void in
                                 if succeed! {
@@ -620,6 +628,22 @@ class HomeBuyGoodsDetailViewController: UIViewController,UITableViewDataSource,U
         }
         for view in superView.subviews {
             self.getBackView(view)
+        }
+    }
+    func collect() {
+        if g_isLogin! {
+            let dic = NSMutableDictionary()
+            dic.setValue(g_customerId!, forKey: "CustomerId")
+            dic.setValue(1, forKey: "Quantity")
+            dic.setValue(productDetail.Id.integerValue, forKey: "Id")
+            dic.setValue(2, forKey: "carttype")
+            QNNetworkTool.addProductToCart(dic, completion: { (succeed, dictionary, error) -> Void in
+                if succeed! {
+                    ZMDTool.showPromptView("添加成功")
+                } else {
+                    ZMDTool.showErrorPromptView(dictionary, error: error, errorMsg: "添加失败")
+                }
+            })
         }
     }
 }

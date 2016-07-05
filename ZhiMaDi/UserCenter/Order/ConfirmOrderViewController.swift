@@ -403,15 +403,7 @@ class ConfirmOrderViewController: UIViewController,UITableViewDataSource,UITable
 
         let confirmBtn = ZMDTool.getButton(CGRect(x: kScreenWidth - 12 - 110, y: 12, width: 110, height: 34), textForNormal: "提交订单", fontSize: 15,textColorForNormal:UIColor.whiteColor(), backgroundColor:RGB(235,61,61,1.0)) { (sender) -> Void in
             self.view.endEditing(true)
-            var mark = ""
-            if self.markTF != nil {
-                mark = self.markTF!.text!
-            }
-            let vc = CashierViewController()
-            vc.mark = mark
-            vc.total = self.total
-
-            self.navigationController?.pushViewController(vc, animated: true)
+            self.fetchPayMethods()
         }
         ZMDTool.configViewLayerWithSize(confirmBtn, size: 15)
         view.addSubview(confirmBtn)
@@ -430,10 +422,27 @@ class ConfirmOrderViewController: UIViewController,UITableViewDataSource,UITable
             ZMDTool.hiddenActivityView()
             if orderTotal != nil {
                 self.total = "\(orderTotal!)"
-                self.payLbl.text = "实付：\(self.total)（含运费39.0）"
+                self.payLbl.text = "实付：\(self.total)" // （含运费39.0）
                 self.totalLbl.attributedText = "合计 : \(self.total)".AttributedText("\(self.total)", color: RGB(235,61,61,1.0))
             } else {
                 ZMDTool.showErrorPromptView(nil, error: error, errorMsg: nil)
+            }
+        }
+    }
+    func fetchPayMethods() {
+        ZMDTool.showActivityView(nil)
+        QNNetworkTool.fetchPaymentMethod { (paymentMethods, dictionary, error) -> Void in
+            ZMDTool.hiddenActivityView()
+            if paymentMethods != nil {
+                var mark = ""
+                if self.markTF != nil {
+                    mark = self.markTF!.text!
+                }
+                let vc = CashierViewController()
+                vc.mark = mark
+                vc.total = self.total
+                vc.payMethods = NSMutableArray(array: paymentMethods)
+                self.navigationController?.pushViewController(vc, animated: true)
             }
         }
     }

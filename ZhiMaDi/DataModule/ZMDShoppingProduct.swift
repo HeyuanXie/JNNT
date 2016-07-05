@@ -18,7 +18,7 @@ class ZMDShoppingItem: NSObject {
     var UnitPrice : String!                         // 单价
     var Warnings : NSArray!
     var DefaultPictureModel : ZMDPictureModel?
-    
+    var Picture : ZMDPictureModel?
     override static func mj_objectClassInArray() -> [NSObject : AnyObject]! {
         return ["DefaultPictureModel":ZMDPictureModel.classForCoder()]
     }

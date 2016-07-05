@@ -13,7 +13,6 @@ private let bPushTool = ZMDPushTool()
 /// JPush收到消息的通知
 let QNNotificationReceviedMessage = "QNNotificationReceviedMessage"
 
-
 /** 极光推送接受管理器 */
 class ZMDPushTool : NSObject {
     var launchOptions : [NSObject: AnyObject]?
@@ -41,7 +40,7 @@ class ZMDPushTool : NSObject {
 
         // 百度推送配置 （测试模式）
         BPush.registerChannel(launchOptions, apiKey: "2Dz0DIkA7RduxKb0oltxo11I", pushMode: BPushMode.Development, withFirstAction: nil, withSecondAction: nil, withCategory: nil, isDebug: true)
-        //        // App 是用户点击推送消息启动
+        //       // App 是用户点击推送消息启动
         if launchOptions != nil {
             if let userInfo = launchOptions!["UIApplicationLaunchOptionsRemoteNotificationKey"] {
                 BPush.handleNotification(userInfo as! [NSObject : AnyObject])

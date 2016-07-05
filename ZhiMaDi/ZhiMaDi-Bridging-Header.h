@@ -31,6 +31,8 @@
 #import <ShareSDKUI/ShareSDK+SSUI.h>
 #import <ShareSDKConnector/ShareSDKConnector.h>
 #import <TencentOpenAPI/WeiBoAPI.h>
+#import <ShareSDKExtension/SSEThirdPartyLoginHelper.h>
+#import "ShareSDKThirdLoginHelper.h"
 //腾讯SDK头文件
 #import <TencentOpenAPI/TencentOAuth.h>
 #import <TencentOpenAPI/QQApiInterface.h>

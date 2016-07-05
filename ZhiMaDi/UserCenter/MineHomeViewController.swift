@@ -147,6 +147,7 @@ class MineHomeViewController: UIViewController,UITableViewDataSource, UITableVie
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
+        self.currentTableView.reloadData()
 //        if !g_isLogin {
 //            ZMDTool.enterLoginViewController()
 //        }
@@ -195,21 +196,25 @@ class MineHomeViewController: UIViewController,UITableViewDataSource, UITableVie
             if let personImgV = cell!.viewWithTag(10001) as? UIImageView{
                 ZMDTool.configViewLayerWithSize(personImgV, size: 42)
                 if let urlStr = g_customer?.Avatar?.AvatarUrl,url = NSURL(string: urlStr) {
-                    personImgV.sd_setImageWithURL(url)
+                    personImgV.image = UIImage(data: NSData(contentsOfURL: url)!)
                 }
+            }
+            if let usrNameLbl = cell?.viewWithTag(10002) as? UILabel {
+                usrNameLbl.text = g_customer?.FirstName ?? ""
             }
             let followBtn = cell?.viewWithTag(10003) as! UIButton
             followBtn.rac_command = RACCommand(signalBlock: { (sender) -> RACSignal! in
                 let vc = MineCollectionViewController()
+                vc.hidesBottomBarWhenPushed = true
                 self.navigationController?.pushViewController(vc, animated: true)
                 return RACSignal.empty()
             })
-            let collectionBtn = cell?.viewWithTag(10004) as! UIButton
-            collectionBtn.rac_command = RACCommand(signalBlock: { (sender) -> RACSignal! in
-                let vc = MineFollowViewController()
-                self.navigationController?.pushViewController(vc, animated: true)
-                return RACSignal.empty()
-            })
+//            let collectionBtn = cell?.viewWithTag(10004) as! UIButton
+//            collectionBtn.rac_command = RACCommand(signalBlock: { (sender) -> RACSignal! in
+//                let vc = MineFollowViewController()
+//                self.navigationController?.pushViewController(vc, animated: true)
+//                return RACSignal.empty()
+//            })
             return cell!
         case .UserMyOrder :
             let cellId = "MyOrderCell"
@@ -275,6 +280,8 @@ class MineHomeViewController: UIViewController,UITableViewDataSource, UITableVie
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cellType = self.userCenterData[indexPath.section][indexPath.row]
         switch cellType{
+        case .UserHead :
+            break
         case .UserMyOrder:
             cellType.didSelect(self.navigationController!)
             break

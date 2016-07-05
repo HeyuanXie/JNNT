@@ -235,10 +235,7 @@ class VipClubHomeViewController: UIViewController ,UITableViewDataSource,UITable
         })
         self.navigationItem.rightBarButtonItem = rightItm
     }
-    
-    func updateData (){
-        
-    }
+
     func fetchData(){
     }
     private func dataInit(){

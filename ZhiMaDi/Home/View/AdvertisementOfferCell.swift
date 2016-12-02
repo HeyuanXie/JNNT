@@ -30,18 +30,20 @@ class AdvertisementOfferCell: UITableViewCell {
         // Configure the view for the selected state
     }
     class func configCell(cell:AdvertisementOfferCell,advertisementAll:[ZMDAdvertisement]?) {
-        if let advertisement = advertisementAll?[0] {
+        if let advertisementAll = advertisementAll where advertisementAll.count > 0 {
+            let advertisement = advertisementAll[0]
             let url = kImageAddressNew + (advertisement.ResourcesCDNPath ?? "")
-            cell.leftBtn.sd_setImageWithURL(NSURL(string: url.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!), forState: UIControlState.Normal)
+            cell.leftBtn.sd_setImageWithURL(NSURL(string: url.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!), forState: UIControlState.Normal)
         }
-        if let advertisement = advertisementAll?[1] {
+        if let advertisementAll = advertisementAll where advertisementAll.count > 1 {
+            let advertisement = advertisementAll[1]
             let url = kImageAddressNew + (advertisement.ResourcesCDNPath ?? "")
-            cell.rightTopBtn.sd_setImageWithURL(NSURL(string: url.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!), forState: UIControlState.Normal)
+            cell.rightTopBtn.sd_setImageWithURL(NSURL(string: url.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!), forState: UIControlState.Normal)
         }
-        if let advertisement = advertisementAll?[2] {
+        if let advertisementAll = advertisementAll where advertisementAll.count > 2 {
+            let advertisement = advertisementAll[2]
             let url = kImageAddressNew + (advertisement.ResourcesCDNPath ?? "")
-            cell.rightBotBtn.sd_setImageWithURL(NSURL(string: url.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!), forState: UIControlState.Normal)
-//            cell.testBtn.sd_setImageWithURL(NSURL(string: url), forState: UIControlState.Normal)
+            cell.rightBotBtn.sd_setImageWithURL(NSURL(string: url.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!), forState: UIControlState.Normal)
         }
     }
 }

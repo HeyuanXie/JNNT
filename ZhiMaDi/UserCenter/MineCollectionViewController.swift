@@ -87,10 +87,10 @@ class MineCollectionViewController: UIViewController,UITableViewDataSource, UITa
             if let imgUrl = item.Picture?.ImageUrl {
                 imgV.sd_setImageWithURL(NSURL(string: kImageAddressMain+imgUrl))
             }
-            goodsLbl.text = item.ProductName
+            goodsLbl.text = item.ProductName.componentsSeparatedByString("）").last
             detailLbl.text = (item.AttributeInfo as NSString).stringByReplacingOccurrencesOfString("<br />", withString: " ")
 //            goodsPriceLbl.text = item.SubTotal
-            goodsPriceLbl.attributedText = "\(item.SubTotal) 原价:\(item.UnitPrice)".AttributeText([item.SubTotal,"原价:\(item.UnitPrice)"], colors: [RGB(235,61,61,1),UIColor.lightGrayColor()], textSizes: [14,12])
+            goodsPriceLbl.attributedText = "\(item.SubTotal) 原价:\(item.UnitPrice)".AttributeText([item.SubTotal,"原价:\(item.UnitPrice)"], colors: [RGB(235,61,61,1),UIColor.lightGrayColor()], textSizes: [15,14])
             freightLbl.text = "不包邮"
             cancelBtn.rac_signalForControlEvents(.TouchUpInside).subscribeNext { (sender) -> Void in
                 // 取消收藏
@@ -158,7 +158,8 @@ class CollectionGoodsCell : UITableViewCell {
         imgV.tag = tag++
         self.contentView.addSubview(imgV)
         
-        let goodsLbl = ZMDTool.getLabel(CGRect(x: 12+125+10, y: 12, width: kScreenWidth - 12-125-10-12, height: 15), text: "", fontSize: 15)
+        let goodsLbl = ZMDTool.getLabel(CGRect(x: 12+125+10, y: 12, width: kScreenWidth - 12-125-10-12, height: 40), text: "", fontSize: 15)
+        goodsLbl.numberOfLines = 0
         goodsLbl.tag = tag++
         self.contentView.addSubview(goodsLbl)
         
@@ -166,21 +167,22 @@ class CollectionGoodsCell : UITableViewCell {
         detailLbl.tag = tag++
         self.contentView.addSubview(detailLbl)
         
-        let goodsPriceLbl = ZMDTool.getLabel(CGRect(x: 12+125+10, y: 150-12-14-14-15, width: kScreenWidth - 12-125-10-12, height: 15), text: "", fontSize: 15,textColor: RGB(235,61,61,1.0))
+        let goodsPriceLbl = ZMDTool.getLabel(CGRect(x: 12+125+10, y: 150-12-14-14-15, width: kScreenWidth - 12-125-10-12, height: 16), text: "", fontSize: 15,textColor: RGB(235,61,61,1.0))
         goodsPriceLbl.tag = tag++
         self.contentView.addSubview(goodsPriceLbl)
         
         let freightLbl = ZMDTool.getLabel(CGRect(x: 12+125+10, y: 150-12-14, width: kScreenWidth - 12-125-10-100, height: 15), text: "", fontSize: 15,textColor: defaultDetailTextColor)
         freightLbl.tag = tag++
+        freightLbl.hidden = true
         self.contentView.addSubview(freightLbl)
         
-        let cancelBtn = ZMDTool.getButton(CGRect(x: kScreenWidth - 80, y: 150-12-15, width: 80, height: 15), textForNormal: "取消收藏", fontSize: 15,textColorForNormal:defaultDetailTextColor, backgroundColor: UIColor.clearColor(), blockForCli: { (sender) -> Void in
+        let width = "取消收藏".sizeWithFont(UIFont.systemFontOfSize(15), maxWidth: 120).width
+        let cancelBtn = ZMDTool.getButton(CGRect(x: 12+125+10, y: 150-12-15, width: width, height: 15), textForNormal: "取消收藏", fontSize: 15,textColorForNormal:defaultDetailTextColor, backgroundColor: UIColor.clearColor(), blockForCli: { (sender) -> Void in
             //
             
         })
         cancelBtn.tag = tag++
         self.contentView.addSubview(cancelBtn)
-        
         self.contentView.addSubview(ZMDTool.getLine(CGRect(x: 0, y: 149.5, width: kScreenWidth, height: 0.5)))
     }
 

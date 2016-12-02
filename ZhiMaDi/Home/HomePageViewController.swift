@@ -482,8 +482,8 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
     func cellForHomeGoods(tableView: UITableView,indexPath: NSIndexPath)-> UITableViewCell {
         let cellId = "goodsCell"
         let cell = tableView.dequeueReusableCellWithIdentifier(cellId) as! AdvertisementOfferCell
-        if  self.advertisementAll != nil {
-            AdvertisementOfferCell.configCell(cell, advertisementAll: self.advertisementAll.offer)
+        if let advertisementAll = self.advertisementAll,offer = advertisementAll.offer {
+            AdvertisementOfferCell.configCell(cell, advertisementAll: offer)
         }
         return cell
     }
@@ -802,13 +802,16 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
         QNNetworkTool.fetchMainPageInto { (advertisementAll, error, dictionary) -> Void in
             if advertisementAll != nil {
                 self.advertisementAll = advertisementAll
+                if let offer = advertisementAll?.offer where offer.count > 0 {
+                    self.userCenterData = [/*.HomeContentTypeHead,*/.HomeContentTypeAd,.HomeContentTypeMenu,.HomeContentTypeGoods,.HomeContentTypeRecommendationHead,.HomeContentTypeRecommendation, .HomeContentTypeTheme]
+                }
                 self.currentTableView.reloadData()
             }
         }
     }
     
     private func dataInit(){
-        self.userCenterData = [/*.HomeContentTypeHead,*/.HomeContentTypeAd,.HomeContentTypeMenu,.HomeContentTypeGoods,.HomeContentTypeRecommendationHead,.HomeContentTypeRecommendation, .HomeContentTypeTheme]
+        self.userCenterData = [/*.HomeContentTypeHead,*/.HomeContentTypeAd,.HomeContentTypeMenu,/*.HomeContentTypeGoods,*/.HomeContentTypeRecommendationHead,.HomeContentTypeRecommendation, .HomeContentTypeTheme]
         self.menuType = [.kFeature,.kCate,.kPublic,.kInformation]
     }
     

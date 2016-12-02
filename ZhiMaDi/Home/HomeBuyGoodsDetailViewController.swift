@@ -194,7 +194,7 @@ class HomeBuyGoodsDetailViewController: UIViewController,UITableViewDataSource,U
         case .HomeContentTypeAd :
             return kScreenWidth
         case .HomeContentTypeDetail :
-            return 156
+            return 122
         case .HomeContentTypeMenu :
             return ZMDProductAttrView.getHeight(self.productDetail) + 60
         case .HomeContentTypeDistribution :
@@ -360,7 +360,8 @@ class HomeBuyGoodsDetailViewController: UIViewController,UITableViewDataSource,U
     func present(alert: UIAlertController) -> Void {
         self.presentViewController(alert, animated: false, completion: nil)
     }
-    //MARK: -  PrivateMethod
+    
+    //MARK: - ****************TableViewCell****************
     //MARK: Second cell
     func cellImageTextForSecond(tableView:UITableView,indexPath:NSIndexPath)-> UITableViewCell {
         let cellId = "SecondImageTextCell"
@@ -698,7 +699,7 @@ class HomeBuyGoodsDetailViewController: UIViewController,UITableViewDataSource,U
     }
     //MARK:第二个table的menu
     func createFilterMenu() -> UIView{
-        let titles = ["图文详情","评分","相关推荐"]
+        let titles = ["图文详情","评分","产品参数"]
         var btnArr = NSMutableArray()
         let view = UIView(frame: CGRectMake(0 , 0, kScreenWidth, 60))
         for var i=0;i<titles.count;i++ {
@@ -1126,11 +1127,14 @@ class ContentTypeDetailCell: UITableViewCell {
             cell.oldPriceLbl.addCenterYLine(cell.oldPriceLbl.text!)
         }
         
-        let text = product.IsFreeShipping?.integerValue == 1 ? "包邮" : "不包邮"
-        cell.skuLbl.attributedText = "是否免邮:  \(text)".AttributedMutableText(["是否包邮:"," \(text)"], colors: [defaultTextColor,defaultSelectColor])
-        cell.skuLbl.font = UIFont.systemFontOfSize(16)
-        cell.isFreeLbl.text = "销售量:  \(product.Sold.integerValue)件"
         cell.isFreeLbl.font = UIFont.systemFontOfSize(16)
-        cell.soldCountLbl.text = ""
+        cell.soldCountLbl.font = UIFont.systemFontOfSize(16)
+        if product.IsFreeShipping?.integerValue == 1 {
+            cell.isFreeLbl.attributedText = "是否免邮:  包邮".AttributedMutableText(["是否包邮:","包邮"], colors: [defaultTextColor,defaultSelectColor])
+            cell.soldCountLbl.text = "销售量:  \(product.Sold.integerValue)件"
+        }else{
+            cell.isFreeLbl.text = "销售量:  \(product.Sold.integerValue)件"
+            cell.soldCountLbl.text = ""
+        }
     }
 }

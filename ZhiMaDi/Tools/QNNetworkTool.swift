@@ -302,7 +302,8 @@ extension QNNetworkTool {
             if let customerDic = dic["customer"] as? NSDictionary,customer = ZMDCustomer.mj_objectWithKeyValues(customerDic) {
                 g_customer = customer
                 if let url = g_customer?.Avatar?.AvatarUrl  {
-                    g_customer?.Avatar?.AvatarUrl = kImageAddressMain + url
+                    let url = url.hasPrefix(kImageAddressMain) ? url : kImageAddressMain + url
+                    g_customer?.Avatar?.AvatarUrl = url
                     g_customer?.FirstName = Username
                 }
             }
@@ -362,7 +363,8 @@ extension QNNetworkTool {
                     completion(succeed: false, dic: nil, error: $3)
                     return
                 }
-                g_customer?.Avatar?.AvatarUrl = url
+                let avatarUrl = url.hasPrefix(kImageAddressMain) ? url : kImageAddressMain + url
+                g_customer?.Avatar?.AvatarUrl = avatarUrl
                 completion(succeed: true, dic: dic, error: $3)
             } catch {}
         }

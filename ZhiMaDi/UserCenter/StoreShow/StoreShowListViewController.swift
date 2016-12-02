@@ -9,9 +9,6 @@
 import UIKit
 class StoreShowListViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
     @IBOutlet weak var currentTableView: UITableView!
-    
-    let kServerAddress  = "http://www.xjnongte.com"
-
     var IndexFilter = 0
     var orderby = 16
     var orderBy : Int?
@@ -73,7 +70,7 @@ class StoreShowListViewController: UIViewController,UITableViewDataSource,UITabl
             storeImage.image = UIImage(named: "default-image-100.jpg")
             ZMDTool.configViewLayerRound(storeImage)
             let store = self.dataArray[indexPath.section] as! ZMDStoreDetail
-            if let urlStr = store.PictureUrl,url = NSURL(string: kServerAddress + urlStr) {
+            if let urlStr = store.PictureUrl,url = NSURL(string: kImageAddressMain + urlStr) {
                 storeImage.sd_setImageWithURL(url, placeholderImage: nil)
             }
             
@@ -278,6 +275,9 @@ class StoreShowListGoodCell: UITableViewCell {
             (view.viewWithTag(100) as!UIImageView).sd_setImageWithURL(NSURL(string: kServerAddress + (product.DefaultPictureModel?.ImageUrl)!), placeholderImage: nil)
             let productName = product.Name.stringByReplacingOccurrencesOfString("（代购）", withString: "").stringByReplacingOccurrencesOfString("【代购】", withString: "").stringByReplacingOccurrencesOfString("（预售）", withString: "")
             (view.viewWithTag(101) as!UILabel).text = productName
+            if let shortDescription = product.ShortDescription {
+                (view.viewWithTag(101) as! UILabel).text = shortDescription
+            }
             (view.viewWithTag(102) as!UILabel).text = product.ProductPrice?.Price
         }
     }

@@ -325,6 +325,8 @@ class PersonInfoViewController:UIViewController,UITableViewDataSource, UITableVi
         ZMDTool.configViewLayerFrameWithColor(btn, color: defaultTextColor)
         footV.addSubview(btn)
         self.tableView.tableFooterView = footV
+        
+        self.moreViewUpdate()
     }
     private func dataInit(){
         self.userCenterData = [UserCenterCellType.Head,UserCenterCellType.NickN /*,UserCenterCellType.RealName*/, UserCenterCellType.Address, UserCenterCellType.ChangePs, UserCenterCellType.Clean]
@@ -333,7 +335,7 @@ class PersonInfoViewController:UIViewController,UITableViewDataSource, UITableVi
     func moreViewUpdate() {
         if self.moreView == nil {
             let titles = ["消息":UIImage(named: "common_more_message"),"首页":UIImage(named: "common_more_home")]
-            let view = UIView(frame: CGRect(x:kScreenWidth-150-12, y: 0, width: 150, height: 48*CGFloat(titles.count)))
+            let view = UIView(frame: CGRect(x:kScreenWidth-150-12, y: 64, width: 150, height: 48*CGFloat(titles.count)))
             self.moreView = view
             var i = 0
             for title in titles {
@@ -341,6 +343,7 @@ class PersonInfoViewController:UIViewController,UITableViewDataSource, UITableVi
                 btn.backgroundColor = UIColor(white: 0, alpha: 0.5)
                 btn.tag = i + 100
                 btn.rac_signalForControlEvents(.TouchUpInside).subscribeNext({ (sender) -> Void in
+                    self.moreView.removeFromSuperview()
                     let vc : UIViewController
 //                    if (sender as!UIButton).tag == 100{
                     if title.0 == "消息"{
@@ -348,7 +351,6 @@ class PersonInfoViewController:UIViewController,UITableViewDataSource, UITableVi
                         self.navigationController?.pushViewController(vc, animated: true)
                     }else{
 //                        self.navigationController?.popToRootViewControllerAnimated(true)
-                        self.moreView.removeFromSuperview()
                         self.tabBarController?.selectedIndex = 0
                     }
                 })
@@ -370,21 +372,30 @@ class PersonInfoViewController:UIViewController,UITableViewDataSource, UITableVi
     
     //MARK:重写（点击moreBtn）
     override func gotoMore() {
-        let containView = UIButton(frame: self.view.bounds)
-        containView.rac_signalForControlEvents(.TouchUpInside).subscribeNext { (sender) -> Void in
-            self.isMoreViewShow = true
-            self.dismissPopupView(self.moreView)
-            containView.removeFromSuperview()
-        }
-        self.view.addSubview(containView)
-        self.moreViewUpdate()
         if self.isMoreViewShow {
-            self.presentPopupView(self.moreView, config: ZMDPopViewConfig())
+            self.moreView.showAsPop()
         }else{
-            self.dismissPopupView(self.moreView)
-            containView.removeFromSuperview()
+            self.moreView.removeFromSuperview()
+//            self.dismissPopupView(self.moreView)
         }
         self.isMoreViewShow = !self.isMoreViewShow
+        
+        
+//        let containView = UIButton(frame: self.view.bounds)
+//        containView.rac_signalForControlEvents(.TouchUpInside).subscribeNext { (sender) -> Void in
+//            self.isMoreViewShow = true
+//            self.dismissPopupView(self.moreView)
+//            containView.removeFromSuperview()
+//        }
+//        self.view.addSubview(containView)
+//        self.moreViewUpdate()
+//        if self.isMoreViewShow {
+//            self.presentPopupView(self.moreView, config: ZMDPopViewConfig())
+//        }else{
+//            self.dismissPopupView(self.moreView)
+//            containView.removeFromSuperview()
+//        }
+//        self.isMoreViewShow = !self.isMoreViewShow
     }
     
     //MARK:重写 -- alertDestructiveAction
@@ -415,7 +426,7 @@ class PersonInfoViewController:UIViewController,UITableViewDataSource, UITableVi
                 }
             }
         }
-        size += Double(SDImageCache.sharedImageCache().getSize().hashValue)
+//        size += Double(SDImageCache.sharedImageCache().getSize().hashValue)   //加上图片缓存但不显示
         let mm = size / 1024 / 1024
         ZMDTool.hiddenActivityView()
         return mm

@@ -17,10 +17,10 @@ private enum QNTabBarItem: Int {
     // 对应的图片名
     var imageName: String {
         switch self {
-        case .Home: return "Home"
-        case .Category: return "Category"
-        case .School: return "School"
-        case .Mine: return "Mine"
+        case .Home: return "home"
+        case .Category: return "category"
+        case .School: return "shoppingCar"
+        case .Mine: return "mine"
         }
     }
 }
@@ -37,7 +37,8 @@ class tabBarViewController: UITabBarController,UITabBarControllerDelegate {
 //        self.tabBar.barTintColor = UIColor(red: 133/255, green: 133/255, blue: 133/255, alpha: 1.0)
 //        self.tabBar.tintColor = UINavigationBar.appearance().tintColor
         UITabBarItem.appearance().setTitleTextAttributes(NSDictionary(dictionary: [NSForegroundColorAttributeName: UIColor(red: 133/255, green: 133/255, blue: 133/255, alpha: 1.0),NSFontAttributeName:UIFont.systemFontOfSize(11)]) as? [String : AnyObject], forState: .Normal)
-        UITabBarItem.appearance().setTitleTextAttributes(NSDictionary(dictionary: [NSForegroundColorAttributeName: defaultSelectColor,NSFontAttributeName:UIFont.systemFontOfSize(11)]) as? [String : AnyObject], forState: .Selected)
+        
+        UITabBarItem.appearance().setTitleTextAttributes(NSDictionary(dictionary: [NSForegroundColorAttributeName: /*defaultSelectColor*/UIColor(red: 54/255, green: 183/255, blue: 9/255, alpha: 1),NSFontAttributeName:UIFont.systemFontOfSize(11)]) as? [String : AnyObject], forState: .Selected)
         // 图标配置
         if let _ = self.tabBar.items {
             self.itemConfig(QNTabBarItem.Home)
@@ -50,10 +51,10 @@ class tabBarViewController: UITabBarController,UITabBarControllerDelegate {
     
     // UITabBarControllerDelegate
     func tabBarController(tabBarController: UITabBarController, shouldSelectViewController viewController: UIViewController) -> Bool {
-        if viewController != (self.viewControllers?.first)! as UIViewController && !g_isLogin! {/*未登录*/
-            ZMDTool.enterLoginViewController()
-            return false
-        }
+//        if viewController != (self.viewControllers?.first)! as UIViewController && !g_isLogin! {/*未登录*/
+//            ZMDTool.enterLoginViewController()
+//            return false
+//        }
 //        if viewController == (self.viewControllers?.last)! as UIViewController && !g_isLogin! {/*未登录*/
 //            ZMDTool.enterLoginViewController()
 //            return false
@@ -72,8 +73,8 @@ class tabBarViewController: UITabBarController,UITabBarControllerDelegate {
     private func itemConfig(qnItem: QNTabBarItem, haveDot: Bool = false) -> UITabBarItem? {
         if let item = self.tabBar.items?[qnItem.rawValue]{
             let imageName = qnItem.imageName
-            if let image = UIImage(named: "TabBar_" + imageName + "_Normal"),
-                let selectedImage = UIImage(named: "TabBar_" + imageName + "_Selected") {
+            if let image = UIImage(named: "Tabbar_" + imageName + "_unselected"),
+                let selectedImage = UIImage(named: "Tabbar_" + imageName + "_selected") {
                     if !haveDot {
                         item.image = image.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal) //不使用Tint Color
                         item.selectedImage = selectedImage.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)

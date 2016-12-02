@@ -135,3 +135,83 @@ extension UIView {
     }
 }
 
+extension UIView {
+    //通过UIView得到它的UIViewController
+    public func getController()->UIViewController?{
+        var next:UIView? = self
+        repeat{
+            if let nextResponder = next?.nextResponder() where nextResponder.isKindOfClass(UIViewController.self){
+                return (nextResponder as! UIViewController)
+            }
+            next = next?.superview
+        }while next != nil
+        return nil
+    }
+}
+
+//设置UIView 的frame
+extension UIView {
+    func get(type:String) -> CGFloat {
+        switch type {
+        case "x" :
+            return self.frame.origin.x
+        case "y" :
+            return self.frame.origin.y
+        case "w" :
+            return self.frame.size.width
+        case "h" :
+            return self.frame.size.height
+        default :
+            return 0
+        }
+    }
+    
+    func set(type:String,value:CGFloat) {
+        var frame = self.frame
+        switch type {
+        case "x" :
+            frame.origin.x = value
+            self.frame = frame
+            break
+        case "y" :
+            frame.origin.y = value
+            self.frame = frame
+            break
+        case "w" :
+            frame.size.width = value
+            self.frame = frame
+            break
+        case "h" :
+            frame.size.height = value
+            self.frame = frame
+        default :
+            break
+        }
+    }
+    
+    func add(type:String,value:CGFloat) {
+        var frame = self.frame
+        switch type {
+        case "x" :
+            frame.origin.x = value + frame.origin.x
+            self.frame = frame
+            break
+        case "y" :
+            frame.origin.y = value + frame.origin.y
+            self.frame = frame
+            break
+        case "w" :
+            frame.size.width = value + frame.size.width
+            self.frame = frame
+            break
+        case "h" :
+            frame.size.height = value + frame.size.height
+            self.frame = frame
+        default :
+            break
+        }
+    }
+    
+}
+
+

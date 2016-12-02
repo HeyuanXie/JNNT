@@ -113,7 +113,8 @@ class ZMDInterceptor : NSObject {
                         if viewController is HomePageViewController {
                             UIApplication.sharedApplication().statusBarStyle = .Default
                             //填充色
-                            viewController.navigationController?.navigationBar.barTintColor = UIColor(red: 14/255, green: 48/255, blue: 141/255, alpha: 1.0)
+//                            viewController.navigationController?.navigationBar.barTintColor = UIColor(red: 14/255, green: 48/255, blue: 141/255, alpha: 1.0)    //蓝色
+                            viewController.navigationController?.navigationBar.barTintColor = RGB(35,172,81,1.0)    //绿色
                         } else {
                             // 设置统一的背景色
                             viewController.view.backgroundColor = UIColor.whiteColor()

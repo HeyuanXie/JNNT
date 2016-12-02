@@ -54,4 +54,11 @@
 
 #import <CommonCrypto/CommonHMAC.h>
 #import <AlipaySDK/AlipaySDK.h>
+
+//信鸽推送
+#import "XGPush.h"
+
+//仿微信图片选择
+#import "TZImagePickerController.h"
+
 #endif /* SleepCare_Bridging_Header_h */

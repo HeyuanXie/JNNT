@@ -324,7 +324,8 @@ extension UIViewController {
             self.dismissPopupView(view)
             return RACSignal.empty()
         })
-        
+        //灰色背景btn的tag
+        bg.tag = 5000
         self.presentPopupViewForNav(bg,config: ZMDPopViewConfig())
         let config = ZMDPopViewConfig()
         config.dismissCompletion = { (view) ->Void in

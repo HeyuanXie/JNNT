@@ -19,6 +19,7 @@ let appThemeColor = UIColor(red: 237/255.0, green: 191/255.0, blue: 28/255.0, al
 let navigationTextColor = UIColor(red: 79/255.0, green: 79/255.0, blue: 79/255.0, alpha: 1.0)  //黑色
 /// 导航栏背景颜色
 let navigationBackgroundColor = UIColor.whiteColor()
+
 /// 导航栏字体（titleView不允许被修改）
 let navigationTextFont = UIFont.systemFontOfSize(19)
 
@@ -50,6 +51,10 @@ let defaultButtonTextSize = defaultSysFontWithSize(13)
 let defaultSysFontWithSize = { (size : CGFloat) -> UIFont in
     UIFont.systemFontOfSize(size)
 }
+
+//灰色不可按button背景色
+let grayButtonBackgroundColor = UIColor(red: 215/255, green: 215/255, blue: 215/255, alpha: 1)
+
 let RGB = { (r : CGFloat,g: CGFloat,b: CGFloat,a: CGFloat) -> UIColor in
     return UIColor(red: r/255, green: g/255, blue: b/255, alpha: a)
 }

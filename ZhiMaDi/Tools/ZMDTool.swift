@@ -217,8 +217,14 @@ extension ZMDTool {
         let vc = UIStoryboard(name: "Login", bundle: nil).instantiateInitialViewController()!
         ZMDTool.enterRootViewController(vc)
     }
+
     class func enterMyStoreViewController() {
         let vc = UIStoryboard(name: "Store", bundle: nil).instantiateInitialViewController()!
+        ZMDTool.enterRootViewController(vc)
+    }
+    
+    class func enterHomePageViewController() {
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()!
         ZMDTool.enterRootViewController(vc)
     }
     
@@ -261,6 +267,17 @@ extension ZMDTool {
         textField.placeholder = placeholder
         return textField
     }
+    
+    class func getTextView(frame:CGRect,placeholder:String,fontSize:CGFloat,textColor:UIColor = defaultTextColor) -> UITextView {
+        let textView = UITextView(frame: frame)
+        textView.textColor = textColor
+        textView.font = defaultSysFontWithSize(fontSize)
+        let label = ZMDTool.getLabel(CGRect(x: 5, y: 5, width: frame.width, height: 20), text: placeholder, fontSize: fontSize, textColor: RGB(173,173,173,1.0), textAlignment: .Left)
+        textView.addSubview(label)
+        label.tag = 10000
+        return textView
+    }
+    
     class func getLabel(frame:CGRect,text:String,fontSize:CGFloat,textColor:UIColor = defaultTextColor,textAlignment : NSTextAlignment = .Left) -> UILabel {
         let label = UILabel(frame: frame)
         label.backgroundColor = UIColor.clearColor()
@@ -290,6 +307,7 @@ extension ZMDTool {
         }
         return btn
     }
+    
     class func getMutilButton (frame:CGRect,textForNormal:String,textColorForNormal:UIColor = defaultTextColor,textColorForSelect:UIColor = RGB(235,61,61,1.0),fontSize:CGFloat,backgroundColor:UIColor,blockForCli : ((AnyObject!) -> Void)!) -> UIButton{
         let btn = UIButton(frame: frame)
         btn.backgroundColor = backgroundColor
@@ -310,6 +328,7 @@ extension ZMDTool {
         return CustomBtn(frame: frame)
     }
 }
+
 //自定义UIButton 用于图跟文字垂直
 class CustomBtn : UIButton {
     override func layoutSubviews() {
@@ -337,6 +356,7 @@ class CustomVerticalBtn : UIButton {
         
     }
 }
+
 // test
 // map faltmap
 class ZMDHaijie {

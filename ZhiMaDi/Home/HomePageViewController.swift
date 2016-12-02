@@ -303,6 +303,8 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
         }
     }
 
+    
+    //MARK: - **************TableViewCell*****************
     //MARK: 头部菜单 cell
     func cellForHomeHead(tableView: UITableView,indexPath: NSIndexPath)-> UITableViewCell {
         let cellId = "HeadCell"
@@ -476,7 +478,7 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
         return cell!
     }
     
-    //MARK: - 商品 cell  offer（已抛弃）
+    //MARK: - 商品 cell  offer
     func cellForHomeGoods(tableView: UITableView,indexPath: NSIndexPath)-> UITableViewCell {
         let cellId = "goodsCell"
         let cell = tableView.dequeueReusableCellWithIdentifier(cellId) as! AdvertisementOfferCell
@@ -597,6 +599,7 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
         return cell!
     }
     
+    //MARK: - ***************OtherMethod*******************
     //MARK:点击广告的响应方法
     func advertisementClick(advertisement: ZMDAdvertisement){
         if let other1 = advertisement.Other1,let other2 = advertisement.Other2,let linkUrl = advertisement.LinkUrl{
@@ -805,7 +808,7 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
     }
     
     private func dataInit(){
-        self.userCenterData = [/*.HomeContentTypeHead,*/.HomeContentTypeAd,.HomeContentTypeMenu,/*.HomeContentTypeGoods,*/.HomeContentTypeRecommendationHead,.HomeContentTypeRecommendation, .HomeContentTypeTheme]
+        self.userCenterData = [/*.HomeContentTypeHead,*/.HomeContentTypeAd,.HomeContentTypeMenu,.HomeContentTypeGoods,.HomeContentTypeRecommendationHead,.HomeContentTypeRecommendation, .HomeContentTypeTheme]
         self.menuType = [.kFeature,.kCate,.kPublic,.kInformation]
     }
     
@@ -813,6 +816,8 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
         self.currentTableView.backgroundColor = tableViewdefaultBackgroundColor
     }
     
+    
+    //MARK: - ************Override************
     //MARK: CommonAlert Action重写
     override func alertDestructiveAction() {
         if let url = NSURL(string: APP_URL_IN_ITUNES) {

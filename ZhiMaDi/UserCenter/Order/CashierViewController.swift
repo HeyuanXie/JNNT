@@ -154,7 +154,6 @@ class CashierViewController: UIViewController,UITableViewDataSource,UITableViewD
                 }
             }
         }else{
-            CycleScrollView
             ZMDTool.showErrorPromptView(dictionary, error: error, errorMsg: dictionary!["error"] as? String)
         }
     }

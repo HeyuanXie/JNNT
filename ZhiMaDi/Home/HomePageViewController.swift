@@ -105,29 +105,30 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
         
         //点击菜单选择，跳转目标VC的枚举
         var pushViewController :UIViewController{
-            let viewController: UIViewController
-            switch self{
-            case .kFeature:
-                viewController = HomeBuyListViewController.CreateFromMainStoryboard() as! HomeBuyListViewController
-                (viewController as!HomeBuyListViewController).isNew = "true"
-                (viewController as!HomeBuyListViewController).storeId = 0
-            case .kCate:
-                viewController = SortViewController2()
-                (viewController as! SortViewController2).isTabBar = false
-            case .kPublic:
-                viewController = MineHomeViewController.CreateFromMainStoryboard() as!MineHomeViewController
-                (viewController as! MineHomeViewController).isTabBarVC = false
-            case .kInformation:
-                viewController = CardVolumeHomeViewController()
-            if !viewController.isKindOfClass(MineHomeViewController) {
-                viewController.hidesBottomBarWhenPushed = true
-                }
-            }
-            return viewController
+//            let viewController: UIViewController
+//            switch self{
+//            case .kFeature:
+//                viewController = TempViewController()
+//                (viewController as! TempViewController).vcTitle = "喀什特色"
+//            case .kCate:
+//                viewController = TempViewController()
+//                (viewController as! TempViewController).vcTitle = "美食汇"
+//            case .kPublic:
+//                viewController = TempViewController()
+//                (viewController as! TempViewController).vcTitle = "喀什特色"
+//            case .kInformation:
+//                viewController = TempViewController()
+//                (viewController as! TempViewController).vcTitle = "喀什特色"
+//            }
+            let vc = TempViewController()
+            vc.vcTitle = self.title
+            vc.hidesBottomBarWhenPushed = true
+            return vc
         }
         
         //点击菜单选择，调用方法跳转
         func didSelect(navViewController:UINavigationController){
+            self.pushViewController.hidesBottomBarWhenPushed = true
             navViewController.pushViewController(self.pushViewController, animated: true)
         }
     }
@@ -221,8 +222,9 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headView = UIView(frame: CGRectMake(0, 0, kScreenWidth, 10))
         headView.backgroundColor = UIColor.clearColor()
+        let cellType = self.userCenterData[section]
         //如果为特卖专题，自定义headerView
-        if section == 4 {
+        if cellType == .HomeContentTypeTheme {
             headView.frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: 30)
             let redView = UIView(frame: CGRect(x: 12, y: 0, width: 8, height: 15))
             redView.backgroundColor = UIColor.redColor()
@@ -457,22 +459,6 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
             })
             label.text = menuType.title
             imgV.image = menuType.image
-            
-            
-            //当请求数据成功时,更新cellForHomeMenu上btn的图片和title
-            /*if let advertisementAll = self.advertisementAll,icon = advertisementAll.icon {
-                if icon.count != 0 {
-                    let icon = i>=2 ? icon[i+1] : icon[i]
-                    //icon的title暂时自定义为 类目i
-                    label.text = icon.Title
-                    var url = kImageAddressNew + (icon.ResourcesCDNPath ?? "")
-                    if icon.ResourcesCDNPath!.hasPrefix("http") {
-                        url = icon.ResourcesCDNPath!
-                    }
-                    //没图片，暂时不用
-                    imgV.sd_setImageWithURL(NSURL(string: url), placeholderImage: nil)
-                }
-            }*/
          }
     
         return cell!
@@ -811,7 +797,7 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
     }
     
     private func dataInit(){
-        self.userCenterData = [/*.HomeContentTypeHead,*/.HomeContentTypeAd,.HomeContentTypeMenu,/*.HomeContentTypeGoods,*/.HomeContentTypeRecommendationHead,.HomeContentTypeRecommendation, .HomeContentTypeTheme]
+        self.userCenterData = [/*.HomeContentTypeHead,*/.HomeContentTypeAd,.HomeContentTypeMenu,.HomeContentTypeGoods,.HomeContentTypeRecommendationHead,.HomeContentTypeRecommendation, .HomeContentTypeTheme]
         self.menuType = [.kFeature,.kCate,.kPublic,.kInformation]
     }
     

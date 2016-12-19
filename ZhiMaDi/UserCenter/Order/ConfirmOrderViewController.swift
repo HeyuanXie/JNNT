@@ -492,7 +492,6 @@ class ConfirmOrderViewController: UIViewController,UITableViewDataSource,UITable
         let storeArray = NSMutableArray()
         for(var i=0;i<self.scis.count;i++){
             let item = self.scis[i] as! ZMDShoppingItem
-            item.Store.Id = i%2
             var j = 0
             for (;j<storeArray.count;j++){
                 let arr = storeArray[j] as! NSMutableArray
@@ -559,9 +558,12 @@ class ConfirmOrderViewController: UIViewController,UITableViewDataSource,UITable
         for var i=0;i<self.markArray.count;i++ {
             let text:String = (self.markArray[i] as! UITextField).text!
             let store = (self.storeArray[i].firstObject as! ZMDShoppingItem).Store
-            marks.setValue(text, forKey: "customercommenthidden_"+"\(store.Id.integerValue)")
+            if text != "" {
+                marks.setValue(text, forKey: "customercommenthidden_"+"\(store.Id.integerValue)")
+            }
         }
         marks.setValue(g_customerId!, forKey: "customerId")
+        marks.setValue("", forKey: "paymentmethod")
         
         QNNetworkTool.fetchPaymentMethod { (paymentMethods, dictionary, error) -> Void in
         ZMDTool.hiddenActivityView()

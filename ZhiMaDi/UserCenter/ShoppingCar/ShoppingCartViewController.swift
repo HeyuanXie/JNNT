@@ -310,13 +310,6 @@ class ShoppingCartViewController: UIViewController,UITableViewDataSource,UITable
                 self.scis.removeAllObjects()
                 self.scis.addObjectsFromArray(self.dataArray as [AnyObject])
                 self.allSelectBtn.selected = true
-//                //模拟产生storeId
-//                var index = 0
-//                for item in self.dataArray {
-//                    let shoppingItem = item as! ZMDShoppingItem
-//                    shoppingItem.StoreId = (index++) % 2
-//                }
-                
                 //将self.dataArray中的商品按店铺分组,得到一个类似于[[item1,item2],[item1,item2],...]的数组self.storeArray
                 self.getTheStoreArray()
                 //通过updateTotal计算选中物品总金额
@@ -334,7 +327,6 @@ class ShoppingCartViewController: UIViewController,UITableViewDataSource,UITable
         let storeArray = NSMutableArray()
         for(var i=0;i<self.dataArray.count;i++){
             let item = self.dataArray[i] as! ZMDShoppingItem
-            item.Store.Id = i%2
             var j = 0
             for (;j<storeArray.count;j++){
                 let arr = storeArray[j] as! NSMutableArray

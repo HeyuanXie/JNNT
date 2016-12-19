@@ -747,6 +747,7 @@
 		842E6A251DE841A70056A554 /* PgySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 842E6A231DE841A70056A554 /* PgySDK.framework */; };
 		842E6A261DE841A70056A554 /* PgyUpdate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 842E6A241DE841A70056A554 /* PgyUpdate.framework */; };
 		8446E60A1DD59AD100889E9A /* libXG-SDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8446E6071DD59AD000889E9A /* libXG-SDK.a */; };
+		8450A6E21E03C91C005FF74A /* TempViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8450A6E11E03C91C005FF74A /* TempViewController.swift */; };
 		84683B071D63F9AF003C848F /* Navi_Msg_50*50@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84683B061D63F9AF003C848F /* Navi_Msg_50*50@2x.png */; };
 		84765FAD1DA8C9A1002F4F80 /* default-image-100.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 84765FAC1DA8C9A1002F4F80 /* default-image-100.jpg */; };
 		84A441F11D88EFEC001FCBB0 /* Tabbar_category_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84A441E91D88EFEC001FCBB0 /* Tabbar_category_selected@2x.png */; };
@@ -1584,6 +1585,7 @@
 		8446E6071DD59AD000889E9A /* libXG-SDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libXG-SDK.a"; sourceTree = "<group>"; };
 		8446E6081DD59AD000889E9A /* XGPush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XGPush.h; sourceTree = "<group>"; };
 		8446E6091DD59AD000889E9A /* XGSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XGSetting.h; sourceTree = "<group>"; };
+		8450A6E11E03C91C005FF74A /* TempViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TempViewController.swift; sourceTree = "<group>"; };
 		84683B061D63F9AF003C848F /* Navi_Msg_50*50@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Navi_Msg_50*50@2x.png"; sourceTree = "<group>"; };
 		84765FAC1DA8C9A1002F4F80 /* default-image-100.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "default-image-100.jpg"; sourceTree = "<group>"; };
 		84A441E91D88EFEC001FCBB0 /* Tabbar_category_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Tabbar_category_selected@2x.png"; sourceTree = "<group>"; };
@@ -2420,6 +2422,7 @@
 				2B9D9F9E1C917B8F00141D31 /* HomeMarketViewController.swift */,
 				84B54A4B1D81670500356BBA /* MyWebViewController.swift */,
 				842E6A201DE828670056A554 /* CodeScanViewController.swift */,
+				8450A6E11E03C91C005FF74A /* TempViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -4197,6 +4200,7 @@
 				84F036CD1DDB10480061D478 /* TZAssetCell.m in Sources */,
 				2BF8D8BF1CAE67D7006E0C4D /* PsWordFindViewController.swift in Sources */,
 				3C9099381C76A6E9006B7D2C /* BarChartDataProvider.swift in Sources */,
+				8450A6E21E03C91C005FF74A /* TempViewController.swift in Sources */,
 				3C90992F1C76A6E9006B7D2C /* ChartDefaultXAxisValueFormatter.swift in Sources */,
 				3C90991C1C76A6E9006B7D2C /* CandleChartData.swift in Sources */,
 				2B8739CD1CBF7AA3007FE81A /* InvitatinCodeViewController.swift in Sources */,
@@ -4379,7 +4383,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "b4a8f4bc-5de5-4f09-b0de-aec2fa8c11cd";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -4402,8 +4406,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: The Wholesale Of Agricultural Commodities Of Jiangnan Kashi Bulk Agricultural Prod (JQV37Q32C9)";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution: The Wholesale Of Agricultural Commodities Of Jiangnan Kashi Bulk Agricultural Prod (JQV37Q32C9)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -4418,7 +4422,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "b4a8f4bc-5de5-4f09-b0de-aec2fa8c11cd";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -4493,7 +4497,7 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jnnt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b4a8f4bc-5de5-4f09-b0de-aec2fa8c11cd";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "ZhiMaDi/ZhiMaDi-Bridging-Header.h";
 			};
 			name = Debug;
@@ -4504,8 +4508,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: The Wholesale Of Agricultural Commodities Of Jiangnan Kashi Bulk Agricultural Prod (JQV37Q32C9)";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution: The Wholesale Of Agricultural Commodities Of Jiangnan Kashi Bulk Agricultural Prod (JQV37Q32C9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: The Wholesale Of Agricultural Commodities Of Jiangnan Kashi Bulk Agricultural Prod (JQV37Q32C9)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4566,7 +4571,7 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jnnt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b4a8f4bc-5de5-4f09-b0de-aec2fa8c11cd";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "ZhiMaDi/ZhiMaDi-Bridging-Header.h";
 			};
 			name = Release;

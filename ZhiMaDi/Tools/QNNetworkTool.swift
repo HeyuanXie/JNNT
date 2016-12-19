@@ -134,7 +134,7 @@ private extension QNNetworkTool {
      :param: completionHandler 请求完成后的回掉， 如果 dictionary 为nil，那么 error 就不可能为空
      */
     private class func requestForSelf(url: NSURL?, method: String, parameters: [String : AnyObject]?, completionHandler: (request: NSURLRequest, response: NSHTTPURLResponse?, data: AnyObject?, dictionary: NSDictionary?, error: NSError?) -> Void) {
-        request(ParameterEncoding.URL.encode(self.productRequest(url, method: method), parameters: parameters).0).response{
+        request(ParameterEncoding.JSON.encode(self.productRequest(url, method: method), parameters: parameters).0).response{
             if $3 != nil {  // 直接出错了
                 completionHandler(request: $0!, response: $1, data: $2, dictionary: nil, error: $3); return
             }

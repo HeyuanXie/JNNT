@@ -67,7 +67,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>AppJNNT</string>
+				<string>appJNNT</string>
 			</array>
 		</dict>
 	</array>

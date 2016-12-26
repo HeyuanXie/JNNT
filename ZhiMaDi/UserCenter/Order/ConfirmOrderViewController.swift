@@ -563,7 +563,7 @@ class ConfirmOrderViewController: UIViewController,UITableViewDataSource,UITable
             }
         }
         marks.setValue(g_customerId!, forKey: "customerId")
-        marks.setValue("", forKey: "paymentmethod")
+        marks.setValue("", forKey: "Paymentmethod")
         
         QNNetworkTool.fetchPaymentMethod { (paymentMethods, dictionary, error) -> Void in
         ZMDTool.hiddenActivityView()

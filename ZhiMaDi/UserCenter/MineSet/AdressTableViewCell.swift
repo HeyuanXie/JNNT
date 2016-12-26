@@ -37,20 +37,22 @@ class AdressTableViewCell: UITableViewCell {
     class func configCell(cell:AdressTableViewCell,address:ZMDAddress) {
         cell.title.text = "收件人: "+address.FirstName+" \(address.PhoneNumber)"
         if address.IsDefault == true{
-            cell.title.text = "收件人: "+address.FirstName+" \(address.PhoneNumber)"+" (默认)"
+            cell.title.text = "           "+"收件人: "+address.FirstName+" \(address.PhoneNumber)"
             cell.title.font = UIFont.systemFontOfSize(15)
-            let attributeString = cell.title.text?.AttributedMutableText(["收件人: ",address.FirstName," \(address.PhoneNumber)"," (默认)"], colors: [UIColor.blackColor(),UIColor.blackColor(),UIColor.blackColor(),UIColor.redColor()])
-            cell.title.attributedText = attributeString
+            let lbl = ZMDTool.getLabel(CGRect(x: 0, y: 0, width: ("默认".sizeWithFont(UIFont.systemFontOfSize(14), maxWidth: 100).width+10), height: cell.title.frame.height), text: "默认", fontSize: 14, textColor: UIColor.whiteColor(), textAlignment: .Center)
+            lbl.backgroundColor = defaultSelectColor
+            lbl.tag = 1000
+            ZMDTool.configViewLayer(lbl)
+            cell.title.addSubview(lbl)
         } else {
             cell.title.text = "收件人: "+address.FirstName+" \(address.PhoneNumber)"
             cell.title.font = UIFont.systemFontOfSize(15)
+            if let defaultLbl = cell.title.viewWithTag(1000) {
+                defaultLbl.hidden = true
+                defaultLbl.removeFromSuperview()
+            }
         }
         cell.address.text = "收件地址: "+(address.Address1 ?? "") + (address.Address2 ?? "")
-        if address.IsDefault == true {
-            //当默认时，让self.address往右移defaultLabel的宽度
-//            cell.defaultLabel.hidden = false
-//            cell.address.center.x += 45
-        }
     }
     
     class func configDaiShouCell(cell:AdressTableViewCell,address:ZMDAddress) {

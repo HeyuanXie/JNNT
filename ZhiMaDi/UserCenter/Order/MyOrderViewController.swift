@@ -162,7 +162,7 @@ class MyOrderViewController: UIViewController,UITableViewDataSource,UITableViewD
             return self.cellForMenu(tableView, cellForRowAtIndexPath: indexPath)
         }
         
-        if indexPath.row == 0 {
+        /*if indexPath.row == 0 {
             let cellId = "StoreCell"
             let cell = tableView.dequeueReusableCellWithIdentifier(cellId)
             let line = ZMDTool.getLine(CGRect(x: 0, y: 47.5, width: kScreenWidth, height: 0.5))
@@ -239,7 +239,8 @@ class MyOrderViewController: UIViewController,UITableViewDataSource,UITableViewD
             let cellId = "GoodsCell"
             let cell = tableView.dequeueReusableCellWithIdentifier(cellId) as! OrderGoodsTableViewCell
             return cell
-        }
+        }*/
+        return UITableViewCell()
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let orderDetail = self.dataArray[indexPath.section] as! ZMDOrderDetail2
@@ -458,7 +459,7 @@ class MyOrderViewController: UIViewController,UITableViewDataSource,UITableViewD
         if cell == nil {
             cell = UITableViewCell(style: .Subtitle, reuseIdentifier: cellId)
             cell?.accessoryType = UITableViewCellAccessoryType.None
-            cell!.selectionStyle = .None
+            cell?.selectionStyle = .None
             ZMDTool.configTableViewCellDefault(cell!)
             let line = ZMDTool.getLine(CGRect(x: 0, y: 55.5, width: kScreenWidth, height: 0.5))
             cell?.contentView.addSubview(line)
@@ -492,6 +493,10 @@ class MyOrderViewController: UIViewController,UITableViewDataSource,UITableViewD
 
         switch orderStatu {
         case .UnPay :
+//            if payMethod == "" || payMethod == nil {
+//                let titles = ["订单详情","","",""]
+//                self.doForOrderStatus(cell, titles: titles, orderDetail: orderDetail)
+//            }
             let titles = payMethod == "货到付款" ? ["取消订单","订单详情","",""] : [" 付款 ","取消订单","订单详情",""]
             self.doForOrderStatus(cell,titles: titles,orderDetail: orderDetail)
             break
@@ -574,13 +579,14 @@ class MyOrderViewController: UIViewController,UITableViewDataSource,UITableViewD
                         ZMDTool.hiddenActivityView()
                         if succeed! {
                             let vc = TradeSuccessedViewController()
+                            vc.orderId = orderId
                             vc.hidesBottomBarWhenPushed = true
                             self.navigationController?.pushViewController(vc, animated: true)
                         }else{
                             ZMDTool.showErrorPromptView(dictionary, error: error, errorMsg: nil)
                         }
                     })
-                }else if titles[sender.tag-1000] == "付款" {
+                }else if titles[sender.tag-1000] == " 付款 " {
                     if order.OrderStatusId == 40 {
                         ZMDTool.showPromptView("订单已取消,无法付款")
                     } else {

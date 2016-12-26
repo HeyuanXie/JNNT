@@ -66,9 +66,7 @@ class StoreShowHomeViewController: UIViewController, ZMDInterceptorProtocol,ZMDI
     }
     
     @IBOutlet weak var currentTableView: UITableView!
-    
-    let kServerAddress = "http://www.xjnongte.com"
-    
+        
     var isNoticeDetail = false  //noticeCell是否全部显示
     var storeId:NSNumber!
     var celltypes = [[StoreHomeCellType.Head/*,.Notice*//*,.Discount*/],/*[.Coupon],*/[.Recommend,.Recommend]]
@@ -130,7 +128,7 @@ class StoreShowHomeViewController: UIViewController, ZMDInterceptorProtocol,ZMDI
             return 60
         }
         if self.celltypes[indexPath.section].first == .Recommend{
-            return 325
+            return 325*kScreenWidth/375.0   //
         }
         return self.celltypes[indexPath.section][indexPath.row].height
     }
@@ -145,7 +143,7 @@ class StoreShowHomeViewController: UIViewController, ZMDInterceptorProtocol,ZMDI
         switch celltype {
         case .Head :
             let cellId = "HeadCell"
-            var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
+            let cell = tableView.dequeueReusableCellWithIdentifier(cellId)
             ZMDTool.configTableViewCellDefault(cell!)
             cell?.selectionStyle = .None
             var tag = 10001
@@ -162,7 +160,7 @@ class StoreShowHomeViewController: UIViewController, ZMDInterceptorProtocol,ZMDI
             ZMDTool.configViewLayerWithSize(followBtn, size: 17)
             
             if self.storeDetail != nil {
-                if let urlStr = self.storeDetail.PictureUrl,url = NSURL(string: kServerAddress + urlStr){
+                if let urlStr = self.storeDetail.PictureUrl,url = NSURL(string: kImageAddressMain + urlStr){
                     imgHead.sd_setImageWithURL(url, placeholderImage: nil)
                 }
                 if let text = self.storeDetail.Name {
@@ -171,32 +169,41 @@ class StoreShowHomeViewController: UIViewController, ZMDInterceptorProtocol,ZMDI
                 if let text = self.storeDetail.Host {
                     detailLbl.text = text
                 }
+                if let isCollected = self.storeDetail.isCollected {
+                    followBtn.selected = isCollected
+                }
             }
 
             followBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 12)
             followBtn.setImage(UIImage(named: "user_pingfen_selected.png"), forState: .Selected)
             followBtn.setTitle("已关注", forState: .Selected)
-            //关注btn临时
+            //关注btn
             followBtn.rac_command = RACCommand(signalBlock: { (sender) -> RACSignal! in
-                let btn = sender as!UIButton
-                btn.selected = !btn.selected
-                btn.titleLabel?.font = btn.selected ? UIFont.systemFontOfSize(14) : UIFont.systemFontOfSize(17)
-                btn.titleEdgeInsets = btn.selected ? UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 8) : UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+                if (sender as! UIButton).selected {
+                    QNNetworkTool.cancelCollectStores(self.storeId.integerValue, completion: { (succeed, error, dictionary) -> Void in
+                        if succeed! {
+                            ZMDTool.showPromptView("取消关注成功")
+                            (sender as! UIButton).selected = false
+                            followBtn.titleLabel?.font = UIFont.systemFontOfSize(17)
+                            followBtn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+                        }else{
+                            ZMDTool.showPromptView("取消关注失败")
+                        }
+                    })
+                }else{
+                    QNNetworkTool.collectStores(self.storeId.integerValue, completion: { (succeed, error, dictionary) -> Void in
+                        if succeed! {
+                            ZMDTool.showPromptView("关注成功")
+                            (sender as! UIButton).selected = true
+                            followBtn.titleLabel?.font = UIFont.systemFontOfSize(14)
+                            followBtn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 8)
+                        }else{
+                            ZMDTool.showPromptView("关注失败")
+                        }
+                    })
+                }
                 return RACSignal.empty()
             })
-            //关注btn
-            /*followBtn.rac_command = RACCommand(signalBlock: { (sender) -> RACSignal! in
-                QNNetworkTool.collectStores(self.storeId.integerValue,collect:!(sender as!UIButton).selected, completion: { (succeed, error, dictionary) -> Void in
-                    if succeed! {
-                        (sender as! UIButton).selected = !(sender as! UIButton).selected
-                        (sender as!UIButton).selected == true ? ZMDTool.showPromptView("关注成功") : ZMDTool.showPromptView("已取消关注")
-                    }else{
-                        (sender as!UIButton).selected == true ? ZMDTool.showPromptView("取消关注失败") : ZMDTool.showPromptView("关注失败")
-                    }
-                })
-                print("关注店铺\((sender as! UIButton).selected)")
-                return RACSignal.empty()
-            })*/
             return cell!
         case .Notice :
             let cellId = "NoticeCell"

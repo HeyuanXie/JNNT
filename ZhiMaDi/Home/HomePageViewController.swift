@@ -34,7 +34,7 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
             case .HomeContentTypeGoods :
                 return 2
             case .HomeContentTypeRecommendationHead:
-                return 12
+                return 0
             case .HomeContentTypeRecommendation :
                 return 0
             case .HomeContentTypeTheme :
@@ -54,7 +54,7 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
             case .HomeContentTypeGoods :
                 return kScreenWidth * 430 / 750
             case .HomeContentTypeRecommendationHead:
-                return 40
+                return 48
             case .HomeContentTypeRecommendation :
                 return 202
             case .HomeContentTypeTheme :
@@ -105,25 +105,29 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
         
         //点击菜单选择，跳转目标VC的枚举
         var pushViewController :UIViewController{
-//            let viewController: UIViewController
-//            switch self{
-//            case .kFeature:
-//                viewController = TempViewController()
-//                (viewController as! TempViewController).vcTitle = "喀什特色"
-//            case .kCate:
-//                viewController = TempViewController()
-//                (viewController as! TempViewController).vcTitle = "美食汇"
-//            case .kPublic:
-//                viewController = TempViewController()
-//                (viewController as! TempViewController).vcTitle = "喀什特色"
-//            case .kInformation:
-//                viewController = TempViewController()
-//                (viewController as! TempViewController).vcTitle = "喀什特色"
-//            }
-            let vc = TempViewController()
-            vc.vcTitle = self.title
-            vc.hidesBottomBarWhenPushed = true
-            return vc
+            let viewController: UIViewController
+            switch self{
+            case .kFeature:
+                viewController = HomeBuyListViewController.CreateFromMainStoryboard() as! HomeBuyListViewController
+                (viewController as! HomeBuyListViewController).Cid = "172"
+                (viewController as! HomeBuyListViewController).As = "true"
+                (viewController as! HomeBuyListViewController).title = "喀什特色"
+            case .kCate:
+                viewController = HomeBuyListViewController.CreateFromMainStoryboard() as! HomeBuyListViewController
+                (viewController as! HomeBuyListViewController).Cid = "173"
+                (viewController as! HomeBuyListViewController).As = "true"
+                (viewController as! HomeBuyListViewController).title = "美食汇"
+            case .kPublic:
+                viewController = MyWebViewController()
+                (viewController as! MyWebViewController).webUrl = "http://www.ksnongte.com/t/gongyi"
+                (viewController as! MyWebViewController).title = "喀什公益"
+            case .kInformation:
+                viewController = MyWebViewController()
+                (viewController as! MyWebViewController).webUrl = "http://www.ksnongte.com/news/list?CategoryId=2"
+                (viewController as! MyWebViewController).title = "农产资讯"
+                (viewController as! MyWebViewController).hideWebNavi = true
+            }
+            return viewController
         }
         
         //点击菜单选择，调用方法跳转
@@ -143,8 +147,11 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
     
     var textInput: UITextField!
     
-    var history = NSMutableArray()
-    var newProducts = NSMutableArray()
+    var history = NSMutableArray()  //浏览历史(猜你喜欢、大家都在看)数据
+    var goods = NSMutableArray()    //goodCell数据
+    var themes = NSMutableArray()   //特卖专题数据
+    
+    var noticeView : HYNoticeView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -202,11 +209,17 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
     
     //MARK:- UITableViewDataSource,UITableViewDelegate
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //如果为专题section
-        if let advertisements = self.advertisementAll,let topic = advertisements.topic where self.userCenterData[section] == .HomeContentTypeTheme {
-            return topic.count
+        if self.userCenterData[section] == .HomeContentTypeGoods {
+            return self.goods.count != 0 ? 1 : 0
         }
-        //其他section全部只有 1 行
+        //如果为专题section
+        if self.userCenterData[section] == .HomeContentTypeTheme {
+            if let advertisementAll = self.advertisementAll,topic = advertisementAll.topic {
+                return topic.count
+            }
+            return 0
+        }
+       //其他section全部只有 1 行
         return 1
     }
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -299,8 +312,8 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
     //MARK: 广告分区cycleScrollView delegate
     func clickImgAtIndex(index: Int) {
         //点击cycleScrollView中图片，响应事件
-        if let advertisementAll = self.advertisementAll {
-            let advertisement = advertisementAll.top![index]
+        if let advertisementAll = self.advertisementAll,top = advertisementAll.top {
+            let advertisement = top[index]
             self.advertisementClick(advertisement)
         }
     }
@@ -401,7 +414,7 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
         
         if self.advertisementAll != nil && self.advertisementAll.top != nil {
             for id in self.advertisementAll.top! {
-                var url = kImageAddressNew + (id.ResourcesCDNPath ?? "")
+                var url = kImageAddressMain + (id.ResourcesCDNPath ?? "")
                 if id.ResourcesCDNPath!.hasPrefix("http") {
                     url = id.ResourcesCDNPath!
                 }
@@ -454,6 +467,13 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
             let label = cell?.contentView.viewWithTag(10010 + i) as! UILabel
             let imgV = cell?.contentView.viewWithTag(10020 + i) as! UIImageView
             btn.rac_command = RACCommand(signalBlock: { (sender) -> RACSignal! in
+
+//                if let noticeView = self.noticeView {
+//                    noticeView.removeFromSuperview()
+//                }
+//                self.noticeView = HYNoticeView(frame: CGRectMake(5, 100*kScreenWidth/375, 180, 40*kScreenWidth/375), text: "功能开发中,敬请期待！", position: HYNoticeViewPosition.Left)
+//                self.noticeView.showType(HYNoticeType.TestCall, inView: self.view, after: 0, duration: 0.8, options: UIViewAnimationOptions.CurveEaseInOut)
+//                self.performSelector(Selector("hide"), withObject: nil, afterDelay: 3.0)
                 menuType.didSelect(self.navigationController!)
                 return RACSignal.empty()
             })
@@ -463,13 +483,31 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
     
         return cell!
     }
+    func hide()
+    {
+        HYNoticeView.hideNoticeWithType(1)
+    }
     
-    //MARK: - 商品 cell  offer
+    //MARK: - 今日特卖
     func cellForHomeGoods(tableView: UITableView,indexPath: NSIndexPath)-> UITableViewCell {
-        let cellId = "goodsCell"
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellId) as! AdvertisementOfferCell
-        if let advertisementAll = self.advertisementAll,offer = advertisementAll.offer {
-            AdvertisementOfferCell.configCell(cell, advertisementAll: offer)
+        let cellId = "goodCell"
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellId) as! AdvertisementGoodCell
+        AdvertisementGoodCell.configcell(cell, datas: self.goods)
+        if self.goods.count > 1 {
+            let topAd = self.goods[0] as! ZMDAdvertisement
+            let botAd = self.goods[1] as! ZMDAdvertisement
+            cell.topBtn.rac_command = RACCommand(signalBlock: { (sender) -> RACSignal! in
+                let vc = HomeBuyGoodsDetailViewController.CreateFromMainStoryboard() as! HomeBuyGoodsDetailViewController
+                vc.productId = topAd.Id.integerValue
+                self.pushToViewController(vc, animated: true, hideBottom: true)
+                return RACSignal.empty()
+            })
+            cell.botBtn.rac_command = RACCommand(signalBlock: { (sender) -> RACSignal! in
+                let vc = HomeBuyGoodsDetailViewController.CreateFromMainStoryboard() as! HomeBuyGoodsDetailViewController
+                vc.productId = botAd.Id.integerValue
+                self.pushToViewController(vc, animated: true, hideBottom: true)
+                return RACSignal.empty()
+            })
         }
         return cell
     }
@@ -549,7 +587,7 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
                 btn.addSubview(moneyLbl)
                 
                 let imgV = UIImageView(frame: CGRectMake(width/2-48, 30, 96,96))
-                let url = kImageAddressNew + (guess[i].ResourcesCDNPath ?? "")
+                let url = kImageAddressMain + (guess[i].ResourcesCDNPath ?? "")
                 imgV.sd_setImageWithURL(NSURL(string: url))
                 btn.addSubview(imgV)
                 cell!.contentView.addSubview(btn)
@@ -572,16 +610,18 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
         titleLbl.textColor = defaultTextColor
         timeLbl.textColor = defaultTextColor
         timeLbl.text = "查看详情"
-        if let advertisements = self.advertisementAll,let topic = advertisements.topic {
-            let id = topic[indexPath.row]
-            let url = kImageAddressNew + (id.ResourcesCDNPath ?? "")
+//        let advertisement = self.themes[indexPath.row] as! ZMDAdvertisement
+        if let advertisementAll = self.advertisementAll,topic = advertisementAll.topic {
+            let advertisement = topic[indexPath.row]
+            let url = kImageAddressMain + (advertisement.ResourcesCDNPath ?? "")
             imgV.sd_setImageWithURL(NSURL(string: url.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!))
-            titleLbl.text = id.Title ?? ""
-            
-            let endTimeText = id.EndTime?.stringByReplacingOccurrencesOfString("T", withString: " ")
+            if let title = advertisement.Title?.componentsSeparatedByString("，").first {
+                titleLbl.text = title
+            }
+            let endTimeText = advertisement.EndTime?.stringByReplacingOccurrencesOfString("T", withString: " ")
             timeLbl.setEndTime(endTimeText!)
-//            timeLbl.start()
         }
+        //            timeLbl.start()
         return cell!
     }
     
@@ -791,6 +831,14 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
                 if let offer = advertisementAll?.offer where offer.count > 0 {
                     self.userCenterData = [/*.HomeContentTypeHead,*/.HomeContentTypeAd,.HomeContentTypeMenu,.HomeContentTypeGoods,.HomeContentTypeRecommendationHead,.HomeContentTypeRecommendation, .HomeContentTypeTheme]
                 }
+                self.currentTableView.reloadData()
+            }
+        }
+        
+        QNNetworkTool.fetchHomeMiniAd("mb_index_dayhot") { (success, products, error) -> Void in
+            if success! {
+                self.goods.removeAllObjects()
+                self.goods.addObjectsFromArray(products as! [AnyObject])
                 self.currentTableView.reloadData()
             }
         }

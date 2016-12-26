@@ -60,5 +60,6 @@
 
 //仿微信图片选择
 #import "TZImagePickerController.h"
+#import "HYNoticeView.h"
 
 #endif /* SleepCare_Bridging_Header_h */

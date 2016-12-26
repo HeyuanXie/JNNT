@@ -16,6 +16,7 @@ class TradeSuccessedViewController: UIViewController, UITableViewDataSource, UIT
     }
     
     var currentTableView :UITableView!
+    var orderId : NSInteger!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.updateUI()
@@ -89,7 +90,8 @@ class TradeSuccessedViewController: UIViewController, UITableViewDataSource, UIT
                     btn.rac_command = RACCommand(signalBlock: { (sender) -> RACSignal! in
                         if sender.tag == 1000 {
                             //立即评价
-                            let vc = OrderGoodsScoreViewController()
+                            let vc = OrderCommentViewController()
+                            vc.orderId = self.orderId
                             vc.hidesBottomBarWhenPushed = true
                             self.navigationController?.pushViewController(vc, animated: true)
                         } else {

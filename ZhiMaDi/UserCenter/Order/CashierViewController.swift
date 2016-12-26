@@ -31,7 +31,16 @@ class CashierViewController: UIViewController,UITableViewDataSource,UITableViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        self.selectPayMethod = self.payMethods[1] as! ZMDPaymentMethod
+        
+        let arr = NSMutableArray()
+        arr.addObjectsFromArray(self.payMethods as [AnyObject])
+        for item in arr {
+            let method = item as! ZMDPaymentMethod
+            if method.Name == nil {
+                self.payMethods.removeObject(item)
+            }
+        }
+        
         if self.payMethods.count != 0 {
             self.selectPayMethod = self.payMethods[0] as! ZMDPaymentMethod  //默认选中第一个方法
 //            self.payMethods.removeObject(self.selectPayMethod)
@@ -106,7 +115,7 @@ class CashierViewController: UIViewController,UITableViewDataSource,UITableViewD
         let method = self.payMethods[indexPath.row] as! ZMDPaymentMethod
         self.setPayImage(cell!, method: method)
         cell?.textLabel?.text = method.Name
-        (cell?.contentView.viewWithTag(1000) as! UIButton).selected = indexPath.row == self.indexTypeRow ? true : false
+        (cell?.contentView.viewWithTag(1000) as! UIButton).selected = indexPath.section == self.indexTypeRow ? true : false
         return cell!
     }
     
@@ -122,6 +131,9 @@ class CashierViewController: UIViewController,UITableViewDataSource,UITableViewD
             cell.imageView?.sd_setImageWithURL(url, placeholderImage: nil)
             return
         }*/
+        if method.Name == nil {
+            return
+        }
         switch method.Name {
         case "货到付款":
             cell.imageView?.image = UIImage(named: "pay_InHome")

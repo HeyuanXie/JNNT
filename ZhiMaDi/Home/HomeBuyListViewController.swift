@@ -309,10 +309,12 @@ class HomeBuyListViewController: UIViewController ,ZMDInterceptorProtocol, UITab
         return view
     }
     func setVCTitle() {
+        if self.title != nil {
+            return
+        }
         if self.isNew == "true" {
             self.title = "新品推荐"
         }else{
-//            self.title = self.isStore ? "所有商品" : self.titleForFilter
             self.title = self.titleForFilter == "" ? "所有商品" : self.titleForFilter
         }
     }
@@ -360,61 +362,10 @@ class HomeBuyListViewController: UIViewController ,ZMDInterceptorProtocol, UITab
         }
     }
     
-/*    func updateData(orderby:Int?) {
-        if self.isStore || self.isNew {
-            QNNetworkTool.fetchStoreHomePages(12, pageNumber: self.indexSkip, StoreId: self.storeId.integerValue, orderBy: orderby!, Q: self.titleForFilter,isNew:self.isNew, completion: { (store,products, error, dictionary) -> Void in
-                if let products = products {
-                    if self.indexSkip == 1 {
-                        self.dataArray.removeAllObjects()
-                    }
-                    self.dataArray.addObjectsFromArray(products as [AnyObject])
-                    self.isHasNext = products.count < 12 ? false : true
-                    self.indexSkip += 1
-                    self.currentTableView.reloadData()
-                    self.footer.endRefreshing()
-                }else {
-                    ZMDTool.showErrorPromptView(nil, error: error)
-                }
-            })
-        }else{
-            QNNetworkTool.products(12, pageNumber: self.indexSkip, storeId: 0, Q: self.titleForFilter, orderBy: orderby!, isNew: self.isNew, Cid: (self.Cid as NSString).integerValue, completion: { (products, error, dictionary) -> Void in
-                if let products = products {
-                    if self.indexSkip == 1 {
-                        self.dataArray.removeAllObjects()
-                    }
-                    self.dataArray.addObjectsFromArray(products as [AnyObject])
-                    self.isHasNext = products.count < 12 ? false : true
-                    self.indexSkip += 1
-                    self.currentTableView.reloadData()
-                    self.footer.endRefreshing()
-                }else{
-                    ZMDTool.showErrorPromptView(nil, error: error)
-                }
-            })
-            
-//            QNNetworkTool.products(self.titleForFilter,pagenumber: "\(self.indexSkip)",orderby:orderby,Cid: self.Cid) { (products, error, dictionary) -> Void in
-//                if let products = products {
-//                    if self.indexSkip == 1 {
-//                        self.dataArray.removeAllObjects()
-//                    }
-//                    self.dataArray.addObjectsFromArray(products as [AnyObject])
-//                    //请求一条数据有12个元素
-//                    self.isHasNext = products.count < 12 ? false : true
-//                    self.indexSkip += 1
-//                    self.currentTableView.reloadData()
-//                    self.footer.endRefreshing()
-//                } else {
-//                    ZMDTool.showErrorPromptView(nil, error: error)
-//                }
-//            }
-
-        }
-    }*/
-    
     func updateData(orderby:Int?) {
         let Q = self.As == "true" ? "" : self.titleForFilter
         let isNew = "false"
-        QNNetworkTool.products(self.As, pageSize: 12, pageNumber: self.indexSkip, storeId: self.storeId.integerValue, Q: Q, orderBy: orderby!, isNew: isNew/*self.isNew*/, Cid: (self.Cid as NSString).integerValue) { (products, error, dic) -> Void in
+        QNNetworkTool.products(self.As, pageSize: 12, pageNumber: self.indexSkip, storeId: self.storeId.integerValue, Q: Q, orderBy: orderby!, isNew: self.isNew, Cid: (self.Cid as NSString).integerValue) { (products, error, dic) -> Void in
             if let productsArr = products {
                 if self.indexSkip == 1 {
                     self.dataArray.removeAllObjects()

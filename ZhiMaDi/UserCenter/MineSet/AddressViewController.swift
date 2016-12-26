@@ -73,7 +73,11 @@ class AddressViewController: UIViewController,UITableViewDataSource, UITableView
             let cellId = "kuaidiCell"
             let cell = tableView.dequeueReusableCellWithIdentifier(cellId) as! AdressTableViewCell
             let address = self.addresses[indexPath.section] as! ZMDAddress
-            
+            if address.IsDefault == true {
+                if let defaultLbl = cell.title.viewWithTag(1000) as? UILabel {
+                    defaultLbl.removeFromSuperview()
+                }
+            }
             AdressTableViewCell.configCell(cell, address: address)
             cell.selectedBtn.selected = indexPath.section == self.selectIndex
             if !self.isEdit {

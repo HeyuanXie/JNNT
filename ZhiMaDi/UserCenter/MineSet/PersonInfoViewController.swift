@@ -329,7 +329,7 @@ class PersonInfoViewController:UIViewController,UITableViewDataSource, UITableVi
         self.moreViewUpdate()
     }
     private func dataInit(){
-        self.userCenterData = [UserCenterCellType.Head,UserCenterCellType.NickN /*,UserCenterCellType.RealName*/, UserCenterCellType.Address, UserCenterCellType.ChangePs, UserCenterCellType.Clean]
+        self.userCenterData = [UserCenterCellType.Head,UserCenterCellType.NickN , UserCenterCellType.ChangePs, UserCenterCellType.Clean]
     }
     //MARK:创建moreView
     func moreViewUpdate() {

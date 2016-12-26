@@ -14,6 +14,7 @@ class ZMDStoreDetail: NSObject {
     var Url:String!
     var PictureUrl:String!
     var Id:NSNumber!
+    var isCollected : Bool!
     var LogoPictureId : NSNumber!
     var Products:[ZMDProduct]!
     var AvailableCategories: [ZMDStoreCategory]?

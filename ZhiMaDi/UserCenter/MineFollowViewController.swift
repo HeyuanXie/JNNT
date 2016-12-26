@@ -10,11 +10,16 @@ import UIKit
 // 关注的店铺
 class MineFollowViewController: UIViewController,UITableViewDataSource, UITableViewDelegate,ZMDInterceptorProtocol,ZMDInterceptorMoreProtocol {
     var currentTableView: UITableView!
-    var data : NSArray!
+
+    lazy var datas : NSMutableArray = {
+        let tmp = NSMutableArray()
+        return tmp
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.subViewInit()
-        self.data = ["","",""]
+        self.fetchData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -23,28 +28,29 @@ class MineFollowViewController: UIViewController,UITableViewDataSource, UITableV
     }
     //MARK:- UITableViewDataSource,UITableViewDelegate
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.data.count
+        return self.datas.count
     }
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 16
+        return zoom(16)
     }
     func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0
     }
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 85
+        return zoom(85)
     }
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headView = UIView(frame: CGRectMake(0, 0, kScreenWidth, 16))
+        let headView = UIView(frame: CGRectMake(0, 0, kScreenWidth, zoom(16)))
         headView.backgroundColor = UIColor.clearColor()
         return headView
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cellId = "OtherCell"
         var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
+        let store = self.datas[indexPath.row] as! ZMDStoreDetail
         if cell == nil {
             cell = UITableViewCell(style: .Subtitle, reuseIdentifier: cellId)
             cell?.accessoryType = UITableViewCellAccessoryType.None
@@ -52,53 +58,57 @@ class MineFollowViewController: UIViewController,UITableViewDataSource, UITableV
             
             ZMDTool.configTableViewCellDefault(cell!)
             var tag = 10000
-            let imgV = UIImageView(frame: CGRect(x: 12, y: 12, width: 60, height: 60))
+            let imgV = UIImageView(frame: CGRect(x: zoom(12), y: zoom(12), width: zoom(60), height: zoom(60)))
             imgV.backgroundColor = UIColor.clearColor()
-            imgV.image = UIImage(named: "product_pic")
             imgV.tag = tag++
             cell?.contentView.addSubview(imgV)
             
-            let storeLbl = ZMDTool.getLabel(CGRect(x: 12+60+10, y: 12, width: kScreenWidth - 82-75-10, height: 15), text: "", fontSize: 15)
+            let storeLbl = ZMDTool.getLabel(CGRect(x: zoom(12+60+10), y: zoom(20), width: kScreenWidth - 82-75-10, height: zoom(15)), text: "", fontSize: 15)
             storeLbl.tag = tag++
             cell?.contentView.addSubview(storeLbl)
             
-            let storeGoodsLbl = ZMDTool.getLabel(CGRect(x: 12+60+10, y: 85-12-15, width: kScreenWidth - 82-75-10, height: 15), text: "", fontSize: 15,textColor: defaultDetailTextColor)
+            let storeGoodsLbl = ZMDTool.getLabel(CGRect(x: zoom(12+60+10), y: zoom(85-35), width: kScreenWidth - 82-75-10, height: zoom(15)), text: "", fontSize: 15,textColor: defaultDetailTextColor)
             storeGoodsLbl.tag = tag++
             cell?.contentView.addSubview(storeGoodsLbl)
             
-            let getVolumeBtn = ZMDTool.getButton(CGRect(x: kScreenWidth - 75, y: 12, width: 75, height: 15), textForNormal: "领券", fontSize: 15, backgroundColor: UIColor.clearColor(), blockForCli: { (sender) -> Void in
+            let goToBtn = ZMDTool.getButton(CGRect(x: kScreenWidth - 75, y: zoom(20), width: zoom(75), height: zoom(15)), textForNormal: "进入店铺", fontSize: 14, backgroundColor: UIColor.clearColor(), blockForCli: { (sender) -> Void in
+                let vc = StoreShowHomeViewController.CreateFromMainStoryboard() as! StoreShowHomeViewController
+                vc.storeId = store.Id
+                self.pushToViewController(vc, animated: true, hideBottom: true)
             })
-            getVolumeBtn.tag = tag++
-            cell?.contentView.addSubview(getVolumeBtn)
+            goToBtn.tag = tag++
+            cell?.contentView.addSubview(goToBtn)
             
-            let cancelBtn = ZMDTool.getButton(CGRect(x: kScreenWidth - 75, y: 85-12-15, width: 62, height: 15), textForNormal: "取消关注", fontSize: 15,textColorForNormal:defaultDetailTextColor, backgroundColor: UIColor.clearColor(), blockForCli: { (sender) -> Void in
+            let cancelBtn = ZMDTool.getButton(CGRect(x: kScreenWidth - 75, y: zoom(85-20-15), width: zoom(75), height: zoom(15)), textForNormal: "取消关注", fontSize: 14,textColorForNormal:defaultTextColor, backgroundColor: UIColor.clearColor(), blockForCli: { (sender) -> Void in
+                self.cancelCollect(store)
             })
             cancelBtn.tag = tag++
             cell?.contentView.addSubview(cancelBtn)
-            
-            cell?.contentView.addSubview(ZMDTool.getLine(CGRect(x: 0, y: 84.5, width: kScreenWidth, height: 0.5)))
-            cell?.contentView.addSubview(ZMDTool.getLine(CGRect(x: kScreenWidth - 75, y: 12, width: 0.5, height: 15)))
+            cell?.addLine()
         }
         var tag = 10000
         let imgV = cell?.viewWithTag(tag++) as! UIImageView
         let storeLbl = cell?.viewWithTag(tag++) as! UILabel
         let storeGoodsLbl = cell?.viewWithTag(tag++) as! UILabel
         let cancelBtn = cell?.viewWithTag(tag++) as! UIButton
-        let getVolumeBtn = cell?.viewWithTag(tag++) as! UIButton
+        let goToBtn = cell?.viewWithTag(tag++) as! UIButton
         
-        imgV.image = UIImage(named: "product_pic")
-        storeLbl.text = "葫芦堡旗舰店"
-        storeGoodsLbl.text = "主营：婴儿床、婴儿床、婴儿床、婴儿床、婴儿床"
-        getVolumeBtn.rac_signalForControlEvents(.TouchUpInside).subscribeNext { (sender) -> Void in
-            
+        if let urlStr = store.PictureUrl, url = NSURL(string: kImageAddressMain+urlStr) {
+            imgV.sd_setImageWithURL(url, placeholderImage: nil)
         }
-        cancelBtn.rac_signalForControlEvents(.TouchUpInside).subscribeNext { (sender) -> Void in
-            
+        if let name = store.Name {
+            storeLbl.text = name
         }
+        if let host = store.Host {
+            storeGoodsLbl.text = "主营: \(host)"
+        }
+        storeGoodsLbl.text = "注意： 大发发"
         return cell!
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let store = self.datas[indexPath.row] as! ZMDStoreDetail
         let vc = StoreShowHomeViewController.CreateFromMainStoryboard() as! StoreShowHomeViewController
+        vc.storeId = store.Id
         vc.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(vc, animated: true)
     }
@@ -111,5 +121,32 @@ class MineFollowViewController: UIViewController,UITableViewDataSource, UITableV
         self.currentTableView.dataSource = self
         self.currentTableView.delegate = self
         self.view.addSubview(self.currentTableView)
+    }
+    
+    func fetchData() {
+        QNNetworkTool.collectStoresList { (success, stores, error) -> Void in
+            if success {
+                self.datas.removeAllObjects()
+                self.datas.addObjectsFromArray(stores as! [AnyObject])
+                self.currentTableView.reloadData()
+            }else{
+                ZMDTool.showErrorPromptView(nil, error: error, errorMsg: nil)
+            }
+        }
+    }
+    
+    func cancelCollect(store:ZMDStoreDetail) {
+        if store.Id == nil {
+            ZMDTool.showPromptView("店铺Id为空")
+            return
+        }
+        QNNetworkTool.cancelCollectStores(store.Id.integerValue) { (succeed, error, dictionary) -> Void in
+            if succeed! {
+                ZMDTool.showPromptView("取消关注成功")
+                self.fetchData()
+            }else{
+                ZMDTool.showPromptView("取消关注失败")
+            }
+        }
     }
 }

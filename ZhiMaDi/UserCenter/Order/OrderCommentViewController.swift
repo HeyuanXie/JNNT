@@ -156,7 +156,7 @@ class OrderCommentViewController: UIViewController,UITableViewDelegate,UITableVi
                 if let productReviews = productReviews {
                     for i in 0..<productReviews.count {
                         let productReview = productReviews[i] as! ZMDCommentItem
-                        let params : NSDictionary = ["productReviewId":productReview.Id.integerValue,"displayOrder":0]
+                        let params : NSDictionary = ["productReviewId":productReview.Id.integerValue,"displayOrder":i]
                         let datas = self.photos[i] as! NSArray
                         let group = dispatch_group_create()
                         for i in 0..<datas.count {
@@ -190,13 +190,13 @@ class OrderCommentViewController: UIViewController,UITableViewDelegate,UITableVi
         
         
         //2.店铺评分
-        /*QNNetworkTool.addStoreComments(self.descriptionPoint, service: self.servicePoint, logistics: self.logisticsPoint, orderId: self.orderId.integerValue, customerId: g_customerId!) { (success, error) -> Void in
-        if success! {
-        
-        }else{
-        ZMDTool.showErrorPromptView(nil, error: nil, errorMsg: error)
+        QNNetworkTool.addStoreComments(self.descriptionPoint, service: self.servicePoint, logistics: self.logisticsPoint, orderId: self.orderId.integerValue, customerId: g_customerId!) { (success, error) -> Void in
+            if success! {
+            
+            }else{
+                ZMDTool.showErrorPromptView(nil, error: nil, errorMsg: error)
+            }
         }
-        }*/
     }
     
     //MARK: -UITextViewDelegate
@@ -234,14 +234,14 @@ class OrderCommentViewController: UIViewController,UITableViewDelegate,UITableVi
     //MARK: - MWPhotoBrowserDelegate
     func numberOfPhotosInPhotoBrowser(photoBrowser: MWPhotoBrowser!) -> UInt {
         let photos = self.photos[self.photoIndex]
-        return photos.count
-//        return UInt(photos.count)
+//        return photos.count
+        return UInt(photos.count)
     }
     func photoBrowser(photoBrowser: MWPhotoBrowser!, photoAtIndex index: UInt) -> MWPhotoProtocol! {
         let photos = self.photos[self.photoIndex]
         if Int(index) < photos.count {
-            let photo : MWPhoto = MWPhoto(image: photos[index] as! UIImage)
-//            let photo:MWPhoto = MWPhoto(image: photos[Int(index)] as! UIImage)
+//            let photo : MWPhoto = MWPhoto(image: photos[index] as! UIImage)
+            let photo:MWPhoto = MWPhoto(image: photos[Int(index)] as! UIImage)
             return photo
         }
         return nil
@@ -564,6 +564,8 @@ class OrderCommentViewController: UIViewController,UITableViewDelegate,UITableVi
         }else {
             pickBtn.frame = CGRectMake(padding, 10, 75 , 75)
             pickBtn.hidden = false
+            
+            
         }
         self.currentTableView.reloadData()
     }
@@ -575,7 +577,7 @@ class OrderCommentViewController: UIViewController,UITableViewDelegate,UITableVi
         }
         faceScoreView.addSubview(ZMDTool.getLine(CGRect(x: 0, y: 0, width: CGRectGetWidth(faceScoreView.frame), height: 0.5), backgroundColor: defaultLineColor))
         let titles = ["好评","中评","差评"]
-        let images = [("user_pingfen_unselected","user_pingfen_selected"),("user_pingfen_unselected","user_pingfen_selected"),("user_pingfen_unselected","user_pingfen_selected")]
+        let images = [("good_normal","good_select"),("soso_normal","soso_select"),("bad_normal","bad_select")]
         let width = faceScoreView.frame.width/3
         for i in 0..<3 {
             let faceBtn = UIButton(type: .Custom)

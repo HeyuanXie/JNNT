@@ -264,9 +264,7 @@ class MineHomeViewController: UIViewController,UITableViewDataSource, UITableVie
             //关注的店铺
             let followBtn = cell?.viewWithTag(10004) as! UIButton
             followBtn.rac_command = RACCommand(signalBlock: { (sender) -> RACSignal! in
-                ZMDTool.showPromptView("功能暂未开放!")
-                let vc = OrderCommentViewController()
-                vc.orderId = 210
+                let vc = MineFollowViewController()
                 vc.hidesBottomBarWhenPushed = true
                 self.navigationController?.pushViewController(vc, animated: true)
                 return RACSignal.empty()

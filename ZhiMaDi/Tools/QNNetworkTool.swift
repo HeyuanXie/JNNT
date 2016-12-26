@@ -98,6 +98,15 @@ private extension QNNetworkTool {
     private class func requestPOST(urlString: String, parameters: [String : AnyObject]?, completionHandler: (request: NSURLRequest, response: NSHTTPURLResponse?, data: AnyObject?,  dictionary: NSDictionary?, error: NSError?) -> Void) {
         let url: NSURL! = NSURL(string: urlString)
         assert((url != nil), "输入的url有问题")
+        // JSON数据
+        do {
+            let options = NSJSONWritingOptions()
+            if parameters != nil {
+                let data = try NSJSONSerialization.dataWithJSONObject(parameters!, options: options)
+                let value = NSString(data: data, encoding: NSUTF8StringEncoding)
+                print(value!)
+            }
+        } catch {}
         requestForSelf(url, method: "POST", parameters: parameters, completionHandler: completionHandler)
     }
     /**
@@ -147,8 +156,9 @@ private extension QNNetworkTool {
                         return
                     }
                     completionHandler(request: $0!, response: $1, data: $2, dictionary: nil, error: NSError(domain: "返回的为array", code: 10086, userInfo: nil));
+                }else{
+                    completionHandler(request: $0!, response: $1, data: $2, dictionary: dictionary, error: nil)
                 }
-                completionHandler(request: $0!, response: $1, data: $2, dictionary: dictionary, error: nil)
             }
             catch {
                 completionHandler(request: $0!, response: $1, data: $2, dictionary: nil, error: NSError(domain: "JSON解析错误", code: 10086, userInfo: nil));
@@ -454,7 +464,7 @@ extension QNNetworkTool {
                         completion(categories:nil,error: error,dictionary:nil)
                         return
                     }
-                    let categories = ZMDXHYCategory.mj_objectArrayWithKeyValuesArray(array)
+                    let categories = ZMDSortCategory.mj_objectArrayWithKeyValuesArray(array)
                     completion(categories:categories,error: nil,dictionary:nil)
                 } catch {
                     println("Json解析过程出错")
@@ -475,7 +485,7 @@ extension QNNetworkTool {
         
         requestPOST(kServerAddress + "/api/v1/extend/Product/ProductDetails", parameters: ["Id":Id,"customerId":g_customerId ?? 0]) { (_,response, _, dictionary, error) -> Void in
             guard let dic = dictionary ,let productDetail = ZMDProductDetail.mj_objectWithKeyValues(dic["product"]) else {
-                completion(productDetail:nil,error: error,dictionary:nil)
+                completion(productDetail:nil,error: error,dictionary:dictionary)
                 return
             }
             completion(productDetail:productDetail,error: nil,dictionary:dictionary)
@@ -506,7 +516,7 @@ extension QNNetworkTool {
         }
     }
     
-    //MARK: 首页猜你喜欢
+    //MARK: 首页猜你喜欢/大家都在看
     class func fetchCustomerHistory(completion:(history:NSArray?,dictionary:NSDictionary?,error:NSError?)->Void) {
         requestPOST(kServerAddress+"/api/v1/extend/product/HistoryProducts", parameters: ["customerId":g_customerId ?? 0]) { (request, response, data, dictionary, error) in
             if data != nil {
@@ -522,6 +532,18 @@ extension QNNetworkTool {
                 catch{
                     
                 }
+            }
+        }
+    }
+    
+    //MARK: 首页获取各部分小广告
+    class func fetchHomeMiniAd(adName:String,completion:(success:Bool?,products:NSArray?,error:NSError?)->Void) {
+        let url = kServerAddress+"/api/v1/Advertisement/"+adName
+        requestGET(url, parameters: nil) { (request, response, data, dictionary, error) -> Void in
+            if let dic = dictionary ,array = ZMDAdvertisement.mj_objectArrayWithKeyValuesArray(dic["zones"]) {
+                completion(success: true, products: array, error: nil)
+            }else{
+                completion(success: false, products: nil, error: error)
             }
         }
     }
@@ -570,14 +592,46 @@ extension QNNetworkTool {
     }
     
     
-    //收藏/取消收藏 店铺（collect==true为收藏）
-    class func collectStores(storeId:Int!,collect:Bool!,completion:(succeed:Bool?,error:NSError?,dictionary:NSDictionary?)->Void) {
-        requestPOST(kServerAddress+"收藏店铺", parameters: ["StoreId":storeId]) { (request, response, data, dictionary, error) -> Void in
-            guard let success = dictionary!["success"] as? NSNumber where success.boolValue else {
+    //收藏 店铺
+    class func collectStores(storeId:Int!,completion:(succeed:Bool?,error:NSError?,dictionary:NSDictionary?)->Void) {
+        requestPOST(kServerAddress+"/api/v1/extend/StoreExtend/AddStoreWish", parameters: ["StoreId":storeId,"customerId":g_customerId!]) { (request, response, data, dictionary, error) -> Void in
+            guard let success = dictionary!["success"] as? NSNumber where success.boolValue == true else {
                 completion(succeed: false, error: error, dictionary: dictionary)
                 return
             }
             completion(succeed: true, error: nil, dictionary: dictionary)
+        }
+    }
+    
+    //取消收藏 店铺
+    class func cancelCollectStores(storeId:Int!,completion:(succeed:Bool?,error:NSError?,dictionary:NSDictionary?)->Void) {
+        requestPOST(kServerAddress+"/api/v1/extend/StoreExtend/removeStoreWish", parameters: ["StoreId":storeId,"customerId":g_customerId!]) { (request, response, data, dictionary, error) -> Void in
+            guard let success = dictionary!["success"] as? NSNumber where success.boolValue == true else {
+                completion(succeed: false, error: error, dictionary: dictionary)
+                return
+            }
+            completion(succeed: true, error: nil, dictionary: dictionary)
+        }
+    }
+    
+    /// 收藏的店铺列表
+    class func collectStoresList(completion:(success:Bool,stores:NSArray?,error:NSError?)->Void) {
+        requestPOST(kServerAddress+"/api/v1/extend/StoreExtend/CustomerWish", parameters: ["customerId":g_customerId!]) { (request, response, data, dictionary, error) -> Void in
+            guard let dic = dictionary, datas = dic["data"] as? NSArray else {
+                completion(success: false, stores: nil, error: error)
+                return
+            }
+            let keyValues = NSMutableArray()
+            for item in datas {
+                if let dic = item["Store"] as? NSDictionary {
+                    keyValues.addObject(dic)
+                }else{
+                    let dic = ZMDStoreDetail().mj_keyValues()
+                    keyValues.addObject(dic)
+                }
+            }
+            let stores = ZMDStoreDetail.mj_objectArrayWithKeyValuesArray(keyValues)
+            completion(success: true, stores: stores, error: nil)
         }
     }
     
@@ -938,7 +992,7 @@ extension QNNetworkTool {
     
     ///店铺评分
     class func addStoreComments(description:Int,service:Int,logistics:Int,orderId:Int,customerId:Int,completion:(success:Bool?,error:String?) -> Void) {
-        requestPOST(kServerAddress+"/api/v1/extend/StoreExtend/AddStoreScore", parameters: ["description":description,"service":service,"logistics":logistics,"orderId":orderId,"csutomerId":g_customerId!]) { (request, response, data, dictionary, error) -> Void in
+        requestPOST(kServerAddress+"/api/v1/extend/StoreExtend/AddStoreScore", parameters: ["description":description,"service":service,"logistics":logistics,"orderId":orderId,"csutomerId":g_customerId ?? 1]) { (request, response, data, dictionary, error) -> Void in
             if let dic = dictionary,success = dic["success"] as? Bool where success == true {
                 completion(success: true, error: nil)
             }else{

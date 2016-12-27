@@ -62,4 +62,7 @@
 #import "TZImagePickerController.h"
 #import "HYNoticeView.h"
 
+//webView页面缓存
+#import "JWCacheURLProtocol.h"
+
 #endif /* SleepCare_Bridging_Header_h */

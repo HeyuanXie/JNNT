@@ -9,35 +9,32 @@
 import UIKit
 import WebKit
 
-class MyWebViewController: UIViewController,WKNavigationDelegate,WKScriptMessageHandler {
+class MyWebViewController: UIViewController,WKNavigationDelegate,WKScriptMessageHandler,ZMDInterceptorProtocol {
     var webView : WKWebView!
     var webUrl :String!
     var userCC : WKUserContentController!
     ///如果webView自带返回按钮，是否隐藏
     var hideWebNavi = false
+    
+    //MARK: - LifeCircle
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Do any additional setup after loading the view.
         self.initUI()
         self.loadWebView()
-        // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(animated: Bool) {
     }
 
     func initUI() {
-        
         self.configBackButton()
         self.configMoreButton()
-        
-        UIApplication.sharedApplication().statusBarStyle = .Default
-        let lbl = UILabel(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: 20))
-        lbl.text = self.title == nil ? APP_NAME : self.title
-        lbl.font = UIFont.systemFontOfSize(17)
-        lbl.textAlignment = .Center
-        lbl.textColor = RGB(79/255,79/255,79/255,1)
-//        self.navigationItem.titleView = lbl
-        
-        self.navigationController?.navigationBar.barTintColor = UIColor.whiteColor()
-        self.navigationController?.navigationBar.tintColor = UIColor.blackColor()
-        
+        let titleLbl = ZMDTool.getLabel(CGRect(x: 0, y: 0, width: kScreenWidth, height: 20), text: "", fontSize: 17)
+        titleLbl.textColor = UIColor.whiteColor()
+        titleLbl.textAlignment = .Center
+        self.navigationItem.titleView = titleLbl
+    
         self.userCC = WKUserContentController()
         let jScript = "var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width'); document.getElementsByTagName('head')[0].appendChild(meta);"
         let userScript = WKUserScript(source: jScript, injectionTime: .AtDocumentEnd, forMainFrameOnly: true)
@@ -68,11 +65,14 @@ class MyWebViewController: UIViewController,WKNavigationDelegate,WKScriptMessage
             })
         }
     }
+    
     func loadWebView() {
-        let request = NSURLRequest(URL: NSURL(string: self.webUrl)!)
-        webView.loadRequest(request)
-        ZMDTool.showActivityView("数据加载中...")
-        self.addScriptMessage(self.userCC)
+        if let url = NSURL(string: self.webUrl) {
+            let request = NSMutableURLRequest(URL: url, cachePolicy: NSURLRequestCachePolicy.UseProtocolCachePolicy, timeoutInterval: 20.0)
+            webView.loadRequest(request)
+            ZMDTool.showActivityView(nil)
+            self.addScriptMessage(self.userCC)
+        }
     }
     
     func addScriptMessage(userCC:WKUserContentController) {
@@ -84,9 +84,9 @@ class MyWebViewController: UIViewController,WKNavigationDelegate,WKScriptMessage
     func webView(webView: WKWebView, didFinishNavigation navigation: WKNavigation!) {
         ZMDTool.hiddenActivityView()
         if let title = webView.title {
-//            (self.navigationItem.titleView as! UILabel).text = title
-            self.title = title
+            (self.navigationItem.titleView as! UILabel).text = title
         }
+        NSURLCache.sharedURLCache()
     }
     func webView(webView: WKWebView, didFailNavigation navigation: WKNavigation!, withError error: NSError) {
         ZMDTool.hiddenActivityView()
@@ -100,8 +100,6 @@ class MyWebViewController: UIViewController,WKNavigationDelegate,WKScriptMessage
             
         }
     }
-    
-    
     //MARK: - OverrideMethod
     override func back() {
         if self.webView.canGoBack {

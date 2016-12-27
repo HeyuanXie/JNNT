@@ -12,7 +12,6 @@ import AVFoundation
 class HomePageViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate,UIScrollViewDelegate,CycleScrollViewDelegate,ZMDInterceptorProtocol,UITextFieldDelegate {
     //首页section的枚举
     enum UserCenterCellType{
-        case HomeContentTypeHead                     /* 头部选项 */
         case HomeContentTypeAd                      /* 广告显示页 */
         case HomeContentTypeMenu                    /* 菜单选择栏目 */
         case HomeContentTypeGoods                   /* 商品栏目 */
@@ -20,13 +19,11 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
         case HomeContentTypeRecommendation          /* 推荐商品 */
         case HomeContentTypeTheme                   /* 特卖 主题展示 */
         init(){
-            self = HomeContentTypeHead
+            self = HomeContentTypeAd
         }
         
         var heightForHeadOfSection : CGFloat {
             switch  self {
-            case .HomeContentTypeHead :
-                return 0
             case .HomeContentTypeAd :
                 return 0
             case .HomeContentTypeMenu :
@@ -45,8 +42,6 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
         
         var height : CGFloat {
             switch  self {
-            case .HomeContentTypeHead :
-                return 44
             case .HomeContentTypeAd :
                 return kScreenWidth * 280 / 750
             case .HomeContentTypeMenu :
@@ -93,13 +88,13 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
         var image : UIImage?{
             switch self{
             case .kFeature:
-                return UIImage(named: "home_new")
+                return UIImage(named: "01")
             case .kCate:
-                return UIImage(named: "home_list")
+                return UIImage(named: "02")
             case .kPublic:
-                return UIImage(named: "home_zulin")
+                return UIImage(named: "03")
             case .kInformation:
-                return UIImage(named: "home_coupons")
+                return UIImage(named: "04")
             }
         }
         
@@ -120,13 +115,14 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
             case .kPublic:
                 viewController = MyWebViewController()
                 (viewController as! MyWebViewController).webUrl = "http://www.ksnongte.com/t/gongyi"
-                (viewController as! MyWebViewController).title = "喀什公益"
+//                (viewController as! MyWebViewController).title = "喀什公益"
             case .kInformation:
                 viewController = MyWebViewController()
                 (viewController as! MyWebViewController).webUrl = "http://www.ksnongte.com/news/list?CategoryId=2"
-                (viewController as! MyWebViewController).title = "农产资讯"
+//                (viewController as! MyWebViewController).title = "农产资讯"
                 (viewController as! MyWebViewController).hideWebNavi = true
             }
+            viewController.hidesBottomBarWhenPushed = true
             return viewController
         }
         
@@ -259,8 +255,6 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         switch  self.userCenterData[indexPath.section] {
-        case .HomeContentTypeHead :
-            return self.cellForHomeHead(tableView, indexPath: indexPath)
         case .HomeContentTypeAd :
             return self.cellForHomeAd(tableView, indexPath: indexPath)
         case .HomeContentTypeMenu :
@@ -320,78 +314,6 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
 
     
     //MARK: - **************TableViewCell*****************
-    //MARK: 头部菜单 cell
-    func cellForHomeHead(tableView: UITableView,indexPath: NSIndexPath)-> UITableViewCell {
-        let cellId = "HeadCell"
-        var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
-        let menuTitles = self.categories
-        if cell == nil {
-            cell = UITableViewCell(style: .Default, reuseIdentifier: cellId)
-            cell!.selectionStyle = .None
-            cell!.contentView.backgroundColor = UIColor.whiteColor()
-            
-            let width = 80,height = 44
-            let scrollView = UIScrollView(frame: CGRect(x: 0, y: 0, width: kScreenWidth - 44, height: 44)) //66
-            scrollView.tag = 10001
-            scrollView.backgroundColor = UIColor.clearColor()
-            scrollView.showsHorizontalScrollIndicator = false
-            //******这里设置scrollView的contentSize只会在创建cell的时候执行，
-            //******请求数据成功时cell != nil，这部分代码不执行，所以要在其他地方进行设置contentSize
-//            scrollView.contentSize = CGSize(width: width * menuTitles.count, height: height)
-            cell?.contentView.addSubview(scrollView)
-
-            
-            //下部弹窗
-            let 下拉 = UIButton(frame: CGRect(x: kScreenWidth - 44, y: 8, width: 44, height: 28))
-            下拉.backgroundColor = UIColor.whiteColor()
-            下拉.setImage(UIImage(named: "home_down"), forState: .Normal)
-            下拉.setImage(UIImage(named: "home_up"), forState: .Selected)
-            下拉.rac_signalForControlEvents(.TouchUpInside).subscribeNext({ (sender) -> Void in
-                self.updateViewForNextMenu()
-                if CGRectGetMinY(self.下拉视窗.frame) < 0  {
-                    self.下拉视窗.frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: 44+150)
-                    self.viewShowWithBg(self.下拉视窗,showAnimation: .SlideInFromTop,dismissAnimation: .SlideOutToTop)
-                } else {
-                    self.dismissPopupView(self.下拉视窗)
-                }
-            })
-            cell?.contentView.addSubview(下拉)
-            cell?.contentView.addSubview(ZMDTool.getLine(CGRect(x: kScreenWidth - 44, y: 8, width: 0.5, height: 28)))
-        }
-        
-        let width = 80,height = 44
-        let scrollView = cell?.viewWithTag(10001) as! UIScrollView
-        //******cell != nil 时为scrollView设置contentSize
-        scrollView.contentSize = CGSize(width: width * menuTitles.count, height: height)
-        for subView in scrollView.subviews {
-            subView.removeFromSuperview()
-        }
-        var i = 0
-        for title in menuTitles {
-            let x = i * width,y = 0
-            let frame = CGRect(x: x, y: y, width: width, height: height)
-            i++
-            
-            let headBtn = UIButton(frame: frame)
-            headBtn.setTitle((title as! ZMDCategory).Name, forState: .Normal)
-            headBtn.titleLabel?.font = defaultDetailTextSize
-            headBtn.setTitleColor(defaultDetailTextColor, forState: .Normal)
-            headBtn.setTitleColor(defaultSelectColor, forState: .Selected)
-            headBtn.titleLabel?.textAlignment = .Center
-            headBtn.tag = 1000+i
-            headBtn.rac_signalForControlEvents(.TouchUpInside).subscribeNext({ (sender) -> Void in
-                //直接点击scrollView上的btn，进行页面跳转
-                let homeBuyListViewController = HomeBuyListViewController.CreateFromMainStoryboard() as! HomeBuyListViewController
-                let titleFilter = (sender as! UIButton).titleLabel?.text
-                homeBuyListViewController.titleForFilter = titleFilter ?? ""
-//                let category = menuTitles[(sender as!UIButton).tag-1-1000] as! ZMDCategory
-//                homeBuyListViewController.Cid = category.Id.stringValue
-                self.navigationController?.pushViewController(homeBuyListViewController, animated: true)
-            })
-            scrollView.addSubview(headBtn)
-        }
-        return cell!
-    }
     //MARK: 广告 cell(CycleScrollView)
     func cellForHomeAd(tableView: UITableView,indexPath: NSIndexPath)-> UITableViewCell {
         let cellId = "AdCell"
@@ -497,15 +419,11 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
             let topAd = self.goods[0] as! ZMDAdvertisement
             let botAd = self.goods[1] as! ZMDAdvertisement
             cell.topBtn.rac_command = RACCommand(signalBlock: { (sender) -> RACSignal! in
-                let vc = HomeBuyGoodsDetailViewController.CreateFromMainStoryboard() as! HomeBuyGoodsDetailViewController
-                vc.productId = topAd.Id.integerValue
-                self.pushToViewController(vc, animated: true, hideBottom: true)
+                self.advertisementClick(topAd)
                 return RACSignal.empty()
             })
             cell.botBtn.rac_command = RACCommand(signalBlock: { (sender) -> RACSignal! in
-                let vc = HomeBuyGoodsDetailViewController.CreateFromMainStoryboard() as! HomeBuyGoodsDetailViewController
-                vc.productId = botAd.Id.integerValue
-                self.pushToViewController(vc, animated: true, hideBottom: true)
+                self.advertisementClick(botAd)
                 return RACSignal.empty()
             })
         }
@@ -531,7 +449,7 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
         })
         return cell!
     }
-    //MARK: - 推荐 cell   猜你喜欢
+    //MARK: - 推荐 cell   大家都在看
     func cellForHomeRecommendation(tableView: UITableView,indexPath: NSIndexPath)-> UITableViewCell {
         let kTagScrollView = 10001
         let cellId = "RecommendationCell"
@@ -547,26 +465,21 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
             cell?.contentView.addSubview(scrollView)
         }
         let scrollView = cell?.viewWithTag(kTagScrollView) as! UIScrollView
-        if let advertisementAll = self.advertisementAll,guess = advertisementAll.guess {
+        if self.history.count != 0 {
             for subView in scrollView.subviews {
                 subView.removeFromSuperview()
             }
             
-            scrollView.contentSize = CGSize(width: (136 + 10) * CGFloat(guess.count), height: 180)
-            for var i=0;i<guess.count;i++ {
-                let advertisement = guess[i]
+            scrollView.contentSize = CGSize(width: (136 + 10) * CGFloat(self.history.count), height: 180)
+            for var i=0;i<self.history.count;i++ {
+                let advertisement = self.history[i] as! ZMDAdvertisement
                 let btnHeight = CGFloat(180)
                 let width = CGFloat(136)
                 let btn = UIButton(frame: CGRectMake(10*CGFloat(i + 1)+CGFloat(i) * width, 0,width, btnHeight))
                 btn.tag = 10000 + i
                 btn.backgroundColor = UIColor.whiteColor()
                 btn.rac_command = RACCommand(signalBlock: { (sender) -> RACSignal! in
-//                    let vc = MyWebViewController()
-//                    vc.webUrl = advertisement.LinkUrl ?? ""
-                    let vc = HomeBuyGoodsDetailViewController.CreateFromMainStoryboard() as! HomeBuyGoodsDetailViewController
-                    vc.productId = (advertisement.Other2! as NSString).integerValue
-                    vc.hidesBottomBarWhenPushed = true
-                    self.navigationController?.pushViewController(vc, animated: true)
+                    self.advertisementClick(advertisement)
                     return RACSignal.empty()
                 })
                 
@@ -583,11 +496,11 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
                 moneyLbl.textColor = defaultSelectColor
                 moneyLbl.textAlignment =  .Center
                 moneyLbl.tag = 10020 + i
-                moneyLbl.text = advertisement.Other1
+                moneyLbl.text = advertisement.Other3
                 btn.addSubview(moneyLbl)
                 
                 let imgV = UIImageView(frame: CGRectMake(width/2-48, 30, 96,96))
-                let url = kImageAddressMain + (guess[i].ResourcesCDNPath ?? "")
+                let url = kImageAddressMain + (advertisement.ResourcesCDNPath ?? "").stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
                 imgV.sd_setImageWithURL(NSURL(string: url))
                 btn.addSubview(imgV)
                 cell!.contentView.addSubview(btn)
@@ -628,47 +541,43 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
     //MARK: - ***************OtherMethod*******************
     //MARK:点击广告的响应方法
     func advertisementClick(advertisement: ZMDAdvertisement){
-        if let other1 = advertisement.Other1,let other2 = advertisement.Other2,let linkUrl = advertisement.LinkUrl{
+        if let other1 = advertisement.Other1, let other2 = advertisement.Other2 {
             let other1 = other1 as String
-            let other2 = other2 as String   //最终参数
-            let linkUrl = linkUrl as String //用于获取临时参数
+            let other2 = other2   //最终参数
             switch other1{
             case "Product":
                 let vc = HomeBuyGoodsDetailViewController.CreateFromMainStoryboard() as! HomeBuyGoodsDetailViewController
-                let arr = linkUrl.componentsSeparatedByString("/")
-                vc.hidesBottomBarWhenPushed = true
-                vc.productId = (arr[3] as NSString).integerValue
-                self.navigationController?.pushViewController(vc, animated: true)
+                vc.productId = (other2 as NSString).integerValue
+                self.pushToViewController(vc, animated: true, hideBottom: true)
                 break
             case "Seckill":
                 break
             case "Topic":
-                let vc = HomeBuyGoodsDetailViewController.CreateFromMainStoryboard() as! HomeBuyGoodsDetailViewController
-                vc.productId = 8803
-                vc.hidesBottomBarWhenPushed = true
-                self.navigationController?.pushViewController(vc, animated: true)
+                let vc = HomeBuyListViewController.CreateFromMainStoryboard() as! HomeBuyListViewController
+                vc.Cid = other2
+                self.pushToViewController(vc, animated: true, hideBottom: true)
                 break
+//            case "Supply":
+//                let vc = SupplyDemandDetailViewController.CreateFromMainStoryboard() as! SupplyDemandDetailViewController
+//                vc.supplyProductId = (other2 as NSString).integerValue
+//                vc.type = 1
+//                self.pushToViewController(vc, animated: true, hideBottom: true)
+//            case "Demand":
+//                let vc = SupplyDemandDetailViewController.CreateFromMainStoryboard() as! SupplyDemandDetailViewController
+//                vc.supplyProductId = (other2 as NSString).integerValue
+//                vc.type = 2
+//                self.pushToViewController(vc, animated: true, hideBottom: true)
+//            case "Enterprise":
+//                let vc = EnterpriseDetailViewController.CreateFromMainStoryboard() as! EnterpriseDetailViewController
+//                vc.enterpriseId = (other2 as NSString).integerValue
+//                self.pushToViewController(vc, animated: true, hideBottom: true)
             case "Coupon":
                 break
             default:
-                let vc = MyWebViewController()
-                vc.webUrl = linkUrl
-                vc.hidesBottomBarWhenPushed = true
-                self.navigationController?.pushViewController(vc, animated: true)
                 break
             }
-        } else {
-            let linkUrl = advertisement.LinkUrl ?? "" as String
-            let id = (linkUrl.stringByReplacingOccurrencesOfString("http://www.ksnongte.com/", withString: "") as NSString).integerValue
-            if id != 0 {
-                let vc = HomeBuyGoodsDetailViewController.CreateFromMainStoryboard() as! HomeBuyGoodsDetailViewController
-                vc.productId = id
-                self.pushToViewController(vc, animated: true, hideBottom: true)
-            }else if linkUrl != "" {
-                let vc = MyWebViewController()
-                vc.webUrl = linkUrl
-                self.pushToViewController(vc, animated: true, hideBottom: true)
-            }
+        }else{
+            return
         }
     }
     // 下拉视窗
@@ -800,17 +709,6 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
     
     //MARK:数据源获取
     func fetchData(){
-        QNNetworkTool.categories { (categories, error, dictionary) -> Void in
-            if let categories = categories {
-                self.categories.removeAllObjects()
-                self.categories.addObjectsFromArray(categories as [AnyObject])
-
-                self.currentTableView.reloadData()
-            } else {
-                ZMDTool.showErrorPromptView(nil, error: error)
-            }
-        }
-        
         //获取浏览历史
         /*QNNetworkTool.fetchCustomerHistory { (history, dictionary, error) in
             if let history = history {
@@ -831,6 +729,14 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
                 if let offer = advertisementAll?.offer where offer.count > 0 {
                     self.userCenterData = [/*.HomeContentTypeHead,*/.HomeContentTypeAd,.HomeContentTypeMenu,.HomeContentTypeGoods,.HomeContentTypeRecommendationHead,.HomeContentTypeRecommendation, .HomeContentTypeTheme]
                 }
+                self.currentTableView.reloadData()
+            }
+        }
+        //大家都在看
+        QNNetworkTool.fetchHomeMiniAd("index_KSnongte") { (success, products, error) -> Void in
+            if success! {
+                self.history.removeAllObjects()
+                self.history.addObjectsFromArray(products as! [AnyObject])
                 self.currentTableView.reloadData()
             }
         }

@@ -239,8 +239,6 @@ class StoreShowListGoodCell: UITableViewCell {
     @IBOutlet weak var thirdView:UIView!
     @IBOutlet weak var fourthView:UIView!
     
-    let kServerAddress  = "http://www.xjnongte.com"
-
     override func awakeFromNib() {
 
     }
@@ -272,7 +270,7 @@ class StoreShowListGoodCell: UITableViewCell {
             default:
                 break
             }
-            (view.viewWithTag(100) as!UIImageView).sd_setImageWithURL(NSURL(string: kServerAddress + (product.DefaultPictureModel?.ImageUrl)!), placeholderImage: nil)
+            (view.viewWithTag(100) as!UIImageView).sd_setImageWithURL(NSURL(string: kImageAddressMain + (product.DefaultPictureModel?.ImageUrl)!), placeholderImage: nil)
             let productName = product.Name.stringByReplacingOccurrencesOfString("（代购）", withString: "").stringByReplacingOccurrencesOfString("【代购】", withString: "").stringByReplacingOccurrencesOfString("（预售）", withString: "")
             (view.viewWithTag(101) as!UILabel).text = productName
             if let shortDescription = product.ShortDescription {

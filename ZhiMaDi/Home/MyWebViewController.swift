@@ -36,7 +36,7 @@ class MyWebViewController: UIViewController,WKNavigationDelegate,WKScriptMessage
         self.navigationItem.titleView = titleLbl
     
         self.userCC = WKUserContentController()
-        let jScript = "var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width'); document.getElementsByTagName('head')[0].appendChild(meta);"
+        let jScript = "var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width'); document.getElementsByTagName('head')[0].appendChild(meta);user-scalable=no;"
         let userScript = WKUserScript(source: jScript, injectionTime: .AtDocumentEnd, forMainFrameOnly: true)
         userCC.addUserScript(userScript)
         let config = WKWebViewConfiguration()
@@ -58,7 +58,7 @@ class MyWebViewController: UIViewController,WKNavigationDelegate,WKScriptMessage
             })
         }else{
             self.webView.snp_makeConstraints(closure: { (make) -> Void in
-                make.top.equalTo(0)
+                make.top.equalTo(-44)
                 make.left.equalTo(0)
                 make.right.equalTo(0)
                 make.bottom.equalTo(0)

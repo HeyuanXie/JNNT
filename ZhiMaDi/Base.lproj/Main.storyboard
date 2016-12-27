@@ -1549,12 +1549,7 @@
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" tag="10000" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zun-5m-aKI">
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="190"/>
-                                                    <color key="backgroundColor" red="1" green="0.59086902817575926" blue="0.59792870418090904" alpha="1" colorSpace="calibratedRGB"/>
                                                 </imageView>
-                                                <view alpha="0.69999999999999996" tag="10005" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yb7-7f-cbw">
-                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="190"/>
-                                                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                </view>
                                                 <imageView userInteractionEnabled="NO" tag="10001" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="orE-jH-e03">
                                                     <rect key="frame" x="118" y="26" width="84" height="84"/>
                                                     <constraints>
@@ -1597,7 +1592,6 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" red="0.74117647058823533" green="0.22745098039215686" blue="0.015686274509803921" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstItem="bv7-95-PkS" firstAttribute="leading" secondItem="OaD-c0-xfD" secondAttribute="trailing" constant="30" id="1mM-ha-2I5"/>
                                                 <constraint firstItem="orE-jH-e03" firstAttribute="top" secondItem="vhv-Qf-dcy" secondAttribute="topMargin" constant="18" id="26u-iy-jee"/>
@@ -1614,14 +1608,10 @@
                                                 <constraint firstItem="bv7-95-PkS" firstAttribute="top" secondItem="uib-rb-3BI" secondAttribute="bottom" constant="1" id="TxP-5M-8Rk"/>
                                                 <constraint firstItem="OaD-c0-xfD" firstAttribute="leading" secondItem="FGo-hS-3Bt" secondAttribute="trailing" constant="30" id="bbh-zH-QIL"/>
                                                 <constraint firstItem="orE-jH-e03" firstAttribute="centerX" secondItem="vhv-Qf-dcy" secondAttribute="centerX" id="beE-T9-b30"/>
-                                                <constraint firstAttribute="trailing" secondItem="Yb7-7f-cbw" secondAttribute="trailing" id="bkO-et-Qtk"/>
                                                 <constraint firstAttribute="trailing" secondItem="uib-rb-3BI" secondAttribute="trailing" id="ctt-0O-aYE"/>
                                                 <constraint firstItem="OaD-c0-xfD" firstAttribute="centerX" secondItem="vhv-Qf-dcy" secondAttribute="centerX" id="cxb-K7-CUq"/>
-                                                <constraint firstItem="Yb7-7f-cbw" firstAttribute="top" secondItem="vhv-Qf-dcy" secondAttribute="top" id="iK2-eo-Owv"/>
                                                 <constraint firstItem="FGo-hS-3Bt" firstAttribute="leading" secondItem="vhv-Qf-dcy" secondAttribute="leading" constant="30" id="jGq-yp-96r"/>
-                                                <constraint firstAttribute="bottom" secondItem="Yb7-7f-cbw" secondAttribute="bottom" id="mO2-nz-NA1"/>
                                                 <constraint firstItem="OaD-c0-xfD" firstAttribute="top" secondItem="vhv-Qf-dcy" secondAttribute="top" constant="150" id="pfv-gX-fwq"/>
-                                                <constraint firstItem="Yb7-7f-cbw" firstAttribute="leading" secondItem="vhv-Qf-dcy" secondAttribute="leading" id="sju-lK-gwi"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>

@@ -183,13 +183,13 @@ class MineHomeViewController: UIViewController,UITableViewDataSource, UITableVie
         if section == 0 {
             return 0
         }
-        return  16
+        return  12
     }
     func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0
     }
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headView = UIView(frame: CGRectMake(0, 0, kScreenWidth, 16))
+        let headView = UIView(frame: CGRectMake(0, 0, kScreenWidth, 12))
         headView.backgroundColor = UIColor.clearColor()
         return headView
     }
@@ -212,11 +212,7 @@ class MineHomeViewController: UIViewController,UITableViewDataSource, UITableVie
             //设置背景图和用户图像(圆形)
             if let backgroundV = cell?.viewWithTag(10000) as? UIImageView {
                 ZMDTool.configViewLayer(backgroundV)
-                if !g_isLogin {
-                    backgroundV.image = UIImage(named: "示例头像")
-                }else if let urlStr = g_customer?.Avatar?.AvatarUrl,url = NSURL(string: urlStr){
-                    backgroundV.sd_setImageWithURL(url, placeholderImage: nil)
-                }
+                backgroundV.image = UIImage(named: "store_home_bg")
                 cell?.sendSubviewToBack(backgroundV)
             }
             
@@ -267,7 +263,11 @@ class MineHomeViewController: UIViewController,UITableViewDataSource, UITableVie
             let cellId = "MyOrderCell"
             let cell = tableView.dequeueReusableCellWithIdentifier(cellId)
             if let dic = self.orderNumberDic,total = dic["Total"] {
-                (cell?.viewWithTag(1000) as!UILabel).attributedText = "我的订单 (\(total))".AttributedText("\(total)", color: defaultSelectColor)
+                if !g_isLogin {
+                    (cell?.viewWithTag(1000) as! UILabel).text = "我的订单"
+                }else{
+                    (cell?.viewWithTag(1000) as! UILabel).attributedText = "我的订单 (\(total))".AttributedText("\(total)", color: defaultSelectColor)
+                }
             }
             return cell!
         case .UserMyOrderMenu :

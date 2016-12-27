@@ -103,7 +103,7 @@ class PersonInfoViewController:UIViewController,UITableViewDataSource, UITableVi
         return self.userCenterData.count
     }
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return (section == self.userCenterData.count - 1) ? 16 : 1
+        return (section == self.userCenterData.count - 1) ? 12 : 1
     }
     func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0
@@ -112,7 +112,7 @@ class PersonInfoViewController:UIViewController,UITableViewDataSource, UITableVi
         return indexPath.section == 0 ? 85 : tableViewCellDefaultHeight
     }
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headView = UIView(frame: CGRectMake(0, 0, kScreenWidth, 16))
+        let headView = UIView(frame: CGRectMake(0, 0, kScreenWidth, 12))
         headView.backgroundColor = UIColor.clearColor()
         return headView
     }

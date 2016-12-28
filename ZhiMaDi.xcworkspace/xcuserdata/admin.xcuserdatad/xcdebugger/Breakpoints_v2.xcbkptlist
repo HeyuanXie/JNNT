@@ -27,6 +27,38 @@
             endingLineNumber = "851"
             landmarkName = "confirmOrderWithStores(_:completion:)"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static ZhiMaDi.QNNetworkTool.confirmOrderWithStores (ZhiMaDi.QNNetworkTool.Type)(__ObjC.NSDictionary, completion : (succeed : Swift.ImplicitlyUnwrappedOptional&lt;Swift.Bool&gt;, dictionary : Swift.Optional&lt;__ObjC.NSDictionary&gt;, error : Swift.Optional&lt;__ObjC.NSError&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "ZhiMaDi"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/admin/Desktop/JNNT/ZhiMaDi/Tools/QNNetworkTool.swift"
+                  timestampString = "504616785.069127"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "851"
+                  endingLineNumber = "851"
+                  offsetFromSymbolStart = "32">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static ZhiMaDi.QNNetworkTool.(confirmOrderWithStores (ZhiMaDi.QNNetworkTool.Type) -&gt; (__ObjC.NSDictionary, completion : (succeed : Swift.ImplicitlyUnwrappedOptional&lt;Swift.Bool&gt;, dictionary : Swift.Optional&lt;__ObjC.NSDictionary&gt;, error : Swift.Optional&lt;__ObjC.NSError&gt;) -&gt; ()) -&gt; ()).(closure #1)"
+                  moduleName = "ZhiMaDi"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/admin/Desktop/JNNT/ZhiMaDi/Tools/QNNetworkTool.swift"
+                  timestampString = "504616785.069328"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "851"
+                  endingLineNumber = "851"
+                  offsetFromSymbolStart = "36">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

@@ -130,9 +130,11 @@ class CardVolumeConsumerDetailViewController: UIViewController,UITableViewDataSo
             }
             let titleLbl = ZMDTool.getLabel(CGRect(x: 12, y: 20, width: kScreenWidth, height: 16), text: "使用说明", fontSize: 17)
             cell?.contentView.addSubview(titleLbl)
-            let detailLbl = ZMDTool.getLabel(CGRect(x: 12, y: 20+16+12, width: kScreenWidth, height: 40), text: self.coupon.Discount.Explain, fontSize: 15,textColor: defaultDetailTextColor)
-            detailLbl.numberOfLines = 2
-            cell?.contentView.addSubview(detailLbl)
+            if let text = self.coupon.Discount.Explain {
+                let detailLbl = ZMDTool.getLabel(CGRect(x: 12, y: 20+16+12, width: kScreenWidth, height: 40), text: text, fontSize: 15,textColor: defaultDetailTextColor)
+                detailLbl.numberOfLines = 2
+                cell?.contentView.addSubview(detailLbl)
+            }
             return cell!
         }
     }

@@ -693,7 +693,7 @@ extension QNNetworkTool {
     }
     // 用户优惠券（我的 -> 卡券)
     class func fetchCustomerCoupons(completion: (coupons : NSArray?,datas:NSData?,error: NSError?) -> Void) {
-        requestPOST(kServerAddress + "/api/v1/extend/CustomerCoupons/Coupons", parameters: ["customerId":g_customerId ?? 1]) { (_, _, data, _, error) -> Void in
+        requestPOST(kServerAddress + "/api/v1/extend/CustomerCoupons/Coupons", parameters: ["customerId":g_customerId!]) { (_, _, data, _, error) -> Void in
             do {
                 let jsonObject: AnyObject? = try NSJSONSerialization.JSONObjectWithData(data as! NSData, options: NSJSONReadingOptions.MutableContainers)
                 guard let _ = jsonObject as? NSArray else {

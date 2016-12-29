@@ -118,7 +118,7 @@ class MyOrderViewController: UIViewController,UITableViewDataSource,UITableViewD
         return 3 + order.Items.count
     }
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return self.dataArray.count
+        return self.isAfterSale ? 0 : self.dataArray.count     //TODO:暂时是没有售后的
     }
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 16

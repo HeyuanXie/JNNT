@@ -513,6 +513,7 @@ extension QNNetworkTool {
                 return
             }
             completion(advertisementAll:advertisementAll,error: nil,dictionary:dictionary)
+            HYNetworkCache.save_asyncJsonResponseToCacheFile(dic, andURL: "MainPageInfo", completed: nil)
         }
     }
     
@@ -528,6 +529,7 @@ extension QNNetworkTool {
                     }
                     let history = ZMDProduct.mj_objectArrayWithKeyValuesArray(array)
                     completion(history: history, dictionary: dictionary, error: nil)
+                    HYNetworkCache.save_asyncJsonResponseToCacheFile(array, andURL: "CustomerHistory", completed: nil)
                 }
                 catch{
                     
@@ -542,6 +544,7 @@ extension QNNetworkTool {
         requestGET(url, parameters: nil) { (request, response, data, dictionary, error) -> Void in
             if let dic = dictionary ,array = ZMDAdvertisement.mj_objectArrayWithKeyValuesArray(dic["zones"]) {
                 completion(success: true, products: array, error: nil)
+                HYNetworkCache.save_asyncJsonResponseToCacheFile(dic["zones"], andURL: adName, completed: nil)
             }else{
                 completion(success: false, products: nil, error: error)
             }

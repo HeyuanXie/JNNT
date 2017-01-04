@@ -718,6 +718,7 @@
 		84CDE0EC1E12398F0040D903 /* 示例头像@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84CDE0EB1E12398F0040D903 /* 示例头像@2x.png */; };
 		84CDE0EE1E123A360040D903 /* 示例头像@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84CDE0ED1E123A360040D903 /* 示例头像@3x.png */; };
 		84CDE0F21E1249490040D903 /* JWCacheURLProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CDE0F11E1249490040D903 /* JWCacheURLProtocol.m */; };
+		84D2752F1E1CD18200D2D59F /* HYNetworkCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D2752E1E1CD18200D2D59F /* HYNetworkCache.m */; };
 		84DB27FC1DD0508D00CDBE67 /* ZMDAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DB27FB1DD0508D00CDBE67 /* ZMDAlertView.swift */; };
 		84DC0D671D7D474C00FB3E4E /* store_notice.png in Resources */ = {isa = PBXBuildFile; fileRef = 84DC0D661D7D474C00FB3E4E /* store_notice.png */; };
 		84DC550B1E08E1D200C1BFD7 /* temp_todayHot.png in Resources */ = {isa = PBXBuildFile; fileRef = 84DC550A1E08E1D200C1BFD7 /* temp_todayHot.png */; };
@@ -1521,6 +1522,8 @@
 		84CDE0ED1E123A360040D903 /* 示例头像@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "示例头像@3x.png"; sourceTree = "<group>"; };
 		84CDE0F01E1249490040D903 /* JWCacheURLProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JWCacheURLProtocol.h; sourceTree = "<group>"; };
 		84CDE0F11E1249490040D903 /* JWCacheURLProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JWCacheURLProtocol.m; sourceTree = "<group>"; };
+		84D2752D1E1CD18200D2D59F /* HYNetworkCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HYNetworkCache.h; sourceTree = "<group>"; };
+		84D2752E1E1CD18200D2D59F /* HYNetworkCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HYNetworkCache.m; sourceTree = "<group>"; };
 		84DB27FB1DD0508D00CDBE67 /* ZMDAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZMDAlertView.swift; sourceTree = "<group>"; };
 		84DC0D661D7D474C00FB3E4E /* store_notice.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = store_notice.png; sourceTree = "<group>"; };
 		84DC550A1E08E1D200C1BFD7 /* temp_todayHot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = temp_todayHot.png; sourceTree = "<group>"; };
@@ -2859,6 +2862,7 @@
 		3C90987A1C76A6E9006B7D2C /* Librarys */ = {
 			isa = PBXGroup;
 			children = (
+				84D2752C1E1CD18200D2D59F /* HYNetWorkCache */,
 				84CDE0EF1E1249490040D903 /* JWNetAutoCache */,
 				845987611E0D463E00C700BB /* HYNoticeView */,
 				842E6A221DE841A70056A554 /* pgySDK */,
@@ -3209,6 +3213,15 @@
 				84CDE0F11E1249490040D903 /* JWCacheURLProtocol.m */,
 			);
 			path = JWNetAutoCache;
+			sourceTree = "<group>";
+		};
+		84D2752C1E1CD18200D2D59F /* HYNetWorkCache */ = {
+			isa = PBXGroup;
+			children = (
+				84D2752D1E1CD18200D2D59F /* HYNetworkCache.h */,
+				84D2752E1E1CD18200D2D59F /* HYNetworkCache.m */,
+			);
+			path = HYNetWorkCache;
 			sourceTree = "<group>";
 		};
 		84F036B61DDB10480061D478 /* TZImagePickerController */ = {
@@ -4054,6 +4067,7 @@
 				3C9099401C76A6E9006B7D2C /* BubbleChartRenderer.swift in Sources */,
 				2B6F90741CB6508300BD7A5D /* BankCardVerifyPhoneViewController.swift in Sources */,
 				2BF8D8761CD0AD45008237D9 /* MyStoreDistributionHomeViewController.swift in Sources */,
+				84D2752F1E1CD18200D2D59F /* HYNetworkCache.m in Sources */,
 				2B8BB2B41CBDF41000CD2AD5 /* CircleScaleCustomView.swift in Sources */,
 				2B8BB2BC1CBE34B300CD2AD5 /* PhotoBroswerViewController.swift in Sources */,
 				3C9099301C76A6E9006B7D2C /* ChartFillFormatter.swift in Sources */,

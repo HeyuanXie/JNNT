@@ -137,6 +137,7 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
     
     var userCenterData: [UserCenterCellType]!
     var menuType: [MenuType]!
+    var menuDatas = NSMutableArray()    //menuCell的数据
     var 下拉视窗 : UIView!
     var categories = NSMutableArray()
     var advertisementAll : ZMDAdvertisementAll!
@@ -148,9 +149,11 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
     var themes = NSMutableArray()   //特卖专题数据
     
     var noticeView : HYNoticeView!
+    var networkObserver : Reachability!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.networkObserver = Reachability.reachabilityForInternetConnection()
         //检测更新
         if !APP_DIDLAUNCHED {
             self.checkUpdate()
@@ -251,6 +254,9 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
         return headView
     }
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if self.userCenterData[indexPath.section] == .HomeContentTypeMenu {
+            return self.menuDatas.count >= 5 ? zoom(210) : zoom(105)
+        }
         return self.userCenterData[indexPath.section].height
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -258,6 +264,7 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
         case .HomeContentTypeAd :
             return self.cellForHomeAd(tableView, indexPath: indexPath)
         case .HomeContentTypeMenu :
+//            return self.cellForHomeAutoMenu(tableView, indexPath: indexPath)
             return self.cellForHomeMenu(tableView, indexPath: indexPath)
         case .HomeContentTypeGoods :
             return self.cellForHomeGoods(tableView, indexPath: indexPath)
@@ -328,7 +335,7 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
         }
         let cycleScroll = CycleScrollView(frame: CGRectMake(0, 0, kScreenWidth, kScreenWidth * 280 / 750))
         cycleScroll.tag = 10001
-        cycleScroll.backgroundColor = UIColor.blueColor()
+        cycleScroll.backgroundColor = UIColor.whiteColor()
         cycleScroll.delegate = self
         cycleScroll.autoScroll = true
         cycleScroll.autoTime = 2.5
@@ -351,6 +358,55 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
         return cell!
     }
     // 菜单
+    func cellForHomeAutoMenu(tableView:UITableView, indexPath: NSIndexPath) -> UITableViewCell {
+        let cellId = "AutoMenuCell"
+        var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
+        if cell == nil {
+            cell = UITableViewCell(style: .Default, reuseIdentifier: cellId)
+            ZMDTool.configTableViewCellDefault(cell!)
+            
+            for var i=0;i<self.menuDatas.count;i++ {
+                let btnHeight = zoom(105)
+                let btnWidth = self.menuDatas.count >= 5 ? kScreenWidth/5 : kScreenWidth/CGFloat(self.menuDatas.count)
+                let btnX = CGFloat(i%5)*btnWidth
+                let btnY = i >= 5 ? zoom(100) : 0
+                let btn = UIButton(frame: CGRect(x: btnX, y: btnY, width: btnWidth, height: btnHeight))
+                btn.tag = 10000 + i
+                btn.backgroundColor = UIColor.whiteColor()
+                
+                let label = UILabel(frame: CGRectMake(0, btnHeight/2 + zoom(25), btnWidth, 14))
+                label.font = UIFont.systemFontOfSize(14)
+                label.textColor = defaultTextColor
+                label.textAlignment =  .Center
+                label.tag = 10010 + i
+                btn.addSubview(label)
+                
+                let imgV = UIImageView(frame: CGRectMake(btnWidth/2-25, btnHeight/2 - zoom(40), 50,50))
+                imgV.tag = 10020 + i
+                btn.addSubview(imgV)
+                cell!.contentView.addSubview(btn)
+            }
+            
+            for var i=0;i<self.menuDatas.count;i++ {
+                let btn = cell?.contentView.viewWithTag(10000 + i) as! UIButton
+                let label = cell?.contentView.viewWithTag(10010 + i) as! UILabel
+                let imgV = cell?.contentView.viewWithTag(10020 + i) as! UIImageView
+                if self.menuDatas.count != 0 {
+                    let ad = self.menuDatas[i] as! ZMDAdvertisement
+                    label.text = ad.Title
+                    imgV.sd_setImageWithURL(NSURL(string: kImageAddressMain+ad.ResourcesCDNPath!))
+                    btn.rac_command = RACCommand(signalBlock: { (sender) -> RACSignal! in
+                        self.advertisementClick(ad)
+                        return RACSignal.empty()
+                    })
+                }
+                label.text = "\(i)"
+                imgV.image = UIImage.imageWithColor(appThemeColor, size: CGSize(width: 50, height: 50))
+            }
+        }
+        return cell!
+    }
+    
     func cellForHomeMenu(tableView: UITableView,indexPath: NSIndexPath)-> UITableViewCell {
         let cellId = "MenuCell"
         var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
@@ -708,7 +764,28 @@ class HomePageViewController: UIViewController,UITableViewDataSource,UITableView
     }
     
     //MARK:数据源获取
+    func fetchCache() {
+        if let advertisementAllData = HYNetworkCache.cacheJsonWithURL("MainPageInfo"),advertisementAll = ZMDAdvertisementAll.mj_objectWithKeyValues(advertisementAllData) {
+            self.advertisementAll = advertisementAll
+            if let offer = advertisementAll.offer where offer.count > 0 {
+                self.userCenterData = [/*.HomeContentTypeHead,*/.HomeContentTypeAd,.HomeContentTypeMenu,.HomeContentTypeGoods,.HomeContentTypeRecommendationHead,.HomeContentTypeRecommendation, .HomeContentTypeTheme]
+            }
+            self.currentTableView.reloadData()
+        }
+        if let historyData = HYNetworkCache.cacheJsonWithURL("index_KSnongte"),historys = ZMDAdvertisement.mj_objectArrayWithKeyValuesArray(historyData) {
+            self.history.addObjectsFromArray(historys as [AnyObject])
+            self.currentTableView.reloadData()
+        }
+        if let miniAdsData = HYNetworkCache.cacheJsonWithURL("mb_index_dayhot"),miniAds = ZMDAdvertisement.mj_objectArrayWithKeyValuesArray(miniAdsData){
+            self.goods.addObjectsFromArray(miniAds as [AnyObject])
+            self.currentTableView.reloadData()
+        }
+    }
     func fetchData(){
+        self.fetchCache()
+        if self.networkObserver.currentReachabilityStatus() == .NotReachable {
+            return
+        }
         //获取浏览历史
         /*QNNetworkTool.fetchCustomerHistory { (history, dictionary, error) in
             if let history = history {

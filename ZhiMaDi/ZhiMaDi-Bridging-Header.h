@@ -64,5 +64,7 @@
 
 //webView页面缓存
 #import "JWCacheURLProtocol.h"
+//本地数据缓存（JSON形式）
+#import "HYNetworkCache.h"
 
 #endif /* SleepCare_Bridging_Header_h */

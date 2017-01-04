@@ -42,6 +42,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            window?.makeKeyAndVisible()
 //        }
         
+        if let lastDate = getObjectFromUserDefaults("openDate") as? NSDate {
+            let time = abs(lastDate.timeIntervalSinceNow)
+            if time >= 2*24*60*60 {
+                HYNetworkCache.clearCache()     //超过两天，清理首页缓存，(也可以在这里处理超过多少天忘记密码)
+            }
+        }
+        let date = NSDate()
+        saveObjectToUserDefaults("openDate", value: date)
+        
         if let account = g_Account {
             if let password = g_Password {
                 QNNetworkTool.loginAjax(account, Password: password, completion: { (success, error, dictionary) -> Void in

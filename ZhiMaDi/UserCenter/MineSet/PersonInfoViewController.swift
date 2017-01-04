@@ -249,6 +249,7 @@ class PersonInfoViewController:UIViewController,UITableViewDataSource, UITableVi
                         dispatch_async(dispatch_get_main_queue(), { () -> Void in
                             //清理缓存
                             self.clearCache()
+                            HYNetworkCache.clearCache()     //清理首页缓存
                         })
                         ZMDTool.showPromptView("清理完成")
                     })

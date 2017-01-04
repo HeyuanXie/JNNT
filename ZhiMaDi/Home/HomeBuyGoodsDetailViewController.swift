@@ -772,10 +772,8 @@ class HomeBuyGoodsDetailViewController: UIViewController,UITableViewDataSource,U
         rightItem.customView?.tintColor = UIColor.whiteColor()
         self.navigationItem.rightBarButtonItem = rightItem
     }
+    
     private func dataInit(){
-        //        if self.productDetail.Store.discount == nil {
-        //            self.goodsCellTypes = [.HomeContentTypeAd,.HomeContentTypeDetail,.HomeContentTypeMenu,.HomeContentTypeDistribution,.HomeContentTypeStore,/*.HomeContentTypeDaPeiGou*/.HomeContentTypeLoadMore]
-        //        }
         self.goodsCellTypes = [.HomeContentTypeAd,.HomeContentTypeDetail,.HomeContentTypeMenu,.HomeContentTypeDistribution,.HomeContentTypeStore,/*.HomeContentTypeDaPeiGou*/.HomeContentTypeLoadMore]
         
         QNNetworkTool.fetchProductDetail(self.productId) { (productDetail, error, dictionary) -> Void in
@@ -796,10 +794,15 @@ class HomeBuyGoodsDetailViewController: UIViewController,UITableViewDataSource,U
                     self.editViewShow(self.productDetail, SciId: 0)
                 }
             } else {
-                ZMDTool.showErrorPromptView(nil, error: nil, errorMsg: dictionary!["error"] as? String)
+                if let dictionary = dictionary {
+                    ZMDTool.showErrorPromptView(nil, error: error, errorMsg: dictionary["error"] as? String)
+                }else{
+                    ZMDTool.showErrorPromptView(nil, error: error)
+                }
             }
         }
     }
+    
     //在第一个table上拉刷新
     func footerRefresh(){
         UIView.animateWithDuration(0.38, animations: { () -> Void in

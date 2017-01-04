@@ -67,7 +67,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MjY-Ko-ytz">
-                                <rect key="frame" x="227" y="148" width="81" height="24"/>
+                                <rect key="frame" x="227" y="150" width="81" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="81" id="Vwp-R5-quL"/>
                                     <constraint firstAttribute="height" constant="24" id="Yid-3D-N2f"/>
@@ -158,7 +158,7 @@
                         <color key="backgroundColor" red="0.94117647058823528" green="0.94117647058823528" blue="0.94117647058823528" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="tMU-GC-Yqt" firstAttribute="leading" secondItem="BTm-VW-Jxm" secondAttribute="leading" constant="12" id="2l6-kq-3jm"/>
-                            <constraint firstItem="MjY-Ko-ytz" firstAttribute="top" secondItem="vAw-iw-lEp" secondAttribute="bottom" constant="30" id="3y0-rQ-4Ee"/>
+                            <constraint firstItem="MjY-Ko-ytz" firstAttribute="top" secondItem="vAw-iw-lEp" secondAttribute="bottom" constant="32" id="3y0-rQ-4Ee"/>
                             <constraint firstItem="tMU-GC-Yqt" firstAttribute="top" secondItem="oD8-bz-kU7" secondAttribute="bottom" constant="30" id="4LI-eK-uXk"/>
                             <constraint firstItem="oXB-OU-001" firstAttribute="top" secondItem="tMU-GC-Yqt" secondAttribute="bottom" constant="31" id="6d8-PI-PXL"/>
                             <constraint firstItem="uRb-al-fC9" firstAttribute="centerX" secondItem="BTm-VW-Jxm" secondAttribute="centerX" id="83h-jM-CE7"/>
@@ -177,7 +177,7 @@
                             <constraint firstItem="T5x-aB-yGy" firstAttribute="centerX" secondItem="BTm-VW-Jxm" secondAttribute="centerX" id="cMp-C0-GLn"/>
                             <constraint firstAttribute="trailing" secondItem="1Ig-Bq-2eT" secondAttribute="trailing" id="diK-QC-yMM"/>
                             <constraint firstItem="d88-ox-UrN" firstAttribute="top" secondItem="VX5-gU-cgw" secondAttribute="bottom" constant="35" id="dtn-nM-ud5"/>
-                            <constraint firstItem="MjY-Ko-ytz" firstAttribute="top" secondItem="1Ig-Bq-2eT" secondAttribute="bottom" constant="12" id="emE-KP-Ra0"/>
+                            <constraint firstItem="MjY-Ko-ytz" firstAttribute="top" secondItem="1Ig-Bq-2eT" secondAttribute="bottom" constant="14" id="emE-KP-Ra0"/>
                             <constraint firstItem="d88-ox-UrN" firstAttribute="top" secondItem="Nle-Ye-TSw" secondAttribute="bottom" constant="35" id="fof-f9-ivU"/>
                             <constraint firstAttribute="trailing" secondItem="vAw-iw-lEp" secondAttribute="trailing" constant="10" id="hVT-0o-IUv"/>
                             <constraint firstItem="17Z-q1-ljm" firstAttribute="top" secondItem="BTm-VW-Jxm" secondAttribute="top" constant="15" id="iez-gh-zoz"/>
@@ -283,7 +283,7 @@
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nMh-sE-ply">
-                                <rect key="frame" x="227" y="148" width="81" height="24"/>
+                                <rect key="frame" x="227" y="150" width="81" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="81" id="CSI-Fc-Yfp"/>
                                     <constraint firstAttribute="height" constant="24" id="vDd-4B-WUz"/>
@@ -297,7 +297,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q89-1p-f74">
-                                <rect key="frame" x="12" y="204" width="296" height="50"/>
+                                <rect key="frame" x="12" y="206" width="296" height="50"/>
                                 <color key="backgroundColor" red="0.23921568630000001" green="0.70980392160000005" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="VaG-no-VXp"/>
@@ -365,7 +365,7 @@
                         <color key="backgroundColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="4FU-yf-bpQ" firstAttribute="leading" secondItem="jsL-l5-bz9" secondAttribute="trailing" constant="12" id="60x-yN-9Ve"/>
-                            <constraint firstItem="nMh-sE-ply" firstAttribute="top" secondItem="3Ut-Xb-yGC" secondAttribute="bottom" constant="12" id="6ET-IQ-dPi"/>
+                            <constraint firstItem="nMh-sE-ply" firstAttribute="top" secondItem="3Ut-Xb-yGC" secondAttribute="bottom" constant="14" id="6ET-IQ-dPi"/>
                             <constraint firstItem="GN6-IS-25m" firstAttribute="top" secondItem="XZG-Cb-Mfm" secondAttribute="bottom" constant="35" id="74E-Nl-q8G"/>
                             <constraint firstItem="zuZ-le-rNN" firstAttribute="top" secondItem="e53-nL-dK8" secondAttribute="bottom" constant="30" id="7EY-ae-z3c"/>
                             <constraint firstItem="3Ut-Xb-yGC" firstAttribute="top" secondItem="sqc-7H-FtD" secondAttribute="bottom" id="HuK-HO-eqH"/>

@@ -62,11 +62,9 @@ class CashierViewController: UIViewController,UITableViewDataSource,UITableViewD
     }
     //MARK:- UITableViewDataSource,UITableViewDelegate
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return section == 0 ? 1 : self.payMethods.count
         return self.payMethods.count
     }
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-//        return self.payMethods.count == 0 ? 1 : 2
         return 1
     }
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -76,7 +74,7 @@ class CashierViewController: UIViewController,UITableViewDataSource,UITableViewD
         return 0
     }
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return indexPath.section == 0 ? 70 : 55
+        return 70
     }
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headView = UIView(frame: CGRectMake(0, 0, kScreenWidth, 12))
@@ -100,7 +98,7 @@ class CashierViewController: UIViewController,UITableViewDataSource,UITableViewD
             cell?.addLine()
             
             let selectBtn = UIButton(frame: CGRect(x: kScreenWidth - 40, y: 8, width: 40, height: 40))
-            selectBtn.selected = indexPath.section == self.indexTypeRow ? true : false
+            selectBtn.selected = indexPath.row == self.indexTypeRow ? true : false
             selectBtn.setImage(UIImage(named: "common_01unselected"), forState: .Normal)
             selectBtn.setImage(UIImage(named: "common_02selected"), forState: .Selected)
             selectBtn.rac_command = RACCommand(signalBlock: { (sender) -> RACSignal! in
@@ -115,12 +113,12 @@ class CashierViewController: UIViewController,UITableViewDataSource,UITableViewD
         let method = self.payMethods[indexPath.row] as! ZMDPaymentMethod
         self.setPayImage(cell!, method: method)
         cell?.textLabel?.text = method.Name
-        (cell?.contentView.viewWithTag(1000) as! UIButton).selected = indexPath.section == self.indexTypeRow ? true : false
+        (cell?.contentView.viewWithTag(1000) as! UIButton).selected = indexPath.row == self.indexTypeRow ? true : false
         return cell!
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.indexTypeRow = indexPath.section
+        self.indexTypeRow = indexPath.row
         tableView.reloadData()
     }
     
@@ -201,12 +199,6 @@ class CashierViewController: UIViewController,UITableViewDataSource,UITableViewD
                     self.respondForPostOrder(succeed, dictionary: dictionary, error: error)
                 })
             } else {
-                //单店支付
-//                QNNetworkTool.confirmOrder(self.mark, Paymentmethod: self.selectPayMethod.PaymentMethodSystemName, completion: { (succeed, dictionary, error) -> Void in
-//                    //利用confirmOrder的返回值作为参数，自定义一个方法
-//                    self.respondForPostOrder(succeed, dictionary: dictionary, error: error)
-//                })
-                
                 //多店支付
                 let dic = self.marks //self.marks中已经添加了"customerId":g_customerId
                 dic.setValue(self.selectPayMethod.PaymentMethodSystemName, forKey: "Paymentmethod")

@@ -148,11 +148,10 @@ class ConfirmOrderViewController: UIViewController,UITableViewDataSource,UITable
         if section == 0 {
             return 1
         }else{
-            return 5 + self.storeArray[section - 1].count
+            return 4 + self.storeArray[section - 1].count
         }
     }
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-
         return self.storeArray.count + 1
     }
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -239,7 +238,7 @@ class ConfirmOrderViewController: UIViewController,UITableViewDataSource,UITable
                 //运费
                 (cell?.contentView.viewWithTag(10000) as! UILabel).text = self.singleTotalArray.count == 0 ? "" : (self.singleTotalArray[indexPath.section-1] as!ZMDSingleStoreTotal).Shipping
                 return cell!
-            }else if indexPath.row == self.storeArray[indexPath.section - 1].count + 2 {
+            } else if indexPath.row == self.storeArray[indexPath.section - 1].count + 200 {
                 //是否开发票
                 let cellId = "InvoiceCell\(indexPath.section)"
                 var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
@@ -259,7 +258,7 @@ class ConfirmOrderViewController: UIViewController,UITableViewDataSource,UITable
                     label.textColor = defaultDetailTextColor
                 }                
                 return cell!
-            }else if indexPath.row == self.storeArray[indexPath.section - 1].count + 3 {
+            } else if indexPath.row == self.storeArray[indexPath.section - 1].count + 2 {
                 //备注
                 let cellId = "MarkCell\(indexPath.section)"
                 var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
@@ -281,7 +280,7 @@ class ConfirmOrderViewController: UIViewController,UITableViewDataSource,UITable
                     cell!.textLabel?.text = "备注"
                 }
                 return cell!
-            }else if indexPath.row == self.storeArray[indexPath.section - 1].count + 4 {
+            } else if indexPath.row == self.storeArray[indexPath.section - 1].count + 3 {
                 //合计
                 let cellId = "GoodsCountCell\(indexPath.section)"
                 var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
@@ -382,7 +381,7 @@ class ConfirmOrderViewController: UIViewController,UITableViewDataSource,UITable
                     }
                     self.navigationController?.pushViewController(vc, animated: true)
                     break
-                case self.storeArray[indexPath.section-1].count + 2: //是否开发票
+                case self.storeArray[indexPath.section-1].count + 200: //是否开发票
                     let cell = tableView.cellForRowAtIndexPath(indexPath)
                     let vc = InvoiceTypeViewController()
                     if self.publicInfo != nil {

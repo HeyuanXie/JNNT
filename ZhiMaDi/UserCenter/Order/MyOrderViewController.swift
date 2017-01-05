@@ -598,8 +598,14 @@ class MyOrderViewController: UIViewController,UITableViewDataSource,UITableViewD
                             ZMDTool.hiddenActivityView()
                             if paymentMethods != nil {
                                 let vc = CashierViewController()
-                                vc.total = order.OrderTotal
+                                if let total = order.OrderTotal.hasPrefix("¥") ? order.OrderTotal.componentsSeparatedByString("¥").last : order.OrderTotal {
+                                    vc.total = total
+                                }
                                 vc.orderId = orderId
+                                vc.person = order.ShippingAddress.FirstName
+                                vc.phoneNumber = order.ShippingAddress.PhoneNumber
+                                vc.address1 = order.ShippingAddress.Address1 ?? ""
+                                vc.address2 = order.ShippingAddress.Address2 ?? ""
                                 vc.payMethods = NSMutableArray(array: paymentMethods)
                                 vc.hidesBottomBarWhenPushed = true
                                 self.navigationController?.pushViewController(vc, animated:true)

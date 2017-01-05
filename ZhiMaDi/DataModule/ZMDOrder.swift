@@ -25,6 +25,7 @@ class ZMDOrder2: NSObject {
     var OrderStatusId:NSNumber!
     var ShippingStatusId:NSNumber!
     var PaymentStatusId:NSNumber!
+    var ShippingAddress:ZMDAddress!
     
     /** 获得各种订单状态*/
     func orderStatu() -> String {

@@ -871,7 +871,7 @@ extension QNNetworkTool {
     ShippingStatusId: 发货状态
     */
     class func fetchOrder(urlStr:String,completion: ( value: NSArray?,error: NSError?) -> Void) {
-        var str = (kOdataAddress + urlStr).stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+        let str = (kOdataAddress + urlStr).stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
         let url = NSURL(string:str)
         request(self.productRequest(url, method: "GET")).responseString { (response) -> Void in
             guard let data = response.result.value else {

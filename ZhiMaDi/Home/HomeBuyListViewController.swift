@@ -356,15 +356,8 @@ class HomeBuyListViewController: UIViewController ,ZMDInterceptorProtocol, UITab
         self.popView.showAsPopAndhideWhenClickGray()
     }
     
-    func fetchData() {
-        if self.isStore {
-            
-        }
-    }
-    
     func updateData(orderby:Int?) {
         let Q = self.As == "true" ? "" : self.titleForFilter
-        let isNew = "false"
         QNNetworkTool.products(self.As, pageSize: 12, pageNumber: self.indexSkip, storeId: self.storeId.integerValue, Q: Q, orderBy: orderby!, isNew: self.isNew, Cid: (self.Cid as NSString).integerValue) { (products, error, dic) -> Void in
             if let productsArr = products {
                 if self.indexSkip == 1 {

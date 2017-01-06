@@ -673,7 +673,6 @@
 		84E1BBD31E0B878700FBAF7A /* good_select@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84E1BBCD1E0B878700FBAF7A /* good_select@3x.png */; };
 		84E1BBD41E0B878700FBAF7A /* soso_normal@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84E1BBCE1E0B878700FBAF7A /* soso_normal@3x.png */; };
 		84E1BBD51E0B878700FBAF7A /* soso_select@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84E1BBCF1E0B878700FBAF7A /* soso_select@3x.png */; };
-		84E226561D5C77A100B39174 /* 葫芦堡图标.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 84E226551D5C77A100B39174 /* 葫芦堡图标.jpg */; };
 		84F036CC1DDB10480061D478 /* NSBundle+TZImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F036B81DDB10480061D478 /* NSBundle+TZImagePicker.m */; };
 		84F036CD1DDB10480061D478 /* TZAssetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F036BA1DDB10480061D478 /* TZAssetCell.m */; };
 		84F036CE1DDB10480061D478 /* TZAssetModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F036BC1DDB10480061D478 /* TZAssetModel.m */; };
@@ -1411,7 +1410,6 @@
 		84E1BBCD1E0B878700FBAF7A /* good_select@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "good_select@3x.png"; sourceTree = "<group>"; };
 		84E1BBCE1E0B878700FBAF7A /* soso_normal@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "soso_normal@3x.png"; sourceTree = "<group>"; };
 		84E1BBCF1E0B878700FBAF7A /* soso_select@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "soso_select@3x.png"; sourceTree = "<group>"; };
-		84E226551D5C77A100B39174 /* 葫芦堡图标.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "葫芦堡图标.jpg"; sourceTree = "<group>"; };
 		84F036B71DDB10480061D478 /* NSBundle+TZImagePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+TZImagePicker.h"; sourceTree = "<group>"; };
 		84F036B81DDB10480061D478 /* NSBundle+TZImagePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+TZImagePicker.m"; sourceTree = "<group>"; };
 		84F036B91DDB10480061D478 /* TZAssetCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TZAssetCell.h; sourceTree = "<group>"; };
@@ -2042,7 +2040,6 @@
 				84E1BBB71E0B642000FBAF7A /* cb_glossy_off@2x.png */,
 				84E1BBB81E0B642000FBAF7A /* cb_glossy_on.png */,
 				84E1BBB91E0B642000FBAF7A /* cb_glossy_on@2x.png */,
-				84E226551D5C77A100B39174 /* 葫芦堡图标.jpg */,
 				84765FAC1DA8C9A1002F4F80 /* default-image-100.jpg */,
 				84C7E5421DAE116C00096A9E /* product_default.png */,
 				84A93EEB1DACDF4F00532D4F /* tm.png */,
@@ -3192,7 +3189,6 @@
 				2BA287EA1CC0942900B6281E /* message_product@2x.png in Resources */,
 				2B02B53F1CAD18FE0064B47C /* pay_express@3x.png in Resources */,
 				2B28F5151CA3DD4E004B8DA4 /* product_up@3x.png in Resources */,
-				84E226561D5C77A100B39174 /* 葫芦堡图标.jpg in Resources */,
 				84BFAE131D94ECDA00BF394F /* home_search_gray.png in Resources */,
 				2B5FF3ED1CA3F03C0067909D /* common_01unselected@2x.png in Resources */,
 				2B3AC60C1C96C05B00CC8662 /* Share_WX@3x.png in Resources */,
@@ -4038,7 +4034,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: The Wholesale Of Agricultural Commodities Of Jiangnan Kashi Bulk Agricultural Prod (JQV37Q32C9)";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution: The Wholesale Of Agricultural Commodities Of Jiangnan Kashi Bulk Agricultural Prod (JQV37Q32C9)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: The Wholesale Of Agricultural Commodities Of Jiangnan Kashi Bulk Agricultural Prod (JQV37Q32C9)";
 				ENABLE_BITCODE = NO;

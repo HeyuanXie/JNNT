@@ -67,4 +67,6 @@
 //本地数据缓存（JSON形式）
 #import "HYNetworkCache.h"
 
+#import <JSPatchPlatform/JSPatch.h>
+
 #endif /* SleepCare_Bridging_Header_h */

@@ -68,6 +68,10 @@ class AdvertisementGoodCell : UITableViewCell {
     @IBOutlet weak var topBtn : UIButton!
     @IBOutlet weak var botBtn : UIButton!
     
+    override func awakeFromNib() {
+        self.botBtn.addSubview(ZMDTool.getLine(CGRect(x: 0, y: 0, width: self.botBtn.frame.width, height: 0.5)))
+    }
+    
     class func configcell(cell:AdvertisementGoodCell,datas:NSArray) {
         if datas.count > 0 {
             let advertisement = datas[0] as! ZMDAdvertisement

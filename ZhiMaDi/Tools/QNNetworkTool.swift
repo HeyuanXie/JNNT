@@ -456,7 +456,7 @@ extension QNNetworkTool {
     
     //MARK:分类页面的数据
     class func sortCategories(completion: (categories:NSArray?,error:NSError?,dictionary:NSDictionary?) -> Void) {
-        requestGET(kServerAddress + "/api/v1/extend/Product/HomepageCategories", parameters: nil) { (_, _, data, _, error) -> Void in
+        requestGET(kServerAddress + "/api/v1/extend/Product/Categories", parameters: nil) { (_, _, data, _, error) -> Void in
             if data != nil{
                 do {
                     let jsonObject: AnyObject? = try NSJSONSerialization.JSONObjectWithData(data as! NSData, options: NSJSONReadingOptions.MutableContainers)

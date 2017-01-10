@@ -48,7 +48,7 @@ class OrderPaySucceedViewController: UIViewController,UITableViewDataSource,UITa
         } else if indexPath.row == 1 {
             return 102
         }
-        return 56
+        return zoom(52)
     }
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headView = UIView(frame: CGRectMake(0, 0, kScreenWidth, 10))
@@ -126,14 +126,12 @@ class OrderPaySucceedViewController: UIViewController,UITableViewDataSource,UITa
                 cell = UITableViewCell(style: .Subtitle, reuseIdentifier: cellId)
                 cell?.accessoryType = UITableViewCellAccessoryType.None
                 cell!.selectionStyle = .None
-                
                 ZMDTool.configTableViewCellDefault(cell!)
+                cell?.addLine()
                 
-                let botLbl = ZMDTool.getLabel(CGRect(x: 12, y: 0 , width: kScreenWidth, height: 55.5), text: "实付：0.0 获得0积分", fontSize: 16)
+                let botLbl = ZMDTool.getLabel(CGRect(x: 12, y: 0 , width: kScreenWidth, height: zoom(52)-0.5), text: "实付：0.0 获得0积分", fontSize: 16)
                 botLbl.tag = 10001
                 cell?.contentView.addSubview(botLbl)
-                
-                cell?.addSubview(ZMDTool.getLine(CGRect(x: 0, y: 55.5, width: kScreenWidth, height: 0.5)))
             }
             let botLbl = cell?.viewWithTag(10001) as! UILabel
             botLbl.attributedText = ((self.isPayed ? "实付: " : "应付: ") + "¥\(self.total)").AttributedText("¥\(self.total)", color: defaultSelectColor)
@@ -147,12 +145,14 @@ class OrderPaySucceedViewController: UIViewController,UITableViewDataSource,UITa
                 ZMDTool.configTableViewCellDefault(cell!)
                 
                 let titles = ["查看订单","继续购物"]
-                let width = kScreenWidth*3/11,height = CGFloat(40)
+                let width = zoom(104),height = zoom(34)
+                let padding = (kScreenWidth-zoom(104*2)-zoom(32))/2
                 var i = 0
                 for title in titles {
-                    let btn = UIButton(frame: CGRect(x: CGFloat(i)*(width+kScreenWidth/11)+kScreenWidth*2/11, y: 8, width: width, height: height))
+                    let btn = UIButton(frame: CGRect(x: padding+CGFloat(i)*(width+zoom(32)), y: zoom(9), width: width, height: height))
                     btn.tag = 1000 + i
                     btn.setTitle(title, forState: .Normal)
+                    btn.titleLabel?.font = UIFont.systemFontOfSize(16)
                     btn.setTitleColor(defaultTextColor, forState: .Normal)
                     ZMDTool.configViewLayer(btn)
                     ZMDTool.configViewLayerFrame(btn)

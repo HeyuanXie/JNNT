@@ -19,59 +19,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("\n<\(APP_NAME)> 开始运行\nversion: \(APP_VERSION)(\(APP_VERSION_BUILD))\nApple ID: \(APP_ID)\nBundle ID: \(APP_BUNDLE_ID)\n")
         // 修改统一的字体
         UIBarButtonItem.appearance().setTitleTextAttributes([NSFontAttributeName : navigationTextFont], forState: .Normal)
-        //配置分享
-        ZMDShareSDKTool.startShare()
-        
+
+        self.configShare()
+        self.configInterceptor()
         self.configXGPush(launchOptions)
-        
-        // 开启推送服务
-        ZMDPushTool.startPushTool(launchOptions)
-        ZMDPushTool.clear()
-        // 启动过渡页
-//        let allowShowStartPages = !NSUserDefaults.standardUserDefaults().boolForKey(kKeyIsFirstStartApp)
-//        if allowShowStartPages {
-//            UIApplication.sharedApplication().statusBarHidden = true
-//            let startPages = StartPagesWindow()
-//            startPages.finished = { () -> Void in
-//                NSUserDefaults.standardUserDefaults().setBool(true, forKey: kKeyIsFirstStartApp)
-//                let vc = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()!
-//                ZMDTool.enterRootViewController(vc)
-//            }
-//            window = UIWindow(frame: UIScreen.mainScreen().bounds)
-//            window?.rootViewController = startPages
-//            window?.makeKeyAndVisible()
-//        }
-        
-        if let lastDate = getObjectFromUserDefaults("openDate") as? NSDate {
-            let time = abs(lastDate.timeIntervalSinceNow)
-            if time >= 2*24*60*60 {
-                HYNetworkCache.clearCache()     //超过两天，清理首页缓存，(也可以在这里处理超过多少天忘记密码)
-            }
-        }
-        let date = NSDate()
-        saveObjectToUserDefaults("openDate", value: date)
-        
-        if let account = g_Account {
-            if let password = g_Password {
-                QNNetworkTool.loginAjax(account, Password: password, completion: { (success, error, dictionary) -> Void in
-                    if success! {
-                        
-                    }else{
-                        
-                    }
-                })
-            }
-        }
-        
-        // 开启拦截器
-        ZMDInterceptor.start()
+        self.configJPush(launchOptions)
+//        self.showStartPages()
+        self.configHomePageCache()
+        self.autoLogin()
+        self.configJSPatch()
+
         return true
     }
+    
     func applicationWillResignActive(application: UIApplication) {
         ZMDPushTool.clear()
         XGPush.clearLocalNotifications()
     }
-
    
     func applicationDidEnterBackground(application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
@@ -154,6 +118,41 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     //MARK: - PrivateMethod
+    /// 分享配置
+    func configShare() {
+        ZMDShareSDKTool.startShare()
+    }
+    
+    /// 开启拦截器
+    func configInterceptor() {
+        ZMDInterceptor.start()
+    }
+    
+    /// 启动引导页
+    func showStartPages() {
+        let allowShowStartPages = !NSUserDefaults.standardUserDefaults().boolForKey(kKeyIsFirstStartApp)
+        if allowShowStartPages {
+            UIApplication.sharedApplication().statusBarHidden = true
+            let startPages = StartPagesWindow()
+            startPages.finished = { () -> Void in
+                NSUserDefaults.standardUserDefaults().setBool(true, forKey: kKeyIsFirstStartApp)
+                let vc = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()!
+                ZMDTool.enterRootViewController(vc)
+            }
+            window = UIWindow(frame: UIScreen.mainScreen().bounds)
+            window?.rootViewController = startPages
+            window?.makeKeyAndVisible()
+        }
+    }
+    
+    /// 激光推送相关配置
+    func configJPush(launchOptions: [NSObject: AnyObject]?) {
+        // 开启推送服务
+        ZMDPushTool.startPushTool(launchOptions)
+        ZMDPushTool.clear()
+    }
+    
+    /// 信鸽推送相关配置
     func configXGPush(launchOptions: [NSObject: AnyObject]?) {
         self.registerPushForIOS8()
         XGPush.startApp(UInt32((XG_AccessId as NSString).integerValue) , appKey: XG_AccessKey)
@@ -177,7 +176,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print("[XGPush]--没运行-handleLaunching's errorBlock/n/n")
         }
     }
-    
     func registerPushForIOS8() {
         //Types
         let types = UIUserNotificationType.Sound //| UIUserNotificationType.Alert | UIUserNotificationType.Badge
@@ -209,11 +207,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.sharedApplication().registerUserNotificationSettings(mySettings)
         UIApplication.sharedApplication().registerForRemoteNotifications()
     }
-    
     func registerPush(){
         UIApplication.sharedApplication().registerForRemoteNotificationTypes(UIRemoteNotificationType.Sound)
     }
-    
     func configPushNotification(launchOptions:[NSObject:AnyObject]?) {
         guard let launchOptions = launchOptions else {
             return
@@ -221,5 +217,40 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let tabBarVC = self.window?.rootViewController as! UITabBarController
         tabBarVC.selectedIndex = 3
     }
+    
+    /// 首页数据缓存处理
+    func configHomePageCache() {
+        if let lastDate = getObjectFromUserDefaults("openDate") as? NSDate {
+            let time = abs(lastDate.timeIntervalSinceNow)
+            if time >= 2*24*60*60 {
+                HYNetworkCache.clearCache()     //超过两天，清理首页缓存，(也可以在这里处理超过多少天忘记密码)
+            }
+        }
+        let date = NSDate()
+        saveObjectToUserDefaults("openDate", value: date)
+    }
+    
+    /// 自动登录
+    func autoLogin() {
+        if let account = g_Account {
+            if let password = g_Password {
+                QNNetworkTool.loginAjax(account, Password: password, completion: { (success, error, dictionary) -> Void in
+                    if success! {
+                        
+                    }else{
+                        
+                    }
+                })
+            }
+        }
+    }
+    
+    /// JSPatch热修复
+    func configJSPatch() {
+        JSPatch.startWithAppKey(JSPatch_Key)
+//        JSPatch.setupDevelopment()
+        JSPatch.sync()
+    }
+    
 }
 

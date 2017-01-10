@@ -46,6 +46,10 @@ let XG_AccessId = "2200241980"
 /// 信鸽推送AccessKey
 let XG_AccessKey = "IT5A2WNM296F"
 
+// MARK: - JSPatch
+/// 热修复AppKey
+let JSPatch_Key = "4cb09c162231f9bf"
+
 // MARK: - System
 /// 系统名称
 let SYSTEM_NAME: String = UIDevice.currentDevice().systemName

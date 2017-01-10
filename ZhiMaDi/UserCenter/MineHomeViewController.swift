@@ -183,13 +183,13 @@ class MineHomeViewController: UIViewController,UITableViewDataSource, UITableVie
         if section == 0 {
             return 0
         }
-        return  12
+        return  zoom(12)
     }
     func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0
     }
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headView = UIView(frame: CGRectMake(0, 0, kScreenWidth, 12))
+        let headView = UIView(frame: CGRectMake(0, 0, kScreenWidth, zoom(12)))
         headView.backgroundColor = UIColor.clearColor()
         return headView
     }

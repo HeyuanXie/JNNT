@@ -211,7 +211,6 @@ class MineHomeViewController: UIViewController,UITableViewDataSource, UITableVie
             let cell = tableView.dequeueReusableCellWithIdentifier(cellId)
             //设置背景图和用户图像(圆形)
             if let backgroundV = cell?.viewWithTag(10000) as? UIImageView {
-                ZMDTool.configViewLayer(backgroundV)
                 backgroundV.image = UIImage(named: "store_home_bg")
                 cell?.sendSubviewToBack(backgroundV)
             }

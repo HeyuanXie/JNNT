@@ -286,16 +286,16 @@ extension QNNetworkTool {
         }
     }
     // 手机验证码注册并登录
-    class func registerAndLogin(mobile:String,code:String,psw:String,completion: (success: Bool!,error:NSError?,dictionary:NSDictionary?) -> Void){
+    class func registerAndLogin(mobile:String,code:String,psw:String,completion: (success: Bool!,error:NSError?,dictionary:NSDictionary?,errorMsg:String?) -> Void){
         requestPOST(kServerAddress + "/api/v1/extend/Login/PhoneLogin", parameters: paramsToJsonDataParams(["mobile" : mobile,"code" : code,"psw" : psw])) { (_,response, _, dictionary, error) -> Void in
             guard let dic = dictionary else {
-                completion(success:false,error: error,dictionary:nil)
+                completion(success:false,error: error,dictionary:nil,errorMsg:nil)
                 return
             }
             if (dic["success"] as? NSNumber)!.boolValue {
-                completion(success:true,error: nil,dictionary:nil)
+                completion(success:true,error: nil,dictionary:nil,errorMsg: nil)
             } else {
-                completion(success:false,error: nil,dictionary:nil)
+                completion(success:false,error: nil,dictionary:nil,errorMsg: dictionary!["error"] as? String)
             }
         }
     }

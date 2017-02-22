@@ -288,7 +288,10 @@ class PersonInfoViewController:UIViewController,UITableViewDataSource, UITableVi
             ZMDTool.hiddenActivityView()
             if succeed {
                 self.headerView.image = UIImage(data: imageData)
-//                self.postHeadImage(imageData: imageData)
+                if let dict = dic,url = dict["ImageUrl"] as? String {
+                    //如果更换头像后url没变，需要清除上一个头像的缓存
+                    SDImageCache.sharedImageCache().removeImageForKey(url.hasPrefix("http") ? url : kImageAddressMain + url)
+                }
             }else {
                 ZMDTool.showPromptView( "上传失败,点击重试或者重新选择图片", nil)
             }

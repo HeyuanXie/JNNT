@@ -458,7 +458,7 @@ class ConfirmOrderViewController: UIViewController,UITableViewDataSource,UITable
         let size = "提交订单".sizeWithFont(UIFont.systemFontOfSize(15), maxWidth: 200)
         let confirmBtn = ZMDTool.getButton(CGRect(x: kScreenWidth - 12 - size.width - 20, y: 12, width: size.width+20, height: 34), textForNormal: "提交订单", fontSize: 15,textColorForNormal:UIColor.whiteColor(), backgroundColor:RGB(235,61,61,1.0)) { (sender) -> Void in
             self.view.endEditing(true)
-            //判断是否选择地址
+            //判断是否选择了收货地址
             guard self.didChoseAddress else {
                 ZMDTool.showPromptView("请选择收货地址")
                 return
@@ -470,7 +470,7 @@ class ConfirmOrderViewController: UIViewController,UITableViewDataSource,UITable
         ZMDTool.configViewLayerWithSize(confirmBtn, size: 15)
         view.addSubview(confirmBtn)
         
-        self.payLbl = ZMDTool.getLabel(CGRect(x: 12, y: 12, width: 200, height: 15), text: "实付: ¥ \(self.total)", fontSize: 16,textColor: defaultTextColor)
+        self.payLbl = ZMDTool.getLabel(CGRect(x: 12, y: 12, width: CGRectGetMinX(confirmBtn.frame)-12, height: 15), text: "实付: ¥ \(self.total)", fontSize: 16,textColor: defaultTextColor)
         self.payLbl.attributedText = self.payLbl.text?.AttributedText("¥ \(self.total)", color: defaultSelectColor)
         view.addSubview(self.payLbl)
         

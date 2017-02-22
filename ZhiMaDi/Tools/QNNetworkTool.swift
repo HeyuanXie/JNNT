@@ -162,7 +162,7 @@ private extension QNNetworkTool {
             }
             catch {
                 completionHandler(request: $0!, response: $1, data: $2, dictionary: nil, error: NSError(domain: "JSON解析错误", code: 10086, userInfo: nil));
-                println("Json解析过程出错")
+                print("Json解析过程出错")
             }
         }
     }
@@ -467,7 +467,7 @@ extension QNNetworkTool {
                     let categories = ZMDSortCategory.mj_objectArrayWithKeyValuesArray(array)
                     completion(categories:categories,error: nil,dictionary:nil)
                 } catch {
-                    println("Json解析过程出错")
+                    print("Json解析过程出错")
                 }
             }else {
                 completion(categories:nil,error: error,dictionary:nil)
@@ -1188,7 +1188,7 @@ extension QNNetworkTool {
                     let areas = ZMDArea.mj_objectArrayWithKeyValuesArray(array)
                     completion(areas:areas,error: nil,dictionary:nil)
                 } catch {
-                    println("Json解析过程出错")
+                    print("Json解析过程出错")
                 }
             }else {
                 completion(areas:nil,error: error,dictionary:nil)

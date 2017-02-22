@@ -124,7 +124,7 @@ class LoginViewController: UIViewController , ZMDInterceptorNavigationBarHiddenP
                     let vc = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()
                     ZMDTool.enterRootViewController(vc!)
                 } else {
-                    ZMDTool.showPromptView(errorMsg ?? "失败")
+                    ZMDTool.showPromptView(errorMsg ?? "登陆失败,请稍后重试")
                 }
             })
         }

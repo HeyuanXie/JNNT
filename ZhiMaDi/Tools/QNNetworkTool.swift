@@ -995,7 +995,7 @@ extension QNNetworkTool {
     
     ///店铺评分
     class func addStoreComments(description:Int,service:Int,logistics:Int,orderId:Int,customerId:Int,completion:(success:Bool?,error:String?) -> Void) {
-        requestPOST(kServerAddress+"/api/v1/extend/StoreExtend/AddStoreScore", parameters: ["description":description,"service":service,"logistics":logistics,"orderId":orderId,"csutomerId":g_customerId ?? 1]) { (request, response, data, dictionary, error) -> Void in
+        requestPOST(kServerAddress+"/api/v1/extend/StoreExtend/AddStoreScore", parameters: ["description":description,"service":service,"logistics":logistics,"orderId":orderId,"customerId":g_customerId ?? 1]) { (request, response, data, dictionary, error) -> Void in
             if let dic = dictionary,success = dic["success"] as? Bool where success == true {
                 completion(success: true, error: nil)
             }else{
